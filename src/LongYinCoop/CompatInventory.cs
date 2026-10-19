@@ -24,14 +24,14 @@ namespace LongYinCoop
                 });
 
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("# compat-notes — Harmony patches present at startup");
+                sb.AppendLine(UIStrings.CompatTitle);
                 sb.AppendLine();
-                sb.AppendLine("Generated: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                sb.AppendLine("Process: " + Environment.ProcessId);
-                sb.AppendLine("Total patched methods: " + patched.Count);
+                sb.AppendLine(string.Format(UIStrings.CompatGenerated, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
+                sb.AppendLine(string.Format(UIStrings.CompatProcess, Environment.ProcessId));
+                sb.AppendLine(string.Format(UIStrings.CompatTotal, patched.Count));
                 sb.AppendLine();
-                sb.AppendLine("| # | Declaring type | Method | Owners | Prefix | Postfix | Transpiler | Finalizer |");
-                sb.AppendLine("|---|---|---|---|---|---|---|---|");
+                sb.AppendLine(UIStrings.CompatTableHeader);
+                sb.AppendLine(UIStrings.CompatTableDivider);
 
                 int i = 0;
                 foreach (MethodBase m in patched)
@@ -39,20 +39,19 @@ namespace LongYinCoop
                     i++;
                     Patches info = HarmonyLib.Harmony.GetPatchInfo(m);
                     if (info == null) continue;
-                    sb.AppendLine("| " + i + " | " + TypeName(m) + " | " + m.Name + " | " +
-                                  Join(info.Owners) + " | " + Count(info.Prefixes) + " | " +
-                                  Count(info.Postfixes) + " | " + Count(info.Transpilers) + " | " +
-                                  Count(info.Finalizers) + " |");
+                    sb.AppendLine(string.Format(UIStrings.CompatRow, i, TypeName(m), m.Name,
+                                  Join(info.Owners), Count(info.Prefixes), Count(info.Postfixes),
+                                  Count(info.Transpilers), Count(info.Finalizers)));
                 }
 
                 sb.AppendLine();
-                sb.AppendLine("## Notes");
-                sb.AppendLine("- อ่านอย่างเดียว ไม่ได้แก้/ถอด patch ของ mod อื่น");
-                sb.AppendLine("- ใช้ตรวจการชนกับ LongYinThai (โดยเฉพาะ AddInfoText และ setter ของ Text) ก่อนขึ้น S1");
+                sb.AppendLine(UIStrings.CompatNotesTitle);
+                sb.AppendLine(UIStrings.CompatNoteReadOnly);
+                sb.AppendLine(UIStrings.CompatNotePurpose);
 
                 string path = Path.Combine(CoopPaths.UserDataDir, "compat-notes.md");
                 File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
-                CoopLog.Msg("compat: " + patched.Count + " patched methods -> " + path);
+                CoopLog.Msg(string.Format(UIStrings.CompatDump, patched.Count, path));
             }
             catch (Exception e)
             {

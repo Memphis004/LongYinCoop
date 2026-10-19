@@ -33,7 +33,7 @@ namespace LongYinCoop
                 string dir = CoopPaths.EnsureUserDataDir();
                 string path = Path.Combine(dir, "s0-result.json");
                 File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
-                CoopLog.Msg("s0-result written: " + path);
+                CoopLog.Msg(string.Format(UIStrings.S0ReportWritten, path));
             }
             catch (Exception e)
             {

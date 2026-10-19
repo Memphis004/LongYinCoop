@@ -1,0 +1,36 @@
+# ข้อ 7 — ข้อความทั้งหมดออกจาก UIStrings.cs
+
+build: dotnet build -c Release → 0 warning 0 error
+
+grep -n "\"[^\"]*[A-Za-z][^\"]*\"" *.cs | grep -v UIStrings.cs  (กรอง path/JSON key/format/pref key ออก)
+
+CompatInventory.cs:52:                string path = Path.Combine(CoopPaths.UserDataDir, "compat-notes.md");
+CoopLog.cs:20:                string dir = Path.Combine(root, "UserData", "LongYinCoop", "logs");
+CoopLog.cs:22:                _path = Path.Combine(dir, "coop-" + DateTime.Now.ToString("yyyyMMdd") + ".log");
+CoopLog.cs:35:        public static void Error(Exception e) { Write(UIStrings.LogLevelError, e == null ? "null" : e.ToString()); }
+CoopPaths.cs:15:            get { return Path.Combine(GameRoot, "UserData", "LongYinCoop"); }
+CoopPrefs.cs:16:            Category = MelonPreferences.CreateCategory("LongYinCoop");
+CoopPrefs.cs:18:            Enabled = Category.CreateEntry("Enabled", false);
+CoopPrefs.cs:20:            Probe = Category.CreateEntry("Probe", true);
+CoopPrefs.cs:22:            Ipc = Category.CreateEntry("Ipc", true);
+CoopPrefs.cs:24:            DevCommands = Category.CreateEntry("DevCommands", true);
+IpcServer.cs:58:                    // สร้าง instance ถัดไปทันที เพื่อไม่ให้มีช่วง "pipe busy" ระหว่าง client
+IpcServer.cs:212:                    if (doc.RootElement.TryGetProperty("n", out el) && el.ValueKind == JsonValueKind.Number) n = el.GetInt32();
+S0Report.cs:17:                Field(sb, "pid", Environment.ProcessId.ToString(), false);
+S0Report.cs:18:                Field(sb, "stage", CoopMod.Stage.ToString(), true);
+S0Report.cs:19:                Field(sb, "modVersion", CoopMod.Version, true);
+S0Report.cs:20:                Field(sb, "unityVersion", unityVersion, true);
+S0Report.cs:21:                Field(sb, "gameVersion", gameVersion, true);
+S0Report.cs:22:                Field(sb, "onUpdateThreadId", onUpdateThreadId.ToString(), true);
+S0Report.cs:23:                Field(sb, "probeThreadId", probeThreadId.ToString(), true);
+S0Report.cs:24:                Field(sb, "threadMatch", threadMatch ? "true" : "false", true);
+S0Report.cs:25:                Field(sb, "probeHits", HarmonyProbe.Hits.ToString(), true);
+S0Report.cs:26:                Field(sb, "probeInstalled", HarmonyProbe.Installed ? "true" : "false", true);
+S0Report.cs:27:                Field(sb, "probeTarget", HarmonyProbe.Target == null ? "" : HarmonyProbe.Target.DeclaringType.FullName + "." + HarmonyProbe.Target.Name, true);
+S0Report.cs:28:                Field(sb, "pipeName", pipeName, true);
+S0Report.cs:29:                Field(sb, "logPath", CoopLog.LogPath, true);
+S0Report.cs:34:                string path = Path.Combine(dir, "s0-result.json");
+S0Report.cs:47:            sb.Append("\"").Append(name).Append("\":\"").Append(Escape(value)).Append("\"");
+S0Report.cs:53:            return s.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "").Replace("\n", " ");
+
+เหลือเฉพาะ: ชื่อไฟล์/พาธ, JSON key, pref key, format specifier, escape — ไม่มีข้อความที่ผู้ใช้เห็น

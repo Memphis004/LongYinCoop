@@ -40,7 +40,7 @@ namespace LongYinCoop
                 if (_target == null) _target = AccessTools.Method("GameController:Update");
                 if (_target == null)
                 {
-                    CoopLog.Warn("probe: GameController.Update not found");
+                    CoopLog.Warn(UIStrings.ProbeTargetMissing);
                     return false;
                 }
 
@@ -49,8 +49,8 @@ namespace LongYinCoop
                     "Prefix", BindingFlags.Static | BindingFlags.NonPublic);
                 _harmony.Patch(_target, new HarmonyMethod(prefix));
                 Installed = true;
-                CoopLog.Msg("probe: patched " + _target.DeclaringType.FullName + "." + _target.Name +
-                            " (thread measurement only)");
+                CoopLog.Msg(string.Format(UIStrings.ProbeInstalled,
+                                          _target.DeclaringType.FullName, _target.Name));
                 return true;
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace LongYinCoop
                 if (_harmony != null) _harmony.UnpatchSelf();
                 Installed = false;
                 int after = CompatInventory.CountOwnedPatches(HarmonyId);
-                CoopLog.Msg("probe: unpatched (owned patches before=" + before + " after=" + after + ")");
+                CoopLog.Msg(string.Format(UIStrings.ProbeRemoved, before, after));
             }
             catch (Exception e)
             {

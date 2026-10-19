@@ -37,7 +37,7 @@ namespace LongYinCoop
             _thread.IsBackground = true;
             _thread.Name = "LongYinCoop.Ipc";
             _thread.Start();
-            CoopLog.Msg(UIStrings.IpcListening + " \\\\.\\pipe\\" + _pipeName);
+            CoopLog.Msg(string.Format(UIStrings.IpcListening, _pipeName));
         }
 
         public void Stop()
@@ -94,7 +94,7 @@ namespace LongYinCoop
                 int len = BitConverter.ToInt32(header, 0);
                 if (len <= 0 || len > MaxFrame)
                 {
-                    CoopLog.Warn(UIStrings.IpcBadFrame + ": " + len);
+                    CoopLog.Warn(string.Format(UIStrings.IpcBadFrame, len));
                     return;
                 }
 
@@ -128,10 +128,10 @@ namespace LongYinCoop
             }
             catch (Exception e)
             {
-                return Fail(null, "bad json: " + e.Message);
+                return Fail(null, string.Format(UIStrings.IpcBadJson, e.Message));
             }
 
-            if (string.IsNullOrEmpty(cmd)) return Fail(null, "missing cmd");
+            if (string.IsNullOrEmpty(cmd)) return Fail(null, UIStrings.IpcMissingCmd);
 
             try
             {
@@ -201,7 +201,7 @@ namespace LongYinCoop
         /// <summary>dev-only: enqueue N no-op แล้วรอ drain — วัดเกณฑ์ dispatcher เท่านั้น</summary>
         private string BenchDispatch(string cmd, string json)
         {
-            if (!CoopPrefs.DevCommands.Value) return Fail(cmd, "dev commands disabled (DevCommands=false)");
+            if (!CoopPrefs.DevCommands.Value) return Fail(cmd, UIStrings.DevCommandsDisabled);
 
             int n = 1000;
             try

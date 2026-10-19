@@ -20,19 +20,19 @@ namespace LongYinCoop
                 string dir = Path.Combine(root, "UserData", "LongYinCoop", "logs");
                 Directory.CreateDirectory(dir);
                 _path = Path.Combine(dir, "coop-" + DateTime.Now.ToString("yyyyMMdd") + ".log");
-                Write("INFO", "=== " + tag + " | pid=" + Environment.ProcessId +
-                             " | start " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + " ===");
+                Write(UIStrings.LogLevelInfo, string.Format(UIStrings.LogStart, tag, Environment.ProcessId,
+                             DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")));
             }
             catch (Exception e)
             {
-                Console.WriteLine("[LongYinCoop] log init failed: " + e);
+                Console.WriteLine(string.Format(UIStrings.LogInitFailed, e));
             }
         }
 
-        public static void Msg(string msg) { Write("INFO", msg); }
-        public static void Warn(string msg) { Write("WARN", msg); }
-        public static void Error(string msg) { Write("ERROR", msg); }
-        public static void Error(Exception e) { Write("ERROR", e == null ? "null" : e.ToString()); }
+        public static void Msg(string msg) { Write(UIStrings.LogLevelInfo, msg); }
+        public static void Warn(string msg) { Write(UIStrings.LogLevelWarn, msg); }
+        public static void Error(string msg) { Write(UIStrings.LogLevelError, msg); }
+        public static void Error(Exception e) { Write(UIStrings.LogLevelError, e == null ? "null" : e.ToString()); }
 
         private static void Write(string level, string msg)
         {

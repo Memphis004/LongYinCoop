@@ -17,12 +17,11 @@ namespace LongYinCoop
 
         public override void OnInitializeMelon()
         {
-            CoopLog.Init(UIStrings.ModName + " v" + Version + " stage=" + Stage);
+            CoopLog.Init(string.Format(UIStrings.StartTag, UIStrings.ModName, Version, Stage));
             CoopPrefs.Init();
 
-            CoopLog.Msg(UIStrings.Loaded + " role=host stage=" + Stage + " version=" + Version +
-                        " enabled=" + CoopPrefs.Enabled.Value + " probe=" + CoopPrefs.Probe.Value +
-                        " ipc=" + CoopPrefs.Ipc.Value);
+            CoopLog.Msg(UIStrings.Loaded + string.Format(UIStrings.LoadedArgs,
+                        Stage, Version, CoopPrefs.Enabled.Value, CoopPrefs.Probe.Value, CoopPrefs.Ipc.Value));
 
             if (!CoopPrefs.Enabled.Value)
             {
@@ -76,9 +75,9 @@ namespace LongYinCoop
 
             if (_ticks % 600 == 0)
             {
-                CoopLog.Msg("heartbeat ticks=" + _ticks + " probeHits=" + HarmonyProbe.Hits +
-                            " queued=" + _dispatcher.Queued + " ran=" + _dispatcher.Ran +
-                            " err=" + _dispatcher.Errors + " p99=" + Math.Round(_dispatcher.Percentile(0.99), 3) + "ms");
+                CoopLog.Msg(string.Format(UIStrings.Heartbeat, _ticks, HarmonyProbe.Hits,
+                            _dispatcher.Queued, _dispatcher.Ran, _dispatcher.Errors,
+                            Math.Round(_dispatcher.Percentile(0.99), 3)));
             }
         }
 
@@ -101,11 +100,9 @@ namespace LongYinCoop
             }
 
             CoopLog.Msg((match ? UIStrings.ThreadMatch : UIStrings.ThreadMismatch) +
-                        " onUpdateThread=" + onUpdateThread +
-                        " probeThread=" + probeThread +
-                        " probeHits=" + HarmonyProbe.Hits +
-                        " probeThreads=[" + HarmonyProbe.ThreadIdsCsv() + "]" +
-                        " unity=" + unityVersion + " game=" + gameVersion);
+                        string.Format(UIStrings.ThreadDetailArgs, onUpdateThread, probeThread,
+                                      HarmonyProbe.Hits, HarmonyProbe.ThreadIdsCsv(),
+                                      unityVersion, gameVersion));
 
             S0Report.Write(onUpdateThread, probeThread, match, unityVersion, gameVersion,
                            _ipc == null ? null : _ipc.PipeName);
