@@ -17,6 +17,11 @@ namespace LongYinCoop
         private int _sampleCount;
         private int _sampleNext;
 
+        private readonly double[] _frameSamples = new double[1024];
+        private int _frameCount;
+        private int _frameNext;
+        private long _lastTickTimestamp;
+
         public long Queued;
         public long Ran;
         public long Deferred;
@@ -38,6 +43,14 @@ namespace LongYinCoop
         public void Tick(double budgetMs)
         {
             OnUpdateThreadId = Environment.CurrentManagedThreadId;
+
+            long nowTimestamp = Stopwatch.GetTimestamp();
+            if (_lastTickTimestamp != 0)
+            {
+                double frameMs = (nowTimestamp - _lastTickTimestamp) * 1000.0 / Stopwatch.Frequency;
+                if (frameMs > 0 && frameMs < 1000) AddFrameSample(frameMs);
+            }
+            _lastTickTimestamp = nowTimestamp;
 
             Stopwatch sw = Stopwatch.StartNew();
             while (sw.Elapsed.TotalMilliseconds < budgetMs)
@@ -103,6 +116,31 @@ namespace LongYinCoop
             }
         }
 
+        private void AddFrameSample(double ms)
+        {
+            lock (_sampleLock)
+            {
+                _frameSamples[_frameNext] = ms;
+                _frameNext = (_frameNext + 1) % _frameSamples.Length;
+                if (_frameCount < _frameSamples.Length) _frameCount++;
+            }
+        }
+
+        public double FramePercentile(double p)
+        {
+            double[] copy;
+            lock (_sampleLock)
+            {
+                copy = new double[_frameCount];
+                Array.Copy(_frameSamples, copy, _frameCount);
+            }
+            if (copy.Length == 0) return 0;
+            Array.Sort(copy);
+            int idx = (int)Math.Ceiling(p * copy.Length) - 1;
+            if (idx < 0) idx = 0;
+            return Math.Round(copy[idx], 3);
+        }
+
         public double Percentile(double p)
         {
             double[] copy;
@@ -144,7 +182,11 @@ namespace LongYinCoop
                 p50Ms = Math.Round(Percentile(0.50), 4),
                 p99Ms = Math.Round(Percentile(0.99), 4),
                 maxMs = Math.Round(MaxDrainMs, 4),
-                samples = _sampleCount
+                samples = _sampleCount,
+                frameMsP50 = FramePercentile(0.50),
+                frameMsP95 = FramePercentile(0.95),
+                frameMsP99 = FramePercentile(0.99),
+                frameSamples = _frameCount
             };
         }
     }
