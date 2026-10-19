@@ -36,3 +36,4 @@ __pycache__/
 
 # keep evidence small: big runtime logs stay local
 evidence/**/coop-run.log
+!evidence/**/s0-result.json
