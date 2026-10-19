@@ -49,7 +49,15 @@ python tools/coopctl.py get_version
 python tools/coopctl.py get_scene
 python tools/coopctl.py get_player_pos
 python tools/coopctl.py stats
+python tools/coopctl.py bench_dispatch --n 1000   # dev: dispatcher 1,000 no-op
+python tools/coopctl.py bench --cmd ping --n 1000 # วัด p99 สองแบบ
 ```
+
+`bench` วัดสองโหมดแล้วรายงานคู่กัน:
+- `reuse` = เปิด pipe ครั้งเดียว ยิงต่อเนื่อง N ครั้ง (วัด transport ล้วน)
+- `per_call` = connect ใหม่ทุกคำสั่ง (วัดแบบ CLI จริง รวม overhead ของ pipe)
+
+คำสั่งที่แตะ IL2CPP (`get_scene`, `get_player_pos`) จะมี latency ~1 frame เพราะรอ `MainThreadDispatcher`
 
 framing = 4-byte little-endian length + UTF-8 JSON; 1 client ต่อ connection
 ทุกคำสั่งที่แตะ IL2CPP วิ่งผ่าน `MainThreadDispatcher` (timeout 500 ms)

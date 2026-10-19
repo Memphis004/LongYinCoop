@@ -11,6 +11,7 @@ Usage:
 """
 import argparse
 import json
+import math
 import struct
 import subprocess
 import sys
@@ -74,11 +75,65 @@ def call(pid, cmd, timeout=5.0, retries=40, extra=None):
         f.close()
 
 
+def _summary(samples, ok, bad):
+    s = sorted(samples)
+    n = len(s)
+
+    def pct(p):
+        if n == 0:
+            return 0.0
+        i = min(n - 1, max(0, int(math.ceil(p * n)) - 1))
+        return s[i]
+
+    return {
+        "n": n,
+        "ok": ok,
+        "bad": bad,
+        "p50": round(pct(0.50), 3),
+        "p95": round(pct(0.95), 3),
+        "p99": round(pct(0.99), 3),
+        "max": round(s[-1], 3) if n else 0.0,
+    }
+
+
+def bench(pid, cmd, n=1000, extra=None, warmup=20):
+    """วัดสองแบบ: connection เดิมต่อเนื่อง และ connect ใหม่ทุกครั้ง"""
+    reuse, ok1, bad1 = [], 0, 0
+    f = connect(pid)
+    try:
+        for _ in range(warmup):
+            request(f, cmd, extra)
+        for _ in range(n):
+            t = time.perf_counter()
+            r = request(f, cmd, extra)
+            reuse.append((time.perf_counter() - t) * 1000.0)
+            if r.get("ok"):
+                ok1 += 1
+            else:
+                bad1 += 1
+    finally:
+        f.close()
+
+    fresh, ok2, bad2 = [], 0, 0
+    for _ in range(n):
+        t = time.perf_counter()
+        r = call(pid, cmd, extra=extra)
+        fresh.append((time.perf_counter() - t) * 1000.0)
+        if r.get("ok"):
+            ok2 += 1
+        else:
+            bad2 += 1
+
+    return {"cmd": cmd, "n": n, "reuse": _summary(reuse, ok1, bad1), "per_call": _summary(fresh, ok2, bad2)}
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats", "bench_dispatch"])
+    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats", "bench_dispatch", "bench"])
     ap.add_argument("--pid", type=int, default=None, help="game pid (auto-detected if omitted)")
-    ap.add_argument("--n", type=int, default=1000, help="bench_dispatch: number of no-op commands")
+    ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench: number of requests")
+    ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version"],
+                    help="bench: command to measure")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -86,6 +141,18 @@ def main():
     if not pid:
         print("game not running (or pass --pid)", file=sys.stderr)
         return 2
+
+    if args.command == "bench":
+        res = bench(pid, args.cmd, args.n)
+        if args.quiet:
+            print(json.dumps(res))
+        else:
+            print("bench cmd=%s n=%d" % (res["cmd"], res["n"]))
+            for mode in ("reuse", "per_call"):
+                s = res[mode]
+                print("  %-9s n=%d ok=%d bad=%d p50=%.3f p95=%.3f p99=%.3f max=%.3f ms" %
+                      (mode, s["n"], s["ok"], s["bad"], s["p50"], s["p95"], s["p99"], s["max"]))
+        return 0 if res["reuse"]["bad"] == 0 and res["per_call"]["bad"] == 0 else 1
 
     try:
         extra = {"n": args.n} if args.command == "bench_dispatch" else None
