@@ -9,6 +9,7 @@ namespace LongYinCoop
         public static MelonPreferences_Entry<bool> Enabled;
         public static MelonPreferences_Entry<bool> Probe;
         public static MelonPreferences_Entry<bool> Ipc;
+        public static MelonPreferences_Entry<bool> DevCommands;
 
         public static void Init()
         {
@@ -19,6 +20,8 @@ namespace LongYinCoop
             Probe = Category.CreateEntry("Probe", true);
             // named pipe IPC อ่านอย่างเดียว
             Ipc = Category.CreateEntry("Ipc", true);
+            // dev-only: bench_dispatch (ไม่แตะ state เกม) — ปิดได้ใน build ปกติ
+            DevCommands = Category.CreateEntry("DevCommands", true);
         }
     }
 }

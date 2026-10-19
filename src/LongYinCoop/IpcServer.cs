@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
 using System.Text;
@@ -183,6 +184,9 @@ namespace LongYinCoop
                     case "stats":
                         return Ok(cmd, _dispatcher.Snapshot());
 
+                    case "bench_dispatch":
+                        return BenchDispatch(cmd, json);
+
                     default:
                         return Fail(cmd, UIStrings.UnknownCommand);
                 }
@@ -192,6 +196,47 @@ namespace LongYinCoop
                 CoopLog.Error(e);
                 return Fail(cmd, e.Message);
             }
+        }
+
+        /// <summary>dev-only: enqueue N no-op แล้วรอ drain — วัดเกณฑ์ dispatcher เท่านั้น</summary>
+        private string BenchDispatch(string cmd, string json)
+        {
+            if (!CoopPrefs.DevCommands.Value) return Fail(cmd, "dev commands disabled (DevCommands=false)");
+
+            int n = 1000;
+            try
+            {
+                using (JsonDocument doc = JsonDocument.Parse(json))
+                {
+                    JsonElement el;
+                    if (doc.RootElement.TryGetProperty("n", out el) && el.ValueKind == JsonValueKind.Number) n = el.GetInt32();
+                }
+            }
+            catch { }
+            if (n < 1) n = 1;
+            if (n > 10000) n = 10000;
+
+            long before = Interlocked.Read(ref _dispatcher.Ran);
+            long queuedBefore = Interlocked.Read(ref _dispatcher.Queued);
+            for (int i = 0; i < n; i++) _dispatcher.Enqueue(delegate { });
+
+            Stopwatch sw = Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < 5000 && Interlocked.Read(ref _dispatcher.Ran) - before < n)
+            {
+                Thread.Sleep(1);
+            }
+
+            long ran = Interlocked.Read(ref _dispatcher.Ran) - before;
+            long queued = Interlocked.Read(ref _dispatcher.Queued) - queuedBefore;
+            return Ok(cmd, new
+            {
+                requested = n,
+                queued = queued,
+                ran = ran,
+                dropped = queued - ran,
+                elapsedMs = sw.ElapsedMilliseconds,
+                stats = _dispatcher.Snapshot()
+            });
         }
 
         private string OnMain(string cmd, Func<object> func)

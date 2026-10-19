@@ -50,8 +50,11 @@ def connect(pid, retries=40, delay=0.05):
     raise last
 
 
-def request(f, cmd):
-    payload = json.dumps({"cmd": cmd}).encode("utf-8")
+def request(f, cmd, extra=None):
+    msg = {"cmd": cmd}
+    if extra:
+        msg.update(extra)
+    payload = json.dumps(msg).encode("utf-8")
     f.write(struct.pack("<I", len(payload)) + payload)
     header = f.read(4)
     if len(header) != 4:
@@ -63,18 +66,19 @@ def request(f, cmd):
     return json.loads(body.decode("utf-8"))
 
 
-def call(pid, cmd, timeout=5.0, retries=40):
+def call(pid, cmd, timeout=5.0, retries=40, extra=None):
     f = connect(pid, retries)
     try:
-        return request(f, cmd)
+        return request(f, cmd, extra)
     finally:
         f.close()
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats"])
+    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats", "bench_dispatch"])
     ap.add_argument("--pid", type=int, default=None, help="game pid (auto-detected if omitted)")
+    ap.add_argument("--n", type=int, default=1000, help="bench_dispatch: number of no-op commands")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -84,7 +88,8 @@ def main():
         return 2
 
     try:
-        result = call(pid, args.command)
+        extra = {"n": args.n} if args.command == "bench_dispatch" else None
+        result = call(pid, args.command, extra=extra)
     except FileNotFoundError:
         print("pipe not found for pid %d - is the mod loaded and Enabled=true?" % pid, file=sys.stderr)
         return 3
