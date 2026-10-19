@@ -1,0 +1,35 @@
+# --- build output ---
+bin/
+obj/
+*.user
+.vs/
+
+# --- game assets: NEVER commit ---
+GameAssembly.dll
+UnityPlayer.dll
+UnityCrashHandler64.exe
+baselib.dll
+version.dll
+LongYinLiZhiZhuan.exe
+LongYinLiZhiZhuan_Data/
+MelonLoader/
+Mods/
+UserData/
+UserLibs/
+Plugins/
+Il2CppDumper/
+dump.cs
+il2cpp.h
+Il2CppAssemblies/
+global-metadata.dat
+*.dll.off
+
+# --- local test artifacts ---
+coop-test/
+*.log
+s0-result.json
+compat-notes.local.md
+
+# python
+__pycache__/
+*.pyc
