@@ -33,3 +33,6 @@ compat-notes.local.md
 # python
 __pycache__/
 *.pyc
+
+# keep evidence small: big runtime logs stay local
+evidence/**/coop-run.log
