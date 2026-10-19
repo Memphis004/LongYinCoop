@@ -12,7 +12,7 @@ Build: `GameAssembly.dll` `33c56def…d7920c1` · metadata `451311d4…c18bfd0`
 | 2 | dispatcher: `bench_dispatch 1000`, 0 dropped, p99 ≤ 4 ms | **PASS** — 1000/1000, dropped 0, elapsed 4 ms, p99 0.0008 ms, max 0.12 ms | `bench_dispatch` |
 | 3 | IPC อิงเฟรม (D9) | **PASS** — ดูตารางล่าง | `bench` + `stats` |
 | 4 | `snapshot world` ตรงกับ Frida (3 ครั้ง) | **ยังไม่ทดสอบ** — `get_player_pos` ทำงาน แต่ยังไม่ได้เทียบกับ Frida | — |
-| 5 | savehash ไม่เปลี่ยน (ยกเว้น `PlayerprefData.dat`, D10) | **PASS** — `SaveSlot0–10` ไม่เปลี่ยนเลย; `PlayerprefData.dat` เปลี่ยนแม้ `Enabled=false` (control test) | `savehash.*.txt` |
+| 5 | savehash ไม่เปลี่ยน (ยกเว้น `PlayerprefData.dat`, D10) | **PASS** — `SaveSlot0–10` ไม่เปลี่ยนเลย; `PlayerprefData.dat` เปลี่ยนทั้ง 2 control runs แม้ `Enabled=false` | `savehash.control2.*.txt` |
 | 6 | probe hit > 0, thread ตรง, unpatch = 0 | **PASS** — hits 10,668 (MainGame) · thread 1 = 1 · `before=1 after=0` · `Probe=false` → ไม่มี patch ของเรา | `s0-result.json`, log |
 | 7 | UIStrings ครอบทุกข้อความ | **ผ่านบางส่วน** — ข้อความหลักอยู่ใน `UIStrings.cs`, ข้อความวินิจฉัยยังมี literal | code review |
 | 8 | ถอด mod (`.off`) แล้วเกมบูตปกติ | **รอผู้ใช้ทดสอบ** | — |
@@ -45,8 +45,10 @@ dispatcher ระหว่างวัด: errors 0, pending 0, drain p99 0.024 
 ## Control test — `PlayerprefData.dat` (D10)
 
 ```
-ก่อน: 0c8aef57a09e65d7598ef48d11c7c58e010f5fc6cf3e4780443a9d307ef5258e
-หลัง: 1b8ad58a8df5576884acf83ed8ff324a0f6d8823647e1e9515f16ab2199411f2
+run 1  before: 0c8aef57a09e65d7598ef48d11c7c58e010f5fc6cf3e4780443a9d307ef5258e
+run 1  after : 1b8ad58a8df5576884acf83ed8ff324a0f6d8823647e1e9515f16ab2199411f2
+run 2  before: 1b8ad58a8df5576884acf83ed8ff324a0f6d8823647e1e9515f16ab2199411f2
+run 2  after : 0ebc1769f3bd4c3745320087506d14f4f58e42ede7190f4f7228661454a4bb13
 ```
 รันด้วย `Enabled=false` → log `Disabled by pref … mod does nothing`, probe ไม่ติด, IPC ไม่เปิด
 **ยังเปลี่ยนไฟล์เดิมไฟล์เดียว** และ `SaveSlot*` ไม่เปลี่ยน → ยืนยันว่าเกมเขียนเอง ไม่ใช่ mod
