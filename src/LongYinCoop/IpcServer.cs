@@ -144,7 +144,10 @@ namespace LongYinCoop
                                     unityVersion = UnityEngine.Application.unityVersion,
                                     gameVersion = UnityEngine.Application.version,
                                     productName = UnityEngine.Application.productName,
+                                    stageLabel = CoopMod.StageLabel,
                                     enabled = CoopPrefs.Enabled.Value,
+                                    devCommands = CoopPrefs.DevCommands.Value,
+                                    allowRemoteInput = CoopPrefs.AllowRemoteInput.Value,
                                     probeEnabled = CoopPrefs.Probe.Value,
                                     probeInstalled = HarmonyProbe.Installed,
                                     probeHits = HarmonyProbe.Hits,
@@ -197,6 +200,9 @@ namespace LongYinCoop
 
                         case "s1_report":
                             return OnMain(cmd, delegate { return WriteS1Report(); });
+
+                        case "spike":
+                            return Spike(cmd, root);
 
                         case "set_pref":
                             return SetPref(cmd, root);
@@ -315,6 +321,25 @@ namespace LongYinCoop
             File.WriteAllText(path, JsonSerializer.Serialize(snap, S1Json.Options), Encoding.UTF8);
             CoopLog.Msg(string.Format(UIStrings.S1ReportWritten, path));
             return snap;
+        }
+
+        /// <summary>
+        /// S1.5-b: ลงทะเบียนเฉพาะ `spike status` (อ่านอย่างเดียว)
+        /// - ต้องมี coop.enabled + coop.ipc + coop.devCommands
+        /// - ไม่ใช้ coop.allowRemoteInput (คง false) และไม่มี move/attack/pause/arm ใน build นี้
+        /// </summary>
+        private string Spike(string cmd, JsonElement root)
+        {
+            if (!CoopPrefs.Enabled.Value) return Fail(cmd, UIStrings.SpikeDisabled);
+            if (!CoopPrefs.Ipc.Value) return Fail(cmd, UIStrings.SpikeIpcRequired);
+            if (!CoopPrefs.DevCommands.Value) return Fail(cmd, UIStrings.DevCommandsDisabled);
+
+            string sub = GetString(root, "sub");
+            if (string.IsNullOrEmpty(sub)) return Fail(cmd, UIStrings.SpikeMissingSub);
+            if (sub == "status") return OnMain(cmd, delegate { return TurnGate.ReadStatus(); });
+
+            // ยังไม่เขียน/ลงทะเบียนคำสั่งที่เปลี่ยน state (S1.5-d ขึ้นไป)
+            return Fail(cmd, string.Format(UIStrings.SpikeNotRegistered, sub));
         }
 
         private string SetPref(string cmd, JsonElement root)

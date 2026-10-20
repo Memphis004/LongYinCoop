@@ -39,20 +39,38 @@
           shownHp: h.field("shownHp").value,
           shownMaxHp: h.field("shownMaxHp").value,
           row: g ? g.field("row").value : -1,
-          col: g ? g.field("column").value : -1
+          col: g ? g.field("column").value : -1,
+          // S1.5-b: flags the mod's spike status also reports
+          moved: !!u.field("moved").value,
+          attacked: !!u.field("attacked").value,
+          playerControl: !!u.field("playerControl").value,
+          autoFight: !!u.field("autoFight").value
         });
       } catch (e) { skipped++; }
     }
   }
 
   let activeHero = null, activeGrid = null;
+  let activeMoved = null, activeAttacked = null, activePlayerControl = null;
   try {
     const active = nonNull(bc.field("nowActiveUnit").value);
     if (active) {
       activeHero = nonNull(active.field("heroData").value);
       activeGrid = nonNull(active.field("mapGrid").value);
+      activeMoved = !!active.field("moved").value;
+      activeAttacked = !!active.field("attacked").value;
+      activePlayerControl = !!active.field("playerControl").value;
     }
   } catch (e) { }
+
+  // per-turn flags live on BattleController (private) - read-only, may be unavailable
+  let turnMoved = null, turnAttacked = null;
+  try { turnMoved = !!bc.field("nowActiveUnitMoved").value; } catch (e) { }
+  try { turnAttacked = !!bc.field("nowActiveUnitAttacked").value; } catch (e) { }
+  let paused = null, activeState = null, infoCount = null;
+  try { paused = !!bc.field("battlePaused").value; } catch (e) { }
+  try { activeState = bc.field("nowActiveState").value; } catch (e) { }
+  try { infoCount = bc.field("infoCount").value; } catch (e) { }
 
   // on-screen log text: อ่านแยกด้วย tools/ui-log-probe.js (generic GetComponentsInChildren ใช้ผ่าน bridge ไม่ได้)
 
@@ -62,6 +80,14 @@
     skipped: skipped,
     activeHeroID: activeHero ? activeHero.field("heroID").value : null,
     activeCell: activeGrid ? { row: activeGrid.field("row").value, col: activeGrid.field("column").value } : null,
+    activeMoved: activeMoved,
+    activeAttacked: activeAttacked,
+    activePlayerControl: activePlayerControl,
+    turnMoved: turnMoved,
+    turnAttacked: turnAttacked,
+    paused: paused,
+    nowActiveState: activeState,
+    infoCount: infoCount,
     units: units.slice(0, 16)
   });
 })()

@@ -30,6 +30,8 @@ namespace LongYinCoop
         public static int LatestAgeMs;
 
         public static bool InBattle { get { return _active; } }
+        /// <summary>ตัวนับเทิร์นของ mod (จำนวนครั้งที่ activeId เปลี่ยน) — ใช้ใน stateHash ของ S1.5</summary>
+        public static int TurnIndex { get { return _turnIndex; } }
         public static int BattleCapacity { get { return Ring.Capacity; } }
         public static int BattleCount { get { return Ring.Count; } }
 
@@ -253,7 +255,8 @@ namespace LongYinCoop
             return st;
         }
 
-        private static string StableId(int teamId, HeroData hero, int index, HashSet<string> usedIds)
+        /// <summary>identity เดียวกับที่ capture S1 ใช้ — S1.5 เรียกใช้เพื่อ join audit ได้ (ไม่ตั้งใจซ้ำโค้ด)</summary>
+        internal static string StableId(int teamId, HeroData hero, int index, HashSet<string> usedIds)
         {
             // identity ถาวร: side + heroID (+ summonID) — กันชนด้วย suffix เฉพาะเมื่อซ้ำในศึกเดียวกัน
             string baseId = hero == null

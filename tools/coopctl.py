@@ -14,6 +14,7 @@ Usage:
     python tools/coopctl.py probe_types
     python tools/coopctl.py probe_units
     python tools/coopctl.py patch_report
+    python tools/coopctl.py spike                 # S1.5-b: read-only battle status
     python tools/coopctl.py compat_dump --tag bigmap
     python tools/coopctl.py s1_report
     python tools/coopctl.py set_pref --key capture --value false
@@ -141,11 +142,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats",
                                         "bench_dispatch", "bench", "snapshot", "capture", "compat_dump",
-                                        "probe_types", "patch_report", "probe_units", "s1_report", "set_pref"])
+                                        "probe_types", "patch_report", "probe_units", "s1_report", "set_pref",
+                                        "spike"])
     ap.add_argument("--pid", type=int, default=None, help="game pid (auto-detected if omitted)")
     ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench / snapshot log: number of requests")
-    ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version"],
+    ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version", "spike"],
                     help="bench: command to measure")
+    ap.add_argument("--sub", default="status", choices=["status"],
+                    help="spike: subcommand (S1.5-b registers only status)")
     ap.add_argument("--what", default="world", choices=["world", "battle", "log"], help="snapshot: stream")
     ap.add_argument("--action", default=None, choices=["start", "stop", "status"], help="capture: action")
     ap.add_argument("--tag", default=None, help="compat_dump: file suffix")
@@ -160,7 +164,8 @@ def main():
         return 2
 
     if args.command == "bench":
-        res = bench(pid, args.cmd, args.n)
+        extra = {"sub": args.sub} if args.cmd == "spike" else None
+        res = bench(pid, args.cmd, args.n, extra=extra)
         if args.quiet:
             print(json.dumps(res))
         else:
@@ -182,6 +187,8 @@ def main():
             extra = {"tag": args.tag} if args.tag else None
         elif args.command == "set_pref":
             extra = {"key": args.key, "value": args.value}
+        elif args.command == "spike":
+            extra = {"sub": args.sub}
         else:
             extra = None
         result = call(pid, args.command, extra=extra)

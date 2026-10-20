@@ -10,7 +10,8 @@ namespace LongYinCoop
         public const string ModName = "LongYinCoop";
         public const string StartTag = "{0} v{1} stage={2}";
         public const string Loaded = "S1 loaded";
-        public const string LoadedArgs = " role=host stage={0} version={1} enabled={2} probe={3} ipc={4} capture={5}";
+        public const string LoadedArgs =
+            " role=host stage={0} version={1} enabled={2} probe={3} ipc={4} capture={5} dev={6} allowRemoteInput={7}";
         public const string DisabledByPref = "Disabled by pref (Enabled=false) — mod does nothing";
 
         // ── probe ────────────────────────────────────────────────────────
@@ -57,6 +58,16 @@ namespace LongYinCoop
         public const string SnapshotUnavailable = "snapshot unavailable (nothing sampled yet)";
         public const string PrefSet = "pref set {0}={1}";
         public const string PrefUnknown = "unknown pref: {0}";
+
+        // ── log file ─────────────────────────────────────────────────────
+        // ── S1.5-b: spike status (read-only) ─────────────────────────────
+        public const string SpikeDisabled = "spike: mod is disabled (coop.enabled=false)";
+        public const string SpikeIpcRequired = "spike: ipc is disabled (coop.ipc=false)";
+        public const string SpikeMissingSub = "spike: missing subcommand (expected \"status\")";
+        public const string SpikeNotRegistered = "spike: subcommand not registered in this build: {0}";
+        public const string SpikeStatusFailed = "spike status failed (calls={0} errors={1})";
+        public const string SpikeTurnFlagsMissing =
+            "spike: nowActiveUnitMoved/Attacked not found on BattleController — falling back to BattleUnit.moved/attacked";
 
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";

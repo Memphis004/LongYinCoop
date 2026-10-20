@@ -2,14 +2,15 @@ using System;
 using System.Diagnostics;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.2.0", "Westernholudur")]
+[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.3.0", "Westernholudur")]
 
 namespace LongYinCoop
 {
     public sealed class CoopMod : MelonMod
     {
-        public const string Version = "0.2.0";
+        public const string Version = "0.3.0";
         public const int Stage = 1;
+        public const string StageLabel = "S1.5-b";
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
@@ -18,12 +19,13 @@ namespace LongYinCoop
 
         public override void OnInitializeMelon()
         {
-            CoopLog.Init(string.Format(UIStrings.StartTag, UIStrings.ModName, Version, Stage));
+            CoopLog.Init(string.Format(UIStrings.StartTag, UIStrings.ModName, Version, StageLabel));
             CoopPrefs.Init();
 
             CoopLog.Msg(UIStrings.Loaded + string.Format(UIStrings.LoadedArgs,
-                        Stage, Version, CoopPrefs.Enabled.Value, CoopPrefs.Probe.Value,
-                        CoopPrefs.Ipc.Value, CoopPrefs.Capture.Value));
+                        StageLabel, Version, CoopPrefs.Enabled.Value, CoopPrefs.Probe.Value,
+                        CoopPrefs.Ipc.Value, CoopPrefs.Capture.Value, CoopPrefs.DevCommands.Value,
+                        CoopPrefs.AllowRemoteInput.Value));
 
             if (!CoopPrefs.Enabled.Value)
             {
