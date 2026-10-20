@@ -154,8 +154,12 @@ def main():
     ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench / snapshot log: number of requests")
     ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version", "spike"],
                     help="bench: command to measure")
-    ap.add_argument("--sub", default="status", choices=["status"],
-                    help="spike: subcommand (S1.5-b registers only status)")
+    ap.add_argument("--sub", default="status", choices=["status", "arm", "disarm", "move"],
+                    help="spike: status (read-only) | arm/disarm/move (S1.5-d, needs allowRemoteInput + arm)")
+    ap.add_argument("--seconds", type=int, default=120, help="spike arm: seconds (1-300)")
+    ap.add_argument("--id", default=None, help="spike move: stable id of the active unit")
+    ap.add_argument("--row", type=int, default=-1, help="spike move: target row")
+    ap.add_argument("--col", type=int, default=-1, help="spike move: target column")
     ap.add_argument("--what", default="world", choices=["world", "battle", "log"], help="snapshot: stream")
     ap.add_argument("--action", default=None, choices=["start", "stop", "status"], help="capture: action")
     ap.add_argument("--tag", default=None, help="compat_dump: file suffix")
@@ -195,6 +199,12 @@ def main():
             extra = {"key": args.key, "value": args.value}
         elif args.command == "spike":
             extra = {"sub": args.sub}
+            if args.sub == "arm":
+                extra["seconds"] = args.seconds
+            elif args.sub == "move":
+                extra["id"] = args.id
+                extra["row"] = args.row
+                extra["col"] = args.col
         else:
             extra = None
         result = call(pid, args.command, extra=extra)
