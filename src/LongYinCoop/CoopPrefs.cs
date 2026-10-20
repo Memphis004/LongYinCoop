@@ -10,6 +10,9 @@ namespace LongYinCoop
         public static MelonPreferences_Entry<bool> Probe;
         public static MelonPreferences_Entry<bool> Ipc;
         public static MelonPreferences_Entry<bool> DevCommands;
+        public static MelonPreferences_Entry<bool> Capture;
+        public static MelonPreferences_Entry<int> WorldHz;
+        public static MelonPreferences_Entry<int> WorldStreamHz;
 
         public static void Init()
         {
@@ -22,6 +25,12 @@ namespace LongYinCoop
             Ipc = Category.CreateEntry("Ipc", true);
             // dev-only: bench_dispatch (ไม่แตะ state เกม) — ปิดได้ใน build ปกติ
             DevCommands = Category.CreateEntry("DevCommands", true);
+            // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
+            Capture = Category.CreateEntry("Capture", true);
+            // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling
+            WorldHz = Category.CreateEntry("WorldHz", 10);
+            // อัตราเขียน world stream ลงดิสก์ (ตัด npcs ออก; snapshot เต็มขอผ่าน IPC)
+            WorldStreamHz = Category.CreateEntry("WorldStreamHz", 2);
         }
     }
 }

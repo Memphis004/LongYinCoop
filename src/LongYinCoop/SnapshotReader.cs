@@ -21,7 +21,7 @@ namespace LongYinCoop
             }
         }
 
-        public static PlayerPos GetPlayerPos()
+        public static HeroData GetPlayerHero()
         {
             try
             {
@@ -34,13 +34,26 @@ namespace LongYinCoop
                 BigmapNpcController npc = army.GetComponent<BigmapNpcController>();
                 if (npc == null) return null;
 
-                HeroData hero = npc.heroData;
+                return npc.heroData;
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+                return null;
+            }
+        }
+
+        public static PlayerPos GetPlayerPos()
+        {
+            try
+            {
+                HeroData hero = GetPlayerHero();
                 if (hero == null) return null;
 
                 BigMapPos pos = hero.bigMapPos;
                 if (pos == null) return null;
 
-                return new PlayerPos { x = pos.x, y = pos.y, heroID = hero.heroID };
+                return new PlayerPos { x = pos.x, y = pos.y, heroID = hero.heroID, areaId = hero.atAreaID };
             }
             catch (Exception e)
             {
@@ -55,5 +68,6 @@ namespace LongYinCoop
         public float x;
         public float y;
         public int heroID;
+        public int areaId;
     }
 }

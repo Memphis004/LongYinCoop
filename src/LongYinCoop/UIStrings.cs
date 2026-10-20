@@ -9,8 +9,8 @@ namespace LongYinCoop
         // ── ชื่อ/สถานะของ mod ─────────────────────────────────────────────
         public const string ModName = "LongYinCoop";
         public const string StartTag = "{0} v{1} stage={2}";
-        public const string Loaded = "S0 loaded";
-        public const string LoadedArgs = " role=host stage={0} version={1} enabled={2} probe={3} ipc={4}";
+        public const string Loaded = "S1 loaded";
+        public const string LoadedArgs = " role=host stage={0} version={1} enabled={2} probe={3} ipc={4} capture={5}";
         public const string DisabledByPref = "Disabled by pref (Enabled=false) — mod does nothing";
 
         // ── probe ────────────────────────────────────────────────────────
@@ -39,7 +39,24 @@ namespace LongYinCoop
         // ── heartbeat / report ───────────────────────────────────────────
         public const string Heartbeat =
             "heartbeat ticks={0} probeHits={1} queued={2} ran={3} err={4} p99={5}ms";
+        public const string HeartbeatS1 =
+            "heartbeat ticks={0} err={1} battle={2}/{3} log={4} tickP99={5}ms heap={6}MB";
         public const string S0ReportWritten = "s0-result written: {0}";
+        public const string S1ReportWritten = "s1-report written: {0}";
+
+        // ── S1: battle log hook / markers / capture ──────────────────────
+        public const string BattleLogTargetMissing = "battlelog: AddInfoText not found";
+        public const string BattleLogPatchApplied = "battlelog: PatchApplied {0}";
+        public const string BattleLogPatchCount = "battlelog: patched {0}/{1} overload(s)";
+        public const string BattleMarker =
+            "battle marker {0} type={1} state={2} player={3} enemy={4} turn={5} battleTime={6}";
+        public const string CaptureStarted = "capture started -> {0}";
+        public const string CaptureStartFailed = "capture start failed: {0}";
+        public const string CaptureStopped = "capture stopped ({0} records, {1} dropped)";
+        public const string CaptureNotActive = "capture is not active";
+        public const string SnapshotUnavailable = "snapshot unavailable (nothing sampled yet)";
+        public const string PrefSet = "pref set {0}={1}";
+        public const string PrefUnknown = "unknown pref: {0}";
 
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";
@@ -50,7 +67,7 @@ namespace LongYinCoop
 
         // ── compat inventory (compat-notes.md) ───────────────────────────
         public const string CompatDump = "compat: {0} patched methods -> {1}";
-        public const string CompatTitle = "# compat-notes — Harmony patches present at startup";
+        public const string CompatTitle = "# compat-notes — Harmony patches present";
         public const string CompatGenerated = "Generated: {0}";
         public const string CompatProcess = "Process: {0}";
         public const string CompatTotal = "Total patched methods: {0}";

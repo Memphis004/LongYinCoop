@@ -1,14 +1,15 @@
 using System;
+using System.Diagnostics;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.1.0", "Westernholudur")]
+[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.2.0", "Westernholudur")]
 
 namespace LongYinCoop
 {
     public sealed class CoopMod : MelonMod
     {
-        public const string Version = "0.1.0";
-        public const int Stage = 0;
+        public const string Version = "0.2.0";
+        public const int Stage = 1;
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
@@ -21,7 +22,8 @@ namespace LongYinCoop
             CoopPrefs.Init();
 
             CoopLog.Msg(UIStrings.Loaded + string.Format(UIStrings.LoadedArgs,
-                        Stage, Version, CoopPrefs.Enabled.Value, CoopPrefs.Probe.Value, CoopPrefs.Ipc.Value));
+                        Stage, Version, CoopPrefs.Enabled.Value, CoopPrefs.Probe.Value,
+                        CoopPrefs.Ipc.Value, CoopPrefs.Capture.Value));
 
             if (!CoopPrefs.Enabled.Value)
             {
@@ -34,6 +36,7 @@ namespace LongYinCoop
 
             HarmonyProbe.Apply(CoopPrefs.Probe.Value);
             CompatInventory.Dump();
+            BattleLogHook.Apply();
 
             if (CoopPrefs.Ipc.Value)
             {
@@ -45,6 +48,8 @@ namespace LongYinCoop
         public override void OnDeinitializeMelon()
         {
             if (_ipc != null) _ipc.Stop();
+            CaptureWriter.Stop();
+            BattleLogHook.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -55,6 +60,7 @@ namespace LongYinCoop
             if (!CoopPrefs.Enabled.Value)
             {
                 HarmonyProbe.Uninstall();
+                CaptureWriter.Stop();
                 return;
             }
 
@@ -66,6 +72,18 @@ namespace LongYinCoop
                 HarmonyProbe.Apply(CoopPrefs.Probe.Value);
             }
 
+            Stopwatch sw = Stopwatch.StartNew();
+            int hz = CoopPrefs.WorldHz.Value;
+            if (hz < 1) hz = 1;
+            if (hz > 60) hz = 60;
+            int streamHz = CoopPrefs.WorldStreamHz.Value;
+            if (streamHz < 1) streamHz = 1;
+            if (streamHz > hz) streamHz = hz;
+            WorldSampler.Tick(1000 / hz, 1000 / streamHz);
+            BattleSampler.Tick();
+            sw.Stop();
+            S1Metrics.AddTick(sw.Elapsed.TotalMilliseconds);
+
             _ticks++;
             if (!_threadReported && HarmonyProbe.Hits > 0)
             {
@@ -75,9 +93,10 @@ namespace LongYinCoop
 
             if (_ticks % 600 == 0)
             {
-                CoopLog.Msg(string.Format(UIStrings.Heartbeat, _ticks, HarmonyProbe.Hits,
-                            _dispatcher.Queued, _dispatcher.Ran, _dispatcher.Errors,
-                            Math.Round(_dispatcher.Percentile(0.99), 3)));
+                CoopLog.Msg(string.Format(UIStrings.HeartbeatS1, _ticks, _dispatcher.Errors,
+                            BattleSampler.BattlesStarted, BattleSampler.BattlesEnded,
+                            BattleLogHook.Log.Count, Math.Round(S1Metrics.TickPercentile(0.99), 3),
+                            Math.Round(S1Metrics.HeapMb, 2)));
             }
         }
 

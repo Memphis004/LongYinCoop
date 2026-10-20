@@ -13,7 +13,7 @@ namespace LongYinCoop
     /// </summary>
     internal static class CompatInventory
     {
-        public static void Dump()
+        public static string Dump(string tag = null)
         {
             try
             {
@@ -49,14 +49,30 @@ namespace LongYinCoop
                 sb.AppendLine(UIStrings.CompatNoteReadOnly);
                 sb.AppendLine(UIStrings.CompatNotePurpose);
 
-                string path = Path.Combine(CoopPaths.UserDataDir, "compat-notes.md");
+                string name = string.IsNullOrEmpty(tag) ? "compat-notes.md" : "compat-notes-" + Sanitize(tag) + ".md";
+                CoopPaths.EnsureUserDataDir();
+                string path = Path.Combine(CoopPaths.UserDataDir, name);
                 File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
                 CoopLog.Msg(string.Format(UIStrings.CompatDump, patched.Count, path));
+                return path;
             }
             catch (Exception e)
             {
                 CoopLog.Error(e);
+                return null;
             }
+        }
+
+        private static string Sanitize(string tag)
+        {
+            StringBuilder sb = new StringBuilder(tag.Length);
+            for (int i = 0; i < tag.Length; i++)
+            {
+                char c = tag[i];
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
+                    (c >= '0' && c <= '9') || c == '-' || c == '_') sb.Append(c);
+            }
+            return sb.ToString();
         }
 
         public static int CountOwnedPatches(string owner)

@@ -7,6 +7,16 @@ Usage:
     python tools/coopctl.py get_scene
     python tools/coopctl.py get_player_pos
     python tools/coopctl.py stats
+    python tools/coopctl.py snapshot --what world
+    python tools/coopctl.py snapshot --what battle
+    python tools/coopctl.py snapshot --what log --n 30
+    python tools/coopctl.py capture --action start|stop|status
+    python tools/coopctl.py probe_types
+    python tools/coopctl.py probe_units
+    python tools/coopctl.py patch_report
+    python tools/coopctl.py compat_dump --tag bigmap
+    python tools/coopctl.py s1_report
+    python tools/coopctl.py set_pref --key capture --value false
     python tools/coopctl.py --pid 1234 get_scene
 """
 import argparse
@@ -129,11 +139,18 @@ def bench(pid, cmd, n=1000, extra=None, warmup=20):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats", "bench_dispatch", "bench"])
+    ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats",
+                                        "bench_dispatch", "bench", "snapshot", "capture", "compat_dump",
+                                        "probe_types", "patch_report", "probe_units", "s1_report", "set_pref"])
     ap.add_argument("--pid", type=int, default=None, help="game pid (auto-detected if omitted)")
-    ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench: number of requests")
+    ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench / snapshot log: number of requests")
     ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version"],
                     help="bench: command to measure")
+    ap.add_argument("--what", default="world", choices=["world", "battle", "log"], help="snapshot: stream")
+    ap.add_argument("--action", default=None, choices=["start", "stop", "status"], help="capture: action")
+    ap.add_argument("--tag", default=None, help="compat_dump: file suffix")
+    ap.add_argument("--key", default="capture", help="set_pref: pref key")
+    ap.add_argument("--value", default="false", help="set_pref: value")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -155,7 +172,18 @@ def main():
         return 0 if res["reuse"]["bad"] == 0 and res["per_call"]["bad"] == 0 else 1
 
     try:
-        extra = {"n": args.n} if args.command == "bench_dispatch" else None
+        if args.command == "bench_dispatch":
+            extra = {"n": args.n}
+        elif args.command == "snapshot":
+            extra = {"what": args.what, "n": min(args.n, 500) if args.what == "log" else args.n}
+        elif args.command == "capture":
+            extra = {"action": args.action or "status"}
+        elif args.command == "compat_dump":
+            extra = {"tag": args.tag} if args.tag else None
+        elif args.command == "set_pref":
+            extra = {"key": args.key, "value": args.value}
+        else:
+            extra = None
         result = call(pid, args.command, extra=extra)
     except FileNotFoundError:
         print("pipe not found for pid %d - is the mod loaded and Enabled=true?" % pid, file=sys.stderr)
