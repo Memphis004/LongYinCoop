@@ -19,7 +19,7 @@
 - อ่านค่าจากออบเจกต์ที่ได้จาก singleton: `mov rax, [rax+0x20]` → `movss xmm6, [rax+0x1d8]`
 - ดึง **ข้อความของลูก** แล้วแปลงเป็น int (`cvtdq2ps`) → เทียบกับค่านั้น → ตั้ง active tab
 
-**[DUMP]** ฟิลด์ `float` ตัวเดียวที่ offset `0x1D8` ทั้ง dump:
+**[DUMP]** ฟิลด์ **`float` ตัวเดียว** ที่ offset `0x1D8` ทั้ง dump (มีฟิลด์ชนิดอื่นที่ `0x1D8` อีก 18 ตัว แต่เป็นคลาสอื่นคนละชนิด):
 ```
 public class WorldData : ICloneable   // TypeDefIndex: 8181
     public float battleTimeScale;      // 0x1D8
