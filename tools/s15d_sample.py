@@ -27,6 +27,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--seconds", type=float, default=600.0)
     ap.add_argument("--interval", type=float, default=0.1)
+    ap.add_argument("--append", action="store_true",
+                    help="append to --out instead of truncating (for supervised restart loops)")
     args = ap.parse_args()
 
     out_path = os.path.abspath(args.out)
@@ -45,7 +47,7 @@ def main():
     end = time.time() + args.seconds
     next_report = time.time() + 10.0
 
-    with open(out_path, "w", encoding="utf-8") as out:
+    with open(out_path, "a" if args.append else "w", encoding="utf-8") as out:
         while time.time() < end:
             t = time.time()
             try:
