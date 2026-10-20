@@ -194,10 +194,12 @@ namespace LongYinCoop
                     return r;
                 }
 
-                bc.GenerateMovePath(cell.gridData);
+                // คลิกช่องปลายทางเหมือนผู้เล่นทำจริง — เกมจะเรียก GenerateMovePath เองข้างใน
+                // (วัด 22:2x: เรียก GenerateMovePath ตรง ๆ จากนอกโหมดไม่เกิด path และไม่เปลี่ยน state)
+                bc.BattleGridClicked(cell.gameObject);
                 r.StateAfterPath = (int)bc.nowActiveState;
                 r.StateAfterPathName = bc.nowActiveState.ToString();
-                r.Call = "BattleController.MoveButtonClicked + GenerateMovePath";
+                r.Call = "BattleController.MoveButtonClicked + BattleGridClicked";
 
                 // ถ้า path ไม่ออก (ยังอยู่โหมดเลือกช่อง) ให้ถอยออกจากโหมดนั้นหนึ่งครั้ง — ไม่ retry คำสั่งเดิน
                 if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage
