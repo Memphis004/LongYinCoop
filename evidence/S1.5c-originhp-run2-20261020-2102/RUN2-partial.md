@@ -25,7 +25,9 @@
 - ทั้ง 4,206 sample (423.0 s ครอบ 21:04:30–21:08:48 ซึ่งเป็นช่วงหลังโจมตี) `paused=false` **100%**
 - `timeScale` = 1 ทั้งหมด ยกเว้น 1 sample ที่ 0.05 (ระหว่าง `Attacking` — hit-stop ของเกม ไม่ใช่ปุ่มหยุด)
 - ขัดกับ W4 ที่วัดได้ 10/10 (ขณะมี hook) → **ยังแยกไม่ได้ว่า "ปุ่มไม่ลงทะเบียน" หรือ "ฟิลด์ไม่สะท้อน"** เพราะรอบนี้ไม่มี hook บนปุ่ม
-- แก้ชั่วคราว: เปิด `jitprobeW4` (postfix อ่านอย่างเดียวบน `BattlePauseButtonClicked`) ที่ 21:08:55 → `installed=true`, `missing=0`, ไฟล์ `UserData\LongYinCoop\CoopSpike\jitprobe-w4-20261020-210855.ndjson` แล้วเริ่ม sampler ใหม่ (`logs/spike-full-2109.ndjson`) เพื่อวัดซ้ำ
+- แก้ชั่วคราว: เปิด `jitprobeW4` (postfix อ่านอย่างเดียวบน `BattlePauseButtonClicked`) ที่ 21:08:55 → `installed=true`, `missing=0` (log บรรทัด `JitProbe W4 installed`) แล้วเริ่ม sampler ใหม่ (`logs/spike-full-2109.ndjson`, 900 s) เพื่อวัดซ้ำ
+- **ข้อควรรู้จากการปฏิบัติ**: ไฟล์ `jitprobe-w4-20261020-210855.ndjson` ถูกสร้างตอน **hit แรก** เท่านั้น — ไม่มีไฟล์ = ยังไม่มีการกด ไม่ใช่ hook พัง
+- **ข้อควรรู้จากการปฏิบัติ**: pipe รับ client ได้ทีละตัว — ถ้า sampler ถือ connection อยู่ คำสั่งอื่น (`set_pref`, `spike`) จะค้าง/`Errno 22` ต้องหยุด sampler ก่อนทุกครั้งที่ต้องส่งคำสั่ง
 
 ## 3. กลไกเร่งความเร็ว — ยังไม่เห็น
 
