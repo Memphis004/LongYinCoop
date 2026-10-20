@@ -106,6 +106,8 @@ namespace LongYinCoop
             bool paused = bc.battlePaused;
             bool playingAnim = bc.playingAnim;
             int infoCount = bc.infoCount;
+            // S1.5-c: BattleController.nowScale (0xE0) — ตัวชี้ความเร็วศึก (อ่านอย่างเดียว)
+            float nowScale = SafeNowScale(bc);
 
             BattleMapData map = bc.battleMapData;
             int gridW = map == null ? -1 : map.mapWidth;
@@ -243,6 +245,7 @@ namespace LongYinCoop
                 timeLimit = SafeFloat(bc, 1),
                 aiWaitTime = SafeFloat(bc, 2),
                 timeScale = UnityEngine.Time.timeScale,
+                nowScale = nowScale,
                 deltaTime = UnityEngine.Time.deltaTime,
                 unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = hash,
@@ -288,6 +291,7 @@ namespace LongYinCoop
                 timeLimit = -1f,
                 aiWaitTime = -1f,
                 timeScale = UnityEngine.Time.timeScale,
+                nowScale = -1f,
                 deltaTime = UnityEngine.Time.deltaTime,
                 unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = (string)null,
@@ -303,6 +307,13 @@ namespace LongYinCoop
             return battleState == (int)BattleState.Prepare
                    || battleState == (int)BattleState.Ready
                    || battleState == (int)BattleState.Fighting;
+        }
+
+        /// <summary>BattleController.nowScale — อ่านอย่างเดียว (ตัวชี้ความเร็วศึก; ยังไม่ยืนยันว่าปุ่ม x5 เขียนฟิลด์นี้)</summary>
+        private static float SafeNowScale(BattleController bc)
+        {
+            try { return bc == null ? -1f : (float)Math.Round(bc.nowScale, 4); }
+            catch { return -1f; }
         }
 
         /// <summary>BattleUnit.originHp — อ่านอย่างเดียว (ยังไม่ยืนยันว่าเป็น hp ปัจจุบันของศึก)</summary>
