@@ -1,0 +1,48 @@
+file      : evidence/S1.5c-originhp-run2-20261020-2102/logs/spike-full-2101.ndjson
+records   : 4206
+window    : 21:01:45.643 -> 21:08:48.657 (423.0s)
+states    : {'Fighting': 4206}
+active    : {'WaitPlayerInput': 4043, 'WaitMoving': 23, 'Moving': 18, 'WaitAttacking': 11, 'Attacking': 65, 'Finish': 24, 'Rest': 20, 'None': 2}
+paused    : {False: 4206}
+timeScale : {1: 4205, 0.05: 1}
+turns     : {20: 1477, 21: 23, 22: 118, 23: 2588}
+
+== per-unit first -> last
+  0:9       hp   221.326 ->   221.326  originHp   221.326 ->   221.326  alive True->True
+  0:4       hp   475.701 ->   472.459  originHp   475.701 ->   475.701  alive True->True
+  0:86      hp   765.306 ->   765.306  originHp   765.306 ->   765.306  alive True->True
+  0:0       hp   452.000 ->   459.962  originHp   505.551 ->   505.551  alive True->True
+  1:10105   hp   474.280 ->   474.280  originHp   474.280 ->   474.280  alive True->True
+  1:10066   hp   551.870 ->   551.870  originHp   551.870 ->   551.870  alive True->True
+  1:10107   hp   537.660 ->   456.343  originHp   537.660 ->   537.660  alive True->True
+  1:10102   hp   187.450 ->   187.450  originHp   589.260 ->   589.260  alive True->True
+  1:10067   hp   553.840 ->   553.840  originHp   553.840 ->   553.840  alive True->True
+
+== hp/alive transitions
+  21:04:09.383 0:4       hp   475.701 ->   474.680 (d=  -1.021)  originHp   475.701 ->   475.701  alive True->True  state=Attacking
+  21:04:09.383 1:10107   hp   537.660 ->   504.360 (d= -33.300)  originHp   537.660 ->   537.660  alive True->True  state=Attacking
+  21:04:12.499 0:4       hp   474.680 ->   472.459 (d=  -2.221)  originHp   475.701 ->   475.701  alive True->True  state=Attacking
+  21:04:12.499 1:10107   hp   504.360 ->   456.343 (d= -48.017)  originHp   537.660 ->   537.660  alive True->True  state=Attacking
+  21:04:24.861 0:0       hp   452.000 ->   459.962 (d=  +7.962)  originHp   505.551 ->   505.551  alive True->True  state=Rest
+  total transitions: 5
+
+== battleTime segments (wall >= 0.3 s)
+  21:01:45.643 -> 21:04:03.855 WaitPlayerInput  wall=138.21s battleTime  +0.0000
+  21:04:03.956 -> 21:04:05.061 WaitMoving       wall=  1.11s battleTime  +0.0000
+  21:04:05.161 -> 21:04:05.663 Moving           wall=  0.50s battleTime  +0.0000
+  21:04:05.764 -> 21:04:06.267 WaitPlayerInput  wall=  0.50s battleTime  +0.0000
+  21:04:06.367 -> 21:04:07.373 WaitAttacking    wall=  1.01s battleTime  +0.0000
+  21:04:07.473 -> 21:04:13.907 Attacking        wall=  6.43s battleTime  +0.0000
+  21:04:14.108 -> 21:04:14.611 WaitMoving       wall=  0.50s battleTime  +0.0000
+  21:04:14.711 -> 21:04:15.214 Moving           wall=  0.50s battleTime  +0.0000
+  21:04:15.314 -> 21:04:16.219 Rest             wall=  0.90s battleTime  +0.0000
+  21:04:16.420 -> 21:04:21.543 WaitPlayerInput  wall=  5.12s battleTime  +0.0000
+  21:04:21.644 -> 21:04:22.046 WaitMoving       wall=  0.40s battleTime  +0.0000
+  21:04:22.146 -> 21:04:22.648 Moving           wall=  0.50s battleTime  +0.0000
+  21:04:22.749 -> 21:04:24.760 WaitPlayerInput  wall=  2.01s battleTime  +0.0000
+  21:04:24.861 -> 21:04:25.765 Rest             wall=  0.90s battleTime  +0.0000
+  21:04:25.866 -> 21:04:28.078 Finish           wall=  2.21s battleTime  +0.0000
+  21:04:28.279 -> 21:08:48.657 WaitPlayerInput  wall=260.38s battleTime  +0.0000
+
+== timeScale != 1 frames
+  21:04:12.499 scale=0.05 deltaTime=0.000347 unscaled=0.006938 state=Attacking
