@@ -93,6 +93,8 @@ namespace LongYinCoop
             public string StateBeforeName { get; set; }
             public bool MovedFlagBefore { get; set; }
             public string Call { get; set; }
+            public int StateAfterSelfClick { get; set; }
+            public string StateAfterSelfClickName { get; set; }
             public int StateAfterButton { get; set; }
             public string StateAfterButtonName { get; set; }
             public int StateAfterPreview { get; set; }
@@ -185,22 +187,45 @@ namespace LongYinCoop
                 }
                 r.GridName = cell.gameObject.name;
 
-                // ลำดับเดียวกับ UI จริงที่วัดไว้ใน W2:
-                //   MoveButtonClicked() -> state 6 (ShowMovingRage)
-                //   GenerateMovePath(targetGrid) -> state 7 (WaitMoving) แล้วเกมเดินยูนิตเอง
-                bc.MoveButtonClicked();
-                r.StateAfterButton = (int)bc.nowActiveState;
-                r.StateAfterButtonName = bc.nowActiveState.ToString();
-
-                if (r.StateAfterButton == (int)ActiveUnitBattleState.WaitPlayerInput)
+                int activeRow = -1, activeCol = -1;
+                try
                 {
-                    r.Error = string.Format(UIStrings.SpikeMoveButtonIgnored, r.StateAfterButtonName);
+                    GridUnitData activeGrid = active.mapGrid;
+                    if (activeGrid != null) { activeRow = activeGrid.row; activeCol = activeGrid.column; }
+                }
+                catch { }
+                if (activeRow < 0 || activeCol < 0)
+                {
+                    r.Error = UIStrings.SpikeMoveNoPlayerUnit;
+                    return r;
+                }
+
+                // ขั้นที่ 1 — คลิกช่องที่ยูนิตยืน = ทางเข้าโหมดเดินที่ผู้เล่นใช้จริง
+                // หลักฐาน W1/W2 22:26 (f43218): BattleGridClicked(6_0 = ช่องของยูนิต) -> OnClick(6,0)
+                // ในรอบ 4 พบว่า MoveButtonClicked() ก็ขึ้น state 6 ได้ แต่ GenerateMovePath จาก state 6
+                // ไม่เกิด path ("no path generated (state ShowMovingRage)") -> ปุ่มย้ายไม่ใช่ทางเข้า
+                GridUnitController selfCell = Scan(rootA, activeRow, activeCol);
+                if (selfCell == null) selfCell = Scan(rootB, activeRow, activeCol);
+                if (selfCell == null)
+                {
+                    r.Error = string.Format(UIStrings.SpikeMoveNoGrid, activeRow, activeCol);
+                    return r;
+                }
+                r.Call = "BattleGridClicked(self)";
+                bc.BattleGridClicked(selfCell.gameObject);
+                r.StateAfterSelfClick = (int)bc.nowActiveState;
+                r.StateAfterSelfClickName = bc.nowActiveState.ToString();
+                // เก็บไว้เพื่อเทียบกับรุ่นก่อน (ปุ่มย้าย) — รอบนี้ไม่เรียกแล้ว
+                r.StateAfterButton = r.StateAfterSelfClick;
+                r.StateAfterButtonName = r.StateAfterSelfClickName;
+
+                if (r.StateAfterSelfClick == (int)ActiveUnitBattleState.WaitPlayerInput)
+                {
+                    r.Error = string.Format(UIStrings.SpikeMoveButtonIgnored, r.StateAfterSelfClickName);
                     return r;
                 }
 
                 // ขั้นที่ 2 — preview path (ของจริงเกิดตอนเมาส์เลื่อนผ่านช่อง: W1/W2 22:26)
-                // หลักฐาน: คลิกที่ commit จริง (f43357) เรียก GenerateMovePath(target) ก่อน OnClick เสมอ
-                // รอบ 3 พลาดขั้นนี้: MoveButtonClicked -> BattleGridClicked ไม่เกิด path และ state ค้างที่ 6
                 bc.GenerateMovePath(cell.gridData);
                 r.StateAfterPreview = (int)bc.nowActiveState;
                 r.StateAfterPreviewName = bc.nowActiveState.ToString();
@@ -219,7 +244,7 @@ namespace LongYinCoop
                 bc.BattleGridClicked(cell.gameObject);
                 r.StateAfterPath = (int)bc.nowActiveState;
                 r.StateAfterPathName = bc.nowActiveState.ToString();
-                r.Call = "MoveButtonClicked + GenerateMovePath + BattleGridClicked";
+                r.Call = "BattleGridClicked(self) + GenerateMovePath + BattleGridClicked(target)";
 
                 // ล้มเหลวเฉพาะเมื่อยังอยู่โหมดเลือกช่อง (ShowMovingRage) — ถ้าเกมเดินแล้ว/จบเทิร์นแล้วถือว่ารับคำสั่ง
                 if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage)
