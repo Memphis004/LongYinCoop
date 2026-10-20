@@ -502,9 +502,32 @@ namespace LongYinCoop
                     };
                 });
             }
+            // S1.5e W7: probe อ่าน chain ของ attack (13 method) — default false, unpatch ได้ทันที
+            if (key == "jitprobeW7")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.JitProbeW7.Value = on;
+                    JitProbeW7.Apply(on);
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.JitProbeW7.Value,
+                        installed = JitProbeW7.Installed,
+                        file = JitProbeW7.FilePath,
+                        hits = JitProbeW7.Hits,
+                        prefixHits = JitProbeW7.PrefixHits,
+                        stacks = JitProbeW7.StacksLogged,
+                        missing = JitProbeW7.Missing,
+                        dropped = JitProbeW7.Dropped
+                    };
+                });
+            }
             return Fail(cmd, string.Format(UIStrings.PrefUnknown, key));
         }
-
         /// <summary>dev-only: enqueue N no-op แล้วรอ drain — วัดเกณฑ์ dispatcher เท่านั้น</summary>
         private string BenchDispatch(string cmd, JsonElement root)
         {

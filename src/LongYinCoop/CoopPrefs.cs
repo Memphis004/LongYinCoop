@@ -21,6 +21,8 @@ namespace LongYinCoop
         public static MelonPreferences_Entry<bool> JitProbeW4;
         // S1.5-c W6: prefix+postfix บน chain ของ move (state ก่อน/หลัง + ตัวตน GameObject + stack) — default false
         public static MelonPreferences_Entry<bool> JitProbeW6;
+        // S1.5e W7: probe อ่านอย่างเดียวบน chain ของ attack (J1/J2/J3) — default false
+        public static MelonPreferences_Entry<bool> JitProbeW7;
         public static MelonPreferences_Entry<bool> Capture;
         public static MelonPreferences_Entry<int> WorldHz;
         public static MelonPreferences_Entry<int> WorldStreamHz;
@@ -45,6 +47,8 @@ namespace LongYinCoop
             JitProbeW4 = Category.CreateEntry("JitProbeW4", false);
             // S1.5-c W6: hook อ่าน chain ทั้ง 5 จุด พร้อม state ก่อน/หลัง — false = ไม่ติด patch
             JitProbeW6 = Category.CreateEntry("JitProbeW6", false);
+            // S1.5e W7: hook อ่าน chain ของ attack (13 method) — false = ไม่ติด patch เลย
+            JitProbeW7 = Category.CreateEntry("JitProbeW7", false);
             // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
             Capture = Category.CreateEntry("Capture", true);
             // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling

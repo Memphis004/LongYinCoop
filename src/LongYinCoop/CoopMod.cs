@@ -10,7 +10,7 @@ namespace LongYinCoop
     {
         public const string Version = "0.4.0";
         public const int Stage = 1;
-        public const string StageLabel = "S1.5-c-W2W4";
+        public const string StageLabel = "S1.5e-W7";
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
@@ -44,6 +44,8 @@ namespace LongYinCoop
             JitProbeW4.Apply(CoopPrefs.JitProbeW4.Value);
             // S1.5-c W6: probe อ่าน chain ของ move (state ก่อน/หลัง + ตัวตน GameObject)
             JitProbeW6.Apply(CoopPrefs.JitProbeW6.Value);
+            // S1.5e W7: probe อ่าน chain ของ attack (default false = ไม่ติด patch)
+            JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -63,6 +65,7 @@ namespace LongYinCoop
             JitProbeW2.Uninstall();
             JitProbeW4.Uninstall();
             JitProbeW6.Uninstall();
+            JitProbeW7.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -76,6 +79,7 @@ namespace LongYinCoop
                 JitProbeW2.Uninstall();
                 JitProbeW4.Uninstall();
                 JitProbeW6.Uninstall();
+                JitProbeW7.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 return;
@@ -101,6 +105,10 @@ namespace LongYinCoop
             if (CoopPrefs.JitProbeW6.Value != JitProbeW6.Installed)
             {
                 JitProbeW6.Apply(CoopPrefs.JitProbeW6.Value);
+            }
+            if (CoopPrefs.JitProbeW7.Value != JitProbeW7.Installed)
+            {
+                JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
             }
 
             // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)
