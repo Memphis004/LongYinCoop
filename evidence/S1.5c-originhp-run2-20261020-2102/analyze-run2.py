@@ -38,9 +38,16 @@ def main():
     print("timeScale :", dict(Counter(r.get("timeScale") for r in recs)))
     print("turns     :", dict(Counter(r.get("turnIndex") for r in recs)))
 
+    # records captured outside a battle carry units = null; unit sections use only
+    # the samples that have a unit list
+    with_units = [r for r in recs if isinstance(r.get("units"), list) and r["units"]]
+    if not with_units:
+        print("\n(no samples with units - nothing to compare per unit)")
+        return 0
+
     print("\n== per-unit first -> last")
-    first = {u["id"]: u for u in recs[0]["units"]}
-    last = {u["id"]: u for u in recs[-1]["units"]}
+    first = {u["id"]: u for u in with_units[0]["units"]}
+    last = {u["id"]: u for u in with_units[-1]["units"]}
     for uid in first:
         a, b = first[uid], last.get(uid, {})
         print("  %-9s hp %9.3f -> %9.3f  originHp %9.3f -> %9.3f  alive %s->%s"
@@ -50,7 +57,7 @@ def main():
     print("\n== hp/alive transitions")
     prev = dict(first)
     n = 0
-    for r in recs[1:]:
+    for r in with_units[1:]:
         for u in r["units"]:
             p = prev.get(u["id"])
             if p and (abs(u["hp"] - p["hp"]) > 1e-6 or u["alive"] != p["alive"]):
@@ -88,6 +95,9 @@ def main():
             print("  %s scale=%s deltaTime=%.6f unscaled=%.6f state=%s"
                   % (ts(r["t"]), r["timeScale"], r.get("deltaTime", 0),
                      r.get("unscaledDeltaTime", 0), r.get("nowActiveStateName")))
+
+    print("\n== battleTimeScale values")
+    print(" ", dict(Counter(r.get("battleTimeScale") for r in recs)))
     return 0
 
 

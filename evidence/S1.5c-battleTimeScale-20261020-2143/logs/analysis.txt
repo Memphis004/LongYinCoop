@@ -1,18 +1,24 @@
 file      : evidence/S1.5c-battleTimeScale-20261020-2143/logs/spike-full.ndjson
-records   : 1291
-window    : 21:44:34.668 -> 21:46:46.787 (132.1s)
-states    : {None: 297, 'Prepare': 37, 'Fighting': 957}
-active    : {None: 297, 'None': 39, 'WaitPlayerInput': 955}
-paused    : {False: 1291}
-timeScale : {1: 1291}
-turns     : {-1: 297, 0: 994}
+records   : 1745
+window    : 21:44:34.668 -> 21:47:32.430 (177.8s)
+states    : {None: 297, 'Prepare': 37, 'Fighting': 1411}
+active    : {None: 297, 'None': 39, 'WaitPlayerInput': 1409}
+paused    : {False: 1745}
+timeScale : {1: 1745}
+turns     : {-1: 297, 0: 1448}
 
 == per-unit first -> last
-Traceback (most recent call last):
-  File "C:\Users\memph\LongYinCoop\evidence\S1.5c-originhp-run2-20261020-2102\analyze-run2.py", line 95, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "C:\Users\memph\LongYinCoop\evidence\S1.5c-originhp-run2-20261020-2102\analyze-run2.py", line 42, in main
-    first = {u["id"]: u for u in recs[0]["units"]}
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: 'NoneType' object is not iterable
+  0:9       hp   221.326 ->   221.326  originHp   221.326 ->   221.326  alive True->True
+
+== hp/alive transitions
+  total transitions: 0
+
+== battleTime segments (wall >= 0.3 s)
+  21:44:34.668 -> 21:45:05.819 None             wall= 31.15s battleTime  +0.0000
+  21:45:05.920 -> 21:45:09.751 None             wall=  3.83s battleTime  +0.5238
+  21:45:09.851 -> 21:47:32.430 WaitPlayerInput  wall=142.58s battleTime  +0.0000
+
+== timeScale != 1 frames
+
+== battleTimeScale values
+  {-1: 297, 10: 132, 3: 56, 5: 66, 1: 1194}
