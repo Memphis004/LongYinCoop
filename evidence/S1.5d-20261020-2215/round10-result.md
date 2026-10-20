@@ -1,4 +1,4 @@
-# S1.5-d / รอบ 10 — คำสั่งเดินครั้งที่ 2 บน build `bbf8cd42` · 2026-10-20 23:3x [RUNTIME]
+# S1.5-d / รอบ 10 — คำสั่งเดินครั้งที่ 2 บน build `bbf8cd42` · 2026-10-20 23:37:32 [RUNTIME]
 
 build `bbf8cd42be5d` · เกม pid 20232 · arm ครั้งเดียว, คำสั่งเดียว, ไม่ retry
 
@@ -50,7 +50,7 @@ stateHash=f2725e09c5e2bd0e61d2148c09e7078c66bdc971f451883225696c2090c332ee
 
 ## 6. ความปลอดภัย
 - `allowRemoteInput=false` (exit 0) + `disarm` (exit 0) หลังยิง
-- เซฟจริง: `save-split.py verify` → `real 0/0/0`, drift 0, sentinel 5/5, **RESULT: PASS**
+- เซฟจริง: `save-split.py verify` → `real 0/0/0`, drift 0, sentinel 5/5, **RESULT: PASS** (หลักฐาน: `logs/save-verify/round10.json`)
 
 ## 7. เกณฑ์ S1.5-d
 | ข้อ | ผล |

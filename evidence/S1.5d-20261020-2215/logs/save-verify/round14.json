@@ -1,0 +1,22 @@
+{
+  "ts": "2026-10-20T23:49:50",
+  "label": "S1.5c-originhp-20261020-172346",
+  "mounted_digest": "6d6eb1ba87f2bdf5d3ae6d238a9ff675089bd6f28022e369158815f8136fd056",
+  "mounted_is_real_baseline": false,
+  "copy_drift": {
+    "changed": 1,
+    "missing": 0,
+    "added": 0,
+    "slot_drift": 0,
+    "other_drift": []
+  },
+  "real": {
+    "present": true,
+    "unchanged": true,
+    "mtime_drift": []
+  },
+  "hidden": [
+    ".hidden-SaveSlot8"
+  ],
+  "ok": true
+}

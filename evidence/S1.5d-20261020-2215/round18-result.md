@@ -1,4 +1,4 @@
-# S1.5-d / รอบ 18 — คำสั่งเดินครั้งที่ 10 บน build `bbf8cd42` · 2026-10-21 00:5x [RUNTIME]
+# S1.5-d / รอบ 18 — คำสั่งเดินครั้งที่ 10 บน build `bbf8cd42` · 2026-10-20 23:58:44 [RUNTIME]
 
 build `bbf8cd42be5d` · เกม pid 20232 · arm ครั้งเดียว, คำสั่งเดียว, ไม่ retry
 
@@ -49,7 +49,7 @@ stateHash=648a923c544384e7b1b35514d16fceb96f956b6e487cfdddfe5ff7610b7a33aa
 
 ## 6. ความปลอดภัย
 - `allowRemoteInput=false` + `disarm` แล้ว (exit 0 ทั้งคู่)
-- เซฟจริง: `real 0/0/0`, drift 0, sentinel 5/5, **RESULT: PASS**
+- เซฟจริง: `real 0/0/0`, drift 0, sentinel 5/5, **RESULT: PASS** (หลักฐาน: `logs/save-verify/round18.json`)
 
 ## 7. เกณฑ์ S1.5-d
 | ข้อ | ผล |

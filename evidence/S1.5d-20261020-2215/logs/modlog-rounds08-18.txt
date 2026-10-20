@@ -1,0 +1,738 @@
+# excerpt of UserData/LongYinCoop/logs/coop-20261020.log (mod runtime log)
+# window: lines 28150-28880 of 29214, i.e. 23:25 .. 23:59 on 2026-10-20
+# covers the ten accepted spike move runs (rounds 08 and 10-18)
+# each round shows: enable remote input -> arm for 60s -> move (ok) -> disarm -> disable remote input
+# (the comment lines above are metadata only; the log lines start at 23:25:06)
+# source lines: 28150-28880
+
+23:25:06.023 [INFO] IPC client connected
+23:25:06.040 [INFO] IPC client disconnected
+23:25:10.257 [INFO] heartbeat ticks=3600 err=0 battle=1/0 log=0 tickP99=0.367ms heap=125.38MB
+23:25:15.229 [INFO] heartbeat ticks=4200 err=0 battle=1/0 log=0 tickP99=0.369ms heap=128.12MB
+23:25:19.694 [INFO] heartbeat ticks=4800 err=0 battle=1/0 log=0 tickP99=0.377ms heap=131.19MB
+23:25:24.174 [INFO] heartbeat ticks=5400 err=0 battle=1/0 log=0 tickP99=0.392ms heap=130.46MB
+23:25:28.583 [INFO] heartbeat ticks=6000 err=0 battle=1/0 log=0 tickP99=0.394ms heap=133.3MB
+23:25:33.041 [INFO] heartbeat ticks=6600 err=0 battle=1/0 log=0 tickP99=0.387ms heap=129.51MB
+23:25:35.232 [INFO] IPC client connected
+23:25:35.247 [INFO] IPC client disconnected
+23:25:37.659 [INFO] heartbeat ticks=7200 err=0 battle=1/0 log=0 tickP99=0.394ms heap=133.49MB
+23:25:42.006 [INFO] heartbeat ticks=7800 err=0 battle=1/0 log=0 tickP99=0.401ms heap=128.37MB
+23:25:46.360 [INFO] heartbeat ticks=8400 err=0 battle=1/0 log=0 tickP99=0.401ms heap=135.1MB
+23:25:47.617 [INFO] IPC client connected
+23:25:47.624 [INFO] pref set allowRemoteInput=True
+23:25:47.625 [INFO] IPC client disconnected
+23:25:47.768 [INFO] IPC client connected
+23:25:47.770 [INFO] spike arm: 60s
+23:25:47.771 [INFO] IPC client disconnected
+23:25:47.926 [INFO] IPC client connected
+23:25:47.930 [INFO] IPC client disconnected
+23:25:47.930 [INFO] IPC client connected
+23:25:47.939 [INFO] spike move start id=0:0 -> (3,0) selfClick=ShowMovingRage (deferred)
+23:25:47.950 [INFO] spike move id=0:0 -> (3,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(3,0) confirmed=True rollback=False cost=2ms total=11ms err=-
+23:25:47.952 [INFO] IPC client disconnected
+23:25:50.797 [INFO] heartbeat ticks=9000 err=0 battle=1/0 log=0 tickP99=0.401ms heap=135.13MB
+23:25:55.272 [INFO] heartbeat ticks=9600 err=0 battle=1/0 log=0 tickP99=0.396ms heap=135.26MB
+23:25:59.734 [INFO] heartbeat ticks=10200 err=0 battle=1/0 log=0 tickP99=0.396ms heap=133.64MB
+23:26:03.653 [INFO] IPC client connected
+23:26:03.658 [INFO] IPC client disconnected
+23:26:03.903 [INFO] IPC client connected
+23:26:03.908 [INFO] spike disarm
+23:26:03.908 [INFO] pref set allowRemoteInput=False
+23:26:03.909 [INFO] IPC client disconnected
+23:26:04.049 [INFO] IPC client connected
+23:26:04.054 [INFO] spike disarm
+23:26:04.055 [INFO] IPC client disconnected
+23:26:04.290 [INFO] heartbeat ticks=10800 err=0 battle=1/0 log=0 tickP99=0.393ms heap=133.06MB
+23:26:08.706 [INFO] heartbeat ticks=11400 err=0 battle=1/0 log=0 tickP99=0.387ms heap=132.24MB
+23:26:13.053 [INFO] heartbeat ticks=12000 err=0 battle=1/0 log=0 tickP99=0.381ms heap=131.38MB
+23:26:17.400 [INFO] heartbeat ticks=12600 err=0 battle=1/0 log=0 tickP99=0.38ms heap=129.61MB
+23:26:21.802 [INFO] heartbeat ticks=13200 err=0 battle=1/0 log=0 tickP99=0.38ms heap=138.74MB
+23:26:26.185 [INFO] heartbeat ticks=13800 err=0 battle=1/0 log=0 tickP99=0.381ms heap=137.83MB
+23:26:30.573 [INFO] heartbeat ticks=14400 err=0 battle=1/0 log=0 tickP99=0.393ms heap=136.96MB
+23:26:35.080 [INFO] heartbeat ticks=15000 err=0 battle=1/0 log=0 tickP99=0.401ms heap=136.09MB
+23:26:39.712 [INFO] heartbeat ticks=15600 err=0 battle=1/0 log=0 tickP99=0.399ms heap=136.13MB
+23:26:44.142 [INFO] heartbeat ticks=16200 err=0 battle=1/0 log=0 tickP99=0.395ms heap=134.38MB
+23:26:48.628 [INFO] heartbeat ticks=16800 err=0 battle=1/0 log=0 tickP99=0.393ms heap=133.47MB
+23:26:53.135 [INFO] heartbeat ticks=17400 err=0 battle=1/0 log=0 tickP99=0.393ms heap=133.5MB
+23:26:57.627 [INFO] heartbeat ticks=18000 err=0 battle=1/0 log=0 tickP99=0.392ms heap=131.42MB
+23:27:02.138 [INFO] heartbeat ticks=18600 err=0 battle=1/0 log=0 tickP99=0.382ms heap=131.51MB
+23:27:06.488 [INFO] heartbeat ticks=19200 err=0 battle=1/0 log=0 tickP99=0.381ms heap=138.06MB
+23:27:11.391 [INFO] heartbeat ticks=19800 err=0 battle=1/0 log=0 tickP99=0.377ms heap=138.83MB
+23:27:15.869 [INFO] heartbeat ticks=20400 err=0 battle=1/0 log=0 tickP99=0.376ms heap=137.19MB
+23:27:20.280 [INFO] heartbeat ticks=21000 err=0 battle=1/0 log=0 tickP99=0.377ms heap=136.33MB
+23:27:24.724 [INFO] heartbeat ticks=21600 err=0 battle=1/0 log=0 tickP99=0.376ms heap=135.42MB
+23:27:29.112 [INFO] heartbeat ticks=22200 err=0 battle=1/0 log=0 tickP99=0.374ms heap=134.52MB
+23:27:33.473 [INFO] heartbeat ticks=22800 err=0 battle=1/0 log=0 tickP99=0.371ms heap=132.77MB
+23:27:37.896 [INFO] heartbeat ticks=23400 err=0 battle=1/0 log=0 tickP99=0.372ms heap=130.57MB
+23:27:42.312 [INFO] heartbeat ticks=24000 err=0 battle=1/0 log=0 tickP99=0.371ms heap=141.81MB
+23:27:46.632 [INFO] heartbeat ticks=24600 err=0 battle=1/0 log=0 tickP99=0.372ms heap=140.08MB
+23:27:51.131 [INFO] heartbeat ticks=25200 err=0 battle=1/0 log=0 tickP99=0.373ms heap=139.28MB
+23:27:55.652 [INFO] heartbeat ticks=25800 err=0 battle=1/0 log=0 tickP99=0.378ms heap=139.25MB
+23:28:00.117 [INFO] heartbeat ticks=26400 err=0 battle=1/0 log=0 tickP99=0.378ms heap=137.53MB
+23:28:04.603 [INFO] heartbeat ticks=27000 err=0 battle=1/0 log=0 tickP99=0.379ms heap=137.49MB
+23:28:09.048 [INFO] heartbeat ticks=27600 err=0 battle=1/0 log=0 tickP99=0.382ms heap=135.89MB
+23:28:13.582 [INFO] heartbeat ticks=28200 err=0 battle=1/0 log=0 tickP99=0.382ms heap=134.95MB
+23:28:18.042 [INFO] heartbeat ticks=28800 err=0 battle=1/0 log=0 tickP99=0.386ms heap=134.88MB
+23:28:22.387 [INFO] heartbeat ticks=29400 err=0 battle=1/0 log=0 tickP99=0.391ms heap=90.99MB
+23:28:26.866 [INFO] heartbeat ticks=30000 err=0 battle=1/0 log=0 tickP99=0.387ms heap=90.49MB
+23:28:31.359 [INFO] heartbeat ticks=30600 err=0 battle=1/0 log=0 tickP99=0.387ms heap=88.89MB
+23:28:35.782 [INFO] heartbeat ticks=31200 err=0 battle=1/0 log=0 tickP99=0.389ms heap=88.79MB
+23:28:40.226 [INFO] heartbeat ticks=31800 err=0 battle=1/0 log=0 tickP99=0.386ms heap=87.17MB
+23:28:44.740 [INFO] heartbeat ticks=32400 err=0 battle=1/0 log=0 tickP99=0.385ms heap=86.42MB
+23:28:49.305 [INFO] heartbeat ticks=33000 err=0 battle=1/0 log=0 tickP99=0.38ms heap=86.46MB
+23:28:53.746 [INFO] heartbeat ticks=33600 err=0 battle=1/0 log=0 tickP99=0.379ms heap=84.88MB
+23:28:58.193 [INFO] heartbeat ticks=34200 err=0 battle=1/0 log=0 tickP99=0.377ms heap=84.86MB
+23:29:02.600 [INFO] heartbeat ticks=34800 err=0 battle=1/0 log=0 tickP99=0.374ms heap=94.07MB
+23:29:07.051 [INFO] heartbeat ticks=35400 err=0 battle=1/0 log=0 tickP99=0.372ms heap=93.15MB
+23:29:11.554 [INFO] heartbeat ticks=36000 err=0 battle=1/0 log=0 tickP99=0.372ms heap=93.12MB
+23:29:12.992 [INFO] IPC client connected
+23:29:12.997 [INFO] IPC client disconnected
+23:29:13.215 [INFO] IPC client connected
+23:29:13.218 [INFO] pref set allowRemoteInput=True
+23:29:13.218 [INFO] IPC client disconnected
+23:29:13.364 [INFO] IPC client connected
+23:29:13.371 [INFO] spike arm: 60s
+23:29:13.373 [INFO] IPC client disconnected
+23:29:13.515 [INFO] IPC client connected
+23:29:13.516 [INFO] IPC client disconnected
+23:29:13.722 [INFO] IPC client connected
+23:29:13.724 [INFO] spike disarm
+23:29:13.725 [INFO] pref set allowRemoteInput=False
+23:29:13.725 [INFO] IPC client disconnected
+23:29:13.879 [INFO] IPC client connected
+23:29:13.884 [INFO] spike disarm
+23:29:13.885 [INFO] IPC client disconnected
+23:29:14.023 [INFO] IPC client connected
+23:29:14.030 [INFO] IPC client disconnected
+23:29:15.947 [INFO] heartbeat ticks=36600 err=0 battle=1/0 log=0 tickP99=0.374ms heap=91.83MB
+23:29:20.328 [INFO] heartbeat ticks=37200 err=0 battle=1/0 log=0 tickP99=0.372ms heap=90.1MB
+23:29:24.870 [INFO] heartbeat ticks=37800 err=0 battle=1/0 log=0 tickP99=0.371ms heap=89.38MB
+23:29:29.286 [INFO] heartbeat ticks=38400 err=0 battle=1/0 log=0 tickP99=0.371ms heap=89.28MB
+23:29:33.640 [INFO] heartbeat ticks=39000 err=0 battle=1/0 log=0 tickP99=0.371ms heap=87.56MB
+23:29:38.029 [INFO] heartbeat ticks=39600 err=0 battle=1/0 log=0 tickP99=0.372ms heap=93.78MB
+23:29:42.431 [INFO] heartbeat ticks=40200 err=0 battle=1/0 log=0 tickP99=0.37ms heap=92.87MB
+23:29:46.904 [INFO] heartbeat ticks=40800 err=0 battle=1/0 log=0 tickP99=0.37ms heap=91.21MB
+23:29:51.424 [INFO] heartbeat ticks=41400 err=0 battle=1/0 log=0 tickP99=0.373ms heap=91.16MB
+23:29:55.988 [INFO] heartbeat ticks=42000 err=0 battle=1/0 log=0 tickP99=0.382ms heap=90.48MB
+23:30:00.493 [INFO] heartbeat ticks=42600 err=0 battle=1/0 log=0 tickP99=0.384ms heap=90.38MB
+23:30:05.098 [INFO] heartbeat ticks=43200 err=0 battle=1/0 log=0 tickP99=0.386ms heap=89.57MB
+23:30:20.433 [INFO] IPC client connected
+23:30:20.934 [INFO] IPC client disconnected
+23:30:22.499 [INFO] heartbeat ticks=43800 err=0 battle=1/0 log=0 tickP99=0.386ms heap=90.48MB
+23:30:26.952 [INFO] heartbeat ticks=44400 err=0 battle=1/0 log=0 tickP99=0.388ms heap=90.38MB
+23:30:31.394 [INFO] heartbeat ticks=45000 err=0 battle=1/0 log=0 tickP99=0.388ms heap=88.68MB
+23:30:35.615 [INFO] IPC client connected
+23:30:35.616 [INFO] IPC client disconnected
+23:30:35.950 [INFO] heartbeat ticks=45600 err=0 battle=1/0 log=0 tickP99=0.388ms heap=88.76MB
+23:30:40.346 [INFO] heartbeat ticks=46200 err=0 battle=1/0 log=0 tickP99=0.384ms heap=87.05MB
+23:30:44.769 [INFO] heartbeat ticks=46800 err=0 battle=1/0 log=0 tickP99=0.385ms heap=85.67MB
+23:30:48.996 [INFO] IPC client connected
+23:30:48.997 [INFO] IPC client disconnected
+23:30:49.194 [INFO] IPC client connected
+23:30:49.199 [INFO] IPC client disconnected
+23:30:49.207 [INFO] heartbeat ticks=47400 err=0 battle=1/0 log=0 tickP99=0.383ms heap=95.36MB
+23:30:53.713 [INFO] heartbeat ticks=48000 err=0 battle=1/0 log=0 tickP99=0.386ms heap=95.35MB
+23:30:58.116 [INFO] heartbeat ticks=48600 err=0 battle=1/0 log=0 tickP99=0.384ms heap=94.47MB
+23:31:02.525 [INFO] heartbeat ticks=49200 err=0 battle=1/0 log=0 tickP99=0.384ms heap=92.72MB
+23:31:03.629 [INFO] IPC client connected
+23:31:03.636 [INFO] IPC client disconnected
+23:31:06.934 [INFO] heartbeat ticks=49800 err=0 battle=1/0 log=0 tickP99=0.381ms heap=91.11MB
+23:31:11.323 [INFO] heartbeat ticks=50400 err=0 battle=1/0 log=0 tickP99=0.382ms heap=90.99MB
+23:31:15.899 [INFO] heartbeat ticks=51000 err=0 battle=1/0 log=0 tickP99=0.386ms heap=90.19MB
+23:31:20.396 [INFO] heartbeat ticks=51600 err=0 battle=1/0 log=0 tickP99=0.385ms heap=87.91MB
+23:31:24.857 [INFO] heartbeat ticks=52200 err=0 battle=1/0 log=0 tickP99=0.382ms heap=96.31MB
+23:31:29.273 [INFO] heartbeat ticks=52800 err=0 battle=1/0 log=0 tickP99=0.382ms heap=94.59MB
+23:31:33.710 [INFO] heartbeat ticks=53400 err=0 battle=1/0 log=0 tickP99=0.38ms heap=93.72MB
+23:31:38.134 [INFO] heartbeat ticks=54000 err=0 battle=1/0 log=0 tickP99=0.379ms heap=92.83MB
+23:31:42.523 [INFO] heartbeat ticks=54600 err=0 battle=1/0 log=0 tickP99=0.378ms heap=91.95MB
+23:31:46.911 [INFO] heartbeat ticks=55200 err=0 battle=1/0 log=0 tickP99=0.371ms heap=90.28MB
+23:31:51.307 [INFO] heartbeat ticks=55800 err=0 battle=1/0 log=0 tickP99=0.37ms heap=90.38MB
+23:31:55.807 [INFO] heartbeat ticks=56400 err=0 battle=1/0 log=0 tickP99=0.372ms heap=88.39MB
+23:32:00.161 [INFO] heartbeat ticks=57000 err=0 battle=1/0 log=0 tickP99=0.373ms heap=98.69MB
+23:32:04.536 [INFO] heartbeat ticks=57600 err=0 battle=1/0 log=0 tickP99=0.372ms heap=96.95MB
+23:32:08.988 [INFO] heartbeat ticks=58200 err=0 battle=1/0 log=0 tickP99=0.373ms heap=96.14MB
+23:32:13.410 [INFO] heartbeat ticks=58800 err=0 battle=1/0 log=0 tickP99=0.373ms heap=95.28MB
+23:32:17.827 [INFO] heartbeat ticks=59400 err=0 battle=1/0 log=0 tickP99=0.373ms heap=94.38MB
+23:32:22.236 [INFO] heartbeat ticks=60000 err=0 battle=1/0 log=0 tickP99=0.373ms heap=92.68MB
+23:32:26.604 [INFO] heartbeat ticks=60600 err=0 battle=1/0 log=0 tickP99=0.371ms heap=90.71MB
+23:32:31.048 [INFO] heartbeat ticks=61200 err=0 battle=1/0 log=0 tickP99=0.371ms heap=90.6MB
+23:32:35.388 [INFO] heartbeat ticks=61800 err=0 battle=1/0 log=0 tickP99=0.373ms heap=89.96MB
+23:32:39.888 [INFO] heartbeat ticks=62400 err=0 battle=1/0 log=0 tickP99=0.373ms heap=89.52MB
+23:32:44.284 [INFO] heartbeat ticks=63000 err=0 battle=1/0 log=0 tickP99=0.374ms heap=87.81MB
+23:32:48.716 [INFO] heartbeat ticks=63600 err=0 battle=1/0 log=0 tickP99=0.375ms heap=87.75MB
+23:32:53.123 [INFO] heartbeat ticks=64200 err=0 battle=1/0 log=0 tickP99=0.374ms heap=86.09MB
+23:32:57.672 [INFO] heartbeat ticks=64800 err=0 battle=1/0 log=0 tickP99=0.384ms heap=85.26MB
+23:33:02.102 [INFO] heartbeat ticks=65400 err=0 battle=1/0 log=0 tickP99=0.384ms heap=84.39MB
+23:33:06.512 [INFO] heartbeat ticks=66000 err=0 battle=1/0 log=0 tickP99=0.384ms heap=83.14MB
+23:33:10.893 [INFO] heartbeat ticks=66600 err=0 battle=1/0 log=0 tickP99=0.384ms heap=92.69MB
+23:33:15.345 [INFO] heartbeat ticks=67200 err=0 battle=1/0 log=0 tickP99=0.385ms heap=91.87MB
+23:33:19.740 [INFO] heartbeat ticks=67800 err=0 battle=1/0 log=0 tickP99=0.385ms heap=90.19MB
+23:33:24.191 [INFO] heartbeat ticks=68400 err=0 battle=1/0 log=0 tickP99=0.38ms heap=90.11MB
+23:33:28.677 [INFO] heartbeat ticks=69000 err=0 battle=1/0 log=0 tickP99=0.378ms heap=89.29MB
+23:33:33.045 [INFO] heartbeat ticks=69600 err=0 battle=1/0 log=0 tickP99=0.377ms heap=87.56MB
+23:33:37.572 [INFO] heartbeat ticks=70200 err=0 battle=1/0 log=0 tickP99=0.377ms heap=87.49MB
+23:33:41.969 [INFO] heartbeat ticks=70800 err=0 battle=1/0 log=0 tickP99=0.375ms heap=85.37MB
+23:33:46.329 [INFO] heartbeat ticks=71400 err=0 battle=1/0 log=0 tickP99=0.369ms heap=91.97MB
+23:33:49.567 [INFO] IPC client connected
+23:33:49.572 [INFO] IPC client disconnected
+23:33:50.766 [INFO] heartbeat ticks=72000 err=0 battle=1/0 log=0 tickP99=0.373ms heap=91.15MB
+23:33:55.218 [INFO] heartbeat ticks=72600 err=0 battle=1/0 log=0 tickP99=0.373ms heap=90.26MB
+23:33:59.599 [INFO] heartbeat ticks=73200 err=0 battle=1/0 log=0 tickP99=0.374ms heap=89.32MB
+23:34:03.905 [INFO] heartbeat ticks=73800 err=0 battle=1/0 log=0 tickP99=0.373ms heap=87.55MB
+23:34:08.342 [INFO] heartbeat ticks=74400 err=0 battle=1/0 log=0 tickP99=0.375ms heap=85.69MB
+23:34:12.842 [INFO] heartbeat ticks=75000 err=0 battle=1/0 log=0 tickP99=0.376ms heap=86.11MB
+23:34:17.181 [INFO] heartbeat ticks=75600 err=0 battle=1/0 log=0 tickP99=0.376ms heap=95.26MB
+23:34:21.661 [INFO] heartbeat ticks=76200 err=0 battle=1/0 log=0 tickP99=0.376ms heap=94.42MB
+23:34:26.030 [INFO] heartbeat ticks=76800 err=0 battle=1/0 log=0 tickP99=0.376ms heap=92.72MB
+23:34:30.375 [INFO] heartbeat ticks=77400 err=0 battle=1/0 log=0 tickP99=0.379ms heap=92.66MB
+23:34:34.729 [INFO] heartbeat ticks=78000 err=0 battle=1/0 log=0 tickP99=0.379ms heap=90.87MB
+23:34:39.048 [INFO] heartbeat ticks=78600 err=0 battle=1/0 log=0 tickP99=0.376ms heap=89.13MB
+23:34:43.514 [INFO] heartbeat ticks=79200 err=0 battle=1/0 log=0 tickP99=0.376ms heap=88.21MB
+23:34:47.951 [INFO] heartbeat ticks=79800 err=0 battle=1/0 log=0 tickP99=0.376ms heap=94.92MB
+23:34:52.360 [INFO] heartbeat ticks=80400 err=0 battle=1/0 log=0 tickP99=0.377ms heap=95.08MB
+23:34:56.805 [INFO] heartbeat ticks=81000 err=0 battle=1/0 log=0 tickP99=0.376ms heap=93.64MB
+23:35:01.318 [INFO] heartbeat ticks=81600 err=0 battle=1/0 log=0 tickP99=0.376ms heap=92.99MB
+23:35:05.639 [INFO] heartbeat ticks=82200 err=0 battle=1/0 log=0 tickP99=0.383ms heap=92.24MB
+23:35:06.389 [INFO] IPC client connected
+23:35:06.394 [INFO] IPC client disconnected
+23:35:10.047 [INFO] heartbeat ticks=82800 err=0 battle=1/0 log=0 tickP99=0.378ms heap=91.57MB
+23:35:14.387 [INFO] heartbeat ticks=83400 err=0 battle=1/0 log=0 tickP99=0.383ms heap=90.07MB
+23:35:18.776 [INFO] heartbeat ticks=84000 err=0 battle=1/0 log=0 tickP99=0.378ms heap=88.63MB
+23:35:23.114 [INFO] heartbeat ticks=84600 err=0 battle=1/0 log=0 tickP99=0.373ms heap=86.55MB
+23:35:27.554 [INFO] heartbeat ticks=85200 err=0 battle=1/0 log=0 tickP99=0.372ms heap=98.03MB
+23:35:31.893 [INFO] heartbeat ticks=85800 err=0 battle=1/0 log=0 tickP99=0.372ms heap=96.46MB
+23:35:36.316 [INFO] heartbeat ticks=86400 err=0 battle=1/0 log=0 tickP99=0.368ms heap=95.92MB
+23:35:40.740 [INFO] heartbeat ticks=87000 err=0 battle=1/0 log=0 tickP99=0.364ms heap=95.16MB
+23:35:45.151 [INFO] heartbeat ticks=87600 err=0 battle=1/0 log=0 tickP99=0.364ms heap=94.49MB
+23:35:49.615 [INFO] heartbeat ticks=88200 err=0 battle=1/0 log=0 tickP99=0.366ms heap=92.95MB
+23:35:54.114 [INFO] heartbeat ticks=88800 err=0 battle=1/0 log=0 tickP99=0.372ms heap=93.13MB
+23:35:58.538 [INFO] heartbeat ticks=89400 err=0 battle=1/0 log=0 tickP99=0.378ms heap=91.55MB
+23:36:03.086 [INFO] heartbeat ticks=90000 err=0 battle=1/0 log=0 tickP99=0.382ms heap=90.95MB
+23:36:07.551 [INFO] heartbeat ticks=90600 err=0 battle=1/0 log=0 tickP99=0.382ms heap=91.02MB
+23:36:11.926 [INFO] heartbeat ticks=91200 err=0 battle=1/0 log=0 tickP99=0.384ms heap=97.49MB
+23:36:16.336 [INFO] heartbeat ticks=91800 err=0 battle=1/0 log=0 tickP99=0.384ms heap=96.81MB
+23:36:20.772 [INFO] heartbeat ticks=92400 err=0 battle=1/0 log=0 tickP99=0.387ms heap=96.16MB
+23:36:25.237 [INFO] heartbeat ticks=93000 err=0 battle=1/0 log=0 tickP99=0.387ms heap=95.46MB
+23:36:29.717 [INFO] heartbeat ticks=93600 err=0 battle=1/0 log=0 tickP99=0.384ms heap=94.56MB
+23:36:34.119 [INFO] heartbeat ticks=94200 err=0 battle=1/0 log=0 tickP99=0.381ms heap=87.9MB
+23:36:39.071 [INFO] heartbeat ticks=94800 err=0 battle=1/0 log=1 tickP99=0.377ms heap=88.73MB
+23:36:43.452 [INFO] heartbeat ticks=95400 err=0 battle=1/0 log=1 tickP99=0.375ms heap=87.13MB
+23:36:47.824 [INFO] heartbeat ticks=96000 err=0 battle=1/0 log=1 tickP99=0.375ms heap=86.32MB
+23:36:52.181 [INFO] heartbeat ticks=96600 err=0 battle=1/0 log=1 tickP99=0.374ms heap=84.7MB
+23:36:56.500 [INFO] heartbeat ticks=97200 err=0 battle=1/0 log=1 tickP99=0.37ms heap=82.71MB
+23:37:00.931 [INFO] heartbeat ticks=97800 err=0 battle=1/0 log=1 tickP99=0.37ms heap=93.17MB
+23:37:05.312 [INFO] heartbeat ticks=98400 err=0 battle=1/0 log=1 tickP99=0.37ms heap=92.6MB
+23:37:09.714 [INFO] heartbeat ticks=99000 err=0 battle=1/0 log=1 tickP99=0.372ms heap=90.97MB
+23:37:14.145 [INFO] heartbeat ticks=99600 err=0 battle=1/0 log=1 tickP99=0.374ms heap=90.25MB
+23:37:14.655 [INFO] IPC client connected
+23:37:14.659 [INFO] IPC client disconnected
+23:37:18.631 [INFO] heartbeat ticks=100200 err=0 battle=1/0 log=1 tickP99=0.373ms heap=89.53MB
+23:37:23.005 [INFO] heartbeat ticks=100800 err=0 battle=1/0 log=1 tickP99=0.372ms heap=88.74MB
+23:37:27.353 [INFO] heartbeat ticks=101400 err=0 battle=1/0 log=1 tickP99=0.371ms heap=87.13MB
+23:37:31.714 [INFO] heartbeat ticks=102000 err=0 battle=1/0 log=1 tickP99=0.371ms heap=85.07MB
+23:37:32.423 [INFO] IPC client connected
+23:37:32.429 [INFO] pref set allowRemoteInput=True
+23:37:32.429 [INFO] IPC client disconnected
+23:37:32.601 [INFO] IPC client connected
+23:37:32.610 [INFO] spike arm: 60s
+23:37:32.610 [INFO] IPC client disconnected
+23:37:32.750 [INFO] IPC client connected
+23:37:32.755 [INFO] IPC client disconnected
+23:37:32.756 [INFO] IPC client connected
+23:37:32.762 [INFO] spike move start id=0:86 -> (2,0) selfClick=ShowMovingRage (deferred)
+23:37:32.776 [INFO] spike move id=0:86 -> (2,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(2,0) confirmed=True rollback=False cost=0ms total=13ms err=-
+23:37:32.776 [INFO] IPC client disconnected
+23:37:36.133 [INFO] heartbeat ticks=102600 err=0 battle=1/0 log=1 tickP99=0.37ms heap=85.51MB
+23:37:40.567 [INFO] heartbeat ticks=103200 err=0 battle=1/0 log=1 tickP99=0.37ms heap=92.23MB
+23:37:45.067 [INFO] heartbeat ticks=103800 err=0 battle=1/0 log=2 tickP99=0.375ms heap=91.79MB
+23:37:46.314 [INFO] IPC client connected
+23:37:46.328 [INFO] IPC client disconnected
+23:37:46.551 [INFO] IPC client connected
+23:37:46.552 [INFO] spike disarm
+23:37:46.552 [INFO] pref set allowRemoteInput=False
+23:37:46.553 [INFO] IPC client disconnected
+23:37:46.711 [INFO] IPC client connected
+23:37:46.730 [INFO] spike disarm
+23:37:46.731 [INFO] IPC client disconnected
+23:37:49.574 [INFO] heartbeat ticks=104400 err=0 battle=1/0 log=2 tickP99=0.377ms heap=92.13MB
+23:37:53.921 [INFO] heartbeat ticks=105000 err=0 battle=1/0 log=2 tickP99=0.377ms heap=90.56MB
+23:37:58.435 [INFO] heartbeat ticks=105600 err=0 battle=1/0 log=2 tickP99=0.383ms heap=89.89MB
+23:38:02.941 [INFO] heartbeat ticks=106200 err=0 battle=1/0 log=2 tickP99=0.398ms heap=89.09MB
+23:38:07.511 [INFO] heartbeat ticks=106800 err=0 battle=1/0 log=2 tickP99=0.403ms heap=87.57MB
+23:38:12.017 [INFO] heartbeat ticks=107400 err=0 battle=1/0 log=2 tickP99=0.407ms heap=86.8MB
+23:38:16.608 [INFO] heartbeat ticks=108000 err=0 battle=1/0 log=2 tickP99=0.407ms heap=86.98MB
+23:38:21.163 [INFO] heartbeat ticks=108600 err=0 battle=1/0 log=2 tickP99=0.41ms heap=86.25MB
+23:38:25.620 [INFO] heartbeat ticks=109200 err=0 battle=1/0 log=2 tickP99=0.411ms heap=84.92MB
+23:38:30.058 [INFO] heartbeat ticks=109800 err=0 battle=1/0 log=2 tickP99=0.41ms heap=94.68MB
+23:38:34.600 [INFO] heartbeat ticks=110400 err=0 battle=1/0 log=2 tickP99=0.408ms heap=93.17MB
+23:38:39.211 [INFO] heartbeat ticks=111000 err=0 battle=1/0 log=2 tickP99=0.402ms heap=93.42MB
+23:38:43.773 [INFO] heartbeat ticks=111600 err=0 battle=1/0 log=2 tickP99=0.403ms heap=92.68MB
+23:38:48.327 [INFO] heartbeat ticks=112200 err=0 battle=1/0 log=2 tickP99=0.402ms heap=92.84MB
+23:38:52.744 [INFO] heartbeat ticks=112800 err=0 battle=1/0 log=2 tickP99=0.396ms heap=91.99MB
+23:38:57.258 [INFO] heartbeat ticks=113400 err=0 battle=1/0 log=2 tickP99=0.388ms heap=90.5MB
+23:39:01.744 [INFO] heartbeat ticks=114000 err=0 battle=1/0 log=2 tickP99=0.383ms heap=90.48MB
+23:39:06.264 [INFO] heartbeat ticks=114600 err=0 battle=1/0 log=2 tickP99=0.377ms heap=89.81MB
+23:39:10.744 [INFO] heartbeat ticks=115200 err=0 battle=1/0 log=2 tickP99=0.378ms heap=87.73MB
+23:39:15.167 [INFO] heartbeat ticks=115800 err=0 battle=1/0 log=2 tickP99=0.375ms heap=96.18MB
+23:39:19.576 [INFO] heartbeat ticks=116400 err=0 battle=1/0 log=2 tickP99=0.375ms heap=94.54MB
+23:39:24.001 [INFO] heartbeat ticks=117000 err=0 battle=1/0 log=2 tickP99=0.375ms heap=93.75MB
+23:39:28.409 [INFO] heartbeat ticks=117600 err=0 battle=1/0 log=2 tickP99=0.376ms heap=93.04MB
+23:39:32.860 [INFO] heartbeat ticks=118200 err=0 battle=1/0 log=2 tickP99=0.376ms heap=92.35MB
+23:39:37.285 [INFO] heartbeat ticks=118800 err=0 battle=1/0 log=2 tickP99=0.376ms heap=90.89MB
+23:39:41.791 [INFO] heartbeat ticks=119400 err=0 battle=1/0 log=2 tickP99=0.376ms heap=90.96MB
+23:39:42.647 [INFO] IPC client connected
+23:39:42.652 [INFO] IPC client disconnected
+23:39:43.139 [INFO] IPC client connected
+23:39:43.145 [INFO] pref set allowRemoteInput=True
+23:39:43.145 [INFO] IPC client disconnected
+23:39:43.295 [INFO] IPC client connected
+23:39:43.297 [INFO] spike arm: 60s
+23:39:43.298 [INFO] IPC client disconnected
+23:39:43.480 [INFO] IPC client connected
+23:39:43.511 [INFO] IPC client disconnected
+23:39:43.511 [INFO] IPC client connected
+23:39:43.516 [INFO] spike move start id=0:4 -> (8,0) selfClick=ShowMovingRage (deferred)
+23:39:43.526 [INFO] spike move id=0:4 -> (8,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(8,0) confirmed=True rollback=False cost=0ms total=10ms err=-
+23:39:43.527 [INFO] IPC client disconnected
+23:39:46.346 [INFO] heartbeat ticks=120000 err=0 battle=1/0 log=2 tickP99=0.38ms heap=90.59MB
+23:39:50.756 [INFO] heartbeat ticks=120600 err=0 battle=1/0 log=2 tickP99=0.383ms heap=88.96MB
+23:39:55.264 [INFO] heartbeat ticks=121200 err=0 battle=1/0 log=2 tickP99=0.388ms heap=89.04MB
+23:39:59.559 [INFO] IPC client connected
+23:39:59.561 [INFO] IPC client disconnected
+23:39:59.846 [INFO] IPC client connected
+23:39:59.852 [INFO] spike disarm
+23:39:59.853 [INFO] pref set allowRemoteInput=False
+23:39:59.854 [INFO] IPC client disconnected
+23:39:59.908 [INFO] heartbeat ticks=121800 err=0 battle=1/0 log=2 tickP99=0.399ms heap=88.01MB
+23:40:00.052 [INFO] IPC client connected
+23:40:00.054 [INFO] spike disarm
+23:40:00.055 [INFO] IPC client disconnected
+23:40:04.401 [INFO] heartbeat ticks=122400 err=0 battle=1/0 log=2 tickP99=0.403ms heap=97.75MB
+23:40:08.900 [INFO] heartbeat ticks=123000 err=0 battle=1/0 log=2 tickP99=0.403ms heap=97.11MB
+23:40:13.379 [INFO] heartbeat ticks=123600 err=0 battle=1/0 log=2 tickP99=0.402ms heap=96.31MB
+23:40:17.906 [INFO] heartbeat ticks=124200 err=0 battle=1/0 log=2 tickP99=0.401ms heap=96.41MB
+23:40:22.413 [INFO] heartbeat ticks=124800 err=0 battle=1/0 log=2 tickP99=0.401ms heap=95.66MB
+23:40:26.961 [INFO] heartbeat ticks=125400 err=0 battle=1/0 log=2 tickP99=0.397ms heap=94.17MB
+23:40:31.441 [INFO] heartbeat ticks=126000 err=0 battle=1/0 log=2 tickP99=0.381ms heap=94.2MB
+23:40:35.795 [INFO] heartbeat ticks=126600 err=0 battle=1/0 log=2 tickP99=0.378ms heap=85.77MB
+23:40:40.366 [INFO] heartbeat ticks=127200 err=0 battle=1/0 log=2 tickP99=0.385ms heap=85.04MB
+23:40:44.787 [INFO] heartbeat ticks=127800 err=0 battle=1/0 log=2 tickP99=0.396ms heap=91.37MB
+23:40:49.349 [INFO] heartbeat ticks=128400 err=0 battle=1/0 log=2 tickP99=0.396ms heap=91.58MB
+23:40:53.866 [INFO] heartbeat ticks=129000 err=0 battle=1/0 log=2 tickP99=0.394ms heap=90.11MB
+23:40:58.322 [INFO] heartbeat ticks=129600 err=0 battle=1/0 log=2 tickP99=0.394ms heap=89.31MB
+23:41:02.897 [INFO] heartbeat ticks=130200 err=0 battle=1/0 log=2 tickP99=0.395ms heap=88.57MB
+23:41:07.377 [INFO] heartbeat ticks=130800 err=0 battle=1/0 log=2 tickP99=0.393ms heap=87.78MB
+23:41:11.911 [INFO] heartbeat ticks=131400 err=0 battle=1/0 log=2 tickP99=0.392ms heap=87MB
+23:41:16.529 [INFO] heartbeat ticks=132000 err=0 battle=1/0 log=2 tickP99=0.391ms heap=87.1MB
+23:41:20.938 [INFO] heartbeat ticks=132600 err=0 battle=1/0 log=2 tickP99=0.392ms heap=85.46MB
+23:41:25.389 [INFO] heartbeat ticks=133200 err=0 battle=1/0 log=2 tickP99=0.392ms heap=83.45MB
+23:41:29.771 [INFO] heartbeat ticks=133800 err=0 battle=1/0 log=2 tickP99=0.388ms heap=93.18MB
+23:41:34.271 [INFO] heartbeat ticks=134400 err=0 battle=1/0 log=2 tickP99=0.39ms heap=92.51MB
+23:41:38.723 [INFO] heartbeat ticks=135000 err=0 battle=1/0 log=2 tickP99=0.387ms heap=90.88MB
+23:41:43.131 [INFO] heartbeat ticks=135600 err=0 battle=1/0 log=2 tickP99=0.384ms heap=90.91MB
+23:41:47.625 [INFO] heartbeat ticks=136200 err=0 battle=1/0 log=2 tickP99=0.376ms heap=89.33MB
+23:41:52.083 [INFO] heartbeat ticks=136800 err=0 battle=1/0 log=2 tickP99=0.371ms heap=87.75MB
+23:41:56.520 [INFO] heartbeat ticks=137400 err=0 battle=1/0 log=2 tickP99=0.371ms heap=85.78MB
+23:42:00.885 [INFO] heartbeat ticks=138000 err=0 battle=1/0 log=2 tickP99=0.369ms heap=85.68MB
+23:42:05.248 [INFO] heartbeat ticks=138600 err=0 battle=1/0 log=2 tickP99=0.369ms heap=92.5MB
+23:42:09.783 [INFO] heartbeat ticks=139200 err=0 battle=1/0 log=2 tickP99=0.375ms heap=91.76MB
+23:42:14.338 [INFO] heartbeat ticks=139800 err=0 battle=1/0 log=2 tickP99=0.382ms heap=91.9MB
+23:42:18.754 [INFO] heartbeat ticks=140400 err=0 battle=1/0 log=2 tickP99=0.382ms heap=90.25MB
+23:42:23.178 [INFO] heartbeat ticks=141000 err=0 battle=1/0 log=2 tickP99=0.382ms heap=88.73MB
+23:42:27.705 [INFO] heartbeat ticks=141600 err=0 battle=1/0 log=2 tickP99=0.382ms heap=87.25MB
+23:42:32.122 [INFO] heartbeat ticks=142200 err=0 battle=1/0 log=2 tickP99=0.382ms heap=85.32MB
+23:42:36.552 [INFO] heartbeat ticks=142800 err=0 battle=1/0 log=2 tickP99=0.382ms heap=95.09MB
+23:42:40.969 [INFO] heartbeat ticks=143400 err=0 battle=1/0 log=2 tickP99=0.375ms heap=92.79MB
+23:42:45.434 [INFO] heartbeat ticks=144000 err=0 battle=1/0 log=2 tickP99=0.362ms heap=91.15MB
+23:42:49.899 [INFO] heartbeat ticks=144600 err=0 battle=1/0 log=2 tickP99=0.366ms heap=89.5MB
+23:42:54.323 [INFO] heartbeat ticks=145200 err=0 battle=1/0 log=2 tickP99=0.364ms heap=87.52MB
+23:42:58.753 [INFO] heartbeat ticks=145800 err=0 battle=1/0 log=2 tickP99=0.364ms heap=94.25MB
+23:43:03.211 [INFO] heartbeat ticks=146400 err=0 battle=1/0 log=2 tickP99=0.362ms heap=93.62MB
+23:43:07.683 [INFO] heartbeat ticks=147000 err=0 battle=1/0 log=2 tickP99=0.364ms heap=91.21MB
+23:43:12.127 [INFO] heartbeat ticks=147600 err=0 battle=1/0 log=2 tickP99=0.364ms heap=89.66MB
+23:43:16.592 [INFO] heartbeat ticks=148200 err=0 battle=1/0 log=2 tickP99=0.372ms heap=88.93MB
+23:43:21.009 [INFO] heartbeat ticks=148800 err=0 battle=1/0 log=2 tickP99=0.377ms heap=88.9MB
+23:43:25.432 [INFO] heartbeat ticks=149400 err=0 battle=1/0 log=2 tickP99=0.38ms heap=86.92MB
+23:43:29.876 [INFO] heartbeat ticks=150000 err=0 battle=1/0 log=2 tickP99=0.382ms heap=97.68MB
+23:43:34.446 [INFO] heartbeat ticks=150600 err=0 battle=1/0 log=3 tickP99=0.382ms heap=97.86MB
+23:43:38.869 [INFO] heartbeat ticks=151200 err=0 battle=1/0 log=3 tickP99=0.382ms heap=96.3MB
+23:43:43.348 [INFO] heartbeat ticks=151800 err=0 battle=1/0 log=3 tickP99=0.382ms heap=96.36MB
+23:43:47.750 [INFO] heartbeat ticks=152400 err=0 battle=1/0 log=3 tickP99=0.375ms heap=94.76MB
+23:43:52.180 [INFO] heartbeat ticks=153000 err=0 battle=1/0 log=3 tickP99=0.374ms heap=94.02MB
+23:43:56.625 [INFO] heartbeat ticks=153600 err=0 battle=1/0 log=3 tickP99=0.378ms heap=92.49MB
+23:44:00.077 [INFO] IPC client connected
+23:44:00.083 [INFO] IPC client disconnected
+23:44:00.511 [INFO] IPC client connected
+23:44:00.514 [INFO] pref set allowRemoteInput=True
+23:44:00.514 [INFO] IPC client disconnected
+23:44:00.681 [INFO] IPC client connected
+23:44:00.690 [INFO] spike arm: 60s
+23:44:00.691 [INFO] IPC client disconnected
+23:44:00.854 [INFO] IPC client connected
+23:44:00.861 [INFO] IPC client disconnected
+23:44:00.861 [INFO] IPC client connected
+23:44:00.868 [INFO] spike move start id=0:9 -> (5,0) selfClick=ShowMovingRage (deferred)
+23:44:00.881 [INFO] spike move id=0:9 -> (5,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(5,0) confirmed=True rollback=False cost=0ms total=14ms err=-
+23:44:00.881 [INFO] IPC client disconnected
+23:44:01.127 [INFO] heartbeat ticks=154200 err=0 battle=1/0 log=3 tickP99=0.384ms heap=92.77MB
+23:44:05.610 [INFO] heartbeat ticks=154800 err=0 battle=1/0 log=3 tickP99=0.386ms heap=91.22MB
+23:44:10.188 [INFO] heartbeat ticks=155400 err=0 battle=1/0 log=3 tickP99=0.392ms heap=91.36MB
+23:44:14.624 [INFO] heartbeat ticks=156000 err=0 battle=1/0 log=3 tickP99=0.393ms heap=96.05MB
+23:44:17.484 [INFO] IPC client connected
+23:44:17.492 [INFO] IPC client disconnected
+23:44:17.736 [INFO] IPC client connected
+23:44:17.742 [INFO] spike disarm
+23:44:17.743 [INFO] pref set allowRemoteInput=False
+23:44:17.743 [INFO] IPC client disconnected
+23:44:17.902 [INFO] IPC client connected
+23:44:17.908 [INFO] spike disarm
+23:44:17.909 [INFO] IPC client disconnected
+23:44:19.083 [INFO] heartbeat ticks=156600 err=0 battle=1/0 log=3 tickP99=0.394ms heap=94.56MB
+23:44:23.571 [INFO] heartbeat ticks=157200 err=0 battle=1/0 log=3 tickP99=0.394ms heap=93.88MB
+23:44:28.095 [INFO] heartbeat ticks=157800 err=0 battle=1/0 log=3 tickP99=0.394ms heap=93.09MB
+23:44:32.700 [INFO] heartbeat ticks=158400 err=0 battle=1/0 log=3 tickP99=0.392ms heap=93.27MB
+23:44:37.228 [INFO] heartbeat ticks=159000 err=0 battle=1/0 log=3 tickP99=0.394ms heap=84.45MB
+23:44:41.826 [INFO] heartbeat ticks=159600 err=0 battle=1/0 log=3 tickP99=0.39ms heap=85.09MB
+23:44:46.511 [INFO] heartbeat ticks=160200 err=0 battle=1/0 log=3 tickP99=0.384ms heap=86.09MB
+23:44:51.067 [INFO] heartbeat ticks=160800 err=0 battle=1/0 log=3 tickP99=0.385ms heap=84.56MB
+23:44:55.497 [INFO] heartbeat ticks=161400 err=0 battle=1/0 log=3 tickP99=0.386ms heap=82.46MB
+23:44:59.948 [INFO] heartbeat ticks=162000 err=0 battle=1/0 log=3 tickP99=0.386ms heap=82.53MB
+23:45:04.373 [INFO] heartbeat ticks=162600 err=0 battle=1/0 log=3 tickP99=0.383ms heap=92.26MB
+23:45:08.843 [INFO] heartbeat ticks=163200 err=0 battle=1/0 log=3 tickP99=0.383ms heap=91.57MB
+23:45:12.532 [INFO] IPC client connected
+23:45:12.533 [INFO] IPC client disconnected
+23:45:13.468 [INFO] heartbeat ticks=163800 err=0 battle=1/0 log=3 tickP99=0.383ms heap=91.75MB
+23:45:18.038 [INFO] heartbeat ticks=164400 err=0 battle=1/0 log=3 tickP99=0.383ms heap=90.97MB
+23:45:22.551 [INFO] heartbeat ticks=165000 err=0 battle=1/0 log=3 tickP99=0.382ms heap=90.23MB
+23:45:27.051 [INFO] heartbeat ticks=165600 err=0 battle=1/0 log=3 tickP99=0.386ms heap=89.51MB
+23:45:31.495 [INFO] heartbeat ticks=166200 err=0 battle=1/0 log=3 tickP99=0.386ms heap=89.57MB
+23:45:36.050 [INFO] heartbeat ticks=166800 err=0 battle=1/0 log=3 tickP99=0.386ms heap=88.12MB
+23:45:40.596 [INFO] heartbeat ticks=167400 err=0 battle=1/0 log=3 tickP99=0.386ms heap=88.2MB
+23:45:45.036 [INFO] heartbeat ticks=168000 err=0 battle=1/0 log=3 tickP99=0.386ms heap=86.47MB
+23:45:49.450 [INFO] heartbeat ticks=168600 err=0 battle=1/0 log=3 tickP99=0.387ms heap=85.36MB
+23:45:53.883 [INFO] heartbeat ticks=169200 err=0 battle=1/0 log=3 tickP99=0.386ms heap=92.93MB
+23:45:58.355 [INFO] heartbeat ticks=169800 err=0 battle=1/0 log=3 tickP99=0.383ms heap=92.26MB
+23:46:02.952 [INFO] heartbeat ticks=170400 err=0 battle=1/0 log=3 tickP99=0.387ms heap=90.77MB
+23:46:07.375 [INFO] heartbeat ticks=171000 err=0 battle=1/0 log=3 tickP99=0.385ms heap=90.91MB
+23:46:11.847 [INFO] heartbeat ticks=171600 err=0 battle=1/0 log=3 tickP99=0.385ms heap=89.41MB
+23:46:16.285 [INFO] heartbeat ticks=172200 err=0 battle=1/0 log=3 tickP99=0.38ms heap=88.74MB
+23:46:20.860 [INFO] heartbeat ticks=172800 err=0 battle=1/0 log=3 tickP99=0.376ms heap=88.86MB
+23:46:25.207 [INFO] heartbeat ticks=173400 err=0 battle=1/0 log=3 tickP99=0.379ms heap=87.21MB
+23:46:29.534 [INFO] heartbeat ticks=174000 err=0 battle=1/0 log=3 tickP99=0.38ms heap=85.13MB
+23:46:34.033 [INFO] heartbeat ticks=174600 err=0 battle=1/0 log=3 tickP99=0.376ms heap=85.24MB
+23:46:38.495 [INFO] heartbeat ticks=175200 err=0 battle=1/0 log=3 tickP99=0.374ms heap=96.03MB
+23:46:42.943 [INFO] heartbeat ticks=175800 err=0 battle=1/0 log=3 tickP99=0.374ms heap=94.53MB
+23:46:47.429 [INFO] heartbeat ticks=176400 err=0 battle=1/0 log=3 tickP99=0.374ms heap=94.68MB
+23:46:51.951 [INFO] heartbeat ticks=177000 err=0 battle=1/0 log=7 tickP99=0.379ms heap=94.73MB
+23:46:56.490 [INFO] heartbeat ticks=177600 err=0 battle=1/0 log=7 tickP99=0.373ms heap=94.01MB
+23:47:00.900 [INFO] heartbeat ticks=178200 err=0 battle=1/0 log=7 tickP99=0.373ms heap=93.31MB
+23:47:05.268 [INFO] heartbeat ticks=178800 err=0 battle=1/0 log=7 tickP99=0.371ms heap=91.72MB
+23:47:09.664 [INFO] heartbeat ticks=179400 err=0 battle=1/0 log=7 tickP99=0.373ms heap=91.02MB
+23:47:14.087 [INFO] heartbeat ticks=180000 err=0 battle=1/0 log=7 tickP99=0.372ms heap=90.49MB
+23:47:16.570 [INFO] IPC client connected
+23:47:16.573 [INFO] IPC client disconnected
+23:47:17.059 [INFO] IPC client connected
+23:47:17.059 [INFO] pref set allowRemoteInput=True
+23:47:17.060 [INFO] IPC client disconnected
+23:47:17.236 [INFO] IPC client connected
+23:47:17.240 [INFO] spike arm: 60s
+23:47:17.241 [INFO] IPC client disconnected
+23:47:17.385 [INFO] IPC client connected
+23:47:17.393 [INFO] IPC client disconnected
+23:47:17.393 [INFO] IPC client connected
+23:47:17.400 [INFO] spike move start id=0:0 -> (4,0) selfClick=ShowMovingRage (deferred)
+23:47:17.413 [INFO] spike move id=0:0 -> (4,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(4,0) confirmed=True rollback=False cost=0ms total=14ms err=-
+23:47:17.413 [INFO] IPC client disconnected
+23:47:18.594 [INFO] heartbeat ticks=180600 err=0 battle=1/0 log=7 tickP99=0.378ms heap=90.03MB
+23:47:22.941 [INFO] heartbeat ticks=181200 err=0 battle=1/0 log=7 tickP99=0.375ms heap=88.02MB
+23:47:27.390 [INFO] heartbeat ticks=181800 err=0 battle=1/0 log=10 tickP99=0.376ms heap=89.51MB
+23:47:31.732 [INFO] heartbeat ticks=182400 err=0 battle=1/0 log=10 tickP99=0.375ms heap=96.19MB
+23:47:34.430 [INFO] IPC client connected
+23:47:34.433 [INFO] IPC client disconnected
+23:47:34.680 [INFO] IPC client connected
+23:47:34.684 [INFO] spike disarm
+23:47:34.684 [INFO] pref set allowRemoteInput=False
+23:47:34.684 [INFO] IPC client disconnected
+23:47:34.829 [INFO] IPC client connected
+23:47:34.836 [INFO] spike disarm
+23:47:34.837 [INFO] IPC client disconnected
+23:47:36.343 [INFO] heartbeat ticks=183000 err=0 battle=1/0 log=10 tickP99=0.378ms heap=96.58MB
+23:47:40.683 [INFO] heartbeat ticks=183600 err=0 battle=1/0 log=10 tickP99=0.379ms heap=95.03MB
+23:47:45.107 [INFO] heartbeat ticks=184200 err=0 battle=1/0 log=10 tickP99=0.381ms heap=94.45MB
+23:47:49.625 [INFO] heartbeat ticks=184800 err=0 battle=1/0 log=10 tickP99=0.386ms heap=92.94MB
+23:47:54.279 [INFO] heartbeat ticks=185400 err=0 battle=1/0 log=10 tickP99=0.387ms heap=93.16MB
+23:47:58.814 [INFO] heartbeat ticks=186000 err=0 battle=1/0 log=10 tickP99=0.388ms heap=93.44MB
+23:48:03.411 [INFO] heartbeat ticks=186600 err=0 battle=1/0 log=10 tickP99=0.395ms heap=92.95MB
+23:48:07.917 [INFO] heartbeat ticks=187200 err=0 battle=1/0 log=10 tickP99=0.395ms heap=92.24MB
+23:48:12.508 [INFO] heartbeat ticks=187800 err=0 battle=1/0 log=10 tickP99=0.396ms heap=92.42MB
+23:48:16.959 [INFO] heartbeat ticks=188400 err=0 battle=1/0 log=10 tickP99=0.388ms heap=90.97MB
+23:48:21.549 [INFO] heartbeat ticks=189000 err=0 battle=1/0 log=10 tickP99=0.387ms heap=90.38MB
+23:48:26.055 [INFO] heartbeat ticks=189600 err=0 battle=1/0 log=10 tickP99=0.385ms heap=90.57MB
+23:48:29.241 [INFO] IPC client connected
+23:48:29.244 [INFO] IPC client disconnected
+23:48:30.500 [INFO] heartbeat ticks=190200 err=0 battle=1/0 log=10 tickP99=0.386ms heap=88.66MB
+23:48:34.951 [INFO] heartbeat ticks=190800 err=0 battle=1/0 log=10 tickP99=0.382ms heap=99.32MB
+23:48:39.444 [INFO] heartbeat ticks=191400 err=0 battle=1/0 log=10 tickP99=0.383ms heap=92.88MB
+23:48:43.965 [INFO] heartbeat ticks=192000 err=0 battle=1/0 log=10 tickP99=0.38ms heap=91.43MB
+23:48:48.319 [INFO] heartbeat ticks=192600 err=0 battle=1/0 log=10 tickP99=0.38ms heap=89.87MB
+23:48:52.749 [INFO] heartbeat ticks=193200 err=0 battle=1/0 log=10 tickP99=0.38ms heap=90.02MB
+23:48:57.138 [INFO] heartbeat ticks=193800 err=0 battle=1/0 log=10 tickP99=0.38ms heap=88.67MB
+23:49:01.589 [INFO] heartbeat ticks=194400 err=0 battle=1/0 log=10 tickP99=0.38ms heap=87.97MB
+23:49:06.089 [INFO] heartbeat ticks=195000 err=0 battle=1/0 log=10 tickP99=0.38ms heap=87.35MB
+23:49:10.505 [INFO] heartbeat ticks=195600 err=0 battle=1/0 log=10 tickP99=0.379ms heap=86.64MB
+23:49:14.908 [INFO] heartbeat ticks=196200 err=0 battle=1/0 log=10 tickP99=0.383ms heap=84.8MB
+23:49:19.296 [INFO] heartbeat ticks=196800 err=0 battle=1/0 log=10 tickP99=0.382ms heap=92.45MB
+23:49:23.817 [INFO] heartbeat ticks=197400 err=0 battle=1/0 log=10 tickP99=0.379ms heap=91.87MB
+23:49:28.325 [INFO] heartbeat ticks=198000 err=0 battle=1/0 log=10 tickP99=0.379ms heap=91.41MB
+23:49:30.622 [INFO] IPC client connected
+23:49:30.625 [INFO] IPC client disconnected
+23:49:31.110 [INFO] IPC client connected
+23:49:31.116 [INFO] pref set allowRemoteInput=True
+23:49:31.117 [INFO] IPC client disconnected
+23:49:31.265 [INFO] IPC client connected
+23:49:31.268 [INFO] spike arm: 60s
+23:49:31.268 [INFO] IPC client disconnected
+23:49:31.438 [INFO] IPC client connected
+23:49:31.461 [INFO] IPC client disconnected
+23:49:31.462 [INFO] IPC client connected
+23:49:31.465 [INFO] spike move start id=0:86 -> (3,0) selfClick=ShowMovingRage (deferred)
+23:49:31.477 [INFO] spike move id=0:86 -> (3,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(3,0) confirmed=True rollback=False cost=0ms total=11ms err=-
+23:49:31.477 [INFO] IPC client disconnected
+23:49:32.879 [INFO] heartbeat ticks=198600 err=0 battle=1/0 log=10 tickP99=0.383ms heap=90.11MB
+23:49:37.406 [INFO] heartbeat ticks=199200 err=0 battle=1/0 log=10 tickP99=0.383ms heap=88.71MB
+23:49:41.903 [INFO] heartbeat ticks=199800 err=0 battle=1/0 log=10 tickP99=0.383ms heap=87.2MB
+23:49:46.531 [INFO] heartbeat ticks=200400 err=0 battle=1/0 log=10 tickP99=0.38ms heap=86.69MB
+23:49:49.463 [INFO] IPC client connected
+23:49:49.467 [INFO] IPC client disconnected
+23:49:49.717 [INFO] IPC client connected
+23:49:49.726 [INFO] spike disarm
+23:49:49.727 [INFO] pref set allowRemoteInput=False
+23:49:49.727 [INFO] IPC client disconnected
+23:49:49.896 [INFO] IPC client connected
+23:49:49.899 [INFO] spike disarm
+23:49:49.899 [INFO] IPC client disconnected
+23:49:51.121 [INFO] heartbeat ticks=201000 err=0 battle=1/0 log=10 tickP99=0.384ms heap=85.59MB
+23:49:55.641 [INFO] heartbeat ticks=201600 err=0 battle=1/0 log=10 tickP99=0.387ms heap=95.06MB
+23:50:00.162 [INFO] heartbeat ticks=202200 err=0 battle=1/0 log=10 tickP99=0.387ms heap=95.15MB
+23:50:04.752 [INFO] heartbeat ticks=202800 err=0 battle=1/0 log=10 tickP99=0.387ms heap=93.72MB
+23:50:09.280 [INFO] heartbeat ticks=203400 err=0 battle=1/0 log=10 tickP99=0.389ms heap=93.09MB
+23:50:13.815 [INFO] heartbeat ticks=204000 err=0 battle=1/0 log=10 tickP99=0.39ms heap=93.24MB
+23:50:18.328 [INFO] heartbeat ticks=204600 err=0 battle=1/0 log=10 tickP99=0.397ms heap=91.84MB
+23:50:22.932 [INFO] heartbeat ticks=205200 err=0 battle=1/0 log=10 tickP99=0.397ms heap=92.05MB
+23:50:27.390 [INFO] heartbeat ticks=205800 err=0 battle=1/0 log=10 tickP99=0.396ms heap=91.41MB
+23:50:31.794 [INFO] heartbeat ticks=206400 err=0 battle=1/0 log=10 tickP99=0.397ms heap=90.68MB
+23:50:36.140 [INFO] heartbeat ticks=207000 err=0 battle=1/0 log=10 tickP99=0.394ms heap=89.96MB
+23:50:40.570 [INFO] heartbeat ticks=207600 err=0 battle=1/0 log=10 tickP99=0.393ms heap=88.5MB
+23:50:42.241 [INFO] IPC client connected
+23:50:42.243 [INFO] IPC client disconnected
+23:50:45.083 [INFO] heartbeat ticks=208200 err=0 battle=1/0 log=10 tickP99=0.392ms heap=87.6MB
+23:50:49.430 [INFO] heartbeat ticks=208800 err=0 battle=1/0 log=10 tickP99=0.382ms heap=95.17MB
+23:50:53.868 [INFO] heartbeat ticks=209400 err=0 battle=1/0 log=10 tickP99=0.378ms heap=94.5MB
+23:50:58.395 [INFO] heartbeat ticks=210000 err=0 battle=1/0 log=10 tickP99=0.378ms heap=93.02MB
+23:51:02.950 [INFO] heartbeat ticks=210600 err=0 battle=1/0 log=10 tickP99=0.386ms heap=93.33MB
+23:51:07.353 [INFO] heartbeat ticks=211200 err=0 battle=1/0 log=10 tickP99=0.384ms heap=91.81MB
+23:51:11.894 [INFO] heartbeat ticks=211800 err=0 battle=1/0 log=11 tickP99=0.383ms heap=92.29MB
+23:51:16.290 [INFO] heartbeat ticks=212400 err=0 battle=1/0 log=11 tickP99=0.382ms heap=91.57MB
+23:51:20.776 [INFO] heartbeat ticks=213000 err=0 battle=1/0 log=11 tickP99=0.384ms heap=90.15MB
+23:51:25.394 [INFO] heartbeat ticks=213600 err=0 battle=1/0 log=11 tickP99=0.382ms heap=90.39MB
+23:51:29.100 [INFO] IPC client connected
+23:51:29.106 [INFO] IPC client disconnected
+23:51:29.571 [INFO] IPC client connected
+23:51:29.589 [INFO] pref set allowRemoteInput=True
+23:51:29.590 [INFO] IPC client disconnected
+23:51:29.746 [INFO] IPC client connected
+23:51:29.748 [INFO] spike arm: 60s
+23:51:29.749 [INFO] IPC client disconnected
+23:51:29.926 [INFO] IPC client connected
+23:51:29.933 [INFO] IPC client disconnected
+23:51:29.934 [INFO] IPC client connected
+23:51:29.938 [INFO] spike move start id=0:4 -> (10,1) selfClick=ShowMovingRage (deferred)
+23:51:29.944 [INFO] heartbeat ticks=214200 err=0 battle=1/0 log=11 tickP99=0.381ms heap=89.14MB
+23:51:29.952 [INFO] spike move id=0:4 -> (10,1) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(10,1) confirmed=True rollback=False cost=1ms total=14ms err=-
+23:51:29.952 [INFO] IPC client disconnected
+23:51:34.471 [INFO] heartbeat ticks=214800 err=0 battle=1/0 log=11 tickP99=0.38ms heap=89.33MB
+23:51:38.983 [INFO] heartbeat ticks=215400 err=0 battle=1/0 log=11 tickP99=0.384ms heap=88.79MB
+23:51:43.470 [INFO] heartbeat ticks=216000 err=0 battle=1/0 log=11 tickP99=0.383ms heap=87.84MB
+23:51:44.949 [INFO] IPC client connected
+23:51:44.951 [INFO] IPC client disconnected
+23:51:45.179 [INFO] IPC client connected
+23:51:45.182 [INFO] spike disarm
+23:51:45.183 [INFO] pref set allowRemoteInput=False
+23:51:45.184 [INFO] IPC client disconnected
+23:51:45.357 [INFO] IPC client connected
+23:51:45.358 [INFO] spike disarm
+23:51:45.359 [INFO] IPC client disconnected
+23:51:48.039 [INFO] heartbeat ticks=216600 err=0 battle=1/0 log=11 tickP99=0.385ms heap=98.46MB
+23:51:52.601 [INFO] heartbeat ticks=217200 err=0 battle=1/0 log=11 tickP99=0.385ms heap=97.92MB
+23:51:57.031 [INFO] heartbeat ticks=217800 err=0 battle=1/0 log=11 tickP99=0.385ms heap=97.22MB
+23:52:01.510 [INFO] heartbeat ticks=218400 err=0 battle=1/0 log=11 tickP99=0.388ms heap=96.68MB
+23:52:06.003 [INFO] heartbeat ticks=219000 err=0 battle=1/0 log=11 tickP99=0.379ms heap=95.98MB
+23:52:10.565 [INFO] heartbeat ticks=219600 err=0 battle=1/0 log=11 tickP99=0.38ms heap=95.37MB
+23:52:15.072 [INFO] heartbeat ticks=220200 err=0 battle=1/0 log=11 tickP99=0.381ms heap=94.65MB
+23:52:19.558 [INFO] heartbeat ticks=220800 err=0 battle=1/0 log=11 tickP99=0.38ms heap=94.87MB
+23:52:24.023 [INFO] heartbeat ticks=221400 err=0 battle=1/0 log=11 tickP99=0.378ms heap=93.48MB
+23:52:28.537 [INFO] heartbeat ticks=222000 err=0 battle=1/0 log=11 tickP99=0.38ms heap=93.55MB
+23:52:33.155 [INFO] heartbeat ticks=222600 err=0 battle=1/0 log=11 tickP99=0.379ms heap=92.99MB
+23:52:37.626 [INFO] heartbeat ticks=223200 err=0 battle=1/0 log=11 tickP99=0.377ms heap=84.87MB
+23:52:38.104 [INFO] IPC client connected
+23:52:38.107 [INFO] IPC client disconnected
+23:52:42.182 [INFO] heartbeat ticks=223800 err=0 battle=1/0 log=11 tickP99=0.38ms heap=85.09MB
+23:52:46.758 [INFO] heartbeat ticks=224400 err=0 battle=1/0 log=11 tickP99=0.38ms heap=84.12MB
+23:52:51.188 [INFO] heartbeat ticks=225000 err=0 battle=1/0 log=11 tickP99=0.379ms heap=91.77MB
+23:52:55.628 [INFO] heartbeat ticks=225600 err=0 battle=1/0 log=11 tickP99=0.376ms heap=91.11MB
+23:53:00.146 [INFO] heartbeat ticks=226200 err=0 battle=1/0 log=11 tickP99=0.376ms heap=91.36MB
+23:53:04.528 [INFO] heartbeat ticks=226800 err=0 battle=1/0 log=11 tickP99=0.378ms heap=89.79MB
+23:53:09.000 [INFO] heartbeat ticks=227400 err=0 battle=1/0 log=11 tickP99=0.38ms heap=89.33MB
+23:53:13.444 [INFO] heartbeat ticks=228000 err=0 battle=1/0 log=12 tickP99=0.378ms heap=89.04MB
+23:53:17.958 [INFO] heartbeat ticks=228600 err=0 battle=1/0 log=12 tickP99=0.374ms heap=88.54MB
+23:53:22.360 [INFO] heartbeat ticks=229200 err=0 battle=1/0 log=12 tickP99=0.376ms heap=87.08MB
+23:53:26.812 [INFO] heartbeat ticks=229800 err=0 battle=1/0 log=12 tickP99=0.377ms heap=87.34MB
+23:53:31.144 [INFO] heartbeat ticks=230400 err=0 battle=1/0 log=12 tickP99=0.375ms heap=85.83MB
+23:53:35.589 [INFO] heartbeat ticks=231000 err=0 battle=1/0 log=12 tickP99=0.373ms heap=85.33MB
+23:53:39.998 [INFO] heartbeat ticks=231600 err=0 battle=1/0 log=12 tickP99=0.373ms heap=94.81MB
+23:53:44.526 [INFO] heartbeat ticks=232200 err=0 battle=1/0 log=12 tickP99=0.373ms heap=95.1MB
+23:53:48.963 [INFO] heartbeat ticks=232800 err=0 battle=1/0 log=12 tickP99=0.373ms heap=93.58MB
+23:53:53.449 [INFO] heartbeat ticks=233400 err=0 battle=1/0 log=12 tickP99=0.37ms heap=93.16MB
+23:53:57.021 [INFO] IPC client connected
+23:53:57.025 [INFO] IPC client disconnected
+23:53:57.487 [INFO] IPC client connected
+23:53:57.490 [INFO] pref set allowRemoteInput=True
+23:53:57.491 [INFO] IPC client disconnected
+23:53:57.663 [INFO] IPC client connected
+23:53:57.671 [INFO] spike arm: 60s
+23:53:57.672 [INFO] IPC client disconnected
+23:53:57.821 [INFO] IPC client connected
+23:53:57.826 [INFO] IPC client disconnected
+23:53:57.830 [INFO] IPC client connected
+23:53:57.838 [INFO] spike move start id=0:0 -> (4,1) selfClick=ShowMovingRage (deferred)
+23:53:57.851 [INFO] spike move id=0:0 -> (4,1) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(4,1) confirmed=True rollback=False cost=0ms total=14ms err=-
+23:53:57.851 [INFO] IPC client disconnected
+23:53:58.074 [INFO] heartbeat ticks=234000 err=0 battle=1/0 log=12 tickP99=0.375ms heap=93.81MB
+23:54:02.581 [INFO] heartbeat ticks=234600 err=0 battle=1/0 log=12 tickP99=0.373ms heap=93.26MB
+23:54:07.144 [INFO] heartbeat ticks=235200 err=0 battle=1/0 log=12 tickP99=0.378ms heap=93.58MB
+23:54:11.552 [INFO] heartbeat ticks=235800 err=0 battle=1/0 log=12 tickP99=0.378ms heap=91.28MB
+23:54:15.874 [INFO] IPC client connected
+23:54:15.879 [INFO] IPC client disconnected
+23:54:16.040 [INFO] heartbeat ticks=236400 err=0 battle=1/0 log=12 tickP99=0.381ms heap=90.71MB
+23:54:16.127 [INFO] IPC client connected
+23:54:16.130 [INFO] spike disarm
+23:54:16.131 [INFO] pref set allowRemoteInput=False
+23:54:16.131 [INFO] IPC client disconnected
+23:54:16.312 [INFO] IPC client connected
+23:54:16.321 [INFO] spike disarm
+23:54:16.322 [INFO] IPC client disconnected
+23:54:20.579 [INFO] heartbeat ticks=237000 err=0 battle=1/0 log=12 tickP99=0.384ms heap=90.24MB
+23:54:25.038 [INFO] heartbeat ticks=237600 err=0 battle=1/0 log=12 tickP99=0.383ms heap=89.62MB
+23:54:29.406 [INFO] heartbeat ticks=238200 err=0 battle=1/0 log=12 tickP99=0.387ms heap=88.94MB
+23:54:33.989 [INFO] heartbeat ticks=238800 err=0 battle=1/0 log=12 tickP99=0.388ms heap=88.48MB
+23:54:38.502 [INFO] heartbeat ticks=239400 err=0 battle=1/0 log=12 tickP99=0.385ms heap=87.67MB
+23:54:43.051 [INFO] heartbeat ticks=240000 err=0 battle=1/0 log=12 tickP99=0.385ms heap=88.04MB
+23:54:47.512 [INFO] heartbeat ticks=240600 err=0 battle=1/0 log=12 tickP99=0.381ms heap=87.05MB
+23:54:51.946 [INFO] heartbeat ticks=241200 err=0 battle=1/0 log=12 tickP99=0.38ms heap=94.01MB
+23:54:56.494 [INFO] heartbeat ticks=241800 err=0 battle=1/0 log=12 tickP99=0.377ms heap=94.21MB
+23:55:01.015 [INFO] heartbeat ticks=242400 err=0 battle=1/0 log=12 tickP99=0.376ms heap=93.64MB
+23:55:05.619 [INFO] heartbeat ticks=243000 err=0 battle=1/0 log=12 tickP99=0.377ms heap=93.97MB
+23:55:10.014 [INFO] heartbeat ticks=243600 err=0 battle=1/0 log=12 tickP99=0.375ms heap=92.47MB
+23:55:12.463 [INFO] IPC client connected
+23:55:12.463 [INFO] IPC client disconnected
+23:55:14.563 [INFO] heartbeat ticks=244200 err=0 battle=1/0 log=12 tickP99=0.38ms heap=92.9MB
+23:55:19.104 [INFO] heartbeat ticks=244800 err=0 battle=1/0 log=12 tickP99=0.381ms heap=92.32MB
+23:55:23.548 [INFO] heartbeat ticks=245400 err=0 battle=1/0 log=12 tickP99=0.383ms heap=90.83MB
+23:55:28.055 [INFO] heartbeat ticks=246000 err=0 battle=1/0 log=12 tickP99=0.387ms heap=91.06MB
+23:55:32.627 [INFO] heartbeat ticks=246600 err=0 battle=1/0 log=12 tickP99=0.386ms heap=89.78MB
+23:55:37.062 [INFO] heartbeat ticks=247200 err=0 battle=1/0 log=12 tickP99=0.386ms heap=88.3MB
+23:55:41.471 [INFO] heartbeat ticks=247800 err=0 battle=1/0 log=12 tickP99=0.384ms heap=97.77MB
+23:55:45.999 [INFO] heartbeat ticks=248400 err=0 battle=1/0 log=12 tickP99=0.387ms heap=98.05MB
+23:55:50.512 [INFO] heartbeat ticks=249000 err=0 battle=1/0 log=12 tickP99=0.386ms heap=96.7MB
+23:55:54.984 [INFO] heartbeat ticks=249600 err=0 battle=1/0 log=12 tickP99=0.385ms heap=96.05MB
+23:55:59.470 [INFO] heartbeat ticks=250200 err=0 battle=1/0 log=12 tickP99=0.384ms heap=95.4MB
+23:56:03.998 [INFO] heartbeat ticks=250800 err=0 battle=1/0 log=12 tickP99=0.387ms heap=94.89MB
+23:56:08.651 [INFO] heartbeat ticks=251400 err=0 battle=1/0 log=12 tickP99=0.393ms heap=94.31MB
+23:56:13.304 [INFO] heartbeat ticks=252000 err=0 battle=1/0 log=12 tickP99=0.391ms heap=93.8MB
+23:56:17.970 [INFO] heartbeat ticks=252600 err=0 battle=1/0 log=12 tickP99=0.388ms heap=95.13MB
+23:56:22.616 [INFO] heartbeat ticks=253200 err=0 battle=1/0 log=13 tickP99=0.389ms heap=95.44MB
+23:56:27.177 [INFO] heartbeat ticks=253800 err=0 battle=1/0 log=13 tickP99=0.388ms heap=94.22MB
+23:56:31.642 [INFO] heartbeat ticks=254400 err=0 battle=1/0 log=13 tickP99=0.388ms heap=93.44MB
+23:56:36.059 [INFO] heartbeat ticks=255000 err=0 battle=1/0 log=13 tickP99=0.388ms heap=84.3MB
+23:56:40.427 [INFO] heartbeat ticks=255600 err=0 battle=1/0 log=13 tickP99=0.385ms heap=90.97MB
+23:56:41.741 [INFO] IPC client connected
+23:56:41.747 [INFO] IPC client disconnected
+23:56:42.220 [INFO] IPC client connected
+23:56:42.226 [INFO] pref set allowRemoteInput=True
+23:56:42.227 [INFO] IPC client disconnected
+23:56:42.393 [INFO] IPC client connected
+23:56:42.394 [INFO] spike arm: 60s
+23:56:42.394 [INFO] IPC client disconnected
+23:56:42.537 [INFO] IPC client connected
+23:56:42.545 [INFO] IPC client disconnected
+23:56:42.545 [INFO] IPC client connected
+23:56:42.552 [INFO] spike move start id=0:9 -> (6,0) selfClick=ShowMovingRage (deferred)
+23:56:42.566 [INFO] spike move id=0:9 -> (6,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(6,0) confirmed=True rollback=False cost=0ms total=13ms err=-
+23:56:42.566 [INFO] IPC client disconnected
+23:56:44.968 [INFO] heartbeat ticks=256200 err=0 battle=1/0 log=13 tickP99=0.387ms heap=90.65MB
+23:56:49.406 [INFO] heartbeat ticks=256800 err=0 battle=1/0 log=13 tickP99=0.385ms heap=89.94MB
+23:56:53.746 [INFO] heartbeat ticks=257400 err=0 battle=1/0 log=13 tickP99=0.385ms heap=86.79MB
+23:56:58.259 [INFO] heartbeat ticks=258000 err=0 battle=1/0 log=13 tickP99=0.381ms heap=87.02MB
+23:57:00.504 [INFO] IPC client connected
+23:57:00.510 [INFO] IPC client disconnected
+23:57:00.724 [INFO] IPC client connected
+23:57:00.731 [INFO] spike disarm
+23:57:00.732 [INFO] pref set allowRemoteInput=False
+23:57:00.732 [INFO] IPC client disconnected
+23:57:00.877 [INFO] IPC client connected
+23:57:00.884 [INFO] spike disarm
+23:57:00.885 [INFO] IPC client disconnected
+23:57:02.794 [INFO] heartbeat ticks=258600 err=0 battle=1/0 log=13 tickP99=0.384ms heap=87.3MB
+23:57:07.329 [INFO] heartbeat ticks=259200 err=0 battle=1/0 log=13 tickP99=0.384ms heap=86.02MB
+23:57:11.738 [INFO] heartbeat ticks=259800 err=0 battle=1/0 log=13 tickP99=0.388ms heap=85.31MB
+23:57:16.175 [INFO] heartbeat ticks=260400 err=0 battle=1/0 log=13 tickP99=0.384ms heap=84.61MB
+23:57:20.577 [INFO] heartbeat ticks=261000 err=0 battle=1/0 log=13 tickP99=0.384ms heap=93.97MB
+23:57:25.119 [INFO] heartbeat ticks=261600 err=0 battle=1/0 log=13 tickP99=0.384ms heap=93.29MB
+23:57:29.626 [INFO] heartbeat ticks=262200 err=0 battle=1/0 log=13 tickP99=0.383ms heap=91.85MB
+23:57:34.098 [INFO] heartbeat ticks=262800 err=0 battle=1/0 log=13 tickP99=0.384ms heap=91.99MB
+23:57:38.606 [INFO] heartbeat ticks=263400 err=0 battle=1/0 log=13 tickP99=0.385ms heap=91.3MB
+23:57:43.243 [INFO] heartbeat ticks=264000 err=0 battle=1/0 log=13 tickP99=0.384ms heap=89.14MB
+23:57:47.770 [INFO] heartbeat ticks=264600 err=0 battle=1/0 log=13 tickP99=0.387ms heap=88.49MB
+23:57:52.145 [INFO] heartbeat ticks=265200 err=0 battle=1/0 log=13 tickP99=0.39ms heap=87.77MB
+23:57:56.631 [INFO] heartbeat ticks=265800 err=0 battle=1/0 log=13 tickP99=0.39ms heap=85.85MB
+23:57:57.628 [INFO] IPC client connected
+23:57:57.646 [INFO] IPC client disconnected
+23:58:01.172 [INFO] heartbeat ticks=266400 err=0 battle=1/0 log=13 tickP99=0.39ms heap=87.36MB
+23:58:05.651 [INFO] heartbeat ticks=267000 err=0 battle=1/0 log=13 tickP99=0.39ms heap=93.79MB
+23:58:10.123 [INFO] heartbeat ticks=267600 err=0 battle=1/0 log=13 tickP99=0.39ms heap=93.11MB
+23:58:14.575 [INFO] heartbeat ticks=268200 err=0 battle=1/0 log=13 tickP99=0.384ms heap=92.46MB
+23:58:19.033 [INFO] heartbeat ticks=268800 err=0 battle=1/0 log=13 tickP99=0.387ms heap=91.82MB
+23:58:23.414 [INFO] heartbeat ticks=269400 err=0 battle=1/0 log=13 tickP99=0.387ms heap=90.28MB
+23:58:27.894 [INFO] heartbeat ticks=270000 err=0 battle=1/0 log=14 tickP99=0.387ms heap=90.7MB
+23:58:32.317 [INFO] heartbeat ticks=270600 err=0 battle=1/0 log=14 tickP99=0.379ms heap=89.33MB
+23:58:36.726 [INFO] heartbeat ticks=271200 err=0 battle=1/0 log=14 tickP99=0.38ms heap=88.64MB
+23:58:41.240 [INFO] heartbeat ticks=271800 err=0 battle=1/0 log=14 tickP99=0.382ms heap=88.06MB
+23:58:43.968 [INFO] IPC client connected
+23:58:43.970 [INFO] IPC client disconnected
+23:58:44.464 [INFO] IPC client connected
+23:58:44.469 [INFO] pref set allowRemoteInput=True
+23:58:44.470 [INFO] IPC client disconnected
+23:58:44.652 [INFO] IPC client connected
+23:58:44.657 [INFO] spike arm: 60s
+23:58:44.659 [INFO] IPC client disconnected
+23:58:44.840 [INFO] IPC client connected
+23:58:44.844 [INFO] IPC client disconnected
+23:58:44.845 [INFO] IPC client connected
+23:58:44.866 [INFO] spike move start id=0:86 -> (4,0) selfClick=ShowMovingRage (deferred)
+23:58:44.879 [INFO] spike move id=0:86 -> (4,0) ok=True self=ShowMovingRage preview=WaitMoving after=WaitMoving unitAfter=(4,0) confirmed=True rollback=False cost=0ms total=13ms err=-
+23:58:44.879 [INFO] IPC client disconnected
+23:58:45.775 [INFO] heartbeat ticks=272400 err=0 battle=1/0 log=14 tickP99=0.387ms heap=87.71MB
+23:58:50.511 [INFO] heartbeat ticks=273000 err=0 battle=1/0 log=14 tickP99=0.398ms heap=88.02MB
+23:58:55.004 [INFO] heartbeat ticks=273600 err=0 battle=1/0 log=14 tickP99=0.411ms heap=86.1MB
+23:58:59.537 [INFO] heartbeat ticks=274200 err=0 battle=1/0 log=14 tickP99=0.41ms heap=95.97MB
+23:59:04.111 [INFO] heartbeat ticks=274800 err=0 battle=1/0 log=14 tickP99=0.414ms heap=96.25MB
+23:59:04.853 [INFO] IPC client connected
+23:59:04.857 [INFO] IPC client disconnected
+23:59:05.126 [INFO] IPC client connected
+23:59:05.128 [INFO] spike disarm
+23:59:05.129 [INFO] pref set allowRemoteInput=False
+23:59:05.129 [INFO] IPC client disconnected
+23:59:05.312 [INFO] IPC client connected
+23:59:05.313 [INFO] spike disarm
+23:59:05.314 [INFO] IPC client disconnected
+23:59:08.641 [INFO] heartbeat ticks=275400 err=0 battle=1/0 log=14 tickP99=0.427ms heap=95.76MB
