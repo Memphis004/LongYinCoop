@@ -1,0 +1,25 @@
+samples=8945 inBattle=8404
+timeLimit values: [-1, 0]
+aiWaitTime values (first 6): [-1, -1, -1, -1, -1, -1]
+
+state -> wall seconds / battleTime advanced / ratio
+  WaitPlayerInput    wall= 787.24s dBT=  0.000 ratio= 0.00 n=7823
+  WaitMoving         wall=  21.51s dBT=  0.000 ratio= 0.00 n=214
+  WaitAttacking      wall=   8.65s dBT=  0.000 ratio= 0.00 n=86
+  Attacking          wall=   6.13s dBT=  0.655 ratio= 0.11 n=61
+  Rest               wall=   5.73s dBT=  0.310 ratio= 0.05 n=57
+  None               wall=   4.72s dBT=  1.269 ratio= 0.27 n=47
+  Moving             wall=   4.42s dBT=  0.000 ratio= 0.00 n=44
+  Finish             wall=   2.81s dBT=  0.104 ratio= 0.04 n=28
+  WaitAIPlan         wall=   2.72s dBT=  0.000 ratio= 0.00 n=27
+  Finishing          wall=   1.61s dBT=  0.076 ratio= 0.05 n=16
+
+pause windows:
+  t=1792490800.492..1792490802.401  duration=1.91s  state=None turn=15
+  t=1792490803.105..1792490809.436  duration=6.33s  state=Moving turn=16
+  t=1792490810.842..1792490812.855  duration=2.01s  state=Finishing turn=16
+  t=1792490816.273..1792490817.280  duration=1.01s  state=None turn=17
+  t=1792490818.083..1792490820.599  duration=2.52s  state=Rest turn=18
+
+hp changes (unit id, turn, before -> after, t):
+total hp-change samples=0

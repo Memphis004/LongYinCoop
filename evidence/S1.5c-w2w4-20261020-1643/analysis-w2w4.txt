@@ -1,0 +1,108 @@
+== W2 events: 92
+   BattleController.GenerateMovePath             62
+   BattleController.MoveButtonClicked            19
+   BattleController.RegretMove                   10
+   BattleController.CancelMove                   1
+
+== W2 sequence (first 40, frame order)
+   f=17822  BattleController.MoveButtonClicked         state=6 paused=False row=18 col=0
+   f=17826  BattleController.CancelMove                state=2 paused=False row=18 col=0
+   f=17826  BattleController.MoveButtonClicked         state=2 paused=False row=18 col=0
+   f=18012  BattleController.MoveButtonClicked         state=6 paused=False row=18 col=0
+   f=18102  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=15_6
+   f=18104  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=15_5
+   f=18119  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=16_3
+   f=18137  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=16_2
+   f=18140  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=17_2
+   f=18182  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=18_2
+   f=18619  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=18_3
+   f=18725  BattleController.GenerateMovePath          state=7 paused=False row=18 col=0 target=18_3
+   f=20673  BattleController.RegretMove                state=2 paused=False row=18 col=0
+   f=20673  BattleController.MoveButtonClicked         state=2 paused=False row=18 col=0
+   f=21829  BattleController.MoveButtonClicked         state=6 paused=False row=17 col=0
+   f=21863  BattleController.GenerateMovePath          state=7 paused=False row=17 col=0 target=16_3
+   f=21869  BattleController.GenerateMovePath          state=7 paused=False row=17 col=0 target=16_2
+   f=21890  BattleController.GenerateMovePath          state=7 paused=False row=17 col=0 target=16_1
+   f=21895  BattleController.GenerateMovePath          state=7 paused=False row=17 col=0 target=17_1
+   f=21964  BattleController.GenerateMovePath          state=7 paused=False row=17 col=0 target=17_1
+   f=22182  BattleController.RegretMove                state=2 paused=False row=17 col=0
+   f=22182  BattleController.MoveButtonClicked         state=2 paused=False row=17 col=0
+   f=22657  BattleController.MoveButtonClicked         state=6 paused=False row=8 col=0
+   f=22658  BattleController.GenerateMovePath          state=7 paused=False row=8 col=0 target=8_0
+   f=22694  BattleController.GenerateMovePath          state=7 paused=False row=8 col=0 target=10_0
+   f=22702  BattleController.GenerateMovePath          state=7 paused=False row=8 col=0 target=11_0
+   f=22717  BattleController.GenerateMovePath          state=7 paused=False row=8 col=0 target=12_0
+   f=22767  BattleController.GenerateMovePath          state=7 paused=False row=8 col=0 target=12_0
+   f=22969  BattleController.RegretMove                state=2 paused=False row=8 col=0
+   f=22969  BattleController.MoveButtonClicked         state=2 paused=False row=8 col=0
+   f=23387  BattleController.MoveButtonClicked         state=6 paused=False row=9 col=0
+   f=23388  BattleController.GenerateMovePath          state=7 paused=False row=9 col=0 target=10_1
+   f=23427  BattleController.GenerateMovePath          state=7 paused=False row=9 col=0 target=10_0
+   f=23428  BattleController.GenerateMovePath          state=7 paused=False row=9 col=0 target=11_0
+   f=23440  BattleController.GenerateMovePath          state=7 paused=False row=9 col=0 target=12_0
+   f=23504  BattleController.GenerateMovePath          state=7 paused=False row=9 col=0 target=12_0
+   f=23597  BattleController.RegretMove                state=2 paused=False row=9 col=0
+   f=23597  BattleController.MoveButtonClicked         state=2 paused=False row=9 col=0
+   f=24722  BattleController.GenerateMovePath          state=1 paused=False row=9 col=18 target=6_3
+   f=24736  BattleController.GenerateMovePath          state=7 paused=False row=9 col=18 target=9_14
+   GenerateMovePath frame gaps: min=1 max=3138 (n=61)
+
+== W4 events: 10
+   f=29444  obj=Stop   paused=True  state=3   t=2.082   scale=1 aiWait=-0.007
+   f=29700  obj=Stop   paused=False state=12  t=2.082   scale=1 aiWait=-0.007
+   f=29796  obj=Stop   paused=True  state=7   t=2.283   scale=1 aiWait=-0.007
+   f=30629  obj=Stop   paused=False state=7   t=2.283   scale=1 aiWait=-0.007
+   f=30812  obj=Stop   paused=True  state=3   t=2.283   scale=1 aiWait=-0.007
+   f=31087  obj=Stop   paused=False state=12  t=2.283   scale=1 aiWait=-0.007
+   f=31538  obj=Stop   paused=True  state=13  t=2.359   scale=1 aiWait=-0.007
+   f=31669  obj=Stop   paused=False state=0   t=2.359   scale=1 aiWait=-0.007
+   f=31774  obj=Stop   paused=True  state=8   t=2.394   scale=1 aiWait=-0.007
+   f=32110  obj=Stop   paused=False state=1   t=2.394   scale=1 aiWait=-0.007
+
+== status stream: 8945 samples, paused=true in 137 samples
+   t=1792490800.492 turn=15 state=Rest paused=True
+   t=1792490800.593 turn=15 state=Rest paused=True
+   t=1792490800.693 turn=15 state=Rest paused=True
+   t=1792490800.794 turn=15 state=Rest paused=True
+   t=1792490800.894 turn=15 state=Rest paused=True
+   t=1792490800.995 turn=15 state=Finish paused=True
+   t=1792490801.095 turn=15 state=Finish paused=True
+   t=1792490801.196 turn=15 state=Finish paused=True
+   t=1792490801.297 turn=15 state=Finish paused=True
+   t=1792490801.397 turn=15 state=Finish paused=True
+
+== samples inside W4 press window (1792490800.435..1792490820.585): 220
+   t=1792490799.488 paused=False state=8 battleTime=2.0817428
+   t=1792490799.990 paused=False state=3 battleTime=2.0817428
+   t=1792490800.492 paused=True state=3 battleTime=2.0817428
+   t=1792490800.995 paused=True state=12 battleTime=2.0817428
+   t=1792490802.401 paused=False state=0 battleTime=2.1650746
+   t=1792490802.502 paused=False state=0 battleTime=2.262285
+   t=1792490802.602 paused=False state=7 battleTime=2.2831094
+   t=1792490803.105 paused=True state=7 battleTime=2.2831094
+   t=1792490809.436 paused=False state=8 battleTime=2.2831094
+   t=1792490810.239 paused=False state=1 battleTime=2.2831094
+   t=1792490810.641 paused=False state=3 battleTime=2.2831094
+   t=1792490810.842 paused=True state=3 battleTime=2.2831094
+   t=1792490811.648 paused=True state=12 battleTime=2.2831094
+   t=1792490812.855 paused=False state=13 battleTime=2.2831094
+   t=1792490812.955 paused=False state=1 battleTime=2.359496
+   t=1792490813.055 paused=False state=7 battleTime=2.359496
+   t=1792490813.558 paused=False state=8 battleTime=2.359496
+   t=1792490814.364 paused=False state=1 battleTime=2.359496
+   t=1792490814.464 paused=False state=3 battleTime=2.359496
+   t=1792490815.469 paused=False state=13 battleTime=2.359496
+
+== J7 segments (inBattle & isPlayerTurn), split on turnIndex/state/scale change
+   turn=0    state=WaitPlayerInput  wall= 11.26s battleTime=0.606 -> 0.606 (d=+0.000) ratio=0.00
+   turn=0    state=WaitPlayerInput  wall= 17.29s battleTime=0.606 -> 0.606 (d=+0.000) ratio=0.00
+   turn=1    state=WaitPlayerInput  wall=  4.32s battleTime=0.689 -> 0.689 (d=+0.000) ratio=0.00
+   turn=1    state=WaitPlayerInput  wall=  2.71s battleTime=0.689 -> 0.689 (d=+0.000) ratio=0.00
+   turn=2    state=WaitPlayerInput  wall=  2.31s battleTime=0.855 -> 0.855 (d=+0.000) ratio=0.00
+   turn=3    state=WaitPlayerInput  wall=  4.33s battleTime=1.048 -> 1.048 (d=+0.000) ratio=0.00
+   turn=13   state=WaitPlayerInput  wall=  2.72s battleTime=2.040 -> 2.040 (d=+0.000) ratio=0.00
+   turn=19   state=WaitPlayerInput  wall=722.29s battleTime=2.415 -> 2.415 (d=+0.000) ratio=0.00
+
+== timeScale values seen: [1]
+== turnIndex values seen: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+== turnIndex transitions: [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]

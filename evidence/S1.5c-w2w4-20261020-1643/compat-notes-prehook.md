@@ -1,0 +1,56 @@
+﻿# compat-notes — Harmony patches present
+
+Generated: 2026-10-20 17:03:43
+Process: 26720
+Total patched methods: 44
+
+| # | Declaring type | Method | Owners | Prefix | Postfix | Transpiler | Finalizer |
+|---|---|---|---|---|---|---|---|
+| 1 | AsmResolver.Utf8String | Concat | MelonLoader | 1 | 0 | 0 | 0 |
+| 2 | HarmonyLib.PatchFunctions | ReversePatch | MelonLoader | 1 | 0 | 0 | 0 |
+| 3 | HarmonyLib.PatchProcessor | Patch | MelonLoader | 1 | 0 | 0 | 0 |
+| 4 | HarmonyLib.PatchProcessor | Unpatch | MelonLoader | 1 | 0 | 0 | 0 |
+| 5 | HarmonyLib.PatchProcessor | Unpatch | MelonLoader | 1 | 0 | 0 | 0 |
+| 6 | Il2Cpp.BattleController | AddInfoText | longyin.coop.s1.battlelog | 0 | 1 | 0 | 0 |
+| 7 | Il2Cpp.GameController | Update | longyin.coop.probe | 1 | 0 | 0 | 0 |
+| 8 | Il2Cpp.UILabel | set_text | LongYinThai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null:LongYinThai | 1 | 1 | 0 | 0 |
+| 9 | Il2CppInterop.Generator.Contexts.MethodRewriteContext | UnmangleMethodNameWithSignature | MelonLoader | 1 | 0 | 0 | 0 |
+| 10 | Il2CppInterop.Generator.Contexts.RewriteGlobalContext | AddAssemblyContext | MelonLoader | 0 | 1 | 0 | 0 |
+| 11 | Il2CppInterop.Generator.Contexts.RewriteGlobalContext | Dispose | MelonLoader | 1 | 0 | 0 | 0 |
+| 12 | Il2CppInterop.Generator.Contexts.RewriteGlobalContext | GetNewAssemblyForOriginal | MelonLoader | 1 | 0 | 0 | 0 |
+| 13 | Il2CppInterop.Generator.Contexts.RewriteGlobalContext | TryGetNewTypeForOriginal | MelonLoader | 1 | 0 | 0 | 0 |
+| 14 | Il2CppInterop.Generator.Extensions.ILGeneratorEx | EmitObjectToPointer | MelonLoader | 1 | 0 | 0 | 0 |
+| 15 | Il2CppInterop.HarmonySupport.Il2CppDetourMethodPatcher | ReportException | MelonLoader | 1 | 0 | 0 | 0 |
+| 16 | Il2CppInterop.Runtime.Injection.ClassInjector | ConvertMethodInfo | MelonLoader | 0 | 0 | 1 | 0 |
+| 17 | Il2CppInterop.Runtime.Injection.ClassInjector | IsTypeSupported | MelonLoader | 0 | 0 | 1 | 0 |
+| 18 | Il2CppInterop.Runtime.Injection.ClassInjector | RegisterTypeInIl2Cpp | MelonLoader | 0 | 0 | 1 | 0 |
+| 19 | Il2CppInterop.Runtime.Injection.ClassInjector | RewriteType | MelonLoader | 1 | 0 | 0 | 0 |
+| 20 | Il2CppInterop.Runtime.Injection.InjectorHelpers | Setup | MelonLoader | 0 | 0 | 1 | 0 |
+| 21 | Il2CppTMPro.TMP_Text | set_text | LongYinThai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null:LongYinThai | 1 | 1 | 0 | 0 |
+| 22 | MonoMod.RuntimeDetour.DetourContext | Dispose | MelonLoader | 0 | 0 | 1 | 0 |
+| 23 | System.Diagnostics.Process | get_MainWindowHandle | MelonLoader | 1 | 0 | 0 | 0 |
+| 24 | System.Diagnostics.Process | get_MainWindowTitle | MelonLoader | 1 | 0 | 0 | 0 |
+| 25 | System.Reflection.Assembly | Load | MelonLoader | 1 | 0 | 0 | 0 |
+| 26 | System.Reflection.Assembly | LoadFile | MelonLoader | 1 | 0 | 0 | 0 |
+| 27 | System.Runtime.Loader.AssemblyLoadContext | LoadFromPath | MelonLoader | 1 | 0 | 0 | 0 |
+| 28 | System.Runtime.Loader.AssemblyLoadContext | LoadFromStream | MelonLoader | 1 | 0 | 0 | 0 |
+| 29 | System.Runtime.Loader.AssemblyLoadContext | ValidateAssemblyNameWithSimpleName | MelonLoader | 1 | 0 | 0 | 0 |
+| 30 | System.Threading.Thread | get_CurrentCulture | MelonLoader | 1 | 0 | 0 | 0 |
+| 31 | System.Threading.Thread | get_CurrentUICulture | MelonLoader | 1 | 0 | 0 | 0 |
+| 32 | System.Threading.Thread | set_CurrentCulture | MelonLoader | 1 | 0 | 0 | 0 |
+| 33 | System.Threading.Thread | set_CurrentUICulture | MelonLoader | 1 | 0 | 0 | 0 |
+| 34 | UnityEngine.AssetBundle | UnloadAllAssetBundles | com.sinai.universelib | 1 | 0 | 0 | 0 |
+| 35 | UnityEngine.Canvas | get_renderingDisplaySize | com.sinai.unityexplorer.crashprevention | 1 | 0 | 0 | 0 |
+| 36 | UnityEngine.Cursor | set_lockState | com.sinai.universelib | 1 | 0 | 0 | 0 |
+| 37 | UnityEngine.Cursor | set_visible | com.sinai.universelib | 1 | 0 | 0 | 0 |
+| 38 | UnityEngine.EventSystems.EventSystem | SetSelectedGameObject | com.sinai.universelib | 1 | 0 | 0 | 0 |
+| 39 | UnityEngine.EventSystems.EventSystem | set_current | com.sinai.universelib | 1 | 0 | 0 | 0 |
+| 40 | UnityEngine.SceneManagement.SceneManager | Internal_SceneLoaded | MelonLoader | 1 | 0 | 0 | 0 |
+| 41 | UnityEngine.SceneManagement.SceneManager | Internal_SceneUnloaded | MelonLoader | 1 | 0 | 0 | 0 |
+| 42 | UnityEngine.TextMesh | set_text | LongYinThai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null:LongYinThai | 1 | 1 | 0 | 0 |
+| 43 | UnityEngine.UI.Dropdown | CreateBlocker | com.sinai.universelib | 0 | 1 | 0 | 0 |
+| 44 | UnityEngine.UI.Text | set_text | LongYinThai, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null:LongYinThai | 1 | 1 | 0 | 0 |
+
+## Notes
+- อ่านอย่างเดียว ไม่ได้แก้/ถอด patch ของ mod อื่น
+- ใช้ตรวจการชนกับ LongYinThai (โดยเฉพาะ AddInfoText และ setter ของ Text) ก่อนขึ้น S1
