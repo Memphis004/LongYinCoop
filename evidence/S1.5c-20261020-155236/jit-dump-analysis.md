@@ -56,7 +56,7 @@
 
 **สรุป J6:**
 - ผู้ต้องสงสัยหลักคือ `BattlePauseButtonClicked(GameObject)` (ปุ่มหยุดศึกของผู้เล่น) **[GUESS]**
-- **ขัดกับ `battle-notes.md` เดิม** ที่เขียนว่า `battlePaused = true` ขณะผู้เล่นเลือก action → **แก้เอกสารแล้ว** (battle-notes.md §1.1/§1.2/§10 พร้อมป้าย RUNTIME S1.5-b) และรายงานใน §7 ของไฟล์นี้
+- ⚠️ **หลักฐานขัดกัน:** `battle-notes.md` §0 (snapshot runtime เก่า) อ่าน `battlePaused = 1 (true)` ตอน `WaitPlayerInput` แต่ S1.5-b วัดได้ **false 0/82,695** → **ยังไม่รู้สาเหตุ** (ผู้ต้องสงสัย: ประเภทศึก, จังหวะกดหยุด, วิธีอ่าน) → แก้เอกสารเป็น "ห้ามใช้ฟิลด์นี้ตัดสินเทิร์น" **โดยไม่สรุปว่า snapshot เดิมผิด** (battle-notes.md §0/§1.1/§1.2/§10)
 - AI/ระบบไม่น่าจะ toggle ฟิลด์นี้ (เพราะไม่เคยเป็น true ตอน AI เดินเลยใน 82,695 sample) **[GUESS — ยังไม่ยืนยันด้วย probe]**
 - วิธีปิด J6 ให้สมบูรณ์: postfix บน `BattlePauseButtonClicked` + sample `battlePaused` ก่อน/หลัง ในตอนผู้เล่นกดปุ่มจริง (S1.5-c hook step)
 
@@ -137,7 +137,7 @@
 |---|---|---|
 | `S1.5-plan.md` §3 G3 | ระบุห้ามใช้ `BattleUnit.moved/attacked` (0/82,695) ให้ใช้ `nowActiveUnitMoved/Attacked` และติดป้าย GUESS จนผ่านด่านเทียบ UI ตอนผู้เล่นเดินเอง (L3) | ผลวัด S1.5-b ขัดกับสมมติฐานเดิม |
 | `S1.5-plan.md` §4 `stateHash` | เปลี่ยนองค์ประกอบเป็น turn flags + เอาต่อ-unit `moved/attacked` ออก พร้อมหมายเหตุว่า build `d5bf4de` ยังไม่ตรง | ผลวัด S1.5-b |
-| `battle-notes.md` §1.1 / §1.2 / §10 | `battlePaused` ไม่ได้ true ตอนรอ input (0/82,695) — แก้ข้อความเดิมที่อ้าง [RUNTIME] | ผลวัด S1.5-b ขัดกับเอกสาร |
+| `battle-notes.md` §0 / §1.1 / §1.2 / §10 | `battlePaused` หลักฐานขัดกัน (snapshot เดิม = true, S1.5-b = false 0/82,695) → บันทึกว่ายังไม่รู้สาเหตุ + ห้ามใช้ตัดสินเทิร์น | ผลวัด S1.5-b ขัดกับ snapshot เดิม |
 | `battle-notes.md` §2.6 (ตาราง RVA) | `SetAllAuto(bool auto)` มีพารามิเตอร์ 1 ตัว | dump.cs:363654 |
 | `evidence/S1.5-20261020-141903/S1.5a-report.md` §7 (ใหม่) | อธิบายรวมว่า `PlayerprefData.dat` ของจริงต่างจาก baseline S1 เพราะเกมถูกเปิดบนเซฟจริง 14:24/14:28 **ไม่ใช่การเขียนของ mod** | คำสั่งผู้ใช้ |
 
@@ -177,5 +177,5 @@
 2. `BattleGridClicked` ถูกเรียกจริงตอนคลิกในศึกไหม + argument เป็นช่องที่คลิกจริงไหม (J1) — ต้องวัด
 3. ลำดับ call จริงของ move 1 ครั้ง และ attack 1 ครั้ง (J2) — ต้องวัด
 4. ต้องเขียน field (`selectedGrid`, `attackComfirmed`, `nowActiveState`) ก่อนเรียก entry ไหม (J3) — ต้องวัด; ถ้าใช่ = หยุดถาม
-5. `battlePaused` ถูกตั้งที่ไหนนอกจาก `BattlePauseButtonClicked` (J6) — ต้องวัด
+5. `battlePaused` ถูกตั้งที่ไหนนอกจาก `BattlePauseButtonClicked` (J6) — ต้องวัด · และต้องอธิบายว่าทำไม snapshot เดิม (§0 = true) กับ S1.5-b (= false 82,695) ขัดกัน
 6. LongYinThai patch method ใดในรายการ §5 — ต้อง `compat_dump`
