@@ -471,6 +471,30 @@ namespace LongYinCoop
                     };
                 });
             }
+            // S1.5-c W6: probe อ่าน chain ของ move (state ก่อน/หลัง + ตัวตน GameObject + stack) — default false
+            if (key == "jitprobeW6")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.JitProbeW6.Value = on;
+                    JitProbeW6.Apply(on);
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.JitProbeW6.Value,
+                        installed = JitProbeW6.Installed,
+                        file = JitProbeW6.FilePath,
+                        hits = JitProbeW6.Hits,
+                        prefixHits = JitProbeW6.PrefixHits,
+                        stacks = JitProbeW6.StacksLogged,
+                        missing = JitProbeW6.Missing,
+                        dropped = JitProbeW6.Dropped
+                    };
+                });
+            }
             return Fail(cmd, string.Format(UIStrings.PrefUnknown, key));
         }
 

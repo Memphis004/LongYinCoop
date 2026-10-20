@@ -42,6 +42,8 @@ namespace LongYinCoop
             // S1.5-c W2/W4: แยก pref ต่อ wave (default false) — ไม่ติด patch จนกว่าจะสั่ง
             JitProbeW2.Apply(CoopPrefs.JitProbeW2.Value);
             JitProbeW4.Apply(CoopPrefs.JitProbeW4.Value);
+            // S1.5-c W6: probe อ่าน chain ของ move (state ก่อน/หลัง + ตัวตน GameObject)
+            JitProbeW6.Apply(CoopPrefs.JitProbeW6.Value);
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -60,6 +62,7 @@ namespace LongYinCoop
             JitProbe.Uninstall();
             JitProbeW2.Uninstall();
             JitProbeW4.Uninstall();
+            JitProbeW6.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -72,6 +75,7 @@ namespace LongYinCoop
                 JitProbe.Uninstall();
                 JitProbeW2.Uninstall();
                 JitProbeW4.Uninstall();
+                JitProbeW6.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 return;
@@ -91,6 +95,10 @@ namespace LongYinCoop
             if (CoopPrefs.JitProbeW4.Value != JitProbeW4.Installed)
             {
                 JitProbeW4.Apply(CoopPrefs.JitProbeW4.Value);
+            }
+            if (CoopPrefs.JitProbeW6.Value != JitProbeW6.Installed)
+            {
+                JitProbeW6.Apply(CoopPrefs.JitProbeW6.Value);
             }
 
             // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)
