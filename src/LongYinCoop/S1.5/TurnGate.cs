@@ -86,6 +86,59 @@ namespace LongYinCoop
             }
         }
 
+        /// <summary>
+        /// S1.5-d: stableId ของ "ยูนิตที่ถึงตา" คำนวณด้วยอัลกอริทึมเดียวกับ Build() (ตัวเดียว ไม่แยกสำเนา)
+        /// main thread เท่านั้น; คืน null เมื่อไม่มีศึก/ยูนิต
+        /// </summary>
+        public static string ActiveStableId(BattleController bc)
+        {
+            try
+            {
+                if (bc == null) return null;
+                BattleUnit active = bc.nowActiveUnit;
+                if (active == null) return null;
+
+                Il2CppSystem.Collections.Generic.List<BattleTeam> teams = bc.teams;
+                if (teams == null) return null;
+
+                HashSet<string> used = new HashSet<string>();
+                for (int t = 0; t < teams.Count; t++)
+                {
+                    BattleTeam team = teams[t];
+                    if (team == null) continue;
+                    Il2CppSystem.Collections.Generic.List<BattleUnit> units = team.battleUnits;
+                    if (units == null) continue;
+                    for (int i = 0; i < units.Count; i++)
+                    {
+                        BattleUnit u = units[i];
+                        if (u == null) continue;
+                        string id = BattleSampler.StableId(team.ID, u.heroData, i, used);
+                        if (u == active) return id;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+            }
+            return null;
+        }
+
+        /// <summary>S1.5-d: อ่าน flag nowActiveUnitMoved (typed property เดียวกับที่ hash ใช้)</summary>
+        public static bool ReadActiveMovedFlag(BattleController bc)
+        {
+            try
+            {
+                ResolveTurnFlags();
+                return _turnMovedProperty != null && ReadBool(bc, _turnMovedProperty);
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+                return false;
+            }
+        }
+
         private static object Build(long t0)
         {
             BattleController bc = BattleController.Instance;

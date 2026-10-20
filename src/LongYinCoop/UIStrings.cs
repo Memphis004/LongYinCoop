@@ -69,6 +69,19 @@ namespace LongYinCoop
         public const string SpikeTurnFlagsMissing =
             "spike: nowActiveUnitMoved/Attacked not found on BattleController — falling back to BattleUnit.moved/attacked";
 
+        // ── S1.5-d: spike arm / move (คำสั่งเปลี่ยน state) ───────────────
+        public const string SpikeNeedsArm = "DISARMED: run spike arm <seconds> first (one command per arm)";
+        public const string SpikeRemoteInputOff = "DISARMED: coop.allowRemoteInput=false (panic switch)";
+        public const string SpikeArmSecondsInvalid = "spike arm: seconds must be 1-300";
+        public const string SpikeMissingArgs = "spike {0}: missing argument ({1})";
+        public const string SpikeMoveNotInBattle = "spike move: not in battle";
+        public const string SpikeMoveNotFighting = "spike move: battleState={0} (expected Fighting)";
+        public const string SpikeMovePaused = "spike move: battle is paused";
+        public const string SpikeMoveNotPlayerTurn = "spike move: nowActiveState={0} (expected WaitPlayerInput)";
+        public const string SpikeMoveNoPlayerUnit = "spike move: active unit is missing or not player-controlled";
+        public const string SpikeMoveWrongUnit = "spike move: unit {0} is not the active unit ({1})";
+        public const string SpikeMoveNoGrid = "spike move: no grid cell at ({0},{1})";
+
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";
         public const string LogLevelWarn = "WARN";

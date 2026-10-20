@@ -338,7 +338,36 @@ namespace LongYinCoop
             if (string.IsNullOrEmpty(sub)) return Fail(cmd, UIStrings.SpikeMissingSub);
             if (sub == "status") return OnMain(cmd, delegate { return TurnGate.ReadStatus(); });
 
-            // ยังไม่เขียน/ลงทะเบียนคำสั่งที่เปลี่ยน state (S1.5-d ขึ้นไป)
+            // S1.5-d: คำสั่งเปลี่ยน state — ต้องผ่าน panic switch (allowRemoteInput) + arm ทุกครั้ง
+            if (sub == "arm")
+            {
+                if (!CoopPrefs.AllowRemoteInput.Value) return Fail(cmd, UIStrings.SpikeRemoteInputOff);
+                int seconds = GetInt(root, "seconds", MoveCommand.DefaultArmSeconds);
+                if (seconds < 1 || seconds > MoveCommand.MaxArmSeconds) return Fail(cmd, UIStrings.SpikeArmSecondsInvalid);
+                return OnMain(cmd, delegate { return MoveCommand.Arm(seconds); });
+            }
+            if (sub == "disarm")
+            {
+                return OnMain(cmd, delegate { return MoveCommand.Disarm(); });
+            }
+            if (sub == "move")
+            {
+                if (!CoopPrefs.AllowRemoteInput.Value) return Fail(cmd, UIStrings.SpikeRemoteInputOff);
+                string id = GetString(root, "id");
+                int row = GetInt(root, "row", -1);
+                int col = GetInt(root, "col", -1);
+                if (string.IsNullOrEmpty(id)) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "id"));
+                if (row < 0 || col < 0) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "row/col"));
+
+                object raw = null;
+                if (!_dispatcher.Invoke(delegate { return (object)MoveCommand.Move(id, row, col); }, 500, out raw))
+                    return Fail(cmd, UIStrings.MainThreadTimeout);
+                MoveCommand.MoveResult mr = raw as MoveCommand.MoveResult;
+                if (mr == null) return Fail(cmd, UIStrings.SpikeMoveNotInBattle);
+                if (!mr.Ok) return Fail(cmd, mr.Error ?? UIStrings.SpikeMoveNotInBattle);
+                return Ok(cmd, mr);
+            }
+
             return Fail(cmd, string.Format(UIStrings.SpikeNotRegistered, sub));
         }
 
@@ -355,6 +384,24 @@ namespace LongYinCoop
                     CoopPrefs.Capture.Value = on;
                     CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
                     return (object)new { key = key, value = CoopPrefs.Capture.Value };
+                });
+            }
+            // S1.5-d panic switch: false = คำสั่งเปลี่ยน state ทั้งหมดตอบ DISARMED ทันที
+            if (key == "allowRemoteInput")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.AllowRemoteInput.Value = on;
+                    if (!on) MoveCommand.Disarm();
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.AllowRemoteInput.Value,
+                        armed = MoveCommand.IsArmed
+                    };
                 });
             }
             // S1.5-c W1: เปิด/ปิด probe hook (postfix อ่านอย่างเดียว) — ไม่แตะ state เกม
