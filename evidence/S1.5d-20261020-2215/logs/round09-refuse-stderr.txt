@@ -1,0 +1,1 @@
+prefire: REFUSED: turnMoved=true (unit 0:0 at (3,0) already moved this turn; G3 ALREADY_USED)
