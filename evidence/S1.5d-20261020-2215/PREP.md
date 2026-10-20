@@ -24,8 +24,8 @@
 
 | ข้อ | ค่า |
 |---|---|
-| DLL ใหม่ | **`bc5ead96754c`** |
-| build | `dotnet build -c Release` → **0 warning / 0 error** |
+| DLL ใหม่ | **`fd1df6a8409c`** (เดิมรอบแรก `bc5ead96754c` — แก้ `MoveResult` ให้เป็น property เพราะ System.Text.Json ไม่ serialize field: ถ้าไม่แก้ client จะได้ `{}`) |
+| build | `dotnet build -c Release` → **0 warning / 0 error** (ทั้งสองครั้ง) |
 | DLL ที่เกมกำลังรัน | `c45ac7b53ae2` (ยังไม่ deploy — ต้องปิดเกมก่อน) |
 
 ## 4. ขั้นตอนทดสอบ (10 รอบ, exit 1)

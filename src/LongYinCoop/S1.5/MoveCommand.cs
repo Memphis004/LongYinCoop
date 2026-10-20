@@ -76,20 +76,24 @@ namespace LongYinCoop
             Interlocked.Exchange(ref _armedUntilTicks, 0);
         }
 
+        /// <summary>
+        /// ผลของคำสั่ง — ใช้ property (ไม่ใช่ field) เพราะ System.Text.Json serialize เฉพาะ property
+        /// ถ้าใช้ field จะได้ `{}` กลับไปหา client
+        /// </summary>
         public sealed class MoveResult
         {
-            public bool Ok;
-            public string Error;
-            public string StableId;
-            public int TargetRow;
-            public int TargetCol;
-            public string GridName;
-            public string ActiveIdBefore;
-            public int StateBefore;
-            public string StateBeforeName;
-            public bool MovedFlagBefore;
-            public string Call;
-            public long CostMs;
+            public bool Ok { get; set; }
+            public string Error { get; set; }
+            public string StableId { get; set; }
+            public int TargetRow { get; set; }
+            public int TargetCol { get; set; }
+            public string GridName { get; set; }
+            public string ActiveIdBefore { get; set; }
+            public int StateBefore { get; set; }
+            public string StateBeforeName { get; set; }
+            public bool MovedFlagBefore { get; set; }
+            public string Call { get; set; }
+            public long CostMs { get; set; }
         }
 
         /// <summary>
