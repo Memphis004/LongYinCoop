@@ -13,6 +13,8 @@ namespace LongYinCoop
         // S1.5: declared ตามแผน §10 แต่ S1.5-b ไม่ใช้ — `spike status` เป็น read-only จึงไม่ต้อง arm
         // (คำสั่งเปลี่ยน state ใน S1.5-d ขึ้นไปจะต้องมี pref นี้ + armed)
         public static MelonPreferences_Entry<bool> AllowRemoteInput;
+        // S1.5-c W1: probe hook อ่านอย่างเดียว (default false = ไม่ติด patch เลย)
+        public static MelonPreferences_Entry<bool> JitProbe;
         public static MelonPreferences_Entry<bool> Capture;
         public static MelonPreferences_Entry<int> WorldHz;
         public static MelonPreferences_Entry<int> WorldStreamHz;
@@ -30,6 +32,8 @@ namespace LongYinCoop
             DevCommands = Category.CreateEntry("DevCommands", true);
             // S1.5 panic switch: false = คำสั่งเปลี่ยน state ทั้งหมดต้องตอบ DISARMED (default false)
             AllowRemoteInput = Category.CreateEntry("AllowRemoteInput", false);
+            // S1.5-c W1: postfix อ่าน argument ของ OnClick/BattleGridClicked — false = ไม่ติด hook
+            JitProbe = Category.CreateEntry("JitProbe", false);
             // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
             Capture = Category.CreateEntry("Capture", true);
             // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling

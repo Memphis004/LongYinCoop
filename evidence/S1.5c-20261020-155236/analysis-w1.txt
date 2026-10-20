@@ -1,0 +1,270 @@
+EVENTS lines=204 clicks=102
+BattleGridClicked lines=102  OnClick lines=102
+paired(obj equal)=102  bc_frame<=onclick_frame=102  same_frame=102
+
+SAMPLES ok=54473 frame=[37529..91999]
+
+turn   samp active      moved    atk paused turnAttacked top cells
+-1    26061                 0      0      0        - (-1, -1):26061
+0      1330 0:0,0:86      285    348      0        T (2, 0):394 (-1, -1):344 (17, 0):277
+1       584 0:4,0:86      131     16      0        T (12, 0):214 (7, 0):205 (12, 5):70
+2       512 0:4,0:9,1:10104    105     19      0        T (13, 0):197 (6, 0):176 (13, 5):49
+3       283 0:9,1:10104,1:10105     62      6      0        T (5, 0):178 (5, 4):45 (3, 14):21
+4       278 0:9,1:10099,1:10105,1:10107     62     10      0        T (1, 0):171 (1, 5):43 (2, 15):19
+5        99 1:10099,1:10102,1:10103,1:10107     39     12      0        T (17, 14):20 (7, 16):17 (4, 18):16
+6        90 0:0,1:10102,1:10103,1:10184     38      7      0        T (6, 17):21 (14, 14):20 (14, 18):15
+7       477 0:0,1:10066,1:10179,1:10184     67      8      0        T (3, 4):355 (3, 11):48 (12, 14):21
+8        92 0:0,1:10066,1:10067,1:10179     38      8      0        T (8, 16):21 (3, 18):19 (0, 18):17
+9       401 0:0,0:86,1:10067     64     16      0        T (16, 7):288 (12, 12):39 (12, 15):18
+10      671 0:4,0:86      110     24      0        T (12, 5):278 (7, 6):245 (12, 11):50
+11      603 0:0,0:4       123     18      0        T (13, 5):235 (5, 5):203 (11, 10):64
+12     7091 0:0,0:9,1:10104   2799    213      0        T (12, 12):2811 (3, 11):1369 (6, 15):944
+13      506 0:86,0:9,1:10099,1:10104    183     28      0        T (5, 4):283 (5, 14):98 (4, 8):88
+14      621 0:86,0:9,1:10099,1:10105    311      8      0        T (12, 11):287 (16, 11):253 (7, 15):60
+15      482 0:0,0:86,0:9,1:10105    135     12      0        T (1, 5):302 (5, 16):83 (1, 10):50
+16     1080 0:0,0:86,1:10103,1:10107    481     14      0        T (6, 11):297 (2, 13):269 (3, 14):243
+17      249 1:10102,1:10103,1:10107,1:10184    204     10      0        T (6, 16):117 (16, 12):87 (6, 17):17
+18      248 1:10066,1:10102,1:10179,1:10184    193     27      0        T (15, 11):104 (9, 15):91 (12, 14):17
+19      203 0:0,0:4,1:10066,1:10179    151      9      0        T (3, 16):83 (6, 14):68 (3, 18):17
+20     1744 0:0,0:4,1:10067    296      9      0        T (6, 15):1014 (11, 10):412 (11, 14):295
+21      850 0:0,0:4,0:86,1:10067    552     20      0        T (3, 13):455 (3, 6):256 (13, 14):87
+22      870 0:0,0:86,0:9    161     20      0        T (1, 18):401 (3, 14):288 (3, 18):159
+23      734 0:86,0:9        0     11      0        T (1, 10):381 (16, 11):343 (-1, -1):9
+24      859 0:9,1:10105    590      6      0        T (3, 12):589 (4, 8):252 (-1, -1):4
+25       53 0:0,1:10105     28      6      0        T (6, 14):25 (5, 16):16 (-1, -1):4
+26      374 0:0,0:4         0      5      0        T (3, 18):370 (-1, -1):3 (11, 14):1
+27      695 0:4,0:86      453      8      0        T (13, 15):450 (11, 14):231 (-1, -1):6
+28      755 0:86,1:10102    273      8      0        T (16, 11):463 (14, 11):270 (-1, -1):6
+29      102 0:0,1:10102     77      6      0        T (15, 14):76 (15, 11):14 (-1, -1):4
+30      606 0:0,1:10107    314      4      0        T (6, 15):315 (3, 18):275 (3, 17):3
+31      107 1:10067,1:10107     85      7      0        T (17, 14):83 (16, 12):14 (-1, -1):5
+32      141 0:9,1:10067    114     32      0        T (14, 12):105 (13, 14):17 (-1, -1):12
+33      457 0:4,0:9       222      3      0        T (5, 14):224 (3, 12):223 (4, 12):3
+34      962 0:4,0:86      486      4      0        T (14, 13):487 (13, 15):466 (13, 14):3
+35      358 0:86,1:10105      0      6      0        T (14, 11):352 (-1, -1):4 (6, 14):2
+36      107 0:0,1:10105     83      5      0        T (7, 15):53 (-1, -1):33 (6, 14):16
+37     1312 0:0,1:10107    685      3      0        T (14, 14):687 (6, 15):599 (7, 15):3
+38       46 0:86,1:10107     32     20      0        T (17, 14):27 (-1, -1):18 (14, 11):1
+39     1006 0:0,0:86      719      6      0        T (17, 13):718 (14, 11):271 (-1, -1):4
+40      374 0:0             0      3      0        T (14, 14):373 (-1, -1):1
+
+total paused samples=0 / 54473  (0.000%)
+
+--- per click: state change within 150 frames ---
+frame  cell     turn      base      movedHits atkChg   verdict
+37664  2_0      None      moved=False atk=False 0         True     attack
+37922  3_4      None      moved=False atk=False 137       True     move
+38241  12_0     None      moved=False atk=False 0         True     attack
+38317  12_5     None      moved=False atk=False 67        True     move
+38497  13_0     None      moved=False atk=False 0         True     attack
+38602  13_5     None      moved=False atk=False 46        True     move
+38763  5_0      None      moved=False atk=False 0         True     attack
+38848  5_4      None      moved=False atk=False 42        True     move
+39225  3_4      None      moved=False atk=False 0         True     attack
+39403  3_11     None      moved=False atk=False 45        True     move
+39670  12_6     None      moved=False atk=False 0         True     attack
+39728  12_5     None      moved=False atk=False 0         True     attack
+39845  12_11    None      moved=False atk=False 47        True     move
+40039  13_5     None      moved=False atk=False 0         True     attack
+40157  11_10    None      moved=False atk=False 61        True     move
+40162  11_10    None      moved=False atk=False 61        True     move
+40608  3_11     None      moved=False atk=False 0         True     attack
+40803  3_16     None      moved=False atk=False 126       True     move
+41512  3_11     None      moved=False atk=False 0         True     attack
+42220  2_13     None      moved=False atk=False 141       True     move
+42583  2_15     None      moved=True atk=False 0         True     attack
+43063  5_4      None      moved=False atk=False 0         True     attack
+43177  4_8      None      moved=False atk=False 85        True     move
+43182  4_8      None      moved=False atk=False 85        True     move
+43462  12_11    None      moved=False atk=False 0         True     attack
+43764  16_12    None      moved=True atk=False 0         True     attack
+43807  16_11    None      moved=True atk=False 21        True     attack
+44074  2_13     None      moved=False atk=False 0         True     attack
+44216  1_18     None      moved=False atk=False 134       True     move
+44221  1_18     None      moved=False atk=False 139       True     move
+44412  3_18     None      moved=True atk=False 0         True     attack
+44698  16_11    None      moved=True atk=True 0         True     attack
+45080  12_10    None      moved=False atk=False 0         True     attack
+45133  11_10    None      moved=False atk=False 0         True     attack
+45227  11_14    None      moved=False atk=False 133       True     move
+45491  12_15    None      moved=True atk=False 0         True     attack
+45944  3_17     None      moved=False atk=False 0         True     attack
+46000  1_18     None      moved=False atk=False 0         True     attack
+46055  3_18     None      moved=False atk=False 144       True     move
+46168  3_17     None      moved=True atk=False 0         True     attack
+46503  16_12    None      moved=False atk=False 0         True     attack
+46715  4_8      None      moved=False atk=False 0         True     attack
+46829  3_12     None      moved=False atk=False 135       True     move
+46835  3_12     None      moved=False atk=False 141       True     move
+47382  3_14     None      moved=True atk=False 0         True     attack
+47765  3_16     None      moved=False atk=False 0         True     attack
+47985  11_14    None      moved=False atk=False 0         True     attack
+48094  13_15    None      moved=False atk=False 141       True     move
+48219  13_14    None      moved=True atk=False 0         True     attack
+48803  16_11    None      moved=False atk=False 0         True     attack
+49021  14_11    None      moved=False atk=False 132       True     move
+49241  15_12    None      moved=True atk=False 0         True     attack
+49538  3_18     None      moved=False atk=False 0         True     attack
+49690  6_15     None      moved=False atk=False 134       True     move
+49956  6_14     None      moved=True atk=False 0         True     attack
+49982  6_12     None      moved=True atk=False 0         True     attack
+50380  3_12     None      moved=False atk=False 0         True     attack
+50492  5_14     None      moved=False atk=False 139       True     move
+50670  6_14     None      moved=True atk=False 0         True     attack
+50946  13_15    None      moved=False atk=False 0         True     attack
+51192  14_13    None      moved=False atk=False 142       True     move
+51624  14_12    None      moved=True atk=False 0         True     attack
+51981  14_12    None      moved=False atk=False 0         True     attack
+52387  6_15     None      moved=False atk=False 0         True     attack
+52752  14_14    None      moved=False atk=False 123       True     move
+53360  14_13    None      moved=True atk=False 0         True     attack
+53679  14_11    None      moved=False atk=False 0         True     attack
+53782  17_13    None      moved=False atk=False 135       True     move
+54450  16_14    None      moved=True atk=False 0         True     attack
+54796  17_14    None      moved=False atk=False 0         True     attack
+58889  17_0     None      moved=False atk=False 0         True     attack
+59023  16_7     None      moved=False atk=False 114       True     move
+59277  7_0      None      moved=False atk=False 0         True     attack
+59370  7_6      None      moved=False atk=False 52        True     move
+59537  6_0      None      moved=False atk=False 0         True     attack
+59623  5_5      None      moved=False atk=False 44        True     move
+59842  1_0      None      moved=False atk=False 0         True     attack
+59914  1_5      None      moved=False atk=False 40        True     move
+60291  16_7     None      moved=False atk=False 0         True     attack
+60449  12_12    None      moved=False atk=False 37        True     move
+60617  6_7      None      moved=False atk=False 0         True     attack
+60679  7_6      None      moved=False atk=False 0         True     attack
+60762  6_11     None      moved=False atk=False 43        True     move
+60936  5_5      None      moved=False atk=False 0         True     attack
+61036  3_6      None      moved=False atk=False 48        True     move
+61264  12_12    None      moved=False atk=False 0         True     attack
+61512  12_12    None      moved=False atk=False 0         True     attack
+62005  6_15     None      moved=False atk=False 125       True     move
+62953  12_12    None      moved=False atk=False 0         True     attack
+64061  13_16    None      moved=False atk=False 123       True     move
+64827  12_12    None      moved=False atk=False 0         True     attack
+65407  6_15     None      moved=False atk=False 114       True     move
+65977  1_5      None      moved=False atk=False 0         True     attack
+66047  1_10     None      moved=False atk=False 47        True     move
+66256  6_11     None      moved=False atk=False 0         True     attack
+66408  3_14     None      moved=False atk=False 135       True     move
+66604  5_14     None      moved=True atk=False 0         True     attack
+67893  6_16     None      moved=False atk=False 0         True     attack
+68191  3_6      None      moved=False atk=False 0         True     attack
+68296  3_13     None      moved=False atk=False 132       True     move
+68670  5_13     None      moved=True atk=False 0         True     attack
+68997  5_14     None      moved=False atk=False 0         True     attack
+
+verdict counts={'move': 38, 'attack': 64, 'select': 0, 'none': 0}
+clicks with >=5 frames unit-stays-on-clicked-cell AND turnMoved: 39
+
+turnMoved false->true transitions=61
+  with a click within 300 frames before=60
+  lag frames min=7 p50=26 max=279
+  frame=37936 turn=0 playerTurn=True click_before=37922 lag=14
+  frame=38332 turn=1 playerTurn=True click_before=38317 lag=15
+  frame=38616 turn=2 playerTurn=True click_before=38602 lag=14
+  frame=38860 turn=3 playerTurn=True click_before=38848 lag=12
+  frame=38932 turn=4 playerTurn=False click_before=38848 lag=84
+  frame=38982 turn=5 playerTurn=False click_before=38848 lag=134
+  frame=39029 turn=6 playerTurn=False click_before=38848 lag=181
+  frame=39429 turn=7 playerTurn=True click_before=39403 lag=26
+  frame=39502 turn=8 playerTurn=False click_before=39403 lag=99
+  frame=39547 turn=9 playerTurn=False click_before=39403 lag=144
+  frame=39864 turn=10 playerTurn=True click_before=39845 lag=19
+  frame=40177 turn=11 playerTurn=True click_before=40162 lag=15
+  frame=40828 turn=12 playerTurn=True click_before=40803 lag=25
+  frame=42230 turn=12 playerTurn=True click_before=42220 lag=10
+  frame=43192 turn=13 playerTurn=True click_before=43182 lag=10
+  frame=43579 turn=14 playerTurn=False click_before=43462 lag=117
+  frame=43861 turn=15 playerTurn=False click_before=43807 lag=54
+  frame=44233 turn=16 playerTurn=True click_before=44221 lag=12
+  frame=44491 turn=17 playerTurn=False click_before=44412 lag=79
+  frame=44604 turn=18 playerTurn=False click_before=44412 lag=192
+  frame=44730 turn=19 playerTurn=False click_before=44698 lag=32
+  frame=45245 turn=20 playerTurn=True click_before=45227 lag=18
+  frame=45565 turn=21 playerTurn=False click_before=45491 lag=74
+  frame=46062 turn=22 playerTurn=True click_before=46055 lag=7
+  frame=46845 turn=24 playerTurn=True click_before=46835 lag=10
+  frame=47460 turn=25 playerTurn=False click_before=47382 lag=78
+  frame=48104 turn=27 playerTurn=True click_before=48094 lag=10
+  frame=49040 turn=28 playerTurn=True click_before=49021 lag=19
+  frame=49337 turn=29 playerTurn=False click_before=49241 lag=96
+  frame=49707 turn=30 playerTurn=True click_before=49690 lag=17
+  frame=50043 turn=31 playerTurn=False click_before=49982 lag=61
+  frame=50155 turn=32 playerTurn=False click_before=49982 lag=173
+  frame=50504 turn=33 playerTurn=True click_before=50492 lag=12
+  frame=51201 turn=34 playerTurn=True click_before=51192 lag=9
+  frame=52069 turn=36 playerTurn=False click_before=51981 lag=88
+  frame=52780 turn=37 playerTurn=True click_before=52752 lag=28
+  frame=53479 turn=38 playerTurn=False click_before=53360 lag=119
+  frame=53798 turn=39 playerTurn=True click_before=53782 lag=16
+  frame=59047 turn=0 playerTurn=True click_before=59023 lag=24
+  frame=59389 turn=1 playerTurn=True click_before=59370 lag=19
+  frame=59641 turn=2 playerTurn=True click_before=59623 lag=18
+  frame=59723 turn=3 playerTurn=False click_before=59623 lag=100
+  frame=59930 turn=4 playerTurn=True click_before=59914 lag=16
+  frame=60003 turn=5 playerTurn=False click_before=59914 lag=89
+  frame=60047 turn=6 playerTurn=False click_before=59914 lag=133
+  frame=60095 turn=7 playerTurn=False click_before=59914 lag=181
+  frame=60141 turn=8 playerTurn=False click_before=59914 lag=227
+  frame=60473 turn=9 playerTurn=True click_before=60449 lag=24
+  frame=60781 turn=10 playerTurn=True click_before=60762 lag=19
+  frame=61058 turn=11 playerTurn=True click_before=61036 lag=22
+  frame=62031 turn=12 playerTurn=True click_before=62005 lag=26
+  frame=64089 turn=12 playerTurn=True click_before=64061 lag=28
+  frame=65433 turn=12 playerTurn=True click_before=65407 lag=26
+  frame=65579 turn=13 playerTurn=False click_before=65407 lag=172
+  frame=65686 turn=14 playerTurn=False click_before=65407 lag=279
+  frame=66062 turn=15 playerTurn=True click_before=66047 lag=15
+  frame=66424 turn=16 playerTurn=True click_before=66408 lag=16
+  frame=66692 turn=17 playerTurn=False click_before=66604 lag=88
+  frame=66838 turn=18 playerTurn=False click_before=66604 lag=234
+  frame=66956 turn=19 playerTurn=False click_before=66604 lag=352
+  frame=68315 turn=21 playerTurn=True click_before=68296 lag=19
+
+turnAttacked false->true transitions=65 (isPlayerTurn at transition: ['False'])
+  with a click within 300 frames before=60 (includes AI turns; see report)
+
+max consecutive matching frames per click:
+  frame=37922 cell=3_4 matched=163 span=37936..38098 turn=0
+  frame=38317 cell=12_5 matched=67 span=38332..38398 turn=1
+  frame=38602 cell=13_5 matched=46 span=38616..38661 turn=2
+  frame=38848 cell=5_4 matched=42 span=38860..38901 turn=3
+  frame=39403 cell=3_11 matched=45 span=39429..39473 turn=7
+  frame=39845 cell=12_11 matched=47 span=39864..39910 turn=10
+  frame=40157 cell=11_10 matched=61 span=40177..40237 turn=11
+  frame=40162 cell=11_10 matched=61 span=40177..40237 turn=11
+  frame=40803 cell=3_16 matched=582 span=40828..41409 turn=12
+  frame=42220 cell=2_13 matched=483 span=42230..42712 turn=12
+  frame=43177 cell=4_8 matched=85 span=43192..43276 turn=13
+  frame=43182 cell=4_8 matched=85 span=43192..43276 turn=13
+  frame=43764 cell=16_12 matched=84 span=44491..44574 turn=17
+  frame=43807 cell=16_11 matched=21 span=43808..43828 turn=14
+  frame=44216 cell=1_18 matched=231 span=44233..44463 turn=16
+  frame=44221 cell=1_18 matched=231 span=44233..44463 turn=16
+  frame=44412 cell=3_18 matched=156 span=46062..46217 turn=22
+  frame=45227 cell=11_14 matched=293 span=45245..45537 turn=20
+  frame=46055 cell=3_18 matched=156 span=46062..46217 turn=22
+  frame=46829 cell=3_12 matched=586 span=46845..47430 turn=24
+  frame=46835 cell=3_12 matched=586 span=46845..47430 turn=24
+  frame=48094 cell=13_15 matched=447 span=48104..48550 turn=27
+  frame=49021 cell=14_11 matched=267 span=49040..49306 turn=28
+  frame=49690 cell=6_15 matched=312 span=49707..50018 turn=30
+  frame=50492 cell=5_14 matched=221 span=50504..50724 turn=33
+  frame=51192 cell=14_13 matched=484 span=51201..51684 turn=34
+  frame=52752 cell=14_14 matched=684 span=52780..53463 turn=37
+  frame=53782 cell=17_13 matched=715 span=53798..54512 turn=39
+  frame=59023 cell=16_7 matched=114 span=59047..59160 turn=0
+  frame=59370 cell=7_6 matched=52 span=59389..59440 turn=1
+  frame=59623 cell=5_5 matched=44 span=59641..59684 turn=2
+  frame=59914 cell=1_5 matched=40 span=59930..59969 turn=4
+  frame=60449 cell=12_12 matched=37 span=60473..60509 turn=9
+  frame=60762 cell=6_11 matched=43 span=60781..60823 turn=10
+  frame=61036 cell=3_6 matched=48 span=61058..61105 turn=11
+  frame=62005 cell=6_15 matched=824 span=62031..62854 turn=12
+  frame=64061 cell=13_16 matched=607 span=64089..64695 turn=12
+  frame=65407 cell=6_15 matched=114 span=65433..65546 turn=12
+  frame=66047 cell=1_10 matched=47 span=66062..66108 turn=15
+  frame=66408 cell=3_14 matched=240 span=66424..66663 turn=16
+  frame=68296 cell=3_13 matched=452 span=68315..68766 turn=21

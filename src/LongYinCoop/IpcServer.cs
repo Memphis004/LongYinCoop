@@ -357,6 +357,29 @@ namespace LongYinCoop
                     return (object)new { key = key, value = CoopPrefs.Capture.Value };
                 });
             }
+            // S1.5-c W1: เปิด/ปิด probe hook (postfix อ่านอย่างเดียว) — ไม่แตะ state เกม
+            if (key == "jitprobe")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.JitProbe.Value = on;
+                    // ทำทันทีบน main thread เพื่อให้ผลลัพธ์ที่ตอบกลับตรงกับสถานะจริง
+                    JitProbe.Apply(on);
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.JitProbe.Value,
+                        installed = JitProbe.Installed,
+                        file = JitProbe.FilePath,
+                        onClickHits = JitProbe.OnClickHits,
+                        battleGridClickedHits = JitProbe.GridClickedHits,
+                        dropped = JitProbe.Dropped
+                    };
+                });
+            }
             return Fail(cmd, string.Format(UIStrings.PrefUnknown, key));
         }
 

@@ -2,15 +2,15 @@ using System;
 using System.Diagnostics;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.3.0", "Westernholudur")]
+[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.4.0", "Westernholudur")]
 
 namespace LongYinCoop
 {
     public sealed class CoopMod : MelonMod
     {
-        public const string Version = "0.3.0";
+        public const string Version = "0.4.0";
         public const int Stage = 1;
-        public const string StageLabel = "S1.5-b";
+        public const string StageLabel = "S1.5-c";
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
@@ -37,6 +37,8 @@ namespace LongYinCoop
             MelonEvents.OnUpdate.Subscribe(Tick);
 
             HarmonyProbe.Apply(CoopPrefs.Probe.Value);
+            // S1.5-c W1: default false -> ไม่ติด patch เลย (เปิด/ปิดได้ด้วย pref ระหว่างรัน)
+            JitProbe.Apply(CoopPrefs.JitProbe.Value);
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -52,6 +54,7 @@ namespace LongYinCoop
             if (_ipc != null) _ipc.Stop();
             CaptureWriter.Stop();
             BattleLogHook.Uninstall();
+            JitProbe.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -61,6 +64,7 @@ namespace LongYinCoop
 
             if (!CoopPrefs.Enabled.Value)
             {
+                JitProbe.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 return;
@@ -72,6 +76,12 @@ namespace LongYinCoop
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)
             {
                 HarmonyProbe.Apply(CoopPrefs.Probe.Value);
+            }
+
+            // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)
+            if (CoopPrefs.JitProbe.Value != JitProbe.Installed)
+            {
+                JitProbe.Apply(CoopPrefs.JitProbe.Value);
             }
 
             Stopwatch sw = Stopwatch.StartNew();

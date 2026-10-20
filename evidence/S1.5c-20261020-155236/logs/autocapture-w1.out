@@ -1,0 +1,30 @@
+[16:15:08] connected pid=32984 - waiting for WaitPlayerInput
+[16:16:12] AUTOCAPTURE_START frame=37528 active=0:0 playerControl=True paused=False infoCount=0
+[16:16:27] samples=2000 lastFrame=39528 inBattle=True active=1:10067
+[16:16:42] samples=4000 lastFrame=41528 inBattle=True active=0:0
+[16:16:57] samples=6000 lastFrame=43528 inBattle=True active=0:86
+[16:17:12] samples=8000 lastFrame=45528 inBattle=True active=0:4
+[16:17:28] samples=10000 lastFrame=47528 inBattle=True active=0:0
+[16:17:43] samples=12000 lastFrame=49528 inBattle=True active=0:0
+[16:17:58] samples=14000 lastFrame=51528 inBattle=True active=0:4
+[16:18:14] samples=16000 lastFrame=53528 inBattle=True active=0:86
+[16:18:29] samples=18000 lastFrame=55528 inBattle=False active=None
+[16:18:45] samples=20000 lastFrame=57527 inBattle=False active=None
+[16:19:01] samples=22000 lastFrame=59527 inBattle=True active=0:4
+[16:19:16] samples=24000 lastFrame=61527 inBattle=True active=0:0
+[16:19:32] samples=26000 lastFrame=63527 inBattle=True active=0:0
+[16:19:47] samples=28000 lastFrame=65527 inBattle=True active=0:0
+[16:20:02] samples=30000 lastFrame=67527 inBattle=True active=0:0
+[16:20:18] samples=32000 lastFrame=69527 inBattle=False active=None
+[16:20:34] samples=34000 lastFrame=71527 inBattle=False active=None
+[16:20:50] samples=36000 lastFrame=73527 inBattle=False active=None
+[16:21:05] samples=38000 lastFrame=75527 inBattle=False active=None
+[16:21:20] samples=40000 lastFrame=77527 inBattle=False active=None
+[16:21:36] samples=42000 lastFrame=79527 inBattle=False active=None
+[16:21:51] samples=44000 lastFrame=81527 inBattle=False active=None
+[16:22:06] samples=46000 lastFrame=83526 inBattle=False active=None
+[16:22:21] samples=48000 lastFrame=85526 inBattle=False active=None
+[16:22:37] samples=50000 lastFrame=87526 inBattle=False active=None
+[16:22:53] samples=52000 lastFrame=89526 inBattle=False active=None
+[16:23:08] samples=54000 lastFrame=91526 inBattle=False active=None
+[16:23:12] AUTOCAPTURE_DONE samples=54473 errors=0 hash_changes=926 same=53546
