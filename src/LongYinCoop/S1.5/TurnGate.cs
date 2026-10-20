@@ -171,7 +171,10 @@ namespace LongYinCoop
                         col = column,
                         hp = Math.Round(hp, 3),
                         alive = alive,
-                        playerControl = u.playerControl
+                        playerControl = u.playerControl,
+                        // S1.5-c ตัดสินใจ: ตัววัดดาเมจที่เป็นไปได้ (อ่านอย่างเดียว)
+                        originHp = SafeOriginHp(u),
+                        unitAlive = SafeUnitAlive(u)
                     });
 
                     if (active != null && u == active)
@@ -240,6 +243,8 @@ namespace LongYinCoop
                 timeLimit = SafeFloat(bc, 1),
                 aiWaitTime = SafeFloat(bc, 2),
                 timeScale = UnityEngine.Time.timeScale,
+                deltaTime = UnityEngine.Time.deltaTime,
+                unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = hash,
                 hashText = canonical,
                 actionPatches = ActionPatchAudit(),
@@ -283,6 +288,8 @@ namespace LongYinCoop
                 timeLimit = -1f,
                 aiWaitTime = -1f,
                 timeScale = UnityEngine.Time.timeScale,
+                deltaTime = UnityEngine.Time.deltaTime,
+                unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = (string)null,
                 hashText = (string)null,
                 actionPatches = ActionPatchAudit(),
@@ -296,6 +303,20 @@ namespace LongYinCoop
             return battleState == (int)BattleState.Prepare
                    || battleState == (int)BattleState.Ready
                    || battleState == (int)BattleState.Fighting;
+        }
+
+        /// <summary>BattleUnit.originHp — อ่านอย่างเดียว (ยังไม่ยืนยันว่าเป็น hp ปัจจุบันของศึก)</summary>
+        private static float SafeOriginHp(BattleUnit u)
+        {
+            try { return u == null ? -1f : (float)Math.Round(u.originHp, 3); }
+            catch { return -1f; }
+        }
+
+        /// <summary>BattleUnit.IsAlive — property getter (อ่านอย่างเดียว)</summary>
+        private static bool SafeUnitAlive(BattleUnit u)
+        {
+            try { return u != null && u.IsAlive; }
+            catch { return false; }
         }
 
         /// <summary>อ่าน float ของ BattleController แบบ typed ตาม index (0=battleTime, 1=timeLimit, 2=AIWaitTime)</summary>
