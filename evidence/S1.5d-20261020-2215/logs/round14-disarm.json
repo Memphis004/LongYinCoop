@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "armed": false,
+    "remainingMs": 0
+  },
+  "note": null
+}

@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "Ok": true,
+    "Error": null,
+    "StableId": "0:9",
+    "TargetRow": 6,
+    "TargetCol": 0,
+    "GridName": "6_0",
+    "ActiveIdBefore": "0:9",
+    "StateBefore": 2,
+    "StateBeforeName": "WaitPlayerInput",
+    "MovedFlagBefore": false,
+    "Call": "BattleGridClicked(self) + GenerateMovePath + BattleGridClicked(target)",
+    "StateAfterSelfClick": 6,
+    "StateAfterSelfClickName": "ShowMovingRage",
+    "StateAfterButton": 6,
+    "StateAfterButtonName": "ShowMovingRage",
+    "StateAfterPreview": 7,
+    "StateAfterPreviewName": "WaitMoving",
+    "UnitRowAfter": 6,
+    "UnitColAfter": 0,
+    "PositionConfirmed": true,
+    "StateAfterPath": 7,
+    "StateAfterPathName": "WaitMoving",
+    "RollbackApplied": false,
+    "CostMs": 0,
+    "ElapsedMs": 13
+  },
+  "note": null
+}

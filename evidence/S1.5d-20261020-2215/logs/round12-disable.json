@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "cmd": "set_pref",
+  "result": {
+    "key": "allowRemoteInput",
+    "value": false,
+    "armed": false
+  },
+  "note": null
+}

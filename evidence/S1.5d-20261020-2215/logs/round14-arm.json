@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "armed": true,
+    "seconds": 60,
+    "remainingMs": 60000
+  },
+  "note": null
+}
