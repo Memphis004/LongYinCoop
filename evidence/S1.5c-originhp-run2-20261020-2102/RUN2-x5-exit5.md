@@ -1,6 +1,6 @@
 # S1.5-c run 2 — exit 5 + ความพยายามวัด x5 (2026-10-20 21:19–21:25) [RUNTIME]
 
-หลักฐาน: `logs/spike-full-2119.ndjson` (3,782 sample @100 ms, error 0) · `jitprobe-w4-20261020-210855.ndjson` (32 event)
+หลักฐาน: `logs/spike-full-2119.ndjson` (สตรีม 100 ms, error 0; **3,782 sample ณ เวลาวิเคราะห์ 21:25**, 4,066 sample ณ 21:26:19 — stream ยังเดินต่อ) · `logs/analysis-run2-2119.txt` · `jitprobe-w4-20261020-210855.ndjson` (32 event)
 
 ## 1. exit 5 — pause→resume ที่ยืนยันได้
 
@@ -24,7 +24,7 @@
 
 | ตัววัด | ผล |
 |---|---|
-| `Time.timeScale` | **1** ตลอด 3,782 sample — ที่ไม่ใช่ 1 มีแค่ hit-stop: `0.05` ×6 และ `0.2` ×8 (ทั้งหมดอยู่ช่วง `Attacking` ก่อน 21:24) |
+| `Time.timeScale` | **1** ตลอด (4,052/4,066 sample ณ 21:26:19) — ที่ไม่ใช่ 1 มีแค่ hit-stop: `0.05` ×6 และ `0.2` ×8 (ทั้งหมดอยู่ช่วง `Attacking` ก่อน 21:24) |
 | ระยะ `Attacking` (วินาทีผนัง) | ก่อน 21:24: median **0.70** (n=11, 0.50–2.31) · หลัง: median **0.80** (n=3, 0.60–1.81) → **ไม่เร็วขึ้น** |
 | ระยะ `WaitAttacking` | ก่อน median 0.85 · หลัง median 1.41 → ไม่เร็วขึ้น |
 | ระยะ `Moving` | 0.10–0.20 s ทั้งก่อนและหลัง |
