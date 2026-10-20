@@ -362,8 +362,13 @@ namespace LongYinCoop
 
                 if (timedOut)
                 {
-                    // ยังไม่ถึง state 7 ภายในเวลา — ถอยออกจากโหมดและรายงาน
-                    try { bc.CancelMove(); r.RollbackApplied = true; } catch { }
+                    // ยังไม่ถึง state 7 ภายในเวลา — ถอยออกจากโหมดเฉพาะเมื่อยังอยู่ในโหมดเดิน
+                    bool inMoveMode = bc.nowActiveState == ActiveUnitBattleState.ShowMovingRage
+                                      || bc.nowActiveState == ActiveUnitBattleState.WaitMoving;
+                    if (inMoveMode)
+                    {
+                        try { bc.CancelMove(); r.RollbackApplied = true; } catch { }
+                    }
                     Finish(job, string.Format(UIStrings.SpikeMovePathFailed, bc.nowActiveState.ToString()), false);
                 }
             }
