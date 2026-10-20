@@ -17,6 +17,8 @@ Usage:
     python tools/coopctl.py spike                 # S1.5-b: read-only battle status
     python tools/coopctl.py spike --sub move --id 0:0 --row 5 --col 0
         # exits 5 without firing when spike status reports turnMoved=true
+    python tools/coopctl.py spike --sub attack --id 0:0 --target 1:10067
+        # exits 5 without firing unless nowActiveState=WaitAttacking and active=--id
     python tools/coopctl.py compat_dump --tag bigmap
     python tools/coopctl.py s1_report
     python tools/coopctl.py set_pref --key capture --value false
@@ -111,6 +113,49 @@ def prefire_move_block(pid):
     return None
 
 
+def prefire_attack_block(pid, attacker, target):
+    """อ่าน `spike status` ก่อนยิง attack (read-only, ไม่ใช้ arm)
+
+    คืนข้อความเหตุผลถ้าต้องปฏิเสธ, คืน None ถ้าผ่าน
+    เงื่อนไขที่บล็อก (ฝั่ง client เท่านั้น — mod ยังตรวจซ้ำเสมอ):
+      1) nowActiveStateName ต้องเป็น WaitAttacking (mod ไม่เรียก ChangeNowActiveAttackSkill เอง — มติ 2026-10-21)
+      2) active ต้องตรงกับ attacker ที่สั่ง
+      3) target ต้องมีอยู่จริง unitAlive=true และอยู่ฝั่งตรงข้าม
+    """
+    try:
+        st = call(pid, "spike", extra={"sub": "status"})
+    except Exception as e:
+        return "prefire: REFUSED: spike status failed (%s)" % e
+    if not st.get("ok"):
+        return "prefire: REFUSED: spike status unavailable (%s)" % st.get("error")
+
+    r = st.get("result") or {}
+    if "nowActiveStateName" not in r or "units" not in r:
+        return "prefire: REFUSED: spike status missing fields (old build?)"
+    if not attacker or not target:
+        return "prefire: REFUSED: need --id <attacker stableId> and --target <target stableId>"
+
+    state = r.get("nowActiveStateName")
+    if state != "WaitAttacking":
+        return ("prefire: REFUSED: NOT_ATTACK_MODE: nowActiveState=%s (attack needs WaitAttacking; "
+                "the game enters it by itself after a move)" % state)
+
+    active = r.get("active")
+    if active != attacker:
+        return "prefire: REFUSED: active unit is %s, not %s" % (active, attacker)
+
+    units = {u.get("id"): u for u in (r.get("units") or [])}
+    tgt = units.get(target)
+    if tgt is None:
+        return "prefire: REFUSED: target %s not found" % target
+    me = units.get(active) or {}
+    if tgt.get("team") == me.get("team"):
+        return "prefire: REFUSED: target %s is not an enemy (team %s)" % (target, tgt.get("team"))
+    if not tgt.get("unitAlive"):
+        return "prefire: REFUSED: TARGET_DEAD: %s unitAlive=false" % target
+    return None
+
+
 def _summary(samples, ok, bad):
     s = sorted(samples)
     n = len(s)
@@ -179,10 +224,11 @@ def main():
     ap.add_argument("--n", type=int, default=1000, help="bench_dispatch / bench / snapshot log: number of requests")
     ap.add_argument("--cmd", default="ping", choices=["ping", "stats", "get_scene", "get_player_pos", "get_version", "spike"],
                     help="bench: command to measure")
-    ap.add_argument("--sub", default="status", choices=["status", "arm", "disarm", "move"],
-                    help="spike: status (read-only) | arm/disarm/move (S1.5-d, needs allowRemoteInput + arm)")
+    ap.add_argument("--sub", default="status", choices=["status", "arm", "disarm", "move", "attack"],
+                    help="spike: status (read-only) | arm/disarm/move/attack (needs allowRemoteInput + arm)")
     ap.add_argument("--seconds", type=int, default=120, help="spike arm: seconds (1-300)")
-    ap.add_argument("--id", default=None, help="spike move: stable id of the active unit")
+    ap.add_argument("--id", default=None, help="spike move/attack: stable id of the active unit")
+    ap.add_argument("--target", default=None, help="spike attack: stable id of the target unit")
     ap.add_argument("--row", type=int, default=-1, help="spike move: target row")
     ap.add_argument("--col", type=int, default=-1, help="spike move: target column")
     ap.add_argument("--what", default="world", choices=["world", "battle", "log"], help="snapshot: stream")
@@ -228,6 +274,11 @@ def main():
                 if block:
                     print(block, file=sys.stderr)
                     return 5
+            elif args.sub == "attack":
+                block = prefire_attack_block(pid, args.id, args.target)
+                if block:
+                    print(block, file=sys.stderr)
+                    return 5
             extra = {"sub": args.sub}
             if args.sub == "arm":
                 extra["seconds"] = args.seconds
@@ -235,6 +286,9 @@ def main():
                 extra["id"] = args.id
                 extra["row"] = args.row
                 extra["col"] = args.col
+            elif args.sub == "attack":
+                extra["id"] = args.id
+                extra["target"] = args.target
         else:
             extra = None
         result = call(pid, args.command, extra=extra)

@@ -90,6 +90,26 @@ namespace LongYinCoop
         public const string SpikeMoveBusy = "spike move: another move is still in progress";
         public const string SpikeMoveTimeout = "spike move: timed out waiting for the game to accept the target";
 
+        // ── S1.5-e: spike attack (คำสั่งเปลี่ยน state ที่สอง) ─────────────
+        public const string SpikeAttackNotInBattle = "spike attack: not in battle";
+        public const string SpikeAttackNotFighting = "spike attack: battleState={0} (expected Fighting)";
+        public const string SpikeAttackPaused = "spike attack: battle is paused";
+        public const string SpikeAttackNotAiming =
+            "NOT_ATTACK_MODE: spike attack: nowActiveState={0} (expected WaitAttacking)";
+        public const string SpikeAttackNoPlayerUnit = "spike attack: active unit is missing or not player-controlled";
+        public const string SpikeAttackWrongUnit = "spike attack: unit {0} is not the active unit ({1})";
+        public const string SpikeAttackTargetNotFound = "spike attack: target {0} not found on this battlefield";
+        public const string SpikeAttackTargetSelf = "spike attack: target {0} is the active unit";
+        public const string SpikeAttackTargetFriendly = "spike attack: target {0} is not an enemy (team {1})";
+        public const string SpikeAttackTargetDead = "TARGET_DEAD: spike attack: target {0} is not alive";
+        public const string SpikeAttackNoGrid = "spike attack: no grid cell at ({0},{1})";
+        public const string SpikeAttackRejected =
+            "OUT_OF_RANGE: spike attack: the game did not accept the click (attackComfirmed=false) - no retry";
+        public const string SpikeAttackHpNotConfirmed =
+            "HP_NOT_CONFIRMED: spike attack: target hp did not drop (before={0}, after={1}) - no retry";
+        public const string SpikeAttackBusy = "spike attack: another attack is still in progress";
+        public const string SpikeAttackTimeout = "spike attack: timed out waiting for the game to apply damage";
+
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";
         public const string LogLevelWarn = "WARN";

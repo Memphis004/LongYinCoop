@@ -124,6 +124,73 @@ namespace LongYinCoop
             return null;
         }
 
+        /// <summary>
+        /// S1.5-e: หายูนิตจาก stableId ด้วยอัลกอริทึมเดียวกับ Build()/ActiveStableId
+        /// main thread เท่านั้น; คืน null เมื่อไม่พบ (teamId = -1)
+        /// </summary>
+        public static BattleUnit ResolveUnit(BattleController bc, string stableId, out int teamId)
+        {
+            teamId = -1;
+            if (bc == null || string.IsNullOrEmpty(stableId)) return null;
+            try
+            {
+                Il2CppSystem.Collections.Generic.List<BattleTeam> teams = bc.teams;
+                if (teams == null) return null;
+
+                HashSet<string> used = new HashSet<string>();
+                for (int t = 0; t < teams.Count; t++)
+                {
+                    BattleTeam team = teams[t];
+                    if (team == null) continue;
+                    Il2CppSystem.Collections.Generic.List<BattleUnit> units = team.battleUnits;
+                    if (units == null) continue;
+                    for (int i = 0; i < units.Count; i++)
+                    {
+                        BattleUnit u = units[i];
+                        if (u == null) continue;
+                        string id = BattleSampler.StableId(team.ID, u.heroData, i, used);
+                        if (string.Equals(id, stableId, StringComparison.Ordinal))
+                        {
+                            teamId = team.ID;
+                            return u;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+            }
+            return null;
+        }
+
+        /// <summary>S1.5-e: team ID ของยูนิต (เทียบฝั่งศัตรู/พวกพ้อง) — คืน -1 เมื่อไม่พบ</summary>
+        public static int ResolveTeamId(BattleController bc, BattleUnit unit)
+        {
+            if (bc == null || unit == null) return -1;
+            try
+            {
+                Il2CppSystem.Collections.Generic.List<BattleTeam> teams = bc.teams;
+                if (teams == null) return -1;
+                for (int t = 0; t < teams.Count; t++)
+                {
+                    BattleTeam team = teams[t];
+                    if (team == null) continue;
+                    Il2CppSystem.Collections.Generic.List<BattleUnit> units = team.battleUnits;
+                    if (units == null) continue;
+                    for (int i = 0; i < units.Count; i++)
+                    {
+                        if (units[i] == unit) return team.ID;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+            }
+            return -1;
+        }
+
         /// <summary>S1.5-d: อ่าน flag nowActiveUnitMoved (typed property เดียวกับที่ hash ใช้)</summary>
         public static bool ReadActiveMovedFlag(BattleController bc)
         {
@@ -272,6 +339,9 @@ namespace LongYinCoop
                 battleStateName = bc.battleState.ToString(),
                 nowActiveState = nowActiveState,
                 nowActiveStateName = bc.nowActiveState.ToString(),
+                // S1.5-e: ข้อมูลประกอบเท่านั้น — list นี้ค้างข้ามเทิร์น (วัดแล้ว 2026-10-21)
+                attackRangeCount = SafeListCount(bc, 0),
+                damageRangeCount = SafeListCount(bc, 1),
                 active = activeId,
                 activeHeroId = activeHeroId,
                 activeName = activeName,
@@ -411,6 +481,22 @@ namespace LongYinCoop
                 return bc.AIWaitTime;
             }
             catch { return -1f; }
+        }
+
+        /// <summary>
+        /// S1.5-e: จำนวนสมาชิกของ list เป้าหมายที่เล็ง (0=attackRangeGridUnits, 1=damageRangeGridUnits)
+        /// อ่านอย่างเดียว — ค่าที่ได้อาจค้างข้ามเทิร์น ใช้เป็นข้อมูลประกอบเท่านั้น
+        /// </summary>
+        private static int SafeListCount(BattleController bc, int which)
+        {
+            try
+            {
+                if (bc == null) return -1;
+                Il2CppSystem.Collections.Generic.List<GridUnitData> list =
+                    which == 0 ? bc.attackRangeGridUnits : bc.damageRangeGridUnits;
+                return list == null ? -1 : list.Count;
+            }
+            catch { return -1; }
         }
 
         private static string CanonicalUnit(string stableId, int side, int teamIndex, int row, int column,

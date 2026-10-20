@@ -79,6 +79,17 @@ namespace LongYinCoop
         }
 
         /// <summary>
+        /// S1.5-e: ใช้สิทธิ์ arm ใบเดียวร่วมกับคำสั่งอื่น (move/attack) — 1 ใบ = 1 คำสั่ง
+        /// คืน false เมื่อไม่ได้ arm (ผู้เรียกต้องไม่แตะเกม)
+        /// </summary>
+        public static bool TryConsumeArm()
+        {
+            if (!IsArmed) return false;
+            ConsumeArm();
+            return true;
+        }
+
+        /// <summary>
         /// ผลของคำสั่ง — ใช้ property (ไม่ใช่ field) เพราะ System.Text.Json serialize เฉพาะ property
         /// ถ้าใช้ field จะได้ `{}` กลับไปหา client
         /// </summary>
@@ -462,8 +473,9 @@ namespace LongYinCoop
         /// <summary>
         /// หา GameObject ของช่อง (row, col) จาก observable grid — ใช้ GridUnitController.gridData
         /// (typed; ไม่มี raw offset) โดยสแกนลูกของ root ที่ให้มา
+        /// S1.5-e: เปิดให้ AttackCommand ใช้ตัวเดียวกัน (ไม่ก๊อปสำเนา)
         /// </summary>
-        private static GridUnitController Scan(Transform root, int row, int col)
+        internal static GridUnitController Scan(Transform root, int row, int col)
         {
             if (root == null) return null;
             try

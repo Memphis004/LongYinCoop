@@ -375,6 +375,30 @@ namespace LongYinCoop
                 return Ok(cmd, mr);
             }
 
+            // S1.5-e: คำสั่งโจมตี — คลิกช่องเป้า 1 ครั้งบน main thread แล้วยืนยันด้วย hp ของเป้าใน Tick()
+            if (sub == "attack")
+            {
+                if (!CoopPrefs.AllowRemoteInput.Value) return Fail(cmd, UIStrings.SpikeRemoteInputOff);
+                string id = GetString(root, "id");
+                string target = GetString(root, "target");
+                if (string.IsNullOrEmpty(id)) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "id"));
+                if (string.IsNullOrEmpty(target)) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "target"));
+
+                object raw = null;
+                if (!_dispatcher.Invoke(delegate { return (object)AttackCommand.StartAttack(id, target); }, 500, out raw))
+                    return Fail(cmd, UIStrings.MainThreadTimeout);
+
+                AttackCommand.AttackResult ar = raw as AttackCommand.AttackResult;
+                if (ar == null)
+                {
+                    // คลิกถูกเกมรับแล้ว (deferred) — รอ Tick ยืนยัน hp เป้าลด
+                    ar = AttackCommand.WaitDone(AttackCommand.WaitTimeoutMs);
+                    if (ar == null) return Fail(cmd, UIStrings.SpikeAttackTimeout);
+                }
+                if (!ar.Ok) return Fail(cmd, ar.Error ?? UIStrings.SpikeAttackNotInBattle, ar);
+                return Ok(cmd, ar);
+            }
+
             return Fail(cmd, string.Format(UIStrings.SpikeNotRegistered, sub));
         }
 
@@ -609,6 +633,18 @@ namespace LongYinCoop
                 { "ok", false },
                 { "cmd", cmd },
                 { "error", error }
+            }, S1Json.Options);
+        }
+
+        /// <summary>S1.5-e: ล้มเหลวแต่ยังส่งผลวัดกลับไปด้วย (ใช้กับคำสั่งที่ต้องการหลักฐาน เช่น spike attack)</summary>
+        private static string Fail(string cmd, string error, object result)
+        {
+            return JsonSerializer.Serialize(new Dictionary<string, object>
+            {
+                { "ok", false },
+                { "cmd", cmd },
+                { "error", error },
+                { "result", result }
             }, S1Json.Options);
         }
 
