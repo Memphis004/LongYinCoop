@@ -82,7 +82,10 @@ namespace LongYinCoop
         public const string SpikeMoveWrongUnit = "spike move: unit {0} is not the active unit ({1})";
         public const string SpikeMoveNoGrid = "spike move: no grid cell at ({0},{1})";
         public const string SpikeMoveButtonIgnored = "spike move: MoveButtonClicked ignored (state stayed {0})";
+        public const string SpikeMoveAlreadyUsed = "ALREADY_USED: this unit has already moved this turn";
         public const string SpikeMovePathFailed = "spike move: no path generated (state {0}); cancelMove applied";
+        public const string SpikeMovePositionUnconfirmed =
+            "spike move: position not confirmed after commit (unit at ({0},{1}), expected ({2},{3}))";
         // S1.5-d รอบ 6: คำสั่งเดินทำงานข้ามเฟรม (ต้องรอ state 7 ก่อนสั่ง preview)
         public const string SpikeMoveBusy = "spike move: another move is still in progress";
         public const string SpikeMoveTimeout = "spike move: timed out waiting for the game to accept the target";

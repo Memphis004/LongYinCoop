@@ -15,6 +15,8 @@ Usage:
     python tools/coopctl.py probe_units
     python tools/coopctl.py patch_report
     python tools/coopctl.py spike                 # S1.5-b: read-only battle status
+    python tools/coopctl.py spike --sub move --id 0:0 --row 5 --col 0
+        # exits 5 without firing when spike status reports turnMoved=true
     python tools/coopctl.py compat_dump --tag bigmap
     python tools/coopctl.py s1_report
     python tools/coopctl.py set_pref --key capture --value false
@@ -84,6 +86,29 @@ def call(pid, cmd, timeout=5.0, retries=40, extra=None):
         return request(f, cmd, extra)
     finally:
         f.close()
+
+
+def prefire_move_block(pid):
+    """อ่าน `spike status` ก่อนยิง move (read-only, ไม่ใช้ arm)
+
+    คืนข้อความเหตุผลถ้าต้องปฏิเสธ, คืน None ถ้าผ่าน
+    เงื่อนไขเดียวที่บล็อก: turnMoved=true = ยูนิตใช้สิทธิ์เดินของเทิร์นนี้แล้ว (G3 ALREADY_USED)
+    ตรวจฝั่ง client เพื่อไม่ให้ arm ถูกใช้ไปเปล่า ๆ กับคำสั่งที่ mod ต้องปฏิเสธ
+    """
+    try:
+        st = call(pid, "spike", extra={"sub": "status"})
+    except Exception as e:
+        return "prefire: REFUSED: spike status failed (%s)" % e
+    if not st.get("ok"):
+        return "prefire: REFUSED: spike status unavailable (%s)" % st.get("error")
+
+    r = st.get("result") or {}
+    if "turnMoved" not in r:
+        return "prefire: REFUSED: spike status has no turnMoved field (old build?)"
+    if r.get("turnMoved"):
+        return ("prefire: REFUSED: turnMoved=true (unit %s at (%s,%s) already moved this turn; "
+                "G3 ALREADY_USED)" % (r.get("active"), r.get("activeRow"), r.get("activeColumn")))
+    return None
 
 
 def _summary(samples, ok, bad):
@@ -198,6 +223,11 @@ def main():
         elif args.command == "set_pref":
             extra = {"key": args.key, "value": args.value}
         elif args.command == "spike":
+            if args.sub == "move":
+                block = prefire_move_block(pid)
+                if block:
+                    print(block, file=sys.stderr)
+                    return 5
             extra = {"sub": args.sub}
             if args.sub == "arm":
                 extra["seconds"] = args.seconds

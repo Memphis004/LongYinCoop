@@ -12,8 +12,10 @@ namespace LongYinCoop
     ///
     /// กติกาที่บังคับในโค้ดนี้ (S1.5-plan §0/§3):
     /// - ต้อง arm ก่อนทุกครั้ง และ **arm ถูกใช้ไป 1 ครั้งต่อ 1 คำสั่ง** (สำเร็จหรือล้มเหลวก็หลุด)
-    /// - เรียก method เดียวเท่านั้น: `BattleController.BattleGridClicked(GameObject)` = entry เดียวกับที่ UI จริงใช้
-    ///   (W1: คลิกกริดของผู้เล่น 39 ครั้งพายูนิตไปยืนช่องนั้นจริง — ไม่มี call อื่นที่ mod ต้องประดิษฐ์)
+    /// - เรียกเฉพาะ 3 method ที่ UI จริงใช้ และเรียงตามลำดับที่วัดได้ (W6):
+    ///   `BattleGridClicked(self)` -> `GenerateMovePath(target)` -> `BattleGridClicked(target)`
+    ///   โดยขั้นที่ 2-3 ต้องข้ามเฟรม (state 6 -> 7 เกิดที่เฟรมถัดไป)
+    /// - G3: ถ้า `nowActiveUnitMoved` ของเทิร์นนี้เป็น true -> `ALREADY_USED` ก่อนแตะ GameObject
     /// - ไม่เขียน field ของเกมเลย, ไม่เรียก Save/Load, ไม่ retry, ไม่วนลูป
     /// - ต้องรันบน Unity main thread เท่านั้น (IpcServer ส่งผ่าน MainThreadDispatcher)
     /// </summary>
@@ -99,12 +101,17 @@ namespace LongYinCoop
             public string StateAfterButtonName { get; set; }
             public int StateAfterPreview { get; set; }
             public string StateAfterPreviewName { get; set; }
+            /// <summary>ตำแหน่งยูนิต ณ เวลาที่ยืนยันว่าถึงเป้าหมายแล้ว (ไม่ใช่ค่าที่อ่านทันทีหลังคลิก)</summary>
             public int UnitRowAfter { get; set; }
             public int UnitColAfter { get; set; }
+            public bool PositionConfirmed { get; set; }
             public int StateAfterPath { get; set; }
             public string StateAfterPathName { get; set; }
             public bool RollbackApplied { get; set; }
+            /// <summary>เวลาที่บล็อก Unity main thread (เฟส 1) — ใช้เทียบเกณฑ์ p99 ≤ 8 ms</summary>
             public long CostMs { get; set; }
+            /// <summary>เวลารวมทั้งคำสั่งถึงตอนยืนยันตำแหน่ง (รวมแอนิเมชัน) — ไม่ใช่ต้นทุน main thread</summary>
+            public long ElapsedMs { get; set; }
         }
 
         /// <summary>
@@ -113,12 +120,22 @@ namespace LongYinCoop
         /// </summary>
         public const int PhaseTimeoutMs = 1500;
 
+        /// <summary>
+        /// เวลาที่ยอมให้ยูนิตเดินไปถึงช่องเป้าหมายหลัง commit (S1.5-d รอบ 6: อ่านตำแหน่งทันทีหลังคลิก
+        /// ได้ค่าเก่า (4,0) ทั้งที่ปลายทางคือ (5,0)) — อ่านซ้ำทุกเฟรมจนตำแหน่งตรงเป้า
+        /// </summary>
+        public const int PositionTimeoutMs = 4000;
+
+        /// <summary>เวลาทั้งหมดที่ฝั่ง IPC รอก่อนตอบ timeout (เฟส 1 + 2 + 3/4 แล้วแต่กรณี)</summary>
+        public const int WaitTimeoutMs = PhaseTimeoutMs + PositionTimeoutMs + 800;
+
         private sealed class Job
         {
             public string StableId;
             public int Row;
             public int Col;
             public GridUnitController Target;
+            public BattleUnit Unit;
             public MoveResult Result;
             public long StartedMs;
             public bool Done;
@@ -196,6 +213,14 @@ namespace LongYinCoop
                     return r;
                 }
 
+                // G3: ยูนิตนี้ใช้สิทธิ์เดินของเทิร์นไปแล้ว -> ปฏิเสธก่อนแตะ GameObject ใด ๆ
+                // (วัดแล้ว: unit-level moved ใช้ไม่ได้, turn-level nowActiveUnitMoved ใช้ได้)
+                if (r.MovedFlagBefore)
+                {
+                    r.Error = UIStrings.SpikeMoveAlreadyUsed;
+                    return r;
+                }
+
                 BattleUnit active = bc.nowActiveUnit;
                 if (active == null || !active.playerControl)
                 {
@@ -267,6 +292,7 @@ namespace LongYinCoop
                     Row = row,
                     Col = col,
                     Target = cell,
+                    Unit = active,
                     Result = r,
                     StartedMs = Clock.ElapsedMilliseconds
                 };
@@ -310,7 +336,39 @@ namespace LongYinCoop
                 }
 
                 MoveResult r = job.Result;
-                if (r.StateAfterPreview != 0 || r.StateAfterPath != 0) return;
+
+                // ขั้นที่ 4 — ยืนยันตำแหน่งจริงหลังเดินจบ (อ่านอย่างเดียว; ไม่เขียน field ของเกม)
+                // รอบ 6 อ่าน UnitRowAfter ทันทีหลังคลิกจึงได้ค่าเก่า — ที่นี่อ่านซ้ำทุกเฟรมจนตรงเป้า
+                if (r.StateAfterPath != 0)
+                {
+                    int nowRow = -1, nowCol = -1;
+                    try
+                    {
+                        GridUnitData g = job.Unit == null ? null : job.Unit.mapGrid;
+                        if (g != null) { nowRow = g.row; nowCol = g.column; }
+                    }
+                    catch { }
+
+                    if (nowRow == job.Row && nowCol == job.Col)
+                    {
+                        r.UnitRowAfter = nowRow;
+                        r.UnitColAfter = nowCol;
+                        r.PositionConfirmed = true;
+                        Finish(job, null, true);
+                        return;
+                    }
+
+                    if (Clock.ElapsedMilliseconds - job.StartedMs > PhaseTimeoutMs + PositionTimeoutMs)
+                    {
+                        r.UnitRowAfter = nowRow;
+                        r.UnitColAfter = nowCol;
+                        Finish(job, string.Format(UIStrings.SpikeMovePositionUnconfirmed,
+                                                  nowRow, nowCol, job.Row, job.Col), false);
+                    }
+                    return;
+                }
+
+                if (r.StateAfterPreview != 0) return;
 
                 bool timedOut = Clock.ElapsedMilliseconds - job.StartedMs > PhaseTimeoutMs;
 
@@ -344,19 +402,7 @@ namespace LongYinCoop
                         return;
                     }
 
-                    try
-                    {
-                        BattleUnit active = bc.nowActiveUnit;
-                        GridUnitData nowGrid = active == null ? null : active.mapGrid;
-                        if (nowGrid != null)
-                        {
-                            r.UnitRowAfter = nowGrid.row;
-                            r.UnitColAfter = nowGrid.column;
-                        }
-                    }
-                    catch { }
-
-                    Finish(job, null, true);
+                    // ตำแหน่งจริงอ่านในขั้นที่ 4 (Tick เฟรมถัดไป) — ไม่รายงานค่าที่อ่านทันทีหลังคลิก
                     return;
                 }
 
@@ -385,15 +431,17 @@ namespace LongYinCoop
             MoveResult r = job.Result;
             r.Ok = ok && error == null;
             if (error != null) r.Error = error;
-            r.CostMs = Clock.ElapsedMilliseconds - job.StartedMs;
+            // CostMs ถูกวัดในเฟส 1 (main thread) แล้ว — ที่นี่เก็บเวลารวมแยกไว้ ไม่ทับค่าที่ใช้เทียบเกณฑ์ p99
+            r.ElapsedMs = Clock.ElapsedMilliseconds - job.StartedMs;
 
             lock (JobLock) { job.Done = true; }
             try { DoneEvent.Set(); } catch { }
 
             CoopLog.Msg(string.Format(
-                "spike move id={0} -> ({1},{2}) ok={3} self={4} preview={5} after={6} unitAfter=({7},{8}) rollback={9} cost={10}ms err={11}",
+                "spike move id={0} -> ({1},{2}) ok={3} self={4} preview={5} after={6} unitAfter=({7},{8}) confirmed={9} rollback={10} cost={11}ms total={12}ms err={13}",
                 job.StableId, job.Row, job.Col, r.Ok, r.StateAfterSelfClickName, r.StateAfterPreviewName,
-                r.StateAfterPathName, r.UnitRowAfter, r.UnitColAfter, r.RollbackApplied, r.CostMs, r.Error ?? "-"));
+                r.StateAfterPathName, r.UnitRowAfter, r.UnitColAfter, r.PositionConfirmed, r.RollbackApplied,
+                r.CostMs, r.ElapsedMs, r.Error ?? "-"));
         }
 
         /// <summary>รอผลจาก Tick (เรียกจาก thread ของ IPC ไม่ใช่ main thread)</summary>

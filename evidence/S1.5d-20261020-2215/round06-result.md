@@ -25,6 +25,7 @@ POST: state=WaitPlayerInput pos=(5,0) hp=505.551 moved=false
 - `UnitRowAfter/UnitColAfter` ใน response อ่านทันทีหลังคลิก จึงยังเป็น **(4,0)** (ค่าเก่า) — ค่าที่เชื่อถือได้คือ `spike status` หลังคำสั่ง = (5,0)
   → ควรแก้ในรอบถัดไปให้อ่านตำแหน่งหลังการเดินจบ (หรือรายงานเป็น "posAtClick" แทน)
 - `elapsed` ฝั่ง client 16 ms = เวลารวม arm→move (ข้ามเฟรมแค่ 1-2 เฟรมตามที่ W6 วัด)
+- **แก้แล้วใน build `bbf8cd42be5d` (2026-10-20 23:2x):** `UnitRowAfter/UnitColAfter` รอจนตำแหน่งตรงเป้า + `PositionConfirmed` · รายละเอียด `round07-blocked.md` §2.2 (ยัง NOT-RUN เพราะยังไม่เปิดเกม)
 
 ## เทียบเกณฑ์ S1.5-d
 | เกณฑ์ | ผล |

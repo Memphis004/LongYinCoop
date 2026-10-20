@@ -367,8 +367,8 @@ namespace LongYinCoop
                 MoveCommand.MoveResult mr = raw as MoveCommand.MoveResult;
                 if (mr == null)
                 {
-                    // เริ่มแล้ว (deferred) — รอ Tick ทำงานเสร็จ (PhaseTimeoutMs + เผื่อ)
-                    mr = MoveCommand.WaitDone(MoveCommand.PhaseTimeoutMs + 800);
+                    // เริ่มแล้ว (deferred) — รอ Tick ทำงานเสร็จ (เฟส 2-4 + เผื่อ)
+                    mr = MoveCommand.WaitDone(MoveCommand.WaitTimeoutMs);
                     if (mr == null) return Fail(cmd, UIStrings.SpikeMoveTimeout);
                 }
                 if (!mr.Ok) return Fail(cmd, mr.Error ?? UIStrings.SpikeMoveNotInBattle);
