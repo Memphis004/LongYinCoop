@@ -380,6 +380,50 @@ namespace LongYinCoop
                     };
                 });
             }
+            // S1.5-c W2: postfix ฝั่ง move — อ่านอย่างเดียว, unpatch ได้ทั้ง wave
+            if (key == "jitprobeW2")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.JitProbeW2.Value = on;
+                    JitProbeW2.Apply(on);
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.JitProbeW2.Value,
+                        installed = JitProbeW2.Installed,
+                        file = JitProbeW2.FilePath,
+                        hits = JitProbeW2.Hits,
+                        missing = JitProbeW2.Missing,
+                        dropped = JitProbeW2.Dropped
+                    };
+                });
+            }
+            // S1.5-c W4: postfix บน BattlePauseButtonClicked (อ่าน timeScale/battleTime ด้วย)
+            if (key == "jitprobeW4")
+            {
+                bool on;
+                if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
+                return OnMain(cmd, delegate
+                {
+                    CoopPrefs.JitProbeW4.Value = on;
+                    JitProbeW4.Apply(on);
+                    CoopLog.Msg(string.Format(UIStrings.PrefSet, key, on));
+                    return (object)new
+                    {
+                        key = key,
+                        value = CoopPrefs.JitProbeW4.Value,
+                        installed = JitProbeW4.Installed,
+                        file = JitProbeW4.FilePath,
+                        hits = JitProbeW4.Hits,
+                        missing = JitProbeW4.Missing,
+                        dropped = JitProbeW4.Dropped
+                    };
+                });
+            }
             return Fail(cmd, string.Format(UIStrings.PrefUnknown, key));
         }
 

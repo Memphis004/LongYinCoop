@@ -10,7 +10,7 @@ namespace LongYinCoop
     {
         public const string Version = "0.4.0";
         public const int Stage = 1;
-        public const string StageLabel = "S1.5-c";
+        public const string StageLabel = "S1.5-c-W2W4";
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
@@ -39,6 +39,9 @@ namespace LongYinCoop
             HarmonyProbe.Apply(CoopPrefs.Probe.Value);
             // S1.5-c W1: default false -> ไม่ติด patch เลย (เปิด/ปิดได้ด้วย pref ระหว่างรัน)
             JitProbe.Apply(CoopPrefs.JitProbe.Value);
+            // S1.5-c W2/W4: แยก pref ต่อ wave (default false) — ไม่ติด patch จนกว่าจะสั่ง
+            JitProbeW2.Apply(CoopPrefs.JitProbeW2.Value);
+            JitProbeW4.Apply(CoopPrefs.JitProbeW4.Value);
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -55,6 +58,8 @@ namespace LongYinCoop
             CaptureWriter.Stop();
             BattleLogHook.Uninstall();
             JitProbe.Uninstall();
+            JitProbeW2.Uninstall();
+            JitProbeW4.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -65,6 +70,8 @@ namespace LongYinCoop
             if (!CoopPrefs.Enabled.Value)
             {
                 JitProbe.Uninstall();
+                JitProbeW2.Uninstall();
+                JitProbeW4.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 return;
@@ -76,6 +83,14 @@ namespace LongYinCoop
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)
             {
                 HarmonyProbe.Apply(CoopPrefs.Probe.Value);
+            }
+            if (CoopPrefs.JitProbeW2.Value != JitProbeW2.Installed)
+            {
+                JitProbeW2.Apply(CoopPrefs.JitProbeW2.Value);
+            }
+            if (CoopPrefs.JitProbeW4.Value != JitProbeW4.Installed)
+            {
+                JitProbeW4.Apply(CoopPrefs.JitProbeW4.Value);
             }
 
             // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)

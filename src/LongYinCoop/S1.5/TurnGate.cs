@@ -132,6 +132,8 @@ namespace LongYinCoop
 
             // activeId ต้องรู้ก่อนเขียนบรรทัด activeId — จึงเก็บหน่วยเป็น list ชั่วคราว
             List<string> unitLines = new List<string>(S1Limits.MaxUnits);
+            // S1.5-c W5: แถวต่อยูนิตสำหรับรายงาน hp (ไม่รวมใน stateHash)
+            List<object> unitRows = new List<object>(S1Limits.MaxUnits);
 
             int count = 0;
             Il2CppSystem.Collections.Generic.List<BattleTeam> teams = bc.teams;
@@ -159,6 +161,18 @@ namespace LongYinCoop
 
                     unitLines.Add(CanonicalUnit(stableId, team.ID, t, row, column, hp, alive,
                                                 u.moved, u.attacked));
+                    unitRows.Add(new
+                    {
+                        id = stableId,
+                        team = team.ID,
+                        teamIndex = t,
+                        heroId = heroId,
+                        row = row,
+                        col = column,
+                        hp = Math.Round(hp, 3),
+                        alive = alive,
+                        playerControl = u.playerControl
+                    });
 
                     if (active != null && u == active)
                     {
@@ -220,6 +234,12 @@ namespace LongYinCoop
                 gridW = gridW,
                 gridH = gridH,
                 frame = UnityEngine.Time.frameCount,
+                // S1.5-c W5/J7: อ่านอย่างเดียว — hp ต่อยูนิต + นาฬิกาศึก (ATB detector)
+                units = unitRows,
+                battleTime = SafeFloat(bc, 0),
+                timeLimit = SafeFloat(bc, 1),
+                aiWaitTime = SafeFloat(bc, 2),
+                timeScale = UnityEngine.Time.timeScale,
                 stateHash = hash,
                 hashText = canonical,
                 actionPatches = ActionPatchAudit(),
@@ -258,6 +278,11 @@ namespace LongYinCoop
                 gridW = -1,
                 gridH = -1,
                 frame = UnityEngine.Time.frameCount,
+                units = (object)null,
+                battleTime = -1f,
+                timeLimit = -1f,
+                aiWaitTime = -1f,
+                timeScale = UnityEngine.Time.timeScale,
                 stateHash = (string)null,
                 hashText = (string)null,
                 actionPatches = ActionPatchAudit(),
@@ -271,6 +296,19 @@ namespace LongYinCoop
             return battleState == (int)BattleState.Prepare
                    || battleState == (int)BattleState.Ready
                    || battleState == (int)BattleState.Fighting;
+        }
+
+        /// <summary>อ่าน float ของ BattleController แบบ typed ตาม index (0=battleTime, 1=timeLimit, 2=AIWaitTime)</summary>
+        private static float SafeFloat(BattleController bc, int which)
+        {
+            try
+            {
+                if (bc == null) return -1f;
+                if (which == 0) return bc.battleTime;
+                if (which == 1) return bc.timeLimit;
+                return bc.AIWaitTime;
+            }
+            catch { return -1f; }
         }
 
         private static string CanonicalUnit(string stableId, int side, int teamIndex, int row, int column,

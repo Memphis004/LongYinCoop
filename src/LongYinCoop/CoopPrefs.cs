@@ -15,6 +15,10 @@ namespace LongYinCoop
         public static MelonPreferences_Entry<bool> AllowRemoteInput;
         // S1.5-c W1: probe hook อ่านอย่างเดียว (default false = ไม่ติด patch เลย)
         public static MelonPreferences_Entry<bool> JitProbe;
+        // S1.5-c W2: postfix ฝั่ง move (MoveButtonClicked/GenerateMovePath/CancelMove/RegretMove) — default false
+        public static MelonPreferences_Entry<bool> JitProbeW2;
+        // S1.5-c W4: postfix บน BattlePauseButtonClicked + อ่าน timeScale/battleTime — default false
+        public static MelonPreferences_Entry<bool> JitProbeW4;
         public static MelonPreferences_Entry<bool> Capture;
         public static MelonPreferences_Entry<int> WorldHz;
         public static MelonPreferences_Entry<int> WorldStreamHz;
@@ -34,6 +38,9 @@ namespace LongYinCoop
             AllowRemoteInput = Category.CreateEntry("AllowRemoteInput", false);
             // S1.5-c W1: postfix อ่าน argument ของ OnClick/BattleGridClicked — false = ไม่ติด hook
             JitProbe = Category.CreateEntry("JitProbe", false);
+            // S1.5-c W2/W4: wave แยก pref (default false) — เปิด/ปิดระหว่างรันได้, unpatch ได้ทั้ง wave
+            JitProbeW2 = Category.CreateEntry("JitProbeW2", false);
+            JitProbeW4 = Category.CreateEntry("JitProbeW4", false);
             // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
             Capture = Category.CreateEntry("Capture", true);
             // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling
