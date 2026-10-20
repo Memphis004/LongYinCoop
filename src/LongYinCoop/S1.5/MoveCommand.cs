@@ -93,6 +93,11 @@ namespace LongYinCoop
             public string StateBeforeName { get; set; }
             public bool MovedFlagBefore { get; set; }
             public string Call { get; set; }
+            public int StateAfterButton { get; set; }
+            public string StateAfterButtonName { get; set; }
+            public int StateAfterPath { get; set; }
+            public string StateAfterPathName { get; set; }
+            public bool RollbackApplied { get; set; }
             public long CostMs { get; set; }
         }
 
@@ -167,18 +172,43 @@ namespace LongYinCoop
                 Transform rootB = null;
                 try { rootA = bc.gridUnitsRoot; } catch { }
                 try { rootB = bc.gridUnitsRootParent == null ? null : bc.gridUnitsRootParent.transform; } catch { }
-                GameObject grid = Scan(rootA, row, col);
-                if (grid == null) grid = Scan(rootB, row, col);
-                if (grid == null)
+                GridUnitController cell = Scan(rootA, row, col);
+                if (cell == null) cell = Scan(rootB, row, col);
+                if (cell == null || cell.gridData == null)
                 {
                     r.Error = string.Format(UIStrings.SpikeMoveNoGrid, row, col);
                     return r;
                 }
-                r.GridName = grid.name;
+                r.GridName = cell.gameObject.name;
 
-                // การเรียกเดียว: entry เดียวกับที่ UI จริงใช้ (W1: 39/39 คลิกเดินไปช่องที่คลิก)
-                bc.BattleGridClicked(grid);
-                r.Call = "BattleController.BattleGridClicked";
+                // ลำดับเดียวกับ UI จริงที่วัดไว้ใน W2:
+                //   MoveButtonClicked() -> state 6 (ShowMovingRage)
+                //   GenerateMovePath(targetGrid) -> state 7 (WaitMoving) แล้วเกมเดินยูนิตเอง
+                bc.MoveButtonClicked();
+                r.StateAfterButton = (int)bc.nowActiveState;
+                r.StateAfterButtonName = bc.nowActiveState.ToString();
+
+                if (r.StateAfterButton == (int)ActiveUnitBattleState.WaitPlayerInput)
+                {
+                    r.Error = string.Format(UIStrings.SpikeMoveButtonIgnored, r.StateAfterButtonName);
+                    return r;
+                }
+
+                bc.GenerateMovePath(cell.gridData);
+                r.StateAfterPath = (int)bc.nowActiveState;
+                r.StateAfterPathName = bc.nowActiveState.ToString();
+                r.Call = "BattleController.MoveButtonClicked + GenerateMovePath";
+
+                // ถ้า path ไม่ออก (ยังอยู่โหมดเลือกช่อง) ให้ถอยออกจากโหมดนั้นหนึ่งครั้ง — ไม่ retry คำสั่งเดิน
+                if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage
+                    || r.StateAfterPath == (int)ActiveUnitBattleState.WaitPlayerInput)
+                {
+                    bc.CancelMove();
+                    r.RollbackApplied = true;
+                    r.Error = string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPathName);
+                    return r;
+                }
+
                 r.Ok = true;
             }
             catch (Exception e)
@@ -202,7 +232,7 @@ namespace LongYinCoop
         /// หา GameObject ของช่อง (row, col) จาก observable grid — ใช้ GridUnitController.gridData
         /// (typed; ไม่มี raw offset) โดยสแกนลูกของ root ที่ให้มา
         /// </summary>
-        private static GameObject Scan(Transform root, int row, int col)
+        private static GridUnitController Scan(Transform root, int row, int col)
         {
             if (root == null) return null;
             try
@@ -216,7 +246,7 @@ namespace LongYinCoop
                     if (gu == null) continue;
                     GridUnitData data = gu.gridData;
                     if (data == null) continue;
-                    if (data.row == row && data.column == col) return gu.gameObject;
+                    if (data.row == row && data.column == col) return gu;
                 }
             }
             catch (Exception e)

@@ -81,6 +81,8 @@ namespace LongYinCoop
         public const string SpikeMoveNoPlayerUnit = "spike move: active unit is missing or not player-controlled";
         public const string SpikeMoveWrongUnit = "spike move: unit {0} is not the active unit ({1})";
         public const string SpikeMoveNoGrid = "spike move: no grid cell at ({0},{1})";
+        public const string SpikeMoveButtonIgnored = "spike move: MoveButtonClicked ignored (state stayed {0})";
+        public const string SpikeMovePathFailed = "spike move: no path generated (state {0}); cancelMove applied";
 
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";
