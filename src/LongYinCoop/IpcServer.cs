@@ -359,11 +359,18 @@ namespace LongYinCoop
                 if (string.IsNullOrEmpty(id)) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "id"));
                 if (row < 0 || col < 0) return Fail(cmd, string.Format(UIStrings.SpikeMissingArgs, sub, "row/col"));
 
+                // S1.5-d: ขั้นที่ 1 ทำบน main thread ทันที, ขั้นที่ 2-3 เดินข้ามเฟรมผ่าน MoveCommand.Tick()
                 object raw = null;
-                if (!_dispatcher.Invoke(delegate { return (object)MoveCommand.Move(id, row, col); }, 500, out raw))
+                if (!_dispatcher.Invoke(delegate { return (object)MoveCommand.StartMove(id, row, col); }, 500, out raw))
                     return Fail(cmd, UIStrings.MainThreadTimeout);
+
                 MoveCommand.MoveResult mr = raw as MoveCommand.MoveResult;
-                if (mr == null) return Fail(cmd, UIStrings.SpikeMoveNotInBattle);
+                if (mr == null)
+                {
+                    // เริ่มแล้ว (deferred) — รอ Tick ทำงานเสร็จ (PhaseTimeoutMs + เผื่อ)
+                    mr = MoveCommand.WaitDone(MoveCommand.PhaseTimeoutMs + 800);
+                    if (mr == null) return Fail(cmd, UIStrings.SpikeMoveTimeout);
+                }
                 if (!mr.Ok) return Fail(cmd, mr.Error ?? UIStrings.SpikeMoveNotInBattle);
                 return Ok(cmd, mr);
             }

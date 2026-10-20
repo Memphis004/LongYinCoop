@@ -82,6 +82,8 @@ namespace LongYinCoop
             }
 
             _dispatcher.Tick(4.0);
+            // S1.5-d: คำสั่งเดินทำงานข้ามเฟรม (ขั้นที่ 2-3 รอ state 7 ของเกม)
+            MoveCommand.Tick();
 
             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)

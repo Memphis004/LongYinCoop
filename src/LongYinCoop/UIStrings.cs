@@ -83,6 +83,9 @@ namespace LongYinCoop
         public const string SpikeMoveNoGrid = "spike move: no grid cell at ({0},{1})";
         public const string SpikeMoveButtonIgnored = "spike move: MoveButtonClicked ignored (state stayed {0})";
         public const string SpikeMovePathFailed = "spike move: no path generated (state {0}); cancelMove applied";
+        // S1.5-d รอบ 6: คำสั่งเดินทำงานข้ามเฟรม (ต้องรอ state 7 ก่อนสั่ง preview)
+        public const string SpikeMoveBusy = "spike move: another move is still in progress";
+        public const string SpikeMoveTimeout = "spike move: timed out waiting for the game to accept the target";
 
         // ── log file ─────────────────────────────────────────────────────
         public const string LogLevelInfo = "INFO";

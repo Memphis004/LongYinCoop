@@ -108,9 +108,37 @@ namespace LongYinCoop
         }
 
         /// <summary>
-        /// เดินยูนิตที่ถึงตาไปช่อง (row, col) ด้วยการเรียก entry เดียวกับ UI: BattleGridClicked(gridGameObject)
+        /// เวลาที่ยอมให้เกมเปลี่ยน state 6 (ShowMovingRage) -> 7 (WaitMoving) ก่อนสั่ง preview
+        /// วัดจริง (W6 22:49): คลิกช่องตัวเอง f28538 state=6 -> เพิ่มอีก 1 เฟรม f28539 state=7
         /// </summary>
-        public static MoveResult Move(string stableId, int row, int col)
+        public const int PhaseTimeoutMs = 1500;
+
+        private sealed class Job
+        {
+            public string StableId;
+            public int Row;
+            public int Col;
+            public GridUnitController Target;
+            public MoveResult Result;
+            public long StartedMs;
+            public bool Done;
+        }
+
+        private static Job _job;
+        private static readonly object JobLock = new object();
+        private static readonly ManualResetEventSlim DoneEvent = new ManualResetEventSlim(false);
+
+        /// <summary>
+        /// เริ่มคำสั่งเดิน — ต้องเรียกบน Unity main thread
+        /// คืน MoveResult ทันทีเมื่อล้มเหลวก่อน/ระหว่างแตะเกม (ขั้นที่ 1), คืน null เมื่อเริ่มแล้ว (ผลมาทาง WaitDone)
+        ///
+        /// ลำดับที่วัดได้ (W6 22:49):
+        ///   f28538 GridUnitController.OnClick -> BattleGridClicked(self) : state 2 -> 6 (ShowMovingRage)
+        ///   f28539 (เฟรมถัดไป) เกมตั้ง state 7 (WaitMoving) แล้ว hover เรียก GenerateMovePath(target)
+        ///   commit: BattleGridClicked(target)
+        /// ขั้นที่ 2-3 จึงต้องข้ามเฟรม ไม่ใช่เรียกต่อกันในสแต็กเดียว (รอบ 5 ล้มเพราะเรียกในเฟรมเดียวกับขั้นที่ 1)
+        /// </summary>
+        public static MoveResult StartMove(string stableId, int row, int col)
         {
             Stopwatch sw = Stopwatch.StartNew();
             MoveResult r = new MoveResult
@@ -125,6 +153,15 @@ namespace LongYinCoop
             {
                 r.Error = UIStrings.SpikeNeedsArm;
                 return r;
+            }
+
+            lock (JobLock)
+            {
+                if (_job != null && !_job.Done)
+                {
+                    r.Error = UIStrings.SpikeMoveBusy;
+                    return r;
+                }
             }
 
             // ใช้สิทธิ์ทันที — คำสั่งนี้จะไม่สามารถ retry ได้ถ้าล้มเหลว
@@ -174,19 +211,6 @@ namespace LongYinCoop
                     return r;
                 }
 
-                Transform rootA = null;
-                Transform rootB = null;
-                try { rootA = bc.gridUnitsRoot; } catch { }
-                try { rootB = bc.gridUnitsRootParent == null ? null : bc.gridUnitsRootParent.transform; } catch { }
-                GridUnitController cell = Scan(rootA, row, col);
-                if (cell == null) cell = Scan(rootB, row, col);
-                if (cell == null || cell.gridData == null)
-                {
-                    r.Error = string.Format(UIStrings.SpikeMoveNoGrid, row, col);
-                    return r;
-                }
-                r.GridName = cell.gameObject.name;
-
                 int activeRow = -1, activeCol = -1;
                 try
                 {
@@ -200,10 +224,20 @@ namespace LongYinCoop
                     return r;
                 }
 
-                // ขั้นที่ 1 — คลิกช่องที่ยูนิตยืน = ทางเข้าโหมดเดินที่ผู้เล่นใช้จริง
-                // หลักฐาน W1/W2 22:26 (f43218): BattleGridClicked(6_0 = ช่องของยูนิต) -> OnClick(6,0)
-                // ในรอบ 4 พบว่า MoveButtonClicked() ก็ขึ้น state 6 ได้ แต่ GenerateMovePath จาก state 6
-                // ไม่เกิด path ("no path generated (state ShowMovingRage)") -> ปุ่มย้ายไม่ใช่ทางเข้า
+                Transform rootA = null;
+                Transform rootB = null;
+                try { rootA = bc.gridUnitsRoot; } catch { }
+                try { rootB = bc.gridUnitsRootParent == null ? null : bc.gridUnitsRootParent.transform; } catch { }
+
+                GridUnitController cell = Scan(rootA, row, col);
+                if (cell == null) cell = Scan(rootB, row, col);
+                if (cell == null || cell.gridData == null)
+                {
+                    r.Error = string.Format(UIStrings.SpikeMoveNoGrid, row, col);
+                    return r;
+                }
+                r.GridName = cell.gameObject.name;
+
                 GridUnitController selfCell = Scan(rootA, activeRow, activeCol);
                 if (selfCell == null) selfCell = Scan(rootB, activeRow, activeCol);
                 if (selfCell == null)
@@ -211,11 +245,12 @@ namespace LongYinCoop
                     r.Error = string.Format(UIStrings.SpikeMoveNoGrid, activeRow, activeCol);
                     return r;
                 }
+
+                // ขั้นที่ 1 — คลิกช่องที่ยูนิตยืน (ทางเข้าโหมดเดินเดียวกับที่ผู้เล่นใช้)
                 r.Call = "BattleGridClicked(self)";
                 bc.BattleGridClicked(selfCell.gameObject);
                 r.StateAfterSelfClick = (int)bc.nowActiveState;
                 r.StateAfterSelfClickName = bc.nowActiveState.ToString();
-                // เก็บไว้เพื่อเทียบกับรุ่นก่อน (ปุ่มย้าย) — รอบนี้ไม่เรียกแล้ว
                 r.StateAfterButton = r.StateAfterSelfClick;
                 r.StateAfterButtonName = r.StateAfterSelfClickName;
 
@@ -225,65 +260,150 @@ namespace LongYinCoop
                     return r;
                 }
 
-                // ขั้นที่ 2 — preview path (ของจริงเกิดตอนเมาส์เลื่อนผ่านช่อง: W1/W2 22:26)
-                bc.GenerateMovePath(cell.gridData);
-                r.StateAfterPreview = (int)bc.nowActiveState;
-                r.StateAfterPreviewName = bc.nowActiveState.ToString();
-
-                if (r.StateAfterPreview == (int)ActiveUnitBattleState.WaitPlayerInput
-                    || r.StateAfterPreview == (int)ActiveUnitBattleState.ShowMovingRage)
+                // ขั้นที่ 2-3 ต้องข้ามเฟรม — ส่งงานให้ Tick()
+                Job job = new Job
                 {
-                    // preview ไม่เกิด = ไม่มี path ให้ commit — ถอยออกจากโหมด selelect และรายงาน
-                    bc.CancelMove();
-                    r.RollbackApplied = true;
-                    r.Error = string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPreviewName);
-                    return r;
-                }
+                    StableId = stableId,
+                    Row = row,
+                    Col = col,
+                    Target = cell,
+                    Result = r,
+                    StartedMs = Clock.ElapsedMilliseconds
+                };
+                DoneEvent.Reset();
+                lock (JobLock) { _job = job; }
 
-                // ขั้นที่ 3 — คลิกช่องปลายทางเพื่อ commit (เกมจะเรียก GenerateMovePath ซ้ำ + OnClick เอง)
-                bc.BattleGridClicked(cell.gameObject);
-                r.StateAfterPath = (int)bc.nowActiveState;
-                r.StateAfterPathName = bc.nowActiveState.ToString();
-                r.Call = "BattleGridClicked(self) + GenerateMovePath + BattleGridClicked(target)";
-
-                // ล้มเหลวเฉพาะเมื่อยังอยู่โหมดเลือกช่อง (ShowMovingRage) — ถ้าเกมเดินแล้ว/จบเทิร์นแล้วถือว่ารับคำสั่ง
-                if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage)
-                {
-                    bc.CancelMove();
-                    r.RollbackApplied = true;
-                    r.Error = string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPathName);
-                    return r;
-                }
-
-                // ยืนยันด้วยตำแหน่งจริง (อ่านซ้ำ 1 ครั้ง ไม่วนรอ)
-                try
-                {
-                    GridUnitData nowGrid = bc.nowActiveUnit == null ? null : bc.nowActiveUnit.mapGrid;
-                    if (nowGrid != null)
-                    {
-                        r.UnitRowAfter = nowGrid.row;
-                        r.UnitColAfter = nowGrid.column;
-                    }
-                }
-                catch { }
-
-                r.Ok = true;
+                CoopLog.Msg(string.Format("spike move start id={0} -> ({1},{2}) selfClick={3} (deferred)",
+                                          stableId, row, col, r.StateAfterSelfClickName));
+                return null;
             }
             catch (Exception e)
             {
                 CoopLog.Error(e);
                 r.Ok = false;
                 r.Error = "exception: " + e.GetType().Name + ": " + e.Message;
+                return r;
             }
             finally
             {
                 sw.Stop();
                 r.CostMs = sw.ElapsedMilliseconds;
             }
+        }
 
-            CoopLog.Msg(string.Format("spike move id={0} -> ({1},{2}) ok={3} call={4} cost={5}ms",
-                stableId, row, col, r.Ok, r.Call ?? "-", r.CostMs));
-            return r;
+        /// <summary>เรียกทุกเฟรมบน main thread (CoopMod.Tick) — เดินขั้นที่ 2 และ 3 เมื่อเกมพร้อม</summary>
+        public static void Tick()
+        {
+            Job job;
+            lock (JobLock) { job = _job; }
+            if (job == null || job.Done) return;
+
+            BattleController bc = null;
+            try { bc = BattleController.Instance; } catch { }
+
+            try
+            {
+                if (bc == null)
+                {
+                    Finish(job, UIStrings.SpikeMoveNotInBattle, false);
+                    return;
+                }
+
+                MoveResult r = job.Result;
+                if (r.StateAfterPreview != 0 || r.StateAfterPath != 0) return;
+
+                bool timedOut = Clock.ElapsedMilliseconds - job.StartedMs > PhaseTimeoutMs;
+
+                // ขั้นที่ 2 — รอ state 7 (WaitMoving) แล้วสั่ง preview
+                if (bc.nowActiveState == ActiveUnitBattleState.WaitMoving)
+                {
+                    bc.GenerateMovePath(job.Target.gridData);
+                    r.StateAfterPreview = (int)bc.nowActiveState;
+                    r.StateAfterPreviewName = bc.nowActiveState.ToString();
+
+                    if (r.StateAfterPreview == (int)ActiveUnitBattleState.ShowMovingRage
+                        || r.StateAfterPreview == (int)ActiveUnitBattleState.WaitPlayerInput)
+                    {
+                        bc.CancelMove();
+                        r.RollbackApplied = true;
+                        Finish(job, string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPreviewName), false);
+                        return;
+                    }
+
+                    // ขั้นที่ 3 — commit ในเฟรมเดียวกับ preview (เหมือนเกมจริง f43357)
+                    r.Call = "BattleGridClicked(self) + GenerateMovePath + BattleGridClicked(target)";
+                    bc.BattleGridClicked(job.Target.gameObject);
+                    r.StateAfterPath = (int)bc.nowActiveState;
+                    r.StateAfterPathName = bc.nowActiveState.ToString();
+
+                    if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage)
+                    {
+                        bc.CancelMove();
+                        r.RollbackApplied = true;
+                        Finish(job, string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPathName), false);
+                        return;
+                    }
+
+                    try
+                    {
+                        BattleUnit active = bc.nowActiveUnit;
+                        GridUnitData nowGrid = active == null ? null : active.mapGrid;
+                        if (nowGrid != null)
+                        {
+                            r.UnitRowAfter = nowGrid.row;
+                            r.UnitColAfter = nowGrid.column;
+                        }
+                    }
+                    catch { }
+
+                    Finish(job, null, true);
+                    return;
+                }
+
+                if (timedOut)
+                {
+                    // ยังไม่ถึง state 7 ภายในเวลา — ถอยออกจากโหมดและรายงาน
+                    try { bc.CancelMove(); r.RollbackApplied = true; } catch { }
+                    Finish(job, string.Format(UIStrings.SpikeMovePathFailed, bc.nowActiveState.ToString()), false);
+                }
+            }
+            catch (Exception e)
+            {
+                CoopLog.Error(e);
+                Finish(job, "exception: " + e.GetType().Name + ": " + e.Message, false);
+            }
+        }
+
+        /// <summary>ปิดงานและปลุก thread ที่รอผล (IPC) — เรียกบน main thread</summary>
+        private static void Finish(Job job, string error, bool ok)
+        {
+            MoveResult r = job.Result;
+            r.Ok = ok && error == null;
+            if (error != null) r.Error = error;
+            r.CostMs = Clock.ElapsedMilliseconds - job.StartedMs;
+
+            lock (JobLock) { job.Done = true; }
+            try { DoneEvent.Set(); } catch { }
+
+            CoopLog.Msg(string.Format(
+                "spike move id={0} -> ({1},{2}) ok={3} self={4} preview={5} after={6} unitAfter=({7},{8}) rollback={9} cost={10}ms err={11}",
+                job.StableId, job.Row, job.Col, r.Ok, r.StateAfterSelfClickName, r.StateAfterPreviewName,
+                r.StateAfterPathName, r.UnitRowAfter, r.UnitColAfter, r.RollbackApplied, r.CostMs, r.Error ?? "-"));
+        }
+
+        /// <summary>รอผลจาก Tick (เรียกจาก thread ของ IPC ไม่ใช่ main thread)</summary>
+        public static MoveResult WaitDone(int timeoutMs)
+        {
+            if (timeoutMs < 1) timeoutMs = 1;
+            if (!DoneEvent.Wait(timeoutMs)) return null;
+
+            Job job;
+            lock (JobLock)
+            {
+                job = _job;
+                _job = null;
+            }
+            return job == null ? null : job.Result;
         }
 
         /// <summary>
