@@ -40,6 +40,12 @@ cp src/LongYinCoop/bin/Debug/LongYinCoop.pdb  "/c/Program Files (x86)/Steam/stea
 | `Enabled` | `false` | kill switch — false = mod ไม่ทำอะไรเลย |
 | `Probe` | `true` | Harmony probe บน `GameController.Update` (วัด thread เท่านั้น) |
 | `Ipc` | `true` | เปิด named pipe `\\.\pipe\longyin-coop-<pid>` |
+| `JitProbe` | `false` | S1.5-c W1 — postfix อ่าน argument บน `GridUnitController.OnClick` + `BattleGridClicked` |
+| `JitProbeW2` | `false` | S1.5-c W2 — `MoveButtonClicked` / `GenerateMovePath` / `CancelMove` / `RegretMove` |
+| `JitProbeW4` | `false` | S1.5-c W4 — `BattlePauseButtonClicked` + `timeScale`/`battleTime` ตอนกด pause |
+
+ทุก pref ของ wave เริ่มที่ `false` และแก้ระหว่างรันได้ผ่าน `coopctl.py set_pref --key <name> --value true|false`
+(เปิด/ปิดแล้ว `UnpatchSelf()` ทันที — ไม่เหลือ patch ของ mod หลังปิด)
 
 ## IPC (อ่านอย่างเดียว)
 
