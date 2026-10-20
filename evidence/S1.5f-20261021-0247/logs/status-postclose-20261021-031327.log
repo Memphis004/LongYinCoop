@@ -1,0 +1,7 @@
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=37933643ff0b
+  Save.real-S1.5f-20261021-0247 files=57  digest=2b0548fe464b
+leftovers: Save.real-S1.5f-20261021-0247
+mounted Save matches:
+  ~S1.5f-20261021-0247/savehash.copy.before.txt: changed=1 missing=0 added=0

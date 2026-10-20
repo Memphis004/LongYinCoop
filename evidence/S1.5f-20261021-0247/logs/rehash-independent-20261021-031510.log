@@ -1,0 +1,9 @@
+independent rehash (PowerShell Get-FileHash SHA256) ts=20261021-031510
+baseline: coop-test\S1.5c-originhp-20261020-172346\savehash.real.before.txt (lines=57)
+mounted : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data\Save (files=57)
+bytes   : 485795552
+mismatch=0 missing=0 extra=0
+--- leftovers in Data dir (Save*)
+  Save
+--- Save folder top-level counts
+  entries=13 hidden=0

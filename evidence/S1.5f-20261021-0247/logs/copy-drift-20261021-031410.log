@@ -1,0 +1,12 @@
+import importlib.util, pathlib
+spec = importlib.util.spec_from_file_location("ss", r"tools\save-split.py")
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+dest = m.label_dir("S1.5f-20261021-0247")
+save = m.DATA / "Save"
+base = m.read_hashfile(dest / "savehash.copy.before.txt")
+cur = m.hash_tree(save)
+c, mi, a = m.diff_hashes(base, cur)
+print("copy.vs.before changed=%d missing=%d added=%d" % (len(c), len(mi), len(a)))
+for k in c: print("  changed:", k)
+for k in mi: print("  missing:", k)
+for k in a: print("  added:", k)

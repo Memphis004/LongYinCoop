@@ -1,0 +1,4 @@
+usage: save-split.py [-h] [--data-dir DATA_DIR] [--coop-dir COOP_DIR]
+                     {status,split,verify,restore,sentinel,rebaseline,list}
+                     ...
+save-split.py: error: unrecognized arguments: --label S1.5f-20261021-0247
