@@ -1,0 +1,11 @@
+{
+  "label": "S1.5f-20261021-0247",
+  "window": "w3b-targetdead-grid",
+  "pref": true,
+  "settle_ms": 500,
+  "cases": [
+    {"n": 12, "group": "TARGET_DEAD(grid)", "cmd": "attack", "args": {"id": "0:0", "target": "1:10066"}, "arm": 120, "expect": "no grid cell at (-1,-1)"},
+    {"n": 13, "group": "TARGET_DEAD(grid)", "cmd": "attack", "args": {"id": "0:0", "target": "1:10066"}, "arm": 120, "expect": "no grid cell at (-1,-1)"},
+    {"n": 14, "group": "TARGET_DEAD(grid)", "cmd": "attack", "args": {"id": "0:0", "target": "1:10066"}, "arm": 120, "expect": "no grid cell at (-1,-1)"}
+  ]
+}

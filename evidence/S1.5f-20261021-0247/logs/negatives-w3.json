@@ -1,0 +1,34 @@
+{
+  "label": "S1.5f-20261021-0247",
+  "window": "w3-targetdead",
+  "pid": 42216,
+  "settle_ms": 500,
+  "base_hash": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+  "cases": [
+    {
+      "n": 11,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10066"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_after": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: no grid cell at (-1,-1)",
+      "expect": "TARGET_DEAD",
+      "code_ok": false,
+      "latency_ms": 6,
+      "pass": false,
+      "ts": "2026-10-21 02:59:09"
+    }
+  ],
+  "pass": 0,
+  "fail": 1
+}

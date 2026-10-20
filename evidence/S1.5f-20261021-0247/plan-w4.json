@@ -1,0 +1,11 @@
+{
+  "label": "S1.5f-20261021-0247",
+  "window": "w4-panic-switch",
+  "pref": false,
+  "settle_ms": 500,
+  "cases": [
+    {"n": "P1", "group": "PANIC", "cmd": "move", "args": {"id": "0:0", "row": 0, "col": 16}, "arm": 0, "expect": "panic switch"},
+    {"n": "P2", "group": "PANIC", "cmd": "attack", "args": {"id": "0:0", "target": "1:10107"}, "arm": 0, "expect": "panic switch"},
+    {"n": "P3", "group": "PANIC", "cmd": "arm", "args": {"seconds": 120}, "arm": 0, "expect": "panic switch"}
+  ]
+}

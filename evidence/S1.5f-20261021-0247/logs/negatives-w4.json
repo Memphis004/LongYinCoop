@@ -1,0 +1,80 @@
+{
+  "label": "S1.5f-20261021-0247",
+  "window": "w4-panic-switch",
+  "pid": 42216,
+  "settle_ms": 500,
+  "base_hash": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+  "cases": [
+    {
+      "n": "P1",
+      "group": "PANIC",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 0,
+        "col": 16
+      },
+      "arm": 0,
+      "armed": null,
+      "pref": false,
+      "hash_before": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_after": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "DISARMED: coop.allowRemoteInput=false (panic switch)",
+      "expect": "panic switch",
+      "code_ok": true,
+      "latency_ms": 1,
+      "pass": true,
+      "ts": "2026-10-21 03:03:29"
+    },
+    {
+      "n": "P2",
+      "group": "PANIC",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10107"
+      },
+      "arm": 0,
+      "armed": null,
+      "pref": false,
+      "hash_before": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_after": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "DISARMED: coop.allowRemoteInput=false (panic switch)",
+      "expect": "panic switch",
+      "code_ok": true,
+      "latency_ms": 1,
+      "pass": true,
+      "ts": "2026-10-21 03:03:30"
+    },
+    {
+      "n": "P3",
+      "group": "PANIC",
+      "cmd": "arm",
+      "args": {
+        "seconds": 120
+      },
+      "arm": 0,
+      "armed": null,
+      "pref": false,
+      "hash_before": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_after": "e9197b2d0efb375d84f1f1b75737b4a7f91c740cc3048090844a34828b6640da",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "DISARMED: coop.allowRemoteInput=false (panic switch)",
+      "expect": "panic switch",
+      "code_ok": true,
+      "latency_ms": 1,
+      "pass": true,
+      "ts": "2026-10-21 03:03:30"
+    }
+  ],
+  "pass": 3,
+  "fail": 0
+}
