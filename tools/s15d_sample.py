@@ -29,16 +29,34 @@ def main():
     ap.add_argument("--interval", type=float, default=0.1)
     ap.add_argument("--append", action="store_true",
                     help="append to --out instead of truncating (for supervised restart loops)")
+    ap.add_argument("--wait", type=float, default=0.0,
+                    help="seconds to keep waiting for the game/pipe to appear (0 = fail fast)")
+    ap.add_argument("--wait-interval", type=float, default=3.0)
     args = ap.parse_args()
 
     out_path = os.path.abspath(args.out)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     pid = coopctl.find_pid()
+    wait_end = time.time() + max(0.0, args.wait)
+    while not pid and time.time() < wait_end:
+        print("[%s] waiting for the game (%.0fs left)" % (stamp(), wait_end - time.time()), flush=True)
+        time.sleep(args.wait_interval)
+        pid = coopctl.find_pid()
     if not pid:
         print("[%s] game not running" % stamp(), flush=True)
         return 2
-    f = coopctl.connect(pid)
+
+    f = None
+    while f is None:
+        try:
+            f = coopctl.connect(pid)
+        except Exception as exc:
+            if time.time() >= wait_end:
+                print("[%s] pipe unavailable: %s" % (stamp(), exc), flush=True)
+                return 4
+            time.sleep(args.wait_interval)
+            pid = coopctl.find_pid() or pid
     print("[%s] connected pid=%d interval=%.0fms seconds=%.0f out=%s"
           % (stamp(), pid, args.interval * 1000, args.seconds, out_path), flush=True)
 
