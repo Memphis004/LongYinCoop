@@ -1,0 +1,15 @@
+window x10 = 21:48:43.616 .. 21:50:14.999
+window x1  = 21:50:14.999 .. 21:53:04.000
+x10: rows=904 21:48:43->21:50:14 wall=91.3s turns=43 (2.12 s/turn) scales={10: 904} timeScale={1: 891, 0.05: 8, 0.2: 5}
+x1: rows=1665 21:50:14->21:53:03 wall=168.9s turns=24 (7.04 s/turn) scales={1: 1665} timeScale={1: 1656, 0.05: 4, 0.2: 5}
+
+state median             x1        x10    ratio
+Attacking             2.61s      0.30s    8.65x   (n=17 / 15)
+Moving                0.50s      0.10s    5.01x   (n=19 / 5)
+Rest                  0.90s      0.10s    9.02x   (n=7 / 1)
+WaitAttacking         0.50s      0.76s    0.66x   (n=17 / 8)
+WaitMoving            0.50s      0.70s    0.71x   (n=20 / 25)
+
+overall speedup = 3.32x  (7.04 s/turn -> 2.12 s/turn)
+x10: longest idle wait 3.0s at turn 33, battleTime 4.0802 -> 4.0802 (+0.0000)
+x1: longest idle wait 43.0s at turn 67, battleTime 8.1487 -> 8.1487 (+0.0000)
