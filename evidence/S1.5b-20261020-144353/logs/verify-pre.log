@@ -1,0 +1,14 @@
+mounted Save:
+  vs real baseline: changed=0 missing=5 added=5
+    missing[slot]=5: SaveSlot8/Hero, SaveSlot8/Info, SaveSlot8/Save, SaveSlot8/TempHero, SaveSlot8/steam_autocloud.vdf
+    added[other]=5: .hidden-SaveSlot8/Hero, .hidden-SaveSlot8/Info, .hidden-SaveSlot8/Save, .hidden-SaveSlot8/TempHero, .hidden-SaveSlot8/steam_autocloud.vdf
+  sentinel: .hidden-SaveSlot8 counts as SaveSlot8/ (5 files)
+  vs copy baseline: changed=0 missing=0 added=0
+
+real folder Save.real-S1.5-20261020-144353:
+  vs real baseline: changed=0 missing=0 added=0
+  mtime/size drift: 0
+sentinel: hidden=.hidden-SaveSlot8
+sentinel record: sentinel.json
+
+RESULT: PASS

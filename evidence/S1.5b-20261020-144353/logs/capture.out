@@ -1,0 +1,3 @@
+samples=15110 errors=0 distinct_hashes=234 consecutive_hash_changes=233 consecutive_same=14876
+main_thread_cost_p99=4.0214ms cost_errors=0
+wrote C:\Users\memph\LongYinCoop\evidence\S1.5b-20261020-144353\spike-status.ndjson

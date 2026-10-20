@@ -1,0 +1,16 @@
+{"ts": "2026-10-20T14:49:22", "event": "process", "pid": 27916}
+{"ts": "2026-10-20T14:49:22", "event": "connected", "modVersion": "0.3.0", "stageLabel": "S1.5-b", "enabled": true, "ipc": null, "devCommands": true, "allowRemoteInput": false, "logPath": "UserData\\LongYinCoop\\logs\\coop-20261020.log"}
+{"ts": "2026-10-20T14:49:22", "event": "status", "frame": 2391, "inBattle": false, "battleState": -1, "battleStateName": null, "nowActiveState": -1, "nowActiveStateName": null, "active": null, "activeHeroId": -1, "activeName": null, "activePlayerControl": false, "isPlayerTurn": false, "moved": false, "attacked": false, "paused": false, "infoCount": -1, "stateHash": null}
+{"ts": "2026-10-20T14:50:01", "event": "status", "frame": 7415, "inBattle": true, "battleState": 1, "battleStateName": "Prepare", "nowActiveState": 0, "nowActiveStateName": "None", "active": null, "activeHeroId": -1, "activeName": null, "activePlayerControl": false, "isPlayerTurn": false, "moved": false, "attacked": false, "paused": false, "infoCount": 0, "stateHash": "7e5523ed9181d11b03cf0ac72a4ff2fe691b3a58e47088f8fcb6cdd7fc305c57"}
+Traceback (most recent call last):
+  File "C:\Users\memph\LongYinCoop\tools\spike_watch.py", line 99, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "C:\Users\memph\LongYinCoop\tools\spike_watch.py", line 86, in main
+    log(fh, "status", snap)
+  File "C:\Users\memph\LongYinCoop\tools\spike_watch.py", line 28, in log
+    print(json.dumps(rec, ensure_ascii=False), flush=True)
+  File "C:\Users\memph\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode characters in position 244-257: character maps to <undefined>

@@ -1,0 +1,21 @@
+[15:39:28] connected pid=27916 - waiting for WaitPlayerInput
+[15:39:28] AUTOCAPTURE_START frame=376915 active=0:0 playerControl=True paused=False infoCount=36
+[15:39:44] samples=2000 lastFrame=378915 inBattle=True active=0:0
+[15:40:00] samples=4000 lastFrame=380915 inBattle=True active=0:0
+[15:40:15] samples=6000 lastFrame=382915 inBattle=True active=0:0
+[15:40:32] samples=8000 lastFrame=384915 inBattle=True active=1:10168
+[15:40:48] samples=10000 lastFrame=386914 inBattle=True active=0:86
+[15:41:05] samples=12000 lastFrame=388914 inBattle=True active=0:9
+[15:41:21] samples=14000 lastFrame=390914 inBattle=True active=0:86
+[15:41:37] samples=16000 lastFrame=392914 inBattle=False active=None
+[15:41:53] samples=18000 lastFrame=394914 inBattle=False active=None
+[15:42:09] samples=20000 lastFrame=396913 inBattle=False active=None
+[15:42:25] samples=22000 lastFrame=398911 inBattle=False active=None
+[15:42:41] samples=24000 lastFrame=400911 inBattle=False active=None
+[15:42:57] samples=26000 lastFrame=402911 inBattle=False active=None
+[15:43:13] samples=28000 lastFrame=404910 inBattle=False active=None
+[15:43:28] samples=30000 lastFrame=406909 inBattle=False active=None
+[15:43:45] samples=32000 lastFrame=408909 inBattle=False active=None
+[15:44:01] samples=34000 lastFrame=410908 inBattle=False active=None
+[15:44:17] samples=36000 lastFrame=412908 inBattle=False active=None
+[15:44:28] AUTOCAPTURE_DONE samples=37503 errors=0 hash_changes=572 same=36930

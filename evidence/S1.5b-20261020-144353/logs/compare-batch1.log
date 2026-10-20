@@ -1,0 +1,3 @@
+frames matched: 20/20 (tol +/-2 frames)
+status samples: 38032  consecutive hash changes: 322  consecutive identical: 37709
+main-thread cost: p99=0.0000ms max=0.0000ms errors=None samples=None

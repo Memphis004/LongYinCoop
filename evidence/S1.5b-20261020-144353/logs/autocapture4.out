@@ -1,0 +1,18 @@
+[15:31:39] connected pid=27916 - waiting for WaitPlayerInput
+[15:35:04] AUTOCAPTURE_START frame=343336 active=0:0 playerControl=True paused=False infoCount=36
+[15:35:20] samples=2000 lastFrame=345336 inBattle=True active=0:0
+[15:35:36] samples=4000 lastFrame=347336 inBattle=True active=0:0
+[15:35:52] samples=6000 lastFrame=349336 inBattle=True active=0:0
+[15:36:07] samples=8000 lastFrame=351336 inBattle=True active=0:0
+[15:36:23] samples=10000 lastFrame=353335 inBattle=True active=0:0
+[15:36:39] samples=12000 lastFrame=355335 inBattle=True active=0:0
+[15:36:54] samples=14000 lastFrame=357335 inBattle=True active=0:0
+[15:37:10] samples=16000 lastFrame=359335 inBattle=True active=0:0
+[15:37:26] samples=18000 lastFrame=361335 inBattle=True active=0:0
+[15:37:42] samples=20000 lastFrame=363335 inBattle=True active=0:0
+[15:37:57] samples=22000 lastFrame=365335 inBattle=True active=0:0
+[15:38:13] samples=24000 lastFrame=367334 inBattle=True active=0:0
+[15:38:29] samples=26000 lastFrame=369334 inBattle=True active=0:0
+[15:38:44] samples=28000 lastFrame=371334 inBattle=True active=0:0
+[15:39:00] samples=30000 lastFrame=373334 inBattle=True active=0:0
+[15:39:04] AUTOCAPTURE_DONE samples=30465 errors=0 hash_changes=0 same=30464

@@ -1,0 +1,3 @@
+{"ts": "2026-10-20T14:57:40", "event": "process", "pid": 27916}
+{"ts": "2026-10-20T14:57:40", "event": "connected", "modVersion": "0.3.0", "stageLabel": "S1.5-b", "enabled": true, "ipc": null, "devCommands": true, "allowRemoteInput": false, "logPath": "UserData\\LongYinCoop\\logs\\coop-20261020.log"}
+{"ts": "2026-10-20T14:57:40", "event": "status", "frame": 64353, "inBattle": false, "battleState": -1, "battleStateName": null, "nowActiveState": -1, "nowActiveStateName": null, "active": null, "activeHeroId": -1, "activeName": null, "activePlayerControl": false, "isPlayerTurn": false, "moved": false, "attacked": false, "paused": false, "infoCount": -1, "stateHash": null}

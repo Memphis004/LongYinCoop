@@ -25,7 +25,9 @@ def load_status(path):
             if not line:
                 continue
             rec = json.loads(line)
-            if rec.get("ok") and rec.get("frame") is not None:
+            # only in-battle samples may satisfy the UI comparison; an out-of-battle
+            # sample would trivially "match" an empty probe and hide a real bug
+            if rec.get("ok") and rec.get("inBattle") and rec.get("frame") is not None:
                 rows.append(rec)
     return rows
 
@@ -71,12 +73,19 @@ def main():
                                % (args.tol, delta)})
             continue
 
+        # mod reports -1 when there is no active unit; the probe reports null
+        def norm(value):
+            return None if value in (None, -1) else value
+
         problems = []
-        if p.get("activeHeroID") != s.get("activeHeroId"):
+        if norm(p.get("activeHeroID")) != norm(s.get("activeHeroId")):
             problems.append("activeHeroID %r != %r" % (p.get("activeHeroID"), s.get("activeHeroId")))
         cell = p.get("activeCell") or {}
-        if (cell.get("row"), cell.get("col")) != (s.get("activeRow"), s.get("activeColumn")):
-            problems.append("activeCell %r != %r" % (cell, (s.get("activeRow"), s.get("activeColumn"))))
+        if norm(p.get("activeHeroID")) is not None:
+            if (cell.get("row"), cell.get("col")) != (s.get("activeRow"), s.get("activeColumn")):
+                problems.append("activeCell %r != %r" % (cell, (s.get("activeRow"), s.get("activeColumn"))))
+        if "activePlayerControl" in p and bool(p["activePlayerControl"]) != bool(s.get("activePlayerControl")):
+            problems.append("playerControl %r != %r" % (p.get("activePlayerControl"), s.get("activePlayerControl")))
         if "paused" in p and bool(p["paused"]) != bool(s.get("paused")):
             problems.append("paused %r != %r" % (p.get("paused"), s.get("paused")))
         if "nowActiveState" in p and p["nowActiveState"] != s.get("nowActiveState"):
@@ -85,6 +94,12 @@ def main():
             problems.append("moved %r != %r" % (p.get("activeMoved"), s.get("moved")))
         if "activeAttacked" in p and bool(p["activeAttacked"]) != bool(s.get("attacked")):
             problems.append("attacked %r != %r" % (p.get("activeAttacked"), s.get("attacked")))
+        # per-turn flags live on BattleController: the S1.5 TurnGate uses these, and (measured
+        # 2026-10-20) BattleUnit.moved/attacked above never became true even after a real move
+        if "turnMoved" in p and bool(p["turnMoved"]) != bool(s.get("turnMoved")):
+            problems.append("turnMoved %r != %r" % (p.get("turnMoved"), s.get("turnMoved")))
+        if "turnAttacked" in p and bool(p["turnAttacked"]) != bool(s.get("turnAttacked")):
+            problems.append("turnAttacked %r != %r" % (p.get("turnAttacked"), s.get("turnAttacked")))
 
         if problems:
             mismatches.append({"probe_frame": p["frame"], "status_frame": s["frame"],

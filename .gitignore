@@ -37,3 +37,6 @@ __pycache__/
 # keep evidence small: big runtime logs stay local
 evidence/**/coop-run.log
 !evidence/**/s0-result.json
+
+# raw status streams are large runtime logs (75MB) - keep local, aggregates live in the reports
+evidence/**/*.ndjson

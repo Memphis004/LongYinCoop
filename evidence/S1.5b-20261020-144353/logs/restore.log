@@ -1,0 +1,6 @@
+copy check: changed=1 (pref=1) missing=0 added=0
+rename  : Save -> Save.used-20261020-154607
+rename  : Save.real-S1.5-20261020-144353 -> Save
+  restored Save vs real baseline: changed=0 missing=0 added=0
+OK restore S1.5-20261020-144353: 57 files, copy kept at C:\Users\memph\LongYinCoop\coop-test\S1.5-20261020-144353\Save.used-20261020-154607
+real folder now at C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data\Save (renamed back, never rewritten)

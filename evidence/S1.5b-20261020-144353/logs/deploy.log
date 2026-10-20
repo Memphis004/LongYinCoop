@@ -1,0 +1,13 @@
+deployed 2026-10-20T14:44:01
+old_sha256=8ebf86f4d2cde3ffaad1fda1ff529ba1b8ea7272f0390b531b67e5a4b54847de
+backup=LongYinCoop.dll.prev-8ebf86f4d2cd
+new_sha256=4a28edf193e30a0bf05939d27e9585e367557452943bf8dfd2d4ace911e2ce86
+source_sha256=4a28edf193e30a0bf05939d27e9585e367557452943bf8dfd2d4ace911e2ce86
+-rwxr-xr-x 1 memph 197609  119808 Oct 20 14:42 LongYinCoop.dll
+-rwxr-xr-x 1 memph 197609  107520 Oct 20 11:31 LongYinCoop.dll.prev-6f9e82c1
+-rwxr-xr-x 1 memph 197609  109568 Oct 20 12:37 LongYinCoop.dll.prev-8ebf86f4d2cd
+-rw-r--r-- 1 memph 197609   30924 Oct 20 14:42 LongYinCoop.pdb
+redeploy 2026-10-20T14:46:22
+replaced_never_run=4a28edf193e30a0bf05939d27e9585e367557452943bf8dfd2d4ace911e2ce86
+new_sha256=e9063ed9980d285500c7e9c1e62f216a5baad58769f1e73eea62037e6a80bfb5
+rollback_backup=LongYinCoop.dll.prev-8ebf86f4d2cd (S1 build 8ebf86f4…)

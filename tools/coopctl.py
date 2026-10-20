@@ -139,6 +139,12 @@ def bench(pid, cmd, n=1000, extra=None, warmup=20):
 
 
 def main():
+    # console may be cp1252 on this machine; never die on a Chinese hero name
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except Exception:
+        pass
+
     ap = argparse.ArgumentParser()
     ap.add_argument("command", choices=["ping", "get_version", "get_scene", "get_player_pos", "stats",
                                         "bench_dispatch", "bench", "snapshot", "capture", "compat_dump",
