@@ -1,0 +1,7 @@
+expect  : C:\Users\memph\LongYinCoop\coop-test\S1-20261020-113926\savehash.real.before.txt
+  Save vs baseline: changed=0 missing=0 added=0
+copy    : Save -> coop-test/S1.5-20261020-142220-dry1/save
+rename  : Save -> Save.real-S1.5-20261020-142220-dry1
+copy    : coop-test/S1.5-20261020-142220-dry1/save -> Save
+  copy vs real: changed=0 missing=0 added=0
+OK split S1.5-20261020-142220-dry1: 57 files, real kept as Save.real-S1.5-20261020-142220-dry1

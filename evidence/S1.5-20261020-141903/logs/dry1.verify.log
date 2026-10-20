@@ -1,0 +1,10 @@
+mounted Save:
+  vs real baseline: changed=0 missing=0 added=0
+  note: byte-identical to the real baseline (expected right after split)
+  vs copy baseline: changed=0 missing=0 added=0
+
+real folder Save.real-S1.5-20261020-142220-dry1:
+  vs real baseline: changed=0 missing=0 added=0
+  mtime/size drift: 0
+
+RESULT: PASS
