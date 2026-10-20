@@ -1,11 +1,11 @@
 file      : evidence/S1.5c-originhp-run2-20261020-2102/logs/spike-full-2119.ndjson
-records   : 4066
-window    : 21:19:27.782 -> 21:26:19.370 (411.6s)
-states    : {'Fighting': 4066}
-active    : {'Finish': 1526, 'None': 10, 'WaitMoving': 99, 'Moving': 18, 'WaitAttacking': 141, 'Attacking': 148, 'WaitPlayerInput': 1876, 'Finishing': 1, 'Rest': 2, 'WaitAIPlan': 245}
-paused    : {True: 1771, False: 2295}
-timeScale : {1: 4052, 0.05: 6, 0.2: 8}
-turns     : {31: 1528, 32: 19, 33: 41, 34: 130, 35: 97, 36: 125, 37: 14, 38: 122, 39: 71, 40: 100, 41: 239, 42: 14, 43: 14, 44: 310, 45: 78, 46: 260, 47: 904}
+records   : 7662
+window    : 21:19:27.782 -> 21:32:23.795 (776.0s)
+states    : {'Fighting': 7662}
+active    : {'Finish': 1526, 'None': 10, 'WaitMoving': 99, 'Moving': 18, 'WaitAttacking': 141, 'Attacking': 148, 'WaitPlayerInput': 5472, 'Finishing': 1, 'Rest': 2, 'WaitAIPlan': 245}
+paused    : {True: 1771, False: 5891}
+timeScale : {1: 7648, 0.05: 6, 0.2: 8}
+turns     : {31: 1528, 32: 19, 33: 41, 34: 130, 35: 97, 36: 125, 37: 14, 38: 122, 39: 71, 40: 100, 41: 239, 42: 14, 43: 14, 44: 310, 45: 78, 46: 260, 47: 4500}
 
 == per-unit first -> last
   0:9       hp   221.326 ->    78.335  originHp   221.326 ->   221.326  alive True->True
@@ -116,7 +116,7 @@ turns     : {31: 1528, 32: 19, 33: 41, 34: 130, 35: 97, 36: 125, 37: 14, 38: 122
   21:24:19.441 -> 21:24:21.251 Attacking        wall=  1.81s battleTime  +0.0000
   21:24:21.754 -> 21:24:46.773 WaitAIPlan       wall= 25.02s battleTime  +0.0000
   21:24:47.075 -> 21:24:47.880 Attacking        wall=  0.80s battleTime  +0.0000
-  21:24:47.980 -> 21:26:19.370 WaitPlayerInput  wall= 91.39s battleTime  +0.0000
+  21:24:47.980 -> 21:32:23.795 WaitPlayerInput  wall=455.81s battleTime  +0.0000
 
 == timeScale != 1 frames
   21:22:07.276 scale=0.05 deltaTime=0.000349 unscaled=0.006986 state=Attacking
@@ -133,3 +133,6 @@ turns     : {31: 1528, 32: 19, 33: 41, 34: 130, 35: 97, 36: 125, 37: 14, 38: 122
   21:22:57.332 scale=0.05 deltaTime=0.001042 unscaled=0.020835 state=Attacking
   21:23:04.672 scale=0.05 deltaTime=0.000351 unscaled=0.007015 state=Attacking
   21:24:20.950 scale=0.05 deltaTime=0.000347 unscaled=0.006947 state=Attacking
+
+== battleTimeScale values
+  {None: 7662}
