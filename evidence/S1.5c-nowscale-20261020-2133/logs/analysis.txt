@@ -1,0 +1,49 @@
+file      : evidence/S1.5c-nowscale-20261020-2133/logs/spike-full.ndjson
+records   : 1811
+window    : 21:35:27.183 -> 21:38:30.609 (183.4s)
+states    : {'Fighting': 1811}
+active    : {'Attacking': 25, 'None': 7, 'WaitPlayerInput': 793, 'WaitMoving': 909, 'Moving': 30, 'WaitAttacking': 18, 'Rest': 28, 'WaitAIPlan': 1}
+paused    : {False: 1811}
+timeScale : {1: 1811}
+turns     : {0: 5, 1: 37, 2: 37, 3: 32, 4: 7, 5: 6, 6: 6, 7: 6, 8: 937, 9: 23, 10: 715}
+
+== per-unit first -> last
+  0:9       hp   221.326 ->   221.326  originHp   221.326 ->   221.326  alive True->True
+  0:4       hp   475.701 ->   475.701  originHp   475.701 ->   475.701  alive True->True
+  0:86      hp   765.306 ->   765.306  originHp   765.306 ->   765.306  alive True->True
+  0:0       hp   505.551 ->   505.551  originHp   505.551 ->   505.551  alive True->True
+  1:10105   hp   474.280 ->   474.280  originHp   474.280 ->   474.280  alive True->True
+  1:10066   hp   551.870 ->   551.870  originHp   551.870 ->   551.870  alive True->True
+  1:10107   hp   537.660 ->   537.660  originHp   537.660 ->   537.660  alive True->True
+  1:10102   hp   589.260 ->   589.260  originHp   589.260 ->   589.260  alive True->True
+  1:10067   hp   553.840 ->   553.840  originHp   553.840 ->   553.840  alive True->True
+
+== hp/alive transitions
+  total transitions: 0
+
+== battleTime segments (wall >= 0.3 s)
+  21:35:27.183 -> 21:35:27.485 Attacking        wall=  0.30s battleTime  +0.0000
+  21:35:27.686 -> 21:35:28.692 WaitPlayerInput  wall=  1.01s battleTime  +0.0000
+  21:35:28.793 -> 21:35:29.397 WaitMoving       wall=  0.60s battleTime  +0.0000
+  21:35:30.103 -> 21:35:30.505 WaitAttacking    wall=  0.40s battleTime  +0.0000
+  21:35:30.605 -> 21:35:31.207 Attacking        wall=  0.60s battleTime  +0.0000
+  21:35:31.408 -> 21:35:32.112 WaitPlayerInput  wall=  0.70s battleTime  +0.0000
+  21:35:32.212 -> 21:35:32.814 WaitMoving       wall=  0.60s battleTime  +0.0000
+  21:35:32.915 -> 21:35:33.217 Moving           wall=  0.30s battleTime  +0.0000
+  21:35:33.618 -> 21:35:34.221 WaitAttacking    wall=  0.60s battleTime  +0.0000
+  21:35:34.322 -> 21:35:34.824 Attacking        wall=  0.50s battleTime  +0.0000
+  21:35:35.025 -> 21:35:35.830 WaitPlayerInput  wall=  0.80s battleTime  +0.0000
+  21:35:35.930 -> 21:35:36.332 WaitMoving       wall=  0.40s battleTime  +0.0000
+  21:35:36.937 -> 21:35:37.441 WaitAttacking    wall=  0.50s battleTime  +0.0000
+  21:35:37.541 -> 21:35:38.244 Attacking        wall=  0.70s battleTime  +0.0000
+  21:35:40.858 -> 21:35:42.566 WaitPlayerInput  wall=  1.71s battleTime  +0.0000
+  21:35:42.667 -> 21:37:11.326 WaitMoving       wall= 88.66s battleTime  +0.0000
+  21:37:11.426 -> 21:37:12.130 Moving           wall=  0.70s battleTime  +0.0000
+  21:37:12.230 -> 21:37:14.342 WaitPlayerInput  wall=  2.11s battleTime  +0.0000
+  21:37:14.443 -> 21:37:15.349 Rest             wall=  0.91s battleTime  +0.0000
+  21:37:15.550 -> 21:37:15.952 WaitMoving       wall=  0.40s battleTime  +0.0000
+  21:37:16.053 -> 21:37:16.556 Moving           wall=  0.50s battleTime  +0.0000
+  21:37:16.657 -> 21:37:17.563 Rest             wall=  0.91s battleTime  +0.0000
+  21:37:17.763 -> 21:38:30.609 WaitPlayerInput  wall= 72.85s battleTime  +0.0000
+
+== timeScale != 1 frames
