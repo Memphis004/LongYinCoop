@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "cmd": "spike",
+  "error": "spike move: position not confirmed after commit (unit at (9,0), expected (9,6))"
+}
