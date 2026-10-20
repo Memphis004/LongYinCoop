@@ -95,6 +95,10 @@ namespace LongYinCoop
             public string Call { get; set; }
             public int StateAfterButton { get; set; }
             public string StateAfterButtonName { get; set; }
+            public int StateAfterPreview { get; set; }
+            public string StateAfterPreviewName { get; set; }
+            public int UnitRowAfter { get; set; }
+            public int UnitColAfter { get; set; }
             public int StateAfterPath { get; set; }
             public string StateAfterPathName { get; set; }
             public bool RollbackApplied { get; set; }
@@ -194,22 +198,49 @@ namespace LongYinCoop
                     return r;
                 }
 
-                // คลิกช่องปลายทางเหมือนผู้เล่นทำจริง — เกมจะเรียก GenerateMovePath เองข้างใน
-                // (วัด 22:2x: เรียก GenerateMovePath ตรง ๆ จากนอกโหมดไม่เกิด path และไม่เปลี่ยน state)
+                // ขั้นที่ 2 — preview path (ของจริงเกิดตอนเมาส์เลื่อนผ่านช่อง: W1/W2 22:26)
+                // หลักฐาน: คลิกที่ commit จริง (f43357) เรียก GenerateMovePath(target) ก่อน OnClick เสมอ
+                // รอบ 3 พลาดขั้นนี้: MoveButtonClicked -> BattleGridClicked ไม่เกิด path และ state ค้างที่ 6
+                bc.GenerateMovePath(cell.gridData);
+                r.StateAfterPreview = (int)bc.nowActiveState;
+                r.StateAfterPreviewName = bc.nowActiveState.ToString();
+
+                if (r.StateAfterPreview == (int)ActiveUnitBattleState.WaitPlayerInput
+                    || r.StateAfterPreview == (int)ActiveUnitBattleState.ShowMovingRage)
+                {
+                    // preview ไม่เกิด = ไม่มี path ให้ commit — ถอยออกจากโหมด selelect และรายงาน
+                    bc.CancelMove();
+                    r.RollbackApplied = true;
+                    r.Error = string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPreviewName);
+                    return r;
+                }
+
+                // ขั้นที่ 3 — คลิกช่องปลายทางเพื่อ commit (เกมจะเรียก GenerateMovePath ซ้ำ + OnClick เอง)
                 bc.BattleGridClicked(cell.gameObject);
                 r.StateAfterPath = (int)bc.nowActiveState;
                 r.StateAfterPathName = bc.nowActiveState.ToString();
-                r.Call = "BattleController.MoveButtonClicked + BattleGridClicked";
+                r.Call = "MoveButtonClicked + GenerateMovePath + BattleGridClicked";
 
-                // ถ้า path ไม่ออก (ยังอยู่โหมดเลือกช่อง) ให้ถอยออกจากโหมดนั้นหนึ่งครั้ง — ไม่ retry คำสั่งเดิน
-                if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage
-                    || r.StateAfterPath == (int)ActiveUnitBattleState.WaitPlayerInput)
+                // ล้มเหลวเฉพาะเมื่อยังอยู่โหมดเลือกช่อง (ShowMovingRage) — ถ้าเกมเดินแล้ว/จบเทิร์นแล้วถือว่ารับคำสั่ง
+                if (r.StateAfterPath == (int)ActiveUnitBattleState.ShowMovingRage)
                 {
                     bc.CancelMove();
                     r.RollbackApplied = true;
                     r.Error = string.Format(UIStrings.SpikeMovePathFailed, r.StateAfterPathName);
                     return r;
                 }
+
+                // ยืนยันด้วยตำแหน่งจริง (อ่านซ้ำ 1 ครั้ง ไม่วนรอ)
+                try
+                {
+                    GridUnitData nowGrid = bc.nowActiveUnit == null ? null : bc.nowActiveUnit.mapGrid;
+                    if (nowGrid != null)
+                    {
+                        r.UnitRowAfter = nowGrid.row;
+                        r.UnitColAfter = nowGrid.column;
+                    }
+                }
+                catch { }
 
                 r.Ok = true;
             }
