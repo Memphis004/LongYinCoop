@@ -65,3 +65,14 @@
 | J7 (เร่งความเร็ว) | **NOT-RUN** — `timeScale` = 1 ตลอด |
 | W5 hp ต่อยูนิต | **ส่งมอบแล้ว แต่ตัวชี้วัดผิด** — 0 การเปลี่ยนแปลง |
 | ไม่เรียก method เปลี่ยน state / ไม่เขียน field | **PASS** (postfix อ่านอย่างเดียว, `AllowRemoteInput=false`) |
+
+## 6. สภาพหลังปิดงาน (2026-10-20 17:22) [RUNTIME]
+
+| ขั้น | ผล |
+|---|---|
+| `verify` หลังปิดเกม | **PASS** — copy vs baseline `changed=1` (เฉพาะ `PlayerprefData.dat`) · real `0/0/0` · drift 0 |
+| `sentinel unhide --slot 8` | OK (5 ไฟล์, `hash_match=True`) |
+| `restore` | OK — `Save` = ของจริง 57 ไฟล์ · digest **`2b0548fe464b`** ตรง baseline เป๊ะ · สำเนาเก็บที่ `coop-test/S1.5c-w2w4-20261020-165604/Save.used-20261020-172211` |
+| rehash อิสระ | **0 changed / 0 missing / 0 added** (57/57) |
+| โฟลเดอร์คงเหลือ | `Save` เดียว — ไม่มี `Save.real-*` / `Save.used-*` ใน `LongYinLiZhiZhuan_Data` |
+| hook | ปิดทั้งหมด (`installed=false`) · pref `JitProbeW2/W4=false` ใน `MelonPreferences.cfg` |
