@@ -1,0 +1,439 @@
+{
+ "note": "condensed timeline of the measured real move (raw .ndjson is gitignored by convention)",
+ "source_sha256_16": {
+  "w1": "3f2db513474ceadc",
+  "w2": "382b3af2e90805da"
+ },
+ "counts": {
+  "w1": 16,
+  "w2": 30
+ },
+ "events": [
+  {
+   "t": 1792509962752,
+   "f": 43218,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "6_0",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792509962753,
+   "f": 43218,
+   "m": "GridUnitController.OnClick",
+   "obj": "6_0",
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509962760,
+   "f": 43219,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509962845,
+   "f": 43231,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 1,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509962893,
+   "f": 43238,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 2,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509962935,
+   "f": 43244,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 3,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509962970,
+   "f": 43249,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 4,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963011,
+   "f": 43255,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 5,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963057,
+   "f": 43260,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 6,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963095,
+   "f": 43266,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 7,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963158,
+   "f": 43275,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 8,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963255,
+   "f": 43286,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 9,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963790,
+   "f": 43357,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "6_9",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792509963790,
+   "f": 43357,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 9,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792509963790,
+   "f": 43357,
+   "m": "GridUnitController.OnClick",
+   "obj": "6_9",
+   "row": 6,
+   "col": 9
+  },
+  {
+   "t": 1792510031224,
+   "f": 52364,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "7_7",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510031224,
+   "f": 52364,
+   "m": "GridUnitController.OnClick",
+   "obj": "7_7",
+   "row": 7,
+   "col": 7
+  },
+  {
+   "t": 1792510031862,
+   "f": 52446,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "6_9",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510031862,
+   "f": 52446,
+   "m": "BattleController.RegretMove",
+   "nowActiveState": 2,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510031862,
+   "f": 52446,
+   "m": "GridUnitController.OnClick",
+   "obj": "6_9",
+   "row": 6,
+   "col": 9
+  },
+  {
+   "t": 1792510032704,
+   "f": 52559,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "6_0",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510032704,
+   "f": 52559,
+   "m": "GridUnitController.OnClick",
+   "obj": "6_0",
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510032710,
+   "f": 52560,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510032862,
+   "f": 52582,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 1,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510032961,
+   "f": 52595,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 2,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033008,
+   "f": 52602,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 3,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033057,
+   "f": 52609,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 6,
+   "targetCol": 4,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033154,
+   "f": 52623,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 7,
+   "targetCol": 4,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033407,
+   "f": 52657,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 7,
+   "targetCol": 5,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033439,
+   "f": 52662,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 8,
+   "targetCol": 5,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033710,
+   "f": 52700,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "8_5",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510033711,
+   "f": 52700,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 8,
+   "targetCol": 5,
+   "nowActiveState": 7,
+   "row": 6,
+   "col": 0
+  },
+  {
+   "t": 1792510033711,
+   "f": 52700,
+   "m": "GridUnitController.OnClick",
+   "obj": "8_5",
+   "row": 8,
+   "col": 5
+  },
+  {
+   "t": 1792510147725,
+   "f": 67732,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "9_0",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510147726,
+   "f": 67732,
+   "m": "GridUnitController.OnClick",
+   "obj": "9_0",
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510147732,
+   "f": 67733,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 9,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510148454,
+   "f": 67820,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 10,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510149169,
+   "f": 67917,
+   "m": "BattleController.BattleGridClicked",
+   "obj": "11_0",
+   "row": -1,
+   "col": -1
+  },
+  {
+   "t": 1792510149169,
+   "f": 67917,
+   "m": "GridUnitController.OnClick",
+   "obj": "11_0",
+   "row": 11,
+   "col": 0
+  },
+  {
+   "t": 1792510149662,
+   "f": 67984,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 10,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510154474,
+   "f": 68539,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 8,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510154502,
+   "f": 68543,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 8,
+   "targetCol": 1,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510155273,
+   "f": 68645,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 9,
+   "targetCol": 1,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510155634,
+   "f": 68691,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 9,
+   "targetCol": 0,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510156148,
+   "f": 68758,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 9,
+   "targetCol": 1,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  },
+  {
+   "t": 1792510156239,
+   "f": 68769,
+   "m": "BattleController.GenerateMovePath",
+   "targetRow": 9,
+   "targetCol": 3,
+   "nowActiveState": 7,
+   "row": 9,
+   "col": 0
+  }
+ ]
+}
