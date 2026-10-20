@@ -67,6 +67,24 @@ field ที่บันทึกต่อ event: `frame`, `turnIndex`, `battleS
 - ยัง**ห้าม**ยิง `spike arm`/`move`/`attack` ในรอบวัดนี้ — รอบนี้เป็น read-only
 - ถ้าเกม crash / ค้าง / เซฟ hash เปลี่ยน → หยุดทันทีตาม §8
 
+## 4.1 คำตัดสินที่ผู้ใช้อนุมัติ (2026-10-21 01:10)
+
+| ข้อ | คำตัดสิน | ผลต่อการวัด |
+|---|---|---|
+| 3 | ใช้ **HardFight ใหม่บน Save สำเนา** | ไม่ใช้ศึกค้างจาก S1.5d; เซฟสำเนาอาจ drift ได้ (ไม่แตะเซฟจริง) |
+| 4 | ทดสอบ **เฉพาะสกิลโจมตี Default** | ห้ามสั่งเปลี่ยนสกิล (ไม่เรียก `ChangeNowActiveAttackSkill`/`ChangeActiveSkill` ด้วย mod) — ถ้าเกมเรียกเองระหว่างกด ให้บันทึกเป็นหลักฐานแต่ไม่นับเป็นเกณฑ์ |
+| 5 | **ไม่ข้ามศึก**ในการนับ 10/10 | ถ้าศึกจบก่อนครบ 10 → หยุดและรายงานก่อน ไม่เริ่มศึกใหม่เอง |
+
+## 4.2 สถานะจริงตอนเปิด probe (2026-10-21 01:09:56)
+
+- `set_pref --key jitprobeW7 --value true` → `installed=true`, **`missing=0`**, 13/13 method ติด, ไฟล์ `UserData\LongYinCoop\CoopSpike\jitprobe-w7-20261021-010956.ndjson`
+- log ยืนยัน: `JitProbe W7 installed: BattleGridClicked,ChangeActiveSkill,ChangeNowActiveAttackSkill,RefreshAttackRange,CancelAttack,PlayBattleUnitAttack,BattleUnitAttackStart,BattleUnitAttackHappen,BattleUnitAttackHit,BattleUnitAttackFinish,BattleUnitAttackEnd,ManageDamage,OnClick missing=0`
+- เกม (pid 31684, start 01:05:58) โหลด build `S1.5e-W7` — ตรงกับ DLL `35dd058b…`
+- สถานะศึกตอนนั้น: `inBattle=true`, `battleState=3 Fighting`, `nowActiveState=2 WaitPlayerInput`, `turnIndex=12`, 9 ยูนิต, active `0:0` ที่ (6,12), ศัตรูอยู่ col 15–18
+- `attackRangeCount=5` และ `attackRange=8:17,7:17,9:17,7:18,9:18` **ทั้งที่ active อยู่ (6,12)** → เป็น range ค้างจากหน่วยก่อน (ยังไม่ยืนยันว่าใครเขียน) — ต้องดูจาก W7 ว่า `RefreshAttackRange` ถูกเรียกเมื่อไร
+- `actionPatches.count=4` owners=`longyincoop.jitprobe.w7` (BattleGridClicked / ChangeActiveSkill / ChangeNowActiveAttackSkill / PlayBattleUnitAttack) — **คาดไว้แล้ว** ไม่ใช่การละเมิด
+- ไฟล์หลักฐาน: `logs/status-0112-probe-on.json`, `logs/jitprobe-w7-start.ndjson`
+
 ## 5. ยังไม่ทำ
 - ยังไม่เขียน `AttackCommand` (รอผล W7)
 - ยังไม่แตะ `attackRange` ใน `spike status` (จะทำใน build ของ S1.5e หลังวัด)
