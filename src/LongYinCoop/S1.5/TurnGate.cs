@@ -108,6 +108,8 @@ namespace LongYinCoop
             int infoCount = bc.infoCount;
             // S1.5-c: BattleController.nowScale (0xE0) — ตัวชี้ความเร็วศึก (อ่านอย่างเดียว)
             float nowScale = SafeNowScale(bc);
+            // S1.5-c: WorldData.battleTimeScale (0x1D8) — ตัวชี้ความเร็วศึกตัวจริง (อ่านอย่างเดียว)
+            float battleTimeScale = SafeBattleTimeScale();
 
             BattleMapData map = bc.battleMapData;
             int gridW = map == null ? -1 : map.mapWidth;
@@ -246,6 +248,7 @@ namespace LongYinCoop
                 aiWaitTime = SafeFloat(bc, 2),
                 timeScale = UnityEngine.Time.timeScale,
                 nowScale = nowScale,
+                battleTimeScale = battleTimeScale,
                 deltaTime = UnityEngine.Time.deltaTime,
                 unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = hash,
@@ -292,6 +295,7 @@ namespace LongYinCoop
                 aiWaitTime = -1f,
                 timeScale = UnityEngine.Time.timeScale,
                 nowScale = -1f,
+                battleTimeScale = -1f,
                 deltaTime = UnityEngine.Time.deltaTime,
                 unscaledDeltaTime = UnityEngine.Time.unscaledDeltaTime,
                 stateHash = (string)null,
@@ -307,6 +311,19 @@ namespace LongYinCoop
             return battleState == (int)BattleState.Prepare
                    || battleState == (int)BattleState.Ready
                    || battleState == (int)BattleState.Fighting;
+        }
+
+        /// <summary>WorldData.battleTimeScale — อ่านอย่างเดียว (ฟิลด์ที่ SetTimeScaleTab() เทียบกับเลขบนแท็บ)</summary>
+        private static float SafeBattleTimeScale()
+        {
+            try
+            {
+                GameController gc = GameController.Instance;
+                if (gc == null) return -1f;
+                WorldData world = gc.worldData;
+                return world == null ? -1f : (float)Math.Round(world.battleTimeScale, 4);
+            }
+            catch { return -1f; }
         }
 
         /// <summary>BattleController.nowScale — อ่านอย่างเดียว (ตัวชี้ความเร็วศึก; ยังไม่ยืนยันว่าปุ่ม x5 เขียนฟิลด์นี้)</summary>
