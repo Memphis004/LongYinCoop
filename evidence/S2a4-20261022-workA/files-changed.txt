@@ -1,0 +1,17 @@
+# work A — files changed (2026-10-22)
+
+ src/LongYinCoop/CoopMod.cs                     |   7 +-
+ src/LongYinCoop/CoopPaths.cs                   |   9 +-
+ src/LongYinCoop/S2/S2HostService.cs            |  18 ++--
+ src/LongYinCoop/S2/S2NetConfig.cs              | 137 ++++++++++++++++----------
+ tests/S2Protocol.Tests/S2Protocol.Tests.csproj |   2 +
+ tests/S2Protocol.Tests/S2a2Tests.cs            | 122 ++++++++++++++++-------
+ 6 files changed, 188 insertions(+), 107 deletions(-)
+
+# environment checks
+net.cfg exists in game UserData : False (mod idle by default, fail-closed)
+MelonPreferences.cfg sha256     : 269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1 (unchanged)
+MelonPreferences.cfg mtime      : 2026-10-21 22:58:31
+save-split status               : Save 57 files 854cc890430f EXACT (copy.before + real.before) leftovers: none
+mod DLL                         : NOT built / NOT deployed (per restriction)
+tests                           : 242 checks PASS / 0 FAIL (exit 0) — see netcfg-tests.txt

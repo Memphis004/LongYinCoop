@@ -57,10 +57,11 @@ namespace LongYinCoop
                 _ipc.Start();
             }
 
-            // S2a-2: spectator snapshot sender — ไม่ทำอะไรจนกว่า coop.net.enabled=true ใน
-            // MelonPreferences.cfg (อ่านไฟล์ตรง ๆ, poll <=1 Hz) และต้องปิด AllowRemoteInput/JitProbe*
+            // S2a-2 + งาน A: spectator snapshot sender — ไม่ทำอะไรจนกว่า net.cfg (ของเราเอง) ตั้ง
+            // enabled = true (อ่านไฟล์ตรง ๆ, poll <=1 Hz) และต้องปิด AllowRemoteInput/JitProbe*
             // (rev4: DevCommands ไม่ถูกตรวจ — ต้องเปิดไว้ให้ `spike status` = เครื่องมือวัดทำงาน)
-            _s2 = new S2HostService(CoopPaths.MelonPreferencesPath, CoopPaths.S2EvidenceDir);
+            // ไฟล์อยู่ที่ UserData\LongYinCoop\net.cfg — MelonLoader ไม่แตะ (มติ 2026-10-22)
+            _s2 = new S2HostService(CoopPaths.NetCfgPath, CoopPaths.S2EvidenceDir);
         }
 
         public override void OnDeinitializeMelon()

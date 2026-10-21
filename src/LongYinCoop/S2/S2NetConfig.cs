@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -7,8 +6,7 @@ using System.Text;
 namespace LongYinCoop.S2
 {
     /// <summary>
-    /// S2a-2: อ่าน `coop.net.*` จาก `UserData\MelonPreferences.cfg` เอง (ไม่ใช้ MelonPreferences entry)
-    /// เพื่อให้สลับ pref กลางรันได้ตาม D2-i (poll ≤1 Hz) และเพื่อให้ทดสอบได้โดยไม่ต้องมีเกม
+    /// ค่าที่อ่านได้จาก `net.cfg` (ไม่ใช่ MelonPreferences) — `<see cref="S2NetConfig"/>` เป็นตัวอ่าน
     /// </summary>
     public struct S2NetSettings
     {
@@ -16,8 +14,8 @@ namespace LongYinCoop.S2
         public string Role;            // off | host | guest
         public string Secret;          // hex, ≥32 ตัวอักษร (ห้าม log)
         public bool AllowNonLoopback;
-        public bool FileRead;
-        public bool SectionFound;
+        public bool FileRead;          // อ่านไฟล์ได้ (ไม่มีไฟล์ = false)
+        public bool FormatOk;          // โครงไฟล์ถูก (flat key=value, ไม่มี section)
         public string Error;
         public long ReadCount;
         public long LastReadMs;
@@ -26,7 +24,7 @@ namespace LongYinCoop.S2
         {
             get
             {
-                if (!FileRead || !SectionFound) return false;
+                if (!FileRead || !FormatOk) return false;
                 if (!string.IsNullOrEmpty(Error)) return false;
                 if (Enabled && !IsKnownRole(Role)) return false;
                 if (Enabled && !IsAcceptableSecret(Secret)) return false;
@@ -58,19 +56,43 @@ namespace LongYinCoop.S2
         public string Describe()
         {
             return string.Format(CultureInfo.InvariantCulture,
-                "enabled={0} role={1} allowNonLoopback={2} secretSet={3} section={4} reads={5} error={6}",
-                Enabled, Role ?? "-", AllowNonLoopback, SecretLooksSet, SectionFound, ReadCount,
+                "enabled={0} role={1} allowNonLoopback={2} secretSet={3} format={4} reads={5} error={6}",
+                Enabled, Role ?? "-", AllowNonLoopback, SecretLooksSet, FormatOk, ReadCount,
                 Error ?? "-");
         }
     }
 
+    /// <summary>
+    /// งาน A (มติผู้ใช้ 2026-10-22): อ่าน `coop.net.*` จาก `UserData\LongYinCoop\net.cfg`
+    /// ซึ่ง **MelonLoader ไม่เคยอ่านหรือเขียน** — แยกจาก `MelonPreferences.cfg` โดยสิ้นเชิง
+    ///
+    /// เหตุผล (RUNTIME, วัด 2026-10-22 — `evidence/S2a2-20261021-2254/S2a2-report.md` §3.3):
+    ///   1) ค่า string ดิบที่ไม่ครอบ quote ใน `MelonPreferences.cfg` ทำให้ TOML ทั้งไฟล์เสีย
+    ///      → MelonLoader ใช้ค่า default → `Enabled=false` → mod นิ่ง ไม่มี IPC pipe
+    ///   2) ตอนออกเกม MelonLoader เขียน cfg ใหม่ แล้วแปลง `coop.net.enabled` เป็นตารางซ้อน
+    ///      `[LongYinCoop.coop]` + `net = { enabled = false }` และทิ้ง key ที่ไม่รู้จัก
+    ///      → reader แบบเดิม (อ่านเฉพาะ section `[LongYinCoop]` แบบ literal) อ่านไม่เจอเงียบ ๆ
+    ///
+    /// รูปแบบไฟล์: flat `key = value` บรรทัดละคู่ · `#`/`;` = comment · **ไม่มี section / ไม่ใช่ TOML**
+    /// <code>
+    /// enabled          = false          # true = ให้ S2 ทำงาน (ต้อง role=host และ write path ปิด)
+    /// role             = host           # host | guest
+    /// secret           = 0123…cdef      # hex ≥32 ตัว (ห้าม log)
+    /// allowNonLoopback = false
+    /// </code>
+    ///
+    /// Fail-closed: ไม่มีไฟล์ / อ่านไม่ได้ / มี `[section]` / บรรทัดที่ไม่ใช่ `key = value`
+    /// ⇒ `FormatOk=false` ⇒ `IsValid=false` ⇒ S2 ไม่ทำงาน · key ที่ไม่รู้จักถูกข้าม (เผื่ออนาคต)
+    /// · key ซ้ำ = ตัวหลังชนะ · ค่าที่ครอบ quote (`"host"`) ถูกถอด quote ให้ (ทนการก๊อปจาก TOML)
+    /// </summary>
     public sealed class S2NetConfig
     {
-        public const string SectionName = "LongYinCoop";
-        public const string KeyEnabled = "coop.net.enabled";
-        public const string KeyRole = "coop.role";
-        public const string KeySecret = "coop.secret";
-        public const string KeyAllowNonLoopback = "coop.allowNonLoopback";
+        public const string FileName = "net.cfg";
+
+        public const string KeyEnabled = "enabled";
+        public const string KeyRole = "role";
+        public const string KeySecret = "secret";
+        public const string KeyAllowNonLoopback = "allownonloopback"; // เทียบแบบ lower-case
 
         private readonly int _pollMs;
         private long _lastPollMs = long.MinValue / 2;
@@ -114,7 +136,9 @@ namespace LongYinCoop.S2
             {
                 if (!File.Exists(path))
                 {
-                    S2NetSettings missing = Parse("", path, nowMs, readCount);
+                    S2NetSettings missing = Blank(nowMs, readCount);
+                    missing.FileRead = false;
+                    missing.FormatOk = false;
                     missing.Error = "cfg not found";
                     return missing;
                 }
@@ -122,7 +146,9 @@ namespace LongYinCoop.S2
             }
             catch (Exception e)
             {
-                S2NetSettings failed = Parse("", path, nowMs, readCount);
+                S2NetSettings failed = Blank(nowMs, readCount);
+                failed.FileRead = false;
+                failed.FormatOk = false;
                 failed.Error = e.GetType().Name;
                 return failed;
             }
@@ -130,49 +156,38 @@ namespace LongYinCoop.S2
             return Parse(text, path, nowMs, readCount);
         }
 
-        /// <summary>อ่านค่าเฉพาะ section [LongYinCoop] (test ได้โดยไม่ต้องมีเกม)</summary>
+        /// <summary>อ่านค่า flat key=value (test ได้โดยไม่ต้องมีเกม)</summary>
         public static S2NetSettings Parse(string text, string path, long nowMs, long readCount = 1)
         {
-            S2NetSettings s = new S2NetSettings
-            {
-                Role = "off",
-                Secret = null,
-                Enabled = false,
-                AllowNonLoopback = false,
-                FileRead = true,
-                SectionFound = false,
-                ReadCount = readCount,
-                LastReadMs = nowMs,
-            };
-
+            S2NetSettings s = Blank(nowMs, readCount);
             if (string.IsNullOrEmpty(text)) return s;
 
-            string section = null;
-            List<string> keys = new List<string>();
-            List<string> values = new List<string>();
+            int lineNo = 0;
             foreach (string raw in text.Split('\n'))
             {
+                lineNo++;
                 string line = raw.Trim();
                 if (line.Length == 0 || line[0] == '#' || line[0] == ';') continue;
-                if (line[0] == '[' && line[line.Length - 1] == ']')
+
+                if (line[0] == '[')
                 {
-                    section = line.Substring(1, line.Length - 2).Trim();
-                    continue;
+                    // กันการก๊อป TOML/pref เดิมมาใส่: net.cfg ต้อง flat เท่านั้น
+                    s.FormatOk = false;
+                    s.Error = "line " + lineNo + ": net.cfg is flat key=value (no [section])";
+                    return s;
                 }
+
                 int eq = line.IndexOf('=');
-                if (eq <= 0) continue;
-                if (section != SectionName) continue;
-                keys.Add(line.Substring(0, eq).Trim());
-                values.Add(line.Substring(eq + 1).Trim());
-            }
+                if (eq <= 0)
+                {
+                    s.FormatOk = false;
+                    s.Error = "line " + lineNo + ": expected key = value";
+                    return s;
+                }
 
-            // section มีจริงถ้าเจอบรรทัด [LongYinCoop]
-            s.SectionFound = HasSection(text);
+                string key = line.Substring(0, eq).Trim().ToLowerInvariant();
+                string value = Unquote(line.Substring(eq + 1).Trim());
 
-            for (int i = 0; i < keys.Count; i++)
-            {
-                string key = keys[i];
-                string value = values[i];
                 if (key == KeyEnabled)
                 {
                     s.Enabled = IsTrue(value);
@@ -189,6 +204,7 @@ namespace LongYinCoop.S2
                 {
                     s.AllowNonLoopback = IsTrue(value);
                 }
+                // key อื่น: ข้าม (เผื่ออนาคต ไม่ทำให้ไฟล์เสีย)
             }
 
             if (s.Enabled && !S2NetSettings.IsKnownRole(s.Role))
@@ -203,18 +219,31 @@ namespace LongYinCoop.S2
             return s;
         }
 
-        private static bool HasSection(string text)
+        private static S2NetSettings Blank(long nowMs, long readCount)
         {
-            foreach (string raw in text.Split('\n'))
+            return new S2NetSettings
             {
-                string line = raw.Trim();
-                if (line.Length > 2 && line[0] == '[' && line[line.Length - 1] == ']'
-                    && line.Substring(1, line.Length - 2).Trim() == SectionName)
-                {
-                    return true;
-                }
+                Role = "off",
+                Secret = null,
+                Enabled = false,
+                AllowNonLoopback = false,
+                FileRead = true,
+                FormatOk = true,
+                ReadCount = readCount,
+                LastReadMs = nowMs,
+            };
+        }
+
+        private static string Unquote(string value)
+        {
+            if (value.Length >= 2)
+            {
+                char first = value[0];
+                char last = value[value.Length - 1];
+                if ((first == '"' && last == '"') || (first == '\'' && last == '\''))
+                    return value.Substring(1, value.Length - 2).Trim();
             }
-            return false;
+            return value;
         }
 
         public static bool IsTrue(string value)

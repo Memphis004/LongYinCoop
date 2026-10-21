@@ -120,6 +120,13 @@ public interface ITransport {
 
 > **จุดที่ต้องยืนยัน (ขัดกับ §1.6 — ดู §12 ข้อ 1):** ผู้ใช้สั่ง "ต้องเปิดฟังบน interface อื่นด้วย pref ที่ตั้งเอง" — แผนนี้ตีความว่า pref รับ **IP ของ interface นั้นแบบเจาะจง** (เช่น IP ของ ZeroTier/Tailscale) ไม่ใช่ `0.0.0.0`
 
+> **อัปเดต 2026-10-22 (งาน A, ดู `evidence/S2a4-20261022-workA/design.md`):** ค่า `coop.net.*`
+> **ไม่เก็บใน `MelonPreferences.cfg` อีกต่อไป** — ย้ายไป `UserData\LongYinCoop\net.cfg` (flat `key = value`,
+> MelonLoader ไม่แตะ) ด้วยเหตุผลจาก incident S2a-2: TOML ที่ไม่ถูก quote ทำให้ mod นิ่ง และ ML แปลง dotted key
+> เป็นตารางซ้อน `[LongYinCoop.coop]` ตอนออกเกม · ชื่อ key ในไฟล์ใหม่ = `enabled`, `role`, `secret`,
+> `allowNonLoopback` · key ที่เหลือในตารางนี้ (`bind`, `port`, `maxFrameBytes`, `showIpOnStart`,
+> `snapshotEveryActions`) **ยังไม่มีในไฟล์** จะเพิ่มตอน S2a-3/S2b พร้อมเทสต์ของมันเอง
+
 ## 4. โมเดลข้อมูลฝั่ง guest (replica)
 
 ### 4.1 field ที่ replicate (S2)

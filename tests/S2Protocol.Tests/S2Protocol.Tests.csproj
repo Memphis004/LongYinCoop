@@ -23,6 +23,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2SelfTest.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2WriteGuard.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
+    <!-- งาน A: path ของ net.cfg (pure: System + System.IO เท่านั้น) -->
+    <Compile Include="..\..\src\LongYinCoop\CoopPaths.cs" LinkBase="Mod" />
   </ItemGroup>
 
   <ItemGroup>

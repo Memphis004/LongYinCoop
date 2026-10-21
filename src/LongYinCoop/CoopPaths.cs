@@ -15,10 +15,13 @@ namespace LongYinCoop
             get { return Path.Combine(GameRoot, "UserData", "LongYinCoop"); }
         }
 
-        /// <summary>S2: อ่านค่า coop.net.* จากไฟล์นี้ตรง ๆ เพื่อสลับ pref กลางรันได้ (D2-i)</summary>
-        public static string MelonPreferencesPath
+        /// <summary>
+        /// S2 (งาน A, มติ 2026-10-22): `coop.net.*` อยู่ในไฟล์ของเราเอง — **MelonLoader ไม่แตะไฟล์นี้**
+        /// (ห้ามย้ายกลับไป MelonPreferences.cfg: ML เขียนทับและแปลง dotted key เป็นตารางซ้อนตอนออกเกม)
+        /// </summary>
+        public static string NetCfgPath
         {
-            get { return Path.Combine(GameRoot, "UserData", "MelonPreferences.cfg"); }
+            get { return Path.Combine(UserDataDir, S2.S2NetConfig.FileName); }
         }
 
         public static string S2EvidenceDir

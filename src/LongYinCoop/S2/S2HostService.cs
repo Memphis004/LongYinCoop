@@ -12,12 +12,12 @@ namespace LongYinCoop.S2
     /// S2a-2 host service (spectator, **ไม่มี write path** ไปยัง state ของเกม)
     ///
     /// ลำดับใน 1 tick (เรียกจาก CoopMod.Tick() = Unity main thread เท่านั้น):
-    ///   1) poll `coop.net.*` จาก MelonPreferences.cfg (≤1 Hz) — D2-i ต้องสลับกลางรันได้
+    ///   1) poll `net.cfg` (UserData\LongYinCoop — ไฟล์ของเราเอง, MelonLoader ไม่แตะ) ≤1 Hz
     ///   2) ถ้า active: sample state → POCO (IL2CPP อ่านบน main thread)
     ///   3) post POCO ให้ sender thread (main thread ไม่ serialize)
     ///   4) drain ช่อง guest→host ผ่าน allowlist (forbidden = ทิ้ง + นับ; commandsAccepted ต้องเป็น 0 เสมอ)
     ///
-    /// A/B ของ exit 3 (rev3): **A = `coop.net.enabled=false`** (baseline, S2 idle),
+    /// A/B ของ exit 3 (rev3): **A = `net.cfg` enabled=false** (baseline, S2 idle),
     /// **B = `true`** (S2 ทำงาน) — สลับเป็นบล็อก A-B-A-B บล็อกละ 30 s
     /// ทุกครั้งที่สลับจะเขียน marker ลง `s2-snapshots.ndjson` ให้ตามเวลาจาก recorder ภายนอกได้
     /// </summary>
@@ -43,7 +43,7 @@ namespace LongYinCoop.S2
         private bool _selfTestDone;
         private bool _guardWarned;
         private string _phase = PhaseA;
-        private string _lastReason = "init: still reading coop.net.*";
+        private string _lastReason = "init: still reading net.cfg";
         private long _phaseNumber;
         private long _phaseStartMs;
         private long _phaseFrames;
@@ -173,7 +173,7 @@ namespace LongYinCoop.S2
             {
                 _guardWarned = true;
                 CoopLog.Warn("[S2] idle: write path open (" + OpenWritePaths() + ") - close every write path"
-                             + " and set coop.net.enabled=true");
+                             + " and set enabled = true in UserData\\LongYinCoop\\net.cfg");
             }
             return false;
         }
@@ -188,11 +188,11 @@ namespace LongYinCoop.S2
 
         private static string DescribeIdle(S2NetSettings settings)
         {
-            if (!settings.FileRead) return "idle: coop.net.enabled unreadable (" + (settings.Error ?? "?") + ")";
-            if (!settings.SectionFound) return "idle: section [LongYinCoop] missing in MelonPreferences.cfg";
-            if (!settings.Enabled) return "idle: coop.net.enabled=false (phase A baseline)";
+            if (!settings.FileRead) return "idle: net.cfg unreadable (" + (settings.Error ?? "?") + ")";
+            if (!settings.FormatOk) return "idle: net.cfg invalid: " + (settings.Error ?? "?");
+            if (!settings.Enabled) return "idle: net.cfg enabled=false (phase A baseline)";
             if (!string.IsNullOrEmpty(settings.Error)) return "idle: " + settings.Error;
-            if (settings.Role != "host") return "idle: coop.role=" + (settings.Role ?? "-") + " (S2a-2 runs host side only)";
+            if (settings.Role != "host") return "idle: net.cfg role=" + (settings.Role ?? "-") + " (S2a-2 runs host side only)";
             if (CoopPrefs.AllowRemoteInput.Value || CoopPrefs.JitProbe.Value || CoopPrefs.JitProbeW2.Value
                 || CoopPrefs.JitProbeW4.Value || CoopPrefs.JitProbeW6.Value || CoopPrefs.JitProbeW7.Value)
                 return "idle: write path open (" + OpenWritePaths() + ") - must be closed for S2";
@@ -210,7 +210,7 @@ namespace LongYinCoop.S2
             _phaseStartMs = nowMs;
             _phaseFrames = 0;
             _phaseSample.Reset();
-            _lastReason = "active: coop.net.enabled=true role=host (loopback) - phase B";
+            _lastReason = "active: net.cfg enabled=true role=host (loopback) - phase B";
             WriteMarker("phase.start", "block=" + _phase + " blockIndex=" + _phaseNumber
                         + " s2Enabled=true role=host transport=loopback");
             CoopLog.Msg("[S2] snapshot sender ACTIVE block=" + _phase + " -> " + SnapshotPath);

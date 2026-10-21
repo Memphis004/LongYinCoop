@@ -17,8 +17,9 @@ namespace LongYinCoop.S2.Tests
     /// S2a-2 (step 0) in-process tests — no game, no sockets, no mod runtime.
     /// Covers: loopback transport, serializing sender, S2Frame wire codec (incl. the
     /// rev4 `unitAlive` mirror), audit tuple, guest->host allowlist gate (exit 6),
-    /// coop.net.* config poll (D2-i mechanism), phase stats + the signed exit-3 rule
-    /// (A = coop.net.enabled=false, B = true), the exit-6 self-test frame set (exactly
+    /// `net.cfg` config poll (งาน A 2026-10-22 — flat key=value ใต้ UserData\LongYinCoop,
+    /// MelonLoader ไม่แตะ), phase stats + the signed exit-3 rule
+    /// (A = net.cfg enabled=false, B = true), the exit-6 self-test frame set (exactly
     /// 3 forbidden drops / 0 accepted), the pure rev4 write-guard (all 64 pref
     /// combinations, DevCommands excluded), ndjson evidence writer, and the TurnGate
     /// guard (byte-exact vs the 57e68dc fixture).
@@ -418,66 +419,111 @@ namespace LongYinCoop.S2.Tests
                 && gateMethods[0].ReturnType == typeof(S2GateOutcome));
         }
 
-        // ---------------------------------------------------------------- coop.net.* config
+        // ---------------------------------------------------------------- net.cfg (งาน A, 2026-10-22)
 
+        /// <summary>
+        /// งาน A (มติผู้ใช้ 2026-10-22): `coop.net.*` ย้ายไป `UserData\LongYinCoop\net.cfg`
+        /// — flat `key = value`, ไม่ใช่ TOML, ไม่มี section, MelonLoader ไม่แตะไฟล์นี้
+        /// (incident S2a-2: TOML ใน MelonPreferences.cfg ทำให้ mod นิ่ง และ ML แปลง dotted key
+        ///  เป็นตารางซ้อน `[LongYinCoop.coop] net = { … }` ตอนออกเกม)
+        /// </summary>
         private static void NetConfigTests()
         {
             const string secret = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
-            string path = Path.Combine(_tmp, "MelonPreferences.cfg");
+            string path = Path.Combine(_tmp, "net.cfg");
 
-            string empty = "[LongYinCoop]\ncoop.enabled = false\n";
-            S2NetSettings s = S2NetConfig.Parse(empty, path, 0);
-            Check("missing coop.net.enabled defaults to false/off/off",
-                !s.Enabled && s.Role == "off" && !s.AllowNonLoopback && s.SectionFound && s.IsValid);
+            S2NetSettings s = S2NetConfig.Parse("", path, 0);
+            Check("net.cfg: empty text = disabled/off/format-ok (fail-closed default)",
+                !s.Enabled && s.Role == "off" && !s.AllowNonLoopback && s.FormatOk && s.IsValid);
 
-            string host = "[LongYinCoop]\ncoop.enabled = false\ncoop.net.enabled = true\ncoop.role = host\n"
-                          + "coop.secret = " + secret + "\ncoop.allowNonLoopback = false\n";
+            s = S2NetConfig.Parse("# only comments\n; another\n\n", path, 0);
+            Check("net.cfg: comments-only file = valid and disabled", s.IsValid && !s.Enabled);
+
+            string host = "enabled = true\nrole = host\nsecret = " + secret + "\nallowNonLoopback = false\n";
             s = S2NetConfig.Parse(host, path, 0);
-            Check("host line parses to a valid enabled setting",
-                s.Enabled && s.Role == "host" && s.Secret == secret && s.IsValid && s.SecretLooksSet);
-            Check("describe never leaks the secret", !s.Describe().Contains(secret) && s.Describe().Contains("secretSet=True"));
+            Check("net.cfg: flat host block is valid + enabled (no [section] needed)",
+                s.Enabled && s.Role == "host" && s.Secret == secret && s.FormatOk && s.IsValid && s.SecretLooksSet);
+            Check("net.cfg: describe never leaks the secret",
+                !s.Describe().Contains(secret) && s.Describe().Contains("secretSet=True"));
 
-            s = S2NetConfig.Parse(host.Replace("coop.role = host", "coop.role = guest"), path, 0);
-            Check("guest role is parsed (service decides host-only)", s.Enabled && s.Role == "guest" && s.IsValid);
+            s = S2NetConfig.Parse(host.Replace("role = host", "role = guest"), path, 0);
+            Check("net.cfg: guest role parses (service decides host-only)",
+                s.Enabled && s.Role == "guest" && s.IsValid);
+
+            s = S2NetConfig.Parse("enabled = false\n", path, 0);
+            Check("net.cfg: disabled needs no role/secret", !s.Enabled && s.IsValid);
 
             s = S2NetConfig.Parse(host.Replace(secret, "short"), path, 0);
-            Check("short secret is invalid", !s.IsValid && s.Error != null && s.Error.Contains("secret"));
+            Check("net.cfg: short secret is invalid", !s.IsValid && s.Error != null && s.Error.Contains("secret"));
 
-            s = S2NetConfig.Parse(host.Replace("coop.role = host", "coop.role = banana"), path, 0);
-            Check("unknown role is invalid", !s.IsValid && s.Error != null && s.Error.Contains("role"));
+            s = S2NetConfig.Parse(host.Replace(secret, "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"), path, 0);
+            Check("net.cfg: non-hex secret is invalid", !s.IsValid && s.Error != null && s.Error.Contains("secret"));
 
-            s = S2NetConfig.Parse(host.Replace("coop.net.enabled = true", "coop.net.enabled = yes"), path, 0);
-            Check("truthy spellings accepted", s.Enabled);
-            s = S2NetConfig.Parse("coop.net.enabled = true\ncoop.role = host\ncoop.secret = " + secret + "\n", path, 0);
-            Check("missing section is invalid", !s.SectionFound && !s.IsValid);
+            s = S2NetConfig.Parse(host.Replace("role = host", "role = banana"), path, 0);
+            Check("net.cfg: unknown role is invalid", !s.IsValid && s.Error != null && s.Error.Contains("role"));
 
-            s = S2NetConfig.Parse(host.Replace("coop.allowNonLoopback = false", "coop.allowNonLoopback = true"),
-                                  path, 0);
-            Check("allowNonLoopback parsed (bind policy decided by S2b)",
-                s.AllowNonLoopback && !s.Describe().Contains("allowNonLoopback=True, secret")
-                    && s.Describe().Contains("allowNonLoopback=True"));
+            s = S2NetConfig.Parse(host.Replace("enabled = true", "enabled = yes"), path, 0);
+            Check("net.cfg: truthy spellings accepted", s.Enabled && s.IsValid);
+
+            s = S2NetConfig.Parse("ENABLED = true\nRole = Host\nSECRET = \"" + secret + "\"\n", path, 0);
+            Check("net.cfg: keys are case-insensitive and quoted values are unquoted",
+                s.Enabled && s.Role == "host" && s.Secret == secret && s.IsValid);
+
+            s = S2NetConfig.Parse(host.Replace("allowNonLoopback = false", "allowNonLoopback = true"), path, 0);
+            Check("net.cfg: allowNonLoopback parsed (bind policy decided by S2b)",
+                s.AllowNonLoopback && s.Describe().Contains("allowNonLoopback=True"));
+
+            s = S2NetConfig.Parse(host + "futureKey = 42\n", path, 0);
+            Check("net.cfg: unknown keys are ignored, not fatal", s.IsValid && s.Enabled);
+
+            s = S2NetConfig.Parse("enabled = false\nenabled = true\nrole = host\nsecret = " + secret + "\n", path, 0);
+            Check("net.cfg: duplicate key = last one wins", s.Enabled && s.IsValid);
+
+            // ก๊อป TOML/pref เดิมมาใส่: ต้องปฏิเสธ ไม่ใช่ 'disabled' เงียบ ๆ
+            s = S2NetConfig.Parse("[LongYinCoop]\nenabled = true\n", path, 0);
+            Check("net.cfg: [section] is rejected (flat file only)",
+                !s.FormatOk && !s.IsValid && s.Error != null && s.Error.Contains("flat"));
+
+            // ค่าที่ MelonLoader เขียนเองตอนออกเกม (incident 2026-10-22) ต้องไม่ถูกอ่านเป็น valid+disabled
+            string mlShaped = "[LongYinCoop.coop]\nnet = { enabled = false }\nallowNonLoopback = false\n";
+            s = S2NetConfig.Parse(mlShaped, path, 0);
+            Check("net.cfg: MelonLoader-shaped pref content is rejected, never silently valid",
+                !s.FormatOk && !s.IsValid && !s.Enabled);
+
+            s = S2NetConfig.Parse("enabled true\n", path, 0);
+            Check("net.cfg: a line without '=' is rejected with its line number",
+                !s.FormatOk && !s.IsValid && s.Error != null && s.Error.Contains("line 1"));
+
+            s = S2NetConfig.Parse("enabled = true\r\nrole = host\r\nsecret = " + secret + "\r\n", path, 0);
+            Check("net.cfg: CRLF file parses", s.Enabled && s.IsValid && s.Role == "host");
 
             Check("IsTrue spellings", S2NetConfig.IsTrue(" true ") && S2NetConfig.IsTrue("1")
                 && S2NetConfig.IsTrue("YES") && S2NetConfig.IsTrue("on")
                 && !S2NetConfig.IsTrue("false") && !S2NetConfig.IsTrue("0") && !S2NetConfig.IsTrue(null));
 
             S2NetSettings missing = S2NetConfig.ReadFile(Path.Combine(_tmp, "nope.cfg"), 0, 1);
-            Check("missing cfg file is reported, not thrown",
-                missing.Error == "cfg not found" && !missing.IsValid);
+            Check("net.cfg: missing file is reported, not thrown (fail-closed)",
+                missing.Error == "cfg not found" && !missing.FileRead && !missing.FormatOk && !missing.IsValid);
 
-            // D2-i mechanism: values must be re-read from the file while the game runs
-            File.WriteAllText(path, "[LongYinCoop]\ncoop.net.enabled = false\n");
+            // D2-i: ค่าต้องถูกรี้อ่านจากไฟล์ระหว่างเกมรัน (สลับ block A/B ได้)
+            File.WriteAllText(path, "enabled = false\n");
             S2NetConfig cfg = new S2NetConfig(path, pollMs: 1000);
-            Check("first poll reads the file", cfg.Poll(0) && !cfg.Current.Enabled && cfg.PollCount == 1);
+            Check("net.cfg: first poll reads the file", cfg.Poll(0) && !cfg.Current.Enabled && cfg.PollCount == 1);
             File.WriteAllText(path, host);
-            Check("poll inside the interval does not re-read", !cfg.Poll(500) && !cfg.Current.Enabled);
-            Check("poll after the interval picks up the change", cfg.Poll(1000) && cfg.Current.Enabled
+            Check("net.cfg: poll inside the interval does not re-read", !cfg.Poll(500) && !cfg.Current.Enabled);
+            Check("net.cfg: poll after the interval picks up the change", cfg.Poll(1000) && cfg.Current.Enabled
                 && cfg.Current.Role == "host" && cfg.PollCount == 2);
-            File.WriteAllText(path, "[LongYinCoop]\ncoop.net.enabled = false\n");
-            Check("toggling back off is picked up (A/B blocks)", cfg.Poll(2000) && !cfg.Current.Enabled
+            File.WriteAllText(path, "enabled = false\n");
+            Check("net.cfg: toggling back off is picked up (A/B blocks)", cfg.Poll(2000) && !cfg.Current.Enabled
                 && cfg.PollCount == 3);
             S2NetSettings forced = cfg.ForceRead(2100);
-            Check("ForceRead reads immediately", forced.ReadCount == 4 && cfg.PollCount == 4);
+            Check("net.cfg: ForceRead reads immediately", forced.ReadCount == 4 && cfg.PollCount == 4);
+
+            // ไฟล์ที่ mod ใช้อ่าน ต้องเป็นของเราเอง ไม่ใช่ MelonPreferences.cfg
+            Check("coop paths: net.cfg lives under UserData\\LongYinCoop (MelonLoader never touches it)",
+                CoopPaths.NetCfgPath.EndsWith(Path.Combine("UserData", "LongYinCoop", "net.cfg"),
+                                               StringComparison.OrdinalIgnoreCase)
+                && !CoopPaths.NetCfgPath.EndsWith("MelonPreferences.cfg", StringComparison.OrdinalIgnoreCase));
         }
 
         // ---------------------------------------------------------------- exit 3 accumulator
@@ -499,7 +545,7 @@ namespace LongYinCoop.S2.Tests
         // ---------------------------------------------------------------- exit 3 rule (signed)
 
         /// <summary>
-        /// A/B ของ exit 3 (มติผู้ใช้ 2026-10-21): A = `coop.net.enabled=false` (baseline), B = `true`
+        /// A/B ของ exit 3 (มติผู้ใช้ 2026-10-21): A = `net.cfg` enabled=false (baseline), B = `true`
         /// เกณฑ์คือ **(B − A) ≤ 1 ms โดยดูเครื่องหมาย** ไม่ใช่ค่าสัมบูรณ์ — B ถูกกว่า A (ค่าลบ) ก็ผ่าน
         /// ใกล้ 1 ms (±0.5 ms) = INCONCLUSIVE ห้ามฟันธงผ่านจากรอบเดียว
         /// </summary>
