@@ -1,0 +1,21 @@
+== Phase B battle segments (from samples) ==
+seg1 18:28:24.030 -> 18:35:03.350  dur=399.3s inBattle=True turnMax=44 turnLast=44
+seg2 18:35:03.450 -> 18:36:08.533  dur=65.1s inBattle=False turnMax=-1 turnLast=-1
+seg3 18:36:08.634 -> 19:09:22.166  dur=1993.5s inBattle=True turnMax=0 turnLast=0
+seg4 19:09:22.267 -> 19:09:24.802  dur=2.5s inBattle=False turnMax=-1 turnLast=-1
+
+== idle stretches > 20 s in Phase B (no turn/state/battleTime movement) ==
+  18:28:29.566 -> 18:30:37.641   128.1s  turn=19 state=WaitPlayerInput  (paused=False)
+  18:31:19.198 -> 18:31:41.031    21.8s  turn=26 state=WaitPlayerInput  (paused=False)
+  18:33:20.330 -> 18:34:28.132    67.8s  turn=37 state=Finish  (paused=False)
+  18:35:03.450 -> 18:36:08.634    65.2s  turn=-1 state=None  (paused=False)
+  18:36:28.320 -> 19:09:22.267  1973.9s  turn=0 state=WaitPlayerInput  (paused=False)
+
+== accounting ==
+Phase B wall                     =   2460.8s (18:28:24.030 -> 19:09:24.802)
+battle-pause windows (paused)    =      5.4s
+Esc-menu freeze (sim frozen)     =     67.8s
+dead tail (stopped playing)      =   1976.5s (18:36:28.320 -> 19:09:24.802)
+PLAY TIME (start -> stopped)     =    411.1s  (= 6.9 min)
+
+VERDICT(600 s of continuous play): NOT-RUN (only 411 s < 600 s)

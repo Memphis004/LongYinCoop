@@ -1,0 +1,48 @@
+state id -> name (observed in the status stream of this run):
+   0 = None
+   1 = WaitAIPlan
+   2 = WaitPlayerInput
+   3 = Rest
+   5 = UseItem
+   7 = WaitMoving
+   8 = Moving
+   9 = ShowAttackingRage
+  10 = WaitAttacking
+  11 = Attacking
+  12 = Finish
+  13 = Finishing
+
+W4 events = 32
+  #  time          state(id)       paused  battleTime  timeScale  frame
+  1  18:24:58.441  Rest(3)         True    1.044       1          52349
+  2  18:25:36.806  Finish(12)      False   1.044       1          57186
+  3  18:25:37.646  Moving(8)       True    1.141       1          57288
+  4  18:25:40.847  WaitAIPlan(1)   False   1.141       1          57684
+  5  18:25:41.916  None(0)         True    1.183       1          57809
+  6  18:25:45.013  None(0)         False   1.183       1          58190
+  7  18:25:45.563  Moving(8)       True    1.183       1          58257
+  8  18:25:47.743  WaitAIPlan(1)   False   1.183       1          58529
+  9  18:25:48.979  WaitMoving(7)   True    1.197       1          58690
+ 10  18:25:51.687  WaitMoving(7)   False   1.197       1          59024
+ 11  18:25:52.749  Rest(3)         True    1.197       1          59163
+ 12  18:25:54.812  Finish(12)      False   1.197       1          59427
+ 13  18:26:03.131  WaitAttacking(10) True    1.259       1          60416
+ 14  18:26:05.193  WaitAttacking(10) False   1.259       1          60679
+ 15  18:26:06.295  Attacking(11)   True    1.259       1          60815
+ 16  18:26:08.971  Finish(12)      False   1.259       1          61153
+ 17  18:26:25.857  WaitMoving(7)   True    2.079       1          63265
+ 18  18:26:27.419  WaitMoving(7)   False   2.079       1          63469
+ 19  18:26:27.948  Moving(8)       True    2.079       1          63533
+ 20  18:26:29.303  WaitAIPlan(1)   False   2.079       1          63690
+ 21  18:26:30.164  Attacking(11)   True    2.079       1          63793
+ 22  18:26:32.296  Attacking(11)   False   2.079       1          64067
+ 23  18:26:33.311  WaitMoving(7)   True    2.28        1          64195
+ 24  18:26:34.456  WaitMoving(7)   False   2.28        1          64340
+ 25  18:26:35.844  WaitAttacking(10) True    2.28        1          64508
+ 26  18:26:36.955  WaitAttacking(10) False   2.28        1          64646
+ 27  18:26:37.687  Attacking(11)   True    2.28        1          64735
+ 28  18:28:19.624  Finish(12)      False   2.28        1          77515
+ 29  18:28:20.937  WaitAttacking(10) True    2.356       1          77689
+ 30  18:28:24.166  WaitAttacking(10) False   2.356       1          78111
+ 31  18:30:50.221  Attacking(11)   True    2.509       1          97333
+ 32  18:30:55.644  Finish(12)      False   2.509       1          98031

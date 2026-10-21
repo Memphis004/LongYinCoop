@@ -1,0 +1,51 @@
+== capture ==
+samples_ok=5466 errors=2 span=551.6s (18:18:11.507 -> 18:27:23.059)
+sample_gaps>0.6s=2 max_gap=0.60s
+   gap 0.60s at 18:18:11.909
+   gap 0.60s at 18:19:16.938
+in_battle_samples=4654
+battleTime 0.0000 -> 2.2800 (delta +2.2800)
+turnIndex 0 -> 16 (distinct=17)
+states: {'None': 80, 'WaitPlayerInput': 2903, 'WaitMoving': 386, 'Moving': 135, 'Rest': 141, 'WaitAIPlan': 50, 'Finish': 822, 'WaitAttacking': 47, 'Attacking': 90}
+activeAutoFight: {False: 4654}
+samples_with_battleTimeScale!=1: 1501
+
+== pause windows (paused=true) ==
+windows>=0.30s: 14
+W01 18:24:58.522 -> 18:25:36.849 dur=38.23s state=3(Rest) turn=4 paused=True bt=1.0440->1.0440 frozen=True resumed=True
+W02 18:25:37.654 -> 18:25:40.870 dur= 3.12s state=8(Moving) turn=5 paused=True bt=1.1412->1.1412 frozen=True resumed=True
+W03 18:25:41.977 -> 18:25:45.094 dur= 3.02s state=0(None) turn=5 paused=True bt=1.1828->1.1828 frozen=True resumed=True
+W04 18:25:45.597 -> 18:25:47.809 dur= 2.11s state=8(Moving) turn=6 paused=True bt=1.1828->1.1828 frozen=True resumed=True
+W05 18:25:49.017 -> 18:25:51.733 dur= 2.62s state=7(WaitMoving) turn=7 paused=True bt=1.1967->1.1967 frozen=True resumed=True
+W06 18:25:52.841 -> 18:25:54.851 dur= 1.91s state=3(Rest) turn=7 paused=True bt=1.1967->1.1967 frozen=True resumed=True
+W07 18:26:03.198 -> 18:26:05.208 dur= 1.91s state=10(WaitAttacking) turn=9 paused=True bt=1.2592->1.2592 frozen=True resumed=True
+W08 18:26:06.316 -> 18:26:09.031 dur= 2.61s state=11(Attacking) turn=9 paused=True bt=1.2592->1.2592 frozen=True resumed=True
+W09 18:26:25.930 -> 18:26:27.439 dur= 1.41s state=7(WaitMoving) turn=15 paused=True bt=2.0786->2.0786 frozen=True resumed=False
+W10 18:26:28.043 -> 18:26:29.352 dur= 1.21s state=8(Moving) turn=15 paused=True bt=2.0786->2.0786 frozen=True resumed=True
+W11 18:26:30.156 -> 18:26:32.370 dur= 2.11s state=11(Attacking) turn=15 paused=True bt=2.0786->2.0786 frozen=True resumed=True
+W12 18:26:33.377 -> 18:26:34.483 dur= 1.01s state=7(WaitMoving) turn=16 paused=True bt=2.2800->2.2800 frozen=True resumed=False
+W13 18:26:35.893 -> 18:26:36.999 dur= 1.01s state=10(WaitAttacking) turn=16 paused=True bt=2.2800->2.2800 frozen=True resumed=False
+W14 18:26:37.704 -> OPEN dur=45.36s state=11(Attacking) turn=16 paused=True bt=2.2800->2.2800 frozen=True resumed=None
+complete_pause_resume_rounds=13
+
+== after-resume progression (2 s window per round) ==
+R01 +2s: battleTime +0.0625 state None->WaitAIPlan turn 4->5
+R02 +2s: battleTime +0.0417 state Rest->None turn 5->5
+R03 +2s: battleTime +0.0000 state WaitMoving->WaitAIPlan turn 6->6
+R04 +2s: battleTime +0.0139 state Rest->WaitMoving turn 6->7
+R05 +2s: battleTime +0.0000 state WaitMoving->Rest turn 7->7
+R06 +2s: battleTime +0.0000 state WaitPlayerInput->WaitPlayerInput turn 7->8
+R07 +2s: battleTime +0.0000 state WaitAttacking->Attacking turn 9->9
+R08 +2s: battleTime +0.0555 state None->WaitMoving turn 9->10
+R09 +2s: battleTime +0.0000 state WaitMoving->WaitAttacking turn 15->15
+R10 +2s: battleTime +0.0000 state WaitAttacking->Attacking turn 15->15
+R11 +2s: battleTime +0.2014 state Attacking->WaitMoving turn 15->16
+R12 +2s: battleTime +0.0000 state WaitMoving->WaitAttacking turn 16->16
+R13 +2s: battleTime +0.0000 state Attacking->Attacking turn 16->16
+
+== jitprobe W4 (read-only hook on BattlePauseButtonClicked) ==
+events=26
+states_at_click: {12: 3, 8: 3, 1: 3, 0: 2, 7: 6, 3: 1, 10: 4, 11: 4}
+paused_after_click true=13 false=13
+consecutive_flips=25/25
+clicks_in_WaitPlayerInput=0

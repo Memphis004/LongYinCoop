@@ -1,0 +1,83 @@
+# S1.5g session logs (bundle of the small *.log files; *.log is git-ignored, this .txt is the committed copy)
+# notes:
+#   enable-w4.log          = failed first attempt (path bug in the script's sys.path); fixed, then the hook was
+#                            enabled successfully -> proof: 32 W4 events + JitProbeW4 persisted true in MelonPreferences.cfg
+#   status-pre-split.log   = taken at 16:06 while the game was still RUNNING (the 16:07 incident) -> see incident md
+#   verify-game-running.log= verify at 16:11 against the S1.5f baseline; FAIL because that stage's Save.real-* had
+#                            already been restored away -> reason the rebaseline step exists
+
+===== split.log =====
+expect  : coop-test\baselines\20261021-161120\savehash.real.before.txt
+  Save vs baseline: changed=0 missing=0 added=0
+copy    : Save -> coop-test/S1.5g-20261021-160331/save
+rename  : Save -> Save.real-S1.5g-20261021-160331
+copy    : coop-test/S1.5g-20261021-160331/save -> Save
+  copy vs real: changed=0 missing=0 added=0
+OK split S1.5g-20261021-160331: 57 files, real kept as Save.real-S1.5g-20261021-160331
+
+===== rebaseline.log =====
+  Save vs coop-test\S1.5f-20261021-0247\savehash.real.before.txt: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+accepting volatile-only drift
+OK rebaseline: C:\Users\memph\LongYinCoop\coop-test\baselines\20261021-161120\savehash.real.before.txt
+  changed=1 (volatile only) missing=0 added=0
+
+===== enable-w4.log =====
+Traceback (most recent call last):
+  File "C:\Users\memph\LongYinCoop\evidence\S1.5g-20261021-160331\enable-w4.py", line 14, in <module>
+    import coopctl  # noqa: E402
+    ^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'coopctl'
+
+===== status-pre-split.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : RUNNING
+  Save                         files=57  digest=046ceb7a4810
+leftovers: none
+mounted Save matches:
+  ~S1.5f-20261021-0247/savehash.copy.before.txt: changed=1 missing=0 added=0
+
+===== status-post-split.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=046ceb7a4810
+  Save.real-S1.5g-20261021-160331 files=57  digest=046ceb7a4810
+leftovers: Save.real-S1.5g-20261021-160331
+mounted Save matches:
+  EXACT  S1.5g-20261021-160331/savehash.copy.before.txt
+  EXACT  S1.5g-20261021-160331/savehash.real.before.txt
+
+===== restore.log =====
+copy check: changed=1 (pref=1) missing=0 added=0
+rename  : Save -> Save.used-20261021-190951
+rename  : Save.real-S1.5g-20261021-160331 -> Save
+  restored Save vs real baseline: changed=0 missing=0 added=0
+OK restore S1.5g-20261021-160331: 57 files, copy kept at C:\Users\memph\LongYinCoop\coop-test\S1.5g-20261021-160331\Save.used-20261021-190951
+real folder now at C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data\Save (renamed back, never rewritten)
+
+===== status-post-restore.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=046ceb7a4810
+leftovers: none
+mounted Save matches:
+  EXACT  S1.5g-20261021-160331/savehash.copy.before.txt
+  EXACT  S1.5g-20261021-160331/savehash.real.before.txt
+
+===== status-postclose.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=046ceb7a4810
+leftovers: none
+mounted Save matches:
+  ~S1.5f-20261021-0247/savehash.copy.before.txt: changed=1 missing=0 added=0
+
+===== verify-game-running.log =====
+mounted Save:
+  vs real baseline: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+  vs copy baseline: changed=1 missing=0 added=0
+
+real folder Save.real-S1.5f-20261021-0247: MISSING
+
+RESULT: FAIL

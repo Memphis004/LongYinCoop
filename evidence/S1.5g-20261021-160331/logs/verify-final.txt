@@ -1,0 +1,15 @@
+== rehash of current Save ==
+current Save                 files=57 digest=046ceb7a4810dc7f32af172cdd67a425cc35cc5be0aa09f8d15d596b60fd2848
+S1.5g real.before            files=57 digest=046ceb7a4810dc7f32af172cdd67a425cc35cc5be0aa09f8d15d596b60fd2848
+S1.5g copy.before            files=57 digest=046ceb7a4810dc7f32af172cdd67a425cc35cc5be0aa09f8d15d596b60fd2848
+canonical (S1.5f)            files=57 digest=2b0548fe464b6f3d5959733eb4c8c4e135e7923e4d659174d40bd5b8306c43ef
+
+== current vs S1.5g real.before ==
+  changed=0 missing=0 added=0
+== current vs canonical S1.5f ==
+  changed=1 missing=0 added=0
+    changed: PlayerprefData.dat
+== S1.5g real.before vs copy.before (split integrity) ==
+  changed=0 missing=0 added=0
+
+VERDICT: 57/57 EXACT | canonical-equal-except-pref: ['PlayerprefData.dat']
