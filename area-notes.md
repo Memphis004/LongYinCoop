@@ -301,6 +301,37 @@ TIME_ACTION_DONE   { reqId, worldDayBefore, worldDayAfter,
 
 **ยังต้องยืนยัน**: ตัวเลือก 1/5/10 สร้างจาก UI ตัวไหนแน่ (`ProduceBuildingWork` overload ไม่มี param) และพฤติกรรมปุ่ม `>>` **[NOT-RUN]**
 
+## S4c — Time-consuming actions: design notes (2026-10-22)
+
+### ข้อเท็จจริงที่ยืนยันแล้ว (ห้ามแทนด้วย GUESS)
+
+1. **`totalWorkingDay` ไม่ใช่หลักฐานของเวลาที่ผ่านจริง** **[RUNTIME]**
+   - งาน 10 วันปกติ: `total=10` และปฏิทิน +10
+   - งาน 10 วัน + กด `>>`: `total=10` (ระหว่าง skip เห็น `9`), `left=0`, ปฏิทิน **+1**
+   ⇒ อ่าน `totalWorkingDay` แล้วสรุปว่า "ผ่านไป N วัน" = **ผิด**
+2. **`WorldData.worldTime` (year/month/day) + `hour` = แหล่งความจริงเดียวของเวลาโลก** **[RUNTIME]**
+   - `hour` ไม่รีเซ็ตเมื่อวันเปลี่ยน (คง `18.394` ตลอด 15 วัน, `10.138` หลังเปิดเกมใหม่)
+3. **`leftWorkingDay` / `workFinished` / `skipping` เป็น state เสริม** **[RUNTIME]**
+   - `skipping=true` **ค้าง** หลัง `workFinished=true` ⇒ ใช้ `skipping` เป็นตัวบอก "กำลังข้ามอยู่" ไม่ได้หลังจบ
+   - ตัวบอกว่ายังทำงานอยู่คือ `working && !workFinished` หรือ `leftWorkingDay > 0`
+4. **ห้ามอนุมานจำนวนวันจาก "ผลผลิตที่จ่าย"** **[RUNTIME]**
+   - skip จ่ายผลผลิตครบ (`store[0] 6240 → 7085.4`) แต่ปฏิทินเดิน +1
+
+### กติกา protocol ที่ตามมา
+
+- `TIME_ACTION_DONE` ต้องมี `worldDayBefore` / `worldDayAfter` อ่านจาก `WorldData.worldTime` — **ห้าม**ใช้ `totalWorkingDay`
+- guest resync เมื่อ `worldTime` ที่ mirror ต่างจาก host มากกว่า 0 วัน (ไม่ใช่เมื่อ `leftWorkingDay` ต่าง)
+- `skipping` ใช้เป็น flag "กำลังข้าม" ไม่ได้ ⇒ ให้ใช้ `working && !workFinished`
+- ถ้า host กด `>>` ต้องส่ง snapshot หลังจบ **ทันที** เพราะผลผลิตกับปฏิทินไม่สัมพันธ์กันแล้ว
+
+### ChangeDay hook — pre-runtime checklist (ยังไม่รัน: รออนุมัติ)
+
+- [ ] `inspect()` ยืนยัน overload `GameController.ChangeDay(System.Int32)` (DUMP: `dump.cs:376737`; มี `ChangeDay()` และ `ChangeDayDirect(int)` ด้วย)
+- [ ] อ่าน 40 คำสั่งแรกของ body: ต้องไม่มี write ที่ไม่ใช่ state ของวัน/UI (ถ้ามี ให้หยุดรายงานก่อน hook)
+- [ ] `snapshot()` ก่อน/หลัง (worldTime, WorkingUI 4 field, `ForceData.resourceStore`)
+- [ ] hook เป็น log-only: ไม่มี `Method.invoke`, ไม่มี `Memory.write`, ไม่มี `Interceptor.replace` (บังคับใน `tools/changeday_hook.js`)
+- [ ] ก่อนเปิดเกมทุกครั้ง: `preflight-launch` ต้อง READY (แยกจาก `preflight` เดิมที่ยังต้องมี sampler)
+
 ## คำถามที่ต้องให้คุณตัดสินใจ
 
 1. ~~1/5/10 วัน~~ **วัดแล้ว** (ดู P1-5) — เหลือเฉพาะ: จะวัดว่าตัวเลือกที่มีให้เลือกจริงคือ 1/5/10 ตามที่คุณเห็น หรือต่างออกไป (ต้องกดดูทีละปุ่ม)
