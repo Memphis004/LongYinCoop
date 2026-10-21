@@ -1,0 +1,70 @@
+
+[PASS] frame size == 8 + payload
+[PASS] frame first bytes are big-endian length
+[PASS] frame decodes
+[PASS] frame type/ver/seq survive
+[PASS] payload survives
+[PASS] NextFrameOffset == frame length
+[PASS] max payload frame == 1100 B
+[PASS] payload over cap throws
+[PASS] truncated header rejected
+[PASS] truncated payload rejected
+[PASS] bodyLen < 6 rejected
+[PASS] oversize frame header rejected
+[PASS] unknown type byte rejected
+[PASS] 5000 B payload is chunked (>1 frame)
+[PASS] every chunk frame <= 1100 B
+[PASS] chunks reassemble
+[PASS] reassembled type/seq
+[PASS] reassembled payload identical
+[PASS] no pending left
+[PASS] out-of-order reassembly
+[PASS] duplicate chunk index dropped
+[PASS] pending before timeout
+[PASS] stale pending purged
+[PASS] chunk with total=0 rejected
+[PASS] chunk of chunk throws
+[PASS] small message is one frame
+[PASS] varint u32 boundaries round-trip
+[PASS] float round-trip
+[PASS] bool round-trip
+[PASS] utf8 string round-trip
+[PASS] bytes round-trip
+[PASS] reader exhausted
+[PASS] read past end throws
+[PASS] blob over cap throws
+[PASS] writer grows past initial capacity
+[PASS] varint u64 max round-trip
+[PASS] HMAC-SHA256 RFC4231 case 1
+[PASS] tag is 32 bytes
+[PASS] verify accepts correct tag
+[PASS] verify rejects tampered tag
+[PASS] verify rejects short tag
+[PASS] verify rejects empty secret
+[PASS] nonce must be 32 bytes
+[PASS] fieldHash is order-insensitive
+[PASS] fieldHash is anchor-sensitive
+[PASS] fieldHash is 64 hex chars
+[PASS] replicaHash is order-insensitive
+[PASS] replicaHash repeats
+[PASS] turnIndex changes hash
+[PASS] paused changes hash
+[PASS] death changes hash
+[PASS] unitAlive transition changes hash
+[PASS] hp (3 decimals) changes hash
+[PASS] moved changes hash
+[PASS] hash is 64 hex chars
+[PASS] guest may send AUTH
+[PASS] guest may send PING
+[PASS] guest may send RESYNC
+[PASS] guest may send BYE
+[PASS] guest may NOT send HELLO
+[PASS] guest may NOT send SNAPSHOT
+[PASS] guest may NOT send BATTLE_EVENT
+[PASS] guest may NOT send CHUNK (reassembled type is checked)
+[PASS] unknown byte 0x41 is not allowed
+[PASS] unknown byte is not a defined type
+[PASS] host types are host->guest
+
+RESULT PASS (all T0 checks)
+
