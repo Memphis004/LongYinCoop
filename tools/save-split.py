@@ -35,6 +35,15 @@ PREF_FILE = "PlayerprefData.dat"
 # Files the game/Steam rewrites on its own (S1 §2: 56 SaveSlot* files stayed
 # byte-identical, only PlayerprefData.dat changed). Reported, never fatal.
 VOLATILE_TOP = {PREF_FILE, "steam_autocloud.vdf"}
+# S2 preflight: a launch is only green-lit while a known sampler is already
+# waiting for the process, and the shipped write path (S1.5 IPC) stays disarmed.
+SAMPLER_SCRIPTS = ("spike_watch.py", "s15d_sample.py", "s1_watch.py",
+                   "spike_capture.py", "j7_sample.py", "worldtime_watch.py")
+PREFS_MUST_BE_FALSE = ("AllowRemoteInput", "JitProbe", "JitProbeW2",
+                       "JitProbeW4", "JitProbeW6", "JitProbeW7")
+# A missing key is WARN (MelonLoader default is false); any value outside this
+# set is treated as armed and fails the check.
+PREFS_FALSEY = {"false", "0", "no", "off"}
 
 
 # ---------------------------------------------------------------- utilities
@@ -616,6 +625,145 @@ def cmd_rebaseline(args: argparse.Namespace) -> int:
     return 0
 
 
+def process_alive(pid: int) -> bool:
+    try:
+        res = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"],
+                             capture_output=True, text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return False
+    return str(pid) in res.stdout.split()
+
+
+def process_cmdline(pid: int) -> str | None:
+    script = f'(Get-CimInstance Win32_Process -Filter "ProcessId={pid}").CommandLine'
+    try:
+        res = subprocess.run(["powershell", "-NoProfile", "-NonInteractive", "-Command", script],
+                             capture_output=True, text=True, timeout=40)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return res.stdout.strip() or None
+
+
+def read_prefs(path: Path) -> tuple[dict[str, str], bool]:
+    """Values of the [LongYinCoop] section + whether that section exists."""
+    out: dict[str, str] = {}
+    found = False
+    if not path.is_file():
+        return out, found
+    section = ""
+    for raw in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        line = raw.strip()
+        if not line or line[0] in "#;":
+            continue
+        if line.startswith("[") and line.endswith("]"):
+            section = line[1:-1].strip()
+            if section == "LongYinCoop":
+                found = True
+            continue
+        if section == "LongYinCoop" and "=" in line:
+            key, _, value = line.partition("=")
+            out[key.strip()] = value.strip()
+    return out, found
+
+
+def cmd_preflight(args: argparse.Namespace) -> int:  # noqa: C901 - one linear check list
+    """Refuse to green-light a game launch unless the copy is mounted and the sampler is up."""
+    require_game_closed("preflight")
+    label = args.label
+    dest = label_dir(label)
+    print(f"preflight: label={label}")
+    if not (dest / "MANIFEST.json").is_file():
+        print(f"  REFUSED: manifest not found: {dest / 'MANIFEST.json'}")
+        return 1
+    manifest = read_manifest(label)
+    real_name = manifest["real"]["dir"]
+    real_dir = DATA / real_name
+    save = DATA / "Save"
+    ok = True
+    checks: dict[str, bool] = {}
+
+    # 1. the real folder is still aside and untouched
+    if not real_dir.is_dir():
+        print(f"  FAIL real-aside: {real_name} missing (is the real save mounted?)")
+        checks["real_aside"] = False
+        ok = False
+    else:
+        real_now = hash_tree(real_dir)
+        same = digest_of(real_now) == manifest["real"]["digest"]
+        print(f"  {'OK  ' if same else 'FAIL'} real-aside: {real_name} "
+              f"files={len(real_now)} digest={short(digest_of(real_now))}")
+        checks["real_aside"] = same
+        ok = ok and same
+
+    # 2. the mounted Save is the copy (volatile drift tolerated, nothing else)
+    copy_base = read_hashfile(dest / "savehash.copy.before.txt")
+    mounted = hash_tree(save)
+    changed, missing, added = diff_hashes(copy_base, mounted)
+    bad = [k for k in changed + missing + added if k not in VOLATILE_TOP]
+    hidden = [p.name for p in save.iterdir() if p.name.startswith(HIDDEN_PREFIX)] if save.is_dir() else []
+    mounted_ok = bool(copy_base) and not bad and not hidden
+    print(f"  {'OK  ' if mounted_ok else 'FAIL'} mounted-is-copy: files={len(mounted)} "
+          f"vs copy baseline changed={len(changed)} missing={len(missing)} added={len(added)}"
+          + (f" nonvolatile={bad[:5]}" if bad else "")
+          + (f" hidden_sentinel={hidden}" if hidden else ""))
+    checks["mounted_is_copy"] = mounted_ok
+    ok = ok and mounted_ok
+
+    # 3. exactly the expected leftover
+    left = sorted(left_behind())
+    left_ok = left == [real_name]
+    print(f"  {'OK  ' if left_ok else 'FAIL'} leftovers: {', '.join(left) if left else 'none'}"
+          f"{'' if left_ok else f' (expected only {real_name})'}")
+    checks["leftovers"] = left_ok
+    ok = ok and left_ok
+
+    # 4. sampler process is up, is a known sampler script, and already opened its output
+    pid = args.sampler_pid
+    sampler_ok = False
+    if not process_alive(pid):
+        print(f"  FAIL sampler: pid {pid} is not running")
+    else:
+        cmdline = process_cmdline(pid)
+        hits = [s for s in SAMPLER_SCRIPTS if cmdline and s in cmdline]
+        if not cmdline:
+            print(f"  FAIL sampler: pid {pid} command line not readable")
+        elif not hits:
+            print(f"  FAIL sampler: pid {pid} is not a known sampler ({cmdline[:120]})")
+        elif not Path(args.sampler_out).is_file():
+            print(f"  FAIL sampler: output file not created yet: {args.sampler_out}")
+        else:
+            sampler_ok = True
+            print(f"  OK   sampler: pid {pid} ({hits[0]}) out={args.sampler_out}")
+    checks["sampler"] = sampler_ok
+    ok = ok and sampler_ok
+
+    # 5. the shipped write path must stay disarmed (S2 has no game-state write)
+    prefs_path = DATA.parent / "UserData" / "MelonPreferences.cfg"
+    prefs, has_section = read_prefs(prefs_path)
+    missing = [k for k in PREFS_MUST_BE_FALSE if k not in prefs]
+    armed = [k for k in PREFS_MUST_BE_FALSE
+             if k in prefs and prefs[k].strip().lower() not in PREFS_FALSEY]
+    if missing:
+        print(f"  WARN prefs-disarmed: keys missing from [LongYinCoop] "
+              f"(defaults assumed safe): {', '.join(missing)}")
+    prefs_ok = has_section and not armed
+    if not has_section:
+        print(f"  FAIL prefs-disarmed: [LongYinCoop] section not found in {prefs_path}")
+    else:
+        print(f"  {'OK  ' if prefs_ok else 'FAIL'} prefs-disarmed: "
+              + (f"armed={armed}" if armed else f"{len(PREFS_MUST_BE_FALSE) - len(missing)} keys=false"
+                 + (f", {len(missing)} missing" if missing else "")))
+    checks["prefs_disarmed"] = prefs_ok
+    ok = ok and prefs_ok
+
+    verdict = "READY - you may launch the game" if ok else "REFUSED - do not launch"
+    print(f"PREFLIGHT {verdict}")
+    append_history(label, "preflight", {"ok": ok, "checks": checks,
+                                        "sampler_pid": pid,
+                                        "sampler_out": args.sampler_out})
+    return 0 if ok else 1
+
+
 def cmd_list(args: argparse.Namespace) -> int:
     if not COOP_TEST.is_dir():
         print("no coop-test directory")
@@ -677,6 +825,14 @@ def build_parser() -> argparse.ArgumentParser:
     p_base.add_argument("--against", required=True)
     p_base.add_argument("--reason", required=True)
     p_base.set_defaults(func=cmd_rebaseline)
+
+    p_pre = sub.add_parser("preflight",
+                           help="green-light a game launch: copy mounted + sampler up + prefs disarmed")
+    p_pre.add_argument("--label", required=True)
+    p_pre.add_argument("--sampler-pid", type=int, required=True)
+    p_pre.add_argument("--sampler-out", required=True,
+                       help="sampler output file that must already exist")
+    p_pre.set_defaults(func=cmd_preflight)
 
     sub.add_parser("list", help="history of split/restore runs").set_defaults(func=cmd_list)
     return parser

@@ -1,0 +1,7 @@
+preflight: label=S1.5gB-20261021-200449
+  FAIL real-aside: Save.real-S1.5gB-20261021-200449 missing (is the real save mounted?)
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  FAIL leftovers: none (expected only Save.real-S1.5gB-20261021-200449)
+  FAIL sampler: pid 999999 is not running
+  OK   prefs-disarmed: 6 keys=false
+PREFLIGHT REFUSED - do not launch

@@ -1,0 +1,25 @@
+section [LongYinCoop] found at line 1
+
+[LongYinCoop]
+Enabled = true
+Probe = true
+Ipc = true
+DevCommands = true
+Capture = true
+WorldHz = 10
+WorldStreamHz = 2
+AllowRemoteInput = false
+JitProbe = false
+JitProbeW2 = false
+JitProbeW4 = false
+JitProbeW6 = false
+JitProbeW7 = false
+
+
+keys_present_and_false:
+  AllowRemoteInput = false  => OK false
+  JitProbe = false  => OK false
+  JitProbeW2 = false  => OK false
+  JitProbeW4 = false  => OK false
+  JitProbeW6 = false  => OK false
+  JitProbeW7 = false  => OK false
