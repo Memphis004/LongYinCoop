@@ -152,14 +152,17 @@ def report_diff(label: str, before: dict[str, str], after: dict[str, str]) -> bo
 
 
 def game_running() -> bool:
+    # LONGYIN_GAME_EXE exists so tests can point this check at any live process;
+    # production always uses the real exe name.
+    exe = os.environ.get("LONGYIN_GAME_EXE", EXE)
     try:
         res = subprocess.run(
-            ["tasklist", "/FI", f"IMAGENAME eq {EXE}", "/NH"],
+            ["tasklist", "/FI", f"IMAGENAME eq {exe}", "/NH"],
             capture_output=True, text=True, timeout=20,
         )
     except (OSError, subprocess.SubprocessError) as exc:  # pragma: no cover
         raise SystemExit(f"cannot run tasklist: {exc}")
-    return EXE.lower() in res.stdout.lower()
+    return exe.lower() in res.stdout.lower()
 
 
 def require_game_closed(action: str) -> None:
@@ -764,6 +767,114 @@ def cmd_preflight(args: argparse.Namespace) -> int:  # noqa: C901 - one linear c
     return 0 if ok else 1
 
 
+# ------------------------------------------------------------- launch guard
+
+
+def cmd_preflight_launch(args: argparse.Namespace) -> int:
+    """Fail-closed guard that refuses a launch unless a TEST COPY is mounted.
+
+    Read-only by construction: it never writes a save, a baseline or a history
+    record, and it never starts the game. Exit 0 only when every check passes.
+
+    `leftovers` here means UNEXPECTED leftovers (Save.used-*, a second
+    Save.real-*, a hidden sentinel). `leftovers: none` is PASS. The real folder
+    that a split legitimately moved aside is reported separately as `aside`,
+    because a mounted copy cannot exist without it.
+    """
+    ok = True
+
+    def emit(name: str, good: bool, detail: str) -> None:
+        nonlocal ok
+        ok = ok and good
+        print(f"  {'OK  ' if good else 'FAIL'} {name}: {detail}")
+
+    def structural() -> None:
+        running = game_running()
+        emit("game-not-running", not running,
+             f"{EXE} is running" if running else "not running")
+
+        if not DATA.is_dir():
+            emit("data-dir", False, f"not found: {DATA}")
+            return
+        save = DATA / "Save"
+        if not save.is_dir():
+            emit("save-present", False, f"missing: {save}")
+            return
+
+        aside = [n for n in left_behind() if n.startswith(REAL_PREFIX)]
+        used = [n for n in left_behind() if n.startswith(USED_PREFIX)]
+        emit("unexpected-leftovers", not used, f"none" if not used else f"{used}")
+        emit("aside-exactly-one", len(aside) == 1,
+             f"{aside[0]}" if len(aside) == 1 else f"found {len(aside)}: {aside}")
+
+        hidden = sorted(p.name for p in save.iterdir()
+                        if p.name.startswith(HIDDEN_PREFIX))
+        emit("no-hidden-sentinel", not hidden, "none" if not hidden else f"{hidden}")
+
+        label = args.label
+        if label is None:
+            if len(aside) != 1:
+                emit("label-auto-detect", False,
+                     "cannot infer label (need exactly one Save.real-*)")
+                return
+            label = aside[0][len(REAL_PREFIX):]
+        emit("label", True, label)
+
+        dest = label_dir(label)
+        manifest_path = dest / "MANIFEST.json"
+        if not manifest_path.is_file():
+            emit("manifest", False, f"missing: {manifest_path}")
+            return
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        emit("manifest", True, f"{manifest_path.name} label={manifest.get('label')}")
+
+        real_dir_name = manifest.get("real", {}).get("dir")
+        emit("aside-matches-manifest", aside == [real_dir_name],
+             f"{aside} vs manifest {real_dir_name!r}")
+
+        copy_base_path = dest / "savehash.copy.before.txt"
+        emit("copy-baseline-file", copy_base_path.is_file(), str(copy_base_path.name))
+        if not copy_base_path.is_file():
+            return
+
+        # Refuse the restored / real-save-mounted state outright.
+        real_dir = DATA / real_dir_name if real_dir_name else None
+        emit("real-save-mounted", not (real_dir is not None and not real_dir.is_dir()),
+             "Save is the real folder (no Save.real-* aside)"
+             if real_dir is not None and not real_dir.is_dir() else "no")
+
+        if args.dry_run:
+            print("  ..   hashes: skipped (dry-run)")
+            return
+
+        expected = read_hashfile(copy_base_path)
+        mounted = hash_tree(save)
+        changed, missing, added = diff_hashes(expected, mounted)
+        bad = [k for k in changed + missing + added if k not in VOLATILE_TOP]
+        emit("mounted-is-copy", not bad and bool(expected),
+             f"files={len(mounted)} vs copy baseline changed={len(changed)} "
+             f"missing={len(missing)} added={len(added)}"
+             + (f" nonvolatile={bad[:5]}" if bad else ""))
+
+        if real_dir is not None and real_dir.is_dir():
+            real_now = hash_tree(real_dir)
+            real_ok = digest_of(real_now) == manifest.get("real", {}).get("digest")
+            emit("real-aside-untouched", real_ok,
+                 f"{real_dir.name} files={len(real_now)} digest={short(digest_of(real_now))}")
+
+    try:
+        structural()
+    except Exception as exc:  # fail closed on anything unexpected
+        emit("internal", False, f"{type(exc).__name__}: {exc}")
+
+    if args.dry_run:
+        print(f"PREFLIGHT-LAUNCH DRY-RUN {'ok' if ok else 'structural failure'} "
+              "(no green light - rerun without --dry-run)")
+        return 0 if ok else 1
+    print(f"PREFLIGHT-LAUNCH {'READY - you may launch the game' if ok else 'REFUSED - do not launch'}")
+    return 0 if ok else 1
+
+
 def cmd_list(args: argparse.Namespace) -> int:
     if not COOP_TEST.is_dir():
         print("no coop-test directory")
@@ -833,6 +944,16 @@ def build_parser() -> argparse.ArgumentParser:
     p_pre.add_argument("--sampler-out", required=True,
                        help="sampler output file that must already exist")
     p_pre.set_defaults(func=cmd_preflight)
+
+    p_launch = sub.add_parser(
+        "preflight-launch",
+        help="launch guard: refuse to launch unless a test copy is mounted",
+    )
+    p_launch.add_argument("--label", default=None,
+                          help="split label (default: infer from the single Save.real-*)")
+    p_launch.add_argument("--dry-run", action="store_true",
+                          help="structural checks only - never a launch green light")
+    p_launch.set_defaults(func=cmd_preflight_launch)
 
     sub.add_parser("list", help="history of split/restore runs").set_defaults(func=cmd_list)
     return parser

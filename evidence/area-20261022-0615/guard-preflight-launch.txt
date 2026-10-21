@@ -1,0 +1,38 @@
+# preflight-launch guard — evidence 2026-10-22T06:51:46+07:00
+
+## real state (Save = real folder, unsplit)
+  OK   game-not-running: not running
+  OK   unexpected-leftovers: none
+  FAIL aside-exactly-one: found 0: []
+  OK   no-hidden-sentinel: none
+  FAIL label-auto-detect: cannot infer label (need exactly one Save.real-*)
+PREFLIGHT-LAUNCH REFUSED - do not launch
+exit=1
+
+## dry-run on real state
+  OK   game-not-running: not running
+  OK   unexpected-leftovers: none
+  FAIL aside-exactly-one: found 0: []
+  OK   no-hidden-sentinel: none
+  FAIL label-auto-detect: cannot infer label (need exactly one Save.real-*)
+PREFLIGHT-LAUNCH DRY-RUN structural failure (no green light - rerun without --dry-run)
+exit=1
+
+## sandboxed suite
+PASS  copy-mounted             exit=0 want=0 marker=ok
+PASS  restored-real-save       exit=1 want=1 marker=ok
+PASS  used-leftover            exit=1 want=1 marker=ok
+PASS  two-aside                exit=1 want=1 marker=ok
+PASS  tampered-copy-slot       exit=1 want=1 marker=ok
+PASS  volatile-drift-allowed   exit=0 want=0 marker=ok
+PASS  hidden-sentinel          exit=1 want=1 marker=ok
+PASS  manifest-missing         exit=1 want=1 marker=ok
+PASS  manifest-broken          exit=1 want=1 marker=ok
+PASS  real-aside-touched       exit=1 want=1 marker=ok
+PASS  game-running             exit=1 want=1 marker=ok
+PASS  explicit-label           exit=0 want=0 marker=ok
+PASS  dry-run-ok               exit=0 want=0 marker=ok
+PASS  dry-run-restored         exit=1 want=1 marker=ok
+
+14/14 PASS, 0 FAIL
+exit=0

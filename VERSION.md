@@ -32,6 +32,18 @@
 | ผลบังคับ | ใช้ `--expected-baseline coop-test/baselines/20261021-225856/savehash.real.before.txt` สำหรับ `split` ของรอบ `S2a2-20261021-2254` (รันแล้ว) |
 | หลักฐาน | `evidence/S2a2-20261021-2254/incident-game-open-2254.md`, `rebaseline.txt`, `coop-test/baselines/20261021-225856/REBASELINE.json` |
 
+## Baseline ของรอบสำรวจ Area/UI (2026-10-22 · `area-20261022-0615`)
+
+| รายการ | ค่า |
+|---|---|
+| baseline ก่อน split | `coop-test/baselines/20261022-061550/savehash.real.before.txt` · digest `b069e56c1228` |
+| เหตุผล | เกมถูกเปิดบนเซฟจริง 06:00:22–06:1x **ก่อน** session (ผู้ใช้เป็นคนเปิด) ⇒ เขียน `PlayerprefData.dat` ไฟล์เดียว · `SaveSlot*` 57 ไฟล์ไม่ถูกเขียน |
+| baseline ปัจจุบัน (หลัง incident 06:39) | `coop-test/baselines/20261022-064205/savehash.real.before.txt` · digest **`1901ad90a2c7`** |
+| เหตุผล | incident 2026-10-22 06:39 — **เปิดเกมบนเซฟจริงหลัง restore** เพื่อทดสอบปุ่ม `>>` โดยไม่มี split/preflight · เปลี่ยนเฉพาะ `PlayerprefData.dat` (ตรวจ hash รายไฟล์) · ผู้ใช้ปิดเกมแล้ว · rebaseline volatile-only ตามกฎ |
+| baseline ปัจจุบัน (สุดท้าย) | `coop-test/baselines/20261022-064714/savehash.real.before.txt` · digest **`de7e2af49b23`** |
+| เหตุผล | incident 2026-10-22 06:43 (ครั้งที่ 3) — เปิดเกมบนเซฟจริงหลัง restore อีกครั้งเพื่อวัด `>>` ซ้ำ · เปลี่ยนเฉพาะ `PlayerprefData.dat` · `SaveSlot*` 55 ไฟล์ไม่ถูกเขียน · rebaseline volatile-only |
+| ผลบังคับ | ใช้ `--expected-baseline coop-test/baselines/20261022-064714/savehash.real.before.txt` สำหรับ `split` ครั้งถัดไป (แทน `064205`) |
+
 ## กฎ
 
 1. เทียบ SHA-256 ทั้งสองไฟล์ทุกครั้งที่เริ่ม session — **ไม่ตรง = หยุดและรายงาน** (เกมอัปเดต = anchor ใน notes ทั้งหมดเชื่อไม่ได้)
