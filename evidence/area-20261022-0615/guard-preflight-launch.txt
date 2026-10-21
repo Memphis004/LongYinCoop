@@ -1,9 +1,14 @@
-# preflight-launch guard — evidence 2026-10-22T06:51:46+07:00
+# preflight-launch guard — evidence 2026-10-22T06:56:15+07:00
+
+## rule
+PASS requires leftovers = exactly [Save.real-<label>] (unexpected 0).
+'leftovers: none' from status = the REAL save is mounted = REFUSED.
+'--dry-run' never gives a green light.
 
 ## real state (Save = real folder, unsplit)
   OK   game-not-running: not running
-  OK   unexpected-leftovers: none
-  FAIL aside-exactly-one: found 0: []
+  OK   leftovers-unexpected: none
+  FAIL leftovers-state: none -> the REAL save is mounted (incident state, refused)
   OK   no-hidden-sentinel: none
   FAIL label-auto-detect: cannot infer label (need exactly one Save.real-*)
 PREFLIGHT-LAUNCH REFUSED - do not launch
@@ -11,8 +16,8 @@ exit=1
 
 ## dry-run on real state
   OK   game-not-running: not running
-  OK   unexpected-leftovers: none
-  FAIL aside-exactly-one: found 0: []
+  OK   leftovers-unexpected: none
+  FAIL leftovers-state: none -> the REAL save is mounted (incident state, refused)
   OK   no-hidden-sentinel: none
   FAIL label-auto-detect: cannot infer label (need exactly one Save.real-*)
 PREFLIGHT-LAUNCH DRY-RUN structural failure (no green light - rerun without --dry-run)

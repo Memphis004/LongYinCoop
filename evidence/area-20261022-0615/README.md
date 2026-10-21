@@ -38,6 +38,14 @@
 - หน้ารายชื่อทุกสำนัก = `ForceDetailController` (30 แท็บ)
 - 48 field/class ต้นทางถูกบันทึกพร้อมป้ายใน `area-notes.md`
 
+## กติกาของ `preflight-launch` (มติ 2026-10-22)
+
+- PASS ต้องมี `leftovers = exactly [Save.real-<label>]` (unexpected = 0)
+- `leftovers: none` ตาม `status` = เซฟจริงถูก mount = **REFUSED** (สภาพ incident)
+- `Save.used-*` หรือ `Save.real-*` เกิน 1 ตัว = ambiguous = REFUSED
+- `--dry-run` ไม่ give green light
+- หลักฐาน: `guard-preflight-launch.txt` (real state REFUSED + sandbox 14/14)
+
 ## ข้อจำกัดของรอบนี้
 - ปุ่ม `>>` วัดได้แต่ **ไม่ได้คุมตัวแปร** และทำบนเซฟจริงโดยไม่ตั้งใจ (incident 06:39) — ต้องวัดซ้ำแบบ split ก่อน
 - `areaInteractionTimeData` ความหมายของค่า 1/1 ยังไม่ยืนยัน (GUESS)

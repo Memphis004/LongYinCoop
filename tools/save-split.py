@@ -776,10 +776,16 @@ def cmd_preflight_launch(args: argparse.Namespace) -> int:
     Read-only by construction: it never writes a save, a baseline or a history
     record, and it never starts the game. Exit 0 only when every check passes.
 
-    `leftovers` here means UNEXPECTED leftovers (Save.used-*, a second
-    Save.real-*, a hidden sentinel). `leftovers: none` is PASS. The real folder
-    that a split legitimately moved aside is reported separately as `aside`,
-    because a mounted copy cannot exist without it.
+    Rule (identical to what `split`, `restore` and `preflight` already assume):
+
+      leftovers = exactly [Save.real-<label>]  -> PASS  (copy is mounted)
+      leftovers = none                         -> FAIL  (REAL save is mounted)
+      Save.used-* or a second Save.real-*       -> FAIL  (ambiguous state)
+
+    `split` refuses to run when any leftover exists, and `preflight` demands
+    `leftovers == [Save.real-<label>]`, so "no leftovers at all" can never be a
+    launchable state: it is the incident state this guard exists to refuse.
+    `leftovers: none` is therefore only PASS for *unexpected* leftovers.
     """
     ok = True
 
@@ -803,9 +809,14 @@ def cmd_preflight_launch(args: argparse.Namespace) -> int:
 
         aside = [n for n in left_behind() if n.startswith(REAL_PREFIX)]
         used = [n for n in left_behind() if n.startswith(USED_PREFIX)]
-        emit("unexpected-leftovers", not used, f"none" if not used else f"{used}")
-        emit("aside-exactly-one", len(aside) == 1,
-             f"{aside[0]}" if len(aside) == 1 else f"found {len(aside)}: {aside}")
+        emit("leftovers-unexpected", not used, "none" if not used else f"{used}")
+        if not aside:
+            emit("leftovers-state", False,
+                 "none -> the REAL save is mounted (incident state, refused)")
+        elif len(aside) > 1:
+            emit("leftovers-state", False, f"ambiguous: {len(aside)} Save.real-* -> {aside}")
+        else:
+            emit("leftovers-state", True, f"1 expected aside: {aside[0]}")
 
         hidden = sorted(p.name for p in save.iterdir()
                         if p.name.startswith(HIDDEN_PREFIX))
