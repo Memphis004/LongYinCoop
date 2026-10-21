@@ -1,0 +1,65 @@
+# S1.5gB session logs (bundle; *.log is git-ignored, this .txt is the committed copy)
+
+===== rebaseline.log =====
+  Save vs coop-test\baselines\20261021-161120\savehash.real.before.txt: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+accepting volatile-only drift
+OK rebaseline: C:\Users\memph\LongYinCoop\coop-test\baselines\20261021-200450\savehash.real.before.txt
+  changed=1 (volatile only) missing=0 added=0
+
+===== split.log =====
+expect  : coop-test\baselines\20261021-200450\savehash.real.before.txt
+  Save vs baseline: changed=0 missing=0 added=0
+copy    : Save -> coop-test/S1.5gB-20261021-200449/save
+rename  : Save -> Save.real-S1.5gB-20261021-200449
+copy    : coop-test/S1.5gB-20261021-200449/save -> Save
+  copy vs real: changed=0 missing=0 added=0
+OK split S1.5gB-20261021-200449: 57 files, real kept as Save.real-S1.5gB-20261021-200449
+
+===== status-post-split.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=6dd645d9ef17
+  Save.real-S1.5gB-20261021-200449 files=57  digest=6dd645d9ef17
+leftovers: Save.real-S1.5gB-20261021-200449
+mounted Save matches:
+  EXACT  S1.5gB-20261021-200449/savehash.copy.before.txt
+  EXACT  S1.5gB-20261021-200449/savehash.real.before.txt
+
+===== status-postclose.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=854cc890430f
+  Save.real-S1.5gB-20261021-200449 files=57  digest=6dd645d9ef17
+leftovers: Save.real-S1.5gB-20261021-200449
+mounted Save matches:
+  ~S1.5gB-20261021-200449/savehash.copy.before.txt: changed=1 missing=0 added=0
+
+===== verify-postclose.log =====
+mounted Save:
+  vs real baseline: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+  vs copy baseline: changed=1 missing=0 added=0
+
+real folder Save.real-S1.5gB-20261021-200449:
+  vs real baseline: changed=0 missing=0 added=0
+  mtime/size drift: 0
+
+RESULT: PASS
+
+===== restore.log =====
+copy check: changed=1 (pref=1) missing=0 added=0
+rename  : Save -> Save.used-20261021-202904
+rename  : Save.real-S1.5gB-20261021-200449 -> Save
+  restored Save vs real baseline: changed=0 missing=0 added=0
+OK restore S1.5gB-20261021-200449: 57 files, copy kept at C:\Users\memph\LongYinCoop\coop-test\S1.5gB-20261021-200449\Save.used-20261021-202904
+real folder now at C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data\Save (renamed back, never rewritten)
+
+===== status-post-restore.log =====
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=6dd645d9ef17
+leftovers: none
+mounted Save matches:
+  EXACT  S1.5gB-20261021-200449/savehash.copy.before.txt
+  EXACT  S1.5gB-20261021-200449/savehash.real.before.txt

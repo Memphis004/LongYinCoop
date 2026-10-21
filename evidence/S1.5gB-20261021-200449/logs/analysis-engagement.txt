@@ -1,0 +1,14 @@
+== Phase B battle segments (from samples) ==
+seg1 20:16:30.293 -> 20:28:06.112  dur=695.8s inBattle=True turnMax=139 turnLast=139
+seg2 20:28:06.213 -> 20:28:08.707  dur=2.5s inBattle=False turnMax=-1 turnLast=-1
+
+== idle stretches > 20 s in Phase B (no turn/state/battleTime movement) ==
+
+== accounting ==
+Phase B wall                     =    698.4s (20:16:30.293 -> 20:28:08.707)
+battle-pause windows (paused)    =      0.0s
+Esc-menu freeze (sim frozen)     =      0.0s
+dead tail (stopped playing)      =      0.0s (20:28:08.707 -> 20:28:08.707)
+PLAY TIME (start -> stopped)     =    698.5s  (= 11.6 min)
+
+VERDICT(600 s of continuous play): PASS

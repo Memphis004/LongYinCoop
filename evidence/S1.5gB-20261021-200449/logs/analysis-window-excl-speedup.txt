@@ -1,0 +1,32 @@
+== capture ==
+samples_ok=7438 errors=7 span=750.5s (20:15:38.223 -> 20:28:08.707)
+sample_gaps>0.6s=1 max_gap=0.60s
+   gap 0.60s at 20:15:39.471
+in_battle_samples=6911
+battleTime 0.0000 -> 18.8831 (delta +18.8831)
+turnIndex 0 -> 139 (distinct=140)
+states: {'None': 216, 'WaitPlayerInput': 1888, 'WaitMoving': 739, 'Moving': 675, 'Rest': 676, 'WaitAttacking': 705, 'Attacking': 1964, 'Finishing': 17, 'Finish': 12, 'ShowMovingRage': 3, 'WaitAIPlan': 12, 'ShowAttackingRage': 4}
+activeAutoFight: {False: 6911}
+samples_with_battleTimeScale!=1: 33
+
+== pause windows (paused=true) ==
+windows>=0.30s: 0
+complete_pause_resume_rounds=0
+
+== after-resume progression (2 s window per round) ==
+
+== phase B window (1792588593.800 -> 1792589288.708) ==
+wall=694.8s samples=6901 paused_seconds=0.0s active_seconds=694.8s
+gaps>0.6s=0 max_gap=0.00s
+in_battle_samples=6877/6901
+turnIndex 0 -> 139 (distinct=140)
+battleTime 0.6065 -> 18.8831 (delta +18.2767)
+states: {'WaitPlayerInput': 1886, 'WaitMoving': 739, 'Moving': 675, 'Rest': 676, 'None': 184, 'WaitAttacking': 705, 'Attacking': 1964, 'Finishing': 17, 'Finish': 12, 'ShowMovingRage': 3, 'WaitAIPlan': 12, 'ShowAttackingRage': 4}
+paused_samples=0 fast_scale_samples=0
+units_first=9 units_last=9 units_with_hp_drop=7
+units_dead(last)=['1:10105', '1:10107', '1:10102', '1:10067']
+fighting_samples=6877 non_fighting_samples=24
+battle ended at 20:28:06.112 (last Fighting sample); samples after=24
+
+== mod log ==
+log_lines=170 error_like=0
