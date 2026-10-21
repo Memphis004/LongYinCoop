@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using LongYinCoop.S2;
 using MelonLoader;
 
 [assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.4.0", "Westernholudur")]
@@ -14,6 +15,7 @@ namespace LongYinCoop
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
+        private S2HostService _s2;
         private bool _threadReported;
         private int _ticks;
 
@@ -54,10 +56,20 @@ namespace LongYinCoop
                 _ipc = new IpcServer(_dispatcher);
                 _ipc.Start();
             }
+
+            // S2a-2: spectator snapshot sender — ไม่ทำอะไรจนกว่า coop.net.enabled=true ใน
+            // MelonPreferences.cfg (อ่านไฟล์ตรง ๆ, poll <=1 Hz) และต้องปิด AllowRemoteInput/JitProbe*
+            // (rev4: DevCommands ไม่ถูกตรวจ — ต้องเปิดไว้ให้ `spike status` = เครื่องมือวัดทำงาน)
+            _s2 = new S2HostService(CoopPaths.MelonPreferencesPath, CoopPaths.S2EvidenceDir);
         }
 
         public override void OnDeinitializeMelon()
         {
+            if (_s2 != null)
+            {
+                _s2.Stop();
+                _s2 = null;
+            }
             if (_ipc != null) _ipc.Stop();
             CaptureWriter.Stop();
             BattleLogHook.Uninstall();
@@ -90,6 +102,8 @@ namespace LongYinCoop
             MoveCommand.Tick();
             // S1.5-e: คำสั่งโจมตี — เฟส 2 รอ hp ของเป้าลดจริง
             AttackCommand.Tick();
+            // S2a-2: snapshot sampler/sender (main thread; sample only, never touches game state)
+            if (_s2 != null) _s2.Tick();
 
             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)

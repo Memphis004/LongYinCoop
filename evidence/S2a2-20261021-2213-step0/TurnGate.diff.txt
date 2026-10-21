@@ -1,0 +1,14 @@
+diff --git a/src/LongYinCoop/S1.5/TurnGate.cs b/src/LongYinCoop/S1.5/TurnGate.cs
+index 5b2e1f1..5908545 100644
+--- a/src/LongYinCoop/S1.5/TurnGate.cs
++++ b/src/LongYinCoop/S1.5/TurnGate.cs
+@@ -298,6 +298,9 @@ namespace LongYinCoop
+                         playerControl = u.playerControl,
+                         // S1.5-c ตัดสินใจ: ตัววัดดาเมจที่เป็นไปได้ (อ่านอย่างเดียว)
+                         originHp = SafeOriginHp(u),
++                        // S2a-2 D1: unit death flag (BattleUnit.IsAlive) - added for S2 only,
++                        // NOT part of HashText/CanonicalUnit/stateHash
++                        isAlive = SafeUnitAlive(u),
+                         unitAlive = SafeUnitAlive(u)
+                     });
+ 

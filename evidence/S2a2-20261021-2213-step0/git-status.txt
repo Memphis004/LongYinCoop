@@ -1,0 +1,13 @@
+ M src/LongYinCoop/CoopMod.cs
+ M src/LongYinCoop/CoopPaths.cs
+ M src/LongYinCoop/S1.5/TurnGate.cs
+ M tests/S2Protocol.Tests/Program.cs
+ M tests/S2Protocol.Tests/S2Protocol.Tests.csproj
+?? S2a-2-plan.md
+?? evidence/S2a2-20261021-2213-step0/
+?? src/LongYinCoop/S2/Host/
+?? src/LongYinCoop/S2/S2HostService.cs
+?? src/LongYinCoop/S2/S2NetConfig.cs
+?? src/LongYinCoop/S2/Transport/
+?? tests/S2Protocol.Tests/S2a2Tests.cs
+?? tests/S2Protocol.Tests/fixtures/

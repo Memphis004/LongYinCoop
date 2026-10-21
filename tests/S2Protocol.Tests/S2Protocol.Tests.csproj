@@ -10,9 +10,24 @@
     <RootNamespace>LongYinCoop.S2.Tests</RootNamespace>
   </PropertyGroup>
 
-  <!-- T0: codec/protocol only. The mod sources are linked read-only; no packages. -->
+  <!-- T0/T1: codec/protocol + S2a-2 pure host pieces. The mod sources are linked
+       read-only; no packages. IL2CPP-dependent files (S2/Host/S2Sampler.cs,
+       S2/S2HostService.cs, CoopMod.cs) are intentionally NOT linked. -->
   <ItemGroup>
     <Compile Include="..\..\src\LongYinCoop\S2\Protocol\**\*.cs" LinkBase="Protocol" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Transport\**\*.cs" LinkBase="Transport" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Snapshot.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Counters.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Sender.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2PhaseStats.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2SelfTest.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2WriteGuard.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- fixture (pre-edit TurnGate.cs) is a .txt so the default glob cannot compile it -->
+    <None Include="fixtures\**\*" />
   </ItemGroup>
 
 </Project>

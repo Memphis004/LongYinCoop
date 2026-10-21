@@ -47,8 +47,10 @@ namespace LongYinCoop.S2.Tests
             HashTests();
             AllowlistTests();
 
+            _fail += S2a2Tests.Run();
+
             Console.WriteLine();
-            Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0 checks)" : $"RESULT FAIL ({_fail} checks failed)");
+            Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0/T1 checks)" : $"RESULT FAIL ({_fail} checks failed)");
             return _fail == 0 ? 0 : 1;
         }
 

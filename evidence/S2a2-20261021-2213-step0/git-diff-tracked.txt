@@ -1,0 +1,128 @@
+diff --git a/src/LongYinCoop/CoopMod.cs b/src/LongYinCoop/CoopMod.cs
+index 1e342f5..f91e4e2 100644
+--- a/src/LongYinCoop/CoopMod.cs
++++ b/src/LongYinCoop/CoopMod.cs
+@@ -1,5 +1,6 @@
+ using System;
+ using System.Diagnostics;
++using LongYinCoop.S2;
+ using MelonLoader;
+ 
+ [assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.4.0", "Westernholudur")]
+@@ -14,6 +15,7 @@ namespace LongYinCoop
+ 
+         private MainThreadDispatcher _dispatcher;
+         private IpcServer _ipc;
++        private S2HostService _s2;
+         private bool _threadReported;
+         private int _ticks;
+ 
+@@ -54,10 +56,19 @@ namespace LongYinCoop
+                 _ipc = new IpcServer(_dispatcher);
+                 _ipc.Start();
+             }
++
++            // S2a-2: spectator snapshot sender — ไม่ทำอะไรจนกว่า coop.net.enabled=true ใน
++            // MelonPreferences.cfg (อ่านไฟล์ตรง ๆ, poll <=1 Hz) และต้องปิด AllowRemoteInput/DevCommands
++            _s2 = new S2HostService(CoopPaths.MelonPreferencesPath, CoopPaths.S2EvidenceDir);
+         }
+ 
+         public override void OnDeinitializeMelon()
+         {
++            if (_s2 != null)
++            {
++                _s2.Stop();
++                _s2 = null;
++            }
+             if (_ipc != null) _ipc.Stop();
+             CaptureWriter.Stop();
+             BattleLogHook.Uninstall();
+@@ -90,6 +101,8 @@ namespace LongYinCoop
+             MoveCommand.Tick();
+             // S1.5-e: คำสั่งโจมตี — เฟส 2 รอ hp ของเป้าลดจริง
+             AttackCommand.Tick();
++            // S2a-2: snapshot sampler/sender (main thread; sample only, never touches game state)
++            if (_s2 != null) _s2.Tick();
+ 
+             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
+             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)
+diff --git a/src/LongYinCoop/CoopPaths.cs b/src/LongYinCoop/CoopPaths.cs
+index 59eeb7d..b3d89e9 100644
+--- a/src/LongYinCoop/CoopPaths.cs
++++ b/src/LongYinCoop/CoopPaths.cs
+@@ -15,6 +15,17 @@ namespace LongYinCoop
+             get { return Path.Combine(GameRoot, "UserData", "LongYinCoop"); }
+         }
+ 
++        /// <summary>S2: อ่านค่า coop.net.* จากไฟล์นี้ตรง ๆ เพื่อสลับ pref กลางรันได้ (D2-i)</summary>
++        public static string MelonPreferencesPath
++        {
++            get { return Path.Combine(GameRoot, "UserData", "MelonPreferences.cfg"); }
++        }
++
++        public static string S2EvidenceDir
++        {
++            get { return Path.Combine(UserDataDir, "S2"); }
++        }
++
+         public static string EnsureUserDataDir()
+         {
+             string dir = UserDataDir;
+diff --git a/src/LongYinCoop/S1.5/TurnGate.cs b/src/LongYinCoop/S1.5/TurnGate.cs
+index 5b2e1f1..5908545 100644
+--- a/src/LongYinCoop/S1.5/TurnGate.cs
++++ b/src/LongYinCoop/S1.5/TurnGate.cs
+@@ -298,6 +298,9 @@ namespace LongYinCoop
+                         playerControl = u.playerControl,
+                         // S1.5-c ตัดสินใจ: ตัววัดดาเมจที่เป็นไปได้ (อ่านอย่างเดียว)
+                         originHp = SafeOriginHp(u),
++                        // S2a-2 D1: unit death flag (BattleUnit.IsAlive) - added for S2 only,
++                        // NOT part of HashText/CanonicalUnit/stateHash
++                        isAlive = SafeUnitAlive(u),
+                         unitAlive = SafeUnitAlive(u)
+                     });
+ 
+diff --git a/tests/S2Protocol.Tests/Program.cs b/tests/S2Protocol.Tests/Program.cs
+index 3657ba6..6bb9473 100644
+--- a/tests/S2Protocol.Tests/Program.cs
++++ b/tests/S2Protocol.Tests/Program.cs
+@@ -47,8 +47,10 @@ namespace LongYinCoop.S2.Tests
+             HashTests();
+             AllowlistTests();
+ 
++            _fail += S2a2Tests.Run();
++
+             Console.WriteLine();
+-            Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0 checks)" : $"RESULT FAIL ({_fail} checks failed)");
++            Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0/T1 checks)" : $"RESULT FAIL ({_fail} checks failed)");
+             return _fail == 0 ? 0 : 1;
+         }
+ 
+diff --git a/tests/S2Protocol.Tests/S2Protocol.Tests.csproj b/tests/S2Protocol.Tests/S2Protocol.Tests.csproj
+index d2834e3..50a0c62 100644
+--- a/tests/S2Protocol.Tests/S2Protocol.Tests.csproj
++++ b/tests/S2Protocol.Tests/S2Protocol.Tests.csproj
+@@ -10,9 +10,22 @@
+     <RootNamespace>LongYinCoop.S2.Tests</RootNamespace>
+   </PropertyGroup>
+ 
+-  <!-- T0: codec/protocol only. The mod sources are linked read-only; no packages. -->
++  <!-- T0/T1: codec/protocol + S2a-2 pure host pieces. The mod sources are linked
++       read-only; no packages. IL2CPP-dependent files (S2/Host/S2Sampler.cs,
++       S2/S2HostService.cs, CoopMod.cs) are intentionally NOT linked. -->
+   <ItemGroup>
+     <Compile Include="..\..\src\LongYinCoop\S2\Protocol\**\*.cs" LinkBase="Protocol" />
++    <Compile Include="..\..\src\LongYinCoop\S2\Transport\**\*.cs" LinkBase="Transport" />
++    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Snapshot.cs" LinkBase="Host" />
++    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Counters.cs" LinkBase="Host" />
++    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2Sender.cs" LinkBase="Host" />
++    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2PhaseStats.cs" LinkBase="Host" />
++    <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- fixture (pre-edit TurnGate.cs) is a .txt so the default glob cannot compile it -->
++    <None Include="fixtures\**\*" />
+   </ItemGroup>
+ 
+ </Project>

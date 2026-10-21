@@ -14,7 +14,12 @@ namespace LongYinCoop.S2.Protocol
         public int Column;
         public float Hp;
         public bool IsAlive;    // BattleUnit.IsAlive - the only trustworthy death flag [RUNTIME]
-        public bool UnitAlive;  // BattleUnit.unitAlive - lags one frame after hp reaches 0 [RUNTIME]
+        // rev4 (2026-10-21, decision 2 = option ii): a COPY of IsAlive, kept only to keep the
+        // hash spec unchanged. There is no second source in the game (the interop assembly has
+        // no unitAlive member, and `spike status` reports SafeUnitAlive(u) => u.IsAlive).
+        // It lags hp by <= 1 frame. Reconsider dropping this field at the next protocol
+        // version change (noted in S2-plan.md).
+        public bool UnitAlive;
         public bool Moved;
         public bool Attacked;
     }
@@ -29,7 +34,9 @@ namespace LongYinCoop.S2.Protocol
 
     /// <summary>
     /// Canonical replica fingerprint (rev2 §13.2). Deterministic across unit
-    /// ordering, sensitive to hp/isAlive. Never used to decide gameplay.
+    /// ordering; sensitive to hp/isAlive/unitAlive/moved/attacked. Never used to
+    /// decide gameplay. Spec is frozen: `UnitAlive` stays even though it is a copy
+    /// of `IsAlive` (rev4 decision 2).
     /// </summary>
     public static class ReplicaHash
     {

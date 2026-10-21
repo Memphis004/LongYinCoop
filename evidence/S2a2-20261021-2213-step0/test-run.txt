@@ -1,0 +1,180 @@
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+[PASS] frame size == 8 + payload
+[PASS] frame first bytes are big-endian length
+[PASS] frame decodes
+[PASS] frame type/ver/seq survive
+[PASS] payload survives
+[PASS] NextFrameOffset == frame length
+[PASS] max payload frame == 1100 B
+[PASS] payload over cap throws
+[PASS] truncated header rejected
+[PASS] truncated payload rejected
+[PASS] bodyLen < 6 rejected
+[PASS] oversize frame header rejected
+[PASS] unknown type byte rejected
+[PASS] 5000 B payload is chunked (>1 frame)
+[PASS] every chunk frame <= 1100 B
+[PASS] chunks reassemble
+[PASS] reassembled type/seq
+[PASS] reassembled payload identical
+[PASS] no pending left
+[PASS] out-of-order reassembly
+[PASS] duplicate chunk index dropped
+[PASS] pending before timeout
+[PASS] stale pending purged
+[PASS] chunk with total=0 rejected
+[PASS] chunk of chunk throws
+[PASS] small message is one frame
+[PASS] varint u32 boundaries round-trip
+[PASS] float round-trip
+[PASS] bool round-trip
+[PASS] utf8 string round-trip
+[PASS] bytes round-trip
+[PASS] reader exhausted
+[PASS] read past end throws
+[PASS] blob over cap throws
+[PASS] writer grows past initial capacity
+[PASS] varint u64 max round-trip
+[PASS] HMAC-SHA256 RFC4231 case 1
+[PASS] tag is 32 bytes
+[PASS] verify accepts correct tag
+[PASS] verify rejects tampered tag
+[PASS] verify rejects short tag
+[PASS] verify rejects empty secret
+[PASS] nonce must be 32 bytes
+[PASS] fieldHash is order-insensitive
+[PASS] fieldHash is anchor-sensitive
+[PASS] fieldHash is 64 hex chars
+[PASS] replicaHash is order-insensitive
+[PASS] replicaHash repeats
+[PASS] turnIndex changes hash
+[PASS] paused changes hash
+[PASS] death changes hash
+[PASS] unitAlive transition changes hash
+[PASS] hp (3 decimals) changes hash
+[PASS] moved changes hash
+[PASS] hash is 64 hex chars
+[PASS] guest may send AUTH
+[PASS] guest may send PING
+[PASS] guest may send RESYNC
+[PASS] guest may send BYE
+[PASS] guest may NOT send HELLO
+[PASS] guest may NOT send SNAPSHOT
+[PASS] guest may NOT send BATTLE_EVENT
+[PASS] guest may NOT send CHUNK (reassembled type is checked)
+[PASS] unknown byte 0x41 is not allowed
+[PASS] unknown byte is not a defined type
+[PASS] host types are host->guest
+[PASS] s2a2: loopback pair is open
+[PASS] s2a2: loopback send host->guest
+[PASS] s2a2: loopback receive on peer
+[PASS] s2a2: loopback inbox empty after receive
+[PASS] s2a2: loopback stats count frames/bytes
+[PASS] s2a2: loopback guest->host direction
+[PASS] s2a2: closed pair refuses send (fail-closed)
+[PASS] s2a2: still refuses while peer closed
+[PASS] s2a2: sends after both ends open
+[PASS] s2a2: capacity 1 accepted
+[PASS] s2a2: capacity 2 accepted
+[PASS] s2a2: over capacity drops and counts
+[PASS] s2a2: transport kind/describe is loopback
+[PASS] s2a2: sender accepts post 0
+[PASS] s2a2: sender accepts post 1
+[PASS] s2a2: sender accepts post 2
+[PASS] s2a2: sender accepts post 3
+[PASS] s2a2: sender accepts post 4
+[PASS] s2a2: sender queued 5 frames to the transport
+[PASS] s2a2: sender counters: framesSent/bytesSent
+[PASS] s2a2: sender metrics recorded 5 samples
+[PASS] s2a2: sender metrics p50 sane
+[PASS] s2a2: ndjson writer wrote 5 frame lines
+[PASS] s2a2: first delivered frame is Snapshot
+[PASS] s2a2: delivered payload decodes to a frame
+[PASS] s2a2: delivered frame keeps unit count + audit
+[PASS] s2a2: sender stats after stop: posted 5 sent 5 dropped 0
+[PASS] s2a2: full queue drops instead of blocking main thread
+[PASS] s2a2: queue drops counted in counters
+[PASS] s2a2: unit cap is 64
+[PASS] s2a2: encoded payload smaller than message cap
+[PASS] s2a2: payload roundtrip decodes
+[PASS] s2a2: header roundtrip
+[PASS] s2a2: unit roundtrip keeps -1 row/col and flags
+[PASS] s2a2: audit recomputed on decode matches
+[PASS] s2a2: truncated payload fails closed
+[PASS] s2a2: decode refuses over-cap unit count
+[PASS] s2a2: decode refuses empty payload
+[PASS] s2a2: oversized frame is chunked by codec
+[PASS] s2a2: each chunk frame fits the frame cap
+[PASS] s2a2: message over the 64 KB cap throws (fail-closed)
+[PASS] s2a2: audit tuple stable for unchanged state
+[PASS] s2a2: audit tuple text has no secret
+[PASS] s2a2: audit tuple is order independent
+[PASS] s2a2: audit changes when hp changes
+[PASS] s2a2: audit changes when isAlive changes
+[PASS] s2a2: audit ignores moved/attacked (informational fields only)
+[PASS] s2a2: audit changes when grid position changes
+[PASS] s2a2: audit changes when battleTime changes
+[PASS] s2a2: audit changes when turnIndex changes
+[PASS] s2a2: guest Hello is forbidden
+[PASS] s2a2: guest Snapshot is forbidden
+[PASS] s2a2: guest BattleEvent is forbidden
+[PASS] s2a2: chunked forbidden message is rejected after reassembly
+[PASS] s2a2: guest Auth is control-accepted
+[PASS] s2a2: guest Ping is control-accepted
+[PASS] s2a2: guest Resync is control-accepted
+[PASS] s2a2: guest Bye is control-accepted
+[PASS] s2a2: control frames counted, not forbidden
+[PASS] s2a2: empty frame is malformed
+[PASS] s2a2: undecodable header is malformed
+[PASS] s2a2: trailing bytes are malformed
+[PASS] s2a2: chunk with idx>=total is malformed
+[PASS] s2a2: incomplete chunk awaits without dropping
+[PASS] s2a2: no game command was ever accepted
+[PASS] s2a2: NoForbiddenActivity is false when forbidden frames were dropped
+[PASS] s2a2: gate leaves the audit tuple untouched (no write path)
+[PASS] s2a2: gate exposes exactly one entry point: Accept
+[PASS] s2a2: gate entry point cannot take a game object
+[PASS] s2a2: missing coop.net.enabled defaults to false/off/off
+[PASS] s2a2: host line parses to a valid enabled setting
+[PASS] s2a2: describe never leaks the secret
+[PASS] s2a2: guest role is parsed (service decides host-only)
+[PASS] s2a2: short secret is invalid
+[PASS] s2a2: unknown role is invalid
+[PASS] s2a2: truthy spellings accepted
+[PASS] s2a2: missing section is invalid
+[PASS] s2a2: allowNonLoopback parsed (bind policy decided by S2b)
+[PASS] s2a2: IsTrue spellings
+[PASS] s2a2: missing cfg file is reported, not thrown
+[PASS] s2a2: first poll reads the file
+[PASS] s2a2: poll inside the interval does not re-read
+[PASS] s2a2: poll after the interval picks up the change
+[PASS] s2a2: toggling back off is picked up (A/B blocks)
+[PASS] s2a2: ForceRead reads immediately
+[PASS] s2a2: empty phase stats are zeroed
+[PASS] s2a2: phase stats mean/min/max
+[PASS] s2a2: phase stats snapshot text
+[PASS] s2a2: phase stats reset for the next A/B block
+[PASS] s2a2: exit-3 rule: |B-A| < 1 ms is inconclusive
+[PASS] s2a2: exit-3 rule: >= 1 ms is a real difference
+[PASS] s2a2: writer counts both frames and markers
+[PASS] s2a2: writer produced one line per record
+[PASS] s2a2: frame line is json-ish with units
+[PASS] s2a2: marker line preserved
+[PASS] s2a2: append keeps previous evidence
+[PASS] s2a2: ndjson frame line has no secret-ish fields
+[PASS] s2a2: repo root found for the D1 guard
+[PASS] s2a2: pre-edit TurnGate fixture exists
+[PASS] s2a2: D1 diff removes nothing from TurnGate.cs
+[PASS] s2a2: D1 diff adds exactly 3 lines (2 comments + isAlive)
+[PASS] s2a2: every added line is exactly the approved D1 block
+[PASS] s2a2: hash preimage lines exist and are identical to the pre-edit file
+[PASS] s2a2: hash preimage SHA-256 unchanged (stateHash of an unchanged state cannot move)
+[PASS] s2a2: no hash preimage line gained an isAlive field
+[PASS] s2a2: CanonicalUnit signature and call site unchanged
+[PASS] s2a2: stateHash input lines unchanged (only the new comment mentions stateHash)
+[PASS] s2a2: isAlive appears exactly once outside the hash path
+[PASS] s2a2: unitRows object still exposes both unitAlive and isAlive
+
+RESULT PASS (all T0/T1 checks)
