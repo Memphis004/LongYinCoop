@@ -25,7 +25,21 @@ global-metadata.dat
 *.dll.off
 
 # --- local test artifacts ---
-coop-test/
+# Save copies, recorder streams and logs stay local. Only the small audit
+# records (hash lists, rebaseline/approval notes) are tracked, so baseline
+# history is reviewable in git without ever committing a save.
+coop-test/**
+!coop-test/*/
+!coop-test/*/*/
+!coop-test/**/savehash.real.before.txt
+!coop-test/**/savehash.copy.before.txt
+!coop-test/**/savehash.*.txt.note
+!coop-test/**/REBASELINE.json
+!coop-test/**/APPROVAL.md
+coop-test/**/save/
+coop-test/**/Save.used-*/
+coop-test/**/Save.real-*/
+coop-test/**/__pycache__/
 *.log
 s0-result.json
 compat-notes.local.md

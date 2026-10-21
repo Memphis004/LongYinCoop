@@ -1,0 +1,13 @@
+{
+  "ts": "2026-10-20T14:31:58",
+  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\S1.5-20261020-142237-dry2\\savehash.real.before.txt",
+  "reason": "PlayerprefData.dat rewritten by game launches at 14:24:47 and 14:28:55 on the real save; all 56 SaveSlot* files unchanged",
+  "files": 57,
+  "digest": "80e8d7364047334719d4a2bcceb63ba8b8bb061fe2b2ac6d4d87c0dacf6894f2",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true
+}

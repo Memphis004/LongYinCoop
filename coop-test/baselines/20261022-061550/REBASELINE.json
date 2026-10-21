@@ -1,0 +1,13 @@
+{
+  "ts": "2026-10-22T06:15:50",
+  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\baselines\\20261021-225856\\savehash.real.before.txt",
+  "reason": "exploration area-20261022: game open 06:00:22-06:1x wrote PlayerprefData.dat only; SaveSlot* untouched (verified per-file)",
+  "files": 57,
+  "digest": "b069e56c12282ddcfff2772ad275a83a72c2421bc31271b19d2d5a24cacea38e",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true
+}

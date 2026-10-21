@@ -1,0 +1,13 @@
+{
+  "ts": "2026-10-21T16:11:20",
+  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\S1.5f-20261021-0247\\savehash.real.before.txt",
+  "reason": "PlayerprefData.dat volatile (D10): game was opened on the real save 16:07-16:09 before split (S1.5g incident, SaveSlot* unchanged)",
+  "files": 57,
+  "digest": "046ceb7a4810dc7f32af172cdd67a425cc35cc5be0aa09f8d15d596b60fd2848",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true
+}

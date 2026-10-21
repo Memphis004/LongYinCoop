@@ -1,0 +1,13 @@
+{
+  "ts": "2026-10-22T06:47:14",
+  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\baselines\\20261022-064205\\savehash.real.before.txt",
+  "reason": "incident 2026-10-22 06:43 (3rd): game reopened on the REAL save after restore to re-test skip >>, no split/preflight; only PlayerprefData.dat written, SaveSlot* 55 files untouched",
+  "files": 57,
+  "digest": "de7e2af49b23db53fb102b2cd5891106447658ce9ca7e77b42ee98fd3dbd863e",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true
+}
