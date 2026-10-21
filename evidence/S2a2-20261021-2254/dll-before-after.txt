@@ -1,0 +1,11 @@
+== step 3 backup (before copy-in) ==
+LongYinCoop.dll  bytes=202752  sha256=517758147f59170e584075a4b42f61e00d293803febe36f8a040bcdad4592612
+LongYinCoop.pdb  bytes=46976  sha256=029d8a74899777bf52e3505022e80e6a1d011ca53fe9e3f28463a06d36b32fc1
+LongYinCoop.dll.off  bytes=202752  sha256=517758147f59170e584075a4b42f61e00d293803febe36f8a040bcdad4592612
+LongYinCoop.pdb.off  bytes=46976  sha256=029d8a74899777bf52e3505022e80e6a1d011ca53fe9e3f28463a06d36b32fc1
+
+== step 6 copy-in (2026-10-21) ==
+Mods\LongYinCoop.dll      bytes=257536  sha256=cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+Mods\LongYinCoop.pdb      bytes=66936  sha256=4fc142bdaef7acf52c2889292024d9b0b86e065f9ac73fb324d52f751e47240e
+build sha256 (step 2)   = cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+match                   = True

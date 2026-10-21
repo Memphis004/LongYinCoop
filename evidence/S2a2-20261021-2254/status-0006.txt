@@ -1,0 +1,7 @@
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : RUNNING
+  Save                         files=57  digest=bf17f3ceb117
+  Save.real-S2a2-20261021-2254 files=57  digest=854cc890430f
+leftovers: Save.real-S2a2-20261021-2254
+mounted Save matches:
+  ~S2a2-20261021-2254/savehash.copy.before.txt: changed=1 missing=0 added=0

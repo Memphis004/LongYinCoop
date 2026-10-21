@@ -1,0 +1,10 @@
+samples=7438 span=750.5s inBattle=6911
+recorder dt(ms): p50=100.60 p95=101.20 max=600.60
+frame-derived instantaneous mean frame time(ms): p50=7.236 p95=14.371 p99=33.500 max=453.300
+sampled unscaledDeltaTime(ms): p50=6.945 p95=20.831 p99=34.727 max=652.745 (n=7437)
+blocks ref=26 sim=25
+|500ms-sim minus 100ms-reference| per 30s block(ms): median=0.0000 p95=0.0000 max=0.0000
+reference(100ms) 30s block mean frame time(ms): min=6.832 max=8.144 spread=1.312 sd=0.249  (samples/block 5..299)
+sim(500ms) 30s block mean frame time(ms): min=7.576 max=8.144 spread=0.568 sd=0.110  (samples/block 61..61)
+adjacent 30s blocks |delta|(ms): median=0.0670 p95=0.5682 max=1.1014
+criterion context: margin=1.0ms band=0.5ms -> 0.5ms == 10.3 fps at p50 frame time

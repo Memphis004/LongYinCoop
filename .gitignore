@@ -40,3 +40,6 @@ evidence/**/coop-run.log
 
 # raw status streams are large runtime logs (75MB) - keep local, aggregates live in the reports
 evidence/**/*.ndjson
+
+# binary drops inside evidence stay local
+evidence/**/*.dll

@@ -1,0 +1,7 @@
+preflight: label=S2a2-20261021-2254
+  OK   real-aside: Save.real-S2a2-20261021-2254 files=57 digest=854cc890430f
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  OK   leftovers: Save.real-S2a2-20261021-2254
+  OK   sampler: pid 46824 (s15d_sample.py) out=coop-test\S2a2-20261021-2254\sampler.ndjson
+  OK   prefs-disarmed: 6 keys=false
+PREFLIGHT READY - you may launch the game

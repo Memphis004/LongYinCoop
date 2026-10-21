@@ -146,3 +146,11 @@ FAIL ข้อใด = รายงานตรง ๆ คงสถานะ rol
 **preflight:** READY ได้ต่อเมื่อมี sampler PID + ไฟล์ผล (ข้อ 9–10) + เกมปิด + `Save` เป็นสำเนา (ไม่ตรวจ `DevCommands`)
 
 ขั้น 0 + fix round 2 เสร็จแล้ว (**232 checks PASS / 0 FAIL** · `evidence/S2a2-20261021-2213-step0/`) · **rev4 นี้รันขั้น 1–10 ได้ทันที**
+
+### 8.5 rev5 — มติผู้ใช้ 2026-10-21 (หลังคำถามก่อนเปิดเกม) **แทนที่วิธีทำ exit 3 และ exit 4 ข้างบน**
+เอกสารบังคับ: `evidence/S2a2-20261021-2254/ab-protocol-v2.md` (สรุปใน `AGENTS.md` มติ rev5)
+- **exit 3 = วัด mean อย่างเดียว** ไม่เพิ่ม p99 ไม่ redeploy · ผ่านเกณฑ์ mean = **PASS-with-limitation** (p99 = **NOT-RUN**) · `delta` ใน ±0.5 ms รอบ margin 1.0 ms = **INCONCLUSIVE** · เกณฑ์ margin 1.0 / band 0.5 ไม่ขยับ
+- **A-B-A-B 120 s:** ศึกต้องนิ่งที่ `nowActiveState = WaitPlayerInput` ตลอด และห้ามสั่ง action ใด ๆ · ก่อนทุกบล็อกตรวจ `sampler.ndjson` ยังโต (ตายกลางบล็อก = ทิ้งบล็อกนั้น) · จด wall-clock ทุกการสลับ pref + sha256 cfg ก่อน/หลัง ลง `frame-time-ab.txt` · `phase.start/phase.idle` ไม่โผล่ใน ~3 s = หยุดและรายงาน
+- **exit 4 ย้ายไปหลังจบ A-B-A-B** โดยเปิดเฟส B ค้างไว้แล้วเล่น 1 เทิร์น (ไม่สลับ pref ระหว่างเล่น)
+- **exit 6:** self-test ต้องเกิดในศึกจริง และ marker ต้องมี `haveBefore=true` **และ** `haveAfter=true`; ถ้า false = โมฆะ/NOT-RUN
+- ลำดับบล็อกคงเดิม: A1(false 30s) → B1(true 30s, self-test รันในศึก) → A2(false 30s) → B2(true 30s) → exit 4

@@ -1,0 +1,198 @@
+[00:26:11] waiting for the game (3600s left)
+[00:26:14] waiting for the game (3597s left)
+[00:26:17] waiting for the game (3594s left)
+[00:26:20] waiting for the game (3591s left)
+[00:26:23] waiting for the game (3588s left)
+[00:26:26] waiting for the game (3584s left)
+[00:26:29] waiting for the game (3581s left)
+[00:26:32] waiting for the game (3578s left)
+[00:26:35] waiting for the game (3575s left)
+[00:26:39] waiting for the game (3572s left)
+[00:26:42] waiting for the game (3569s left)
+[00:26:45] waiting for the game (3566s left)
+[00:26:48] waiting for the game (3563s left)
+[00:26:51] waiting for the game (3560s left)
+[00:26:54] waiting for the game (3556s left)
+[00:26:57] waiting for the game (3553s left)
+[00:27:00] waiting for the game (3550s left)
+[00:27:03] waiting for the game (3547s left)
+[00:27:07] waiting for the game (3544s left)
+[00:27:10] waiting for the game (3541s left)
+[00:27:13] waiting for the game (3538s left)
+[00:27:16] waiting for the game (3535s left)
+[00:27:19] waiting for the game (3532s left)
+[00:27:22] waiting for the game (3528s left)
+[00:27:25] waiting for the game (3525s left)
+[00:27:28] waiting for the game (3522s left)
+[00:27:31] waiting for the game (3519s left)
+[00:27:34] waiting for the game (3516s left)
+[00:27:38] waiting for the game (3513s left)
+[00:27:41] waiting for the game (3510s left)
+[00:27:44] waiting for the game (3507s left)
+[00:27:47] waiting for the game (3504s left)
+[00:27:50] waiting for the game (3501s left)
+[00:27:53] waiting for the game (3497s left)
+[00:27:56] waiting for the game (3494s left)
+[00:27:59] waiting for the game (3491s left)
+[00:28:02] waiting for the game (3488s left)
+[00:28:06] waiting for the game (3485s left)
+[00:28:09] waiting for the game (3482s left)
+[00:28:12] waiting for the game (3479s left)
+[00:28:15] waiting for the game (3476s left)
+[00:28:18] waiting for the game (3473s left)
+[00:28:21] waiting for the game (3470s left)
+[00:28:24] waiting for the game (3466s left)
+[00:28:27] waiting for the game (3463s left)
+[00:28:30] waiting for the game (3460s left)
+[00:28:33] waiting for the game (3457s left)
+[00:28:37] waiting for the game (3454s left)
+[00:28:40] waiting for the game (3451s left)
+[00:28:43] waiting for the game (3448s left)
+[00:28:46] waiting for the game (3445s left)
+[00:28:49] waiting for the game (3442s left)
+[00:28:52] waiting for the game (3438s left)
+[00:28:55] waiting for the game (3435s left)
+[00:28:58] waiting for the game (3432s left)
+[00:29:02] waiting for the game (3429s left)
+[00:29:05] waiting for the game (3426s left)
+[00:29:08] waiting for the game (3423s left)
+[00:29:11] waiting for the game (3420s left)
+[00:29:14] waiting for the game (3417s left)
+[00:29:17] waiting for the game (3413s left)
+[00:29:20] waiting for the game (3410s left)
+[00:29:23] waiting for the game (3407s left)
+[00:29:26] waiting for the game (3404s left)
+[00:29:30] waiting for the game (3401s left)
+[00:29:33] waiting for the game (3398s left)
+[00:29:36] waiting for the game (3395s left)
+[00:29:39] waiting for the game (3392s left)
+[00:29:42] waiting for the game (3389s left)
+[00:29:45] waiting for the game (3385s left)
+[00:29:48] waiting for the game (3382s left)
+[00:29:51] waiting for the game (3379s left)
+[00:29:54] waiting for the game (3376s left)
+[00:29:58] waiting for the game (3373s left)
+[00:30:01] waiting for the game (3370s left)
+[00:30:04] waiting for the game (3367s left)
+[00:30:07] waiting for the game (3364s left)
+[00:30:10] waiting for the game (3361s left)
+[00:30:13] waiting for the game (3358s left)
+[00:30:16] waiting for the game (3355s left)
+[00:30:19] waiting for the game (3351s left)
+[00:30:22] waiting for the game (3348s left)
+[00:30:25] waiting for the game (3345s left)
+[00:30:29] waiting for the game (3342s left)
+[00:30:32] waiting for the game (3339s left)
+[00:30:35] waiting for the game (3336s left)
+[00:30:38] waiting for the game (3333s left)
+[00:30:41] waiting for the game (3330s left)
+[00:30:44] waiting for the game (3327s left)
+[00:30:47] waiting for the game (3323s left)
+[00:30:50] waiting for the game (3320s left)
+[00:30:53] waiting for the game (3317s left)
+[00:30:56] waiting for the game (3314s left)
+[00:31:00] waiting for the game (3311s left)
+[00:31:03] waiting for the game (3308s left)
+[00:31:06] waiting for the game (3305s left)
+[00:31:09] waiting for the game (3302s left)
+[00:31:14] connected pid=6156 interval=500ms seconds=7200 out=C:\Users\memph\LongYinCoop\coop-test\S2a2-20261021-2254\sampler.ndjson
+[00:31:24] samples=21 errors=0 state=None turn=-1 timeScale=1
+[00:31:34] samples=41 errors=0 state=None turn=-1 timeScale=1
+[00:31:44] samples=61 errors=0 state=None turn=-1 timeScale=1
+[00:31:54] samples=81 errors=0 state=None turn=-1 timeScale=1
+[00:32:04] samples=101 errors=0 state=None turn=-1 timeScale=1
+[00:32:14] samples=121 errors=0 state=None turn=-1 timeScale=1
+[00:32:24] samples=141 errors=0 state=None turn=-1 timeScale=1
+[00:32:34] samples=161 errors=0 state=None turn=-1 timeScale=1
+[00:32:44] samples=181 errors=0 state=None turn=-1 timeScale=1
+[00:32:54] samples=201 errors=0 state=None turn=-1 timeScale=1
+[00:33:04] samples=221 errors=0 state=Fighting turn=0 timeScale=1
+[00:33:14] samples=241 errors=0 state=Fighting turn=0 timeScale=1
+[00:33:24] samples=261 errors=0 state=Fighting turn=0 timeScale=1
+[00:33:34] samples=281 errors=0 state=Fighting turn=0 timeScale=1
+[00:33:44] samples=301 errors=0 state=Fighting turn=0 timeScale=1
+[00:33:54] samples=321 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:04] samples=341 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:14] samples=361 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:24] samples=381 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:34] samples=401 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:44] samples=421 errors=0 state=Fighting turn=0 timeScale=1
+[00:34:54] samples=441 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:04] samples=461 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:14] samples=481 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:24] samples=501 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:34] samples=521 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:44] samples=541 errors=0 state=Fighting turn=0 timeScale=1
+[00:35:54] samples=561 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:04] samples=581 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:14] samples=601 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:24] samples=621 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:34] samples=641 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:44] samples=661 errors=0 state=Fighting turn=0 timeScale=1
+[00:36:54] samples=681 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:04] samples=701 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:14] samples=721 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:24] samples=741 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:34] samples=761 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:44] samples=781 errors=0 state=Fighting turn=0 timeScale=1
+[00:37:54] samples=801 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:04] samples=821 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:14] samples=841 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:24] samples=861 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:34] samples=881 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:44] samples=901 errors=0 state=Fighting turn=0 timeScale=1
+[00:38:54] samples=921 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:04] samples=941 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:14] samples=961 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:24] samples=981 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:34] samples=1001 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:44] samples=1021 errors=0 state=Fighting turn=0 timeScale=1
+[00:39:54] samples=1041 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:04] samples=1061 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:14] samples=1081 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:24] samples=1101 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:34] samples=1121 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:44] samples=1141 errors=0 state=Fighting turn=0 timeScale=1
+[00:40:54] samples=1161 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:04] samples=1181 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:14] samples=1201 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:24] samples=1221 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:34] samples=1241 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:44] samples=1261 errors=0 state=Fighting turn=0 timeScale=1
+[00:41:54] samples=1281 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:05] samples=1301 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:15] samples=1321 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:25] samples=1341 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:35] samples=1361 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:45] samples=1381 errors=0 state=Fighting turn=0 timeScale=1
+[00:42:55] samples=1401 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:05] samples=1421 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:15] samples=1441 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:25] samples=1461 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:35] samples=1481 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:45] samples=1501 errors=0 state=Fighting turn=0 timeScale=1
+[00:43:55] samples=1521 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:05] samples=1541 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:15] samples=1561 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:25] samples=1581 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:35] samples=1601 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:45] samples=1621 errors=0 state=Fighting turn=0 timeScale=1
+[00:44:55] samples=1641 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:05] samples=1661 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:15] samples=1681 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:25] samples=1701 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:35] samples=1721 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:45] samples=1741 errors=0 state=Fighting turn=0 timeScale=1
+[00:45:55] samples=1761 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:05] samples=1781 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:15] samples=1801 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:25] samples=1821 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:35] samples=1841 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:45] samples=1861 errors=0 state=Fighting turn=1 timeScale=1
+[00:46:55] samples=1881 errors=0 state=Fighting turn=1 timeScale=1
+[00:47:05] samples=1901 errors=0 state=Fighting turn=1 timeScale=1
+[00:47:15] samples=1921 errors=0 state=Fighting turn=1 timeScale=1
+[00:47:25] samples=1941 errors=0 state=Fighting turn=1 timeScale=1
+[00:47:35] samples=1961 errors=0 state=Fighting turn=1 timeScale=1
+[00:47:45] samples=1981 errors=0 state=None turn=-1 timeScale=1
+[00:47:48] game exited

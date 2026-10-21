@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  LongYinCoop -> C:\Users\memph\LongYinCoop\src\LongYinCoop\bin\Release\LongYinCoop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.20
+
+build artifact: src/LongYinCoop/bin/Release/LongYinCoop.dll
+sha256: cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+bytes : 257536

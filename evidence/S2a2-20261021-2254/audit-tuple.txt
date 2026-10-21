@@ -1,0 +1,8 @@
+frames 48,565 ; seq 3 -> 48,567
+phase B1: phase.start blockIndex=2 ; phase.end blockIndex=2 frames=3975 s2Enabled=true elapsedMs=31047
+          sampleMsMean=0.0520 sampleMsMax=4.6782 framesSent=12531 bytesSent=3809424 queuedDropped=0
+          forbiddenTypeDrops=3 commandsAccepted=0 auditChanges=1
+phase B2: phase.start blockIndex=3 (no phase.end - B was left enabled for exit 4, per protocol v2 section 3)
+selftest: expectedForbiddenDrops=3 gained=3 commandsAccepted=0 auditEqual=true exit6=PASS malformed=0
+          reassembled=1 haveBefore=true haveAfter=true
+          auditBefore=auditAfter=[battleTime=0.606 turnIndex=0 nowActiveState=2 unitCount=9 unitsSum=13b4f338...1a95f]

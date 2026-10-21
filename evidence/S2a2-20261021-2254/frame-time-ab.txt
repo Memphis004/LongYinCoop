@@ -1,0 +1,44 @@
+# injection (before A1) wall=2026-10-22 00:36:32.279 cfg_sha_before=7b754081476d7f250dbf8c414c1aac0a9ba592059d678caf587816c3e5050a77 cfg_sha_after=037fc14a1b097b3a798a1b35b5da68c58d8cb1f0a06ca0bd51fbe8db6d6e8ff9 keys=coop.role,coop.secret (bare, TOML-invalid by design; MelonLoader already loaded)
+[2026-10-22 00:37:17] # ===== A-B-A-B start (exit 3, mean only) =====
+[2026-10-22 00:37:18] pre-A1 OK samples=4 state=WaitPlayerInput turn=0 battleTime=0.606 frame=47006
+[2026-10-22 00:37:18] STOP before A1: sampler not growing
+[2026-10-22 00:37:32] # ===== A-B-A-B start (exit 3, mean only) =====
+[2026-10-22 00:37:33] pre-A1 OK samples=2 state=WaitPlayerInput turn=0 battleTime=0.606 frame=48919
+[2026-10-22 00:37:34] BLOCK A1 start=00:37:34 enabled=False cfg_sha_before=037fc14a1b097b3a798a1b35b5da68c58d8cb1f0a06ca0bd51fbe8db6d6e8ff9 cfg_sha_after=037fc14a1b097b3a798a1b35b5da68c58d8cb1f0a06ca0bd51fbe8db6d6e8ff9 switched=False
+[2026-10-22 00:38:04] BLOCK A1 end=00:38:04 duration=30.10s samples=56 states={"WaitPlayerInput": 56}
+[2026-10-22 00:38:04] BLOCK B1 start=00:38:04 enabled=True cfg_sha_before=037fc14a1b097b3a798a1b35b5da68c58d8cb1f0a06ca0bd51fbe8db6d6e8ff9 cfg_sha_after=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf switched=True
+[2026-10-22 00:38:07] STOP after switch to B1: marker phase.start missing within 3.0s
+# STOP return-to-A wall=2026-10-22 00:39:10.308 sha_before=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf sha_after=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 enabled=false
+[2026-10-22 00:40:35] # ===== A-B-A-B attempt 2 (exit 3, mean only) =====
+[2026-10-22 00:40:36] pre-A1 OK samples=2 state=WaitPlayerInput turn=0 battleTime=0.606 frame=72569
+[2026-10-22 00:40:38] BLOCK A1 start=00:40:38 enabled=False cfg_sha_before=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 cfg_sha_after=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 switched=False
+[2026-10-22 00:41:08] BLOCK A1 end=00:41:08 duration=30.10s samples=58 states={"WaitPlayerInput": 58}
+[2026-10-22 00:41:08] BLOCK B1 start=00:41:08 enabled=True cfg_sha_before=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 cfg_sha_after=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf switched=True
+[2026-10-22 00:41:08] marker phase.start seen: {"kind":"phase.start","marker":true,block=B blockIndex=2 s2Enabled=true role=host transport=loopback}
+[2026-10-22 00:41:38] BLOCK B1 end=00:41:38 duration=30.10s samples=60 states={"WaitPlayerInput": 60}
+[2026-10-22 00:41:39] BLOCK A2 start=00:41:39 enabled=False cfg_sha_before=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf cfg_sha_after=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 switched=True
+[2026-10-22 00:41:39] marker phase.end seen: {"kind":"phase.end","marker":true,block=B blockIndex=2 frames=3975 s2Enabled=true elapsedMs=31047 sampleMsMean=0.0520 sampleMsMax=4.6782 framesSent=12531 bytesSent=3809424 queuedDropped=0 forbiddenTypeDrops=3 commandsAccepted=0 auditChanges=1}
+[2026-10-22 00:42:09] BLOCK A2 end=00:42:09 duration=30.02s samples=58 states={"WaitPlayerInput": 58}
+[2026-10-22 00:42:09] BLOCK B2 start=00:42:09 enabled=True cfg_sha_before=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 cfg_sha_after=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf switched=True
+[2026-10-22 00:42:09] marker phase.start seen: {"kind":"phase.start","marker":true,block=B blockIndex=3 s2Enabled=true role=host transport=loopback}
+[2026-10-22 00:42:39] BLOCK B2 end=00:42:39 duration=30.00s samples=58 states={"WaitPlayerInput": 58}
+[2026-10-22 00:42:39] BLOCK B2 end: leaving coop.net.enabled=true for exit 4 (protocol v2 section 3)
+[2026-10-22 00:42:39] # ===== A-B-A-B attempt 2 done =====
+# exit 3 result (attempt 2, protocol v2 section 1-2) - mean only, p99 NOT-RUN
+blocks: A1 00:40:38-00:41:08 / B1 00:41:08-00:41:38 / A2 00:41:39-00:42:09 / B2 00:42:09-00:42:39
+state check: 58/58 + 60/60 + 58/58 + 58/58 samples = WaitPlayerInput (100%); battleTime 0.6065 and turnIndex 0 frozen throughout
+markers: phase.start blockIndex=2 (B1) / phase.end blockIndex=2 (B1: elapsedMs=31047 frames=3975 framesSent=12531 bytes=3809424 forbidden=3 commandsAccepted=0) / phase.start blockIndex=3 (B2)
+
+per-block mean frame ms (EST1 = delta_frame/delta_t; EST2 = mean deltaTime):
+  A1 7.6984 / 7.1786    B1 7.8256 / 7.2909    A2 7.6871 / 7.7699    B2 8.0170 / 8.5718
+
+EST1: A=7.6927 B=7.9213 delta(B-A)=0.2285 ms  margin=1.00 band=0.50  verdict=PASS
+EST2: A=7.4742 B=7.9313 delta(B-A)=0.4571 ms  margin=1.00 band=0.50  verdict=PASS
+
+Per protocol v2 section 1 this is PASS-with-limitation: p99 of frame time = NOT-RUN (2 Hz sampler cannot measure it).
+It must NOT be upgraded to a full PASS.
+
+attempt 1 (00:37:34-00:38:07) was discarded: A1 complete (30.10 s, 56 samples) but B1 ran only ~3 s and the
+harness aborted on its own marker-parser defect (markers are non-JSON: kind+marker:true then a raw body).
+The mod itself activated correctly then (phase.start blockIndex=1 + a valid selftest marker were written).
+# exit4 done, B->A wall=2026-10-22 00:47:01.623 sha_before=cb8bcd39cdfc2ad4cb00b36bb7bded3c9cc7ed220d3b7cb5c7d595eadf139fcf sha_after=9a1a461945f0bac905eb8fe4fdbdc36acea185fdf0fc4aa74145448607ca4e70 enabled=false

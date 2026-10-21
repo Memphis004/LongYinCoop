@@ -1,0 +1,14 @@
+== step 4 pre-split checks (2026-10-21) ==
+label: S2a2-20261021-2254
+game running: 1
+GameAssembly.dll  33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1
+global-metadata  451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0
+expected (VERSION.md): 33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1 / 451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0
+
+--- save-split status ---
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : RUNNING
+  Save                         files=57  digest=854cc890430f
+leftovers: none
+mounted Save matches:
+  ~S1.5gB-20261021-200449/savehash.copy.before.txt: changed=1 missing=0 added=0

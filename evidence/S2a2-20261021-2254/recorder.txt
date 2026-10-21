@@ -1,0 +1,13 @@
+== step 9 recorder (2026-10-21) ==
+script  : tools\s15d_sample.py   (in SAMPLER_SCRIPTS of save-split.py:40)
+pid     : 46824
+cmdline : python tools\s15d_sample.py --out coop-test\S2a2-20261021-2254\sampler.ndjson --seconds 7200 --interval 0.5 --append --wait 3600
+out     : coop-test\S2a2-20261021-2254\sampler.ndjson  (pre-created empty; --append => safe)
+stdout  : evidence\S2a2-20261021-2254\recorder-stdout.log
+stderr  : evidence\S2a2-20261021-2254\recorder-stderr.log
+why s15d_sample.py instead of spike_watch.py:
+  spike_watch.py exits 0 at battle_ready (single-shot) => cannot produce the 120 s A/B frame series of exit 3.
+  s15d_sample.py is read-only (only sends {"cmd":"spike","sub":"status"}), keeps one pipe connection for the
+  whole session, records the full per-unit payload (incl. unitAlive) => serves exit 3 (frame/timeScale series)
+  and exit 4 (per-unit compare) from one series. Both scripts are in the save-split.py allowlist.
+  tools/ is NOT modified.

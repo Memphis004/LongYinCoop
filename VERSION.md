@@ -22,6 +22,16 @@
 
 `2b0548fe464b` ยังคงเป็นบันทึก canonical ของ S1.5 แต่ **ไม่ใช่เกณฑ์ผ่าน/ไม่ผ่านของ save อีกต่อไป** — เกณฑ์คือ `SaveSlot*` ต้องไม่เปลี่ยน และ digest ต้องตรง baseline ที่อนุมัติข้างต้น (ยกเว้น `PlayerprefData.dat`/`steam_autocloud.vdf`)
 
+## Baseline ปัจจุบันของ S2a-2 (rebaseline volatile-only · มติผู้ใช้ 2026-10-21)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `854cc890430f` = `6dd645d9ef17…` ที่เปลี่ยน `PlayerprefData.dat` ไฟล์เดียว |
+| ไฟล์ baseline | `coop-test/baselines/20261021-225856/savehash.real.before.txt` |
+| เหตุผล | incident 2026-10-21 22:54:18 — เกมถูกเปิดบนเซฟจริงระหว่างเตรียม S2a-2 (14 s หลัง session-start check ที่ยังพบเกมปิด) · `SaveSlot*` ทั้ง 57 ไฟล์ไม่ถูกเขียน · ผู้ใช้อนุมัติ **ทาง (ก) rebaseline volatile-only** |
+| ผลบังคับ | ใช้ `--expected-baseline coop-test/baselines/20261021-225856/savehash.real.before.txt` สำหรับ `split` ของรอบ `S2a2-20261021-2254` (รันแล้ว) |
+| หลักฐาน | `evidence/S2a2-20261021-2254/incident-game-open-2254.md`, `rebaseline.txt`, `coop-test/baselines/20261021-225856/REBASELINE.json` |
+
 ## กฎ
 
 1. เทียบ SHA-256 ทั้งสองไฟล์ทุกครั้งที่เริ่ม session — **ไม่ตรง = หยุดและรายงาน** (เกมอัปเดต = anchor ใน notes ทั้งหมดเชื่อไม่ได้)

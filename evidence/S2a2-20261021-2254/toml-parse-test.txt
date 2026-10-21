@@ -1,0 +1,29 @@
+# Tomlet parse test of UserData\MelonPreferences.cfg (2026-10-22 ~00:16)
+# Parser used: MelonLoader\net6\Tomlet.dll (the same assembly MelonLoader uses for il2cpp)
+# Method: [Tomlet.TomlParser]::new().Parse(text)  via pwsh 7.6.0-rc.1
+# Read-only. No game file was modified.
+
+[1] current cfg as-is
+    FAIL -> Expected the start of a number, string literal, boolean, array, or table on line 16, found 'h'
+    (line 16 = `coop.role = host`)
+
+[2] same cfg with the 4 `coop.*` lines removed
+    PARSE OK
+
+[3] same cfg with the two string values quoted
+    coop.role = "host"
+    coop.secret = "f16d97...9f72"
+    PARSE OK
+
+[4] same cfg keeping only the two boolean coop keys (enabled / allowNonLoopback), no role/secret
+    PARSE OK
+
+# Consequence in the running process (pid 23020):
+#   MelonLoader could not load the file -> all prefs fell back to defaults -> Enabled(default)=false
+#   -> CoopMod.OnInitializeMelon() logged "enabled=False" + "Disabled by pref" and returned
+#   -> no IpcServer -> named pipe \\.\pipe\longyin-coop-23020 never created
+
+# Mod-side reader model (S2NetConfig.Parse replicated in python, src\LongYinCoop\S2\S2NetConfig.cs):
+#   unquoted (current style)  -> enabled=True  role='host'    secret_set=True  err=None
+#   quoted   (TOML-valid)     -> enabled=True  role='"host"'  secret_set=True  err='role must be host|guest when enabled'
+# i.e. quoting alone fixes Tomlet but breaks the mod's naive line parser (Role/Secret do not strip quotes).

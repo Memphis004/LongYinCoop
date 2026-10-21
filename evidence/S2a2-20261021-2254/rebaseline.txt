@@ -1,0 +1,14 @@
+== step 4a: status before rebaseline ==
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=854cc890430f
+leftovers: none
+mounted Save matches:
+  ~S1.5gB-20261021-200449/savehash.copy.before.txt: changed=1 missing=0 added=0
+
+== rebaseline (against approved 20261021-200450, volatile only) ==
+Save vs coop-test\baselines\20261021-200450\savehash.real.before.txt: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+accepting volatile-only drift
+OK rebaseline: C:\Users\memph\LongYinCoop\coop-test\baselines\20261021-225856\savehash.real.before.txt
+  changed=1 (volatile only) missing=0 added=0

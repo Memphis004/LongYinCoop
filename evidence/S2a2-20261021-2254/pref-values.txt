@@ -1,0 +1,31 @@
+== step 7 prefs (2026-10-21) ==
+file      : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\UserData\MelonPreferences.cfg
+sha256 before = 269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1
+sha256 after  = 037fc14a1b097b3a798a1b35b5da68c58d8cb1f0a06ca0bd51fbe8db6d6e8ff9
+
+[LongYinCoop] values after:
+Enabled = true
+Probe = true
+Ipc = true
+DevCommands = true
+Capture = true
+WorldHz = 10
+WorldStreamHz = 2
+AllowRemoteInput = false
+JitProbe = false
+JitProbeW2 = false
+JitProbeW4 = false
+JitProbeW6 = false
+JitProbeW7 = false
+coop.net.enabled = false
+coop.role = host
+coop.secret = <redacted: len=64 hex, sha256=a78271ccc1cd13e6ddf3a5e7dcad6341f0db22ce999b06113037d2280a7f3a29>
+coop.allowNonLoopback = false
+
+checks (plan rev4 step 7):
+  coop.net.enabled = false            -> True
+  coop.role = host                    -> True
+  coop.DevCommands = true (explicit)  -> True
+  coop.AllowRemoteInput = false       -> True
+  JitProbe/W2/W4/W6/W7 all false      -> True
+  coop.secret length >= 32 hex        -> True

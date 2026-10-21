@@ -1,0 +1,9 @@
+# metrics-summary (S2a-2, attempt 2, 2026-10-22)
+exit1 load/no-crash : mod log 00:31:14 enabled=True + IPC listening; 1 turn completed (turn 0 -> 1 at 00:45:47);
+                      log scan: [ERROR]=0, Exception=0, WARN=3 (all three = the self-test's intentional forbidden
+                      frames: Hello / Snapshot / BattleEvent dropped at 00:38:05)
+exit2 cost/frame    : sampleMs+serializeMs over 48,565 frames: mean=0.0654 p95=0.0801 p99=0.1047 max=10.7323 ms
+                      (criterion p99 <= 4 ms) ; sampleMs p99=0.0969 serializeMs p99=0.0070
+exit5 corpse        : 0 frames with hp==0 / isAlive==false / unitAlive==false -> NOT-RUN (no corpse in this battle)
+exit8 unit count    : unitCount = 9 in every frame (plan target case is 18 = PASS-with-limitation; 9 is smaller,
+                      so nothing here may be generalized toward the 60-unit goal)

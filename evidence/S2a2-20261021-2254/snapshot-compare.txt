@@ -1,0 +1,11 @@
+# snapshot-compare (exit 4) - 2026-10-22 00:46
+frozen tail key (battleTime, turnIndex) = (0.689, 1); sampler window 31.5 s (64 samples)
+frame seq=44677 frameId=44677 units=9 | sampler units=9
+frame audit = {"battleTime": 0.689, "turnIndex": 1, "nowActiveState": 2, "unitCount": 9,
+               "unitsSum": "e12a6897e23b2fb3bcfb499a0c816c0844c2ce50e78449f48d5f5aa5d2064199"}
+sampler stateHash = battleframe/v1 battleState=3 nowActiveState=2 battlePaused=0 turnIndex=1
+field comparisons = 45 (9 units x hp,row,col,unitAlive,playerControl) -> mismatches = 0
+supplement: replica isAlive / unitAlive vs host unitAlive -> 9 units, mismatches = 0
+RESULT: PASS
+turn evidence (sampler, 00:45:42-00:45:47): WaitMoving -> WaitPlayerInput -> WaitAttacking -> Attacking ->
+        turnIndex 1, active unit 0:86, battleTime 0.606 -> 0.689 (hpSum 4674.8 unchanged = no damage dealt)

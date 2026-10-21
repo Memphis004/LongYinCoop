@@ -1,0 +1,20 @@
+# S2a-2 ขั้น 8 — ตรวจความพอของเครื่องมือวัด (ก่อนเปิดเกม)
+
+## สิ่งที่ต้องมี และสถานะ
+
+| ข้อ | ต้องได้ | สถานะ 2026-10-21 23:0x | หลักฐาน |
+|---|---|---|---|
+| 1 | `spike status` ต้องเรียกได้ (คือเครื่องมือวัดของ exit 4) | ⏳ เรียกได้เฉพาะตอนเกมรัน — เงื่อนไขครบแล้ว: `Enabled=true` + `Ipc=true` + **`DevCommands=true`** (IpcServer.cs:333-335) | `pref-values.txt` |
+| 2 | payload ต่อยูนิตพอสำหรับ exit 4 | ✅ ตรวจแล้ว (RUNTIME, S1.5/S2a-1): `id, team, row, col, hp, originHp, alive, unitAlive, playerControl, moved, attacked` โดย **`unitAlive = SafeUnitAlive(u) → u.IsAlive`** | `S2a-2-plan.md` ขั้น 8 |
+| 3 | replica มีคู่เทียบครบ | ✅ `S2Unit.IsAlive` + `S2Unit.UnitAlive` (สำเนา) อยู่บน wire + ndjson ⇒ เทียบ `unitAlive` สองฝั่งได้ตรง | `fix-round2-20261021.md` |
+| 4 | recorder ที่ preflight ยอมรับ | ✅ `tools\s15d_sample.py` อยู่ใน `SAMPLER_SCRIPTS` ของ `save-split.py` (line 40) | `grep` |
+| 5 | guard ไม่บล็อกการรัน | ✅ `S2WriteGuard.WritePathsClosed` เหลือตรวจ 6 pref (`AllowRemoteInput`, `JitProbe*5`) — ตอนนี้ **false ทั้ง 6** ⇒ ผ่าน; `DevCommands` ไม่ถูกตรวจ | `pref-values.txt` + เทสต์ 64 ชุด |
+| 6 | write path ปิด | ✅ `AllowRemoteInput=false`, `JitProbe/W2/W4/W6/W7=false` (ตรวจซ้ำใน `preflight` ข้อ 5 `prefs-disarmed`) | `preflight.txt` |
+
+## ข้อจำกัดที่ต้องรายงาน (ไม่ใช่ FAIL)
+
+- ข้อ 1 ตรวจแบบ runtime ไม่ได้ก่อนเกมรัน — การเรียกจริงจะเกิดในเฟส B (หลังผู้ใช้กดเปิดเกม) และจะดูจาก `tick`/`metrics` ของ S2 เอง
+- `spike move/attack` (game-state writer) ยัง **ปิด** เพราะ `AllowRemoteInput=false` (preflight บังคับ) — S2a-2 ไม่มี write path ไปถึง state เกม
+- recorder (`s15d_sample.py`) ถือ pipe connection เดียวตลอด session ⇒ **ห้ามเปิด client อื่นระหว่างวัด** (ตามที่ระบุใน §2 ขั้น 9)
+
+**สรุปขั้น 8: ผ่าน** (ข้อ 1 เป็นการตรวจ runtime ที่จะทำตอนเกมรัน; เงื่อนไขที่บังคับล่วงหน้าครบทุกข้อ)
