@@ -100,6 +100,25 @@ and re-quote the values. Recommendation: (a) — smaller failure surface, no TOM
 3. **§3.3 design finding** must be fixed (or explicitly accepted) before S3 uses `coop.net.*` at runtime.
 4. exit 5 (corpse in replica) and the 18/60-unit scaling remain NOT-RUN.
 
+## 8. Addendum 2026-10-22 01:12 — exit 9 now measured = **PASS**
+
+งาน B (อนุมัติ 2026-10-22) ทดสอบ rollback จริง: สลับ `Mods\LongYinCoop.dll` เป็น build ก่อนหน้า
+(`517758147f59…2612`) แล้วผู้ใช้เปิดเกมเอง 01:11:13 → ปิด 01:12:18 (65 s, ไม่เข้าศึก)
+
+- mod เก่าโหลดได้: `LongYinCoop v0.4.0 stage=S1.5e-W7` + `S1 loaded role=host … enabled=True ipc=True`
+  + `IPC listening \\.\pipe\longyin-coop-46908` · heartbeat `err=0 ticks=7800 tickP99=0.012ms`
+  · ออกสะอาด `probe: unpatched (owned patches before=1 after=0)`
+- build เก่าไม่มี S2 (คาดไว้): session นี้ `[S2]` = **0** lines · `S2\s2-snapshots.ndjson` mtime ยังเป็น 00:47:02
+- เซฟ: mounted copy เปลี่ยนเฉพาะ `PlayerprefData.dat` (volatile) · real folder `changed=0`, drift 0
+  · หลัง restore 57 ไฟล์ `854cc890430f` **EXACT** ทุก baseline · `leftovers: none` · `SaveSlot*` ไม่ถูกเขียน
+- คืน DLL แล้ว: active = `cb35a93f…ceee0` · `.off` = `517758147f59…2612` · pref sha `269b571c…098d1` เท่าเดิม
+- noise ที่เห็น (`Can't cache type named … UnityEngine.UIElementsModule`) = 12 บรรทัดทั้งรอบนี้และรอบ S2a-2
+  ⇒ เป็นของ MelonLoader/IL2CPP เดิม ไม่เกี่ยวกับ mod
+
+**ผลรวมใหม่ของ S2a-2: 8 PASS/PASS-with-limitation · 1 NOT-RUN (exit 5 ไม่มีศพ) · 0 FAIL**
+หลักฐาน: `evidence/rollbackB-20261022-0108/` (`rollback-B.md`, `preflight-and-swap.txt`,
+`session-20261022-0111.txt`, `savehash.*`) · tag `stage-S2a-2` ไม่ถูกย้าย (ยังชี้ `14757e3`)
+
 ## 7. Close-out (user rulings, 2026-10-22 ~00:50)
 
 - Stage closed with **commit + tag `stage-S2a-2`** (approved). exit 9 (rollback `.dll.off`) stays **NOT-RUN**

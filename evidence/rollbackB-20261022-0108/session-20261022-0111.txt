@@ -1,0 +1,51 @@
+# MelonLoader log 26-10-22_1-11-13.log (excerpt: LongYinCoop lines)
+[01:11:15.829] Melon Assembly loaded: '.\Mods\LongYinCoop.dll'
+[01:11:16.043] LongYinCoop v0.4.0
+[01:11:16.044] Assembly: LongYinCoop.dll
+[01:11:16.905] [LongYinCoop] === LongYinCoop v0.4.0 stage=S1.5e-W7 | pid=46908 | start 2026-10-22 01:11:16 ===
+[01:11:16.909] [LongYinCoop] S1 loaded role=host stage=S1.5e-W7 version=0.4.0 enabled=True probe=True ipc=True capture=True dev=True allowRemoteInput=False
+[01:11:16.935] [LongYinCoop] probe: patched Il2Cpp.GameController.Update (thread measurement only)
+[01:11:16.943] [LongYinCoop] compat: 32 patched methods -> UserData\LongYinCoop\compat-notes.md
+[01:11:16.971] [LongYinCoop] battlelog: PatchApplied Il2Cpp.BattleController.AddInfoText(String,Boolean)
+[01:11:16.971] [LongYinCoop] battlelog: patched 1/1 overload(s)
+[01:11:16.972] [LongYinCoop] IPC listening \\.\pipe\longyin-coop-46908
+[01:11:17.017] [LongYinCoop] IPC client connected
+[01:11:24.320] [LongYinCoop] heartbeat ticks=600 err=0 battle=0/0 log=0 tickP99=0.022ms heap=107.92MB
+[01:11:28.633] [LongYinCoop] heartbeat ticks=1200 err=0 battle=0/0 log=0 tickP99=0.018ms heap=108.19MB
+[01:11:32.868] [LongYinCoop] heartbeat ticks=1800 err=0 battle=0/0 log=0 tickP99=0.018ms heap=116.45MB
+[01:11:37.230] [LongYinCoop] heartbeat ticks=2400 err=0 battle=0/0 log=0 tickP99=0.017ms heap=113.8MB
+[01:11:41.500] [LongYinCoop] heartbeat ticks=3000 err=0 battle=0/0 log=0 tickP99=0.016ms heap=112.74MB
+[01:11:45.780] [LongYinCoop] heartbeat ticks=3600 err=0 battle=0/0 log=0 tickP99=0.016ms heap=111.62MB
+[01:11:50.076] [LongYinCoop] heartbeat ticks=4200 err=0 battle=0/0 log=0 tickP99=0.014ms heap=110.46MB
+[01:11:54.347] [LongYinCoop] heartbeat ticks=4800 err=0 battle=0/0 log=0 tickP99=0.013ms heap=117.98MB
+[01:11:58.596] [LongYinCoop] heartbeat ticks=5400 err=0 battle=0/0 log=0 tickP99=0.013ms heap=116.85MB
+[01:12:02.948] [LongYinCoop] heartbeat ticks=6000 err=0 battle=0/0 log=0 tickP99=0.012ms heap=115.7MB
+[01:12:07.292] [LongYinCoop] heartbeat ticks=6600 err=0 battle=0/0 log=0 tickP99=0.012ms heap=108.14MB
+[01:12:11.742] [LongYinCoop] heartbeat ticks=7200 err=0 battle=0/0 log=0 tickP99=0.012ms heap=107.23MB
+[01:12:16.061] [LongYinCoop] heartbeat ticks=7800 err=0 battle=0/0 log=0 tickP99=0.012ms heap=114.92MB
+[01:12:17.688] [LongYinCoop] probe: unpatched (owned patches before=1 after=0)
+
+# mod log coop-20261022.log (session 01:11-01:12, all 23 lines)
+01:11:16.890 [INFO] === LongYinCoop v0.4.0 stage=S1.5e-W7 | pid=46908 | start 2026-10-22 01:11:16 ===
+01:11:16.909 [INFO] S1 loaded role=host stage=S1.5e-W7 version=0.4.0 enabled=True probe=True ipc=True capture=True dev=True allowRemoteInput=False
+01:11:16.934 [INFO] probe: patched Il2Cpp.GameController.Update (thread measurement only)
+01:11:16.943 [INFO] compat: 32 patched methods -> UserData\LongYinCoop\compat-notes.md
+01:11:16.970 [INFO] battlelog: PatchApplied Il2Cpp.BattleController.AddInfoText(String,Boolean)
+01:11:16.971 [INFO] battlelog: patched 1/1 overload(s)
+01:11:16.972 [INFO] IPC listening \\.\pipe\longyin-coop-46908
+01:11:17.017 [INFO] IPC client connected
+01:11:24.320 [INFO] heartbeat ticks=600 err=0 battle=0/0 log=0 tickP99=0.022ms heap=107.92MB
+01:11:28.632 [INFO] heartbeat ticks=1200 err=0 battle=0/0 log=0 tickP99=0.018ms heap=108.19MB
+01:11:32.868 [INFO] heartbeat ticks=1800 err=0 battle=0/0 log=0 tickP99=0.018ms heap=116.45MB
+01:11:37.230 [INFO] heartbeat ticks=2400 err=0 battle=0/0 log=0 tickP99=0.017ms heap=113.8MB
+01:11:41.500 [INFO] heartbeat ticks=3000 err=0 battle=0/0 log=0 tickP99=0.016ms heap=112.74MB
+01:11:45.780 [INFO] heartbeat ticks=3600 err=0 battle=0/0 log=0 tickP99=0.016ms heap=111.62MB
+01:11:50.076 [INFO] heartbeat ticks=4200 err=0 battle=0/0 log=0 tickP99=0.014ms heap=110.46MB
+01:11:54.346 [INFO] heartbeat ticks=4800 err=0 battle=0/0 log=0 tickP99=0.013ms heap=117.98MB
+01:11:58.596 [INFO] heartbeat ticks=5400 err=0 battle=0/0 log=0 tickP99=0.013ms heap=116.85MB
+01:12:02.948 [INFO] heartbeat ticks=6000 err=0 battle=0/0 log=0 tickP99=0.012ms heap=115.7MB
+01:12:07.292 [INFO] heartbeat ticks=6600 err=0 battle=0/0 log=0 tickP99=0.012ms heap=108.14MB
+01:12:11.742 [INFO] heartbeat ticks=7200 err=0 battle=0/0 log=0 tickP99=0.012ms heap=107.23MB
+01:12:16.061 [INFO] heartbeat ticks=7800 err=0 battle=0/0 log=0 tickP99=0.012ms heap=114.92MB
+01:12:17.688 [INFO] probe: unpatched (owned patches before=1 after=0)
+01:12:18.125 [INFO] IPC client disconnected

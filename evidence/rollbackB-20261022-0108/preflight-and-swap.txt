@@ -1,0 +1,27 @@
+preflight: label=rollbackB-20261022-0108
+  OK   real-aside: Save.real-rollbackB-20261022-0108 files=57 digest=854cc890430f
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  OK   leftovers: Save.real-rollbackB-20261022-0108
+  OK   sampler: pid 11284 (s15d_sample.py) out=C:\Users\memph\LongYinCoop\coop-test\rollbackB-20261022-0108\sampler.ndjson
+  OK   prefs-disarmed: 6 keys=false
+PREFLIGHT READY - you may launch the game
+
+--- session-start checks (2026-10-22 ~01:07) ---
+GameAssembly.dll sha256 = 33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1 (matches VERSION.md)
+global-metadata.dat sha256 = 451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0 (matches VERSION.md)
+game running = False
+mod repo HEAD = 1372bc3 (work A), tree clean
+save-split status = Save 57 files 854cc890430f, EXACT copy+real baseline, leftovers none
+split = OK (real kept as Save.real-rollbackB-20261022-0108)
+
+--- dll swap (2026-10-22 ~01:09) ---
+LongYinCoop.dll  cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0 (S2a-2 build)
+LongYinCoop.dll.off  517758147f59170e584075a4b42f61e00d293803febe36f8a040bcdad4592612 (previous build)
+-> LongYinCoop.dll.keep-S2a2 = cb35a93f…ceee0 (kept for restore)
+-> LongYinCoop.dll            = 517758147f59…2612 (old build, what the game will load)
+pdb swapped the same way (LongYinCoop.pdb.keep-S2a2)
+
+--- expected on launch ---
+MelonLoader log: LongYinCoop loads; mod log UserData\LongYinCoop\logs\coop-20261022.log gets a startup line
+old build has NO [S2] code: expect zero "[S2]" lines and no growth of UserData\LongYinCoop\S2\s2-snapshots.ndjson
+SaveSlot* must stay untouched (only PlayerprefData.dat is volatile)
