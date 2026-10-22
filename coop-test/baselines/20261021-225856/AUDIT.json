@@ -1,6 +1,8 @@
 {
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
   "ts": "2026-10-21T22:58:56",
-  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\baselines\\20261021-200450\\savehash.real.before.txt",
   "reason": "S2a-2 prep: game opened 22:54:18 during step 4; PlayerprefData.dat drift only (SaveSlot* untouched, 57/57); user-approved 2026-10-21 option (a) rebaseline volatile-only",
   "files": 57,
   "digest": "854cc890430fc40e972d7e13515154f4317c83fef075f2af0caa517b65d60ec1",
@@ -9,5 +11,9 @@
   ],
   "missing": [],
   "added": [],
-  "volatile_only": true
+  "volatile_only": true,
+  "against": "coop-test/baselines/20261021-200450/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "81c85f4c0deaedbeb91325bada5e5c27ff3cb5edabe49b3aa95345a885953951",
+  "generated_by": "tools/coop-audit.py"
 }

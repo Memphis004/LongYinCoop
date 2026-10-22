@@ -1,6 +1,8 @@
 {
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
   "ts": "2026-10-21T20:04:50",
-  "against": "C:\\Users\\memph\\LongYinCoop\\coop-test\\baselines\\20261021-161120\\savehash.real.before.txt",
   "reason": "post-restore game launch on real save 19:49-20:05 (S1.5gB pre-split): PlayerprefData.dat only, no SaveSlot writes (verify slot_drift=0)",
   "files": 57,
   "digest": "6dd645d9ef17fb626c3b680d8c12b8bf5297d5fbce532b9e7bc4286d343ef19e",
@@ -9,5 +11,9 @@
   ],
   "missing": [],
   "added": [],
-  "volatile_only": true
+  "volatile_only": true,
+  "against": "coop-test/baselines/20261021-161120/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "02d02051207ff4571de36bf2e843cdfac985a0d1f2390869a7073aeadb7b6966",
+  "generated_by": "tools/coop-audit.py"
 }
