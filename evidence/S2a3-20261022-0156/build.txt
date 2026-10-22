@@ -1,0 +1,48 @@
+S2a-3 C3 build (Gate #1 approved 2026-10-22)
+sampled: 2026-10-22T14:11:26.3597275+07:00
+repo HEAD: a2eae0651497c11b30bcd960ef1b292c6b01398f
+tracked tree dirty: 0
+dotnet: 9.0.311
+command: dotnet build src\LongYinCoop\LongYinCoop.csproj -c Release --no-incremental
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  LongYinCoop -> C:\Users\memph\LongYinCoop\src\LongYinCoop\bin\Release\LongYinCoop.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:01.19
+
+--- output ---
+built dll: C:\Users\memph\LongYinCoop\src\LongYinCoop\bin\Release\LongYinCoop.dll
+built dll exists: True
+built dll bytes: 313344
+built dll sha256: c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96
+built dll lastWrite: 2026-10-22T14:11:27.8035140+07:00
+built pdb sha256: 6ec6482c9649b61e8fb21e0e682710622a9b3a364b5261363244163d916ec110
+type marker 'TcpTransport' in dll: True
+type marker 'TcpFrameStream' in dll: True
+type marker 'S2Handshake' in dll: True
+type marker 'S2ControlHandler' in dll: True
+type marker 'S2FrameMeter' in dll: True
+type marker 'SeqTracker' in dll: True
+type marker 'BindPolicy' in dll: True
+
+--- deployed (must be untouched) ---
+Mods\LongYinCoop.dll sha256: cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+Mods\LongYinCoop.dll lastWrite: 2026-10-21T22:55:43.2202817+07:00
+Mods\LongYinCoop.dll.off sha256: 517758147f59170e584075a4b42f61e00d293803febe36f8a040bcdad4592612
+
+--- string-literal markers (UTF-16 #US heap) ---
+utf16 marker 'S2a-3': True
+utf16 marker 'S2a-2': False
+utf16 marker '0.5.0': True
+utf16 marker 'selftest.tcp': True
+utf16 marker 'framemeter.window': True
+utf16 marker 'resync-ack': False
+utf16 marker 'forbidden': True
+
+conclusion: build picked up the C1 sources (CoopMod 0.5.0 / StageLabel S2a-3, transport + control + meter types present)
+note: 'S2a-2' absent - expected, the stage label was replaced
