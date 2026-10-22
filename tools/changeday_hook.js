@@ -8,7 +8,8 @@ How to use (il2cpp-frida-mcp):
   1. paste this whole file into `il2cpp_exec_js` (defines globalThis.__cd)
   2. __cd.inspect()     -> signature + param types + RVA + N disassembled instructions
   3. __cd.snapshot()    -> read-only state snapshot (worldTime/WorkingUI/force)
-  4. __cd.hook()        -> Interceptor.attach, LOG ONLY (refuses static/ambiguous)
+  4. __cd.hook()        -> Interceptor.attach on ChangeDay(int) AND ChangeDay(),
+                           LOG ONLY (refuses static/ambiguous/same-address)
   5. (user presses >>)
   6. __cd.dump()        -> print collected calls, __cd.snapshot() again
   7. __cd.unhook()      -> detach; __cd.reset() before any second run
@@ -20,6 +21,8 @@ Known limits (measured/unmeasured as labelled in evidence/S2-cdprep-*):
   - the `asserted` flags are a tripwire, not a sandbox: they refuse a hook only
     if future code sets them True
   - snapshot() calls Il2Cpp.gc.choose(), so it must be run outside the hook
+  - wrapper and leaf are attached together (2026-10-22 ruling A): wrapper calls
+    give sum(delta), leaf hits give the day steps actually executed
 
 Hard rules enforced by construction (see __cd.asserted):
   - never calls Method.invoke / any game method
@@ -30,7 +33,10 @@ If a rule would be broken the module refuses to install the hook.
 */
 
 globalThis.__cd = (() => {
-  const state = { hooked: false, listeners: [], log: [], count: 0, target: null };
+  const state = {
+    hooked: false, listeners: [], log: [], count: 0, target: null,
+    dayHits: 0, dayLog: [], leaf: null,
+  };
 
   const asserted = {
     callsInvoke: false,
@@ -175,10 +181,23 @@ globalThis.__cd = (() => {
     }, null, 1);
   }
 
+  // The 0-parameter overload is the per-day body: ChangeDay(int) just calls it
+  // delta times (see evidence/S2cd-20261022-0710/inspect-analysis.md). Counting
+  // both separates "days requested" from "day steps actually executed".
+  function pickLeaf() {
+    for (const m of variants()) {
+      let pc = -1;
+      try { pc = m.parameterCount; } catch (e) { continue; }
+      if (pc === 0) return m;
+    }
+    return null;
+  }
+
   function hook() {
     if (state.hooked) return 'already hooked';
-    if (state.count > 0) {
-      return 'REFUSED: ' + state.count + ' call(s) already logged from a previous run; call __cd.reset() first';
+    if (state.count > 0 || state.dayHits > 0) {
+      return 'REFUSED: previous run logged ' + state.count + ' wrapper / ' + state.dayHits +
+        ' leaf call(s); call __cd.reset() first';
     }
     const pick = pickTarget();
     const m = pick.method;
@@ -192,9 +211,13 @@ globalThis.__cd = (() => {
     let isStatic = null;
     try { isStatic = m.isStatic; } catch (e) {}
     if (isStatic !== false) return 'REFUSED: ChangeDay(int) isStatic=' + isStatic + ', arg slot unverified';
+    const leaf = pickLeaf();
+    if (leaf && leaf.virtualAddress.equals(m.virtualAddress)) {
+      return 'REFUSED: both overloads resolve to the same address - double attach';
+    }
     const before = snapshot();
     if (before && before.error) return 'REFUSED: snapshot failed at install: ' + before.error;
-    const listener = Interceptor.attach(m.virtualAddress, {
+    const wrapper = Interceptor.attach(m.virtualAddress, {
       onEnter(args) {
         const delta = args[1].toInt32();
         state.count += 1;
@@ -210,32 +233,49 @@ globalThis.__cd = (() => {
         if (last) last.doneAt = Date.now();
       },
     });
-    state.listeners.push(listener);
+    state.listeners.push(wrapper);
+    if (leaf) {
+      const l = Interceptor.attach(leaf.virtualAddress, {
+        onEnter() {
+          state.dayHits += 1;
+          state.dayLog.push({ n: state.dayHits, t: Date.now() });
+        },
+      });
+      state.listeners.push(l);
+      state.leaf = { va: leaf.virtualAddress.toString(), paramCount: 0 };
+    }
     state.hooked = true;
     state.target = { va: m.virtualAddress.toString(), argIndex: 1, paramType: paramTypeName(m, 0) };
     state.before = before;
-    return JSON.stringify({ hooked: true, va: state.target.va, paramType: state.target.paramType, before });
+    return JSON.stringify({
+      hooked: true, wrapper: state.target, leaf: state.leaf, before,
+    }, null, 1);
   }
 
   function reset() {
     if (state.hooked) return 'REFUSED: unhook first';
-    const dropped = state.count;
+    const dropped = state.count + '/' + state.dayHits;
     state.log = [];
     state.count = 0;
+    state.dayLog = [];
+    state.dayHits = 0;
+    state.leaf = null;
     state.before = null;
     state.target = null;
-    return `reset: dropped ${dropped} call(s)`;
+    return 'reset: dropped ' + dropped + ' (wrapper/leaf) call(s)';
   }
 
   function dump(limit) {
     const n = limit || 50;
     return JSON.stringify({
       hooked: state.hooked,
-      total: state.count,
+      wrapperCalls: state.count,
+      wrapperSumDelta: state.log.reduce((a, c) => a + c.delta, 0),
+      leafHits: state.dayHits,
       before: state.before || null,
       after: snapshot(),
       calls: state.log.slice(0, n),
-      sums: state.log.reduce((a, c) => a + c.delta, 0),
+      leaf: state.dayLog.slice(0, n),
     }, null, 1);
   }
 
@@ -244,7 +284,7 @@ globalThis.__cd = (() => {
     for (const l of state.listeners) { try { l.detach(); n++; } catch (e) {} }
     state.listeners = [];
     state.hooked = false;
-    return `detached ${n} listener(s); total calls seen=${state.count}`;
+    return 'detached ' + n + ' listener(s); wrapper calls=' + state.count + ' leaf hits=' + state.dayHits;
   }
 
   return { asserted, inspect, snapshot, hook, reset, dump, unhook, state };
