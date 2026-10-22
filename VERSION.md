@@ -38,11 +38,23 @@
 |---|---|
 | baseline ก่อน split | `coop-test/baselines/20261022-061550/savehash.real.before.txt` · digest `b069e56c1228` |
 | เหตุผล | เกมถูกเปิดบนเซฟจริง 06:00:22–06:1x **ก่อน** session (ผู้ใช้เป็นคนเปิด) ⇒ เขียน `PlayerprefData.dat` ไฟล์เดียว · `SaveSlot*` 57 ไฟล์ไม่ถูกเขียน |
-| baseline ปัจจุบัน (หลัง incident 06:39) | `coop-test/baselines/20261022-064205/savehash.real.before.txt` · digest **`1901ad90a2c7`** |
+| baseline ณ ตอนนั้น (หลัง incident 06:39) | `coop-test/baselines/20261022-064205/savehash.real.before.txt` · digest **`1901ad90a2c7`** |
 | เหตุผล | incident 2026-10-22 06:39 — **เปิดเกมบนเซฟจริงหลัง restore** เพื่อทดสอบปุ่ม `>>` โดยไม่มี split/preflight · เปลี่ยนเฉพาะ `PlayerprefData.dat` (ตรวจ hash รายไฟล์) · ผู้ใช้ปิดเกมแล้ว · rebaseline volatile-only ตามกฎ |
-| baseline ปัจจุบัน (สุดท้าย) | `coop-test/baselines/20261022-064714/savehash.real.before.txt` · digest **`de7e2af49b23`** |
+| baseline ณ ตอนนั้น (ถูกแทนที่ 07:54 — ดูหัวข้อถัดไป) | `coop-test/baselines/20261022-064714/savehash.real.before.txt` · digest **`de7e2af49b23`** |
 | เหตุผล | incident 2026-10-22 06:43 (ครั้งที่ 3) — เปิดเกมบนเซฟจริงหลัง restore อีกครั้งเพื่อวัด `>>` ซ้ำ · เปลี่ยนเฉพาะ `PlayerprefData.dat` · `SaveSlot*` 55 ไฟล์ไม่ถูกเขียน · rebaseline volatile-only |
-| ผลบังคับ | ใช้ `--expected-baseline coop-test/baselines/20261022-064714/savehash.real.before.txt` สำหรับ `split` ครั้งถัดไป (แทน `064205`) |
+| ผลบังคับ (ประวัติ) | ใช้ `--expected-baseline …/20261022-064714` เฉพาะช่วงก่อน 07:54 · **หลังจากนั้นใช้ `4226730f66ff` (หัวข้อถัดไป)** |
+
+## Baseline ปัจจุบันของ S2a-3 (มติผู้ใช้ 2026-10-22 · หลังคืนเซฟ `explore-20261022-0755`)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `4226730f66ffdcf9adb110fd8e26e29ffa8ba40620ccc33b013ef11adfaa46d7` (57 ไฟล์ · 485,795,554 bytes) |
+| ไฟล์ baseline | `coop-test/baselines/20261022-075422/savehash.real.before.txt` |
+| คำสั่งบังคับ | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261022-075422\savehash.real.before.txt` |
+| เหตุผล | incident 2026-10-22 07:48 — เกมถูกเปิดบนเซฟจริงหลัง restore ของ `S2cd` · เทียบ `064714` แล้วเปลี่ยนเฉพาะ `PlayerprefData.dat` (`SaveSlot*` ไม่ถูกเขียน) · `REBASELINE.json` = `volatile_only: true`, `changed: ["PlayerprefData.dat"]` |
+| การอนุมัติ | **มติผู้ใช้ 2026-10-22** หลัง restore `explore-20261022-0755` ผ่าน post-check 6/6 · `coop-test/baselines/20261022-075422/APPROVAL.md` |
+| ยืนยันด้วยการวัด | `Save` 57 ไฟล์ digest `4226730f66ff` **EXACT** · `changed=0 missing=0 added=0` · `leftovers: none` · rehash อิสระ (ordinal sort) ตรงกัน · `evidence/S2a3-20261022-0156/restore-postcheck.md`, `presave-check.md` |
+| ผลบังคับ | เป็น expected baseline ของ **S2a-3** (C6) และใช้ตัดสิน E7/X9/C8 · ถ้า digest ไม่ตรง **หยุดและรายงาน** ห้าม rebaseline กลบ |
 
 ## กฎ
 

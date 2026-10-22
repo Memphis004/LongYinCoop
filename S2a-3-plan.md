@@ -23,7 +23,7 @@
 - ไม่ทำ overlay IMGUI / `WriteGuard` hook / role=guest ในมอด → **S2a-4**
 - ไม่ทำ TCP ข้ามเครื่อง / VPN / bind นอก loopback → **S2b** (ต้องมีคำตอบ Q3 ของ rev2 ก่อน)
 - ไม่แตะ `IpcServer.cs`, `TurnGate.cs`, `tools/save-split.py`, `tools/s15d_sample.py`, mod อื่น (`LongYinThai`, `UnityExplorer`)
-- ไม่แตะเซฟจริง/ไม่เปลี่ยน baseline (`854cc890430f`) · ไม่เปิดเกมเอง (ผู้ใช้เปิดเท่านั้น)
+- ไม่แตะเซฟจริง/ไม่เปลี่ยน baseline (`4226730f66ff`) · ไม่เปิดเกมเอง (ผู้ใช้เปิดเท่านั้น)
 - ไม่เพิ่ม dependency ใหม่ (`csproj` ต้องไม่มี `PackageReference`; ใช้ `System.Net.Sockets`)
 
 ---
@@ -200,7 +200,7 @@ u8 ver=2 | u32 sessionId | varu64 hostApplyUs | 32B replicaHash | u8 flags(resyn
 | E4 | stall 60 s (client หยุดอ่านเอง) | T2 | host p99 (§6.5) + ไม่ crash + กลับมาอ่านได้ | |
 | E5 | disconnect 60 s แล้ว reconnect | T2 | handshake ใหม่สำเร็จ, Div-A=0 หลังต่อ | |
 | E6 | ยิง forbidden จาก client ระหว่างเกมจริง | T2 | audit tuple ไม่เปลี่ยน + counters | |
-| E7 | ปิดเกม → `verify`/`restore` | T2 | เซฟ 57 ไฟล์ `854cc890430f`, `leftovers: none` | |
+| E7 | ปิดเกม → `verify`/`restore` | T2 | เซฟ 57 ไฟล์ `4226730f66ff`, `leftovers: none` | |
 
 **กติกาการนับ verdict:** FAIL ข้อใด = รายงานตรง ๆ ห้ามเลื่อนเกณฑ์ · เคสที่ "วัดไม่ได้" = **NOT-RUN** (ห้ามเขียน PASS) · เคสที่ได้ผลแต่เล็กกว่าเป้า (เช่น unit count < 60) = **PASS-with-limitation** + เหตุผล
 
@@ -227,7 +227,7 @@ u8 ver=2 | u32 sessionId | varu64 hostApplyUs | 32B replicaHash | u8 flags(resyn
 | **X6** | main-thread cost ต่อเฟรม **p99 ≤ 4 ms** | `sampleMs + encodeMs` (เดิมของ S2a-2) | `S2Metrics` (มีอยู่) | p99 ≤ 4 ms | — |
 | **X7** | auth/bind | bind loopback ✓; secret ผิด → DENY ≤ 2 s; fieldHash ผิด → DENY ≤ 1 s; bind นอก loopback ถูกปฏิเสธ | marker + `handshake` log | ครบ | — |
 | **X8** | guest อ่านอย่างเดียว | `commandsAccepted = 0`, `forbiddenTypeDrops = 3` (self-test), audit tuple เท่าเดิม, grep call sites = 0 | counters + `grep` | ครบ | grep ทำมือ = หลักฐานใน evidence |
-| **X9** | ไม่แตะเซฟ | `SaveSlot*` เขียน 0 ไฟล์; digest = `854cc890430f`; `leftovers: none` | `save-split.py verify/status` | ครบ | — |
+| **X9** | ไม่แตะเซฟ | `SaveSlot*` เขียน 0 ไฟล์; digest = `4226730f66ff`; `leftovers: none` | `save-split.py verify/status` | ครบ | — |
 
 ### 6.3 พยากรณ์ bandwidth (จาก A3: header 85 B + 24.3 B/ยูนิต + envelope v2 40 B + frame header 8 B/frame; frame ละ ≤ 1092 B payload)
 
@@ -269,10 +269,12 @@ u8 ver=2 | u32 sessionId | varu64 hostApplyUs | 32B replicaHash | u8 flags(resyn
 | **C3** | `dotnet build -c Release` → sha256 DLL + build log (ยังไม่ copy) | ❌ | gate #1 | 0 error/0 warning ใหม่ | ลบ `bin/` |
 | **C4** | สำรอง DLL ปัจจุบัน (`LongYinCoop.dll` → `.off`/`.prev-<hash>`) · backup `MelonPreferences.cfg` + `net.cfg` · **ล้าง dotted key เก่าใน MelonPreferences.cfg ถ้ามี** (ต้นเหตุ incident 23:54) | ❌ | **gate #2 (อนุมัติ deploy)** | sha256 ครบทั้งก่อน/หลัง + ไฟล์ใหม่ตรง build | copy `.off` กลับ |
 | **C5** | copy DLL+PDB เข้า `Mods\` · ตั้ง `net.cfg` (enabled=false, role=host, secret 32B hex, bind=127.0.0.1, port=47800, sendHz=30) + sha256 | ❌ | gate #2 | sha256 ใน `Mods\` = C3 | คืน `.off` + คืน cfg |
-| **C6** | session-start checks (hash เกม, เกมไม่รัน, `save-split status`=57/`854cc890430f`/leftovers none) → `split --expected-baseline coop-test\baselines\20261021-225856\savehash.real.before.txt` → recorder `s15d_sample.py` → `preflight` **READY** | ❌ | gate #2 | READY + split manifest | `restore` |
+| **C6** | session-start checks (hash เกม, เกมไม่รัน, `save-split status`=57/`4226730f66ff`/leftovers none) → `split --expected-baseline coop-test\baselines\20261022-075422\savehash.real.before.txt` → recorder `s15d_sample.py` → `preflight` **READY** | ❌ | gate #2 | READY + split manifest | `restore` |
 | **C7** | **ผู้ใช้เปิดเกม** → เข้าศึก → แจ้งผม → ผมรัน §6.5 → ผู้ใช้เล่น 2–3 เทิร์น → แจ้ง Esc/เหตุการณ์ → ปิดเกม | ✅ | **ผู้ใช้เปิดเองเท่านั้น** | ทุก phase ครบ + `viewer.ndjson` + markers | ปิดเกม + `.off` |
-| **C8** | ปิดเกม → `verify` → `restore` → คืน pref + `net.cfg` (sha256 ตรงก่อนตั้ง) → `rebaseline` ถ้า pref drift → รวบรวม evidence | ❌ | — | 57 ไฟล์ `854cc890430f`, `leftovers: none` | restore ซ้ำ |
+| **C8** | ปิดเกม → `verify` → `restore` → คืน pref + `net.cfg` (sha256 ตรงก่อนตั้ง) → `rebaseline` ถ้า pref drift → รวบรวม evidence | ❌ | — | 57 ไฟล์ `4226730f66ff`, `leftovers: none` | restore ซ้ำ |
 | **C9** | รายงานเทียบ X1–X9 ทีละข้อ + rollback test | ❌ | **gate #3 (อนุมัติ tag `checkpoint-S2a`)** | verdict ครบทุกข้อ (รวม NOT-RUN) | — |
+
+**มติ 2026-10-22 (อัปเดต baseline ของ stage):** baseline ที่ใช้ตัดสิน E7/X9/C6/C8 เปลี่ยนจาก `854cc890430f` → **`4226730f66ff`** (`coop-test/baselines/20261022-075422`) หลังคืนเซฟจริงของ session `explore-20261022-0755` แล้ววัดได้ 57 ไฟล์ `changed=0 missing=0 added=0` · หลักฐาน `evidence/S2a3-20261022-0156/restore-postcheck.md`, `presave-check.md`, `coop-test/baselines/20261022-075422/REBASELINE.json` + `APPROVAL.md` · `854cc890430f` ยังเป็นประวัติของ S2a-2 (ห้ามใช้เป็นเกณฑ์ของ stage นี้)
 
 **หลักฐาน `evidence/S2a3-<ts>/`**
 `plan-ref.md` · `code-diff-summary.md` · `commit.txt` · `tests.txt` (จำนวน PASS/FAIL) · `build.txt` (log + sha256) · `dll-before-after.txt` · `prefs-sha-before.txt` · `prefs-sha-after.txt` · `netcfg-values.txt` (ไม่ log secret) · `preflight.txt` · `split.json` · `sampler.ndjson` · `s2-snapshots.ndjson` · `s2-metrics.ndjson` (จาก `UserData\LongYinCoop\S2`) · `viewer.ndjson` · `viewer-summary.txt` · `latency.txt` · `bandwidth.txt` · `divergence.txt` · `resync.txt` · `framemeter.txt` · `unit-count.txt` · `audit-tuple.txt` · `nowrite-grep.txt` · `verify-restore.txt` · `report.md`
@@ -330,7 +332,7 @@ u8 ver=2 | u32 sessionId | varu64 hostApplyUs | 32B replicaHash | u8 flags(resyn
 ## 11. สิ่งที่จะไม่เกิดขึ้นใน stage นี้ (ย้ำ)
 - ไม่มีคำสั่งจากเครือข่ายที่แตะ state เกม · ไม่มี `Save/Load` · ไม่แตะ Steam/สถิติ/`cheat*`
 - ไม่มี overlay/IMGUI · ไม่มี role=guest ในมอด · ไม่มี VPN/ข้ามเครื่อง
-- ไม่แตะเซฟจริง · ไม่เปลี่ยน baseline `854cc890430f` · ไม่เปิดเกมเอง · ไม่ build/deploy ก่อนอนุมัติ
+- ไม่แตะเซฟจริง · ไม่เปลี่ยน baseline `4226730f66ff` · ไม่เปิดเกมเอง · ไม่ build/deploy ก่อนอนุมัติ
 
 ---
 
@@ -339,4 +341,4 @@ u8 ver=2 | u32 sessionId | varu64 hostApplyUs | 32B replicaHash | u8 flags(resyn
 `S2a-2-plan.md` §5 (นิยาม exit เดิม), §8.2 (audit คำสั่ง IPC), §8.5 (วินัยการวัด rev5) ·
 `evidence/S2a2-20261021-2254/` (`metrics-summary.txt`, `frame-time-measurability-2345.txt`, `S2a2-report.md`) ·
 `UserData\LongYinCoop\S2\s2-snapshots.ndjson` (49,901 เฟรม, 9 ยูนิต, 304 B) ·
-`VERSION.md` (anchors + baseline `854cc890430f`)
+`VERSION.md` (anchors + baseline `4226730f66ff`)
