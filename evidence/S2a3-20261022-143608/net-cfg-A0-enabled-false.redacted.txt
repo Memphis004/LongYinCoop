@@ -1,0 +1,33 @@
+# net.cfg -> enabled=false for phase A0 (2026-10-22 18:11:46)
+path: <game>\UserData\LongYinCoop\net.cfg
+
+| item | value |
+|---|---|
+| sha256 BEFORE (enabled=true) | 0cca04f8629f473c221de8a7c4b5b76932baaa1fcee7df5acc9449136660df0a (453 B) |
+| backup of the TRUE state | net.cfg.bak-before-A0-20261022-181146 |
+| backup sha256 | 0cca04f8629f473c221de8a7c4b5b76932baaa1fcee7df5acc9449136660df0a (identical) |
+| sha256 AFTER (enabled=false) | dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61 (454 B) |
+| byte delta | +1 byte = `true` -> `false` on the enabled line only |
+| diff (line by line, 11 vs 11 lines) | line 3: `enabled          = true` -> `enabled          = false` |
+| secret | line identical to BEFORE (compared, not printed); 64 lower-case hex |
+| role / transport / bind / port | host / tcp / 127.0.0.1 / 47800 (unchanged) |
+| allowNonLoopback / sendHz / heartbeatMs | false / 30 / 1000 (unchanged) |
+| encoding | UTF-8 no BOM (first bytes 23 20 4c before AND after) |
+| external accept | bind=127.0.0.1 + allowNonLoopback=false (loopback only) |
+| port 47800 before launch | free (connect_ex=10061) |
+
+## redacted snapshot (after)
+```
+# LongYinCoop S2 net config -- flat key = value (MelonLoader never reads/writes this file)
+# enabled=false by default; flip to true only for a measurement session
+enabled          = false
+role             = host
+secret           = <64 hex, unchanged, not printed>
+allowNonLoopback = false
+transport        = tcp
+bind             = 127.0.0.1
+port             = 47800
+sendHz           = 30
+heartbeatMs      = 1000
+```
+(fenced block above is illustrative; the real secret line was verified byte-identical to the backup)

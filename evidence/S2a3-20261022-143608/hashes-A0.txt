@@ -1,0 +1,22 @@
+# Re-verification 2026-10-22 18:10-18:14 (before A0, no game launch)
+
+| item | measured | expected | verdict |
+|---|---|---|---|
+| game process | not running | not running | OK |
+| GameAssembly.dll | 33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1 | VERSION.md line 8 | exact |
+| global-metadata.dat | 451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0 | VERSION.md line 9 | exact |
+| Mods\LongYinCoop.dll | c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96 | C3 build | exact |
+| Mods\LongYinCoop.pdb | 6ec6482c9649b61e8fb21e0e682710622a9b3a364b5261363244163d916ec110 | C3 build | exact |
+| UserData\MelonPreferences.cfg | 269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1 | pre-C4 | unchanged |
+| Save (mounted copy) | 57 files, digest 4226730f66ff | baseline 20261022-075422 | exact |
+| Save.real-S2a3-20261022-143608 (aside) | 57 files, digest 4226730f66ff | approved baseline | exact |
+| leftovers | exactly Save.real-S2a3-20261022-143608 | no other | OK |
+| `save-split.py status` mounted-vs-baseline | EXACT vs 4 baseline files (explore-*, S2a3-* real+copy) | EXACT | OK |
+| prefs disarmed | preflight: 6 keys=false | 6 keys false | OK |
+| port 47800 | no listener (connect_ex=10061) | free | OK |
+| fieldHash (recomputed from source constants + anchor) | 5424e4cd7dfad6304c8786ced7545b026ab56df34b1fc03e42320b15fd707479 | prefix 5424e4cd7dfad630 | match |
+| CPU contention risk (§7.1 of c7-prep) | no emcc/node/clang build workers running now | - | cleared |
+| existing s2-snapshots.ndjson offset | 49,934 lines / 97,291,362 B (last write 00:47:02 = S2a-2 run) | analyse only lines > 49,934 | noted |
+| MelonLoader latest log | 26-10-22_7-57-57.log | no new session yet | OK |
+
+baseline NOT changed. Real SaveSlot* untouched (mounted Save is the copy). No game launch by me.

@@ -1,0 +1,21 @@
+# Recorder check before A0 (2026-10-22 ~18:12)
+
+## Old recorder pid 37536 - DEAD (as expected)
+- process does not exist anymore (`Get-Process -Id 37536` -> not found; no `s15d_sample.py` in any python cmdline)
+- `coop-test\S2a3-20261022-143608\recorder.out.log` tail:
+  [15:39:09] waiting for the game (7s left)
+  [15:39:12] waiting for the game (4s left)
+  [15:39:15] waiting for the game (1s left)
+  [15:39:18] game not running
+- wait window (3600 s from 14:39:16) ended 15:39:18 => it never connected, never wrote a sample.
+- `sampler.ndjson` = 0 bytes the whole time = PLACEHOLDER, not data. Not counted as evidence.
+
+## New recorder pid 18512 - ALIVE and WAITING
+- cmdline: `python tools\s15d_sample.py --out .\coop-test\S2a3-20261022-143608\sampler.ndjson
+  --seconds 3600 --interval 0.1 --wait 7200 --wait-interval 3`
+- started 18:12:0x, wait window ends ~20:12:12 (7200 s)
+- log tail 18:12:16: `[18:12:16] waiting for the game (7197s left)`
+- `recorder-A0.err.log` = empty
+- `sampler.ndjson` = 0 bytes (still only the placeholder; nothing recorded yet)
+- reject rule kept: a block is void if the recorder is dead / file not growing (line `connected pid=.` + growing file is the accept signal)
+- only ONE recorder at a time (single pipe owner)
