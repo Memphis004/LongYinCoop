@@ -55,8 +55,16 @@ mounted Save matches:
   EXACT  S2cd-20261022-071043/savehash.real.before.txt
 ```
 
-## 5. ยังไม่ทำ (รออนุมัติ)
+## 5. หลังผู้ใช้เปิดเกม (07:13:50, pid 26188)
 
-- ยังไม่เปิดเกม (ผู้ใช้ต้องเปิดเอง)
-- ยังไม่ต่อ Frida / ยังไม่รัน `__cd.inspect()`
+| ขั้น | ผล |
+|---|---|
+| `tasklist` เห็นโปรเซสเดียว | `LongYinLiZhiZhuan.exe` 26188 ✅ |
+| Frida attach (`local`, `attach_pid 26188`) | `Ready` ✅ |
+| โหลด `tools/changeday_hook.js` เข้าเกม | คืน `__cd ready` ✅ |
+| `__cd.inspect()` | อ่านผลใน `inspect-analysis.md` + `inspect-raw.json` ✅ |
+
+## 6. ยังไม่ทำ (รออนุมัติ)
+
 - ยังไม่ติด hook, ยังไม่กด `>>`, ยังไม่เรียก `ChangeDay`
+- เกมยังรันอยู่ที่ pid 26188 (ไม่ได้ปิด) และยัง**ไม่ restore** เซฟ — ต้อง `save-split restore --label S2cd-20261022-071043` ตอนจบรอบ

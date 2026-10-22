@@ -1,0 +1,77 @@
+{
+ "overloads": [
+  {
+   "name": "ChangeDay",
+   "params": 1,
+   "paramTypes": [
+    "System.Int32"
+   ],
+   "rva": "0x7925f0",
+   "va": "0x7ffeba8825f0",
+   "static": false
+  },
+  {
+   "name": "ChangeDay",
+   "params": 0,
+   "paramTypes": [],
+   "rva": "0x790e30",
+   "va": "0x7ffeba880e30",
+   "static": false
+  }
+ ],
+ "target": {
+  "name": "ChangeDay",
+  "params": 1,
+  "paramTypes": [
+   "System.Int32"
+  ],
+  "rva": "0x7925f0",
+  "va": "0x7ffeba8825f0",
+  "static": false
+ },
+ "targetReason": "ok",
+ "thunk": "first insn looks like a body",
+ "hooked": false,
+ "body": [
+  "0x7ffeba8825f0  test edx, edx",
+  "0x7ffeba8825f2  jle 0x7ffeba88261d",
+  "0x7ffeba8825f4  mov qword ptr [rsp + 8], rbx",
+  "0x7ffeba8825f9  push rdi",
+  "0x7ffeba8825fa  sub rsp, 0x20",
+  "0x7ffeba8825fe  mov ebx, edx",
+  "0x7ffeba882600  mov rdi, rcx",
+  "0x7ffeba882603  xor edx, edx",
+  "0x7ffeba882605  mov rcx, rdi",
+  "0x7ffeba882608  call 0x7ffeba880e30",
+  "0x7ffeba88260d  dec ebx",
+  "0x7ffeba88260f  test ebx, ebx",
+  "0x7ffeba882611  jg 0x7ffeba882603",
+  "0x7ffeba882613  mov rbx, qword ptr [rsp + 0x30]",
+  "0x7ffeba882618  add rsp, 0x20",
+  "0x7ffeba88261c  pop rdi",
+  "0x7ffeba88261d  ret ",
+  "0x7ffeba88261e  int3 ",
+  "0x7ffeba88261f  int3 ",
+  "0x7ffeba882620  push rbx",
+  "0x7ffeba882622  sub rsp, 0x30",
+  "0x7ffeba882626  cmp byte ptr [rip + 0x170a734], 0",
+  "0x7ffeba88262d  mov rbx, rcx",
+  "0x7ffeba882630  movaps xmmword ptr [rsp + 0x20], xmm6",
+  "0x7ffeba882635  movaps xmm6, xmm1",
+  "0x7ffeba882638  jne 0x7ffeba882659",
+  "0x7ffeba88263a  lea rcx, [rip + 0x16205ff]",
+  "0x7ffeba882641  call 0x7ffeba1c64a0",
+  "0x7ffeba882646  lea rcx, [rip + 0x1624943]",
+  "0x7ffeba88264d  call 0x7ffeba1c64a0",
+  "0x7ffeba882652  mov byte ptr [rip + 0x170a708], 1",
+  "0x7ffeba882659  mov rax, qword ptr [rbx + 0x20]",
+  "0x7ffeba88265d  mov qword ptr [rsp + 0x40], rsi",
+  "0x7ffeba882662  mov qword ptr [rsp + 0x48], rdi",
+  "0x7ffeba882667  test rax, rax",
+  "0x7ffeba88266a  je 0x7ffeba88281f",
+  "0x7ffeba882670  movss xmm2, dword ptr [rax + 0xb4]",
+  "0x7ffeba882678  movaps xmm3, xmm2",
+  "0x7ffeba88267b  mulss xmm2, dword ptr [rip + 0x112ecc5]",
+  "0x7ffeba882683  addss xmm3, xmm6"
+ ]
+}
