@@ -1,0 +1,18 @@
+captured: 2026-10-22 14:48:23
+net.cfg sha256 BEFORE enabling : 42e5efea68467829b6be4206c3b2a4baff571751f8a44ead731ba01be5635137  (455 B, enabled=false)
+net.cfg sha256 AFTER  enabling : 0cca04f8629f473c221de8a7c4b5b76932baaa1fcee7df5acc9449136660df0a  (453 B, enabled=true)
+backup (outside git, contains secret): C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\UserData\LongYinCoop\net.cfg.bak-before-c7-20261022-144640
+diff vs backup: only the 'enabled' line (false -> true); secret identical = True (64 hex)
+
+# net.cfg content AFTER (secret redacted)
+# LongYinCoop S2 net config -- flat key = value (MelonLoader never reads/writes this file)
+# enabled=false by default; flip to true only for a measurement session
+enabled          = true
+role             = host
+secret           = <redacted 64 hex chars>
+allowNonLoopback = false
+transport        = tcp
+bind             = 127.0.0.1
+port             = 47800
+sendHz           = 30
+heartbeatMs      = 1000
