@@ -6,12 +6,20 @@ skip call ChangeDay once, N times, or not at all?".
 
 How to use (il2cpp-frida-mcp):
   1. paste this whole file into `il2cpp_exec_js` (defines globalThis.__cd)
-  2. __cd.inspect()     -> signature + RVA + N disassembled instructions (no hook)
+  2. __cd.inspect()     -> signature + param types + RVA + N disassembled instructions
   3. __cd.snapshot()    -> read-only state snapshot (worldTime/WorkingUI/force)
-  4. __cd.hook()        -> Interceptor.attach, LOG ONLY
+  4. __cd.hook()        -> Interceptor.attach, LOG ONLY (refuses static/ambiguous)
   5. (user presses >>)
   6. __cd.dump()        -> print collected calls, __cd.snapshot() again
-  7. __cd.unhook()
+  7. __cd.unhook()      -> detach; __cd.reset() before any second run
+
+Known limits (measured/unmeasured as labelled in evidence/S2-cdprep-*):
+  - field names come from DUMP; the List<T> access in snapshot() is GUESS
+    until it is seen returning real values
+  - onLeave assumes calls do not nest (doneAt maps to the newest entry)
+  - the `asserted` flags are a tripwire, not a sandbox: they refuse a hook only
+    if future code sets them True
+  - snapshot() calls Il2Cpp.gc.choose(), so it must be run outside the hook
 
 Hard rules enforced by construction (see __cd.asserted):
   - never calls Method.invoke / any game method
@@ -40,23 +48,56 @@ globalThis.__cd = (() => {
     return all;
   }
 
-  function pickIntOverload() {
-    for (const m of variants()) {
+  // DUMP shows two overloads: ChangeDay(int deltaDay) and ChangeDay().
+  // We accept ONLY the single-parameter one whose parameter type is Int32;
+  // a count-only check would silently misread another 1-arg overload.
+  function paramTypeName(m, i) {
+    try { return m.parameters[i].type.name; } catch (e) { return '?'; }
+  }
+
+  function pickTarget() {
+    const all = variants();
+    if (!all.length) return { method: null, reason: 'ChangeDay not found on GameController' };
+    const oneArg = [];
+    for (const m of all) {
       let pc = -1;
       try { pc = m.parameterCount; } catch (e) { continue; }
-      if (pc === 1) return m;
+      if (pc === 1) oneArg.push(m);
     }
-    return null;
+    if (!oneArg.length) return { method: null, reason: 'no 1-parameter ChangeDay overload' };
+    const ints = oneArg.filter(m => /(^|\.)Int32$/.test(paramTypeName(m, 0)));
+    if (!ints.length) {
+      return {
+        method: null,
+        reason: 'no ChangeDay(int) overload; saw ' +
+          oneArg.map(m => paramTypeName(m, 0)).join(', '),
+      };
+    }
+    if (ints.length > 1) return { method: null, reason: 'ambiguous: ' + ints.length + ' int overloads' };
+    return { method: ints[0], reason: 'ok' };
   }
 
   function readMethodInfo(m) {
-    const info = { name: '?', params: '?', rva: '?', va: '?', static: '?' };
+    const info = { name: '?', params: '?', paramTypes: [], rva: '?', va: '?', static: '?' };
     try { info.name = m.name; } catch (e) {}
     try { info.params = m.parameterCount; } catch (e) {}
+    try {
+      for (let i = 0; i < m.parameterCount; i++) info.paramTypes.push(paramTypeName(m, i));
+    } catch (e) {}
     try { info.va = m.virtualAddress.toString(); } catch (e) {}
     try { info.rva = '0x' + (m.virtualAddress.sub(Il2Cpp.module.base).toUInt32()).toString(16); } catch (e) {}
     try { info.static = m.isStatic; } catch (e) {}
     return info;
+  }
+
+  // A method_ptr that starts with an immediate jump is a thunk, not the body:
+  // hooking it still counts calls but disassembly would be meaningless.
+  function thunkHint(addr) {
+    try {
+      const i = Instruction.parse(addr);
+      const viaTrampoline = /^b(\.\w+)?$/.test(i.mnemonic);
+      return viaTrampoline ? `first insn is ${i.mnemonic} ${i.opStr}` : 'first insn looks like a body';
+    } catch (e) { return 'unreadable: ' + e.message; }
   }
 
   function disasm(addr, count) {
@@ -122,27 +163,46 @@ globalThis.__cd = (() => {
   // ---- modes -------------------------------------------------------------
   function inspect(nInstr) {
     const info = variants().map(readMethodInfo);
-    const target = pickIntOverload();
-    const body = target ? disasm(target.virtualAddress, nInstr || 40) : [];
-    return JSON.stringify({ overloads: info, hooked: state.hooked, body }, null, 1);
+    const pick = pickTarget();
+    const body = pick.method ? disasm(pick.method.virtualAddress, nInstr || 40) : [];
+    return JSON.stringify({
+      overloads: info,
+      target: pick.method ? readMethodInfo(pick.method) : null,
+      targetReason: pick.reason,
+      thunk: pick.method ? thunkHint(pick.method.virtualAddress) : null,
+      hooked: state.hooked,
+      body,
+    }, null, 1);
   }
 
   function hook() {
     if (state.hooked) return 'already hooked';
-    const m = pickIntOverload();
-    if (!m) return 'ChangeDay(int) not found - abort';
+    if (state.count > 0) {
+      return 'REFUSED: ' + state.count + ' call(s) already logged from a previous run; call __cd.reset() first';
+    }
+    const pick = pickTarget();
+    const m = pick.method;
+    if (!m) return 'REFUSED: ' + pick.reason;
     // guard: refuse if we ever add an invoke/replace path
     if (asserted.callsInvoke || asserted.writesMemory || asserted.usesReplace) {
       return 'REFUSED: module violates read-only contract';
     }
+    // arg index depends on the calling convention, so a static overload would
+    // make args[1] the wrong slot and every logged delta garbage.
+    let isStatic = null;
+    try { isStatic = m.isStatic; } catch (e) {}
+    if (isStatic !== false) return 'REFUSED: ChangeDay(int) isStatic=' + isStatic + ', arg slot unverified';
     const before = snapshot();
+    if (before && before.error) return 'REFUSED: snapshot failed at install: ' + before.error;
     const listener = Interceptor.attach(m.virtualAddress, {
       onEnter(args) {
         const delta = args[1].toInt32();
         state.count += 1;
         state.log.push({
           n: state.count, t: Date.now(), delta,
-          dayBefore: before.day,
+          // constant: read once at install, not per call (no managed field read
+          // inside the hook, which would allocate and could perturb the body)
+          dayAtInstall: before.day,
         });
       },
       onLeave() {
@@ -152,9 +212,19 @@ globalThis.__cd = (() => {
     });
     state.listeners.push(listener);
     state.hooked = true;
-    state.target = { va: m.virtualAddress.toString() };
+    state.target = { va: m.virtualAddress.toString(), argIndex: 1, paramType: paramTypeName(m, 0) };
     state.before = before;
-    return JSON.stringify({ hooked: true, va: state.target.va, before });
+    return JSON.stringify({ hooked: true, va: state.target.va, paramType: state.target.paramType, before });
+  }
+
+  function reset() {
+    if (state.hooked) return 'REFUSED: unhook first';
+    const dropped = state.count;
+    state.log = [];
+    state.count = 0;
+    state.before = null;
+    state.target = null;
+    return `reset: dropped ${dropped} call(s)`;
   }
 
   function dump(limit) {
@@ -177,7 +247,7 @@ globalThis.__cd = (() => {
     return `detached ${n} listener(s); total calls seen=${state.count}`;
   }
 
-  return { asserted, inspect, snapshot, hook, dump, unhook, state };
+  return { asserted, inspect, snapshot, hook, reset, dump, unhook, state };
 })();
 
 typeof __cd.hook === 'function' ? '__cd ready' : 'load failed';

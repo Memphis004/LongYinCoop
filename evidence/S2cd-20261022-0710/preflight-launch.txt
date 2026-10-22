@@ -1,0 +1,13 @@
+  OK   game-not-running: not running
+  OK   leftovers-unexpected: none
+  OK   leftovers-state: 1 expected aside: Save.real-S2cd-20261022-071043
+  OK   no-hidden-sentinel: none
+  OK   label: S2cd-20261022-071043
+  OK   manifest: MANIFEST.json label=S2cd-20261022-071043
+  OK   aside-matches-manifest: ['Save.real-S2cd-20261022-071043'] vs manifest 'Save.real-S2cd-20261022-071043'
+  OK   copy-baseline-file: savehash.copy.before.txt
+  OK   real-save-mounted: no
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  OK   real-aside-untouched: Save.real-S2cd-20261022-071043 files=57 digest=de7e2af49b23
+PREFLIGHT-LAUNCH READY - you may launch the game
+exit=0
