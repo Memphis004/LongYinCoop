@@ -1,0 +1,296 @@
+{
+  "label": "S2a3-20261022-143608",
+  "created": "2026-10-22T14:39:10",
+  "data_dir": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\LongYinLiZhiZhuan\\LongYinLiZhiZhuan_Data",
+  "expect_baseline": "coop-test\\baselines\\20261022-075422\\savehash.real.before.txt",
+  "sentinel_slot": 8,
+  "real": {
+    "dir": "Save.real-S2a3-20261022-143608",
+    "files": 57,
+    "bytes": 485795554,
+    "digest": "4226730f66ffdcf9adb110fd8e26e29ffa8ba40620ccc33b013ef11adfaa46d7",
+    "mtimes": {
+      "PlayerprefData.dat": [
+        14955,
+        1792630096668516000
+      ],
+      "SaveSlot0/Hero": [
+        33090338,
+        1775315936000000000
+      ],
+      "SaveSlot0/Info": [
+        160,
+        1775315935000000000
+      ],
+      "SaveSlot0/Save": [
+        10541726,
+        1775315935000000000
+      ],
+      "SaveSlot0/TempHero": [
+        3801590,
+        1775315936000000000
+      ],
+      "SaveSlot0/steam_autocloud.vdf": [
+        52,
+        1792630083727605700
+      ],
+      "SaveSlot1/Hero": [
+        17267875,
+        1778346586000000000
+      ],
+      "SaveSlot1/Info": [
+        180,
+        1778346586000000000
+      ],
+      "SaveSlot1/Save": [
+        6622273,
+        1778346586000000000
+      ],
+      "SaveSlot1/TempHero": [
+        1316086,
+        1778346586000000000
+      ],
+      "SaveSlot1/steam_autocloud.vdf": [
+        52,
+        1792630083727605700
+      ],
+      "SaveSlot10/Hero": [
+        33935890,
+        1781248116000000000
+      ],
+      "SaveSlot10/Info": [
+        188,
+        1781248116000000000
+      ],
+      "SaveSlot10/Save": [
+        10708468,
+        1780730858000000000
+      ],
+      "SaveSlot10/TempHero": [
+        4097651,
+        1781248117000000000
+      ],
+      "SaveSlot10/steam_autocloud.vdf": [
+        52,
+        1792630083728106700
+      ],
+      "SaveSlot2/Hero": [
+        33935892,
+        1778334779000000000
+      ],
+      "SaveSlot2/Info": [
+        186,
+        1778334778000000000
+      ],
+      "SaveSlot2/Save": [
+        10707110,
+        1778334778000000000
+      ],
+      "SaveSlot2/TempHero": [
+        4097637,
+        1778334778000000000
+      ],
+      "SaveSlot2/steam_autocloud.vdf": [
+        52,
+        1792630083728106700
+      ],
+      "SaveSlot3/Hero": [
+        31744643,
+        1776278986000000000
+      ],
+      "SaveSlot3/Info": [
+        194,
+        1776278986000000000
+      ],
+      "SaveSlot3/Save": [
+        10237658,
+        1776278986000000000
+      ],
+      "SaveSlot3/TempHero": [
+        4013573,
+        1776278986000000000
+      ],
+      "SaveSlot3/steam_autocloud.vdf": [
+        52,
+        1792630083729107300
+      ],
+      "SaveSlot4/Hero": [
+        33380453,
+        1776380611000000000
+      ],
+      "SaveSlot4/Info": [
+        189,
+        1776380611000000000
+      ],
+      "SaveSlot4/Save": [
+        10700271,
+        1776380611000000000
+      ],
+      "SaveSlot4/TempHero": [
+        4591012,
+        1776380611000000000
+      ],
+      "SaveSlot4/steam_autocloud.vdf": [
+        52,
+        1792630083729107300
+      ],
+      "SaveSlot5/Hero": [
+        17678332,
+        1775618781000000000
+      ],
+      "SaveSlot5/Info": [
+        188,
+        1775618781000000000
+      ],
+      "SaveSlot5/Save": [
+        6783158,
+        1775618781000000000
+      ],
+      "SaveSlot5/TempHero": [
+        1170333,
+        1775618781000000000
+      ],
+      "SaveSlot5/steam_autocloud.vdf": [
+        52,
+        1792630083729607100
+      ],
+      "SaveSlot6/Hero": [
+        33090288,
+        1775709675000000000
+      ],
+      "SaveSlot6/Info": [
+        159,
+        1775709675000000000
+      ],
+      "SaveSlot6/Save": [
+        10541776,
+        1775709676000000000
+      ],
+      "SaveSlot6/TempHero": [
+        3713466,
+        1775709676000000000
+      ],
+      "SaveSlot6/steam_autocloud.vdf": [
+        52,
+        1792630083729607100
+      ],
+      "SaveSlot7/Hero": [
+        34455531,
+        1775491134000000000
+      ],
+      "SaveSlot7/Info": [
+        199,
+        1775491134000000000
+      ],
+      "SaveSlot7/Save": [
+        10797509,
+        1775491134000000000
+      ],
+      "SaveSlot7/TempHero": [
+        4801653,
+        1775491133000000000
+      ],
+      "SaveSlot7/steam_autocloud.vdf": [
+        52,
+        1792630083729607100
+      ],
+      "SaveSlot8/Hero": [
+        34469884,
+        1775714347000000000
+      ],
+      "SaveSlot8/Info": [
+        197,
+        1775714347000000000
+      ],
+      "SaveSlot8/Save": [
+        11033680,
+        1775714347000000000
+      ],
+      "SaveSlot8/TempHero": [
+        5181090,
+        1775714347000000000
+      ],
+      "SaveSlot8/steam_autocloud.vdf": [
+        52,
+        1792630083730107000
+      ],
+      "SaveSlot9/Hero": [
+        32786655,
+        1774910426000000000
+      ],
+      "SaveSlot9/Info": [
+        156,
+        1774910426000000000
+      ],
+      "SaveSlot9/Save": [
+        10622597,
+        1774910426000000000
+      ],
+      "SaveSlot9/TempHero": [
+        3861881,
+        1774910426000000000
+      ],
+      "SaveSlot9/steam_autocloud.vdf": [
+        52,
+        1792630083730107000
+      ],
+      "steam_autocloud.vdf": [
+        52,
+        1792630083727106700
+      ]
+    }
+  },
+  "copy": {
+    "dir": "C:\\Users\\memph\\LongYinCoop\\coop-test\\S2a3-20261022-143608\\save",
+    "files": 57,
+    "bytes": 485795554,
+    "digest": "4226730f66ffdcf9adb110fd8e26e29ffa8ba40620ccc33b013ef11adfaa46d7"
+  },
+  "slots": {
+    "SaveSlot0": {
+      "files": 5,
+      "info_bytes": 160
+    },
+    "SaveSlot1": {
+      "files": 5,
+      "info_bytes": 180
+    },
+    "SaveSlot10": {
+      "files": 5,
+      "info_bytes": 188
+    },
+    "SaveSlot2": {
+      "files": 5,
+      "info_bytes": 186
+    },
+    "SaveSlot3": {
+      "files": 5,
+      "info_bytes": 194
+    },
+    "SaveSlot4": {
+      "files": 5,
+      "info_bytes": 189
+    },
+    "SaveSlot5": {
+      "files": 5,
+      "info_bytes": 188
+    },
+    "SaveSlot6": {
+      "files": 5,
+      "info_bytes": 159
+    },
+    "SaveSlot7": {
+      "files": 5,
+      "info_bytes": 199
+    },
+    "SaveSlot8": {
+      "files": 5,
+      "info_bytes": 197
+    },
+    "SaveSlot9": {
+      "files": 5,
+      "info_bytes": 156
+    }
+  },
+  "mounted_baseline": "savehash.copy.before.txt"
+}

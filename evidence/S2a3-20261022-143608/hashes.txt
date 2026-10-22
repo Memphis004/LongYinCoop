@@ -1,0 +1,11 @@
+captured: 2026-10-22 14:40:36
+c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96    313344  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\Mods\LongYinCoop.dll
+6ec6482c9649b61e8fb21e0e682710622a9b3a364b5261363244163d916ec110     82240  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\Mods\LongYinCoop.pdb
+cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0    257536  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\Mods\LongYinCoop.dll.prev-cb35a93f
+4fc142bdaef7acf52c2889292024d9b0b86e065f9ac73fb324d52f751e47240e     66936  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\Mods\LongYinCoop.pdb.prev-cb35a93f
+517758147f59170e584075a4b42f61e00d293803febe36f8a040bcdad4592612    202752  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\Mods\LongYinCoop.dll.off
+269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1      3232  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\UserData\MelonPreferences.cfg
+42e5efea68467829b6be4206c3b2a4baff571751f8a44ead731ba01be5635137       455  C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\UserData\LongYinCoop\net.cfg
+269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1      3232  C:\Users\memph\LongYinCoop\evidence\S2a3-20261022-143608\prefs.before.cfg
+c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96    313344  C:\Users\memph\LongYinCoop\src\LongYinCoop\bin\Release\LongYinCoop.dll
+6ec6482c9649b61e8fb21e0e682710622a9b3a364b5261363244163d916ec110     82240  C:\Users\memph\LongYinCoop\src\LongYinCoop\bin\Release\LongYinCoop.pdb
