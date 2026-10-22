@@ -113,8 +113,12 @@
 | ทรัพยากรสำนัก | `store [6240,4700,4900,2844.9,4900,2450] → [6896,5214.2,4575,3841.3,4900,2450]` = Δ `+656, +514.2, −325, +996.4, 0, 0`; `change[1]` `+20.5 → −3.6` | RUNTIME |
 | อาคารที่ทำงาน | `buildingID=3, lv=4, produceRate=1.0, resourceStoreRate=1.8, belongHeroID=-1` | RUNTIME |
 | ยกเลิก | ยังไม่วัด (`TryCancelWorking()` + `noCancel` flag) | NOT-RUN |
-| **`>>` (skip) — รอบ 2 (06:44, 2 samples)** | `t1` (กลาง skip): `day=4`, `total=9`, `left=1`, `skipping=true`, `workFinished=false`, `working=true` → `t2` (+5 วิ): `day=5`, `total=10`, `left=0`, `skipping=true`, `workFinished=true`, `working=false` · `store[0]` = `7085.4` เท่ากันทั้ง 2 sample (baseline day4 = `6240`) ⇒ **skip จ่ายผลผลิตครบตามจำนวนวัน แต่ปฏิทินเดินเพิ่มเพียง +1 วัน** (ตรงกับรอบแรกที่ +1) | RUNTIME (2 รอบผลตรงกัน) |
-| **`>>` (skip) — รอบ 1 (06:39)** | วัดแล้ว 2026-10-22 06:39 (บน **เซฟจริงโดยไม่ตั้งใจ** — ดู incident ด้านล่าง): หลังกด `>>` ที่งาน 10 วัน → `leftWorkingDay=0`, `workFinished=true`, `working=false`, **`skipping=true` (ค้างไม่รีเซ็ต)**, `leftPauseTime=-0.007` **แต่ปฏิทินเดินเพิ่มเพียง +1 วัน (`10/9/4`→`10/9/5`)** ขณะที่ `totalWorkingDay=10` ⇒ **skip ไม่เดินวันให้ครบตามจำนวนงาน** · ทรัพยากรสำนักเปลี่ยน `[6240,4700,4900,2844.9,4900,2450] → [5420.4,4933.7,5378,4524.4,5099.4,2450]` (Δ `−819.6,+233.7,+478,+1679.5,+199.4,0`) | RUNTIME (ยังต้องวัดซ้ำแบบคุมตัวแปร) |
+| **`>>` (skip) — รอบ 2 (06:44, 2 samples)** | `t1` (กลาง skip): `day=4`, `total=9`, `left=1`, `skipping=true`, `workFinished=false`, `working=true` → `t2` (+5 วิ): `day=5`, `total=10`, `left=0`, `skipping=true`, `workFinished=true`, `working=false` · `store[0]` = `7085.4` เท่ากันทั้ง 2 sample (baseline day4 = `6240`) | RUNTIME (sample ดิบ) · **ข้อสรุปเดิม "ปฏิทิน +1" ถูกหักล้าง 2026-10-22 07:24**: sample ทั้งคู่อยู่กลางการ์ตูน skip (`leftWorkingDay=1` ที่ t1) ⇒ เห็นแค่วันสุดท้ายของ 10 วัน — ดูแถว "วัดด้วย hook" ด้านล่าง |
+| **`>>` (skip) — รอบ 1 (06:39)** | วัดแล้ว 2026-10-22 06:39 (บน **เซฟจริงโดยไม่ตั้งใจ** — ดู incident ด้านล่าง): หลังกด `>>` ที่งาน 10 วัน → `leftWorkingDay=0`, `workFinished=true`, `working=false`, **`skipping=true` (ค้างไม่รีเซ็ต)**, `leftPauseTime=-0.007` **แต่ปฏิทินเดินเพิ่มเพียง +1 วัน (`10/9/4`→`10/9/5`)** ขณะที่ `totalWorkingDay=10` · ทรัพยากรสำนักเปลี่ยน `[6240,4700,4900,2844.9,4900,2450] → [5420.4,4933.7,5378,4524.4,5099.4,2450]` (Δ `−819.6,+233.7,+478,+1679.5,+199.4,0`) | RUNTIME (sample ดิบ — ข้อสรุปเดิมถูกหักล้าง) |
+| **`>>` (skip) — วัดด้วย hook รอบ A (2026-10-22 07:19, งาน 10 วัน)** | `ChangeDay(int)` = **0 ครั้ง** · `ChangeDay()` = **10 ครั้ง** (ห่างกัน 0.75–2.1 วิ รวม 10.5 วิ) · ปฏิทิน `10/8/25` → `10/9/5` (**+10 วัน**) · `hour` `10.138` คงที่ · `totalWorkingDay` 0→10 · `left=0` · `workFinished` false→true · `skipping` false→true | RUNTIME (hook 2 จุด + cross-check กับ HUD) |
+| **`>>` (skip) — วัดด้วย hook รอบ B (07:24, งาน 5 วัน)** | `ChangeDay(int)` = 0 · `ChangeDay()` = **5 ครั้ง** · ปฏิทิน `10/9/5` → `10/9/10` (**+5**) · `hour` คงที่ · ตรงกับที่ทำนายจากรอบ A **5/5 ข้อ** | RUNTIME (hook 2 จุด) |
+
+- **สรุปที่ถูกต้อง (แทนที่ข้อความเดิมทั้งหมด)**: ปุ่ม `>>` = ลูป `skipping` เรียก **`GameController.ChangeDay()`** (ตัว 0 พารามิเตอร์) **วันละครั้ง ตามจำนวนวันงาน** ⇒ ปฏิทินเดินครบ N วัน และ `hour` ไม่เปลี่ยน · **ไม่ได้ผ่าน `ChangeDay(int)`** เลย (wrapper นั้นเป็น `for (i<delta) ChangeDay()` แต่ skip ไม่เรียกมัน) · หลักฐาน `evidence/S2cd-20261022-0710/measurement-skip{1,2}.md` + `ui-crosscheck.md`
 
 - ตัวเลือกจำนวนวัน (1/5/10) เป็น **UI ของเกมที่สร้างตอนรัน** — ไม่มีในข้อมูล static (`AreaBuildingChoices`/`PlotData` ให้ค่าคงที่ 2/3/5) ⇒ เลือก 10 แล้วได้ `totalWorkingDay=10` **[RUNTIME]**; รายการตัวเลือกที่มีให้เลือกจริง (1/5/10) เป็นสิ่งที่ **ผู้ใช้เห็นเอง** = GUESS จนกว่าจะวัดทีละปุ่ม
 - ระหว่างรอ: โลกเดิน AI รายวันผ่าน `AIController.ManageAIOneDay(HeroData)` + `BuildingUIController.AreaBuildingWork` per-area **[DUMP + worldmap-notes §]***/
@@ -307,30 +311,33 @@ TIME_ACTION_DONE   { reqId, worldDayBefore, worldDayAfter,
 
 1. **`totalWorkingDay` ไม่ใช่หลักฐานของเวลาที่ผ่านจริง** **[RUNTIME]**
    - งาน 10 วันปกติ: `total=10` และปฏิทิน +10
-   - งาน 10 วัน + กด `>>`: `total=10` (ระหว่าง skip เห็น `9`), `left=0`, ปฏิทิน **+1**
-   ⇒ อ่าน `totalWorkingDay` แล้วสรุปว่า "ผ่านไป N วัน" = **ผิด**
+   - งาน 10 วัน + กด `>>` (07:19, hook): `ChangeDay()` ถูกเรียก **10 ครั้ง** ⇒ ปฏิทิน **+10** (ข้อสรุปเดิม "+1" ผิด — sample ถ่ายระหว่างการ์ตูน skip ~10.5 วิ และเห็นแค่วันสุดท้าย)
+   ⇒ ยังสรุปเหมือนเดิมว่า `totalWorkingDay` ใช้เป็นหลักฐานเวลาไม่ได้ (ระหว่าง skip มันขึ้น `9` ก่อนเป็น `10` และ `workFinished` มาก่อนวันจบ) — แต่ **จำนวนวันเดินครบ** ตามจำนวนงาน ให้อ่านจาก `worldTime`
 2. **`WorldData.worldTime` (year/month/day) + `hour` = แหล่งความจริงเดียวของเวลาโลก** **[RUNTIME]**
    - `hour` ไม่รีเซ็ตเมื่อวันเปลี่ยน (คง `18.394` ตลอด 15 วัน, `10.138` หลังเปิดเกมใหม่)
 3. **`leftWorkingDay` / `workFinished` / `skipping` เป็น state เสริม** **[RUNTIME]**
    - `skipping=true` **ค้าง** หลัง `workFinished=true` ⇒ ใช้ `skipping` เป็นตัวบอก "กำลังข้ามอยู่" ไม่ได้หลังจบ
    - ตัวบอกว่ายังทำงานอยู่คือ `working && !workFinished` หรือ `leftWorkingDay > 0`
 4. **ห้ามอนุมานจำนวนวันจาก "ผลผลิตที่จ่าย"** **[RUNTIME]**
-   - skip จ่ายผลผลิตครบ (`store[0] 6240 → 7085.4`) แต่ปฏิทินเดิน +1
+   - ยังใช้กฎเดิม แต่ยกตัวอย่างเดิมทิ้ง: รอบที่วัดด้วย hook (2026-10-22) ผลผลิตกับปฏิทิน **สอดคล้องกัน** (10 ครั้ง/10 วัน) ⇒ ไม่มีหลักฐานว่า "ผลิตครบแต่วันไม่ครบ" อีกแล้ว
+   - เหตุผลที่กฎยังอยู่: ผลผลิตขึ้นกับ `produceRate`/`change[]` และถูกจ่ายเป็นรายวันแยกจากปฏิทิน ⇒ จำนวนวันต้องอ่านจาก `worldTime` เสมอ
 
 ### กติกา protocol ที่ตามมา
 
 - `TIME_ACTION_DONE` ต้องมี `worldDayBefore` / `worldDayAfter` อ่านจาก `WorldData.worldTime` — **ห้าม**ใช้ `totalWorkingDay`
 - guest resync เมื่อ `worldTime` ที่ mirror ต่างจาก host มากกว่า 0 วัน (ไม่ใช่เมื่อ `leftWorkingDay` ต่าง)
 - `skipping` ใช้เป็น flag "กำลังข้าม" ไม่ได้ ⇒ ให้ใช้ `working && !workFinished`
-- ถ้า host กด `>>` ต้องส่ง snapshot หลังจบ **ทันที** เพราะผลผลิตกับปฏิทินไม่สัมพันธ์กันแล้ว
+- ถ้า host กด `>>` การ์ตูนใช้เวลา **~10.5 วิ** และวันเดินทีละวันระหว่างนั้น ⇒ เสนอ: ส่ง snapshot **หลัง animation จบเท่านั้น** (ถ้าส่งกลางทาง guest จะเห็นวันไต่ทีละ 1 และ resource ยังไม่นิ่ง)
 
-### ChangeDay hook — pre-runtime checklist (ยังไม่รัน: รออนุมัติ)
+### ChangeDay hook — pre-runtime checklist (✅ รันแล้ว 2026-10-22)
 
-- [ ] `inspect()` ยืนยัน overload `GameController.ChangeDay(System.Int32)` (DUMP: `dump.cs:376737`; มี `ChangeDay()` และ `ChangeDayDirect(int)` ด้วย)
-- [ ] อ่าน 40 คำสั่งแรกของ body: ต้องไม่มี write ที่ไม่ใช่ state ของวัน/UI (ถ้ามี ให้หยุดรายงานก่อน hook)
-- [ ] `snapshot()` ก่อน/หลัง (worldTime, WorkingUI 4 field, `ForceData.resourceStore`)
-- [ ] hook เป็น log-only: ไม่มี `Method.invoke`, ไม่มี `Memory.write`, ไม่มี `Interceptor.replace` (บังคับใน `tools/changeday_hook.js`)
-- [ ] ก่อนเปิดเกมทุกครั้ง: `preflight-launch` ต้อง READY (แยกจาก `preflight` เดิมที่ยังต้องมี sampler)
+- [x] `inspect()` ยืนยัน `ChangeDay(System.Int32)` RVA `0x7925f0` (instance, ไม่ใช่ thunk) + `ChangeDay()` RVA `0x790e30` — ตรงกับ DUMP `dump.cs:376737`/`:376743`
+- [x] body ของ `ChangeDay(int)`: `if (delta<=0) return;` แล้วเรียก `ChangeDay()` วน `delta` รอบ — **ไม่มี write ฟิลด์เลย**
+- [x] `snapshot()` ก่อน/หลัง + เทียบกับ HUD แล้ว (วันที่และ resource ตรง; จอตัดทศนิยมทิ้ง)
+- [x] hook เป็น log-only: `Interceptor.attach` 2 จุด, 0 invoke/replace/memory write
+- [x] `preflight-launch` = READY ก่อนเปิดเกม (11/11)
+
+**ยังไม่ได้ทำ**: อ่าน body ของ `ChangeDay()` (ตัว per-day) เพื่ออธิบายว่าทำไม `hour` ไม่เปลี่ยน · ยืนยัน `TimeData.DeltaDay()` เรื่องความยาวเดือน (ต้องอนุมัติ invoke)
 
 ## คำถามที่ต้องให้คุณตัดสินใจ
 
