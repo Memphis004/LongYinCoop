@@ -1,0 +1,32 @@
+save-state at C1 close (read-only checks; the agent never wrote the save this session)
+sampled: 2026-10-22T13:43-13:50 +07:00
+
+C1 did nothing that can touch the save: no build of the mod, no deploy, no game launch.
+`Mods\LongYinCoop.dll` sha256 cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+  = still the S2a-2 build (lastWrite 2026-10-21T22:55:43)
+
+`python tools\save-split.py status`:
+  game     : not running
+  Save                          files=57  digest=2e593e635ad9   <- mounted COPY
+  Save.real-explore-20261022-0755 files=57  digest=4226730f66ff <- real folder, split aside
+  leftovers: Save.real-explore-20261022-0755
+  mounted Save matches ~explore-20261022-0755/savehash.copy.before.txt: changed=1 missing=0 added=0
+
+INTERPRETATION (do not read as a C1 result):
+- the split belongs to the `explore-20261022-0755` session (created 2026-10-22T07:55:01)
+  and was left mounted when that session ended. C1 did not split and did not restore.
+- `Save.real-explore-20261022-0755` digest 4226730f66ff == the newest recorded baseline
+  `coop-test/baselines/20261022-075422/savehash.real.before.txt` (REBASELINE.json:
+  volatile_only, changed=["PlayerprefData.dat"], reason = incident 2026-10-22 07:48).
+- `verify --label explore-20261022-0755` (read-only rehash, RESULT PASS):
+    mounted Save vs real baseline:  changed=1 missing=0 added=0 -> changed[playerpref]=1: PlayerprefData.dat
+    mounted Save vs copy baseline:  changed=1 missing=0 added=0
+    real folder vs real baseline:   changed=0 missing=0 added=0, mtime/size drift 0
+  => the REAL save is byte-identical to baseline 4226730f66ff (57 files);
+     only the mounted copy's PlayerprefData.dat drifted.
+- AGENTS.md still says the approved baseline is `6dd645d9ef17` / `854cc890430f` / `de7e2af49b23`;
+  the newest recorded baseline is `4226730f66ff` (20261022-075422). Noted, not edited here.
+
+ACTION NOT TAKEN (needs the user or the explore session's owner):
+  `python tools\save-split.py restore --label explore-20261022-0755`
+  before any launch that is meant to use the real save.

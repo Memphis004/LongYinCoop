@@ -1,0 +1,25 @@
+code commit  : a0ba387611f1c5f845577ccf668b6d137845c5f9
+short        : a0ba387
+base commit  : 0cc5fe0664385bc8e04615ff238b754fa398c6e9 (master, "area-notes: the >> skip ...")
+branch       : master
+committed at : 2026-10-22 (local)
+
+tree at commit: only S2a-3 C1 paths
+  modified (13): CoopMod.cs, S2/S2HostService.cs, S2/S2NetConfig.cs,
+                 S2/Host/{S2Counters,S2Sampler,S2Sender,S2Snapshot}.cs,
+                 S2/Protocol/{S2Auth,S2Types}.cs, S2/Transport/ITransport.cs,
+                 tests/{Program.cs,S2Protocol.Tests.csproj,S2a2Tests.cs}
+  new (14)     : S2/Host/{S2ControlHandler,S2FrameMeter,S2TcpSelfTest}.cs,
+                 S2/Protocol/{BindPolicy,S2Fields,S2Handshake,S2RateLimiter,SeqTracker}.cs,
+                 S2/Transport/{TcpFrameStream,TcpTransport}.cs,
+                 tests/{S2a3Tests,FakeS2Host}.cs, tests/fixtures/replica-vectors.ndjson,
+                 tools/viewer-client.py
+  docs/evidence: S2a-3-plan.md, evidence/S2a3-20261022-0156/
+
+NOT committed (belong to other sessions / runtime data):
+  STAGEPLAN.md, STAGEPLAN.v2-draft.md, battle-notes.md, worldmap-notes.md,
+  tools/explore_hook.js, coop-test/**, evidence/explore-20261022-0755/**,
+  evidence/**/*.ndjson (gitignored by design - raw i9 ndjson stays on disk)
+
+this file (commit.txt) is added in a follow-up commit because it cannot contain
+its own commit hash otherwise.
