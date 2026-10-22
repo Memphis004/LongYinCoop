@@ -1,0 +1,92 @@
+V name=v-base hash=b33ebcd8dee9d12128c05cc8b9ed1fb8aa5cc62195e824e2c9eccdd8931b8f21 battleKey=bk-test turn=3 active=0:1001 paused=0
+U name=v-base id=0:1001 team=0 row=1 col=2 hp=41.5 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-base id=0:1002 team=0 row=0 col=0 hp=12.25 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-base id=1:2001 team=1 row=-1 col=-1 hp=0 alive=0 unitAlive=0 moved=0 attacked=1
+V name=v-hp-midpoints hash=32ca45c81f1ec2e4f42a192e3ca57f2de4126be85cbce77f68edb2576a52c732 battleKey=bk-hp turn=1 active=0:1001 paused=0
+U name=v-hp-midpoints id=0:1001 team=0 row=0 col=0 hp=0.0625 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-midpoints id=0:1002 team=0 row=0 col=1 hp=41.5625 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-midpoints id=0:1003 team=0 row=0 col=2 hp=1.000499963760376 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-midpoints id=0:1004 team=0 row=0 col=3 hp=2.500499963760376 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-midpoints id=0:1005 team=0 row=0 col=4 hp=0.99949997663497925 alive=1 unitAlive=1 moved=0 attacked=0
+V name=v-hp-noise hash=5db64bb8622c551ffadada3993fd481b6de90bbbcf3fd9aadc6c4c47d43cd904 battleKey=bk-noise turn=2 active=0:1001 paused=0
+U name=v-hp-noise id=0:1001 team=0 row=0 col=0 hp=0.10000000149011612 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-noise id=0:1002 team=0 row=0 col=1 hp=0.20000000298023224 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-noise id=0:1003 team=0 row=0 col=2 hp=0.30000001192092896 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-noise id=0:1004 team=0 row=0 col=3 hp=0.3333333432674408 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-hp-noise id=0:1005 team=0 row=0 col=4 hp=0.66666668653488159 alive=1 unitAlive=1 moved=0 attacked=0
+V name=v-negative hash=85e7cc66f610f7da242a038b9f78b6217521c12613d8d72051e8d219ac0c8e23 battleKey=bk-neg turn=4 active=0:1001 paused=0
+U name=v-negative id=0:1001 team=0 row=0 col=0 hp=-0.5 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-negative id=0:1002 team=0 row=0 col=1 hp=-0.0625 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-negative id=0:1003 team=0 row=0 col=2 hp=0 alive=0 unitAlive=0 moved=0 attacked=0
+V name=v-paused hash=6cc441925fc56507a9112e0068d71486d23d272f0c4f0dfc8b694649b7dfd651 battleKey=bk-paused turn=0 active=- paused=1
+U name=v-paused id=0:1001 team=0 row=0 col=0 hp=50 alive=1 unitAlive=1 moved=0 attacked=0
+V name=v-empty hash=60be68314ba983e7f291c2835278142070c17d184cee69032abbaad3455314d0 battleKey=bk-empty turn=0 active=0:1001 paused=0
+V name=v-dead-lag hash=28058ce9fccfd33babd9ff7df88d1d171ae067e84baceff997464eb45222a7c5 battleKey=bk-dead turn=5 active=1:2001 paused=0
+U name=v-dead-lag id=0:1001 team=0 row=0 col=0 hp=0 alive=0 unitAlive=1 moved=0 attacked=0
+U name=v-dead-lag id=1:2001 team=1 row=-1 col=-1 hp=3.5 alive=1 unitAlive=1 moved=0 attacked=1
+V name=v-sort hash=46e7ed45315cc025fe2d214bb87fe4c40fc77c528bdda46a3ed71f07850cd56b battleKey=bk-sort turn=1 active=0:9 paused=0
+U name=v-sort id=0:9 team=0 row=0 col=0 hp=1 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sort id=0:10 team=0 row=0 col=1 hp=1 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sort id=0:100 team=0 row=0 col=2 hp=1 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sort id=1:1 team=1 row=0 col=3 hp=1 alive=1 unitAlive=1 moved=0 attacked=0
+V name=v-sixty hash=20c442f2147f5832221f9b443a5d601eb708946c0c6cc08720815ba2fb24f8aa battleKey=bk-sixty turn=12 active=0:1000 paused=0
+U name=v-sixty id=0:1000 team=0 row=0 col=0 hp=37.5 alive=0 unitAlive=0 moved=0 attacked=1
+U name=v-sixty id=0:1001 team=0 row=1 col=0 hp=37.3125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1002 team=0 row=2 col=0 hp=37.125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1003 team=0 row=3 col=0 hp=36.9375 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1004 team=0 row=4 col=0 hp=36.75 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1005 team=0 row=5 col=0 hp=36.5625 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=0:1006 team=0 row=0 col=1 hp=36.375 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1007 team=0 row=1 col=1 hp=35.75 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1008 team=0 row=2 col=1 hp=35.5625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1009 team=0 row=3 col=1 hp=35.375 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1010 team=0 row=4 col=1 hp=35.1875 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=0:1011 team=0 row=5 col=1 hp=35 alive=0 unitAlive=0 moved=1 attacked=0
+U name=v-sixty id=0:1012 team=0 row=0 col=2 hp=34.8125 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1013 team=0 row=1 col=2 hp=34.625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1014 team=0 row=2 col=2 hp=34 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1015 team=0 row=3 col=2 hp=33.8125 alive=1 unitAlive=1 moved=0 attacked=1
+U name=v-sixty id=0:1016 team=0 row=4 col=2 hp=33.625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1017 team=0 row=5 col=2 hp=33.4375 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1018 team=0 row=0 col=3 hp=33.25 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1019 team=0 row=1 col=3 hp=33.0625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1020 team=0 row=2 col=3 hp=32.875 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=0:1021 team=0 row=3 col=3 hp=32.25 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1022 team=0 row=4 col=3 hp=32.0625 alive=0 unitAlive=0 moved=1 attacked=0
+U name=v-sixty id=0:1023 team=0 row=5 col=3 hp=31.875 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1024 team=0 row=0 col=4 hp=31.6875 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1025 team=0 row=1 col=4 hp=31.5 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=0:1026 team=0 row=2 col=4 hp=31.3125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1027 team=0 row=3 col=4 hp=31.125 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=0:1028 team=0 row=4 col=4 hp=30.5 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=0:1029 team=0 row=5 col=4 hp=30.3125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2030 team=1 row=0 col=5 hp=30.125 alive=1 unitAlive=1 moved=0 attacked=1
+U name=v-sixty id=1:2031 team=1 row=1 col=5 hp=29.9375 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2032 team=1 row=2 col=5 hp=29.75 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2033 team=1 row=3 col=5 hp=29.5625 alive=0 unitAlive=0 moved=0 attacked=0
+U name=v-sixty id=1:2034 team=1 row=4 col=5 hp=29.375 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2035 team=1 row=5 col=5 hp=28.75 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=1:2036 team=1 row=0 col=6 hp=28.5625 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2037 team=1 row=1 col=6 hp=28.375 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2038 team=1 row=2 col=6 hp=28.1875 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2039 team=1 row=3 col=6 hp=28 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2040 team=1 row=4 col=6 hp=27.8125 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=1:2041 team=1 row=5 col=6 hp=27.625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2042 team=1 row=0 col=7 hp=27 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2043 team=1 row=1 col=7 hp=26.8125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2044 team=1 row=2 col=7 hp=26.625 alive=0 unitAlive=0 moved=1 attacked=0
+U name=v-sixty id=1:2045 team=1 row=3 col=7 hp=26.4375 alive=1 unitAlive=1 moved=0 attacked=1
+U name=v-sixty id=1:2046 team=1 row=4 col=7 hp=26.25 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2047 team=1 row=5 col=7 hp=26.0625 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2048 team=1 row=0 col=8 hp=25.875 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2049 team=1 row=1 col=8 hp=25.25 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2050 team=1 row=2 col=8 hp=25.0625 alive=1 unitAlive=1 moved=1 attacked=1
+U name=v-sixty id=1:2051 team=1 row=3 col=8 hp=24.875 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2052 team=1 row=4 col=8 hp=24.6875 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2053 team=1 row=5 col=8 hp=24.5 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2054 team=1 row=0 col=9 hp=24.3125 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2055 team=1 row=1 col=9 hp=24.125 alive=0 unitAlive=0 moved=1 attacked=1
+U name=v-sixty id=1:2056 team=1 row=2 col=9 hp=23.5 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2057 team=1 row=3 col=9 hp=23.3125 alive=1 unitAlive=1 moved=0 attacked=0
+U name=v-sixty id=1:2058 team=1 row=4 col=9 hp=23.125 alive=1 unitAlive=1 moved=1 attacked=0
+U name=v-sixty id=1:2059 team=1 row=5 col=9 hp=22.9375 alive=1 unitAlive=1 moved=1 attacked=0

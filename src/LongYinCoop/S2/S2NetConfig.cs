@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using LongYinCoop.S2.Protocol;
 
 namespace LongYinCoop.S2
 {
@@ -20,6 +21,13 @@ namespace LongYinCoop.S2
         public long ReadCount;
         public long LastReadMs;
 
+        // ---- S2a-3 (ProtoVer 2 / TCP) --------------------------------------
+        public string Bind;            // IP literal (ดีฟอลต์ 127.0.0.1)
+        public int Port;               // ดีฟอลต์ 47800 (0 = ให้ OS เลือก — ใช้ในเทสต์)
+        public int SendHz;             // เพดานอัตราส่ง snapshot
+        public int HeartbeatMs;        // ส่งซ้ำเมื่อ state ไม่เปลี่ยน
+        public string Transport;       // loopback | tcp
+
         public bool IsValid
         {
             get
@@ -28,6 +36,11 @@ namespace LongYinCoop.S2
                 if (!string.IsNullOrEmpty(Error)) return false;
                 if (Enabled && !IsKnownRole(Role)) return false;
                 if (Enabled && !IsAcceptableSecret(Secret)) return false;
+                if (Enabled && !IsUsableTransport(Transport)) return false;
+                if (Enabled && !IsUsableBind(Bind, AllowNonLoopback, Transport)) return false;
+                if (Enabled && (Port < 1 || Port > 65535)) return false;
+                if (Enabled && (SendHz < 1 || SendHz > 120)) return false;
+                if (Enabled && (HeartbeatMs < 100 || HeartbeatMs > 60000)) return false;
                 return true;
             }
         }
@@ -35,6 +48,20 @@ namespace LongYinCoop.S2
         public static bool IsKnownRole(string role)
         {
             return role == "host" || role == "guest";
+        }
+
+        public static bool IsUsableTransport(string transport)
+        {
+            return transport == "loopback" || transport == "tcp";
+        }
+
+        /// <summary>loopback ต้องเป็น loopback literal เสมอ · tcp ผ่าน BindPolicy (pref allowNonLoopback คุม)</summary>
+        public static bool IsUsableBind(string bind, bool allowNonLoopback, string transport)
+        {
+            BindVerdict verdict = BindPolicy.Validate(bind, allowNonLoopback);
+            if (verdict != BindVerdict.Ok) return false;
+            if (transport == "loopback") return BindPolicy.IsLoopbackLiteral(bind);
+            return true;
         }
 
         /// <summary>secret ≥32 ตัว และเป็น hex เท่านั้น (ไม่คืนค่า secret ออก log)</summary>
@@ -56,9 +83,10 @@ namespace LongYinCoop.S2
         public string Describe()
         {
             return string.Format(CultureInfo.InvariantCulture,
-                "enabled={0} role={1} allowNonLoopback={2} secretSet={3} format={4} reads={5} error={6}",
+                "enabled={0} role={1} allowNonLoopback={2} secretSet={3} format={4} reads={5} error={6} " +
+                "transport={7} bind={8} port={9} sendHz={10} heartbeatMs={11}",
                 Enabled, Role ?? "-", AllowNonLoopback, SecretLooksSet, FormatOk, ReadCount,
-                Error ?? "-");
+                Error ?? "-", Transport ?? "-", Bind ?? "-", Port, SendHz, HeartbeatMs);
         }
     }
 
@@ -93,6 +121,18 @@ namespace LongYinCoop.S2
         public const string KeyRole = "role";
         public const string KeySecret = "secret";
         public const string KeyAllowNonLoopback = "allownonloopback"; // เทียบแบบ lower-case
+        // S2a-3
+        public const string KeyBind = "bind";
+        public const string KeyPort = "port";
+        public const string KeySendHz = "sendhz";
+        public const string KeyHeartbeatMs = "heartbeatms";
+        public const string KeyTransport = "transport";
+
+        public const string DefaultBind = BindPolicy.DefaultBind;
+        public const int DefaultPort = 47800;
+        public const int DefaultSendHz = 30;
+        public const int DefaultHeartbeatMs = 1000;
+        public const string DefaultTransport = "loopback";
 
         private readonly int _pollMs;
         private long _lastPollMs = long.MinValue / 2;
@@ -204,6 +244,35 @@ namespace LongYinCoop.S2
                 {
                     s.AllowNonLoopback = IsTrue(value);
                 }
+                else if (key == KeyBind)
+                {
+                    s.Bind = value;
+                }
+                else if (key == KeyPort)
+                {
+                    int port;
+                    if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out port))
+                        return Fail(s, lineNo, "port must be an integer 1..65535");
+                    s.Port = port;
+                }
+                else if (key == KeySendHz)
+                {
+                    int hz;
+                    if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out hz))
+                        return Fail(s, lineNo, "sendHz must be an integer 1..120");
+                    s.SendHz = hz;
+                }
+                else if (key == KeyHeartbeatMs)
+                {
+                    int ms;
+                    if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out ms))
+                        return Fail(s, lineNo, "heartbeatMs must be an integer 100..60000");
+                    s.HeartbeatMs = ms;
+                }
+                else if (key == KeyTransport)
+                {
+                    s.Transport = value.ToLowerInvariant();
+                }
                 // key อื่น: ข้าม (เผื่ออนาคต ไม่ทำให้ไฟล์เสีย)
             }
 
@@ -215,8 +284,35 @@ namespace LongYinCoop.S2
             {
                 s.Error = "secret must be >=32 hex chars when enabled";
             }
+            else if (s.Enabled && !S2NetSettings.IsUsableTransport(s.Transport))
+            {
+                s.Error = "transport must be loopback|tcp";
+            }
+            else if (s.Enabled && !S2NetSettings.IsUsableBind(s.Bind, s.AllowNonLoopback, s.Transport))
+            {
+                s.Error = BindPolicy.Describe(BindPolicy.Validate(s.Bind, s.AllowNonLoopback));
+            }
+            else if (s.Enabled && (s.Port < 1 || s.Port > 65535))
+            {
+                s.Error = "port must be 1..65535";
+            }
+            else if (s.Enabled && (s.SendHz < 1 || s.SendHz > 120))
+            {
+                s.Error = "sendHz must be 1..120";
+            }
+            else if (s.Enabled && (s.HeartbeatMs < 100 || s.HeartbeatMs > 60000))
+            {
+                s.Error = "heartbeatMs must be 100..60000";
+            }
 
             return s;
+        }
+
+        private static S2NetSettings Fail(S2NetSettings settings, int lineNo, string message)
+        {
+            settings.FormatOk = false;
+            settings.Error = "line " + lineNo + ": " + message;
+            return settings;
         }
 
         private static S2NetSettings Blank(long nowMs, long readCount)
@@ -231,6 +327,11 @@ namespace LongYinCoop.S2
                 FormatOk = true,
                 ReadCount = readCount,
                 LastReadMs = nowMs,
+                Bind = DefaultBind,
+                Port = DefaultPort,
+                SendHz = DefaultSendHz,
+                HeartbeatMs = DefaultHeartbeatMs,
+                Transport = DefaultTransport,
             };
         }
 

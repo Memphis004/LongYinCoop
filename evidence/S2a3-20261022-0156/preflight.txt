@@ -1,0 +1,38 @@
+S2a-3 C1 preflight (re-sampled 2026-10-22 13:43; test-build line corrected 13:46)
+scope: code + T0/T1 tests only - no build/deploy of the mod DLL, no game launch by the agent
+sampled: 2026-10-22T13:43:41.7744493+07:00
+
+--- repo ---
+mod repo HEAD: 0cc5fe0664385bc8e04615ff238b754fa398c6e9
+mod repo branch: master
+dotnet: 9.0.311
+python: Python 3.11.9
+
+--- deployed mod (must remain the S2a-2 build) ---
+Mods\LongYinCoop.dll exists: True
+Mods\LongYinCoop.dll sha256: cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0
+Mods\LongYinCoop.dll lastWrite: 2026-10-21T22:55:43.2202817+07:00
+Mods\LongYinCoop.dll.off present: True
+
+--- game ---
+game process running: False
+GameAssembly.dll sha256: 33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1
+global-metadata.dat sha256: 451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0
+
+--- VERSION.md pinned hashes (ASCII lines only) ---
+VERSION.md: | `GameAssembly.dll` | `33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1` | 33,669,120 |
+VERSION.md: | `LongYinLiZhiZhuan_Data/il2cpp_data/Metadata/global-metadata.dat` | `451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0` | 7,960,432 |
+
+--- tests ---
+test project TFM: net6.0
+Release build present: True
+Release build lastWrite: 2026-10-22T13:40:53.9413413+07:00
+
+--- save mount state (read-only; belongs to the explore-20261022-0755 session, not to C1) ---
+data dir : C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinLiZhiZhuan_Data
+game     : not running
+  Save                         files=57  digest=2e593e635ad9
+  Save.real-explore-20261022-0755 files=57  digest=4226730f66ff
+leftovers: Save.real-explore-20261022-0755
+mounted Save matches:
+  ~explore-20261022-0755/savehash.copy.before.txt: changed=1 missing=0 added=0

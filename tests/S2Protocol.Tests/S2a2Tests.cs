@@ -169,7 +169,9 @@ namespace LongYinCoop.S2.Tests
             S2Metrics metrics = new S2Metrics();
             string path = Path.Combine(_tmp, "sender.ndjson");
             S2NdjsonWriter writer = new S2NdjsonWriter(path, flushEvery: 1);
-            S2SerializingSender sender = new S2SerializingSender(host, counters, metrics, writer, queueCapacity: 8);
+            // S2a-3: `Dedup=false` + `SendHz=0` = พฤติกรรม S2a-2 เดิม (ส่งทุกเฟรม) สำหรับ regression นี้
+            S2SerializingSender sender = new S2SerializingSender(host, counters, metrics, writer,
+                new S2SenderOptions { QueueCapacity = 8, Dedup = false, SendHz = 0, HeartbeatMs = 0 });
 
             for (int i = 0; i < 5; i++)
             {
@@ -204,7 +206,8 @@ namespace LongYinCoop.S2.Tests
             // backpressure: slow transport + tiny queue -> TryPost must drop instead of blocking
             SlowTransport slow = new SlowTransport();
             S2Counters c2 = new S2Counters();
-            S2SerializingSender s2 = new S2SerializingSender(slow, c2, new S2Metrics(), null, queueCapacity: 1);
+            S2SerializingSender s2 = new S2SerializingSender(slow, c2, new S2Metrics(), null,
+                new S2SenderOptions { QueueCapacity = 1, Dedup = false, SendHz = 0, HeartbeatMs = 0 });
             long t0 = Environment.TickCount64;
             for (int i = 0; i < 8; i++) s2.TryPost(Frame(100 + i));
             long elapsed = Environment.TickCount64 - t0;

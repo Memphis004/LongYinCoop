@@ -22,6 +22,10 @@
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2PhaseStats.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2SelfTest.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2WriteGuard.cs" LinkBase="Host" />
+    <!-- S2a-3 (Pure, no Unity): control flow / frame meter / tcp self-test -->
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2ControlHandler.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2FrameMeter.cs" LinkBase="Host" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2TcpSelfTest.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
     <!-- งาน A: path ของ net.cfg (pure: System + System.IO เท่านั้น) -->
     <Compile Include="..\..\src\LongYinCoop\CoopPaths.cs" LinkBase="Mod" />
@@ -29,7 +33,8 @@
 
   <ItemGroup>
     <!-- fixture (pre-edit TurnGate.cs) is a .txt so the default glob cannot compile it -->
-    <None Include="fixtures\**\*" />
+    <!-- S2a-3: replica-vectors.ndjson ใช้ร่วมกับ tools/viewer-client.py (mode selftest) -->
+    <None Include="fixtures\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

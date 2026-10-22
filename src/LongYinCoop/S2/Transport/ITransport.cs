@@ -46,11 +46,14 @@ namespace LongYinCoop.S2.Transport
         public long ReceiveDrops;
         public long OpenCount;
         public long CloseCount;
+        /// <summary>connection ที่ถูกปฏิเสธเพราะมี client ใช้งานอยู่แล้ว (S2a-3: TCP only)</summary>
+        public long RejectedConnections;
 
         public void Reset()
         {
             FramesSent = FramesReceived = BytesSent = BytesReceived = 0;
             SendDrops = ReceiveDrops = OpenCount = CloseCount = 0;
+            RejectedConnections = 0;
         }
     }
 }

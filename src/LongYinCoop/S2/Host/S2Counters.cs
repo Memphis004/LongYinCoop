@@ -5,9 +5,9 @@ using LongYinCoop.S2.Protocol;
 namespace LongYinCoop.S2.Host
 {
     /// <summary>
-    /// ตัวนับของ S2 host (S2a-2). `CommandsAccepted` **ไม่มีทางเพิ่มได้เลย** เพราะ S2 ไม่มี
+    /// ตัวนับของ S2 host (S2a-2 + S2a-3). `CommandsAccepted` **ไม่มีทางเพิ่มได้เลย** เพราะ S2 ไม่มี
     /// write path ไปยัง state ของเกม — ถ้าอนาคตมีคนเพิ่ม path เขียน ค่าตัวนี้ต้องยังเป็น 0
-    /// และ exit 6 จะจับได้
+    /// (exit 8 / X8 จะจับได้) · S2a-3 เพิ่มตัวนับของ handshake / resync / pacing / wire bytes
     /// </summary>
     public sealed class S2Counters
     {
@@ -23,6 +23,34 @@ namespace LongYinCoop.S2.Host
         public long FramesQueuedDropped;
         public long BytesSent;
         public string LastDropReason;
+
+        // ---- S2a-3 ----------------------------------------------------------
+        /// <summary>snapshot ที่ถูกข้ามเพราะ replicaHash ไม่เปลี่ยน (dedup) — ไม่กิน seq</summary>
+        public long SnapshotsDeduped;
+        /// <summary>snapshot ที่ถูกเลื่อนเพราะ pacing (sendHz) — ไม่กิน seq, รอรอบถัดไป</summary>
+        public long SnapshotsPaced;
+        /// <summary>snapshot ที่ส่งเพราะ heartbeat (state ไม่เปลี่ยนแต่ครบรอบ)</summary>
+        public long HeartbeatsSent;
+        /// <summary>ไบต์ที่เขียนลง socket จริง (รวม framing, ไม่รวม TCP/IP header)</summary>
+        public long WireBytesSent;
+
+        public long AuthAttempts;
+        public long AuthAccepted;
+        public long AuthDenied;
+        public long AuthExpired;
+        public long AuthRateLimited;
+        public long AuthAfterHandshake;
+
+        public long PingsHandled;
+        public long ByeHandled;
+        public long ResyncRequests;
+        public long ResyncServed;
+        public long ResyncThrottled;
+
+        public long ConnectionsOpened;
+        public long ConnectionsClosed;
+        public long SecondClientRejected;
+        public long ProtocolViolations;
 
         public object Snapshot()
         {
@@ -40,6 +68,25 @@ namespace LongYinCoop.S2.Host
                 framesQueuedDropped = FramesQueuedDropped,
                 bytesSent = BytesSent,
                 lastDropReason = LastDropReason,
+                snapshotsDeduped = SnapshotsDeduped,
+                snapshotsPaced = SnapshotsPaced,
+                heartbeatsSent = HeartbeatsSent,
+                wireBytesSent = WireBytesSent,
+                authAttempts = AuthAttempts,
+                authAccepted = AuthAccepted,
+                authDenied = AuthDenied,
+                authExpired = AuthExpired,
+                authRateLimited = AuthRateLimited,
+                authAfterHandshake = AuthAfterHandshake,
+                pingsHandled = PingsHandled,
+                byeHandled = ByeHandled,
+                resyncRequests = ResyncRequests,
+                resyncServed = ResyncServed,
+                resyncThrottled = ResyncThrottled,
+                connectionsOpened = ConnectionsOpened,
+                connectionsClosed = ConnectionsClosed,
+                secondClientRejected = SecondClientRejected,
+                protocolViolations = ProtocolViolations,
             };
         }
 

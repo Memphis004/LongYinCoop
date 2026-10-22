@@ -56,6 +56,37 @@ namespace LongYinCoop.S2.Protocol
             return Hex(SHA256.HashData(Encoding.UTF8.GetBytes(sb.ToString())));
         }
 
+        /// <summary>8 ไบต์แรกของ fieldHash (16 hex) — ส่งใน handshake เพื่อยืนยันว่า replicas ตรงกัน</summary>
+        public static string FieldHashPrefix(string fieldHashHex, int bytes = 8)
+        {
+            if (string.IsNullOrEmpty(fieldHashHex)) return string.Empty;
+            int chars = Math.Min(fieldHashHex.Length, Math.Max(1, bytes) * 2);
+            return fieldHashHex.Substring(0, chars);
+        }
+
+        /// <summary>hex → bytes · คืน null ถ้าความยาวคี่หรือมีตัวอักษรนอก hex (ไม่ throw)</summary>
+        public static byte[] BytesFromHex(string hex)
+        {
+            if (string.IsNullOrEmpty(hex) || (hex.Length & 1) != 0) return null;
+            byte[] bytes = new byte[hex.Length / 2];
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                int hi = HexDigit(hex[i * 2]);
+                int lo = HexDigit(hex[i * 2 + 1]);
+                if (hi < 0 || lo < 0) return null;
+                bytes[i] = (byte)((hi << 4) | lo);
+            }
+            return bytes;
+        }
+
+        private static int HexDigit(char c)
+        {
+            if (c >= '0' && c <= '9') return c - '0';
+            if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+            if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+            return -1;
+        }
+
         internal static string Hex(byte[] bytes)
         {
             StringBuilder sb = new StringBuilder(bytes.Length * 2);

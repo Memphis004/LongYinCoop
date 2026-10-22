@@ -38,8 +38,27 @@ namespace LongYinCoop.S2.Tests
             }
         }
 
-        private static int Main()
+        private static int Main(string[] args)
         {
+            // ---- CLI ช่วยงาน C1 (ไม่แตะเกม ไม่มี mod runtime) -------------------
+            // --emit-vectors <path>                       เขียน fixtures/replica-vectors.ndjson
+            // --fake-host <port> <sec> [secretHex] [hz] [skipSeqAt]   host จำลอง (I9/Python)
+            if (args != null && args.Length > 0)
+            {
+                if (args[0] == "--emit-vectors" && args.Length >= 2)
+                {
+                    string written = S2a3Tests.EmitVectors(args[1]);
+                    Console.WriteLine("VECTORS written " + written);
+                    return 0;
+                }
+                if (args[0] == "--fake-host")
+                {
+                    return FakeS2Host.RunCli(args.Skip(1).ToArray());
+                }
+                Console.WriteLine("unknown args: " + string.Join(" ", args));
+                return 2;
+            }
+
             FrameTests();
             ChunkTests();
             CompactTests();
@@ -48,6 +67,7 @@ namespace LongYinCoop.S2.Tests
             AllowlistTests();
 
             _fail += S2a2Tests.Run();
+            _fail += S2a3Tests.Run();
 
             Console.WriteLine();
             Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0/T1 checks)" : $"RESULT FAIL ({_fail} checks failed)");

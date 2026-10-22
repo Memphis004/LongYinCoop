@@ -31,6 +31,9 @@ namespace LongYinCoop.S2.Host
         public S2Frame Read(int maxUnits = 64)
         {
             long t0 = Stopwatch.GetTimestamp();
+            // S2a-3: "instant ที่มอดเห็น state ของเกมครั้งแรก" — ต้องเป็น **ต้น** Read()
+            // (ก่อนแตะ IL2CPP) เพื่อให้ latency ที่ guest วัด = host-apply → guest-store จริง
+            ulong applyUs = (ulong)(t0 * 1000000L / Stopwatch.Frequency);
             try
             {
                 BattleController bc = BattleController.Instance;
@@ -124,6 +127,7 @@ namespace LongYinCoop.S2.Host
                     FrameId = ++Frames,
                     Header = header,
                     Units = units.ToArray(),
+                    HostApplyUs = applyUs,
                 };
                 frame.Audit = S2AuditUtil.Compute(header, frame.Units);
                 frame.SampleMs = (Stopwatch.GetTimestamp() - t0) * 1000.0 / Stopwatch.Frequency;

@@ -3,15 +3,15 @@ using System.Diagnostics;
 using LongYinCoop.S2;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.4.0", "Westernholudur")]
+[assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.5.0", "Westernholudur")]
 
 namespace LongYinCoop
 {
     public sealed class CoopMod : MelonMod
     {
-        public const string Version = "0.4.0";
+        public const string Version = "0.5.0";
         public const int Stage = 1;
-        public const string StageLabel = "S1.5e-W7";
+        public const string StageLabel = "S2a-3";
 
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;

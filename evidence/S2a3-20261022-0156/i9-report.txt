@@ -1,0 +1,5 @@
+snapshots=213 spanS=9.982 wireBytes=66882 avgKBps=6.54
+latency n=213 p50=0.2ms p95=0.3ms p99=0.8ms max=3.3ms
+divA mismatches=0 of 213
+gaps=0 resyncSent=0 gapClosed=0
+seq 1..213 units=9..9

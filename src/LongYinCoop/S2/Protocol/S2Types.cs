@@ -25,6 +25,9 @@ namespace LongYinCoop.S2.Protocol
         // transport
         Chunk = 10,
 
+        // host -> guest (S2a-3, ProtoVer 2): ตอบรับ RESYNC ของ guest
+        ResyncAck = 11,
+
         // guest -> host (allowlist)
         Auth = 32,
         Ping = 33,
@@ -33,7 +36,11 @@ namespace LongYinCoop.S2.Protocol
 
     public static class S2Protocol
     {
-        public const byte ProtoVer = 1;
+        /// <summary>
+        /// S2a-3 = 2 (เพิ่ม sessionId/hostApplyUs/replicaHash/resync flag ใน envelope + type ResyncAck=11)
+        /// ไม่ลบ/เปลี่ยนความหมายฟิลด์เดิม และ **ไม่แก้ `ReplicaHash` spec `s2|2`** (มติ 2026-10-21 ข้อ 2(ii))
+        /// </summary>
+        public const byte ProtoVer = 2;
 
         /// <summary>u16 BE body length + type + version + u32 BE seq.</summary>
         public const int HeaderBytes = 8;
@@ -75,10 +82,17 @@ namespace LongYinCoop.S2.Protocol
                 case MessageType.Bye:
                 case MessageType.AuthResult:
                 case MessageType.Deny:
+                case MessageType.ResyncAck:
                     return true;
                 default:
                     return false;
             }
+        }
+
+        /// <summary>ชนิดที่เป็นข้อมูลสำเนา (นับ seq) — S2a-3 มี Snapshot ตัวเดียว</summary>
+        public static bool IsDataMessage(MessageType type)
+        {
+            return type == MessageType.Snapshot;
         }
 
         public static MessageType ReassembledTypeOrUnknown(byte raw)

@@ -102,6 +102,23 @@ namespace LongYinCoop.S2.Host
         public double SampleMs;
         public double SerializeMs;
         public int PayloadBytes;
+
+        // ---- S2a-3 (ProtoVer 2) -------------------------------------------
+        /// <summary>seq ของ session — กำหนด **ตอน send** (ไม่ใช่ตอน sample) ⇒ drop/pacing ไม่ทำให้ seq ขาด</summary>
+        public uint Seq;
+        /// <summary>session ของ connection นี้ (ใหม่ทุก connection) — guest ใช้ล้าง store/expectedSeq</summary>
+        public uint SessionId;
+        /// <summary>Stopwatch µs ตอน **เริ่ม** อ่าน state (host-apply) — ใช้คำนวณ latency ที่ guest</summary>
+        public ulong HostApplyUs;
+        /// <summary>sha256 ตามสเปก `s2|2` ของ field ที่ส่งใน message นี้ (guest คำนวณใหม่แล้วเทียบ = Div-A)</summary>
+        public string ReplicaHash;
+        /// <summary>snapshot นี้เป็นคำตอบของ RESYNC (ข้าม pacing หนึ่งครั้ง)</summary>
+        public bool Resync;
+        public uint ResyncFromSeq;
+        /// <summary>ส่งเพราะ heartbeat (state ไม่เปลี่ยน) ไม่ใช่เพราะ state เปลี่ยน</summary>
+        public bool Heartbeat;
+        /// <summary>จำนวนไบต์ที่เขียนลง socket จริงของ message นี้ (รวม framing)</summary>
+        public int WireBytes;
     }
 
     public static class S2AuditUtil
@@ -154,7 +171,14 @@ namespace LongYinCoop.S2.Host
         {
             StringBuilder sb = new StringBuilder(256 + frame.Units.Length * 96);
             sb.Append("{\"frameId\":").Append(frame.FrameId.ToString(CultureInfo.InvariantCulture));
-            sb.Append(",\"seq\":").Append(frame.FrameId.ToString(CultureInfo.InvariantCulture));
+            sb.Append(",\"seq\":").Append(frame.Seq.ToString(CultureInfo.InvariantCulture));
+            sb.Append(",\"sessionId\":").Append(frame.SessionId.ToString(CultureInfo.InvariantCulture));
+            sb.Append(",\"hostApplyUs\":").Append(frame.HostApplyUs.ToString(CultureInfo.InvariantCulture));
+            sb.Append(",\"replicaHash\":").Append(Quote(frame.ReplicaHash));
+            sb.Append(",\"resync\":").Append(frame.Resync ? "true" : "false");
+            sb.Append(",\"resyncFromSeq\":").Append(frame.ResyncFromSeq.ToString(CultureInfo.InvariantCulture));
+            sb.Append(",\"heartbeat\":").Append(frame.Heartbeat ? "true" : "false");
+            sb.Append(",\"wireBytes\":").Append(frame.WireBytes.ToString(CultureInfo.InvariantCulture));
             sb.Append(",\"battleKey\":").Append(Quote(frame.Header.BattleKey));
             sb.Append(",\"turnIndex\":").Append(frame.Header.TurnIndex.ToString(CultureInfo.InvariantCulture));
             sb.Append(",\"activeUnitId\":").Append(Quote(frame.Header.ActiveUnitId));

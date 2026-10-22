@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -111,15 +112,38 @@ namespace LongYinCoop.S2.Host
         }
     }
 
-    /// <summary>wire encode/decode ของ S2Frame (LE; ใช้ codec เดียวกับ Protocol)</summary>
+    /// <summary>
+    /// wire encode/decode ของ S2Frame (LE; ใช้ codec เดียวกับ Protocol)
+    ///
+    /// ProtoVer 2 (S2a-3): เพิ่ม **sessionId / hostApplyUs / replicaHash / resync flag / resyncFromSeq**
+    /// ไว้ต้น envelope เพื่อให้วัด latency + divergence ได้ (§3.5) — ฟิลด์เดิมไม่เปลี่ยนลำดับ/ความหมาย
+    /// (ยูนิตยังเป็นชุดเดิม + `unitAlive` ที่ต้องคงไว้ตามสเปก hash)
+    /// </summary>
     public static class S2FrameCodec
     {
         public const int MaxUnits = 64;
+        public const int ReplicaHashBytes = 32;
 
         public static byte[] Encode(in S2Frame frame)
         {
+            string hash = frame.ReplicaHash;
+            if (string.IsNullOrEmpty(hash)) hash = ComputeReplicaHash(frame);
+            return Encode(frame, hash);
+        }
+
+        public static byte[] Encode(in S2Frame frame, string replicaHash)
+        {
+            byte[] hashBytes = S2Auth.BytesFromHex(replicaHash);
+            if (hashBytes == null || hashBytes.Length != ReplicaHashBytes)
+                throw new ArgumentException("replicaHash must be 64 hex chars");
+
             CompactWriter w = new CompactWriter(256 + frame.Units.Length * 64);
             w.WriteByte(S2Protocol.ProtoVer);
+            w.WriteVarUInt(frame.SessionId);
+            w.WriteVarULong(frame.HostApplyUs);
+            w.WriteRaw(hashBytes);
+            w.WriteByte(frame.Resync ? (byte)1 : (byte)0);
+            w.WriteVarUInt(frame.ResyncFromSeq);
             w.WriteString(frame.Header.BattleKey);
             w.WriteVarUInt((uint)frame.Header.TurnIndex);
             w.WriteString(frame.Header.ActiveUnitId);
@@ -146,6 +170,37 @@ namespace LongYinCoop.S2.Host
             return w.ToArray();
         }
 
+        /// <summary>hash ตามสเปก `s2|2` ของ message นี้ (host คำนวณก่อนส่ง, guest คำนวณใหม่หลัง decode)</summary>
+        public static string ComputeReplicaHash(in S2Frame frame)
+        {
+            ReplicaHeader header = new ReplicaHeader
+            {
+                BattleKey = frame.Header.BattleKey,
+                TurnIndex = frame.Header.TurnIndex,
+                ActiveUnitId = frame.Header.ActiveUnitId,
+                Paused = frame.Header.Paused,
+            };
+
+            ReplicaUnit[] units = new ReplicaUnit[frame.Units.Length];
+            for (int i = 0; i < units.Length; i++)
+            {
+                S2Unit u = frame.Units[i];
+                units[i] = new ReplicaUnit
+                {
+                    StableId = u.StableId,
+                    Team = u.Team,
+                    Row = u.Row,
+                    Column = u.Column,
+                    Hp = u.Hp,
+                    IsAlive = u.IsAlive,
+                    UnitAlive = u.UnitAlive,
+                    Moved = u.Moved,
+                    Attacked = u.Attacked,
+                };
+            }
+            return ReplicaHash.Compute(header, units);
+        }
+
         public static bool TryDecode(byte[] payload, out S2Frame frame, out string error)
         {
             frame = null;
@@ -167,6 +222,11 @@ namespace LongYinCoop.S2.Host
                 }
 
                 S2Frame decoded = new S2Frame();
+                decoded.SessionId = r.ReadVarUInt();
+                decoded.HostApplyUs = r.ReadVarULong();
+                decoded.ReplicaHash = S2Auth.Hex(r.ReadRaw(ReplicaHashBytes).ToArray());
+                decoded.Resync = r.ReadByte() != 0;
+                decoded.ResyncFromSeq = r.ReadVarUInt();
                 decoded.Header.BattleKey = r.ReadString();
                 decoded.Header.TurnIndex = (int)r.ReadVarUInt();
                 decoded.Header.ActiveUnitId = r.ReadString();
@@ -220,8 +280,43 @@ namespace LongYinCoop.S2.Host
     }
 
     /// <summary>
+    /// ตัวเลือกของ <see cref="S2SerializingSender"/> (S2a-3)
+    ///   `SendHz = 0` / `Dedup = false` = พฤติกรรม S2a-2 เดิม (ส่งทุกเฟรม) — ใช้ในเทสต์ regression
+    /// </summary>
+    public sealed class S2SenderOptions
+    {
+        public int QueueCapacity = 2;
+        /// <summary>เพดานอัตราส่ง snapshot (Hz) · 0 = ไม่จำกัด</summary>
+        public int SendHz = 30;
+        /// <summary>ส่งซ้ำแม้ state ไม่เปลี่ยนเมื่อครบกำหนด (ms) · 0 = ปิด heartbeat</summary>
+        public int HeartbeatMs = 1000;
+        /// <summary>ข้าม snapshot ที่ replicaHash ไม่เปลี่ยน</summary>
+        public bool Dedup = true;
+        public uint SessionId;
+        /// <summary>นาฬิกา monotonic (ms) — เทสต์ฉีดเวลาปลอมได้</summary>
+        public Func<long> NowMs;
+
+        public int MinIntervalMs { get { return SendHz <= 0 ? 0 : 1000 / SendHz; } }
+
+        public Func<long> Clock
+        {
+            get { return NowMs ?? DefaultNow; }
+        }
+
+        public static long DefaultNow()
+        {
+            return System.Diagnostics.Stopwatch.GetTimestamp() * 1000L
+                   / System.Diagnostics.Stopwatch.Frequency;
+        }
+    }
+
+    /// <summary>
     /// serialize บน thread อื่น (ตาม §13.2 ข้อ 4): main thread แค่ TryPost (ไม่บล็อก)
-    /// single-slot-ish queue; คิวเต็ม = ทิ้ง + นับ (ไม่โตเรื่อย ๆ)
+    ///
+    /// S2a-3 เปลี่ยน 3 อย่าง (แผน §1 A1/A2/A7):
+    ///   1) **seq กำหนดตอน send** (ไม่ใช่ `frame.FrameId` ของ sampler) ⇒ คิวเต็ม/pacing ไม่ทำให้ seq ขาด
+    ///   2) **dedup + pacing + heartbeat** แทน "ส่งทุกเฟรม" (§3.2) — heartbeat 1 Hz กัน viewer ค้างค่าเก่า
+    ///   3) envelope v2 + `replicaHash` ต่อ message (Div-A ที่ guest คำนวณใหม่ได้)
     /// </summary>
     public sealed class S2SerializingSender : IDisposable
     {
@@ -230,18 +325,29 @@ namespace LongYinCoop.S2.Host
         private readonly S2Counters _counters;
         private readonly S2Metrics _metrics;
         private readonly S2NdjsonWriter _writer;
+        private readonly S2SenderOptions _options;
+        private readonly Func<long> _clock;
         private readonly Thread _worker;
         private ushort _msgId;
+        private uint _seq;
         private volatile bool _stop;
 
+        private string _lastSentHash;
+        private long _lastSendMs = long.MinValue / 2;
+        private int _resyncFlag;
+        private int _resyncFromSeq;
+
         public S2SerializingSender(ITransport transport, S2Counters counters, S2Metrics metrics,
-                                   S2NdjsonWriter writer = null, int queueCapacity = 2)
+                                   S2NdjsonWriter writer = null, S2SenderOptions options = null)
         {
             _transport = transport;
             _counters = counters ?? new S2Counters();
             _metrics = metrics ?? new S2Metrics();
             _writer = writer;
-            _queue = new BlockingCollection<S2Frame>(queueCapacity < 1 ? 1 : queueCapacity);
+            _options = options ?? new S2SenderOptions();
+            _clock = _options.Clock;
+            int capacity = _options.QueueCapacity < 1 ? 1 : _options.QueueCapacity;
+            _queue = new BlockingCollection<S2Frame>(capacity);
 
             _worker = new Thread(Loop) { IsBackground = true, Name = "S2Serialize" };
             _worker.Start();
@@ -251,8 +357,22 @@ namespace LongYinCoop.S2.Host
         public long Sent;
         public long Dropped;
         public long Errors;
+        public long Deduped;
+        public long Paced;
+        public long Heartbeats;
+        /// <summary>seq ล่าสุดที่ส่งสำเร็จ (0 = ยังไม่ส่ง)</summary>
+        public uint LastSeq { get { return _seq; } }
 
         public S2Metrics Metrics { get { return _metrics; } }
+
+        public S2SenderOptions Options { get { return _options; } }
+
+        /// <summary>ให้ snapshot ใบถัดไปติดธง resync=true (เรียกได้จาก main thread)</summary>
+        public void FlagResync(uint fromSeq)
+        {
+            System.Threading.Interlocked.Exchange(ref _resyncFromSeq, unchecked((int)fromSeq));
+            System.Threading.Interlocked.Exchange(ref _resyncFlag, 1);
+        }
 
         /// <summary>เรียกจาก main thread เท่านั้น — ห้ามบล็อก</summary>
         public bool TryPost(S2Frame frame)
@@ -290,34 +410,7 @@ namespace LongYinCoop.S2.Host
                 {
                     try
                     {
-                        long t0 = System.Diagnostics.Stopwatch.GetTimestamp();
-                        byte[] payload = S2FrameCodec.Encode(frame);
-                        frame.PayloadBytes = payload.Length;
-
-                        ushort id = _msgId++;
-                        System.Collections.Generic.List<byte[]> frames =
-                            ChunkCodec.Encode(id, MessageType.Snapshot, S2Protocol.ProtoVer,
-                                              (uint)frame.FrameId, payload);
-
-                        bool allSent = true;
-                        for (int i = 0; i < frames.Count; i++)
-                        {
-                            if (!_transport.Send(frames[i])) allSent = false;
-                        }
-
-                        double serializeMs = (System.Diagnostics.Stopwatch.GetTimestamp() - t0) * 1000.0
-                                             / System.Diagnostics.Stopwatch.Frequency;
-                        frame.SerializeMs = serializeMs;
-                        _metrics.AddFrame(frame.SampleMs, serializeMs, payload.Length);
-
-                        if (allSent)
-                        {
-                            Sent++;
-                            _counters.FramesSent++;
-                            _counters.BytesSent += payload.Length;
-                        }
-
-                        if (_writer != null) _writer.Write(frame);
+                        SendOne(frame);
                     }
                     catch (Exception)
                     {
@@ -327,6 +420,92 @@ namespace LongYinCoop.S2.Host
             }
             catch (ObjectDisposedException) { }
             catch (InvalidOperationException) { }
+        }
+
+        private void SendOne(S2Frame frame)
+        {
+            long now = _clock();
+
+            bool resync = System.Threading.Interlocked.Exchange(ref _resyncFlag, 0) == 1;
+            uint resyncFrom = unchecked((uint)System.Threading.Interlocked.Exchange(ref _resyncFromSeq, 0));
+
+            // 1) hash ของ message นี้ (ใช้ตัดสิน dedup + ส่งให้ guest ตรวจ Div-A)
+            string hash = S2FrameCodec.ComputeReplicaHash(frame);
+            frame.ReplicaHash = hash;
+            frame.SessionId = _options.SessionId;
+
+            bool changed = _lastSentHash == null || !string.Equals(hash, _lastSentHash, StringComparison.Ordinal);
+            bool heartbeat = false;
+
+            if (!resync)
+            {
+                if (_options.Dedup && !changed)
+                {
+                    // 2) ไม่เปลี่ยน: ส่งเฉพาะเมื่อครบ heartbeat
+                    if (_options.HeartbeatMs <= 0 || now - _lastSendMs < _options.HeartbeatMs)
+                    {
+                        Deduped++;
+                        _counters.SnapshotsDeduped++;
+                        return;
+                    }
+                    heartbeat = true;
+                }
+                else if (_options.Dedup && now - _lastSendMs < _options.MinIntervalMs)
+                {
+                    // 3) เปลี่ยนแต่ยังไม่ถึงรอบ: **ไม่** อัปเดต _lastSentHash ⇒ รอบถัดไปส่งเอง
+                    //    (การเปลี่ยนที่สั้นกว่า sendHz จะถูกรวมไว้ ไม่ทำให้ seq ขาด)
+                    Paced++;
+                    _counters.SnapshotsPaced++;
+                    return;
+                }
+            }
+
+            long t0 = System.Diagnostics.Stopwatch.GetTimestamp();
+            byte[] payload = S2FrameCodec.Encode(frame, hash);
+            frame.PayloadBytes = payload.Length;
+            double encodeMs = (System.Diagnostics.Stopwatch.GetTimestamp() - t0) * 1000.0
+                              / System.Diagnostics.Stopwatch.Frequency;
+
+            frame.Heartbeat = heartbeat;
+            frame.Resync = resync;
+            frame.ResyncFromSeq = resync ? resyncFrom : 0;
+
+            // 4) seq ตอน send เท่านั้น (A1) — ถ้า send ล้มบางส่วน seq ยังเดิน ⇒ guest เห็น gap จริง = ถูกต้อง
+            uint seq = unchecked(_seq + 1);
+            _seq = seq;
+
+            ushort id = _msgId++;
+            List<byte[]> frames = ChunkCodec.Encode(id, MessageType.Snapshot, S2Protocol.ProtoVer, seq, payload);
+
+            bool allSent = true;
+            int wireBytes = 0;
+            for (int i = 0; i < frames.Count; i++)
+            {
+                wireBytes += frames[i].Length;
+                if (!_transport.Send(frames[i])) allSent = false;
+            }
+
+            frame.Seq = seq;
+            frame.WireBytes = wireBytes;
+            frame.SerializeMs = encodeMs;
+            _metrics.AddFrame(frame.SampleMs, encodeMs, payload.Length);
+
+            if (allSent)
+            {
+                Sent++;
+                _counters.FramesSent++;
+                _counters.BytesSent += payload.Length;
+                _counters.WireBytesSent += wireBytes;
+                if (heartbeat)
+                {
+                    Heartbeats++;
+                    _counters.HeartbeatsSent++;
+                }
+                _lastSentHash = hash;
+                _lastSendMs = now;
+            }
+
+            if (_writer != null) _writer.Write(frame);
         }
     }
 

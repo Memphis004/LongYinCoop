@@ -1,0 +1,4 @@
+FAKEHOST listening port=47904 fieldHashPrefix=5424e4cd7dfad630
+FAKEHOST summary port=47904 authAccepted=1 authDenied=0 snapshots=106 forbidden=3 commandsAccepted=0 rejected=0 resyncServed=0 skippedSeq=0 malformed=0 lastError=IOException
+FAKEHOST listening port=47906 fieldHashPrefix=5424e4cd7dfad630
+FAKEHOST summary port=47906 authAccepted=1 authDenied=0 snapshots=106 forbidden=3 commandsAccepted=0 rejected=0 resyncServed=0 skippedSeq=0 malformed=0 lastError=- lastDisconnect=read: IOException
