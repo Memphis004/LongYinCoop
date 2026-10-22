@@ -1,0 +1,93 @@
+{
+ "note": "hooks state written from inside the game after __cd.dump(); afterCheck is a LATER snapshot, not the one inside the first dump()",
+ "wrapperCalls": 0,
+ "wrapperSumDelta": 0,
+ "leafHits": 10,
+ "before": {
+  "wall": 1792628399978,
+  "year": 10,
+  "month": 8,
+  "day": 25,
+  "hour": 10.138,
+  "working": false,
+  "workName": "",
+  "totalWorkingDay": 0,
+  "leftWorkingDay": 0,
+  "skipping": false,
+  "workFinished": false,
+  "forceID": 25,
+  "store": [
+   5996.7,
+   4900,
+   4900,
+   2447.9,
+   4600,
+   2333.2
+  ]
+ },
+ "calls": [],
+ "leaf": [
+  {
+   "n": 1,
+   "t": 1792628431612
+  },
+  {
+   "n": 2,
+   "t": 1792628433714
+  },
+  {
+   "n": 3,
+   "t": 1792628434471
+  },
+  {
+   "n": 4,
+   "t": 1792628435229
+  },
+  {
+   "n": 5,
+   "t": 1792628437137
+  },
+  {
+   "n": 6,
+   "t": 1792628437899
+  },
+  {
+   "n": 7,
+   "t": 1792628438651
+  },
+  {
+   "n": 8,
+   "t": 1792628440610
+  },
+  {
+   "n": 9,
+   "t": 1792628441373
+  },
+  {
+   "n": 10,
+   "t": 1792628442130
+  }
+ ],
+ "afterCheck": {
+  "wall": 1792628480563,
+  "year": 10,
+  "month": 9,
+  "day": 5,
+  "hour": 10.138,
+  "working": false,
+  "workName": "挖掘",
+  "totalWorkingDay": 10,
+  "leftWorkingDay": 0,
+  "skipping": true,
+  "workFinished": true,
+  "forceID": 25,
+  "store": [
+   4479.4,
+   4733.7,
+   5620.3,
+   5177.5,
+   4644.4,
+   2450
+  ]
+ }
+}
