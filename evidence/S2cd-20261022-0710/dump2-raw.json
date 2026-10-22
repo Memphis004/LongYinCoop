@@ -1,0 +1,73 @@
+{
+ "note": "run 2 (5-day job): hooks state + snapshot taken right after dump(); written from inside the game",
+ "wrapperCalls": 0,
+ "wrapperSumDelta": 0,
+ "leafHits": 5,
+ "before": {
+  "wall": 1792628681463,
+  "year": 10,
+  "month": 9,
+  "day": 5,
+  "hour": 10.138,
+  "working": false,
+  "workName": "挖掘",
+  "totalWorkingDay": 10,
+  "leftWorkingDay": 0,
+  "skipping": true,
+  "workFinished": true,
+  "forceID": 25,
+  "store": [
+   4479.4,
+   4733.7,
+   5620.3,
+   5177.5,
+   4644.4,
+   2450
+  ]
+ },
+ "calls": [],
+ "leaf": [
+  {
+   "n": 1,
+   "t": 1792628740546
+  },
+  {
+   "n": 2,
+   "t": 1792628743399
+  },
+  {
+   "n": 3,
+   "t": 1792628744164
+  },
+  {
+   "n": 4,
+   "t": 1792628746670
+  },
+  {
+   "n": 5,
+   "t": 1792628747430
+  }
+ ],
+ "afterCheck": {
+  "wall": 1792628761884,
+  "year": 10,
+  "month": 9,
+  "day": 10,
+  "hour": 10.138,
+  "working": false,
+  "workName": "挖掘",
+  "totalWorkingDay": 5,
+  "leftWorkingDay": 0,
+  "skipping": true,
+  "workFinished": true,
+  "forceID": 25,
+  "store": [
+   4764.4,
+   4733.7,
+   5570.3,
+   5475.5,
+   3683.8,
+   2450
+  ]
+ }
+}
