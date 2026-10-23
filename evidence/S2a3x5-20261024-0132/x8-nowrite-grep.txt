@@ -1,0 +1,5 @@
+src/LongYinCoop/S2/Host/S2WriteGuard.cs:33:            Append(sb, "AllowRemoteInput", allowRemoteInput);
+src/LongYinCoop/S2/S2HostService.cs:223:        /// ด้วย `allowRemoteInput` ที่ `IpcServer.Spike` เอง)
+src/LongYinCoop/S2/S2HostService.cs:227:            if (S2WriteGuard.WritePathsClosed(CoopPrefs.AllowRemoteInput.Value, CoopPrefs.JitProbe.Value,
+src/LongYinCoop/S2/S2HostService.cs:242:            return S2WriteGuard.Describe(CoopPrefs.AllowRemoteInput.Value, CoopPrefs.JitProbe.Value,
+src/LongYinCoop/S2/S2HostService.cs:254:            if (CoopPrefs.AllowRemoteInput.Value || CoopPrefs.JitProbe.Value || CoopPrefs.JitProbeW2.Value

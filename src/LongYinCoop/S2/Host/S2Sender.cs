@@ -18,6 +18,8 @@ namespace LongYinCoop.S2.Host
         private readonly object _lock = new object();
         private readonly double[] _sample = new double[Capacity];
         private readonly double[] _serialize = new double[Capacity];
+        // X6 วัด p99 ของ (sampleMs + serializeMs) ต่อเฟรม — เก็บผลรวมแยก ไม่ใช่ผลรวมของ p99
+        private readonly double[] _combined = new double[Capacity];
         private readonly int[] _bytes = new int[Capacity];
         private int _count;
         private int _next;
@@ -29,6 +31,7 @@ namespace LongYinCoop.S2.Host
             {
                 _sample[_next] = sampleMs;
                 _serialize[_next] = serializeMs;
+                _combined[_next] = sampleMs + serializeMs;
                 _bytes[_next] = payloadBytes;
                 _next = (_next + 1) % Capacity;
                 if (_count < Capacity) _count++;
@@ -43,6 +46,8 @@ namespace LongYinCoop.S2.Host
         public double SamplePercentile(double p) { return Percentile(_sample, p); }
 
         public double SerializePercentile(double p) { return Percentile(_serialize, p); }
+
+        public double CombinedPercentile(double p) { return Percentile(_combined, p); }
 
         public double BytesPercentile(double p)
         {
@@ -76,6 +81,7 @@ namespace LongYinCoop.S2.Host
                 sampleMsP99 = Math.Round(SamplePercentile(0.99), 4),
                 serializeMsP50 = Math.Round(SerializePercentile(0.50), 4),
                 serializeMsP99 = Math.Round(SerializePercentile(0.99), 4),
+                combinedMsP99 = Math.Round(CombinedPercentile(0.99), 4),
                 payloadBytesP99 = Math.Round(BytesPercentile(0.99), 1),
             };
         }
@@ -460,6 +466,14 @@ namespace LongYinCoop.S2.Host
                 }
             }
 
+            // 0) BUGFIX 2026-10-24: the envelope carries the resync flag/fromSeq, so they must be
+            //    set BEFORE Encode. Before this fix the payload was encoded with the previous
+            //    frame's values (always 0/false) while the ndjson log showed true — the guest
+            //    never saw `resync=true`, so a gap window could never close (B3b: gaps=1,
+            //    resync 3/3 served, closed=0, giveUp=1).
+            frame.Resync = resync;
+            frame.ResyncFromSeq = resync ? resyncFrom : 0;
+
             long t0 = System.Diagnostics.Stopwatch.GetTimestamp();
             byte[] payload = S2FrameCodec.Encode(frame, hash);
             frame.PayloadBytes = payload.Length;
@@ -467,8 +481,6 @@ namespace LongYinCoop.S2.Host
                               / System.Diagnostics.Stopwatch.Frequency;
 
             frame.Heartbeat = heartbeat;
-            frame.Resync = resync;
-            frame.ResyncFromSeq = resync ? resyncFrom : 0;
 
             // 4) seq ตอน send เท่านั้น (A1) — ถ้า send ล้มบางส่วน seq ยังเดิน ⇒ guest เห็น gap จริง = ถูกต้อง
             uint seq = unchecked(_seq + 1);

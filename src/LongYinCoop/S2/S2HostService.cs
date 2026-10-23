@@ -714,6 +714,18 @@ namespace LongYinCoop.S2
                 WriteMarker("framemeter.window", "phase=" + (_active ? PhaseB : PhaseA)
                             + " windowMs=" + windowMs + " at=" + nowMs + " " + _frameMeter.ToMarker());
             }
+            // X6: p99 ของ (sampleMs + encodeMs) ต่อเฟรม — เขียนทุก 60 s ลงไฟล์เดียวกับ marker อื่น
+            if (_metrics.TotalFrames > 0)
+            {
+                EnsureWriter();
+                WriteMarker("s2.metrics", "phase=" + (_active ? PhaseB : PhaseA)
+                            + " windowMs=" + windowMs + " at=" + nowMs
+                            + " frames=" + _metrics.TotalFrames
+                            + " window=" + _metrics.WindowSamples
+                            + " combinedP99=" + _metrics.CombinedPercentile(0.99).ToString("F4", CultureInfo.InvariantCulture)
+                            + " sampleP99=" + _metrics.SamplePercentile(0.99).ToString("F4", CultureInfo.InvariantCulture)
+                            + " serializeP99=" + _metrics.SerializePercentile(0.99).ToString("F4", CultureInfo.InvariantCulture));
+            }
             _frameMeter.Reset();
             _framemeterWindowStartMs = nowMs;
         }

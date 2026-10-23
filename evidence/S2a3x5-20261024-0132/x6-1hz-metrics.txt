@@ -1,0 +1,5 @@
+{"kind":"s2.metrics","marker":true,phase=B windowMs=60000 at=21787718 frames=1174 window=1174 combinedP99=0.1379 sampleP99=0.1312 serializeP99=0.0073}
+{"kind":"s2.metrics","marker":true,phase=B windowMs=60016 at=21847734 frames=1234 window=1234 combinedP99=0.1379 sampleP99=0.1312 serializeP99=0.0071}
+{"kind":"s2.metrics","marker":true,phase=B windowMs=60000 at=21907734 frames=1294 window=1294 combinedP99=0.1379 sampleP99=0.1312 serializeP99=0.0071}
+{"kind":"s2.metrics","marker":true,phase=B windowMs=60000 at=21967734 frames=1354 window=1354 combinedP99=0.1337 sampleP99=0.1269 serializeP99=0.0071}
+{"kind":"s2.metrics","marker":true,phase=B windowMs=60016 at=22027750 frames=1413 window=1413 combinedP99=0.1337 sampleP99=0.1184 serializeP99=0.0070}

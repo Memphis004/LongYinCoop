@@ -15,13 +15,16 @@ namespace LongYinCoop.S2.Host
     /// </summary>
     public sealed class S2FrameMeter
     {
-        public const int Capacity = 4096;
+        // 65536 doubles = 512 KB; ครอบ 60 s ได้ถึง ~1,092 fps (เดิม 4096 ครอบแค่ ~32 s ที่ 126 fps
+        // ⇒ p99 ของวินโดว์ 60 s ทิ้งช่วงต้นไปเกือบครึ่ง — ดู X5-remeter-plan.md)
+        public const int Capacity = 65536;
 
         private readonly double[] _samples = new double[Capacity];
         private readonly object _lock = new object();
         private int _count;
         private int _next;
         private long _total;
+        private double _sumMs;
 
         /// <summary>เพดานที่ถือว่า "ค่าเสีย" (เฟรมค้าง/หยุดชั่วคราว) — ไม่นับเข้า percentile</summary>
         public const double MaxPlausibleMs = 5000.0;
@@ -40,6 +43,7 @@ namespace LongYinCoop.S2.Host
                 _next = (_next + 1) % Capacity;
                 if (_count < Capacity) _count++;
                 _total++;
+                _sumMs += deltaMs;
             }
             return true;
         }
@@ -50,8 +54,12 @@ namespace LongYinCoop.S2.Host
             {
                 _count = 0;
                 _next = 0;
+                _sumMs = 0;
             }
         }
+
+        /// <summary>เวลารวมของเฟรมที่รับเข้าหน้าต่างนี้ (ms) — ใช้ยืนยันว่า meter ครอบทั้ง 60 s จริง</summary>
+        public double CoverageMs { get { lock (_lock) { return _sumMs; } } }
 
         public double Percentile(double p)
         {
@@ -91,14 +99,15 @@ namespace LongYinCoop.S2.Host
                 p99 = Math.Round(Percentile(0.99), 3),
                 max = Math.Round(Percentile(1.0), 3),
                 mean = Math.Round(Mean(), 3),
+                coverageMs = Math.Round(CoverageMs, 1),
             };
         }
 
         public string ToMarker(string extraFields = null)
         {
             return string.Format(CultureInfo.InvariantCulture,
-                "framemeter.window frames={0} n={1} p50={2:F3} p95={3:F3} p99={4:F3} max={5:F3} mean={6:F3}{7}",
-                Total, Count, Math.Round(Percentile(0.50), 3), Math.Round(Percentile(0.95), 3),
+                "framemeter.window frames={0} n={1} coverageMs={2:F0} p50={3:F3} p95={4:F3} p99={5:F3} max={6:F3} mean={7:F3}{8}",
+                Total, Count, CoverageMs, Math.Round(Percentile(0.50), 3), Math.Round(Percentile(0.95), 3),
                 Math.Round(Percentile(0.99), 3), Math.Round(Percentile(1.0), 3),
                 Math.Round(Mean(), 3), extraFields == null ? string.Empty : " " + extraFields);
         }

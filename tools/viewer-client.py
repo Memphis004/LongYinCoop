@@ -348,6 +348,9 @@ class Viewer:
         self.secret = bytes.fromhex(args.secret)
         self.field_hash = args.field_hash or ""
         self.field_hash_prefix = self.field_hash[:16]
+        # X7: when set, do NOT abort locally on a host/guest prefix mismatch —
+        # let the guest send AUTH so the host's own deny path is exercised.
+        self.ignore_host_hash = bool(getattr(args, "ignore_host_hash", False))
         self.sock = None
         self.buf = bytearray()
         self.reasm = Reassembler()
@@ -496,7 +499,8 @@ class Viewer:
         if mtype == T_HELLO:
             session_id, nonce, prefix = decode_hello(payload)
             self.emit({"kind": "hello", "sessionId": session_id, "fieldHashPrefix": prefix})
-            if self.field_hash_prefix and prefix != self.field_hash_prefix:
+            if (self.field_hash_prefix and prefix != self.field_hash_prefix
+                    and not self.ignore_host_hash):
                 self.emit({"kind": "error", "error": "fieldHash prefix mismatch",
                            "host": prefix, "guest": self.field_hash_prefix})
                 self.close()
@@ -800,6 +804,7 @@ class Viewer:
         start = time.time()
         next_ping = time.time()
         injected = False
+        gap_injected = False
         stall_until = 0
         kill_at = (start + self.args.kill_after) if self.args.kill_after else 0
 
@@ -829,9 +834,14 @@ class Viewer:
                     self.inject_forbidden()
                 if self.args.inject_malformed:
                     self.inject_malformed()
-                if self.args.inject_gap:
-                    self.emit({"kind": "injectGap", "drop": self.args.inject_gap})
-                    self.expected_seq += self.args.inject_gap
+            # BUGFIX 2026-10-24: a gap means the guest expects an EARLIER seq than the host
+            # sends (recv seq > expected). The old code incremented expected_seq right after
+            # auth, so every snapshot became a "dup" and resync was never triggered
+            # (B3 run 1: gaps=0, duplicates=3). Inject only after a few real messages.
+            if self.args.inject_gap and not gap_injected and self.stats["snapshots"] >= 4:
+                gap_injected = True
+                self.emit({"kind": "injectGap", "drop": self.args.inject_gap})
+                self.expected_seq = max(1, self.expected_seq - self.args.inject_gap)
 
             if self.args.stall and time.time() - start > self.args.duration / 2 and not stall_until:
                 stall_until = time.time() + self.args.stall
@@ -994,6 +1004,8 @@ def main(argv):
     parser.add_argument("--duration", type=float, default=60.0)
     parser.add_argument("--ping-hz", type=float, default=0.2, help="PING rate for clock offset")
     parser.add_argument("--heartbeat-ms", type=int, default=1000)
+    parser.add_argument("--ignore-host-hash", action="store_true",
+                        help="X7: send AUTH even if the host fieldHash prefix differs (host must deny)")
     parser.add_argument("--inject-forbidden", action="store_true")
     parser.add_argument("--inject-malformed", action="store_true")
     parser.add_argument("--inject-gap", type=int, default=0)
