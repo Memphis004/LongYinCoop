@@ -50,3 +50,4 @@
 
 - `measurements-20261024.md` (ตาราง X1–X8) · `x5-paired.log`, `x5-blocks.txt` · `x6-1hz.log`, `x6-1hz-metrics.txt` · `viewer-X6-1hz.out.log` · `x7-wrongsecret.*`, `x7-wronghash3.*`, `viewer-B1/B2.out.log` · `x8-nowrite-grep.txt` · `x9-verify-20261024.txt`, `x9-restore-20261024.txt`, `x9-rehash.txt`
 - รอบก่อนหน้าใน stage: `evidence/S2a3-20261022-143608/{x4-rerun-20261024.md,x6-run-20261024.md,c8c-verify-20261024.txt,c8c-restore-20261024.txt}`
+- **หมายเหตุ `.gitignore`**: `*.log` และ `evidence/**/*.ndjson` ถูก ignore ⇒ ไฟล์ดิบ (`x5-paired.log`, `x6-1hz.log`, `viewer-*.out.log`, `x7-*.ndjson`, `viewer-B1/B2/X6-1hz.ndjson`) **มีอยู่บนเครื่องแต่ไม่อยู่ใน git** — ค่าที่ตัดสิน verdict ถูกคัดลอกไว้ใน `measurements-20261024.md`, `x5-blocks.txt` และ `x6-1hz-metrics.txt` ซึ่ง commit แล้ว
