@@ -56,16 +56,16 @@
 | ยืนยันด้วยการวัด | `Save` 57 ไฟล์ digest `4226730f66ff` **EXACT** · `changed=0 missing=0 added=0` · `leftovers: none` · rehash อิสระ (ordinal sort) ตรงกัน · `evidence/S2a3-20261022-0156/restore-postcheck.md`, `presave-check.md` |
 | ผลบังคับ | เป็น expected baseline ของ **S2a-3** (C6) และใช้ตัดสิน E7/X9/C8 · ถ้า digest ไม่ตรง **หยุดและรายงาน** ห้าม rebaseline กลบ |
 
-## Mod build ที่ deploy ล่าสุด (2026-10-24 · `stage-S2a-3`)
+## Mod build ที่ deploy ล่าสุด (2026-10-24 · `stage-S2a-3` · tag `checkpoint-S2a` @ `ffc2c88`)
 
 | รายการ | ค่า |
 |---|---|
-| `Mods\LongYinCoop.dll` | `3c9584a4dd851b8567450a0802db0dae171fd9fb1529ecd35922e7eb7b74e625` (build 2026-10-24 01:07, resync fix + `s2.metrics` marker) |
-| `Mods\LongYinCoop.pdb` | `9cd7cbd0aabde6c56ca04e62486b03180f6f94b10a339b615552808fbc119020` |
+| `Mods\LongYinCoop.dll` | `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` (mtime 2026-10-24 01:28, X5 meter ring 65536 + `coverageMs`) |
+| `Mods\LongYinCoop.pdb` | `3a713953b2246e664c588a8572e5cc32565da985554d52209de19590591ec069` · backup PDB ก่อนหน้า = `LongYinCoop.pdb.prev-3c9584a4` (`9cd7cbd0…9020`) |
 | backup ก่อน deploy | `Mods\LongYinCoop.dll.prev-c51debef` = `c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96` |
 | `UserData\MelonPreferences.cfg` | `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1` (ไม่เปลี่ยน) |
 | `UserData\LongYinCoop\net.cfg` (A0/พัก) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` (454 B · `enabled=false` · `heartbeatMs=1000`) |
-| source ที่ **ยังไม่ build** | `S2FrameMeter` ring 65536 + `coverageMs` (X5 remeter, 2026-10-24) — build/deploy ต้องขออนุมัติก่อน |
+| source ที่ uncommitted | ไม่มี — commit `ffc2c88` (tag `checkpoint-S2a`) รวม S2Sender / S2FrameMeter / S2HostService / viewer-client |
 | label ที่ใช้ล่าสุด | `S2a3r-20261024-0115` (X4 rerun · restore แล้ว `4226730f66ff` EXACT) · `S2a3x6-20261024-0120` (X6 n=1080 · restore แล้ว `4226730f66ff` EXACT · `leftovers: none`) |
 | หลักฐาน | `evidence/S2a3-20261022-143608/{build-deploy-S2a3r-20261024.md,x4-rerun-20261024.md}` + `X6-sample-plan.md` |
 
