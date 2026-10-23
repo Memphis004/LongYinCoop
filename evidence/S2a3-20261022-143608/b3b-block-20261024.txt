@@ -1,0 +1,20 @@
+B3b_START wall=00:57:58 (fixed --inject-gap: after >=4 snapshots, expected_seq -= 3)
+B3b_END wall=00:59:58 rc=0
+{
+ "snapshots": 121,
+ "gaps": 1,
+ "duplicates": 0,
+ "divA_checked": 121,
+ "divA_mismatch": 0,
+ "resync_sent": 3,
+ "resync_acked": 3,
+ "resync_closed": 0,
+ "resync_giveup": 1,
+ "gapOpenMsMax": 0,
+ "gapOpenMsMean": 0,
+ "sessions": 3,
+ "reconnects": 2,
+ "unitCountMin": 9,
+ "unitCountMax": 9,
+ "errors": 0
+}

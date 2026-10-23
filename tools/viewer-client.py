@@ -399,6 +399,12 @@ class Viewer:
     def connect(self):
         host, port = self.args.connect.rsplit(":", 1)
         sock = socket.create_connection((host, int(port)), timeout=5.0)
+        # X5 backpressure test: a tiny receive buffer makes the host writer block after a few
+        # frames instead of buffering 60 s of snapshots in the kernel (Windows may round up).
+        if getattr(self.args, "rcvbuf", 0):
+            sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, int(self.args.rcvbuf))
+            applied = sock.getsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF)
+            self.emit({"kind": "rcvbuf", "requested": int(self.args.rcvbuf), "applied": applied})
         sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
         sock.settimeout(0.2)
         self.sock = sock
@@ -1010,6 +1016,8 @@ def main(argv):
     parser.add_argument("--inject-malformed", action="store_true")
     parser.add_argument("--inject-gap", type=int, default=0)
     parser.add_argument("--stall", type=float, default=0.0, help="stop reading for N seconds")
+    parser.add_argument("--rcvbuf", type=int, default=0,
+                        help="X5: request this SO_RCVBUF (bytes) so the host write path blocks early")
     parser.add_argument("--kill-after", type=float, default=0.0)
     parser.add_argument("--reconnect", action="store_true")
     parser.add_argument("--keep-open", action="store_true")

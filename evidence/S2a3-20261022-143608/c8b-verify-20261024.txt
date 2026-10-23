@@ -1,0 +1,10 @@
+mounted Save:
+  vs real baseline: changed=1 missing=0 added=0
+    changed[playerpref]=1: PlayerprefData.dat
+  vs copy baseline: changed=1 missing=0 added=0
+
+real folder Save.real-S2a3r-20261024-0115:
+  vs real baseline: changed=0 missing=0 added=0
+  mtime/size drift: 0
+
+RESULT: PASS

@@ -1,0 +1,7 @@
+cfg sha before: 0cca04f8629f473c221de8a7c4b5b76932baaa1fcee7df5acc9449136660df0a bytes 453
+cfg sha after : dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61 bytes 454
+flip wall     : 01:01:06
+marker {"kind":"framemeter.window","marker":true,phase=B windowMs=60000 at=18123078 framemeter.window frames=171643 n=4096 p50=6.945 p95=6.952 p99=20.839 max=111.114 mean=7.693}
+marker {"kind":"framemeter.window","marker":true,phase=A windowMs=60000 at=18183078 framemeter.window frames=179475 n=4096 p50=6.945 p95=6.952 p99=20.839 max=90.271 mean=7.632}
+A1_END wall=01:01:20
+state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}

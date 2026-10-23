@@ -1,0 +1,14 @@
+# net.cfg — A0 state (2026-10-24 ~00:38)
+# secret value is never printed (only file hash)
+
+path                = <game>\UserData\LongYinCoop\net.cfg
+enabled (line 3)    = false            <- already false BEFORE this check
+sha256 before       = dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61
+sha256 after        = dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61
+bytes               = 454
+backup              = net.cfg.bak-before-A0-20261024-0038 (454 B, sha256 identical)
+edit made           = NO (no true -> false flip was needed; file unchanged since 2026-10-22 18:11)
+line endings        = CRLF/LF mixed (unchanged, hash matches the accepted A0 file from 2026-10-22)
+other net.cfg found = none (only the 2 older backups in UserData\LongYinCoop)
+external surface    = bind=127.0.0.1 · allowNonLoopback=false · transport=tcp · port=47800
+port 47800 listener = none at 00:38 (S2 idle as expected for phase A)

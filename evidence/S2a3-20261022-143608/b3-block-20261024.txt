@@ -1,0 +1,5 @@
+B3_START wall=00:55:20 boundary_at=17823078
+  state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}
+B3_END wall=00:57:20 rc=0
+  summary {"snapshots": 120, "gaps": 0, "duplicates": 3, "divA_checked": 120, "divA_mismatch": 0, "resync_sent": 0, "resync_acked": 0, "resync_closed": 0, "resync_giveup": 0, "gapOpenMsMax": 0, "gapOpenMsMean": 0, "sessions": 2, "reconnects": 1, "unitCountMin": 9, "unitCountMax": 9, "errors": 0}
+  state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}

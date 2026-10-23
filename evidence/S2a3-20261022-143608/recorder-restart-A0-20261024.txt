@@ -1,0 +1,20 @@
+# Recorder check / restart before A0 (2026-10-24 ~00:36-00:38)
+
+## Old recorder pid 37536 — DEAD
+- `Get-Process -Id 37536` -> not found; no `s15d_sample.py` in any python cmdline at 00:34.
+- last known log (2026-10-22): `[15:39:18] game not running`, wait window ended 15:39:16 -> never connected.
+- its successor from 2026-10-22 18:12 (pid 18512) is also gone.
+=> no recorder was alive; started a new one.
+
+## New recorder pid 23124 — ALIVE, CONNECTED
+- start           : 2026-10-24 00:35:59 (python.exe, Start-Process hidden, detached)
+- cmdline         : python tools\s15d_sample.py --out coop-test\S2a3-20261022-143608\sampler.ndjson
+                    --seconds 3600 --interval 0.1 --wait 7200 --wait-interval 3
+- wait window ends: ~2026-10-24 02:35:59 (7200 s)
+- log             : recorder-20261024.out.log ; err = recorder-20261024.err.log (0 bytes)
+- connection      : `[00:37:20] connected pid=42000 interval=100ms seconds=3600`
+- growth          : `[00:38:20] samples=591 errors=0 state=None turn=-1 timeScale=1` (sampler.ndjson 18 KB+
+                    with inBattle=false — game is at menu/loading, not in battle yet)
+- only ONE recorder at a time (single pipe owner) — verified only 23124 has s15d_sample in its cmdline
+
+reject rule kept: a block is void if the recorder is dead or sampler.ndjson is not growing.

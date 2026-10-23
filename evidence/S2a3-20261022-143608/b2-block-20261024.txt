@@ -1,0 +1,8 @@
+B2_START wall=00:52:20 boundary_at=17643078
+  state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}
+B2_CLIENT_EXIT wall=00:53:20 rc=0
+  summary {"snapshots": 60, "gaps": 0, "divA_checked": 60, "divA_mismatch": 0, "unitCountMin": 9, "wireBytes": 21471, "errors": 0}
+  marker {"kind":"framemeter.window","marker":true,phase=B windowMs=60000 at=17703078 framemeter.window frames=119111 n=4096 p50=6.945 p95=13.893 p99=27.777 max=479.136 mean=8.085}
+  marker {"kind":"framemeter.window","marker":true,phase=B windowMs=60000 at=17763078 framemeter.window frames=126460 n=4096 p50=6.945 p95=13.901 p99=34.722 max=111.108 mean=8.197}
+B2_END wall=00:55:00
+  state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}

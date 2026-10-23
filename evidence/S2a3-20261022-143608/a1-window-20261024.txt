@@ -1,0 +1,2 @@
+A1_CLEAN_WINDOW wall=01:02:20 {"kind":"framemeter.window","marker":true,phase=A windowMs=60000 at=18243078 framemeter.window frames=187163 n=4096 p50=6.945 p95=6.952 p99=27.776 max=97.223 mean=7.729}
+state {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9}

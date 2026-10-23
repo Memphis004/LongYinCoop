@@ -1,0 +1,18 @@
+PRE  wall=00:40:17 sampler_lines=1750 {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9, 'isPlayerTurn': True, 'paused': False, 'frame': 21718}
+A0_START wall=00:40:20 marker_at=16923062 {"kind":"framemeter.window","marker":true,phase=A windowMs=60000 at=16923062 framemeter.window frames=22087 n=4096 p50=6.945 p95=13.894 p99=27.782 max=111.115 mean=8.022}
+  t+ 5s state=WaitPlayerInput turn=0 units=9
+  t+10s state=WaitPlayerInput turn=0 units=9
+  t+15s state=WaitPlayerInput turn=0 units=9
+  t+20s state=WaitPlayerInput turn=0 units=9
+  t+25s state=WaitPlayerInput turn=0 units=9
+  t+30s state=WaitPlayerInput turn=0 units=9
+  t+35s state=WaitPlayerInput turn=0 units=9
+  t+40s state=WaitPlayerInput turn=0 units=9
+  t+45s state=WaitPlayerInput turn=0 units=9
+  t+50s state=WaitPlayerInput turn=0 units=9
+  t+55s state=WaitPlayerInput turn=0 units=9
+  t+60s state=WaitPlayerInput turn=0 units=9
+  t+65s state=WaitPlayerInput turn=0 units=9
+A0_END   wall=00:41:25 marker_at=16983062 {"kind":"framemeter.window","marker":true,phase=A windowMs=60000 at=16983062 framemeter.window frames=29634 n=4096 p50=6.945 p95=13.893 p99=27.782 max=90.279 mean=7.960}
+POST sampler_lines=2424 (grew=674) {'inBattle': True, 'battleStateName': 'Fighting', 'nowActiveStateName': 'WaitPlayerInput', 'turnIndex': 0, 'unitCount': 9, 'isPlayerTurn': True, 'paused': False, 'frame': 30242}
+STATE_DEVIATIONS=none

@@ -1,0 +1,464 @@
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+C:\Program Files\dotnet\sdk\9.0.311\Sdks\Microsoft.NET.Sdk\targets\Microsoft.NET.EolTargetFrameworks.targets(32,5): warning NETSDK1138: The target framework 'net6.0' is out of support and will not receive security updates in the future. Please refer to https://aka.ms/dotnet-core-support for more information about the support policy. [C:\Users\memph\LongYinCoop\tests\S2Protocol.Tests\S2Protocol.Tests.csproj]
+[PASS] frame size == 8 + payload
+[PASS] frame first bytes are big-endian length
+[PASS] frame decodes
+[PASS] frame type/ver/seq survive
+[PASS] payload survives
+[PASS] NextFrameOffset == frame length
+[PASS] max payload frame == 1100 B
+[PASS] payload over cap throws
+[PASS] truncated header rejected
+[PASS] truncated payload rejected
+[PASS] bodyLen < 6 rejected
+[PASS] oversize frame header rejected
+[PASS] unknown type byte rejected
+[PASS] 5000 B payload is chunked (>1 frame)
+[PASS] every chunk frame <= 1100 B
+[PASS] chunks reassemble
+[PASS] reassembled type/seq
+[PASS] reassembled payload identical
+[PASS] no pending left
+[PASS] out-of-order reassembly
+[PASS] duplicate chunk index dropped
+[PASS] pending before timeout
+[PASS] stale pending purged
+[PASS] chunk with total=0 rejected
+[PASS] chunk of chunk throws
+[PASS] small message is one frame
+[PASS] varint u32 boundaries round-trip
+[PASS] float round-trip
+[PASS] bool round-trip
+[PASS] utf8 string round-trip
+[PASS] bytes round-trip
+[PASS] reader exhausted
+[PASS] read past end throws
+[PASS] blob over cap throws
+[PASS] writer grows past initial capacity
+[PASS] varint u64 max round-trip
+[PASS] HMAC-SHA256 RFC4231 case 1
+[PASS] tag is 32 bytes
+[PASS] verify accepts correct tag
+[PASS] verify rejects tampered tag
+[PASS] verify rejects short tag
+[PASS] verify rejects empty secret
+[PASS] nonce must be 32 bytes
+[PASS] fieldHash is order-insensitive
+[PASS] fieldHash is anchor-sensitive
+[PASS] fieldHash is 64 hex chars
+[PASS] replicaHash is order-insensitive
+[PASS] replicaHash repeats
+[PASS] turnIndex changes hash
+[PASS] paused changes hash
+[PASS] death changes hash
+[PASS] unitAlive transition changes hash
+[PASS] hp (3 decimals) changes hash
+[PASS] moved changes hash
+[PASS] hash is 64 hex chars
+[PASS] guest may send AUTH
+[PASS] guest may send PING
+[PASS] guest may send RESYNC
+[PASS] guest may send BYE
+[PASS] guest may NOT send HELLO
+[PASS] guest may NOT send SNAPSHOT
+[PASS] guest may NOT send BATTLE_EVENT
+[PASS] guest may NOT send CHUNK (reassembled type is checked)
+[PASS] unknown byte 0x41 is not allowed
+[PASS] unknown byte is not a defined type
+[PASS] host types are host->guest
+[PASS] s2a2: loopback pair is open
+[PASS] s2a2: loopback send host->guest
+[PASS] s2a2: loopback receive on peer
+[PASS] s2a2: loopback inbox empty after receive
+[PASS] s2a2: loopback stats count frames/bytes
+[PASS] s2a2: loopback guest->host direction
+[PASS] s2a2: closed pair refuses send (fail-closed)
+[PASS] s2a2: still refuses while peer closed
+[PASS] s2a2: sends after both ends open
+[PASS] s2a2: capacity 1 accepted
+[PASS] s2a2: capacity 2 accepted
+[PASS] s2a2: over capacity drops and counts
+[PASS] s2a2: transport kind/describe is loopback
+[PASS] s2a2: sender accepts post 0
+[PASS] s2a2: sender accepts post 1
+[PASS] s2a2: sender accepts post 2
+[PASS] s2a2: sender accepts post 3
+[PASS] s2a2: sender accepts post 4
+[PASS] s2a2: sender queued 5 frames to the transport
+[PASS] s2a2: sender counters: framesSent/bytesSent
+[PASS] s2a2: sender metrics recorded 5 samples
+[PASS] s2a2: sender metrics p50 sane
+[PASS] s2a2: ndjson writer wrote 5 frame lines
+[PASS] s2a2: first delivered frame is Snapshot
+[PASS] s2a2: delivered payload decodes to a frame
+[PASS] s2a2: delivered frame keeps unit count + audit
+[PASS] s2a2: sender stats after stop: posted 5 sent 5 dropped 0
+[PASS] s2a2: full queue drops instead of blocking main thread
+[PASS] s2a2: queue drops counted in counters
+[PASS] s2a2: unit cap is 64
+[PASS] s2a2: encoded payload smaller than message cap
+[PASS] s2a2: payload roundtrip decodes
+[PASS] s2a2: header roundtrip
+[PASS] s2a2: unit roundtrip keeps -1 row/col and flags
+[PASS] s2a2: unit roundtrip carries unitAlive (rev4 field, mirrored from isAlive)
+[PASS] s2a2: unitAlive is on the wire (decode reads it, does not mirror it)
+[PASS] s2a2: audit recomputed on decode matches
+[PASS] s2a2: truncated payload fails closed
+[PASS] s2a2: decode refuses over-cap unit count
+[PASS] s2a2: decode refuses empty payload
+[PASS] s2a2: oversized frame is chunked by codec
+[PASS] s2a2: each chunk frame fits the frame cap
+[PASS] s2a2: message over the 64 KB cap throws (fail-closed)
+[PASS] s2a2: audit tuple stable for unchanged state
+[PASS] s2a2: audit tuple text has no secret
+[PASS] s2a2: audit tuple is order independent
+[PASS] s2a2: audit changes when hp changes
+[PASS] s2a2: audit changes when isAlive changes
+[PASS] s2a2: audit ignores moved/attacked (informational fields only)
+[PASS] s2a2: audit ignores unitAlive (it is a copy of isAlive, not a second signal)
+[PASS] s2a2: audit changes when grid position changes
+[PASS] s2a2: audit changes when battleTime changes
+[PASS] s2a2: audit changes when turnIndex changes
+[PASS] s2a2: guest Hello is forbidden
+[PASS] s2a2: guest Snapshot is forbidden
+[PASS] s2a2: guest BattleEvent is forbidden
+[PASS] s2a2: chunked forbidden message is rejected after reassembly
+[PASS] s2a2: guest Auth is control-accepted
+[PASS] s2a2: guest Ping is control-accepted
+[PASS] s2a2: guest Resync is control-accepted
+[PASS] s2a2: guest Bye is control-accepted
+[PASS] s2a2: control frames counted, not forbidden
+[PASS] s2a2: empty frame is malformed
+[PASS] s2a2: undecodable header is malformed
+[PASS] s2a2: trailing bytes are malformed
+[PASS] s2a2: chunk with idx>=total is malformed
+[PASS] s2a2: incomplete chunk awaits without dropping
+[PASS] s2a2: no game command was ever accepted
+[PASS] s2a2: NoForbiddenActivity is false when forbidden frames were dropped
+[PASS] s2a2: gate leaves the audit tuple untouched (no write path)
+[PASS] s2a2: gate exposes exactly one entry point: Accept
+[PASS] s2a2: gate entry point cannot take a game object
+[PASS] s2a2: net.cfg: empty text = disabled/off/format-ok (fail-closed default)
+[PASS] s2a2: net.cfg: comments-only file = valid and disabled
+[PASS] s2a2: net.cfg: flat host block is valid + enabled (no [section] needed)
+[PASS] s2a2: net.cfg: describe never leaks the secret
+[PASS] s2a2: net.cfg: guest role parses (service decides host-only)
+[PASS] s2a2: net.cfg: disabled needs no role/secret
+[PASS] s2a2: net.cfg: short secret is invalid
+[PASS] s2a2: net.cfg: non-hex secret is invalid
+[PASS] s2a2: net.cfg: unknown role is invalid
+[PASS] s2a2: net.cfg: truthy spellings accepted
+[PASS] s2a2: net.cfg: keys are case-insensitive and quoted values are unquoted
+[PASS] s2a2: net.cfg: allowNonLoopback parsed (bind policy decided by S2b)
+[PASS] s2a2: net.cfg: unknown keys are ignored, not fatal
+[PASS] s2a2: net.cfg: duplicate key = last one wins
+[PASS] s2a2: net.cfg: [section] is rejected (flat file only)
+[PASS] s2a2: net.cfg: MelonLoader-shaped pref content is rejected, never silently valid
+[PASS] s2a2: net.cfg: a line without '=' is rejected with its line number
+[PASS] s2a2: net.cfg: CRLF file parses
+[PASS] s2a2: IsTrue spellings
+[PASS] s2a2: net.cfg: missing file is reported, not thrown (fail-closed)
+[PASS] s2a2: net.cfg: first poll reads the file
+[PASS] s2a2: net.cfg: poll inside the interval does not re-read
+[PASS] s2a2: net.cfg: poll after the interval picks up the change
+[PASS] s2a2: net.cfg: toggling back off is picked up (A/B blocks)
+[PASS] s2a2: net.cfg: ForceRead reads immediately
+[PASS] s2a2: coop paths: net.cfg lives under UserData\LongYinCoop (MelonLoader never touches it)
+[PASS] s2a2: empty phase stats are zeroed
+[PASS] s2a2: phase stats mean/min/max
+[PASS] s2a2: phase stats snapshot text
+[PASS] s2a2: phase stats reset for the next A/B block
+[PASS] s2a2: exit-3 constants: margin 1.0 ms, band 0.5 ms
+[PASS] s2a2: exit-3 delta is signed (B - A)
+[PASS] s2a2: B > A by 2 ms: delta positive and verdict FAIL
+[PASS] s2a2: B < A by 2 ms: delta negative and verdict PASS
+[PASS] s2a2: B > A by 0.4 ms: positive delta but verdict PASS
+[PASS] s2a2: B = A (delta 0) is a PASS
+[PASS] s2a2: delta exactly 1.0 ms is INCONCLUSIVE (never a one-round pass)
+[PASS] s2a2: delta 0.6 ms is INCONCLUSIVE
+[PASS] s2a2: delta 1.5 ms is INCONCLUSIVE
+[PASS] s2a2: delta 1.6 ms is FAIL
+[PASS] s2a2: delta 0.3 ms is PASS
+[PASS] s2a2: verdict text mapping
+[PASS] s2a2: exit-3 report keeps the sign and the verdict
+[PASS] s2a2: exit-3 report of a miss says FAIL
+[PASS] s2a2: exit-3 report of the band says INCONCLUSIVE
+[PASS] s2a2: phase means feed the exit-3 rule (A 2.0 / B 2.3 = PASS)
+[PASS] s2a2: self-test expects exactly 3 forbidden drops
+[PASS] s2a2: self-test builds 2 plain forbidden frames + at least 2 chunks
+[PASS] s2a2: every self-test frame decodes
+[PASS] s2a2: every self-test frame decodes
+[PASS] s2a2: every self-test frame decodes
+[PASS] s2a2: every self-test frame decodes
+[PASS] s2a2: self-test frame types are Hello then Snapshot
+[PASS] s2a2: self-test carries the chunked BattleEvent id
+[PASS] s2a2: last self-test frame is rejected as forbidden
+[PASS] s2a2: self-test yields exactly 3 forbidden drops (not 2, not 4)
+[PASS] s2a2: self-test accepts no game command
+[PASS] s2a2: self-test reassembles the chunked message once
+[PASS] s2a2: self-test never produces a malformed drop
+[PASS] s2a2: audit tuple unchanged across the self-test path
+[PASS] s2a2: exit-6 rule accepts 3 drops / 0 accepted / audit equal
+[PASS] s2a2: exit-6 rule rejects 2 drops
+[PASS] s2a2: exit-6 rule rejects 4 drops
+[PASS] s2a2: exit-6 rule rejects an accepted command
+[PASS] s2a2: exit-6 rule rejects a changed audit tuple
+[PASS] s2a2: exit-6 report states the exact expectation and verdict
+[PASS] s2a2: aborted self-test (missing chunks) cannot pass exit 6
+[PASS] s2a2: write guard: all 64 pref combinations follow the truth table
+[PASS] s2a2: write guard: exactly 1 combination passes (all six false)
+[PASS] s2a2: write guard: Describe names exactly the prefs that are on
+[PASS] s2a2: write guard: all-off passes
+[PASS] s2a2: write guard: AllowRemoteInput alone rejects
+[PASS] s2a2: write guard: JitProbe alone rejects
+[PASS] s2a2: write guard: JitProbeW2 alone rejects
+[PASS] s2a2: write guard: JitProbeW4 alone rejects
+[PASS] s2a2: write guard: JitProbeW6 alone rejects
+[PASS] s2a2: write guard: JitProbeW7 alone rejects
+[PASS] s2a2: write guard: Describe lists the open prefs
+[PASS] s2a2: write guard method exists and is static
+[PASS] s2a2: write guard takes exactly 6 bools and returns bool
+[PASS] s2a2: write guard has no DevCommands parameter (DevCommands cannot affect it)
+[PASS] s2a2: repo root found for the S2HostService guard source check
+[PASS] s2a2: S2HostService gating delegates to the pure guard with all 6 prefs
+[PASS] s2a2: S2HostService code never reads DevCommands (rev4: it must not gate on it)
+[PASS] s2a2: mirror rule is an identity: MirrorUnitAlive(true/false) = true/false
+[PASS] s2a2: S2Unit carries UnitAlive as a bool (kept for ReplicaHash.UnitAlive)
+[PASS] s2a2: ReplicaUnit.UnitAlive is untouched (hash spec frozen)
+[PASS] s2a2: repo root found for the sampler source check
+[PASS] s2a2: S2Sampler fills UnitAlive from IsAlive via the mirror rule
+[PASS] s2a2: S2Sampler code reads no second death flag (no hero.dead, no IsDead)
+[PASS] s2a2: writer counts both frames and markers
+[PASS] s2a2: writer produced one line per record
+[PASS] s2a2: frame line is json-ish with units
+[PASS] s2a2: marker line preserved
+[PASS] s2a2: append keeps previous evidence
+[PASS] s2a2: ndjson frame line has no secret-ish fields
+[PASS] s2a2: repo root found for the TurnGate guard
+[PASS] s2a2: pre-edit TurnGate fixture exists
+[PASS] s2a2: fixture is the pinned 57e68dc file (sha256 recorded in step-0 evidence)
+[PASS] s2a2: TurnGate.cs matches the 57e68dc fixture byte-exact
+[PASS] s2a2: TurnGate carries no D1 leftovers (no new isAlive field)
+[PASS] s2a2: spike status still exposes unitAlive (exit 4 compare target)
+[PASS] s2a2: SafeUnitAlive reads BattleUnit.IsAlive (typed, read-only)
+[PASS] s2a2: hash preimage lines exist and gained no isAlive field
+
+== S2a-3 (C1) tests ==
+-- U1 TcpFrameStream: fragmentation/coalescing/limits
+[PASS] 1 byte at a time: no framing error
+[PASS] 1 byte at a time: 3 frames (expected 3, got 3)
+[PASS] buffer empty after complete frames (expected 0, got 0)
+[PASS] whole buffer fed
+[PASS] coalesced buffer: 3 frames (expected 3, got 3)
+[PASS] coalesced frames are byte-identical
+[PASS] max frame is 1100 B (expected 1100, got 1100)
+[PASS] 1100 B frame accepted
+[PASS] 3 bytes: no frame yet and no error
+[PASS] rest of the stream completes the frame
+[PASS] > 4096 B of unsplittable data is an error (fail-closed)
+-- U2 TcpFrameStream: fail-closed on bad header
+[PASS] bodyLen 5 rejected
+[PASS] bodyLen 4096 (> cap) rejected
+[PASS] unknown type rejected
+[PASS] proto ver 1 rejected by a v2 peer
+[PASS] reset clears the buffer
+-- U3 chunked message over a fragmented TCP stream
+[PASS] 5000 B payload chunks into > 1 frame
+[PASS] no framing error with random fragmentation
+[PASS] reassembled exactly once
+[PASS] reassembled payload bit-identical
+[PASS] assembled type/seq preserved
+-- U4 SeqTracker
+[PASS] first seq 1 accepted as ok (expected 0, got 0)
+[PASS] seq 2 ok (expected 0, got 0)
+[PASS] seq 3 ok (expected 0, got 0)
+[PASS] no gaps yet (expected 0, got 0)
+[PASS] seq 5 is a gap (expected 1, got 1)
+[PASS] gap size (5 - expected 4) (expected 1, got 1)
+[PASS] expected advances to 6 (expected 6, got 6)
+[PASS] seq 5 again is a duplicate (expected 2, got 2)
+[PASS] duplicate counted once (expected 1, got 1)
+[PASS] seq 0 is not data (expected 3, got 3)
+[PASS] seq 6 ok (expected 0, got 0)
+[PASS] 17-message gap detected (expected 1, got 1)
+[PASS] largest gap is 17 (expected 17, got 17)
+[PASS] uint max ok (expected 0, got 0)
+[PASS] wrap to 1 (no gap) (expected 0, got 0)
+[PASS] resync moves expected (expected 500, got 500)
+[PASS] seq 500 ok after resync (expected 0, got 0)
+      seq: expected=501 lastAccepted=500 received=2 ok=2 gaps=0 dup=0 largestGap=0
+-- U5 ResyncState (gap window)
+[PASS] no window by default
+[PASS] window opens
+[PASS] first request is immediate
+[PASS] not due again before RetryMs
+[PASS] due again at RetryMs
+[PASS] 3 attempts used
+[PASS] give up after the 3rd attempt + retry window
+[PASS] snapshot without the resync flag does not close the window
+[PASS] resync snapshot with hash mismatch does not close
+[PASS] resync snapshot with matching hash closes
+[PASS] one window closed (expected 1, got 1)
+[PASS] window measured 2000 ms (expected 2000, got 2000)
+      resync: gapOpen=false cause=seq-gap attempts=0 closed=1 giveUp=0 meanGapOpenMs=2000.0 maxGapOpenMs=2000
+[PASS] re-opening a window keeps the original timer
+[PASS] abandon (reconnect) counts as give-up
+-- U6 handshake (Hello/Auth/AuthResult/Deny)
+[PASS] Hello frame is a valid v2 frame
+[PASS] client builds Auth from Hello
+[PASS] Auth frame decodes
+[PASS] server accepts the correct HMAC (expected 0, got 0)
+[PASS] server is authenticated and keeps the session id
+[PASS] reply is AuthResult
+[PASS] client accepts the AuthResult
+[PASS] fieldHash prefix is 16 hex chars
+[PASS] wrong secret is denied (expected 1, got 1)
+[PASS] deny code is BadAuth
+[PASS] deny frame is a Deny
+[PASS] deny reason never contains the secret
+[PASS] tampered tag denied
+[PASS] guest rejects a host whose fieldHash prefix differs
+[PASS] Auth for another nonce is rejected
+[PASS] frame ver 1 is denied
+[PASS] Auth before Hello is WrongState
+[PASS] late Auth expires
+[PASS] 5th malformed Auth is rejected hard
+[PASS] new connection blocked right after a failed auth
+[PASS] new connection allowed after 5 s
+[PASS] successful auth does not arm the cooldown
+[PASS] Hello fits one frame
+[PASS] Auth fits one frame
+-- U7 BindPolicy
+[PASS] 127.0.0.1 ok
+[PASS] ::1 ok
+[PASS] 127.5.5.5 ok (127/8 is loopback)
+[PASS] ::ffff:127.0.0.1 ok
+[PASS] 0.0.0.0 rejected
+[PASS] :: rejected
+[PASS] * rejected
+[PASS] 192.168.1.5 rejected without approval
+[PASS] 192.168.1.5 allowed only with allowNonLoopback
+[PASS] localhost (hostname) rejected
+[PASS] empty rejected
+[PASS] null rejected
+[PASS] 0.0.0.0 is never ok even with allowNonLoopback
+[PASS] IsLoopbackLiteral(127.0.0.1)
+[PASS] IsLoopbackLiteral(::1)
+[PASS] IsLoopbackLiteral(localhost) is false
+      describe(192.168.1.5) = bind must be loopback unless allowNonLoopback=true (S2b approval required)
+[PASS] net.cfg: tcp + non-loopback bind is invalid
+[PASS] net.cfg: tcp + 127.0.0.1 is valid
+-- U8 replicaHash vectors (shared with the Python client)
+[PASS] fixture parsed 9 vectors
+[PASS] all 9 fixture hashes still reproduce
+[PASS] fixture covers hp 0.0625 (round-half trap)
+[PASS] fixture covers 60 units
+[PASS] fixture covers 0 units
+[PASS] fixture covers isAlive=false with unitAlive=true
+[PASS] fixture covers paused=true
+[PASS] fixture covers ordinal id sort (0:10 before 0:9)
+[PASS] hash is order independent (sorted by stableId)
+-- U9 ProtoVer 2 envelope roundtrip (wire + hash)
+[PASS] payload decodes
+[PASS] sessionId survives
+[PASS] hostApplyUs survives (varint u64)
+[PASS] replicaHash survives as 32 raw bytes
+[PASS] resync flag + fromSeq survive
+[PASS] guest recomputes the same hash (Div-A = 0)
+[PASS] header/units survive
+[PASS] hash ignores sessionId/hostApplyUs/resync (frozen spec)
+[PASS] 100 synthetic frames decoded (expected 100, got 100)
+[PASS] Div-A/seq mismatches over 100 frames (expected 0, got 0)
+      payload size for 9 units = 307 B
+-- U10 bandwidth projection (X2 — live measurement happens in C4/C5)
+      units=9 payload=302 B chunks=1 wire=310 B @30Hz=9.1 KB/s (under)
+      units=18 payload=536 B chunks=1 wire=544 B @30Hz=15.9 KB/s (under)
+      units=24 payload=692 B chunks=1 wire=700 B @30Hz=20.5 KB/s (under)
+      units=60 payload=1628 B chunks=2 wire=1643 B @30Hz=48.1 KB/s (OVER 30 KB/s)
+[PASS] 9 units at 30 Hz stays under 30 KB/s
+[PASS] 60 units at 30 Hz is over 30 KB/s (=> X2 at most PASS-with-limitation)
+      projection: 9 units 9.1 KB/s · 60 units 47.9 KB/s (criterion 30 KB/s)
+-- I1 listen/accept/handshake/snapshots over 127.0.0.1
+[PASS] host listened (ok)
+[PASS] guest connected (ok)
+[PASS] guest authenticated
+[PASS] guest got a session id
+[PASS] 100 snapshots received (expected 100, got 100)
+[PASS] Div-A mismatches (expected 0, got 0)
+[PASS] seq 1..100 with no gap (expected 0, got 0)
+[PASS] seq 1..100 with no duplicate (expected 0, got 0)
+[PASS] first snapshot carries seq 1 (expected 1, got 1)
+      guest seq: expected=101 lastAccepted=100 received=100 ok=100 gaps=0 dup=0 largestGap=0
+-- I2 slow/stalled guest never blocks the host transport
+[PASS] guest connected
+[PASS] 4000 send bursts finished < 2 s
+[PASS] worst single Send() < 10 ms (non-blocking contract)
+[PASS] outbox drops counted (bounded queue)
+      elapsed=0 ms worstSend=0 ms drops=3744 queued=0 written=0
+-- I3 guest killed mid-message — host survives and re-accepts
+[PASS] host listened
+[PASS] doomed guest connected
+[PASS] message has > 1 chunk
+[PASS] host thread is still alive
+[PASS] a new guest can connect after the kill (ok)
+[PASS] new guest completes the handshake
+[PASS] new guest still receives snapshots after the kill
+-- I4 reconnect x3 (new session each time, seq restarts at 1)
+[PASS] host listened
+[PASS] round 1: connected
+[PASS] round 1: authenticated
+[PASS] round 1: session id 1 (expected 1, got 1)
+[PASS] round 2: connected
+[PASS] round 2: authenticated
+[PASS] round 2: session id 2 (expected 1, got 1)
+[PASS] round 3: connected
+[PASS] round 3: authenticated
+[PASS] round 3: session id 3 (expected 1, got 1)
+[PASS] 3 successful sessions (expected 3, got 3)
+[PASS] session ids increase across reconnects
+[PASS] every session restarts at seq 1
+      sessions = 1,2,3
+-- I5 forbidden frames from a guest (exit-6 baseline, in-proc)
+[PASS] every injected frame was handled (expected 4, got 4)
+[PASS] forbiddenTypeDrops = 3 (expected 3, got 3)
+[PASS] commandsAccepted = 0 (expected 0, got 0)
+[PASS] controlFramesHandled = 0 (expected 0, got 0)
+[PASS] no malformed drops (expected 0, got 0)
+[PASS] S2SelfTest.MeetsExit6 agrees
+[PASS] chunked BattleEvent counted once (expected 1, got 1)
+[PASS] reassembly happened before the allowlist decision (expected 1, got 1)
+[PASS] commandsAccepted still 0 (expected 0, got 0)
+-- I6 S2TcpSelfTest end-to-end (real socket, fake host)
+[PASS] fake host started (ok)
+[PASS] self-test finished
+[PASS] handshake over tcp succeeded
+[PASS] 3 forbidden frames injected
+[PASS] host counted exactly 3 forbidden drops (expected 3, got 3)
+[PASS] host accepted 0 commands (expected 0, got 0)
+      tcp self-test: handshakeOk=true sentForbidden=true forbiddenGained=3 elapsedMs=125 error=-
+-- I7 seq gap -> RESYNC -> resync-flagged snapshot closes the window
+[PASS] host listened
+[PASS] guest connected
+[PASS] guest authenticated
+      gap detected after 20 snapshots (size 1)
+      RESYNC sent (attempt 1)
+[PASS] exactly one gap detected (expected 1, got 1)
+[PASS] gap window opened
+[PASS] window closed by the resync snapshot (expected 1, got 1)
+[PASS] Div-A stayed 0 (expected 0, got 0)
+[PASS] host served a RESYNC
+[PASS] gap window duration was measured
+      resync: gapOpen=false cause=seq-gap attempts=0 closed=1 giveUp=0 meanGapOpenMs=47.0 maxGapOpenMs=47
+      snapshots received = 21
+-- I8 second guest is rejected with Deny{busy}
+[PASS] host listened
+[PASS] first guest connected
+[PASS] first guest authenticated
+[PASS] second guest connected at TCP level
+[PASS] second guest receives Deny
+[PASS] Deny code is Busy
+[PASS] first guest still receives snapshots
+S2a-3 RESULT PASS (pass 179 fail 0)
+
+RESULT PASS (all T0/T1 checks)
