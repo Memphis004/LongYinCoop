@@ -48,6 +48,8 @@ namespace LongYinCoop.S2.Tests
                 UnitAliveMirrorTests();
                 NdjsonWriterTests();
                 TurnGateGuardTests();
+                AliveRuleTableTests();
+                CompletionAliveTests();
             }
             finally
             {
@@ -870,6 +872,10 @@ namespace LongYinCoop.S2.Tests
         /// D1 ถูกยกเลิก (มติผู้ใช้ 2026-10-21): `TurnGate.cs` ต้องเหมือน 57e68dc ทุกไบต์
         /// และ `unitAlive` ที่ `spike status` รายงานคือ `BattleUnit.IsAlive` อยู่แล้ว
         /// -> replica เทียบเกณฑ์ exit 4 ได้ด้วย `isAlive` (S2) เทียบกับ `unitAlive` (spike status)
+        ///
+        /// S3 prerequisite (มติผู้ใช้ 2026-10-25, ส่วน D): อนุมัติแก้ TurnGate.cs โดยเจตนา —
+        /// stateHash v2: alive = IsAlive + hp (แทน !hero.dead) · fixture pin ย้ายจาก 57e68dc
+        /// ไป `TurnGate.s3prereq-20261025.cs.txt` (ไฟล์เก่าเก็กไว้เป็นหลักฐานประวัติ)
         /// </summary>
         private static void TurnGateGuardTests()
         {
@@ -878,23 +884,41 @@ namespace LongYinCoop.S2.Tests
             if (root == null) return;
 
             string turnGatePath = Path.Combine(root, "src", "LongYinCoop", "S1.5", "TurnGate.cs");
-            string fixturePath = Path.Combine(AppContext.BaseDirectory, "fixtures", "TurnGate.before.cs.txt");
+            string oldFixturePath = Path.Combine(AppContext.BaseDirectory, "fixtures", "TurnGate.before.cs.txt");
+            if (!File.Exists(oldFixturePath))
+                oldFixturePath = Path.Combine(root, "tests", "S2Protocol.Tests", "fixtures", "TurnGate.before.cs.txt");
+            Check("pre-edit TurnGate fixture exists", File.Exists(oldFixturePath));
+            if (!File.Exists(oldFixturePath)) return;
+
+            string fixturePath = Path.Combine(AppContext.BaseDirectory, "fixtures", "TurnGate.s3prereq-20261025.cs.txt");
             if (!File.Exists(fixturePath))
-                fixturePath = Path.Combine(root, "tests", "S2Protocol.Tests", "fixtures", "TurnGate.before.cs.txt");
-            Check("pre-edit TurnGate fixture exists", File.Exists(fixturePath));
+                fixturePath = Path.Combine(root, "tests", "S2Protocol.Tests", "fixtures", "TurnGate.s3prereq-20261025.cs.txt");
+            Check("S3-prereq TurnGate fixture exists", File.Exists(fixturePath));
             if (!File.Exists(fixturePath)) return;
 
             byte[] nowBytes = File.ReadAllBytes(turnGatePath);
+            byte[] oldBytes = File.ReadAllBytes(oldFixturePath);
             byte[] beforeBytes = File.ReadAllBytes(fixturePath);
 
-            Check("fixture is the pinned 57e68dc file (sha256 recorded in step-0 evidence)",
-                Sha256Hex(beforeBytes) == "737d48941c3707cef4aea1ef4ccae26163f5fe05f28cd065ae246b84854523ca");
-            Check("TurnGate.cs matches the 57e68dc fixture byte-exact",
+            Check("old fixture is the pinned 57e68dc file (sha256 recorded in step-0 evidence)",
+                Sha256Hex(oldBytes) == "737d48941c3707cef4aea1ef4ccae26163f5fe05f28cd065ae246b84854523ca");
+            Check("S3-prereq fixture is the pinned 2026-10-25 file",
+                Sha256Hex(beforeBytes) == "0e8dbefde4168282e61d80b327f592d79580865cee605bf92f6e243d369e892b");
+            Check("TurnGate.cs matches the S3-prereq fixture byte-exact",
                 nowBytes.Length == beforeBytes.Length && nowBytes.AsSpan().SequenceEqual(beforeBytes));
 
             string text = File.ReadAllText(turnGatePath);
             Check("TurnGate carries no D1 leftovers (no new isAlive field)",
                 !text.Contains("isAlive") && !text.Contains("S2a-2 D1"));
+            // หมายเหตุ: เช็คกลุ่มนี้เป็น static source checks เท่านั้น — ไม่แทน negative runtime
+            // tests (20 เคส = NOT RUN จนกว่าจะได้รับอนุมัติ build/deploy และเปิดเกม)
+            Check("stateHash version bumped to v2 + notes the never-shipped old v2 proposal",
+                text.Contains("\"battleframe/v2\"") && text.Contains("ไม่เคยถูกใช้จริง"));
+            Check("hash alive uses the shared AliveForS3 definition (IsAlive + hp)",
+                text.Contains("bool alive = AliveForS3(u, hp);")
+                && text.Contains("AliveRule.AliveForS3(SafeUnitAlive(u), hp)"));
+            Check("TurnGate no longer gates on HeroData.dead (S3 prerequisite)",
+                !text.Contains("!hero.dead"));
             Check("spike status still exposes unitAlive (exit 4 compare target)",
                 text.Split('\n').Count(l => l.Contains("unitAlive = SafeUnitAlive(u)")) == 1);
             Check("SafeUnitAlive reads BattleUnit.IsAlive (typed, read-only)",
@@ -902,6 +926,72 @@ namespace LongYinCoop.S2.Tests
             Check("hash preimage lines exist and gained no isAlive field",
                 text.Split('\n').Count(l => l.Contains("HashText.Append")) > 5
                 && !text.Split('\n').Any(l => l.Contains("HashText.Append") && l.Contains("isAlive")));
+
+            // S3 prerequisite (รีวิวรอบ 1, 2026-10-25): ความสอดคล้อง TurnGate/AttackCommand + Known flag
+            string attackPath = Path.Combine(root, "src", "LongYinCoop", "S1.5", "AttackCommand.cs");
+            Check("AttackCommand.cs exists for the S3 guard checks", File.Exists(attackPath));
+            if (File.Exists(attackPath))
+            {
+                string atk = File.ReadAllText(attackPath);
+                Check("attack guard uses the shared AliveForS3 definition (consistent with stateHash)",
+                    atk.Contains("TurnGate.AliveForS3(target, r.TargetHpBefore)"));
+                Check("attack completion never claims dead without evidence (Known flag)",
+                    atk.Contains("public bool TargetAliveAfterKnown { get; set; }")
+                    && atk.Contains("(known && !aliveAfter)"));
+                Check("attack TargetAliveAfter uses the shared predicate (CompletionAlive -> AliveForS3)",
+                    atk.Contains("AliveRule.CompletionAlive(isAliveRead, isAlive, hpRead, hp, out aliveAfter)")
+                    && atk.Contains("r.TargetAliveAfter = aliveAfter;"));
+                Check("attack path no longer reads HeroData.dead as the death flag",
+                    !atk.Contains("!targetHero.dead") && !atk.Contains("dead = h.dead"));
+            }
+        }
+
+        /// <summary>
+        /// S3 prerequisite (รีวิวรอบ 3, 2026-10-25): ตารางค่าของ AliveRule.AliveForS3 (pure)
+        /// — ทดสอบเชิงพฤติกรรมจริงของนิยาม alive (ไม่ใช่ text check) โดยไม่ต้องเปิดเกม
+        /// กรณีเอกสาร: ศพ (IsAlive=false, hp=0) = false · เฟรมขอบ (IsAlive=true, hp→0) = false · NaN = false
+        /// </summary>
+        private static void AliveRuleTableTests()
+        {
+            // isAlive=true + hp บวก (ปกติ/จิ๋ว) => true
+            Check("alive(true, +hp) = true", LongYinCoop.AliveRule.AliveForS3(true, 100f));
+            Check("alive(true, epsilon hp) = true", LongYinCoop.AliveRule.AliveForS3(true, float.Epsilon));
+            // เฟรมขอบ: IsAlive ยัง true แต่ hp=0/ติดลบ => false (คำตอบเดียวกับ stateHash และ guard)
+            Check("alive(true, hp=0) = false (death frame)", !LongYinCoop.AliveRule.AliveForS3(true, 0f));
+            Check("alive(true, hp<0) = false", !LongYinCoop.AliveRule.AliveForS3(true, -5f));
+            // IsAlive=false ไม่สน hp => false
+            Check("alive(false, +hp) = false", !LongYinCoop.AliveRule.AliveForS3(false, 100f));
+            Check("alive(false, hp=0) = false (corpse)", !LongYinCoop.AliveRule.AliveForS3(false, 0f));
+            Check("alive(false, hp<0) = false", !LongYinCoop.AliveRule.AliveForS3(false, -1f));
+            // NaN => false (ไม่มีหลักฐานว่า alive — fail-closed)
+            Check("alive(true, NaN) = false (fail-closed)", !LongYinCoop.AliveRule.AliveForS3(true, float.NaN));
+            Check("alive(false, NaN) = false", !LongYinCoop.AliveRule.AliveForS3(false, float.NaN));
+        }
+
+        /// <summary>
+        /// S3 prerequisite (รีวิวรอบ 4, 2026-10-25): CompletionAlive — Known=true เฉพาะเมื่ออ่าน
+        /// isAlive + hp ครบ · อ่านไม่ได้ = unknown (Known=false) ห้ามตีความ false ว่า dead
+        /// · pure — ทดสอบพฤติกรรมจริงของ completion path ได้โดยไม่ต้องเปิดเกม
+        /// </summary>
+        private static void CompletionAliveTests()
+        {
+            bool alive;
+            // อ่านครบทั้งคู่: known=true + aliveAfter = AliveForS3 (predicate เดียวกับ stateHash/guard)
+            Check("completion(true,+hp) = known+alive",
+                LongYinCoop.AliveRule.CompletionAlive(true, true, true, 100f, out alive) && alive);
+            Check("completion(true,hp=0) = known+not-alive (death frame)",
+                LongYinCoop.AliveRule.CompletionAlive(true, true, true, 0f, out alive) && !alive);
+            Check("completion(true,hp<0) = known+not-alive",
+                LongYinCoop.AliveRule.CompletionAlive(true, true, true, -5f, out alive) && !alive);
+            Check("completion(false,+hp) = known+not-alive",
+                LongYinCoop.AliveRule.CompletionAlive(true, false, true, 100f, out alive) && !alive);
+            Check("completion(false,hp=0) = known+not-alive (corpse)",
+                LongYinCoop.AliveRule.CompletionAlive(true, false, true, 0f, out alive) && !alive);
+            // อ่าน target หรือ hp ไม่ได้ => unknown: known=false (aliveAfter ไม่ใช่หลักฐานว่า dead)
+            Check("completion(target unread) = unknown (known=false)",
+                !LongYinCoop.AliveRule.CompletionAlive(false, false, false, -1f, out alive));
+            Check("completion(hp unread) = unknown (known=false)",
+                !LongYinCoop.AliveRule.CompletionAlive(true, true, false, -1f, out alive));
         }
     }
 }

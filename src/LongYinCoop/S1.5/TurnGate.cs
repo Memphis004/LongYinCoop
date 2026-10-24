@@ -22,8 +22,13 @@ namespace LongYinCoop
     /// </summary>
     internal static class TurnGate
     {
-        /// <summary>ขึ้นต้น canonical text — เปลี่ยนเมื่อนิยาม hash เปลี่ยน (hash เก่าจะไม่ชนกัน)</summary>
-        public const string HashVersion = "battleframe/v1";
+        /// <summary>ขึ้นต้น canonical text — เปลี่ยนเมื่อนิยาม hash เปลี่ยน (hash เก่าจะไม่ชนกัน)
+        /// v2 (S3 prerequisite 2026-10-25): alive ต่อยูนิตเปลี่ยนจากการอ่าน HeroData.dead
+        /// (ซึ่งไม่ใช่ธงตายในศึก) เป็น IsAlive+hp
+        /// หมายเหตุประวัติ: evidence เก่า (S1.5c jit-dump-analysis §8) เคย "เสนอ" v2 คนละนิยาม
+        /// (turn flags แทน moved/attacked) — ข้อเสนอนั้นไม่เคยถูกใช้จริง (โค้ดที่ ship ทุกรุ่นเป็น v1)
+        /// v2 ตัวนี้จึงไม่ชนกับ hash จริงตัวใด</summary>
+        public const string HashVersion = "battleframe/v2";
 
         private const int CostCapacity = 512;
 
@@ -281,7 +286,10 @@ namespace LongYinCoop
                     int row = grid == null ? -1 : grid.row;
                     int column = grid == null ? -1 : grid.column;
                     float hp = hero == null ? 0f : hero.hp;
-                    bool alive = hero != null && !hero.dead;
+                    // S3 prerequisite (2026-10-25): HeroData.dead ไม่ใช่ธงตายในศึก [RUNTIME S1.5f §3]
+                    // — ศพมี dead=false, hp=0, IsAlive=false ⇒ alive ต้องมาจาก IsAlive + hp
+                    //   (IsAlive ยัง true ในเฟรมที่ hp→0 ⇒ เช็ค hp>0 เสริม) — นิยามเดียวกับ AttackCommand
+                    bool alive = AliveForS3(u, hp);
 
                     unitLines.Add(CanonicalUnit(stableId, team.ID, t, row, column, hp, alive,
                                                 u.moved, u.attacked));
@@ -463,11 +471,21 @@ namespace LongYinCoop
             catch { return -1f; }
         }
 
-        /// <summary>BattleUnit.IsAlive — property getter (อ่านอย่างเดียว)</summary>
-        private static bool SafeUnitAlive(BattleUnit u)
+        /// <summary>BattleUnit.IsAlive — property getter (อ่านอย่างเดียว)
+        /// internal: AttackCommand ใช้ตัวเดียวกันเป็น guard ของเป้าหมาย (S3 prerequisite)</summary>
+        internal static bool SafeUnitAlive(BattleUnit u)
         {
             try { return u != null && u.IsAlive; }
             catch { return false; }
+        }
+
+        /// <summary>นิยาม alive ร่วมของ S3 prerequisite (รีวิวรอบ 1+3, 2026-10-25):
+        /// ห่อ AliveRule.AliveForS3 (pure) สำหรับ BattleUnit — ใช้นิยามเดียวกันทั้ง stateHash (ที่นี่)
+        /// และ guard เป้าหมายของ spike attack (AttackCommand) · เคสขอบ IsAlive=true แต่ hp&lt;=0
+        /// (เฟรมที่ hp→0) ⇒ ไม่นับ alive ทั้งสองที่</summary>
+        internal static bool AliveForS3(BattleUnit u, float hp)
+        {
+            return AliveRule.AliveForS3(SafeUnitAlive(u), hp);
         }
 
         /// <summary>อ่าน float ของ BattleController แบบ typed ตาม index (0=battleTime, 1=timeLimit, 2=AIWaitTime)</summary>

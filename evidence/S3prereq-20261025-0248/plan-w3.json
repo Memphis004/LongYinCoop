@@ -1,0 +1,52 @@
+{
+  "label": "S3prereq-20261025-0248",
+  "window": "w3-targetdead",
+  "pref": true,
+  "settle_ms": 500,
+  "cases": [
+    {
+      "n": 11,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10066"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD"
+    },
+    {
+      "n": 12,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10066"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD"
+    },
+    {
+      "n": 13,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10066"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD"
+    },
+    {
+      "n": 14,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10066"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD"
+    }
+  ]
+}

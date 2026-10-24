@@ -29,6 +29,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
     <!-- งาน A: path ของ net.cfg (pure: System + System.IO เท่านั้น) -->
     <Compile Include="..\..\src\LongYinCoop\CoopPaths.cs" LinkBase="Mod" />
+    <!-- S3 prerequisite (รีวิวรอบ 3): AliveRule pure — ใช้ทั้งใน mod และ table unit test -->
+    <Compile Include="..\..\src\LongYinCoop\S3\AliveRule.cs" LinkBase="S3" />
   </ItemGroup>
 
   <ItemGroup>

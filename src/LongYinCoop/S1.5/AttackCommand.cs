@@ -62,6 +62,9 @@ namespace LongYinCoop
             public float TargetHpDrop { get; set; }
             public bool TargetAliveBefore { get; set; }
             public bool TargetAliveAfter { get; set; }
+            /// <summary>S3 prerequisite (รีวิวรอบ 1): true เมื่ออ่าน IsAlive ของเป้าได้จริงตอนจบ —
+            /// job.Target ตายกลางทาง (reference null) ⇒ Known=false: ห้ามตีความ TargetAliveAfter=false ว่า "dead"</summary>
+            public bool TargetAliveAfterKnown { get; set; }
             public float ActiveHpBefore { get; set; }
             /// <summary>สัญญาณยืนยันจากเกม (field `attackComfirmed`) อ่านทันทีหลังคลิก — transient</summary>
             public bool AttackConfirmed { get; set; }
@@ -229,7 +232,10 @@ namespace LongYinCoop
                 HeroData targetHero = null;
                 try { targetHero = target.heroData; } catch { }
                 r.TargetHpBefore = targetHero == null ? 0f : targetHero.hp;
-                r.TargetAliveBefore = targetHero != null && !targetHero.dead;
+                // S3 prerequisite (2026-10-25): HeroData.dead ไม่ใช่ธงตายในศึก [RUNTIME S1.5f §3]
+                // — guard ใช้นิยามเดียวกับ stateHash v2: IsAlive && hp>0 (TurnGate.AliveForS3)
+                //   เคสขอบ IsAlive=true แต่ hp<=0 ⇒ ไม่ให้โจมตี (สอดคล้องกับ hash ที่ถือว่าไม่ alive)
+                r.TargetAliveBefore = targetHero != null && TurnGate.AliveForS3(target, r.TargetHpBefore);
                 if (!r.TargetAliveBefore)
                 {
                     r.Error = string.Format(UIStrings.SpikeAttackTargetDead, targetStableId);
@@ -337,26 +343,35 @@ namespace LongYinCoop
                 AttackResult r = job.Result;
 
                 float hp = -1f;
-                bool dead = false;
+                bool isAlive = false;
+                bool isAliveRead = false; // S3 prereq (รีวิวรอบ 4): Target null/IsAlive อ่านไม่ได้ ⇒ unknown
+                bool hpRead = false;      // heroData/hp อ่านไม่ได้ ⇒ unknown (ห้ามตีความ false ว่า dead)
                 BattleUnit t = job.Target;
 
                 if (t != null)
                 {
+                    isAlive = TurnGate.SafeUnitAlive(t);
+                    isAliveRead = true;
                     HeroData h = job.TargetHero;
                     if (h == null) { try { h = t.heroData; } catch { } }
                     if (h != null)
                     {
-                        try { hp = h.hp; } catch { hp = -1f; }
-                        try { dead = h.dead; } catch { }
+                        try { hp = h.hp; hpRead = true; } catch { hp = -1f; }
                     }
                 }
 
-                // สำเร็จ = hp ลดจริง หรือตาย (hp ถึง 0) — ไม่ใช้ hp ผู้โจมตีเป็นเงื่อนไข
-                if (hp >= 0f && (hp < r.TargetHpBefore - HpEpsilon || dead))
+                // นิยาม alive ตอนจบ = predicate เดียวกับ stateHash และ guard (AliveForS3)
+                // Known=true เฉพาะเมื่ออ่าน isAlive + hp ครบ — ไม่ครบ = unknown (Known=false)
+                bool aliveAfter;
+                bool known = AliveRule.CompletionAlive(isAliveRead, isAlive, hpRead, hp, out aliveAfter);
+
+                // สำเร็จ = hp ลดจริง หรือไม่ alive ที่อ่านได้ครบ — ไม่ใช้ hp ผู้โจมตีเป็นเงื่อนไข
+                if (hp >= 0f && (hp < r.TargetHpBefore - HpEpsilon || (known && !aliveAfter)))
                 {
                     r.TargetHpAfter = hp;
                     r.TargetHpDrop = r.TargetHpBefore - hp;
-                    r.TargetAliveAfter = !dead;
+                    r.TargetAliveAfter = aliveAfter;
+                    r.TargetAliveAfterKnown = known;
                     Finish(job, null, true);
                     return;
                 }
@@ -365,7 +380,8 @@ namespace LongYinCoop
                 {
                     r.TargetHpAfter = hp;
                     r.TargetHpDrop = hp >= 0f ? r.TargetHpBefore - hp : 0f;
-                    r.TargetAliveAfter = !dead;
+                    r.TargetAliveAfter = aliveAfter;
+                    r.TargetAliveAfterKnown = known;
                     Finish(job, string.Format(UIStrings.SpikeAttackHpNotConfirmed,
                                               r.TargetHpBefore, hp), false);
                 }
@@ -388,9 +404,9 @@ namespace LongYinCoop
             try { DoneEvent.Set(); } catch { }
 
             CoopLog.Msg(string.Format(
-                "spike attack id={0} target={1} ok={2} confirmed={3} state={4}->{5} hp={6}->{7} drop={8} alive={9} tgt@({10},{11}) range={12}/{13} cost={14}ms total={15}ms err={16}",
+                "spike attack id={0} target={1} ok={2} confirmed={3} state={4}->{5} hp={6}->{7} drop={8} alive={9} aliveKnown={10} tgt@({11},{12}) range={13}/{14} cost={15}ms total={16}ms err={17}",
                 r.StableId, r.TargetId, r.Ok, r.AttackConfirmed, r.StateBeforeName, r.StateAfterName,
-                r.TargetHpBefore, r.TargetHpAfter, r.TargetHpDrop, r.TargetAliveAfter,
+                r.TargetHpBefore, r.TargetHpAfter, r.TargetHpDrop, r.TargetAliveAfter, r.TargetAliveAfterKnown,
                 r.TargetRow, r.TargetCol, r.AttackRangeCount, r.DamageRangeCount,
                 r.CostMs, r.ElapsedMs, r.Error ?? "-"));
         }
