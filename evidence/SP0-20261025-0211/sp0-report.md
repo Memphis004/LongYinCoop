@@ -1,7 +1,7 @@
 # SP0 DUMP-only — รายงานผลตาม exit criteria (label `SP0-20261025-0211`)
 
 - แผน: `SP0-full-plan-draft.md` **rev2.1** (อนุมัติ 2026-10-25 · commit `b0660e2`) · วัดวันที่ 2026-10-25
-- ขอบเขต: DUMP-only — อ่าน `<เกม>\Il2CppDumper\dump.cs` (sha256 `b983820b23a4…09b5503` · 14,953,011 B · mtime 2026-10-20 00:47 · ยืนันรุ่นเดียวกับหลักฐานเดิมผ่าน `GameDataController` @ `dump.cs:377212` ตรง `battle-notes.md:545`) ด้วย `tools/sp0_dump_parser.py` (read-only) · **ไม่เปิดเกม ไม่เรียก method ไม่ build/deploy ไม่แตะเซฟ/config/Steam**
+- ขอบเขต: DUMP-only — อ่าน `<เกม>\Il2CppDumper\dump.cs` (sha256 `b983820b23a4…09b5503` · 14,953,011 B · mtime 2026-10-20 00:47 · ยืนยันรุ่นเดียวกับหลักฐานเดิมผ่าน `GameDataController` @ `dump.cs:377212` ตรง `battle-notes.md:545`) ด้วย `tools/sp0_dump_parser.py` (read-only) · **ไม่เปิดเกม ไม่เรียก method ไม่ build/deploy ไม่แตะเซฟ/config/Steam**
 - Deliverable: `singleton-census.md` (ตาราง census) + `census-candidates.tsv` (330 แถว) + `census-references.tsv` + `parser-integrity.json`
 
 ## ผลตาม exit criteria

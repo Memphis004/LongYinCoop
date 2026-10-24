@@ -1,7 +1,7 @@
 # SP0 DUMP-only Singleton Census — ชั้น A ครบ + รวมหลักฐานชั้น B/C รอบก่อน
 
 - **Label:** `SP0-20261025-0211` · วันที่: 2026-10-25 · แผน: `SP0-full-plan-draft.md` rev2.1 (approved, commit `b0660e2`)
-- **แหล่งข้อมูลชั้น A:** `<เกม>\Il2CppDumper\dump.cs` — sha256 `b983820b23a46d63eae2c4123b1264dc48f6317969139fb50626d140309b5503` · 14,953,011 bytes · mtime 2026-10-20 00:47 · **ยืนันว่าเป็นรุ่นเดียวกับหลักฐาน [DUMP] รอบก่อน**: `GameDataController` TypeDefIndex 8376 ที่บรรทัด 377212 ตรงอ้างอิง `battle-notes.md:545` เป๊ะ · อ่านด้วย `tools/sp0_dump_parser.py` (read-only, ไม่โหลด assembly, ไม่แตะกระบวนการเกม)
+- **แหล่งข้อมูลชั้น A:** `<เกม>\Il2CppDumper\dump.cs` — sha256 `b983820b23a46d63eae2c4123b1264dc48f6317969139fb50626d140309b5503` · 14,953,011 bytes · mtime 2026-10-20 00:47 · **ยืนยันว่าเป็นรุ่นเดียวกับหลักฐาน [DUMP] รอบก่อน**: `GameDataController` TypeDefIndex 8376 ที่บรรทัด 377212 ตรงอ้างอิง `battle-notes.md:545` เป๊ะ · อ่านด้วย `tools/sp0_dump_parser.py` (read-only, ไม่โหลด assembly, ไม่แตะกระบวนการเกม)
 - **ขอบเขต game types:** TypeDefIndex ≥ 7172 = `Assembly-CSharp-firstpass.dll` (เริ่ม 7172) + `Assembly-CSharp.dll` (เริ่ม 7703)
 - **ป้ายหลักฐาน:** ข้อมูลรอบนี้ = **DUMP** · ข้อมูลที่ยกมาจากรอบ `sp0sp7-20261024-225939` = **RUNTIME** (ตามหลักฐานเดิม) · ที่ไม่มีหลักฐาน = **`ยังไม่วัด (runtime required)`**
 - **actual call-sites ของทุกแถว = `UNAVAILABLE IN DUMP-ONLY`** (มติ Q2 — `dump.cs` ไม่มี method bodies จึงนับ call-site จริงไม่ได้ไม่ว่าแถวใด)

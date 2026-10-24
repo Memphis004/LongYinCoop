@@ -437,7 +437,7 @@ pref ทุกตัวอยู่ใน `UserData/MelonPreferences.cfg` ภา
 - Fault injection matrix: ตัด TCP, ระงับ process guest, frame เสีย, `cmdId` ซ้ำ, `clientTick` เก่า
 
 ### Just-in-time ที่ต้องสำรวจใน S5
-1. **`GameDataController.Save/Load` signature จริง** (2 overload: `(int)` และอื่น) → patch ให้ถูกตัว, ยืนยันว่า postfix ไม่รบกวนการเขียนไฟล์
+1. **`GameDataController.Save/Load` signature จริง** — [DUMP, SP0 2026-10-25]: `Save` **1 overload** `(int)` · `Load` 1 overload `(int)` · ที่มี 2 overload คือ `GetSaveDataPath` (`(int,int)` และ `()`) → patch ให้ถูกตัว, ยืนยันว่า postfix ไม่รบกวนการเขียนไฟล์ · **ข้อมูลนี้เป็น DUMP เท่านั้น ยังไม่ใช่การยืนยัน runtime save path — ต้องวัดจริงใน S5**
 2. **guest จะไม่ save ได้อย่างไรโดยไม่ทำเกมพัง** — เรียงจากปลอดภัยสุด: (ก) ไม่เรียก save เองเลย (ข) redirect `saveDataPath` (ค) hook `Save` เป็น no-op — ทดสอบ (ค) บนสำเนาก่อนใช้
 3. **ตรวจจับ handle leak ของ Il2CppInterop** — นับ handle ก่อน/หลัง 60 นาที
 4. **พฤติกรรมตอน host โหลดเซฟระหว่างมี session** — อะไรพังก่อน (pointer ตายทั้งหมด) → กำหนดว่า `SESSION_RESET` ต้องล้างอะไรบ้าง
