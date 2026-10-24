@@ -65,7 +65,8 @@
 | backup ก่อน deploy | `Mods\LongYinCoop.dll.prev-c51debef` = `c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96` |
 | `UserData\MelonPreferences.cfg` | `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1` (ไม่เปลี่ยน) |
 | `UserData\LongYinCoop\net.cfg` (A0/พัก) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` (454 B · `enabled=false` · `heartbeatMs=1000`) |
-| source ที่ uncommitted | ไม่มี — commit `ffc2c88` (tag `checkpoint-S2a`) รวม S2Sender / S2FrameMeter / S2HostService / viewer-client |
+| source ที่ตรงกับ DLL นี้ | **commit `ffc2c88` (tag `checkpoint-S2a`) — DLL `5d7b7cc5…` สร้างจาก source ณ `ffc2c88` เท่านั้น** รวม S2Sender / S2FrameMeter / S2HostService / viewer-client |
+| สถานะ 2026-10-25 (อัปเดต metadata) | **DLL ที่ deploy ยังเป็นรุ่น `5d7b7cc5…` จาก `ffc2c88` — ไม่มี build/deploy ใหม่** · HEAD (`cebcf59`) เป็น docs-only · **S3 prerequisite patch (TurnGate/AttackCommand/S2a2Tests/csproj/AliveRule) ยัง uncommitted และยังไม่ถูก build/deploy** — รออนุมัติรีวิว |
 | label ที่ใช้ล่าสุด | `S2a3r-20261024-0115` (X4 rerun · restore แล้ว `4226730f66ff` EXACT) · `S2a3x6-20261024-0120` (X6 n=1080 · restore แล้ว `4226730f66ff` EXACT · `leftovers: none`) |
 | หลักฐาน | `evidence/S2a3-20261022-143608/{build-deploy-S2a3r-20261024.md,x4-rerun-20261024.md}` + `X6-sample-plan.md` |
 
