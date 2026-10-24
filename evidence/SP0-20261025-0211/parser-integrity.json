@@ -1,0 +1,68 @@
+{
+  "dump": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\LongYinLiZhiZhuan\\Il2CppDumper\\dump.cs",
+  "types_parsed": 8877,
+  "game_images": {
+    "Assembly-CSharp-firstpass.dll": 7172,
+    "Assembly-CSharp.dll": 7703
+  },
+  "game_start_index": 7172,
+  "game_types": 1705,
+  "game_classes": 1341,
+  "typedef_monotonic": true,
+  "unparsed_count": 0,
+  "unparsed_lines": [],
+  "ambiguous_simple_names": [
+    "<>c",
+    "<>c__DisplayClass0_0",
+    "<>c__DisplayClass10_0",
+    "<>c__DisplayClass11_0",
+    "<>c__DisplayClass18_0",
+    "<>c__DisplayClass19_0",
+    "<>c__DisplayClass1_0",
+    "<>c__DisplayClass20_0",
+    "<>c__DisplayClass22_0",
+    "<>c__DisplayClass23_0",
+    "<>c__DisplayClass24_0",
+    "<>c__DisplayClass27_0",
+    "<>c__DisplayClass28_0",
+    "<>c__DisplayClass29_0",
+    "<>c__DisplayClass2_0",
+    "<>c__DisplayClass33_0",
+    "<>c__DisplayClass3_0",
+    "<>c__DisplayClass42_0",
+    "<>c__DisplayClass4_0",
+    "<>c__DisplayClass5_0",
+    "<>c__DisplayClass6_0",
+    "<>c__DisplayClass7_0",
+    "<>c__DisplayClass8_0",
+    "<>c__DisplayClass9_0",
+    "<AnimateVertexColors>d__10",
+    "<AnimateVertexColors>d__11",
+    "<Module>",
+    "<Start>d__10",
+    "<Start>d__4",
+    "BoolDelegate",
+    "FloatDelegate",
+    "KeyCodeDelegate",
+    "ObjectDelegate",
+    "OnFinished",
+    "OnReposition",
+    "Paragraph",
+    "VectorDelegate",
+    "VoidDelegate"
+  ],
+  "anchor_check": {
+    "GameController": {
+      "got": 241,
+      "prior_notes": 244
+    },
+    "BattleController": {
+      "got": 166,
+      "prior_notes": 186
+    },
+    "PlotController": {
+      "got": 1526,
+      "prior_notes": 1530
+    }
+  }
+}
