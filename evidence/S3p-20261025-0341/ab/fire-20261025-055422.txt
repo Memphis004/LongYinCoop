@@ -1,0 +1,60 @@
+=== FIRE label=AB-oldbuild-20261025-054139 fire-ts=20261025-055422 ===
+--- T=05:54:22.847 set_pref allowRemoteInput=true
+{
+  "ok": true,
+  "cmd": "set_pref",
+  "result": {
+    "key": "allowRemoteInput",
+    "value": true,
+    "armed": false
+  },
+  "note": null
+}
+--- T=05:54:23.133 spike arm --seconds 120
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "armed": true,
+    "seconds": 120,
+    "remainingMs": 119999
+  },
+  "note": null
+}
+--- T=05:54:23.398 spike attack --id 0:0 --target 1:10034
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "Ok": true,
+    "Error": null,
+    "StableId": "0:0",
+    "TargetId": "1:10034",
+    "ActiveIdBefore": "0:0",
+    "StateBefore": 10,
+    "StateBeforeName": "WaitAttacking",
+    "StateAfter": 10,
+    "StateAfterName": "WaitAttacking",
+    "GridName": "11_18",
+    "TargetRow": 11,
+    "TargetCol": 18,
+    "ActiveRow": 11,
+    "ActiveCol": 13,
+    "TargetTeam": 1,
+    "TargetHpBefore": 494.39996,
+    "TargetHpAfter": 382.86816,
+    "TargetHpDrop": 111.5318,
+    "TargetAliveBefore": true,
+    "TargetAliveAfter": true,
+    "ActiveHpBefore": 1006.41595,
+    "AttackConfirmed": true,
+    "AttackRangeCount": 83,
+    "DamageRangeCount": 1,
+    "TargetInAttackRange": true,
+    "Call": "BattleGridClicked(target)",
+    "CostMs": 5,
+    "ElapsedMs": 1758
+  },
+  "note": null
+}
+--- T=05:54:25.455 attack call returned

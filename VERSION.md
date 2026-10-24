@@ -42,9 +42,11 @@
 | เหตุผล | incident 2026-10-22 06:39 — **เปิดเกมบนเซฟจริงหลัง restore** เพื่อทดสอบปุ่ม `>>` โดยไม่มี split/preflight · เปลี่ยนเฉพาะ `PlayerprefData.dat` (ตรวจ hash รายไฟล์) · ผู้ใช้ปิดเกมแล้ว · rebaseline volatile-only ตามกฎ |
 | baseline ณ ตอนนั้น (ถูกแทนที่ 07:54 — ดูหัวข้อถัดไป) | `coop-test/baselines/20261022-064714/savehash.real.before.txt` · digest **`de7e2af49b23`** |
 | เหตุผล | incident 2026-10-22 06:43 (ครั้งที่ 3) — เปิดเกมบนเซฟจริงหลัง restore อีกครั้งเพื่อวัด `>>` ซ้ำ · เปลี่ยนเฉพาะ `PlayerprefData.dat` · `SaveSlot*` 55 ไฟล์ไม่ถูกเขียน · rebaseline volatile-only |
-| ผลบังคับ (ประวัติ) | ใช้ `--expected-baseline …/20261022-064714` เฉพาะช่วงก่อน 07:54 · **หลังจากนั้นใช้ `4226730f66ff` (หัวข้อถัดไป)** |
+| ผลบังคับ (ประวัติ) | ใช้ `--expected-baseline …/20261022-064714` เฉพาะช่วงก่อน 07:54 · หลังจากนั้นใช้ `4226730f66ff` (ยุค S2a-3 — ดูหัวข้อประวัติ) · **ตั้งแต่ 2026-10-25 ใช้ `b7f67154cff6` (หัวข้อ Baseline ปัจจุบัน)** |
 
-## Baseline ปัจจุบันของ S2a-3 (มติผู้ใช้ 2026-10-22 · หลังคืนเซฟ `explore-20261022-0755`)
+## Baseline ของ S2a-3 (มติผู้ใช้ 2026-10-22 · หลังคืนเซฟ `explore-20261022-0755`) — **superseded 2026-10-25 โดย `20261025-052020` (หัวข้อถัดไป)**
+
+> สถานะ: เป็น expected baseline **เฉพาะยุค S2a-3** (ใช้จริงถึง A/B ก่อน 2026-10-25) — ปัจจุบันถูกแทนด้วย `b7f67154cff6` ตามหัวข้อ "Baseline ปัจจุบัน" · ค่าด้านล่างคงไว้เป็นประวัติ ห้ามลบ
 
 | รายการ | ค่า |
 |---|---|
@@ -55,6 +57,18 @@
 | การอนุมัติ | **มติผู้ใช้ 2026-10-22** หลัง restore `explore-20261022-0755` ผ่าน post-check 6/6 · `coop-test/baselines/20261022-075422/APPROVAL.md` |
 | ยืนยันด้วยการวัด | `Save` 57 ไฟล์ digest `4226730f66ff` **EXACT** · `changed=0 missing=0 added=0` · `leftovers: none` · rehash อิสระ (ordinal sort) ตรงกัน · `evidence/S2a3-20261022-0156/restore-postcheck.md`, `presave-check.md` |
 | ผลบังคับ | เป็น expected baseline ของ **S2a-3** (C6) และใช้ตัดสิน E7/X9/C8 · ถ้า digest ไม่ตรง **หยุดและรายงาน** ห้าม rebaseline กลบ |
+
+## Baseline ปัจจุบัน (มติผู้ใช้ 2026-10-25 · Post-Close Save Verification · rebaseline volatile-only)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `b7f67154cff613c618994fbf6cb0866a0a8b360bbcb557f5b977320f57ce61cf` (57 ไฟล์) |
+| ไฟล์ baseline | `coop-test/baselines/20261025-052020/savehash.real.before.txt` |
+| **คำสั่งบังคับ** | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261025-052020\savehash.real.before.txt` — **ทุก `split` ตั้งแต่ 2026-10-25 ต้องระบุ flag นี้ตรง ๆ ทุกครั้ง ห้ามพึ่ง default ของ tool** |
+| เหตุผล | ต่อ incident บูตบนเซฟจริง 2026-10-25 04:56 (`evidence/S3p-20261025-0341/incident-boot-on-real-save.md` §6): drift = `PlayerprefData.dat` ไฟล์เดียว (hash ใหม่ `5bc97eb2d9db7cf5b9e49141b89ae40162c407eab4f20ef3849810422ac62a19`) · `SaveSlot*` ครบ 57 ไฟล์ · `REBASELINE.json` = `volatile_only: true` |
+| สายโซ่ baseline | `4226730f66ff` (S2a-3 · `20261022-075422`) → `7332fc93eb98` (`20261024-232024` — SaveSlot8 ที่ผู้ใช้เซฟเอง + pref) → **`b7f67154cff6` (ปัจจุบัน — pref เท่านั้น)** · ตัวเก่าคงไว้ไม่ลบ |
+| ยืนยันด้วยการวัด | restore ของ `AB-oldbuild-20261025-054139` (A/B test 2026-10-25): `Save` 57 ไฟล์ `b7f67154cff6` **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/ab/ab-report.md` |
+| ผลบังคับ | เป็น expected baseline ของทุก `split` ตั้งแต่ 2026-10-25 · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** |
 
 ## Mod build ที่ deploy ล่าสุด (2026-10-24 · `stage-S2a-3` · tag `checkpoint-S2a` @ `ffc2c88`)
 
@@ -67,7 +81,7 @@
 | `UserData\LongYinCoop\net.cfg` (A0/พัก) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` (454 B · `enabled=false` · `heartbeatMs=1000`) |
 | source ที่ตรงกับ DLL นี้ | **commit `ffc2c88` (tag `checkpoint-S2a`) — DLL `5d7b7cc5…` สร้างจาก source ณ `ffc2c88` เท่านั้น** รวม S2Sender / S2FrameMeter / S2HostService / viewer-client |
 | สถานะ 2026-10-25 (อัปเดต metadata) | **DLL ที่ deploy ยังเป็นรุ่น `5d7b7cc5…` จาก `ffc2c88` — ไม่มี build/deploy ใหม่** · **S3 prerequisite patch committed @ `59276a4` (AliveRule/TurnGate/AttackCommand/tests — ผ่าน unit tests 447/0 + Debug compile-only 0W/0E) แต่ยังไม่ถูก build Release/deploy** — DLL ใน `Mods\` ไม่รวม patch นี้จนกว่าจะได้รับอนุมัติ deploy ใหม่ |
-| label ที่ใช้ล่าสุด | `S2a3r-20261024-0115` (X4 rerun · restore แล้ว `4226730f66ff` EXACT) · `S2a3x6-20261024-0120` (X6 n=1080 · restore แล้ว `4226730f66ff` EXACT · `leftovers: none`) |
+| label ที่ใช้ล่าสุด | `S2a3r-20261024-0115` (X4 rerun · restore แล้ว `4226730f66ff` EXACT — ยุค S2a-3) · `S2a3x6-20261024-0120` (X6 n=1080 · restore แล้ว `4226730f66ff` EXACT · `leftovers: none` — ยุค S2a-3) · ตั้งแต่ 2026-10-25 เกณฑ์ผ่านคือ `b7f67154cff6` (หัวข้อ Baseline ปัจจุบัน) |
 | หลักฐาน | `evidence/S2a3-20261022-143608/{build-deploy-S2a3r-20261024.md,x4-rerun-20261024.md}` + `X6-sample-plan.md` |
 
 ## กฎ

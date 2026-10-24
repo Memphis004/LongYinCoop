@@ -1,0 +1,19 @@
+{
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
+  "ts": "2026-10-25T05:20:20",
+  "reason": "S3p incident 2026-10-25 04:56: เกมบูตบนเซฟจริงโดยไม่มี split (pid 27872/4684) — pref drift volatile-only เท่านั้น (SaveSlot* ตรง baseline ครบทุกไฟล์ เทียบ 57 ไฟล์สองทิศด้วยฟังก์ชัน save-split.py); อนุมัติโดยผู้ใช้รอบ Post-Close Save Verification",
+  "files": 57,
+  "digest": "b7f67154cff613c618994fbf6cb0866a0a8b360bbcb557f5b977320f57ce61cf",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true,
+  "against": "coop-test/baselines/20261024-232024/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "bb47b44134fea53cab1f9e3c4fc876147c2bf940d5b6f697be6864192be2097c",
+  "generated_by": "tools/coop-audit.py"
+}
