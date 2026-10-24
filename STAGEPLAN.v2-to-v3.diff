@@ -1,0 +1,305 @@
+diff --git a/StagePlan.txt b/STAGEPLAN.v3-draft.md
+index 7ed18ed..f456db8 100644
+--- a/StagePlan.txt
++++ b/STAGEPLAN.v3-draft.md
+@@ -1,5 +1,11 @@
+ # STAGEPLAN — LongYinLiZhiZhuan Co-op Mod (v2 merged)
+ 
++> **[v3] สถานะ: ร่างรออนุมัติ (2026-10-24) — ยังไม่เริ่มงานใด ๆ ของ ช่วง 1 (§15–§20) ทั้งโค้ด/probe/สร้างไฟล์ จนกว่า §20 จะได้มติครบ และต้องผ่าน gate ของ S3 ก่อน**
++> [v3] เป้าหมายใหม่ที่เพิ่มในเล่มนี้: **C2 = "โลกเดียวกลาง server ตัดสินทุกอย่าง"** — world จำลองเดียว อยู่กับ server = โปรเซสเกมหนึ่งตัวที่ถือ state จริงทั้งหมด; ผู้เล่นทุกคน (รวม host) ขับโลกผ่าน verb ที่ผ่านการตรวจฝั่ง server เท่านั้น
++> [v3] กติกาการเขียนฉบับนี้: v3 ทำเป็น **diff จาก v2** — ทุกส่วน §0–§14 คงข้อความของ v2 merged ไว้เป๊ะทุกตัวอักษร (บรรทัดสถานะถัดลงไปเป็นข้อความเดิมของ v2 ที่ล้าสมัยแล้ว — คงไว้ตามตัวอักษรเพื่อให้ diff สะอาด) · สิ่งที่เพิ่มมี 4 จุดเท่านั้น: (1) บล็อกหัวไฟล์นี้ (2) ลำดับ ช่วง 1 แทรกท้าย §12.1 (3) บรรทัด changelog v3 ท้าย §12.2 (4) §15–§20 แทรกหน้าภาคท้าย (v2 ดิบ + แผนย่อย S1.5/S2a-2/S2a-3) — **v3 ไม่แก้ขอบเขต/เกณฑ์/ข้อความของ S0–S6 ใด ๆ**
++> [v3] สถานะจริง ณ วันเขียน: S0/S1/S1.5/S1.5g/S2 (S2a-2, S2a-3) ปิดแล้ว — tag `stage-S2a-3` รออนุมัติขั้นสุดท้าย (X5 = PASS ตามมติ 2026-10-24, Δmean −0.023 ms); ถัดไปตามลำดับ ช่วง 0 คือ S3 — สถานะปัจจุบันฉบับเต็มดู §14 + AGENTS.md
++
++
+ **สถานะ: รออนุมัติ — ยังไม่เริ่ม S0 (ไม่มีโค้ด, ไม่แตะไฟล์เกม)**
+ หลักการ S0: ไม่แตะ state ของเกม ไฟล์ที่เพิ่มในโฟลเดอร์เกมมีแค่ DLL ของเรา (`Mods\LongYinCoop.dll`) และไฟล์ config/log ของ mod เอง [v2]
+ ลำดับการทำงาน: **S0 → S1 → S1.5 → S2 → S3 → S5 → S4 → S6**
+@@ -587,6 +593,20 @@ S0 --gate--> S1 --gate--> S1.5 (S3-spike) --gate--> S2 --gate--> S3 --gate--> S5
+ 
+ ทุก gate ต้องมี: รายงานผลวัด, hash เซฟก่อน/หลัง, `git tag stage-SN`, และบันทึก anchor ใหม่ที่ค้นเจอ
+ 
++**[v3] ลำดับ ช่วง 0 (S1.5→S3) คงเดิมทุกตัวอักษร — ห้ามแทรก spike หรืองานอื่นใดของ ช่วง 1 ก่อน/ระหว่าง stage ของ ช่วง 0 รวมถึงห้ามสำรวจ JIT ของ ช่วง 1 แทรกระหว่าง stage ของ ช่วง 0**
++
++**[v3] ลำดับ ช่วง 1 (C2 spike ladder) — เริ่มได้เฉพาะหลัง gate ของ S3 ปิดแล้ว:**
++
++```
++S3 --gate--> SP1 puppet hero --gate--> SP2 world clock --gate--> SP3 headless server
++     --gate--> SP4 puppet client --gate--> SP5 scale/ลด NPC --gate--> SP6 battle worker
++     --gate--> มติ "C2 จริงหรือไม่" (tag checkpoint-C2)
++```
++
++- ลำดับ SP1→SP6 เรียงตามโจทย์ของผู้ใช้ (ความเสี่ยง/ความไม่รู้ที่ต้องตัดตอนก่อน) และเป็น dependency แบบหลวมด้วย: SP4 อ้างผลของ SP1, SP5 อ้าง SP1+SP3, SP6 อ้าง SP3 — การสลับลำดับต้องมีมติก่อน
++- spike ไหนจบ NO-GO ห้ามวิ่งไปตัวถัดไปเอง — กลับไปตัดสินที่ §20 ก่อน (ต่อ/หยุด/ออกแบบใหม่)
++- แต่ละ spike ยังต้องมี **แผนย่อยราย stage** (เหมือน S2a-2/S2a-3 ที่ทำมา) อนุมัติก่อนเปิดเกมเสมอ — §16 นี้เป็นกรอบ ไม่ใช่ใบอนุญาต
++
+ ### 12.2 Changelog
+ - **v1:** ฉบับแรก + S1.5 (S3-spike) + แก้ตารางสิทธิ์ Harmony ของ S0
+ - **v2:** S0 เปลี่ยนเป็น "ไม่แตะ state ของเกม", S2 เปลี่ยนเป็น event/delta + snapshot เต็มเป็นระยะ, S1.5 เพิ่มการพิสูจน์ว่าเกมหยุดรอ input และตรวจ `battleTime`/`battleMove`/`battlePaused`, S4 เพิ่มงานสำรวจ hour/encounter chain และต้องรัน S5 ซ้ำ, S0 เพิ่ม exit criteria 4 ข้อ, เพิ่มกฎ interop แบบมีชนิด, `VERSION.md`, repo แยก, ความเสี่ยง #5–7
+@@ -594,6 +614,7 @@ S0 --gate--> S1 --gate--> S1.5 (S3-spike) --gate--> S2 --gate--> S3 --gate--> S5
+ - **S0 measured:** เกณฑ์ IPC เปลี่ยนเป็นอิงเฟรม (≤1× frame p95 / ≤ frame p99+10 ms พร้อมรายงาน frame time), เพิ่มการวัด frame time ใน `stats` (p50/p95/p99), และยกเว้น `PlayerprefData.dat` จากเกณฑ์ savehash หลัง control test `Enabled=false`
+ - **S0 closed (2026-10-20):** ผ่าน 12/12 + tag `stage-S0`; เพิ่ม §2 "carry-over จาก S0" (ข้อ 4 → S4 JIT 1, ข้อ 9 ครึ่งศึก → S1 JIT 7) และ §14 สถานะ
+ - **v2 merged:** ฉบับนี้ — รวม v2 เข้ากับ v1 โดยเก็บรายละเอียดของ v1 ไว้ทั้งหมด (field/ตัวเลข/ขั้นตอนย่อย) และตัดสิน 4 ข้อที่ขัดกัน: (1) S2 ใช้ **event-driven** ของ v2 (ตัด 2 Hz/20 Hz ออก, เกณฑ์ bandwidth วัดแบบ event-driven), (2) แถว raw offset บังคับเฉพาะ **โค้ดที่ ship** สำรวจยังทำได้, (3) S0 gate เรื่อง thread ผ่านได้ถ้ามี **ทางแก้ที่ทดสอบแล้ว**, (4) เรียงเลขหัวข้อตาม v2 (`§0` ขอบเขต, `§0A` สภาพแวดล้อม, `§1.3` โครงโปรเจค, `§1.7` Steam, `§12` ลำดับ+Changelog) และเพิ่ม `§13` ภาคผนวก anchor
++- **v3 (2026-10-24, ร่าง):** เพิ่ม ช่วง 1 = เป้าหมาย C2 "โลกเดียวกลาง server ตัดสินทุกอย่าง": สถาปัตยกรรมสมมติฐาน (§15, ทุกข้อ GUESS), spike ใหม่ 6 ตัว SP1–SP6 (§16), ตารางสิทธิ์ ช่วง 1 (§17), **งบ verb v1** (§18.1), **การตรวจฝั่ง server** (§18.2), กติกาที่ไม่เปลี่ยน (§19), คำถามรอมติ 6 ข้อ (§20) — §0–§14 คงข้อความ v2 merged เดิมทุกตัวอักษร
+ 
+ ---
+ 
+@@ -627,6 +648,259 @@ S0 --gate--> S1 --gate--> S1.5 (S3-spike) --gate--> S2 --gate--> S3 --gate--> S5
+ - **กำลังรอ: อนุมัติแผนย่อย S1 (§3)** — ยังไม่เริ่มเขียนโค้ด S1
+ 
+ 
++---
++
++## 15. [v3] ช่วง 1 — เป้าหมาย C2 และสถาปัตยกรรมสมมติฐาน (ทุกข้อ GUESS จนกว่า spike จะยืนยัน)
++
++**เป้าหมาย C2 [SPEC]:** มี **world จำลองเดียว** อยู่กับ **server = โปรเซสเกมหนึ่งตัว** ที่เป็นผู้ตัดสินทุกอย่าง (authoritative เดียว — คงหลัก §0.2 เดิม); ผู้เล่นทุกคนรวมถึง host ขับโลกด้วย **verb** (§18.1) ที่ server ตรวจแล้วรันเท่านั้น (§18.2); client ที่เหลือเป็น **puppet** — ปิดการจำลองในเครื่อง รับ state จาก server มาแสดงผล
++
++### 15.1 หลักที่ไม่เปลี่ยนตามสถาปัตยกรรมใหม่ [SPEC]
++- host-authoritative / guest ไม่จำลอง ไม่สุ่ม ไม่คำนวณผล (§0.2)
++- RNG ของศึกเป็น `UnityEngine.Random` ตัวกลาง — จุดสุ่มมีที่เดียวเสมอ อยู่ฝั่งที่รัน sim
++- guest ห้าม save ตลอดไป (D5), ทดสอบบนสำเนาเสมอ (§1.2), ห้ามแตะ Steam/cheat flag (§1.7)
++- ทุกการเรียก IL2CPP ผ่านคิว main thread (§1.4)
++
++### 15.2 สถาปัตยกรรมสมมติฐาน — ห้ามใช้ตัดสินงานจริงจนกว่า spike ที่ผูกไว้จะยืนยัน
++
++| # | สมมติฐาน | ป้าย | spike ที่ยืนยัน | สิ่งที่รู้แล้วบางส่วน |
++|---|---|---|---|---|
++| H1 | โปรเซสเกม (Unity player เต็ม) ใช้เป็น world server ได้ — sim เดินต่อแม้ไม่มีหน้าจอ/โฟกัส | **GUESS** | SP3 | พฤติกรรม minimize/hidden/`-batchmode` ของเกมนี้**ไม่เคยถูกวัด** |
++| H2 | ผู้เล่นทุกคน = `HeroData` ในเซฟของ server (hero ของ guest เป็น HeroData/สหาย-class ในเซฟ host) | **GUESS** | SP1 | `WorldData.playerHero` เป็น singleton หรือไม่ยังเป็นคำถามวิจัยค้างของ S6 (§9 ข้อ 1) |
++| H3 | ขับผู้เล่นด้วย **เส้นทางเดียวกับที่ AI ขับ NPC** (ผ่าน `ManageHeroMove`/`SetPlayerMoveTargetArea`) แล้วปิด AI **เฉพาะตัวนั้น** — ไม่เขียน `bigMapPos` ตรง ๆ (คงโหมด B ของ D2) | **GUESS** | SP1 | chain `BigMapController.Update → ManageAllHeroMove → ManageHeroMove` + `SetPlayerMoveTargetArea` 3 overloads มีใน anchor [DUMP, §13] — ยังไม่ยืนยันว่า NPC hero วิ่งผ่านสายนี้จริง และไม่รู้ flag ปิด AI ต่อตัว |
++| H4 | puppet client ปิดการจำลองในเครื่องได้จริง (หยุด AI + นาฬิกาท้องถิ่น) และแสดง state จาก server | **GUESS** | SP4 | transport/snapshot/resync/HMAC ของ S2a-3 ใช้ได้แล้ว [RUNTIME, X1–X9] — แต่เป็น state ศึก ยังไม่มี state โลก |
++| H5 | battle worker = **โปรเซสแยกต่อหนึ่งศึก** | **GUESS** | SP6 | ข้อจำกัดเชิงระบบ: logic ศึกเป็น IL2CPP native ใน `GameAssembly.dll` → โปรเซสแยกที่เป็นไปได้ต้องเป็นอีก Unity player instance ไม่ใช่ .NET process ธรรมดา; `PrepareBattleMap` เรียกตรงโดยไม่โหลด world ได้หรือไม่ยังไม่รู้ [DUMP 3 overloads, §13] |
++| H6 | นาฬิกาโลกขับด้วย **เวลาจริงของ server**; action ที่กินเวลา (งาน/พัก/คราฟต์/เดินทาง) กลายเป็น **timer ส่วนตัวของผู้เล่น** | **GUESS** | SP2 | [RUNTIME] `GameController.ChangeDay()` เดินวันละ 1 วัน/ครั้ง, `ChangeDay(int)` ไม่ถูกเรียก, `hour` ไม่เปลี่ยนระหว่าง skip (evidence `LongYinCoop/evidence/S2cd-20261022-0710/`) · จุดเขียน `hour` ตอนเล่นปกติยังไม่เจอ (GUESS ค้างจาก S4 JIT §8 ข้อ 1) |
++| H7 | ลด NPC ตอนสร้างโลกได้ (gate จำนวน hero ที่โลกสร้าง) | **GUESS** | SP5 | ยังไม่มีข้อมูลใด ๆ เกี่ยวกับจุดสร้าง hero ของโลกใหม่ |
++
++> ทุกแถวในตารางนี้ = **ห้ามเขียนโค้ด ship โดยอ้างว่าจริง** — ต้องรอ spike ตามคอลัมน์สุดท้ายยืนยันแล้วอัปเดตป้ายเป็น RUNTIME พร้อมหลักฐาน
++
++### 15.3 ความสัมพันธ์กับ S4/S5/S6 เดิม [SPEC — ตัดสินที่ §20 Q2]
++- v3 **ไม่แก้/ไม่ยกเลิก** ข้อความ §7 (S5), §8 (S4), §9 (S6) — เอกสารคงไว้ตามตัวอักษร
++- ข้อขัดกันเชิงบทบาท: ถ้า C2 GO (SP1–SP6 ผ่าน) งาน "world follow" ของ S4 กับ "independent party" ของ S6 ถูก C2 กลืนบทบาท — จะยกเลิก/คงไว้ = มติที่ Q2
++- งานวัดนาฬิกาที่เหลือ (เดินในเมือง / พักโรงแรม / งานคราฟต์ — carry-over ที่เดิมชี้ "JIT ของ S4") เสนอย้ายเป้าหมายไปเป็น **JIT ของ SP2** — ตัดสินพร้อมกันที่ Q2
++
++## 16. [v3] Spikes ช่วง 1 — SP1–SP6
++
++**กติกาใช้ร่วมของทุก spike [SPEC]:**
++1. แผนย่อยราย spike (เป้าหมาย/ลำดับ/exit/วิธีวัด) ต้องอนุมัติก่อนเปิดเกมเสมอ — §16 นี้เป็นกรอบเท่านั้น
++2. บังคับใช้ §1 (กติการ่วม) เต็มรูปแบบ: สำเนาเซฟ §1.2, main thread §1.4, rollback §1.5, denylist §1.7
++3. **งบพยายาม: ≤2 รอบวัดต่อ exit ข้อ** — หมดงบแล้วหยุดและรายงานตามจริง ห้ามขยับเกณฑ์เอง (ธรรมเนียมเดียวกับมติ X5 2026-10-24)
++4. ปิดทุก spike ด้วย: รายงานผลวัดเทียบ exit ทีละข้อ + hash เซฟก่อน/หลัง + `git tag stage-SPn` (mod repo) + หลักฐาน `LongYinCoop/evidence/SPn-<timestamp>/`
++5. **NO-GO ไม่ใช่ความล้มเหลวของโปรเจกต์** — เป็นผลวัดที่ต้องรายงานตรงแล้วกลับไปตัดสินที่ §20
++6. สิ่งที่ทุก spike **ไม่ทำ**: ไม่แตะเซฟจริง, ไม่แตะ Steam/anti-cheat/flag `cheat*`, ไม่เรียก `GameDataController.Save/Load`, ไม่เขียน field ของเกมตรง (ดู §17), ห้ามเปิดเกมเอง (ผู้ใช้เปิดเอง), ห้ามเปิด IPC client อื่นระหว่างวัด
++
++### SP1 — puppet hero (หุ่นเชิดฮีโร่)
++
++**เป้าหมาย:** ยืนยัน H2+H3 — บน host (เกมมีหน้าจอปกติ, เซฟสำเนา) โค้ด mod สั่ง `HeroData` ตัวที่**ไม่ใช่** `playerHero` (สหาย/ศิษย์/hero ชั้นรอง) ให้เดินทางไป area เป้าหมายผ่าน path เดียวกับ AI และ**ปิด AI เฉพาะตัวนั้น**ได้ โดยไม่กระทบ hero ตัวอื่น
++
++**Just-in-time (สำรวจก่อนเขียน อ่านอย่างเดียว):**
++1. enumerate hero ทั้งหมดที่ `ManageAllHeroMove` วน — จำแนก `playerHero` / hero ประเภทอื่น (class/flag)
++2. หา flag หรือ method ที่เป็น "ก๊อก AI ต่อตัว" (ชื่อจริงยังไม่รู้ — GUESS): จุดตัดสินใจเลือกเป้าหมาย, เดินเอง, หยุดเอง
++3. ทดสอบบนจอ: สั่ง target ทับของ AI ตอน AI เปิด/ปิด — พฤติกรรมต่างกันไหม
++4. ทางเข้า encounter ระหว่าง puppet เดิน (เกิดศึก = บันทึกพฤติกรรม ไปตัดสินต่อใน SP6/มติ)
++
++**ขอบเขตการเขียน:** อ่านทุกอย่างผ่าน interop แบบมีชนิด · Harmony **postfix log-only** บน `ManageHeroMove`/`SetPlayerMoveTargetArea` · เรียก method เปลี่ยน state = **เฉพาะ** `SetPlayerMoveTargetArea` กับ puppet hero + method ปิด AI ต่อตัวที่ JIT เจอ (ต้องระบุชัดและอนุมัติในแผนย่อยก่อนใช้) · **ห้ามเขียน `bigMapPos` ตรง ๆ** (คงโหมด B ของ D2) · gate ทุก write ด้วย pref ใหม่ `coop.c2.enabled` (default false)
++
++**Exit criteria (วัดได้):**
++1. สั่ง puppet hero เดินไป area เป้าหมาย 10 รอบ → ถึงเป้า ≥9/10 (ตำแหน่งเทียบ UI บนจอ)
++2. ระหว่างเดิน: hook ที่จุดตัดสินใจ AI ของตัวนั้น **ยิง 0 ครั้ง** (หรือถูก gate ทุกครั้ง) ตลอดการเดิน — ถ้าปิด AI ต่อตัวทำไม่ได้ ให้รายงานกลไกจริงที่เจอ (ถือเป็นผลวัด ไม่ใช่ความล้มเหลวของการทดสอบ)
++3. hero อื่น + ผู้เล่นหลักทำงานปกติ; จำนวน hero ก่อน/หลังเท่ากัน; soft-lock 0 ใน 10 min
++4. Δmean frame time A-B-A เทียบไม่สั่ง ≤ margin ของ `S2FrameRule` (Δmean ≤ 1.0 ms — ตัวชี้วัดเดียวกับมติ X5 2026-10-24)
++5. ERROR=0, Exception=0, `commandsAccepted` ตรงจำนวนครั้งที่สั่ง
++6. savehash: เซฟจริง 0 ไฟล์เปลี่ยน; สำเนาบันทึกก่อน/หลัง
++
++**GO/NO-GO:** GO = ข้อ 1+2 ผ่าน และข้อ 3–6 ไม่มี FAIL · NO-GO = ปิด AI ต่อตัวไม่ได้เลย หรือการขับทำให้ระบบ hero พัง → กลับ §20 (ทางเลือกที่จะเสนอ: ขับผ่าน input จริงของ UI แทน AI path = เปลี่ยนสถาปัตยกรรม)
++
++**ความเสี่ยง:** AI ถูกเรียกจากหลาย entry (ไม่ใช่แค่ `ManageAllHeroMove`) · ตำแหน่งกลางทางถูก persist ลงเซฟ · encounter ทับการเดิน · ปิด AI แล้ว hero ค้าง · การ persist อาจเขียน hero ตัวอื่นด้วย (ต้อง diff ทั้ง hero list)
++
++**Rollback:** `coop.c2.enabled=false` → ทุก hook no-op · `.dll.off` · restore สำเนา · tag
++
++### SP2 — world clock (แผนที่ writer ของ hour/day + caller การเดินวัน)
++
++**เป้าหมาย:** สร้างตาราง writer ทั้งหมดของ `hour/day/worldTime` และ caller ของการเดินวันที่**วัดได้จริง** แล้วตอบว่า gate นาฬิกาได้จาก choke point เดียวหรือรายการสั้น — พื้นฐานของ H6 (นาฬิกาขับด้วยเวลาจริง + timer ส่วนตัว) และรับงาน carry-over นาฬิกา (เดินในเมือง/พักโรงแรม/คราฟต์ — ถ้า Q2 อนุมัติให้ย้ายมาจาก S4)
++
++**Just-in-time:**
++1. hook log-only ครอบ writer ที่รู้แล้ว: `ChangeDay()` ทั้ง 2 overload (ตัว 0-param ยิงจริง [RUNTIME]) + `TimeData.DeltaDay` ถ้าหาเจอ
++2. สแกนหาจุดเขียน `hour` ตอนเล่นปกติ (ค้างจาก S4 JIT §8 ข้อ 1 — GUESS)
++3. ทำ action ที่กินเวลาครบชุดบนจอ: เดินในเมือง, พักโรงแรม, งาน, คราฟต์, ปุ่ม `>>` และอย่างอื่นที่จอบอกว่าเวลาเดิน — จับ Δhour/Δday ต่อ action เทียบตัวเลขจอ
++
++**ขอบเขตการเขียน:** **log-only ทั้ง spike — ไม่มี write path เลย** (postfix/prefix อ่าน argument + ค่าเท่านั้น) · probe แบบ transient ใช้กติกา probe ของ §1.1
++
++**Exit criteria (วัดได้):**
++1. ตาราง writer ครบต่อชุดทดสอบ: ทุก action ที่ทำให้เวลาเปลี่ยนบนจอ ถูกจับโดย hook ≥1 ตัว (catch-all 100% ของ action ที่เห็น Δ) พร้อม hit-count ต่อ action
++2. "1 call `ChangeDay()` = 1 วัน" ยืนยันซ้ำบน ≥3 กรณีใหม่ และบันทึกทุกกรณีที่ไม่เป็น 1:1 (ห้ามเหมารวมจากงาน 5/10 วันเดิม)
++3. เสนอ choke point ได้: รายการ writer ปลายทางที่ต้อง gate **≤3 จุด** (หรือรายงานตรงว่าไม่มี พร้อมจำนวนจริง)
++4. ตอบ Δhour ต่อ action ครบ 3 งาน carry-over (เดินในเมือง/โรงแรม/คราฟต์) ตรงตัวเลขจอ
++5. ERROR=0 · Δmean frame ≤ margin · savehash เซฟจริงไม่เปลี่ยน
++
++**GO/NO-GO:** GO = ข้อ 1+3 · NO-GO = writer กระจัดกระจาย >3 จุดและไม่มีจุดร่วม → H6 แบบ "ขับเองที่เดียว" ทำไม่ได้ ต้องออกแบบนาฬิกาใหม่ที่ §20
++
++**ความเสี่ยง:** writer เป็น field write ตรง (ไม่ผ่าน method) จับยาก · hook hot path ทำ frame หนัก (mitigate: log เฉพาะเมื่อค่าเปลี่ยน) · writer ตอน load เซฟต้องแยก context ออกจาก writer ตอนเล่น
++
++**Rollback:** flag → no-op · `.dll.off` · restore สำเนา
++
++### SP3 — headless server
++
++**เป้าหมาย:** ยืนยัน H1 — world sim เดินต่อโดยไม่ต้องมีหน้าจอ/โฟกัส: ทดสอบ 3 แนวทาง (window minimize / hidden window / `-batchmode -nographics`) วัด sim-rate เทียบหน้าต่างปกติ เพื่อเลือกวิธีรัน world server จริงภายหลัง
++
++**ขอบเขตการเขียน:** ไม่มีโค้ด mod ใหม่ที่จำเป็น (ใช้ build + sampler เดิม) · ไฟล์ใหม่เฉพาะ launch script ใน `tools/` (นอกโฟลเดอร์เกม) · **ไม่แตะ Steam ทุกทาง** — การ launch ตรง exe ทำให้ Steam ไม่นับเวลาเล่น = บันทึกเป็นข้อเท็จจริง ไม่ใช่การแตะ Steam (รอมติ Q4 ก่อนรันแนว launch ตรง exe)
++
++**Exit criteria (วัดได้):**
++1. อย่างน้อย 1 แนวทาง: sim เดินครบ 10 min ต่อเนื่อง (ΔworldTime > 0, puppet ของ SP1 ถึงเป้าหมายได้, ไม่มี pause แอบแฝง — ตรวจด้วย `battleTime`/`turnIndex`/state ไม่ใช่ `battlePaused`/`timeScale` ตามข้อเท็จจริงของ S1.5)
++2. sim-rate เทียบหน้าต่างปกติ: Δmean frame ≤ margin เดิม **และ** sim-rate ≥ 90% (นิยาม SPEC ก่อนวัด — ต่ำกว่า = FAIL ตรง)
++3. เกมออกสะอาด (exit code 0), ERROR=0, ไม่มี artifact ค้างในโฟลเดอร์เกม
++4. ถ้า `-batchmode` พัง/ค้าง — เก็บ crash log แล้วตัดแนวทางนั้นทิ้ง (ไม่ใช่ NO-GO ของ spike ตราบใดที่แนวอื่นผ่าน)
++
++**GO/NO-GO:** GO = ข้อ 1+2 ด้วยแนวใดแนวหนึ่ง · NO-GO = ทุกแนว sim ค้างหรือช้า >10% แก้ไม่ได้ → C2 ต้องรัน server แบบมีหน้าต่าง (ยอมรับได้ไหม = §20 Q4)
++
++**ความเสี่ยง:** logic ขับด้วย frame แทนเวลา (vsync ตก → sim ช้าลง) — GUESS ต้องวัด · เกมใช้ UI/render หนัก อาจพังใน batchmode · hidden window อาจโดน OS throttle timer
++
++**Rollback:** ลบ launch script · ปิดเกมปกติ · restore สำเนา
++
++### SP4 — puppet client
++
++**เป้าหมาย:** ยืนยัน H4 — instance เกมที่สอง (บนเครื่องเดียวก่อน, loopback): (ก) ปิดการจำลองในเครื่องได้จริง (AI + นาฬิกาท้องถิ่นนิ่ง) (ข) รับ state โลกจาก server มาแสดงผลทาง overlay ให้ตรง server — **ยังไม่เขียน game object ฝั่ง guest** (puppet แบบเต็มเป็นงานหลังจบ ช่วง 1)
++
++**Just-in-time:**
++1. sandbox สอง instance: เกมอ่าน path เซฟคงที่ [GUESS — `GameDataController.GetSaveDataPath`, DUMP §13] → ทดสอบวิธีแยกโฟลเดอร์เซฟ + `UserData` ของ instance ที่สอง (junction / สลับโฟลเดอร์ / อย่างอื่น) — พิสูจน์ก่อนรัน 2 instance พร้อมกันเสมอ
++2. นิยาม snapshot โลกขั้นต่ำ: hero list (id, bigMapPos, area), calendar, modal state (ต่อยอด enum ของ §8)
++3. ปิด sim ฝั่ง guest: หาจุด gate AI+clock ท้องถิ่น (ใช้ผล SP1/SP2)
++
++**ขอบเขตการเขียน:** server: snapshot โลกใหม่แบบ**อ่านอย่างเดียว** · guest: ห้ามเขียน field เกมทุกจุด — แสดงผลทาง overlay/IMGUI เหมือน S2 · transport ต่อยอด TcpTransport + HMAC + resync ของ S2a-3 [RUNTIME] · คำสั่งขาขึ้นยังไม่มี (SP4 เป็น one-way state)
++
++**Exit criteria (วัดได้):**
++1. sandbox: instance ที่สองไม่เขียนโฟลเดอร์เซฟของ server (watch hash นิ่ง 10 min) และไม่เขียนเซฟตัวเองเลย
++2. guest ปิด sim ท้องถิ่น: hook AI+clock ฝั่ง guest ยิง 0 ครั้ง (หรือ gate ทุกครั้ง) ตลอด 10 min
++3. overlay แสดงตำแหน่ง hero + calendar ตรง server ทุก snapshot; latency p95 ≤ 500 ms (loopback — ค่าเริ่ม SPEC ตั้งก่อนวัด); gap/resync เดินตามกลไกเดิม (ทดสอบที่ 1 Hz และ 5 Hz)
++4. server: Δmean frame ≤ margin ขณะมี client ต่อ (วิธีวัดเดียวกับ X5/X6)
++5. ERROR=0 ทั้งสองฝั่ง; disconnect/reconnect กลางทาง 1 ครั้ง — ไม่ค้างทั้งสองฝั่ง
++
++**GO/NO-GO:** GO = ข้อ 1–3 · NO-GO = ปิด sim ท้องถิ่นไม่ได้ (guest ยังขับโลกตัวเอง) → puppet แบบเต็มตายที่นี่ กลับ §20 (ทางเลือก: viewer-only ตาม S2/S4 เดิม)
++
++**ความเสี่ยง:** สอง instance ชนเซฟ/Steam user (ความเสี่ยง #6 ของ v2 รุนแรงขึ้น) · ML `UserData` ชนกัน · state โลกใหญ่ (หลาย hero) ทำ frame/bandwidth ตก · sandbox พังเงียบ ๆ แล้วเขียนเซฟจริง (mitigate: watch hash ทุก run)
++
++**Rollback:** ปิด instance ที่สอง · flag · restore สำเนา · ลบ sandbox
++
++### SP5 — scale + ลด NPC ตอนสร้างโลก (10/30/100 หุ่น)
++
++**เป้าหมาย:** วัดต้นทุน scale ของโลกเดียวที่ 10/30/100 หุ่น (NPC + puppet) และยืนยัน H7 ว่าลด NPC ตอนสร้างโลกได้จริง — ตอบคำถาม scale ค้าง (§11.1 ข้อ 3; ข้อจำกัด X2: 9 units < 60)
++
++**Just-in-time:**
++1. หาจุดสร้าง hero/NPC ช่วง new game (GUESS — ไม่มีข้อมูลเดิม)
++2. sandbox โลกทดลอง: เซฟใหม่แยกจาก canonical ทั้งก้อน (รอมติ Q6)
++3. วิธีนับ hero ที่ตรวจสอบได้ (interop + เทียบ UI ตัวอย่าง)
++
++**ขอบเขตการเขียน:** hook จุดสร้าง world (หาจุด = log-only; gate จำนวน = เขียนได้**เฉพาะบนเซฟโลกทดลองใหม่**และต้องผ่าน `coop.c2.enabled`) · ห้ามแตะ canonical baseline ทุกทาง (watch hash ทุก run)
++
++**Exit criteria (วัดได้):**
++1. โลกทดลอง 10/30/100 หุ่นสร้างได้: จำนวน hero ตรงเป้า ±0 ทุกขนาด
++2. ที่ 100 หุ่น: Δmean frame เทียบ 10 หุ่น ≤ margin เดิม (เกิน = FAIL ตรง ห้ามปรับเกณฑ์) + snapshot encode p99 ≤ 4 ms (เกณฑ์เดิมของ S2a-2 exit 2)
++3. bandwidth ต่อจำนวนหุ่น ที่ 1 Hz และ 5 Hz — รายงาน observational (ตัดสินความพอภายหลัง)
++4. sim 100 หุ่น เดิน 10 min: soft-lock 0, ERROR=0
++5. canonical baseline ไม่ถูกแตะ (hash ตรงทุก baseline หลังจบ)
++
++**GO/NO-GO:** GO = ข้อ 1+2 · GO-with-limitation = 30 ผ่าน แต่ 100 FAIL (C2 ทำได้ที่ 30) — ตัดสินต่อที่ Q6 · NO-GO = หาจุด hook สร้างโลกไม่เจอเลย
++
++**ความเสี่ยง:** จุดสร้าง hero กระจายหลายที่ · 100 หุ่น crash/พังเชิงระบบ · sandbox พังแล้วเขียน canonical (mitigate: watch hash + save-split ก่อนทุก run)
++
++**Rollback:** ลบเซฟโลกทดลอง · flag · `.dll.off`
++
++### SP6 — battle worker (โปรเซสแยกต่อหนึ่งศึก)
++
++**เป้าหมาย:** พิสูจน์/หักล้าง H5 — worker (instance Unity player แยก หรือแนวทางที่ Q5 อนุมัติ) รัน**ศึกเดียว**เต็มวงจรแบบอัตโนมัติ (ทุกเทิร์นสั่งผ่าน IPC ผ่าน validator) ได้ และวัด lifecycle/determinism/latency เพื่อตัดสินว่า C2 แยกศึกออกจาก world server ได้จริงไหม
++
++**Just-in-time:**
++1. worker เข้าศึกโดยไม่โหลด world เต็มได้ไหม — เรียก `PrepareBattleMap` ตรง [DUMP 3 overloads, §13] บน instance ที่โหลดแค่หน้าเปล่า
++2. seed ของ `UnityEngine.Random` ตั้งได้ไหม → ผล 2 รอบ seed เดียวเหมือนกันไหม (determinism)
++3. worker อยู่ใน sandbox เซฟตัวเองได้ไหม (ต่อยอด sandbox ของ SP4)
++
++**ขอบเขตการเขียน:** worker = instance แยก + sandbox เซฟเฉพาะตัว · คำสั่งผ่าน validator เดิมของ S3 ขยายเป็น auto-play (`battle.move`/`battle.attack`/`battle.pass` ตาม §18.1) · ห้ามแตะ Steam · ห้ามเขียนเซฟฝั่ง world server
++
++**Exit criteria (วัดได้):**
++1. lifecycle ครบ 3 รอบ: สร้าง worker → รันศึกจบ → ทำลาย worker — ไม่มี orphan process, บันทึก memory/exit code ได้
++2. ศึกจบตามปกติ 3/3 (จบด้วยเงื่อนไขของเกมเอง ไม่ force)
++3. latency คำสั่งเทิร์น p95 ≤ 200 ms (loopback — ค่าเริ่ม SPEC ตั้งก่อนวัด)
++4. determinism: ถ้า seed ตั้งได้ — ผล 2 รอบ seed เดียวตรงกัน (hash battle log); ถ้าตั้งไม่ได้ = รายงาน NOT-RUN + ประเมินผลต่อสถาปัตยกรรม (worker ต้องเป็นจุดสุ่มเดียว — ตรงโมเดล C2 อยู่แล้ว อาจไม่บล็อก)
++5. world server ระหว่าง worker ทำงาน: Δmean frame ≤ margin, ERROR=0
++
++**GO/NO-GO:** GO = ข้อ 1–3 · NO-GO = worker รันศึกไม่ได้ในทุกแนวที่ Q5 อนุญาต → fallback ตาม Q5 (เสนอ: ศึกอยู่ใน world server = โมเดล S3 ขยาย)
++
++**ความเสี่ยง:** สูงสุดของชุด — IL2CPP native + Unity runtime + world context อาจทำให้ "โปรเซสแยก" เป็นไปไม่ได้เลย · ต้นทุนเครื่อง (เกมเต็ม 2 ตัวพร้อมกัน) · NO-GO ที่นี่**ไม่**ทำ C2 พังทั้งแผน — เปลี่ยนเป็น "ศึกใน server" เท่านั้น (Q5)
++
++**Rollback:** ปิด worker · ลบ sandbox · flag · `.dll.off`
++
++## 17. [v3] ตารางสิทธิ์การเขียน ช่วง 1 (เพิ่มใหม่ — ไม่แก้ตาราง §1.1 ของ S0–S6)
++
++เรียงคอลัมน์ตามลำดับรันจริง SP1→SP6 · แถวคงแถวเดิมของ §1.1 เพื่อเทียบได้ตรง
++
++| การกระทำ | SP1 | SP2 | SP3 | SP4 | SP5 | SP6 |
++|---|---|---|---|---|---|---|
++| อ่าน field ผ่าน Il2CppInterop แบบมีชนิด | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
++| อ่านด้วย raw offset/pointer | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
++| เรียก getter บริสุทธิ์ (ไม่เปลี่ยน state) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
++| Harmony patch (อ่าน argument/ค่า เท่านั้น) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
++| เรียก method ที่เปลี่ยน state ของเกม | ✅ เฉพาะ `SetPlayerMoveTargetArea` + method ปิด AI ต่อตัว (อนุมัติในแผนย่อยก่อนใช้) | ❌ (log-only ทั้ง spike) | ❌ | ❌ | ✅ เฉพาะตอนสร้างโลกทดลอง (gate จำนวน hero) | ✅ เฉพาะคำสั่งศึกผ่าน validator |
++| เขียน field ของเกมเอง | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
++| รับ input จากเครือข่ายแล้วรัน | ❌ (IPC ในเครื่องเท่านั้น) | ❌ | ❌ | ✅ snapshot โลก (guest อ่านอย่างเดียว) | ✅ ต่อจาก SP4 | ✅ คำสั่งศึก (verb ตาม §18.1) |
++| เรียก `GameDataController.Save/Load` | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
++| เขียนไฟล์ของ mod เอง (log/pref/capture) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
++| Steam / online services | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
++
++> แถว ❌ ทุกคอลัมน์ = ค่าเดียวบังคับทั้ง ช่วง 1 · การสำรวจ JIT (อ่านชั่วคราวนอกโค้ด ship) ยังทำได้ตามขอบเขตแถว raw offset ของ §1.1 · ห้ามเขียน `bigMapPos` ตรง ๆ ทุก spike (คงโหมด B ของ D2) · ทุก write ต้องผ่าน gate `coop.c2.enabled` (default false) อีกชั้นหนึ่ง
++
++## 18. [v3] งบ verb v1 และการตรวจฝั่ง server
++
++### 18.1 งบ verb v1 (รายการ action ที่รองรับ/ปิด) [SPEC — รออนุมัติตาม §20 Q1]
++
++**นิยาม "งบ":** verb ที่ server ยอมรับได้ใน C2 ขั้นแรก — **deny-by-default**: verb ที่ไม่อยู่ในงบ = ปฏิเสธทันที + log เหตุผล · เพิ่ม/ตัด verb ต้องมีมติ + validator เฉพาะ verb ครบก่อน และรายงาน diff ของงบในรายงาน stage ทุกครั้ง
++
++**เปิด (ข้อเสนอ v1 — 6 verbs):**
++
++| verb | พารามิเตอร์ | ใครใช้ได้ | อ้างอิง |
++|---|---|---|---|
++| `world.move.to` | areaId | เจ้าของ hero นั้น (host หรือ puppet ใดก็ได้) | ผลของ SP1 |
++| `world.wait.minutes` | n | ทุก session | timer ส่วนตัวของผู้เล่น (H6) |
++| `time.skipDay` | — | **host เท่านั้น (เสนอ)** — รอ Q1 | [RUNTIME 2 กรณี] 1 call `ChangeDay()` = 1 วัน — ห้ามเหมารวม (SP2 จะยืนยันเพิ่ม) |
++| `battle.move` | unitId, cell | เจ้าของ unit ที่ถึงตา (D3 ยังบังคับ) | ต่อยอด validator ของ S3 (§6) |
++| `battle.attack` | unitId, targetId | เจ้าของ unit ที่ถึงตา | เดียวกัน |
++| `battle.pass` | unitId | เจ้าของ unit ที่ถึงตา | เดียวกัน |
++
++**ปิดตลอด v1 (deny ทุกคำสั่งในกลุ่มนี้ ไม่มีข้อยกเว้น):** `save.*` · `trade.*` · `item.*` (ใช้/ทิ้ง/ซื้อขาย) · `recruit.*` · `skill.*` · `equipment.*` · `steam.*` / สถิติ / ความสำเร็จ · `pref.*` (ยกเว้น `set_pref` ที่ต้อง hardening ตามงาน S2a-4 ค้างก่อน) · ทุก verb ที่แตะ `APIDispatcher` / `DnsChecker` / `CheatCheck` / flag `cheat*` — ตาม denylist §1.7 ซึ่งยังบังคับ
++
++### 18.2 การตรวจฝั่ง server (ไม่ไว้ใจ client) [SPEC]
++
++1. **deny-by-default** — whitelist ต่อ session จากงบ §18.1; verb นอกงบปฏิเสธทันที
++2. **ownership** — server จับ map session→heroId; verb ที่อ้าง unit/hero ต้องเป็น puppet ของ session นั้นเท่านั้น (ห้ามสั่ง hero ของคนอื่น รวมถึงของ host)
++3. **precondition ตรวจที่ server เท่านั้นก่อนรัน** — ศึก: `nowActiveState`/เทิร์นของ unit ตาม D3 (REJECT ประเภทเดิม) · โลก: modal ที่หยุดโลก (enum ของ §8), hero ยังมีชีวิต, ไม่อยู่ระหว่างศึก · เงื่อนไขทรัพยากรที่ verb ต้องการ
++4. **rate + replay** — rate limit ต่อ verb ต่อ session (ค่าตั้งก่อนวัดในแผนย่อยของ spike ที่เกี่ยว) · ต่อยอด seq + resync ของ S2a-3 เป็นตัวต้าน replay [RUNTIME]
++5. **identity** — secret ต่อ client + HMAC ทุก envelope + `fieldHash` ต่อ field ที่ verb แตะ (ต่อยอด X7 — RUNTIME: DENY hmac/fieldHash ≤ 0.3 s)
++6. **choke point เดียว** — ทุก write ผ่านคิว main thread (§1.4) และผ่านลำดับ guard ก่อนสั่งแบบเดียวกับ S1.5 plan §3
++7. **audit** — log accepted/denied ทุกฉบับพร้อมเหตุผล + ตัวนับ `commandsAccepted` (ต่อยอดของ S2a-3)
++8. **เซฟ** — guest/worker ไม่มีสิทธิ์เขียนเซฟทุกเส้นทาง (D5); server **ไม่เคย**ใช้ข้อความจาก client เป็นความจริงของ state — client ส่งได้แค่ intent
++
++## 19. [v3] กติกาที่ไม่เปลี่ยน (ยืนยันซ้ำใน v3)
++
++1. **โปรโตคอลสำเนาเซฟ §1.2 บังคับเต็มรูปแบบทุก spike** — ทดสอบบนสำเนาเท่านั้น, `SaveSlot*` 0 ไฟล์เปลี่ยน, `PlayerprefData.dat` volatile ตาม D10
++2. **กติกาทุกข้อใน AGENTS.md ยังเหนือกว่าเล่มนี้** — ทำทีละ stage ตามแผนและอนุมัติก่อนเริ่ม, ป้ายหลักฐาน RUNTIME/DUMP/GUESS/SPEC, IL2CPP main thread, rollback ทุก stage, ห้ามแตะ Steam/anti-cheat, เทียบ hash เกมทุก session — ถ้าเล่มนี้ขัดกับ AGENTS.md ให้หยุดแล้วรายงาน
++3. **ตารางสิทธิ์ §1.1 ของ S0–S6 ไม่เปลี่ยน** — §17 เป็นตารางใหม่สำหรับ ช่วง 1 เท่านั้น
++4. **ห้ามเริ่มงานใด ๆ ของ ช่วง 1** (โค้ด/probe/สร้างไฟล์ในโฟลเดอร์เกม) จนกว่า (ก) S3 ปิดตาม exit criteria ของ v2 (ข) §20 ได้มติครบ (ค) แผนย่อยราย spike อนุมัติ
++5. ข้อความ §0–§14 คงเป็น v2 merged เดิม — v3 ไม่แก้; ความขัดกันระหว่าง ช่วง 1 กับ S4/S5/S6 ตัดสินที่ Q2 เท่านั้น
++
++## 20. [v3] คำถามที่ต้องให้ตัดสิน (6 ข้อ — ห้ามเริ่ม ช่วง 1 จนได้คำตอบครบ)
++
++| # | คำถาม | ทางเลือก/ค่าเริ่มที่เสนอ |
++|---|---|---|
++| Q1 | งบ verb v1 (§18.1): อนุมัติรายการเปิด 6 verbs หรือปรับ? และ `time.skipDay` ให้ guest ใช้ได้หรือไม่? | เปิด 6 verbs ตามข้อเสนอ · `time.skipDay` = host เท่านั้น |
++| Q2 | ตำแหน่ง S4/S5/S6 เดิมเมื่อมี ช่วง 1 และการย้ายงานวัดนาฬิกา carry-over | (a) คง S4/S5/S6 ตาม v2 (S5 ทำหลัง S3 ก่อนเปิด ช่วง 1) (b) S5 ยุบเป็น fault-injection ใน exit ของแต่ละ spike (c) S4/S6 ยกเลิกเมื่อ C2 GO — งานนาฬิกาย้ายเป้าจาก "JIT ของ S4" → "JIT ของ SP2" |
++| Q3 | topology ของ SP4/SP6 | เริ่ม 2 instance บนเครื่องเดียว (loopback) เสมอ แล้วค่อยขยายเครื่อง guest จริง/VPN หลัง SP4 ผ่าน — พร้อมตอบค้าง §11.1 (VPN ค่ายไหน, เครื่อง guest คืออะไร) |
++| Q4 | แนวทาง headless ที่อนุญาตให้ทดสอบใน SP3 | minimize / hidden window / `-batchmode -nographics` / launch ตรง exe (Steam ไม่นับเวลาเล่น) — เลือกได้หลายแนว |
++| Q5 | fallback ของ SP6 ถ้า "โปรเซสแยก" พิสูจน์ไม่ได้ | (a) ศึกอยู่ใน world server (โมเดล S3 ขยาย) (b) หยุด C2 battle ไว้ก่อน รอแผนใหม่ (c) อนุญาตให้ SP6 ทดสอบแนวอื่นเพิ่ม (ระบุ) |
++| Q6 | เซฟโลกทดลองของ SP5 และเกณฑ์ที่ 100 หุ่น | อนุญาตสร้างเซฟโลกทดลองใหม่นอก canonical (สร้างผ่าน UI เกมบนสำเนา + hook ลด NPC) — เกณฑ์ 100 หุ่นใช้ margin เดิม (Δmean ≤ 1.0 ms) หรือกำหนดใหม่ |
++
++---
++
++> [v3] จบส่วนเพิ่มของ v3 — เนื้อหาถัดลงไปเป็นภาคท้ายเดิมของ StagePlan.txt (v2 ดิบ + แผนย่อย S1.5/S2a-2/S2a-3) คงเดิมทุกตัวอักษร
++
+ # STAGEPLAN — LongYinLiZhiZhuan Co-op Mod (v2)
+ 
+ สถานะ: อนุมัติแล้ว — กำลังเริ่ม S0

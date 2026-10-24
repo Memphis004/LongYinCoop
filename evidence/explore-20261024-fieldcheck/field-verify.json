@@ -1,0 +1,46 @@
+{
+ "at": "2026-10-24T00:31:53",
+ "data": {
+  "player": {
+   "heroID": 0,
+   "badFame": 0,
+   "forceContribution": 995.7932739257812,
+   "itemCount": 70
+  },
+  "world": {
+   "totalBadFame": 67.745,
+   "governMoney": 0,
+   "governItems": 15
+  },
+  "force": {
+   "id": 25,
+   "name": "仙霞派",
+   "resourceStore": [
+    5996.73,
+    4900,
+    4900,
+    2447.87,
+    4600,
+    2333.16
+   ],
+   "resourceStoreMax": [
+    12250,
+    4900,
+    4900,
+    4900,
+    4900,
+    2450
+   ],
+   "forceStorageMoney": 0,
+   "forceStorageItems": 171,
+   "bookStorageItems": 32,
+   "last5Items": [
+    "?",
+    "?",
+    "?",
+    "?",
+    "?"
+   ]
+  }
+ }
+}
