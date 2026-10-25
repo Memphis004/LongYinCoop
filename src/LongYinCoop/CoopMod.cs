@@ -16,6 +16,7 @@ namespace LongYinCoop
         private MainThreadDispatcher _dispatcher;
         private IpcServer _ipc;
         private S2HostService _s2;
+        private S2.S2OverlayService _overlay;
         private bool _threadReported;
         private int _ticks;
 
@@ -62,10 +63,17 @@ namespace LongYinCoop
             // (rev4: DevCommands ไม่ถูกตรวจ — ต้องเปิดไว้ให้ `spike status` = เครื่องมือวัดทำงาน)
             // ไฟล์อยู่ที่ UserData\LongYinCoop\net.cfg — MelonLoader ไม่แตะ (มติ 2026-10-22)
             _s2 = new S2HostService(CoopPaths.NetCfgPath, CoopPaths.S2EvidenceDir);
+            // S2a-4 W3: guest overlay in-process — วาดอย่างเดียว (ไม่กิน input), เปิดด้วย net.cfg overlay=true
+            _overlay = new S2.S2OverlayService(_s2);
         }
 
         public override void OnDeinitializeMelon()
         {
+            if (_overlay != null)
+            {
+                _overlay.Dispose();
+                _overlay = null;
+            }
             if (_s2 != null)
             {
                 _s2.Stop();
@@ -105,6 +113,8 @@ namespace LongYinCoop
             AttackCommand.Tick();
             // S2a-2: snapshot sampler/sender (main thread; sample only, never touches game state)
             if (_s2 != null) _s2.Tick();
+            // S2a-4: overlay service (เปิด/ปิด client ตาม net.cfg + สถานะ listener — main thread)
+            if (_overlay != null) _overlay.Tick();
 
             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)

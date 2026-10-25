@@ -94,6 +94,12 @@ namespace LongYinCoop.S2
 
         public bool Authenticated { get { return _authenticated; } }
 
+        /// <summary>S2a-4 W3: endpoint จริงของ listener tcp (port=0 ใน cfg = OS เลือก) — ให้ overlay in-process ต่อกลับ · 0 = ไม่มี listener</summary>
+        public int ActiveTcpPort { get { return _tcpHost != null ? _tcpHost.Port : 0; } }
+
+        /// <summary>S2a-4 W3: มี listener tcp อยู่หรือไม่ (แม้ยังไม่มี guest)</summary>
+        public bool TcpListening { get { return _tcpHost != null && _tcpHost.Listening; } }
+
         public S2Counters Counters { get { return _counters; } }
 
         public S2NetConfig Config { get { return _config; } }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using LongYinCoop.S2;
 using LongYinCoop.S2.Guest;
 using LongYinCoop.S2.Host;
 using LongYinCoop.S2.Protocol;
@@ -38,6 +39,7 @@ namespace LongYinCoop.S2.Tests
                 Scaffold();
                 T0DecoderVectors();
                 T1OverlayClient();
+                T3RenderModel();
             }
             finally
             {
@@ -319,6 +321,101 @@ namespace LongYinCoop.S2.Tests
                 Check("T1 duplicate counted not gap", s.Duplicates >= 1 && s.Gaps == 0
                     && s.ResyncsSent == 0);
             }
+        }
+
+        // ------------------------------------------------------------------ T3 (W3) render model + overlay key
+
+        private static GuestTimedSnapshot Snap(uint seq, long receivedAtMs)
+        {
+            S2Frame frame = FakeS2Host.SyntheticFrame(seq, seq);
+            byte[] payload = S2FrameCodec.Encode(frame);
+            GuestSnapshotDisplay display;
+            S2GuestDecoder.TryDecode(payload, seq, out display, out _);
+            return new GuestTimedSnapshot { Seq = seq, ReceivedAtMs = receivedAtMs, Display = display };
+        }
+
+        private static S2NetSettings ParseCfg(string text)
+        {
+            return S2NetConfig.Parse(text, "t", 0);
+        }
+
+        private static void T3RenderModel()
+        {
+            long now = 100_000;
+
+            // 1) ring ว่าง → ไม่มีเฟรม (ไม่เด่า ไม่สร้างของปลอม)
+            S2OverlaySelection none = S2OverlayRenderModel.Select(new GuestTimedSnapshot[0], now);
+            Check("T3 empty ring has no snapshot", !none.HasSnapshot);
+
+            // 2) มีเฟรมเดียวยังใหม่กว่าหน้าต่าง smoothing → ใช้เฟรมนั้น (ไม่ extrapolate — ไม่มีเฟรมอื่นให้ใช้)
+            GuestTimedSnapshot[] single = { Snap(1, now - 30) };
+            S2OverlaySelection fresh = S2OverlayRenderModel.Select(single, now);
+            Check("T3 single fresh frame uses oldest real frame", fresh.HasSnapshot && fresh.Snapshot.Seq == 1
+                && !fresh.Stale && fresh.AgeMs == 30);
+
+            // 3) smoothing 100 ms: เลือกใหม่สุดที่พ้นหน้าต่าง (age 300) ไม่ใช่ใหม่สุด (age 20)
+            GuestTimedSnapshot[] ring =
+            {
+                Snap(1, now - 500),
+                Snap(2, now - 400),
+                Snap(3, now - 300),
+                Snap(4, now - 20),
+            };
+            S2OverlaySelection selected = S2OverlayRenderModel.Select(ring, now);
+            Check("T3 smoothing picks newest frame past window", selected.HasSnapshot
+                && selected.Snapshot.Seq == 3 && selected.AgeMs == 300 && !selected.Stale);
+
+            // 4) ทุกเฟรมใหม่กว่าหน้าต่าง → ใช้เก่าสุดที่มีอยู่จริง
+            GuestTimedSnapshot[] allFresh =
+            {
+                Snap(1, now - 50),
+                Snap(2, now - 40),
+                Snap(3, now - 30),
+            };
+            S2OverlaySelection oldest = S2OverlayRenderModel.Select(allFresh, now);
+            Check("T3 all-fresh falls back to oldest", oldest.HasSnapshot && oldest.Snapshot.Seq == 1);
+
+            // 5) stale เมื่อเก่าเกิน 3000 ms
+            GuestTimedSnapshot[] staleRing = { Snap(1, now - 4000), Snap(2, now - 3500) };
+            S2OverlaySelection stale = S2OverlayRenderModel.Select(staleRing, now);
+            Check("T3 stale flagged past 3000ms", stale.HasSnapshot && stale.Stale
+                && stale.Snapshot.Seq == 2);
+
+            // 6) extrapolate=false: ผลลัพธ์ต้องเป็นสมาชิกของ ring เสมอ
+            bool member = false;
+            for (int i = 0; i < ring.Length; i++)
+            {
+                if (ring[i].Seq == selected.Snapshot.Seq) { member = true; break; }
+            }
+            Check("T3 selection is a real ring member", member && selected.Snapshot.Seq != 0);
+
+            // 7) overlay=false ไม่มีผล (ไม่วาด) — gate แบบ pure
+            Check("T3 ShouldRender gate", !S2OverlayRenderModel.ShouldRender(false, ring.Length)
+                && S2OverlayRenderModel.ShouldRender(true, ring.Length)
+                && !S2OverlayRenderModel.ShouldRender(true, 0));
+
+            // 8) net.cfg key `overlay` (M3): default false · รับ true/1/yes/on · ค่าอื่น = false
+            Check("T3 overlay default false", !ParseCfg("").Overlay);
+            Check("T3 overlay true", ParseCfg("overlay = true").Overlay);
+            Check("T3 overlay 1/yes/on", ParseCfg("overlay = 1").Overlay
+                && ParseCfg("overlay = yes").Overlay
+                && ParseCfg("overlay = on").Overlay);
+            Check("T3 overlay garbage/false = false", !ParseCfg("overlay = maybe").Overlay
+                && !ParseCfg("overlay = false").Overlay);
+            S2NetSettings withOverlay = ParseCfg("overlay = true\nrole = host");
+            Check("T3 overlay survives alongside other keys", withOverlay.Overlay
+                && withOverlay.Role == "host" && withOverlay.FormatOk);
+            Check("T3 overlay appears in Describe", ParseCfg("overlay = true")
+                .Describe().Contains("overlay=True"));
+
+            // 9) text builder: ใช้ template ของ UIStrings และใส่ค่าครบ
+            GuestSnapshotDisplay d = Snap(7, now).Display;
+            string header = S2OverlayText.SnapshotLine(d);
+            string unit = S2OverlayText.UnitLine(d.Units[0]);
+            Check("T3 header text has battle/turn/units", header.Contains("turn") && header.Contains("units 9")
+                && header.Contains("active"));
+            Check("T3 unit text has id/hp/grid", unit.Contains(d.Units[0].StableId)
+                && unit.Contains(d.Units[0].HpText) && unit.Contains("(0,0)"));
         }
 
         /// <summary>frame สังเคราะห์ n ยูนิต (ใช้กับ 60/65 ยูนิต — เกินขอบเดิมของ SyntheticFrame)</summary>

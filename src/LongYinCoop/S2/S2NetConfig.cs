@@ -28,6 +28,10 @@ namespace LongYinCoop.S2
         public int HeartbeatMs;        // ส่งซ้ำเมื่อ state ไม่เปลี่ยน
         public string Transport;       // loopback | tcp
 
+        // ---- S2a-4 (overlay) ----------------------------------------------
+        /// <summary>แสดง overlay IMGUI ในโปรเซสเดียวกับ host (default false — M3: flat key ไม่ใช้ hotkey)</summary>
+        public bool Overlay;
+
         public bool IsValid
         {
             get
@@ -84,9 +88,9 @@ namespace LongYinCoop.S2
         {
             return string.Format(CultureInfo.InvariantCulture,
                 "enabled={0} role={1} allowNonLoopback={2} secretSet={3} format={4} reads={5} error={6} " +
-                "transport={7} bind={8} port={9} sendHz={10} heartbeatMs={11}",
+                "transport={7} bind={8} port={9} sendHz={10} heartbeatMs={11} overlay={12}",
                 Enabled, Role ?? "-", AllowNonLoopback, SecretLooksSet, FormatOk, ReadCount,
-                Error ?? "-", Transport ?? "-", Bind ?? "-", Port, SendHz, HeartbeatMs);
+                Error ?? "-", Transport ?? "-", Bind ?? "-", Port, SendHz, HeartbeatMs, Overlay);
         }
     }
 
@@ -127,6 +131,8 @@ namespace LongYinCoop.S2
         public const string KeySendHz = "sendhz";
         public const string KeyHeartbeatMs = "heartbeatms";
         public const string KeyTransport = "transport";
+        // S2a-4
+        public const string KeyOverlay = "overlay";
 
         public const string DefaultBind = BindPolicy.DefaultBind;
         public const int DefaultPort = 47800;
@@ -272,6 +278,11 @@ namespace LongYinCoop.S2
                 else if (key == KeyTransport)
                 {
                     s.Transport = value.ToLowerInvariant();
+                }
+                else if (key == KeyOverlay)
+                {
+                    // S2a-4 (M3): flat key ปิดเป็น default · รับ true/1/yes/on ตาม IsTrue
+                    s.Overlay = IsTrue(value);
                 }
                 // key อื่น: ข้าม (เผื่ออนาคต ไม่ทำให้ไฟล์เสีย)
             }

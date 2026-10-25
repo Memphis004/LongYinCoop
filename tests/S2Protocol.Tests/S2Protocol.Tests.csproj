@@ -29,6 +29,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\S2NetConfig.cs" LinkBase="S2" />
     <!-- งาน A: path ของ net.cfg (pure: System + System.IO เท่านั้น) -->
     <Compile Include="..\..\src\LongYinCoop\CoopPaths.cs" LinkBase="Mod" />
+    <!-- S2a-4 W3: template ข้อความ overlay (pure consts — ใช้โดย S2OverlayText) -->
+    <Compile Include="..\..\src\LongYinCoop\UIStrings.cs" LinkBase="Mod" />
     <!-- S3 prerequisite (รีวิวรอบ 3): AliveRule pure — ใช้ทั้งใน mod และ table unit test -->
     <Compile Include="..\..\src\LongYinCoop\S3\AliveRule.cs" LinkBase="S3" />
     <!-- NEG20 follow-up: RangeCells pure — expose attack range cells (status) -->
@@ -37,6 +39,7 @@
     <!-- (S2OverlayService.cs ไม่ถูกลิงก์: MelonEvents.OnGUI/GUI เป็นของ runtime — compile เฉพาะใน mod csproj) -->
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2GuestDecoder.cs" LinkBase="Guest" />
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayClient.cs" LinkBase="Guest" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayRenderModel.cs" LinkBase="Guest" />
   </ItemGroup>
 
   <ItemGroup>

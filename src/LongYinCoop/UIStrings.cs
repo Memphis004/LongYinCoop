@@ -59,6 +59,17 @@ namespace LongYinCoop
         public const string PrefSet = "pref set {0}={1}";
         public const string PrefUnknown = "unknown pref: {0}";
 
+        // ── S2a-4: guest overlay (in-process, IMGUI) ────────────────────
+        // วาดอย่างเดียว (Label/Box) — ไม่มี interactive control จึงไม่กิน input ของเกม (STAGEPLAN §5)
+        public const string OverlayStarted = "overlay: enabled (connect back to own listener, slot ของ guest ครั้งละ 1)";
+        public const string OverlayStopped = "overlay: disabled";
+        public const string OverlayWaiting = "overlay: waiting for snapshot...";
+        public const string OverlayStatusArgs =
+            "overlay seq={0} age={1}ms{2} gaps={3} resync={4}/{5} divA={6} offset={7}ms";
+        public const string OverlayStaleTag = " STALE";
+        public const string OverlaySnapshotArgs = "{0} turn {1} time {2}s active {3} units {4}";
+        public const string OverlayUnitArgs = "{0}{1} ({2},{3}) hp {4}{5}{6}{7}";
+
         // ── log file ─────────────────────────────────────────────────────
         // ── S1.5-b: spike status (read-only) ─────────────────────────────
         public const string SpikeDisabled = "spike: mod is disabled (coop.enabled=false)";
