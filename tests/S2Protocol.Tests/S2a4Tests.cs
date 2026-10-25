@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using LongYinCoop.S2.Guest;
 using LongYinCoop.S2.Host;
 using LongYinCoop.S2.Protocol;
@@ -36,6 +37,7 @@ namespace LongYinCoop.S2.Tests
             {
                 Scaffold();
                 T0DecoderVectors();
+                T1OverlayClient();
             }
             finally
             {
@@ -178,6 +180,145 @@ namespace LongYinCoop.S2.Tests
                 if (d.Units[i].StableId == stableId) return d.Units[i];
             }
             return default(GuestUnitDisplay);
+        }
+
+        // ------------------------------------------------------------------ T1 (W2) client <-> fake-host
+
+        private const string T1Secret = "0123456789abcdef0123456789abcdef";
+        private const string T1WrongSecret = "ffffffffffffffffffffffffffffffff";
+
+        /// <summary>เริ่ม FakeS2Host บนเธรดของตัวเอง (port 0 = OS เลือก) คืน handle รอ/หยุด</summary>
+        private sealed class T1Host : IDisposable
+        {
+            public int Port;
+            public FakeS2Host.Summary Summary;
+            private readonly Thread _thread;
+            private readonly ManualResetEvent _started = new ManualResetEvent(false);
+
+            public T1Host(int seconds, int skipSeqAt = -1, int dupSeqAt = -1)
+            {
+                _thread = new Thread(delegate ()
+                {
+                    Summary = FakeS2Host.Run(0, T1Secret, seconds, 30, skipSeqAt, dupSeqAt,
+                        delegate (FakeS2Host.Summary s)
+                        {
+                            Port = s.Port;
+                            _started.Set();
+                        });
+                })
+                { IsBackground = true, Name = "s2a4-t1-host" };
+                _thread.Start();
+                _started.WaitOne(5000);
+            }
+
+            public void Dispose()
+            {
+                if (Summary != null) Summary.StopRequested = true;
+                _thread.Join(2000);
+            }
+        }
+
+        private static byte[] SecretBytes(string hex)
+        {
+            return LongYinCoop.S2.Protocol.S2Auth.BytesFromHex(hex);
+        }
+
+        private static S2OverlayClientStats WaitUntil(S2OverlayClient client, Func<S2OverlayClientStats, bool> predicate,
+                                                      int timeoutMs)
+        {
+            long end = Environment.TickCount64 + timeoutMs;
+            S2OverlayClientStats stats = client.SnapshotStats();
+            while (Environment.TickCount64 < end)
+            {
+                if (predicate(stats)) return stats;
+                Thread.Sleep(50);
+                stats = client.SnapshotStats();
+            }
+            return stats;
+        }
+
+        private static void T1OverlayClient()
+        {
+            string fieldHash = LongYinCoop.S2.Protocol.S2Fields.Hash;
+
+            // 1) handshake ผ่าน + snapshot ไหล + Div-A สะอาด + PING offset (loopback)
+            using (T1Host host = new T1Host(10))
+            {
+                Check("T1 fake host started", host.Port > 0);
+                using (S2OverlayClient client = new S2OverlayClient("127.0.0.1", host.Port,
+                        SecretBytes(T1Secret), fieldHash))
+                {
+                    client.Start();
+                    S2OverlayClientStats s = WaitUntil(client,
+                        delegate (S2OverlayClientStats x) { return x.Snapshots >= 20 && x.Pongs >= 1; }, 8000);
+                    Check("T1 handshake authenticates", s.Authenticated && s.Sessions == 1);
+                    Check("T1 snapshots flow (>=20)", s.Snapshots >= 20);
+                    Check("T1 seq tracks without gaps", s.Gaps == 0 && s.LastSeq >= 20);
+                    Check("T1 Div-A clean", s.DivAChecked >= 20 && s.DivAMismatch == 0);
+                    Check("T1 PING/PONG offset on loopback", s.HasOffset && s.Pongs >= 1
+                        && Math.Abs(s.OffsetUsAtMinRtt) < 200_000);
+                    Check("T1 ring + latest populated", client.Latest() != null && client.CopyRing().Length > 0
+                        && client.Latest().Units.Length == 9);
+                }
+            }
+
+            // 2) secret ผิด → ไม่ผ่าน handshake + ได้ Deny (BadAuth)
+            using (T1Host host = new T1Host(8))
+            using (S2OverlayClient client = new S2OverlayClient("127.0.0.1", host.Port,
+                    SecretBytes(T1WrongSecret), fieldHash))
+            {
+                client.Start();
+                S2OverlayClientStats s = WaitUntil(client,
+                    delegate (S2OverlayClientStats x) { return x.Denies >= 1; }, 8000);
+                Check("T1 wrong secret never authenticates", !s.Authenticated && s.Sessions == 0);
+                Check("T1 wrong secret gets denied", s.Denies >= 1
+                    && (s.LastDeny == DenyCode.BadAuth || s.LastDeny == DenyCode.Timeout));
+            }
+
+            // 3) DENY busy: guest ที่สอง (slot เดียว — M4)
+            using (T1Host host = new T1Host(10))
+            using (S2OverlayClient first = new S2OverlayClient("127.0.0.1", host.Port,
+                    SecretBytes(T1Secret), fieldHash))
+            {
+                first.Start();
+                WaitUntil(first, delegate (S2OverlayClientStats x) { return x.Snapshots >= 5; }, 8000);
+                using (S2OverlayClient second = new S2OverlayClient("127.0.0.1", host.Port,
+                        SecretBytes(T1Secret), fieldHash))
+                {
+                    second.Start();
+                    S2OverlayClientStats s = WaitUntil(second,
+                        delegate (S2OverlayClientStats x) { return x.Denies >= 1; }, 8000);
+                    Check("T1 second guest denied busy", s.Denies >= 1 && s.LastDeny == DenyCode.Busy
+                        && !s.Authenticated);
+                }
+                Check("T1 first guest unaffected", first.SnapshotStats().Authenticated);
+            }
+
+            // 4) resync on gap: host ข้าม seq ครั้งเดียว → client เห็น gap ส่ง RESYNC และปิดหน้าต่างได้
+            using (T1Host host = new T1Host(12, skipSeqAt: 5))
+            using (S2OverlayClient client = new S2OverlayClient("127.0.0.1", host.Port,
+                    SecretBytes(T1Secret), fieldHash))
+            {
+                client.Start();
+                S2OverlayClientStats s = WaitUntil(client,
+                    delegate (S2OverlayClientStats x) { return x.Gaps >= 1 && x.GapClosed >= 1 && x.Snapshots >= 30; }, 12000);
+                Check("T1 gap detected exactly once", s.Gaps == 1);
+                Check("T1 resync sent + acked", s.ResyncsSent >= 1 && s.ResyncAcks >= 1);
+                Check("T1 gap window closed by resync snapshot", s.GapClosed >= 1);
+                Check("T1 flow continues after gap", s.Snapshots >= 30);
+            }
+
+            // 5) duplicate seq ไม่นับเป็น gap
+            using (T1Host host = new T1Host(10, dupSeqAt: 4))
+            using (S2OverlayClient client = new S2OverlayClient("127.0.0.1", host.Port,
+                    SecretBytes(T1Secret), fieldHash))
+            {
+                client.Start();
+                S2OverlayClientStats s = WaitUntil(client,
+                    delegate (S2OverlayClientStats x) { return x.Duplicates >= 1 && x.Snapshots >= 20; }, 8000);
+                Check("T1 duplicate counted not gap", s.Duplicates >= 1 && s.Gaps == 0
+                    && s.ResyncsSent == 0);
+            }
         }
 
         /// <summary>frame สังเคราะห์ n ยูนิต (ใช้กับ 60/65 ยูนิต — เกินขอบเดิมของ SyntheticFrame)</summary>

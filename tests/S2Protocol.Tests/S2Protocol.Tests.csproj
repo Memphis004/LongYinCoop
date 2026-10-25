@@ -36,6 +36,7 @@
     <!-- S2a-4: guest side (pure) — decoder (W1), overlay client (W2), render model (W3) -->
     <!-- (S2OverlayService.cs ไม่ถูกลิงก์: MelonEvents.OnGUI/GUI เป็นของ runtime — compile เฉพาะใน mod csproj) -->
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2GuestDecoder.cs" LinkBase="Guest" />
+    <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayClient.cs" LinkBase="Guest" />
   </ItemGroup>
 
   <ItemGroup>
