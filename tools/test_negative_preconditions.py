@@ -595,5 +595,82 @@ class MainFlowOfflineTests(unittest.TestCase):
             nt.coopctl.call = self._orig_call
 
 
+class RangeVerdictFromStateTests(unittest.TestCase):
+    """NEG20 follow-up (2026-10-25): range_verdict_from_state — derive the
+    OUT_OF_RANGE premise verdict from the new `attackRangeCells` status field.
+
+    คืน True = target อยู่ในระยะ · False = นอกระยะ · None = ตรวจไม่ได้ (fail-closed)
+    """
+
+    @staticmethod
+    def st(units, cells, count):
+        s = state(units=units, phase="WaitAttacking")
+        s["attackRangeCells"] = cells
+        s["attackRangeCount"] = count
+        return s
+
+    def test_missing_field_returns_none(self):
+        s = state(units=[unit("0:0", team=0, row=8, col=0),
+                         unit("1:10034", team=1, row=12, col=19)],
+                  phase="WaitAttacking")
+        self.assertIsNone(nt.range_verdict_from_state(s, "1:10034"))
+
+    def test_null_cells_returns_none(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        self.assertIsNone(nt.range_verdict_from_state(self.st(u, None, -1), "1:10034"))
+
+    def test_target_in_cells_returns_true(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        cells = [[12, 18], [12, 19], [11, 19]]
+        self.assertIs(nt.range_verdict_from_state(self.st(u, cells, 3), "1:10034"), True)
+
+    def test_target_out_of_cells_returns_false(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        cells = [[1, 1], [2, 2]]
+        self.assertIs(nt.range_verdict_from_state(self.st(u, cells, 2), "1:10034"), False)
+
+    def test_empty_cells_returns_false(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        self.assertIs(nt.range_verdict_from_state(self.st(u, [], 0), "1:10034"), False)
+
+    def test_count_mismatch_returns_none(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        self.assertIsNone(nt.range_verdict_from_state(self.st(u, [[1, 1]], 2), "1:10034"))
+
+    def test_negative_count_returns_none(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        self.assertIsNone(nt.range_verdict_from_state(self.st(u, [], -1), "1:10034"))
+
+    def test_target_absent_returns_none(self):
+        u = [unit("0:0", team=0, row=8, col=0)]
+        self.assertIsNone(nt.range_verdict_from_state(
+            self.st(u, [[1, 1]], 1), "1:10034"))
+
+    def test_malformed_entries_return_none(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        # entry ยาว != 2 ทำให้ cells_set ไม่ครบ len(cells) -> fail-closed
+        self.assertIsNone(nt.range_verdict_from_state(
+            self.st(u, [[1, 1], [2]], 2), "1:10034"))
+
+    def test_non_list_cells_returns_none(self):
+        u = [unit("0:0", team=0, row=8, col=0), unit("1:10034", team=1, row=12, col=19)]
+        self.assertIsNone(nt.range_verdict_from_state(self.st(u, "nope", 4), "1:10034"))
+
+    def test_case7_fixture_out_of_range_fires_once(self):
+        """เคส 7 fixture (Gate-2 ต้นเหตุ): ตอนนี้ตรวจได้ว่า target IN range -> verdict
+        True -> NOT-RUN (premise-mismatch) — ห้ามยิงเด็ดขาด เหมือน regression เดิม"""
+        u = [unit("0:0", team=0, row=6, col=0), unit("1:10066", team=1, row=7, col=17)]
+        cells = [[7, 12], [7, 17], [7, 18]]  # 1:10066 @(7,17) อยู่ในระยะ (incident จริง)
+        rv = nt.range_verdict_from_state(self.st(u, cells, 3), "1:10066")
+        self.assertIs(rv, True)
+        case = {"n": 7, "group": "OUT_OF_RANGE", "cmd": "attack",
+                "args": {"id": "0:0", "target": "1:10066"}, "arm": 120}
+        d = nt.check_preconditions("OUT_OF_RANGE", "attack", case,
+                                   self.st(u, cells, 3), {"arm_active_until_ms": 0},
+                                   range_verdict=rv)
+        self.assertFalse(d["can_fire"])
+        self.assertEqual(d["notrun_reason"], "premise-mismatch")
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -1,0 +1,504 @@
+{
+  "label": "NEG20R-1b4c17aa-20261025-230950",
+  "window": "w2-waitattacking",
+  "pid": 988,
+  "settle_ms": 500,
+  "base_hash": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+  "cases": [
+    {
+      "n": 5,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:51",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: unit 0:51 is not the active unit (0:0)",
+      "expect": "is not the active unit",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:25"
+    },
+    {
+      "n": 6,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:86",
+        "target": "1:10183"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: unit 0:86 is not the active unit (0:0)",
+      "expect": "is not the active unit",
+      "code_ok": true,
+      "latency_ms": 16,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:26"
+    },
+    {
+      "n": 15,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 1,
+        "col": 0
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike move: nowActiveState=WaitAttacking (expected WaitPlayerInput)",
+      "expect": "expected WaitPlayerInput",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:27"
+    },
+    {
+      "n": 16,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 0,
+        "col": 1
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike move: nowActiveState=WaitAttacking (expected WaitPlayerInput)",
+      "expect": "expected WaitPlayerInput",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:28"
+    },
+    {
+      "n": 19,
+      "group": "SELF",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "0:0"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: target 0:0 is the active unit",
+      "expect": "is the active unit",
+      "code_ok": true,
+      "latency_ms": 7,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:29"
+    },
+    {
+      "n": 7,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "result": "NOT-RUN",
+      "pass": false,
+      "notrun_reason": "premise-mismatch",
+      "prechecks": [
+        {
+          "check": "in-battle",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "check": "battle-fighting",
+          "ok": true,
+          "detail": "battleState=Fighting"
+        },
+        {
+          "check": "attacker-is-active",
+          "ok": true,
+          "detail": "active=0:0"
+        },
+        {
+          "check": "attacker-alive",
+          "ok": true,
+          "detail": "0:0"
+        },
+        {
+          "check": "target-exists",
+          "ok": true,
+          "detail": "1:10181"
+        },
+        {
+          "check": "target-alive",
+          "ok": true,
+          "detail": "1:10181"
+        },
+        {
+          "check": "target-out-of-range(confirmed)",
+          "ok": false,
+          "detail": "range_verdict=True (True=in range, False=out of range)"
+        }
+      ],
+      "pre_state": {
+        "inBattle": true,
+        "battleStateName": "Fighting",
+        "nowActiveStateName": "WaitAttacking",
+        "active": "0:0",
+        "isPlayerTurn": false,
+        "unitCount": 8,
+        "turnIndex": 11,
+        "gridW": 20,
+        "gridH": 20,
+        "attackRangeCount": 32,
+        "damageRangeCount": 1,
+        "paused": false,
+        "stateHash": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+        "attackRangeCells": [
+          [
+            11,
+            13
+          ],
+          [
+            11,
+            14
+          ],
+          [
+            11,
+            15
+          ],
+          [
+            11,
+            19
+          ],
+          [
+            10,
+            14
+          ],
+          [
+            12,
+            14
+          ],
+          [
+            10,
+            15
+          ],
+          [
+            12,
+            15
+          ],
+          [
+            10,
+            16
+          ],
+          [
+            12,
+            16
+          ],
+          [
+            10,
+            18
+          ],
+          [
+            12,
+            18
+          ],
+          [
+            10,
+            19
+          ],
+          [
+            12,
+            19
+          ],
+          [
+            9,
+            15
+          ],
+          [
+            13,
+            15
+          ],
+          [
+            9,
+            16
+          ],
+          [
+            13,
+            16
+          ],
+          [
+            9,
+            17
+          ],
+          [
+            13,
+            17
+          ],
+          [
+            9,
+            18
+          ],
+          [
+            13,
+            18
+          ],
+          [
+            9,
+            19
+          ],
+          [
+            13,
+            19
+          ],
+          [
+            8,
+            16
+          ],
+          [
+            14,
+            16
+          ],
+          [
+            8,
+            17
+          ],
+          [
+            14,
+            17
+          ],
+          [
+            8,
+            18
+          ],
+          [
+            14,
+            18
+          ],
+          [
+            7,
+            17
+          ],
+          [
+            15,
+            17
+          ]
+        ],
+        "units": [
+          {
+            "id": "0:765",
+            "team": 0,
+            "row": 15,
+            "col": 3,
+            "hp": 356.04,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "0:86",
+            "team": 0,
+            "row": 5,
+            "col": 8,
+            "hp": 793.891,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:0",
+            "team": 0,
+            "row": 11,
+            "col": 17,
+            "hp": 1006.416,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:51",
+            "team": 0,
+            "row": 13,
+            "col": 12,
+            "hp": 538.434,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "1:10181",
+            "team": 1,
+            "row": 13,
+            "col": 16,
+            "hp": 184.92,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "1:10183",
+            "team": 1,
+            "row": 18,
+            "col": 16,
+            "hp": 203.04,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "1:10184",
+            "team": 1,
+            "row": 6,
+            "col": 18,
+            "hp": 200.16,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "1:10117",
+            "team": 1,
+            "row": 16,
+            "col": 16,
+            "hp": 312.48,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          }
+        ]
+      },
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "expect": "OUT_OF_RANGE",
+      "ts": "2026-10-25 23:29:29"
+    },
+    {
+      "n": 8,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10183"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "OUT_OF_RANGE: spike attack: the game did not accept the click (attackComfirmed=false) - no retry",
+      "expect": "OUT_OF_RANGE",
+      "code_ok": true,
+      "latency_ms": 31,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:31"
+    },
+    {
+      "n": 9,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10184"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "OUT_OF_RANGE: spike attack: the game did not accept the click (attackComfirmed=false) - no retry",
+      "expect": "OUT_OF_RANGE",
+      "code_ok": true,
+      "latency_ms": 58,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:32"
+    },
+    {
+      "n": 10,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10117"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_after": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "OUT_OF_RANGE: spike attack: the game did not accept the click (attackComfirmed=false) - no retry",
+      "expect": "OUT_OF_RANGE",
+      "code_ok": true,
+      "latency_ms": 7,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:29:33"
+    }
+  ],
+  "pass": 8,
+  "fail": 0,
+  "notrun": 1,
+  "unknown": 0,
+  "aborted": null,
+  "cleanup_ok": true,
+  "cases_planned": 9,
+  "records_written": 9,
+  "event_records": 17,
+  "terminal_cases": 8,
+  "case_status": {
+    "5": "PASS",
+    "6": "PASS",
+    "15": "PASS",
+    "16": "PASS",
+    "19": "PASS",
+    "7": "NOT-RUN",
+    "8": "PASS",
+    "9": "PASS",
+    "10": "PASS"
+  },
+  "incomplete_case_ids": []
+}

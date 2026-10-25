@@ -84,20 +84,23 @@
 | ยืนยันด้วยการวัด | split ของ `NEG20-f2ad30cd-20261025-202331` EXACT (0/0/0) + restore หลังจบ NEG20: `Save` 57 ไฟล์ **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
 | ผลบังคับ | เป็น expected baseline ของ `split` ถัดไป · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** (rebaseline เพิ่มต้องอนุมัติแยก) |
 
-## Mod build ที่ deploy ล่าสุด (2026-10-25 · build `f2ad30cd…` · source `59276a4` — S3 prerequisite patch)
+## Mod build ที่ deploy ล่าสุด (2026-10-25 ค่ำ · build `1b4c17aa…` — rangecells patch · ก่อนหน้า: `f2ad30cd…`)
 
 | รายการ | ค่า |
 |---|---|
-| `Mods\LongYinCoop.dll` | **`f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8`** (314,880 B · deploy 2026-10-25 สำหรับ A/B รอบทดสอบซ้ำบน build ใหม่ · artifact เดียวกับ deploy รอบ Gate-2 — ตรวจ full-hash + `cmp` byte-identical กับ `Mods\LongYinCoop.dll.s3prereq-f2ad30cd`) |
-| `Mods\LongYinCoop.pdb` | **`fab0e051a6d279e2dae583073af88257670cc16c4d9853e3d2af5663dee1f891`** (82,668 B · byte-identical กับ `.pdb.s3prereq-fab0e051`) |
-| backup ก่อน deploy | `Mods\LongYinCoop.dll.prev-5d7b7cc5` = `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` · `Mods\LongYinCoop.pdb.prev-3a713953` = `3a713953b2246e664c588a8572e5cc32565da985554d52209de19590591ec069` (สร้างใหม่ 2026-10-25 — ชื่อว่างเพราะชุดเดิมถูก rollback รอบ Gate-2 ใช้กลับเข้าตำแหน่ง active) |
-| build ก่อนหน้า (ประวัติ) | `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` (mtime 2026-10-24 01:28 · source `ffc2c88` รวม S2Sender/S2FrameMeter/S2HostService/viewer-client · ใช้ทดสอบ A/B รอบแรก 2026-10-25 05:54 = ไม่พบ crash 1 ครั้ง) |
+| `Mods\LongYinCoop.dll` | **`1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177`** (316,416 B · deploy 2026-10-25 ค่ำ เพื่อ Gate-2 closure retest — expose `attackRangeCells` ใน status (read-only) · byte-identical (`cmp`) กับ artifact `src\LongYinCoop\bin\Release\` · deterministic rebuild ยืนยัน hash ตรง source tree ปัจจุบัน) |
+| `Mods\LongYinCoop.pdb` | **`dcd78ebd5241f25196c1c71296ab05dae3d14a034959f9d0d934155e1d4c1e17`** (83,180 B · byte-identical กับ artifact) |
+| backup ก่อน deploy | `Mods\LongYinCoop.dll.prev-f2ad30cd` = `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8` · `Mods\LongYinCoop.pdb.prev-fab0e051` = `fab0e051a6d279e2dae583073af88257670cc16c4d9853e3d2af5663dee1f891` (สร้าง 2026-10-25 ค่ำ — ยืนยันชื่อว่างก่อนสำรอง) |
+| build ก่อนหน้า (ประวัติ) | `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8` (314,880 B · source `59276a4` — S3 prerequisite patch · ใช้ A/B สองรอบ + NEG20 ครบ 20 เคส · สำรองที่ `.prev-f2ad30cd` และ `.s3prereq-f2ad30cd`) · `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` (ยุค S2a-3 · source `ffc2c88` · A/B รอบแรก · สำรองที่ `.prev-5d7b7cc5`) |
+| source ที่ตรงกับ build ใหม่ | HEAD `8fe33ce` **+ patch ยังไม่ commit** (rangecells: `TurnGate.cs` + `S3/RangeCells.cs` + runner/tests — diff ตรวจแล้วใน Phase 2 · deterministic rebuild = `1b4c17aa…` ตรงทุก byte) |
 | `UserData\MelonPreferences.cfg` | `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1` (ไม่เปลี่ยน) |
 | `UserData\LongYinCoop\net.cfg` (A0/พัก) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` (454 B · `enabled=false` · `heartbeatMs=1000`) |
-| สถานะ 2026-10-25 | **S3 prerequisite patch (commit `59276a4`: AliveRule/TurnGate/AttackCommand/tests) ถูก deploy แล้วเป็น build `f2ad30cd…`** · rollback พร้อม (`.prev-5d7b7cc5`) · ผลทดสอบ A/B รอบนี้ต้องตัดสินตาม Phase D — การ deploy เองยังไม่ถือเป็นการอนุมัติ S3 |
-| label ที่ใช้ล่าสุด | `NEG20-f2ad30cd-20261025-202331` (negative 20 เคส · restore แล้ว baseline `20261025-201545` EXACT · `leftovers: none`) · ก่อนหน้า: `AB-newbuild-f2ad30cd-20261025-061942` + `AB-oldbuild-20261025-054139` (A/B สอง build · restore EXACT ทั้งคู่) · ประวัติยุค S2a-3: `S2a3r-20261024-0115`, `S2a3x6-20261024-0120` |
-| ผล runtime ล่าสุด (NEG20 · 2026-10-25 · build `f2ad30cd`) | negative 20 เคส: **PASS 12 · NOT-RUN 8 (7–10 range-unverifiable + 11–14 structural) · FAIL 0 · UNKNOWN 0** · ทุกเคสที่ยิง stateHash ก่อน/หลังเหมือนเดิม · จบศึกปกติ (`state=Loot`) · restore EXACT · รายงาน `evidence/S3p-20261025-0341/neg20/neg20-report.md` · **Gate 2 = รอมติข้อยกเว้น NOT-RUN — ยังไม่สรุป 20/20** |
-| หลักฐาน | `evidence/S3p-20261025-0341/{gate2-deploy.md,gate2-release-build.txt}` (artifact provenance) · `ab/ab-report.md` (A/B รอบแรก) |
+| baseline ที่ใช้กับ build นี้ | `coop-test/baselines/20261025-201545/savehash.real.before.txt` · digest `588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485` — split ทั้งสอง label บังคับ `--expected-baseline` และ restore แล้ว EXACT ทั้งคู่ |
+| สถานะ 2026-10-26 | **rangecells patch (attackRangeCells — read-only instrumentation) deploy แล้ว และผ่าน Phase 3 retest ครบ 20/20** · **Gate 2 = PASS (มติผู้ใช้ 2026-10-26)** · **ต้นเหตุ crash เดิม (Gate-2 incident 04:14) ยัง UNKNOWN — แยกจากผล Gate 2 ชัดเจน** · rollback พร้อม (`.prev-f2ad30cd`) · patch rangecells **ยังไม่ commit** (source ณ HEAD `8fe33ce` + patch) |
+| label ที่ใช้ล่าสุด | `NEG20R-case7-20261025-234850` (เคส 7 retest · restore EXACT · `leftovers: none`) · ก่อนหน้า: `NEG20R-1b4c17aa-20261025-230950` (w1/w2/w3 · restore EXACT · `leftovers: none`) · `NEG20-f2ad30cd-20261025-202331` + `AB-newbuild`/`AB-oldbuild` (restore EXACT ทั้งหมด) · ประวัติยุค S2a-3: `S2a3r-20261024-0115`, `S2a3x6-20261024-0120` |
+| ผล Gate 2 closure retest (NEG20R · 2026-10-25/26 · build `1b4c17aa`) | negative 20 เคส same-binary: **PASS 20 · NOT-RUN 0 · FAIL 0 · UNKNOWN 0** · เคส 7–10 พิสูจน์ด้วย `attackRangeCells` สด (ยิงจริง 4 เคสผ่าน 4 เงื่อนไข + กันยิงเมื่อเป้าในระยะ 1 เคส) · เคส 11–14 ศพจริง (`unitAlive=false`, hp=0, (-1,-1)) + ศัตรูมีชีวิตเหลือ · restore EXACT ทั้งสอง split · รายงาน `evidence/S3p-20261025-0341/neg20r/neg20r-report.md` |
+| ผล runtime รอบแรก (NEG20 · 2026-10-25 · build `f2ad30cd` — ประวัติ) | negative 20 เคส: **PASS 12 · NOT-RUN 8 (7–10 range-unverifiable + 11–14 structural) · FAIL 0 · UNKNOWN 0** · ทุกเคสที่ยิง stateHash ก่อน/หลังเหมือนเดิม · จบศึกปกติ (`state=Loot`) · restore EXACT · **NOT-RUN ทั้ง 8 ปิดครบด้วย NEG20R (หัวข้อข้างบน)** · รายงาน `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
+| หลักฐาน | `evidence/S3p-20261025-0341/{gate2-deploy.md,gate2-release-build.txt}` (provenance ยุคก่อน) · `ab/ab-report.md` · `neg20/neg20-report.md` · **`neg20r/neg20r-report.md` (Gate 2 closure)** · Phase 1–2 audit (diff + deterministic rebuild + tests 466+53) อยู่ในบันทึก session นี้ |
 
 ## กฎ
 

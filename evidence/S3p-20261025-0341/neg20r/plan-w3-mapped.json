@@ -1,0 +1,73 @@
+{
+  "label": "NEG20R-1b4c17aa-20261025-230950",
+  "window": "w3-targetdead",
+  "pref": true,
+  "settle_ms": 500,
+  "cases": [
+    {
+      "n": 11,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD",
+      "id_mapping_note": "1:10066 -> 1:10181"
+    },
+    {
+      "n": 12,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD",
+      "id_mapping_note": "1:10066 -> 1:10181"
+    },
+    {
+      "n": 13,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD",
+      "id_mapping_note": "1:10066 -> 1:10181"
+    },
+    {
+      "n": 14,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "expect": "TARGET_DEAD",
+      "id_mapping_note": "1:10066 -> 1:10181"
+    }
+  ],
+  "id_mapping": {
+    "target": {
+      "1:10066": "1:10181"
+    },
+    "mapped_from": "evidence/S3prereq-20261025-0248/plan-w3.json",
+    "rule": "case/group/expect unchanged - ids only · ศพยืนยันจาก status สด 2026-10-25 23:38:57 (unitAlive=false, hp=0, (-1,-1), alive=false)",
+    "corpses_in_battle": [
+      "1:10181",
+      "1:10117"
+    ],
+    "corpse_selected": "1:10181",
+    "selection_rationale": "ศพแรกที่ยืนยัน (Gate 23:36:12 และ 23:38:57) — เลือก deterministic จากทั้ง 2 ศพที่มีอยู่",
+    "alive_enemies_after_kill": [
+      "1:10183",
+      "1:10184"
+    ]
+  }
+}

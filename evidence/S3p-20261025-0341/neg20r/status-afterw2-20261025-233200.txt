@@ -1,0 +1,295 @@
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "inBattle": true,
+    "battleState": 3,
+    "battleStateName": "Fighting",
+    "nowActiveState": 10,
+    "nowActiveStateName": "WaitAttacking",
+    "attackRangeCount": 32,
+    "damageRangeCount": 1,
+    "attackRangeCells": [
+      [
+        11,
+        13
+      ],
+      [
+        11,
+        14
+      ],
+      [
+        11,
+        15
+      ],
+      [
+        11,
+        19
+      ],
+      [
+        10,
+        14
+      ],
+      [
+        12,
+        14
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        12,
+        15
+      ],
+      [
+        10,
+        16
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        10,
+        18
+      ],
+      [
+        12,
+        18
+      ],
+      [
+        10,
+        19
+      ],
+      [
+        12,
+        19
+      ],
+      [
+        9,
+        15
+      ],
+      [
+        13,
+        15
+      ],
+      [
+        9,
+        16
+      ],
+      [
+        13,
+        16
+      ],
+      [
+        9,
+        17
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        9,
+        18
+      ],
+      [
+        13,
+        18
+      ],
+      [
+        9,
+        19
+      ],
+      [
+        13,
+        19
+      ],
+      [
+        8,
+        16
+      ],
+      [
+        14,
+        16
+      ],
+      [
+        8,
+        17
+      ],
+      [
+        14,
+        17
+      ],
+      [
+        8,
+        18
+      ],
+      [
+        14,
+        18
+      ],
+      [
+        7,
+        17
+      ],
+      [
+        15,
+        17
+      ]
+    ],
+    "active": "0:0",
+    "activeHeroId": 0,
+    "activeName": "จางเสี่ยวตู้",
+    "activePlayerControl": true,
+    "activeAutoFight": false,
+    "activeRow": 11,
+    "activeColumn": 17,
+    "isPlayerTurn": false,
+    "moved": false,
+    "attacked": false,
+    "turnMoved": true,
+    "turnAttacked": false,
+    "turnFlagsAvailable": true,
+    "paused": false,
+    "playingAnim": false,
+    "infoCount": 12,
+    "turnIndex": 11,
+    "unitCount": 8,
+    "gridW": 20,
+    "gridH": 20,
+    "frame": 151587,
+    "units": [
+      {
+        "id": "0:765",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 765,
+        "row": 15,
+        "col": 3,
+        "hp": 356.04,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 356.04,
+        "unitAlive": true
+      },
+      {
+        "id": "0:86",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 86,
+        "row": 5,
+        "col": 8,
+        "hp": 793.891,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 793.891,
+        "unitAlive": true
+      },
+      {
+        "id": "0:0",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 0,
+        "row": 11,
+        "col": 17,
+        "hp": 1006.416,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 1006.416,
+        "unitAlive": true
+      },
+      {
+        "id": "0:51",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 51,
+        "row": 13,
+        "col": 12,
+        "hp": 538.434,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 538.434,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10181",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10181,
+        "row": 13,
+        "col": 16,
+        "hp": 184.92,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 184.92,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10183",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10183,
+        "row": 18,
+        "col": 16,
+        "hp": 203.04,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 203.04,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10184",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10184,
+        "row": 6,
+        "col": 18,
+        "hp": 200.16,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 200.16,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10117",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10117,
+        "row": 16,
+        "col": 16,
+        "hp": 312.48,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 312.48,
+        "unitAlive": true
+      }
+    ],
+    "battleTime": 1.572394,
+    "timeLimit": 0,
+    "aiWaitTime": -0.006918313,
+    "timeScale": 1,
+    "nowScale": 1,
+    "battleTimeScale": 1,
+    "deltaTime": 0.0069375,
+    "unscaledDeltaTime": 0.0069375,
+    "stateHash": "790ae07dfed2581b3b86da483489743cf29b0be2c502c11bc78bd62f826d38d0",
+    "hashText": "battleframe/v2\nbattleState=3\nnowActiveState=10\nbattlePaused=0\nturnIndex=11\nactiveId=0:0\ninfoCount=12\n0:765|0|0|15|3|356.040|1|0|0\n0:86|0|0|5|8|793.891|1|0|0\n0:0|0|0|11|17|1006.416|1|0|0\n0:51|0|0|13|12|538.434|1|0|0\n1:10181|1|1|13|16|184.920|1|0|0\n1:10183|1|1|18|16|203.040|1|0|0\n1:10184|1|1|6|18|200.160|1|0|0\n1:10117|1|1|16|16|312.480|1|0|0\n",
+    "actionPatches": {
+      "count": 0,
+      "summary": "none",
+      "cached": true
+    },
+    "costMs": 0.0987,
+    "cost": {
+      "p50": 0.0898,
+      "p99": 5.2502,
+      "max": 5.2502,
+      "samples": 55,
+      "errors": 0,
+      "calls": 55
+    }
+  },
+  "note": null
+}

@@ -31,6 +31,8 @@
     <Compile Include="..\..\src\LongYinCoop\CoopPaths.cs" LinkBase="Mod" />
     <!-- S3 prerequisite (รีวิวรอบ 3): AliveRule pure — ใช้ทั้งใน mod และ table unit test -->
     <Compile Include="..\..\src\LongYinCoop\S3\AliveRule.cs" LinkBase="S3" />
+    <!-- NEG20 follow-up: RangeCells pure — expose attack range cells (status) -->
+    <Compile Include="..\..\src\LongYinCoop\S3\RangeCells.cs" LinkBase="S3" />
   </ItemGroup>
 
   <ItemGroup>

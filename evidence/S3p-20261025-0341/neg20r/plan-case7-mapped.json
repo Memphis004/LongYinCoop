@@ -1,0 +1,35 @@
+{
+  "label": "NEG20R-case7-20261025-234850",
+  "window": "w2-waitattacking-case7-retest",
+  "settle_ms": 500,
+  "pref": true,
+  "cases": [
+    {
+      "n": 7,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10183"
+      },
+      "arm": 120,
+      "expect": "OUT_OF_RANGE"
+    }
+  ],
+  "id_mapping": {
+    "target": {
+      "1:10066": "1:10183"
+    },
+    "mapped_from": "evidence/S3prereq-20261025-0248/plan-w2.json (เคส 7 เท่านั้น)",
+    "rule": "case/group/expect ไม่เปลี่ยน - target เดียว · เลือกจาก status สด 2026-10-25 23:54:40",
+    "selection": "1:10183 @(0,18) — ยืนยันจาก attackRangeCells สด (79 ช่อง, len==attackRangeCount) ว่า OUT of range",
+    "provable_out_of_range_candidates": [
+      "1:10183 @(0,18)",
+      "1:10117 @(14,18)"
+    ],
+    "in_range_not_fired": [
+      "1:10181 @(6,18)",
+      "1:10184 @(5,18)"
+    ]
+  }
+}

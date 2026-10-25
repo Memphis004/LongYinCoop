@@ -350,6 +350,10 @@ namespace LongYinCoop
                 // S1.5-e: ข้อมูลประกอบเท่านั้น — list นี้ค้างข้ามเทิร์น (วัดแล้ว 2026-10-21)
                 attackRangeCount = SafeListCount(bc, 0),
                 damageRangeCount = SafeListCount(bc, 1),
+                // NEG20 follow-up (2026-10-25): ช่องระยะโจมตีจาก list เดียวกับ attack path
+                // (bc.attackRangeGridUnits — เทียบ AttackCommand.ListHas) — อ่านอย่างเดียว
+                // null = ไม่มีข้อมูล · [] = list ว่าง · อื่น ๆ = [[row,col],...]
+                attackRangeCells = SafeAttackRangeCells(bc),
                 active = activeId,
                 activeHeroId = activeHeroId,
                 activeName = activeName,
@@ -515,6 +519,32 @@ namespace LongYinCoop
                 return list == null ? -1 : list.Count;
             }
             catch { return -1; }
+        }
+
+        /// <summary>
+        /// NEG20 follow-up (2026-10-25): อ่านช่องระยะโจมตีเพื่อ expose ใน status —
+        /// ใช้ list เดียวกับ attack path (`bc.attackRangeGridUnits` — AttackCommand.ListHas)
+        /// อ่านอย่างเดียว ไม่เขียน state ไม่เปลี่ยน guard/turn logic ·
+        /// คืน null = ไม่มีข้อมูล (bc/list null หรืออ่าน error) · [] = list ว่าง ·
+        /// อื่น ๆ = [[row,col],...] (ผ่าน RangeCells.Payload — pure, test ได้ offline)
+        /// </summary>
+        internal static System.Collections.Generic.List<int[]> SafeAttackRangeCells(BattleController bc)
+        {
+            try
+            {
+                if (bc == null) return null;
+                Il2CppSystem.Collections.Generic.List<GridUnitData> list = bc.attackRangeGridUnits;
+                if (list == null) return null;
+                var pairs = new System.Collections.Generic.List<(int row, int col)>(list.Count);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    GridUnitData g = list[i];
+                    if (g == null) continue;
+                    pairs.Add((g.row, g.column));
+                }
+                return RangeCells.Payload(pairs);
+            }
+            catch { return null; }
         }
 
         private static string CanonicalUnit(string stableId, int side, int teamIndex, int row, int column,

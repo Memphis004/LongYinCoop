@@ -1,0 +1,122 @@
+{
+  "label": "NEG20R-1b4c17aa-20261025-230950",
+  "window": "w3-targetdead",
+  "pid": 988,
+  "settle_ms": 500,
+  "base_hash": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+  "cases": [
+    {
+      "n": 11,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_after": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "TARGET_DEAD: spike attack: target 1:10181 is not alive",
+      "expect": "TARGET_DEAD",
+      "code_ok": true,
+      "latency_ms": 5,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:39:42"
+    },
+    {
+      "n": 12,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_after": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "TARGET_DEAD: spike attack: target 1:10181 is not alive",
+      "expect": "TARGET_DEAD",
+      "code_ok": true,
+      "latency_ms": 7,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:39:43"
+    },
+    {
+      "n": 13,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_after": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "TARGET_DEAD: spike attack: target 1:10181 is not alive",
+      "expect": "TARGET_DEAD",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:39:44"
+    },
+    {
+      "n": 14,
+      "group": "TARGET_DEAD",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10181"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_after": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "TARGET_DEAD: spike attack: target 1:10181 is not alive",
+      "expect": "TARGET_DEAD",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:39:45"
+    }
+  ],
+  "pass": 4,
+  "fail": 0,
+  "notrun": 0,
+  "unknown": 0,
+  "aborted": null,
+  "cleanup_ok": true,
+  "cases_planned": 4,
+  "records_written": 4,
+  "event_records": 8,
+  "terminal_cases": 4,
+  "case_status": {
+    "11": "PASS",
+    "12": "PASS",
+    "13": "PASS",
+    "14": "PASS"
+  },
+  "incomplete_case_ids": []
+}

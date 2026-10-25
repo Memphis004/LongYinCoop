@@ -117,12 +117,40 @@ def unit_by_id(state, uid):
     return None
 
 
+def range_verdict_from_state(state, target_id):
+    """OUT_OF_RANGE premise verdict จาก status สด (NEG20 follow-up, 2026-10-25).
+
+    อ่าน field `attackRangeCells` ([[row,col],...] จาก list เดียวกับ attack path)
+    และตรวจ consistency กับ `attackRangeCount` (ต้องเท่ากัน — กัน serialization bug)
+
+    คืน: True = target อยู่ในระยะ · False = อยู่นอกระยะ · None = ตรวจไม่ได้
+    (field หาย / payload null / target ไม่มีใน units / จำนวนไม่ตรง count /
+     entry รูปร่างไม่ครบ) — None ⇒ OUT_OF_RANGE เคส NOT-RUN fail-closed เหมือนเดิม
+    """
+    cells = state.get("attackRangeCells")
+    count = state.get("attackRangeCount")
+    if not isinstance(cells, list):
+        return None
+    tgt = unit_by_id(state, target_id)
+    if tgt is None:
+        return None
+    if not isinstance(count, int) or count < 0 or count != len(cells):
+        return None
+    cells_set = {(c[0], c[1]) for c in cells
+                 if isinstance(c, (list, tuple)) and len(c) == 2}
+    if len(cells_set) != len(cells):
+        return None
+    # True = target อยู่ในระยะ (เจอใน cells) · False = นอกระยะ (รวม list ว่าง)
+    return (tgt.get("row"), tgt.get("col")) in cells_set
+
+
 def pre_snapshot(state):
     """Live-state evidence subset recorded with every row."""
     keys = ("inBattle", "battleStateName", "nowActiveStateName", "active",
             "isPlayerTurn", "unitCount", "turnIndex", "gridW", "gridH",
             "attackRangeCount", "damageRangeCount", "paused", "stateHash")
     snap = {k: state.get(k) for k in keys}
+    snap["attackRangeCells"] = state.get("attackRangeCells")
     snap["units"] = [
         {k: u.get(k) for k in ("id", "team", "row", "col", "hp", "alive",
                                "unitAlive", "playerControl")}
@@ -421,7 +449,13 @@ def main():
             continue
 
         pre = pre_snapshot(state)
-        decision = check_preconditions(group, cmd, c, state, session_facts)
+        # NEG20 follow-up: OUT_OF_RANGE — derive the range verdict from the live
+        # status (attackRangeCells, same list as the attack path). None (field
+        # missing / count mismatch / target absent) keeps the fail-closed NOT-RUN.
+        rv = None
+        if group == "OUT_OF_RANGE":
+            rv = range_verdict_from_state(state, (c.get("args") or {}).get("target"))
+        decision = check_preconditions(group, cmd, c, state, session_facts, range_verdict=rv)
         if not decision["can_fire"]:
             rec = {"ts": ts, "label": label, "window": window, "case_id": n,
                    "group": group, "cmd": cmd, "args": c.get("args"),

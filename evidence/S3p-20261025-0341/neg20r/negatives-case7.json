@@ -1,0 +1,47 @@
+{
+  "label": "NEG20R-case7-20261025-234850",
+  "window": "w2-waitattacking-case7-retest",
+  "pid": 25804,
+  "settle_ms": 500,
+  "base_hash": "5934a70833c5d9348bcb319882235aeb7961cb89480ec92918af8ea0a20e9469",
+  "cases": [
+    {
+      "n": 7,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10183"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "5934a70833c5d9348bcb319882235aeb7961cb89480ec92918af8ea0a20e9469",
+      "hash_after": "5934a70833c5d9348bcb319882235aeb7961cb89480ec92918af8ea0a20e9469",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "OUT_OF_RANGE: spike attack: the game did not accept the click (attackComfirmed=false) - no retry",
+      "expect": "OUT_OF_RANGE",
+      "code_ok": true,
+      "latency_ms": 14,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 23:55:17"
+    }
+  ],
+  "pass": 1,
+  "fail": 0,
+  "notrun": 0,
+  "unknown": 0,
+  "aborted": null,
+  "cleanup_ok": true,
+  "cases_planned": 1,
+  "records_written": 1,
+  "event_records": 2,
+  "terminal_cases": 1,
+  "case_status": {
+    "7": "PASS"
+  },
+  "incomplete_case_ids": []
+}

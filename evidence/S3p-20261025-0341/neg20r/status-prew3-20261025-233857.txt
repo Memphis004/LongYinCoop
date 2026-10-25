@@ -1,0 +1,359 @@
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "inBattle": true,
+    "battleState": 3,
+    "battleStateName": "Fighting",
+    "nowActiveState": 10,
+    "nowActiveStateName": "WaitAttacking",
+    "attackRangeCount": 48,
+    "damageRangeCount": 1,
+    "attackRangeCells": [
+      [
+        9,
+        12
+      ],
+      [
+        9,
+        13
+      ],
+      [
+        9,
+        14
+      ],
+      [
+        9,
+        15
+      ],
+      [
+        8,
+        13
+      ],
+      [
+        10,
+        13
+      ],
+      [
+        8,
+        14
+      ],
+      [
+        10,
+        14
+      ],
+      [
+        8,
+        15
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        8,
+        16
+      ],
+      [
+        10,
+        16
+      ],
+      [
+        7,
+        14
+      ],
+      [
+        11,
+        14
+      ],
+      [
+        7,
+        15
+      ],
+      [
+        11,
+        15
+      ],
+      [
+        7,
+        16
+      ],
+      [
+        11,
+        16
+      ],
+      [
+        7,
+        17
+      ],
+      [
+        11,
+        17
+      ],
+      [
+        6,
+        15
+      ],
+      [
+        12,
+        15
+      ],
+      [
+        6,
+        16
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        6,
+        17
+      ],
+      [
+        12,
+        17
+      ],
+      [
+        6,
+        18
+      ],
+      [
+        12,
+        18
+      ],
+      [
+        5,
+        16
+      ],
+      [
+        13,
+        16
+      ],
+      [
+        5,
+        17
+      ],
+      [
+        13,
+        17
+      ],
+      [
+        5,
+        18
+      ],
+      [
+        13,
+        18
+      ],
+      [
+        5,
+        19
+      ],
+      [
+        13,
+        19
+      ],
+      [
+        4,
+        17
+      ],
+      [
+        14,
+        17
+      ],
+      [
+        4,
+        18
+      ],
+      [
+        14,
+        18
+      ],
+      [
+        4,
+        19
+      ],
+      [
+        14,
+        19
+      ],
+      [
+        3,
+        18
+      ],
+      [
+        15,
+        18
+      ],
+      [
+        3,
+        19
+      ],
+      [
+        15,
+        19
+      ],
+      [
+        2,
+        19
+      ],
+      [
+        16,
+        19
+      ]
+    ],
+    "active": "0:0",
+    "activeHeroId": 0,
+    "activeName": "จางเสี่ยวตู้",
+    "activePlayerControl": true,
+    "activeAutoFight": false,
+    "activeRow": 9,
+    "activeColumn": 19,
+    "isPlayerTurn": false,
+    "moved": false,
+    "attacked": false,
+    "turnMoved": true,
+    "turnAttacked": false,
+    "turnFlagsAvailable": true,
+    "paused": false,
+    "playingAnim": false,
+    "infoCount": 25,
+    "turnIndex": 14,
+    "unitCount": 8,
+    "gridW": 20,
+    "gridH": 20,
+    "frame": 202316,
+    "units": [
+      {
+        "id": "0:765",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 765,
+        "row": 15,
+        "col": 8,
+        "hp": 356.04,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 356.04,
+        "unitAlive": true
+      },
+      {
+        "id": "0:86",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 86,
+        "row": 5,
+        "col": 8,
+        "hp": 793.891,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 793.891,
+        "unitAlive": true
+      },
+      {
+        "id": "0:0",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 0,
+        "row": 9,
+        "col": 19,
+        "hp": 1006.416,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 1006.416,
+        "unitAlive": true
+      },
+      {
+        "id": "0:51",
+        "team": 0,
+        "teamIndex": 0,
+        "heroId": 51,
+        "row": 15,
+        "col": 16,
+        "hp": 538.434,
+        "alive": true,
+        "playerControl": true,
+        "originHp": 538.434,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10181",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10181,
+        "row": -1,
+        "col": -1,
+        "hp": 0,
+        "alive": false,
+        "playerControl": false,
+        "originHp": 184.92,
+        "unitAlive": false
+      },
+      {
+        "id": "1:10183",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10183,
+        "row": 18,
+        "col": 16,
+        "hp": 203.04,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 203.04,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10184",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10184,
+        "row": 6,
+        "col": 18,
+        "hp": 200.16,
+        "alive": true,
+        "playerControl": false,
+        "originHp": 200.16,
+        "unitAlive": true
+      },
+      {
+        "id": "1:10117",
+        "team": 1,
+        "teamIndex": 1,
+        "heroId": 10117,
+        "row": -1,
+        "col": -1,
+        "hp": 0,
+        "alive": false,
+        "playerControl": false,
+        "originHp": 312.48,
+        "unitAlive": false
+      }
+    ],
+    "battleTime": 2.0793076,
+    "timeLimit": 0,
+    "aiWaitTime": -0.006910507,
+    "timeScale": 1,
+    "nowScale": 1,
+    "battleTimeScale": 1,
+    "deltaTime": 0.027783,
+    "unscaledDeltaTime": 0.027783,
+    "stateHash": "34cc1fa954dba3d051a32a94fdac13911e05f41daf088e96e5d088f26c1f5a0e",
+    "hashText": "battleframe/v2\nbattleState=3\nnowActiveState=10\nbattlePaused=0\nturnIndex=14\nactiveId=0:0\ninfoCount=25\n0:765|0|0|15|8|356.040|1|0|0\n0:86|0|0|5|8|793.891|1|0|0\n0:0|0|0|9|19|1006.416|1|0|0\n0:51|0|0|15|16|538.434|1|0|0\n1:10181|1|1|-1|-1|0.000|0|0|0\n1:10183|1|1|18|16|203.040|1|0|0\n1:10184|1|1|6|18|200.160|1|0|0\n1:10117|1|1|-1|-1|0.000|0|0|0\n",
+    "actionPatches": {
+      "count": 0,
+      "summary": "none",
+      "cached": true
+    },
+    "costMs": 0.1088,
+    "cost": {
+      "p50": 0.09,
+      "p99": 5.2502,
+      "max": 5.2502,
+      "samples": 57,
+      "errors": 0,
+      "calls": 57
+    }
+  },
+  "note": null
+}

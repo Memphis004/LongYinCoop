@@ -49,6 +49,7 @@ namespace LongYinCoop.S2.Tests
                 NdjsonWriterTests();
                 TurnGateGuardTests();
                 AliveRuleTableTests();
+                RangeCellsTests();
                 CompletionAliveTests();
             }
             finally
@@ -896,16 +897,29 @@ namespace LongYinCoop.S2.Tests
             Check("S3-prereq TurnGate fixture exists", File.Exists(fixturePath));
             if (!File.Exists(fixturePath)) return;
 
+            // NEG20 follow-up (2026-10-25): fixture ยุค rangecells — TurnGate.cs หลังเพิ่ม
+            // SafeAttackRangeCells/attackRangeCells (ตัวเก่าเก็บไว้เป็นหลักฐานประวัติทั้งคู่)
+            string rcFixturePath = Path.Combine(AppContext.BaseDirectory, "fixtures", "TurnGate.rangecells-20261025.cs.txt");
+            if (!File.Exists(rcFixturePath))
+                rcFixturePath = Path.Combine(root, "tests", "S2Protocol.Tests", "fixtures", "TurnGate.rangecells-20261025.cs.txt");
+            Check("rangecells-era TurnGate fixture exists", File.Exists(rcFixturePath));
+            if (!File.Exists(rcFixturePath)) return;
+
             byte[] nowBytes = File.ReadAllBytes(turnGatePath);
             byte[] oldBytes = File.ReadAllBytes(oldFixturePath);
             byte[] beforeBytes = File.ReadAllBytes(fixturePath);
+            byte[] rcBytes = File.ReadAllBytes(rcFixturePath);
 
             Check("old fixture is the pinned 57e68dc file (sha256 recorded in step-0 evidence)",
                 Sha256Hex(oldBytes) == "737d48941c3707cef4aea1ef4ccae26163f5fe05f28cd065ae246b84854523ca");
             Check("S3-prereq fixture is the pinned 2026-10-25 file",
                 Sha256Hex(beforeBytes) == "0e8dbefde4168282e61d80b327f592d79580865cee605bf92f6e243d369e892b");
-            Check("TurnGate.cs matches the S3-prereq fixture byte-exact",
-                nowBytes.Length == beforeBytes.Length && nowBytes.AsSpan().SequenceEqual(beforeBytes));
+            Check("rangecells fixture is the pinned 2026-10-25 (post-NEG20) file",
+                Sha256Hex(rcBytes) == "e4e84040481bb3f9828b76d33f6bfd8303126155a03737a17addf87240462359");
+            Check("TurnGate.cs matches the rangecells-era fixture byte-exact",
+                nowBytes.Length == rcBytes.Length && nowBytes.AsSpan().SequenceEqual(rcBytes));
+            Check("live source has moved past the S3-prereq fixture (rangecells patch applied by design)",
+                Sha256Hex(nowBytes) != Sha256Hex(beforeBytes));
 
             string text = File.ReadAllText(turnGatePath);
             Check("TurnGate carries no D1 leftovers (no new isAlive field)",
@@ -966,6 +980,66 @@ namespace LongYinCoop.S2.Tests
             // NaN => false (ไม่มีหลักฐานว่า alive — fail-closed)
             Check("alive(true, NaN) = false (fail-closed)", !LongYinCoop.AliveRule.AliveForS3(true, float.NaN));
             Check("alive(false, NaN) = false", !LongYinCoop.AliveRule.AliveForS3(false, float.NaN));
+        }
+
+        /// <summary>
+        /// NEG20 follow-up (2026-10-25): RangeCells pure payload/contains + source-semantic
+        /// ยืนยันว่า status expose ช่องระยะจาก <c>bc.attackRangeGridUnits</c> — list เดียวกับ
+        /// attack path (AttackCommand.ListHas) — และเป็น read-only (ไม่มี write ไปที่ list)
+        /// </summary>
+        private static void RangeCellsTests()
+        {
+            // payload: source null = ไม่มีข้อมูล -> null (runner fail-closed)
+            Check("rangecells: null source -> null payload", LongYinCoop.RangeCells.Payload(null) == null);
+            // source ว่าง -> payload ว่าง (มีข้อมูล: ทุกช่องอยู่นอกระยะ)
+            var empty = LongYinCoop.RangeCells.Payload(new List<(int, int)>());
+            Check("rangecells: empty source -> empty payload", empty != null && empty.Count == 0);
+            // เรียงตามลำดับ + รูปร่าง [row, col]
+            var p = LongYinCoop.RangeCells.Payload(new List<(int, int)> { (3, 5), (0, 0), (12, 19) });
+            Check("rangecells: payload order/shape preserved", p != null && p.Count == 3
+                && p[0][0] == 3 && p[0][1] == 5 && p[1][0] == 0 && p[1][1] == 0
+                && p[2][0] == 12 && p[2][1] == 19);
+            // contains: hit / miss / null
+            Check("rangecells: contains hit", LongYinCoop.RangeCells.Contains(p, 12, 19));
+            Check("rangecells: contains miss", !LongYinCoop.RangeCells.Contains(p, 4, 4));
+            Check("rangecells: contains null payload -> false", !LongYinCoop.RangeCells.Contains(null, 1, 1));
+            // entry รูปร่างไม่ตรง (null / ยาว != 2) ถูกข้าม ไม่ใช้ตัดสิน
+            var messy = new List<int[]> { new[] { 1 }, new[] { 2, 3, 4 }, new[] { 5, 6 } };
+            Check("rangecells: malformed entries skipped (hit)", LongYinCoop.RangeCells.Contains(messy, 5, 6));
+            Check("rangecells: malformed entries skipped (miss)", !LongYinCoop.RangeCells.Contains(messy, 2, 3));
+
+            // source-semantic: status accessor == guard field, read-only instrumentation
+            string root = FindRepoRoot();
+            Check("rangecells: repo root found", root != null);
+            if (root == null) return;
+            string tg = File.ReadAllText(Path.Combine(root, "src", "LongYinCoop", "S1.5", "TurnGate.cs"));
+            string ac = File.ReadAllText(Path.Combine(root, "src", "LongYinCoop", "S1.5", "AttackCommand.cs"));
+            Check("rangecells: status wires SafeAttackRangeCells",
+                tg.Contains("attackRangeCells = SafeAttackRangeCells(bc)"));
+            Check("rangecells: status reads the guard's field",
+                tg.Contains("bc.attackRangeGridUnits"));
+            Check("rangecells: payload built via pure core",
+                tg.Contains("RangeCells.Payload(pairs)"));
+            Check("rangecells: guard membership uses the same field",
+                ac.Contains("ListHas(bc.attackRangeGridUnits"));
+            Check("rangecells: no write to the range list (TurnGate)",
+                !tg.Contains("attackRangeGridUnits =") && !tg.Contains("attackRangeGridUnits.Add"));
+            Check("rangecells: no write to the range list (AttackCommand)",
+                !ac.Contains("attackRangeGridUnits =") && !ac.Contains("attackRangeGridUnits.Add"));
+            Check("rangecells: guard file untouched by the status field",
+                !ac.Contains("attackRangeCells"));
+        }
+
+        /// <summary>หา root ของ repo (จาก test binary เดินขึ้นจนเจอ src/LongYinCoop)</summary>
+        private static string FindRepoRoot()
+        {
+            DirectoryInfo d = new DirectoryInfo(AppContext.BaseDirectory);
+            for (int i = 0; i < 12 && d != null; i++, d = d.Parent)
+            {
+                if (File.Exists(Path.Combine(d.FullName, "src", "LongYinCoop", "S1.5", "TurnGate.cs")))
+                    return d.FullName;
+            }
+            return null;
         }
 
         /// <summary>

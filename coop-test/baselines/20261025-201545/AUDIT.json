@@ -1,0 +1,19 @@
+{
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
+  "ts": "2026-10-25T20:15:45",
+  "reason": "S3 prereq Phase D prep (มติผู้ใช้ 2026-10-25): pref drift volatile-only จาก 2 session เปิดเกมโดยไม่มี split (12:47:32, 15:05:27 — ไม่เข้าศึก) — SaveSlot* ทั้ง 55 ไฟล์ EXACT ตรง baseline 20261025-052020; อนุมัติ rebaseline เฉพาะ volatile ก่อน negative 20 cases",
+  "files": 57,
+  "digest": "588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true,
+  "against": "coop-test/baselines/20261025-052020/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "9d6d4de45a7780c891980d7379a22858409e7f15f75afe4b7c741bcd2c7f741e",
+  "generated_by": "tools/coop-audit.py"
+}
