@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -40,6 +41,7 @@ namespace LongYinCoop.S2.Tests
                 T0DecoderVectors();
                 T1OverlayClient();
                 T3RenderModel();
+                T2WriteGuardPreHook();
             }
             finally
             {
@@ -416,6 +418,184 @@ namespace LongYinCoop.S2.Tests
                 && header.Contains("active"));
             Check("T3 unit text has id/hp/grid", unit.Contains(d.Units[0].StableId)
                 && unit.Contains(d.Units[0].HpText) && unit.Contains("(0,0)"));
+        }
+
+        // ------------------------------------------------------------------ T2 (W4(b)(c)) WriteGuard ก่อน hook + static check
+
+        private static void T2WriteGuardPreHook()
+        {
+            // ---- ส่วน pure: matrix ของ S2WriteGuardHook.Decide (W4(c)) -------------------
+            S2WriteGuardGroup[] groups =
+            {
+                S2WriteGuardGroup.MoveEntry, S2WriteGuardGroup.AttackEntry,
+                S2WriteGuardGroup.PauseButtonEntry, S2WriteGuardGroup.SaveLoadEntry,
+            };
+
+            int wrongAmbientOff = 0;
+            foreach (S2WriteGuardGroup g in groups)
+            {
+                foreach (bool policy in new[] { false, true })
+                {
+                    if (S2WriteGuardHook.Decide(g, false, policy) != S2WriteGuardAction.None) wrongAmbientOff++;
+                }
+            }
+            Check("T2 ambient off = None ทุกกลุ่ม/ทุก policy (นับ counter เฉย ๆ)", wrongAmbientOff == 0);
+
+            int wrongSaveLoad = 0;
+            foreach (bool policy in new[] { false, true })
+            {
+                if (S2WriteGuardHook.Decide(S2WriteGuardGroup.SaveLoadEntry, true, policy)
+                    != S2WriteGuardAction.LogCount) wrongSaveLoad++;
+            }
+            Check("T2 SaveLoad ห้าม throw ทุกกรณี (LogCount เสมอแม้ policy เปิด)", wrongSaveLoad == 0);
+            Check("T2 MayEverThrow false เฉพาะ SaveLoad", !S2WriteGuardHook.MayEverThrow(S2WriteGuardGroup.SaveLoadEntry)
+                && S2WriteGuardHook.MayEverThrow(S2WriteGuardGroup.MoveEntry)
+                && S2WriteGuardHook.MayEverThrow(S2WriteGuardGroup.AttackEntry)
+                && S2WriteGuardHook.MayEverThrow(S2WriteGuardGroup.PauseButtonEntry));
+
+            int wrongThrowPolicy = 0;
+            foreach (S2WriteGuardGroup g in new[] { S2WriteGuardGroup.MoveEntry, S2WriteGuardGroup.AttackEntry,
+                                                    S2WriteGuardGroup.PauseButtonEntry })
+            {
+                if (S2WriteGuardHook.Decide(g, true, true) != S2WriteGuardAction.Throw) wrongThrowPolicy++;
+                if (S2WriteGuardHook.Decide(g, true, false) != S2WriteGuardAction.LogCount) wrongThrowPolicy++;
+            }
+            Check("T2 กลุ่มอื่นตาม policy (throw เมื่อเปิด, log+count เมื่อปิด)", wrongThrowPolicy == 0);
+            Check("T2 default proposal = log+count ไม่ throw (policy=false)",
+                S2WriteGuardHook.Decide(S2WriteGuardGroup.MoveEntry, true, false) == S2WriteGuardAction.LogCount);
+
+            // ---- ส่วน (b): s2_static_check.py จับ fixture ปลอมได้ + ต้นไม้จริงสะอาด ------------
+            string fixtureRoot = Path.Combine(_tmp, "static-check");
+            Directory.CreateDirectory(Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2"));
+
+            string clean = Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2", "Clean.cs");
+            File.WriteAllText(clean,
+                "// comment เอ่อถึง HarmonyLib/Harmony patch probes (ไม่ใช่ code reference) ต้องผ่าน\n" +
+                "/* block comment HarmonyPatch ก็ต้องผ่าน */\n" +
+                "namespace Clean { static class C { public static int Add(int a, int b) => a + b; } }\n");
+
+            string output;
+            int exit = RunStaticCheck(fixtureRoot, out output);
+            Check("T2 static check clean fixture = exit 0", exit == 0);
+            Check("T2 static check comment-only Harmony passes", !output.Contains("VIOLATION"));
+
+            string[] fakeCalls =
+            {
+                "var r = MoveCommand.StartMove(\"0:1\", 2, 3);",
+                "var r = AttackCommand.StartAttack(\"0:1\", \"1:2\");",
+                "BattleController.BattlePauseButtonClicked();",
+                "GameDataController.Save();",
+            };
+            int caught = 0;
+            for (int i = 0; i < fakeCalls.Length; i++)
+            {
+                string path = Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2", "FakeCall" + i + ".cs");
+                File.WriteAllText(path, "namespace F { static class K" + i + " { static void M() { "
+                                        + fakeCalls[i] + " } } }\n");
+                RunStaticCheck(fixtureRoot, out output);
+                if (RunStaticCheckLastExit == 1 && output.Contains("write-path-call-site")) caught++;
+                File.Delete(path);
+            }
+            Check("T2 static check catches all 4 write-path call-site fixtures", caught == fakeCalls.Length);
+
+            string harmony = Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2", "Hook.cs");
+            File.WriteAllText(harmony, "using HarmonyLib;\n[HarmonyPatch] static class H { }\n");
+            exit = RunStaticCheck(fixtureRoot, out output);
+            Check("T2 static check catches HarmonyLib reference", exit == 1
+                && output.Contains("harmony-reference"));
+            File.Delete(harmony);
+
+            string patchCall = Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2", "Patcher.cs");
+            File.WriteAllText(patchCall,
+                "class P6 { static void Y(object harmonyInstance, object target) " +
+                "{ harmonyInstance.Patch(target); } }\n");
+            exit = RunStaticCheck(fixtureRoot, out output);
+            Check("T2 static check catches .Patch( call", exit == 1 && output.Contains("harmony-reference"));
+            File.Delete(patchCall);
+
+            string pureCall = Path.Combine(fixtureRoot, "src", "LongYinCoop", "S2", "Caller.cs");
+            File.WriteAllText(pureCall, "class Caller { static object F() => S2WriteGuardHook.Decide(0, false, false); }\n");
+            exit = RunStaticCheck(fixtureRoot, out output);
+            Check("T2 static check catches pure-logic call in S2/**", exit == 1
+                && output.Contains("pure-logic-reference"));
+            File.Delete(pureCall);
+
+            string pureCallOutside = Path.Combine(fixtureRoot, "src", "LongYinCoop", "CoopModFake.cs");
+            File.WriteAllText(pureCallOutside, "class CoopModFake { static object F() => S2WriteGuardHook.Decide(0, false, false); }\n");
+            exit = RunStaticCheck(fixtureRoot, out output);
+            Check("T2 static check catches pure-logic call outside S2/**", exit == 1
+                && output.Contains("pure-logic-reference") && output.Contains("CoopModFake.cs"));
+            File.Delete(pureCallOutside);
+
+            // ไฟล์นิยามเองต้องผ่าน (token อยู่ในไฟล์ของมันเอง = ไม่ใช่ violation)
+            string repoRoot = FindRepoRoot();
+            Check("T2 repo root found from test assembly", repoRoot != null
+                && File.Exists(Path.Combine(repoRoot, "tools", "s2_static_check.py")));
+            if (repoRoot != null)
+            {
+                exit = RunStaticCheck(repoRoot, out output);
+                Check("T2 REAL TREE clean: 0 write-path call sites, 0 Harmony in S2/**, pure logic uncalled",
+                    exit == 0 && output.Contains("violations=0"));
+            }
+        }
+
+        private static int RunStaticCheckLastExit;
+
+        private static int RunStaticCheck(string root, out string output)
+        {
+            output = "";
+            string script = FindRepoFile("tools", "s2_static_check.py");
+            if (script == null)
+            {
+                output = "s2_static_check.py not found";
+                RunStaticCheckLastExit = -1;
+                return -1;
+            }
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo("python",
+                    "\"" + script + "\" --root \"" + root + "\"")
+                {
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                };
+                using (Process process = Process.Start(psi))
+                {
+                    output = process.StandardOutput.ReadToEnd();
+                    output += process.StandardError.ReadToEnd();
+                    if (!process.WaitForExit(30000)) process.Kill();
+                    RunStaticCheckLastExit = process.ExitCode;
+                    return process.ExitCode;
+                }
+            }
+            catch (Exception e)
+            {
+                output = "python failed: " + e.GetType().Name + ": " + e.Message;
+                RunStaticCheckLastExit = -1;
+                return -1;
+            }
+        }
+
+        private static string FindRepoRoot()
+        {
+            string script = FindRepoFile("tools", "s2_static_check.py");
+            if (script == null) return null;
+            // script = <root>\tools\s2_static_check.py → root = สองชั้นขึ้นจากไฟล์
+            return Path.GetDirectoryName(Path.GetDirectoryName(script));
+        }
+
+        private static string FindRepoFile(params string[] relative)
+        {
+            DirectoryInfo dir = new DirectoryInfo(AppContext.BaseDirectory);
+            for (int i = 0; i < 8 && dir != null; i++, dir = dir.Parent)
+            {
+                string candidate = dir.FullName;
+                for (int j = 0; j < relative.Length; j++) candidate = Path.Combine(candidate, relative[j]);
+                if (File.Exists(candidate)) return candidate;
+            }
+            return null;
         }
 
         /// <summary>frame สังเคราะห์ n ยูนิต (ใช้กับ 60/65 ยูนิต — เกินขอบเดิมของ SyntheticFrame)</summary>

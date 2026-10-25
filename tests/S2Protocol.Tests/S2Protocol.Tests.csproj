@@ -22,6 +22,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2PhaseStats.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2SelfTest.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2WriteGuard.cs" LinkBase="Host" />
+    <!-- S2a-4 W4(c): ตรรกะ flag แบบ pure ของ WriteGuard hook (ไม่มี call site นอก tests — บังคับโดย s2_static_check.py) -->
+    <Compile Include="..\..\src\LongYinCoop\S2\Host\S2WriteGuardHook.cs" LinkBase="Host" />
     <!-- S2a-3 (Pure, no Unity): control flow / frame meter / tcp self-test -->
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2ControlHandler.cs" LinkBase="Host" />
     <Compile Include="..\..\src\LongYinCoop\S2\Host\S2FrameMeter.cs" LinkBase="Host" />
