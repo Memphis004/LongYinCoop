@@ -55,7 +55,18 @@ namespace LongYinCoop
             if (CoopPrefs.Ipc.Value)
             {
                 // S2a-4 W5: ส่งสถานะ S2 ให้ set_pref gate (ปฏิเสธการเปิด write-path pref ขณะ S2 active)
-                _ipc = new IpcServer(_dispatcher, delegate { return _s2 != null && _s2.Active; });
+                // (PASS-2 audit: อ่าน _s2 ใส่ local ครั้งเดียว — กัน NRE ตอน OnDeinitializeMelon เคลียร์ _s2
+                //  ระหว่างที่ IPC thread กำลังเรียก delegate; ความสดของ Active มาจาก volatile ฝั่ง S2HostService)
+                // (final fail-closed audit: _s2 == null = สถานะ "ไม่ทราบ" ⇒ มองเป็น active เพื่อให้ gate
+                //  ปฏิเสธการเปิด write-path — ผ่าน helper ตัวเดียวกับ T4 จึงพิสูจน์ด้วย pure test ตัวจริง;
+                //  callback นี้ถูกเรียกทั้งบน IPC thread (pre-check) และบน main thread (ใน CheckedWrite))
+                _ipc = new IpcServer(_dispatcher, delegate
+                {
+                    S2HostService s = _s2;
+                    return S2.Host.S2SetPrefGate.ServiceStateToActive(
+                        s != null,
+                        s != null && s.Active);
+                });
                 _ipc.Start();
             }
 

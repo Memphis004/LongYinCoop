@@ -51,7 +51,9 @@ namespace LongYinCoop.S2
         private S2SerializingSender _sender;
         private S2NdjsonWriter _writer;
 
-        private bool _active;
+        // volatile: เขียนบน main thread (Activate/Deactivate) แต่ถูกอ่านข้าม thread โดย IpcServer
+        // gate ของ set_pref (S2a-4 W5, PASS-2 audit) — ต้องเห็นค่าล่าสุดเสมอ ไม่งั้น gate fail-open
+        private volatile bool _active;
         private bool _authenticated;
         private bool _selfTestDone;
         private bool _selfTestReported;

@@ -27,7 +27,15 @@ namespace LongYinCoop
         /// <summary>S2a-4 W5: จำนวนคำสั่ง set_pref ที่ถูก gate ปฏิเสธ (evidence ของ E6)</summary>
         public static long SetPrefRejections;
 
-        public IpcServer(MainThreadDispatcher dispatcher, Func<bool> s2Active = null)
+        /// <summary>อ่าน counter แบบ thread-safe (PASS-2 audit: long 32-bit ฉีกได้ — ใช้ตัวนี้ อย่าอ่าน field ตรง)</summary>
+        public static long ReadSetPrefRejections()
+        {
+            return Interlocked.Read(ref SetPrefRejections);
+        }
+
+        // PASS-2 final audit: บังคับ callback (เอา default `= null` ออก) — ไม่มี fallback แปลง
+        // callback หายเป็น inactive · fail-closed ยังอยู่ใน S2SetPrefGate.CheckedWrite (ชั้นลึก)
+        public IpcServer(MainThreadDispatcher dispatcher, Func<bool> s2Active)
         {
             _dispatcher = dispatcher;
             _s2Active = s2Active;
@@ -415,11 +423,14 @@ namespace LongYinCoop
 
             // S2a-4 W5 (§7 ของแผน): ปิดช่อง K9/K10 — ขณะ S2 active ห้าม "เปิด" write-path pref
             // (การปิด false อนุญาตทุกสถานะ · pref นอกชุด เช่น capture ไม่ถูก gate นี้บังคับ)
+            // PASS-2 final IPC pre-check closure: อ่านสถานะผ่าน ReadGateActive (helper เดียวกับ
+            // CheckedWrite — null/โยน exception = "ไม่ทราบ" ⇒ ปฏิเสธ true ทันทีที่นี่ ไม่เรียก
+            // dispatcher และไม่เขียน pref · counter/log ตามกลไกเดิม)
             if (S2SetPrefGate.IsWritePathKey(key))
             {
                 bool on;
                 if (bool.TryParse(value, out on)
-                    && S2SetPrefGate.ShouldReject(_s2Active != null && _s2Active(), key, on))
+                    && S2SetPrefGate.ShouldReject(S2SetPrefGate.ReadGateActive(_s2Active), key, on))
                 {
                     Interlocked.Increment(ref SetPrefRejections);
                     CoopLog.Warn("[S2] set_pref " + key + "=" + on + ": " + S2SetPrefGate.RejectError(key));
@@ -443,7 +454,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.AllowRemoteInput.Value = on;
                     if (!on) MoveCommand.Disarm();
@@ -461,7 +472,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.JitProbe.Value = on;
                     // ทำทันทีบน main thread เพื่อให้ผลลัพธ์ที่ตอบกลับตรงกับสถานะจริง
@@ -484,7 +495,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.JitProbeW2.Value = on;
                     JitProbeW2.Apply(on);
@@ -506,7 +517,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.JitProbeW4.Value = on;
                     JitProbeW4.Apply(on);
@@ -528,7 +539,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.JitProbeW6.Value = on;
                     JitProbeW6.Apply(on);
@@ -552,7 +563,7 @@ namespace LongYinCoop
             {
                 bool on;
                 if (!bool.TryParse(value, out on)) return Fail(cmd, UIStrings.UnknownCommand);
-                return OnMain(cmd, delegate
+                return OnMainGated(cmd, key, on, delegate
                 {
                     CoopPrefs.JitProbeW7.Value = on;
                     JitProbeW7.Apply(on);
@@ -603,6 +614,38 @@ namespace LongYinCoop
                 elapsedMs = sw.ElapsedMilliseconds,
                 stats = _dispatcher.Snapshot()
             });
+        }
+
+        /// <summary>
+        /// OnMain สำหรับ **write-path pref เท่านั้น** (S2a-4 W5 · PASS-2 audit ข้อ TOCTOU):
+        /// ตรวจ gate **บน main thread ภายใน callback เดียวกับการเขียน** — สถานะ S2 เปลี่ยนบน
+        /// main thread เท่านั้น (`S2HostService.Activate/Deactivate` ← Tick/Stop) และ dispatcher
+        /// drain คิวเดียวตามลำดับ จึงไม่มีการเปลี่ยนสถานะ S2 แทรกระหว่างตรวจกับเขียนได้
+        /// · การตรวจล่วงหน้าบน IPC thread (SetPref) ยังคงอยู่เป็น fast-fail — **ไม่ใช่หลักประกัน**
+        /// </summary>
+        private string OnMainGated(string cmd, string key, bool value, Func<object> write)
+        {
+            bool rejected = false;
+            object result;
+            bool ran = _dispatcher.Invoke(delegate
+            {
+                // main thread — ตรรกะ "ตรวจแล้วเขียน" อยู่ใน S2SetPrefGate.CheckedWrite (pure, ตัวเดียว
+                // ที่ทุก branch ใช้): ส่ง _s2Active ตรง ๆ ห้ามแปลง null→false — CheckedWrite fail-closed
+                // เมื่อสถานะอ่านไม่ได้ (null/โยน exception = ปฏิเสธ true ทั้ง 6 key ไม่เรียก write)
+                S2SetPrefWriteOutcome outcome = S2SetPrefGate.CheckedWrite(_s2Active, key, value, write);
+                rejected = outcome.Rejected;
+                return outcome.Value;
+            }, 500, out result);
+
+            if (!ran) return Fail(cmd, UIStrings.MainThreadTimeout);
+            if (rejected)
+            {
+                Interlocked.Increment(ref SetPrefRejections);
+                CoopLog.Warn("[S2] set_pref " + key + "=" + value + ": " + S2SetPrefGate.RejectError(key));
+                return Fail(cmd, S2SetPrefGate.RejectError(key));
+            }
+            if (result == null) return Ok(cmd, null, UIStrings.NoWorldMap);
+            return Ok(cmd, result);
         }
 
         private string OnMain(string cmd, Func<object> func)
