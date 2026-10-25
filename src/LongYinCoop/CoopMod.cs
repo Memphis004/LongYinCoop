@@ -54,7 +54,8 @@ namespace LongYinCoop
 
             if (CoopPrefs.Ipc.Value)
             {
-                _ipc = new IpcServer(_dispatcher);
+                // S2a-4 W5: ส่งสถานะ S2 ให้ set_pref gate (ปฏิเสธการเปิด write-path pref ขณะ S2 active)
+                _ipc = new IpcServer(_dispatcher, delegate { return _s2 != null && _s2.Active; });
                 _ipc.Start();
             }
 

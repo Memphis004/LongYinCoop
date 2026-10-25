@@ -42,6 +42,7 @@ namespace LongYinCoop.S2.Tests
                 T1OverlayClient();
                 T3RenderModel();
                 T2WriteGuardPreHook();
+                T4SetPrefGate();
             }
             finally
             {
@@ -596,6 +597,68 @@ namespace LongYinCoop.S2.Tests
                 if (File.Exists(candidate)) return candidate;
             }
             return null;
+        }
+
+        // ------------------------------------------------------------------ T4 (W5) set_pref gate + net.cfg reload
+
+        private static void T4SetPrefGate()
+        {
+            // ---- matrix (active × key × value) ของ S2SetPrefGate ------------------------
+            string[] writeKeys =
+            {
+                "allowRemoteInput", "jitprobe", "jitprobeW2", "jitprobeW4", "jitprobeW6", "jitprobeW7",
+            };
+            int wrongKey = 0;
+            foreach (string key in writeKeys)
+            {
+                if (!S2SetPrefGate.IsWritePathKey(key)) wrongKey++;
+            }
+            Check("T4 all 6 write-path keys recognized (case-insensitive)", wrongKey == 0
+                && S2SetPrefGate.IsWritePathKey("AllowRemoteInput")
+                && S2SetPrefGate.IsWritePathKey("JITPROBEW4"));
+            Check("T4 non-write keys not gated", !S2SetPrefGate.IsWritePathKey("capture")
+                && !S2SetPrefGate.IsWritePathKey("enabled") && !S2SetPrefGate.IsWritePathKey("")
+                && !S2SetPrefGate.IsWritePathKey("unknownkey"));
+
+            int wrongReject = 0;
+            foreach (string key in writeKeys)
+            {
+                // active=true + value=true → ปฏิเสธ
+                if (!S2SetPrefGate.ShouldReject(true, key, true)) wrongReject++;
+                // ปิด (false) อนุญาตทุกสถานะ
+                if (S2SetPrefGate.ShouldReject(true, key, false)) wrongReject++;
+                if (S2SetPrefGate.ShouldReject(false, key, false)) wrongReject++;
+                // idle → เปิดได้ตามพฤติกรรมเดิม
+                if (S2SetPrefGate.ShouldReject(false, key, true)) wrongReject++;
+            }
+            Check("T4 gate matrix: reject only active+write-path+true", wrongReject == 0);
+            Check("T4 capture=true not rejected while active",
+                !S2SetPrefGate.ShouldReject(true, "capture", true));
+            string error = S2SetPrefGate.RejectError("allowRemoteInput");
+            Check("T4 reject error names key + reason", error.Contains("allowRemoteInput")
+                && error.Contains("S2 is active"));
+
+            // ---- net.cfg reload semantics (K30): Poll ≥ pollMs เท่านั้น + ค่า overlay โหลดใหม่ --------
+            string cfgPath = Path.Combine(_tmp, "net.cfg");
+            File.WriteAllText(cfgPath, "overlay = false\n");
+            S2NetConfig cfg = new S2NetConfig(cfgPath, 1000);
+            cfg.ForceRead(0);
+            Check("T4 reload: initial overlay=false read", cfg.Current.Overlay == false);
+
+            File.WriteAllText(cfgPath, "overlay = true\n");
+            Check("T4 reload: poll within interval is a no-op", !cfg.Poll(500) && cfg.Current.Overlay == false);
+            Check("T4 reload: poll past interval re-reads file", cfg.Poll(1000) && cfg.Current.Overlay == true);
+
+            File.WriteAllText(cfgPath, "overlay = false\nenabled = false\n");
+            cfg.ForceRead(2000);
+            Check("T4 reload: force-read picks up multiple keys", cfg.Current.Overlay == false
+                && cfg.Current.Enabled == false && cfg.Current.FormatOk);
+
+            // ไฟล์เสีย (TOML section) = fail-closed ทั้งไฟล์ — overlay กลับ default false
+            File.WriteAllText(cfgPath, "[LongYinCoop]\noverlay = true\n");
+            cfg.ForceRead(3000);
+            Check("T4 reload: malformed file fails closed (overlay=false)", !cfg.Current.FormatOk
+                && !cfg.Current.Overlay);
         }
 
         /// <summary>frame สังเคราะห์ n ยูนิต (ใช้กับ 60/65 ยูนิต — เกินขอบเดิมของ SyntheticFrame)</summary>

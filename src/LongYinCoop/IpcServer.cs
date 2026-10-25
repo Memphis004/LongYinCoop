@@ -6,6 +6,7 @@ using System.IO.Pipes;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using LongYinCoop.S2.Host;
 
 namespace LongYinCoop
 {
@@ -19,12 +20,17 @@ namespace LongYinCoop
 
         private readonly MainThreadDispatcher _dispatcher;
         private readonly string _pipeName;
+        private readonly Func<bool> _s2Active;
         private volatile bool _running;
         private Thread _thread;
 
-        public IpcServer(MainThreadDispatcher dispatcher)
+        /// <summary>S2a-4 W5: จำนวนคำสั่ง set_pref ที่ถูก gate ปฏิเสธ (evidence ของ E6)</summary>
+        public static long SetPrefRejections;
+
+        public IpcServer(MainThreadDispatcher dispatcher, Func<bool> s2Active = null)
         {
             _dispatcher = dispatcher;
+            _s2Active = s2Active;
             _pipeName = "longyin-coop-" + Environment.ProcessId;
         }
 
@@ -406,6 +412,21 @@ namespace LongYinCoop
         {
             string key = GetString(root, "key");
             string value = GetString(root, "value");
+
+            // S2a-4 W5 (§7 ของแผน): ปิดช่อง K9/K10 — ขณะ S2 active ห้าม "เปิด" write-path pref
+            // (การปิด false อนุญาตทุกสถานะ · pref นอกชุด เช่น capture ไม่ถูก gate นี้บังคับ)
+            if (S2SetPrefGate.IsWritePathKey(key))
+            {
+                bool on;
+                if (bool.TryParse(value, out on)
+                    && S2SetPrefGate.ShouldReject(_s2Active != null && _s2Active(), key, on))
+                {
+                    Interlocked.Increment(ref SetPrefRejections);
+                    CoopLog.Warn("[S2] set_pref " + key + "=" + on + ": " + S2SetPrefGate.RejectError(key));
+                    return Fail(cmd, S2SetPrefGate.RejectError(key));
+                }
+            }
+
             if (key == "capture")
             {
                 bool on;
