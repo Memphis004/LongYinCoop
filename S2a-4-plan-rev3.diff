@@ -1,0 +1,166 @@
+diff --git a/.S2a-4-plan.rev-prev.tmp b/S2a-4-plan.md
+index 31836c3..64d324c 100644
+--- a/.S2a-4-plan.rev-prev.tmp
++++ b/S2a-4-plan.md
+@@ -1,7 +1,8 @@
+ # S2a-4 — แผน Guest Overlay (in-process, loopback) + WriteGuard hook + `set_pref` hardening
+ 
+-**สถานะ: ฉบับเสนอเพื่อ GO-1 (รออนุมัติแผนและขอบเขต) — ยังไม่เริ่ม implementation ใด ๆ**
++**สถานะ: ฉบับเสนอเพื่อ GO-1 — rev3 (รออนุมัติแผนและขอบเขต) — ยังไม่เริ่ม implementation ใด ๆ**
+ จัดทำ: 2026-10-26 · ฐาน: ร่าง S2a-4 rev2/rev2.1/rev2.2 + มติผู้ใช้ (§0) · repo HEAD ตอนเขียน: `f9020c2`
++**แก้ไขเป็น rev3 (2026-10-26 ตามคำขอผู้ใช้ก่อนอนุมัติ GO-1):** (1) นิยามป้าย (a)(b)(c) ในตาราง W4 + กติกา "ก่อนมติ M5 ห้ามสร้างหรือติดตั้ง hook ทุกกรณี — อนุญาตเฉพาะ static check, audit และตรรกะ flag แบบ pure" (2) กำหนดป้ายผลของ E5 เมื่อ M5 ยังไม่อนุมัติ + ห้ามอ้างว่า hook ผ่าน (3) §8 เพิ่มตารางความเสี่ยงรายกลุ่ม hook 4 กลุ่ม + ตัวเลือก M5 "ไม่ hook Save/Load" และ "ไม่ hook เลย" (4) แก้หัวข้อ §4 และตารางงานให้ตรงกัน (5) ระบุว่า GO-1 ครอบเฉพาะ W0–W3, W5, W4(b)(c) เท่านั้น
+ 
+ อ้างอิงบนสุด: `S2-plan.md` §13 (มติรายข้อ §13.9 มีผล — การใช้ §13 แทน §1–§12 ทั้งฉบับยังรอยืนยันจากผู้ใช้) · `STAGEPLAN.md` §5/§1.1/§1.4/§1.2 · `AGENTS.md`
+ 
+@@ -15,7 +16,7 @@
+ | M2 | **Bandwidth ที่ 60 ยูนิตเป็นข้อค้างบังคับก่อนปิด S2 ทั้ง stage** — ห้ามลดเป้า 60 ยูนิต (ตามมติ Q4 §13.9) | §12.4 |
+ | M3 | **Toggle overlay ใช้ flat key ใน `net.cfg` ปิดเป็น default ไม่ใช้ hotkey** — พฤติกรรม reload อ้างจากหลักฐานจริงของ parser/poll | §5 |
+ | M4 | **Guest slot เดียวยอมรับสำหรับ S2a-4** (overlay กับ `viewer-client.py` รันพร้อมกันไม่ได้) · fan-out = scope ใหม่ ยังไม่อนุมัติ | §6 |
+-| M5 | **WriteGuard ใน Release ยังไม่ตัดสิน** — ประเมินความเสี่ยง + เสนอทางเลือกก่อน · **ห้าม implement hook จนกว่าได้รับอนุมัติแยก** | §8 |
++| M5 | **WriteGuard ยังไม่ตัดสิน** — ผู้ใช้เลือก: กลุ่มที่จะ hook (ครบ 4 กลุ่ม / **ไม่ hook Save/Load** / **ไม่ hook เลย** — §8.3) และมิติ build (§8.4) · **ก่อนมีมติเป็นลายลักษณ์: ห้ามสร้างหรือติดตั้ง hook ทุกกรณี — อนุญาตเฉพาะ (b) static check, (c) audit และตรรกะ flag แบบ pure** | §8 |
+ | M6 | **ไม่ต้อง rebuild `1b4c17aa` จาก `82e9093` เป็นงานแยก** · แต่ build ของ S2a-4 ต้องมาจาก **source tree ที่ commit แล้วและสะอาด** พร้อมบันทึก source commit / toolchain / build command / SHA-256 | §9 |
+ | เดิม | Q1/Q2/Q4/Q5/Q6 (`ba0d240`) · มติ X5 (Δmean margin 1.0 / band ±0.5) · baseline `20261025-201545` (digest `588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485`) · Q3 ตอบแล้ว (ZeroTier + สอง topology) = **กำหนดขอบเขตเท่านั้น ไม่ใช่การอนุมัติ topology/implementation** | ทั่วแผน |
+ 
+@@ -23,7 +24,7 @@
+ 
+ ## 1. ขอบเขต
+ 
+-**ทำ:** guest overlay แบบ IMGUI **ในโปรเซสเดียวกับเกม host** กินข้อมูลผ่าน loopback TCP ที่ต่อกลับเข้า listener ของตัวเอง (เส้นทางเดียวกับแขกจริง) · C# guest decoder · `WriteGuard` hook ตามนิยาม `S2-plan.md §13.2` ข้อ 5(a) (**เฉพาะหลังอนุมัติแยกตาม M5 — ก่อนหน้านั้นทำเฉพาะ (b) static check และ (c) audit**) · ปิดช่อง `set_pref` เปิด write path ขณะ S2 active · static check script · suite เทสต์ใหม่
++**ทำ:** guest overlay แบบ IMGUI **ในโปรเซสเดียวกับเกม host** กินข้อมูลผ่าน loopback TCP ที่ต่อกลับเข้า listener ของตัวเอง (เส้นทางเดียวกับแขกจริง) · C# guest decoder · WriteGuard ตามป้าย `S2-plan.md §13.2` ข้อ 5 — **(b) static check + (c) audit + ตรรกะ flag แบบ pure อยู่ในขอบเขต GO-1** · **(a) runtime hook ห้ามสร้าง/ติดตั้งทุกกรณีก่อนมีมติ M5 แยก (§8.3)** · ปิดช่อง `set_pref` เปิด write path ขณะ S2 active · suite เทสต์ใหม่
+ **ไม่ทำ:** S2b-1 (ZeroTier) · S2b-2 (สองอินสแตนซ์) · S3 · fan-out หลาย guest · เปลี่ยน protocol/wire format (`ProtoVer` คงเดิม) · ลดเป้า 60 ยูนิต · แตะ `TurnGate.cs`/`RangeCells.cs`/`.gitignore`
+ 
+ ---
+@@ -55,12 +56,12 @@
+ 
+ ## 3. โครงสร้างเกต (แยกชัดเจน — อนุมัติแต่ละเกตเป็นคนละเรื่อง)
+ 
+-**GO-1 — อนุมัติแผน/ขอบเขต เพื่อเริ่ม implementation (W0–W5)**
+-ต้องมี: อนุมัติแผนฉบับนี้เป็นลายลักษณ์ · คำตอบ 2 คำถามที่กำหนดรูปโค้ด: (1) กลไก toggle = **มีมติแล้ว (M3)** (2) ยอมรับ guest slot เดียว = **มีมติแล้ว (M4)** ⇒ คงค้างเพียง **M5 (WriteGuard ใน build ไหน)** ซึ่งต้องตอบ**ก่อนจบ W4** ไม่บล็อก W0–W3
++**GO-1 — อนุมัติแผน/ขอบเขต เพื่อเริ่ม implementation — ครอบเฉพาะ W0–W3, W5 และ W4(b)(c) เท่านั้น (ไม่รวม W4(a) runtime hook)**
++ต้องมี: อนุมัติแผนฉบับนี้เป็นลายลักษณ์ · คำตอบ 2 คำถามที่กำหนดรูปโค้ด: (1) กลไก toggle = **มีมติแล้ว (M3)** (2) ยอมรับ guest slot เดียว = **มีมติแล้ว (M4)** ⇒ คงค้างเพียง **M5 (จะ hook กลุ่มใด + มิติ build — §8.3/§8.4)** ซึ่งเป็นเงื่อนไขเริ่ม **W4(a) เท่านั้น** — ไม่บล็อก W0–W3, W5, W4(b)(c) · ถ้าถึง GO-3 โดย M5 ยังไม่มีมติ = ทำ runtime แบบไม่มี hook และ E5(a) = NOT-RUN ตาม §11
+ **ห้าม:** ไม่ต้องมีผลเทสต์ W1–W5 ก่อนเริ่ม (เป็นผลที่ต้องได้จาก implementation เอง) · อนุมัติแผน **ไม่ใช่** อนุมัติ build/deploy
+ 
+ **PASS-2 — offline verification หลัง W1–W5**
+-หลักฐาน: T0–T4 ทั้งชุด + **regression 466+53** เขียวครบ + ผล static check (b) + diff รีวิว (ไม่มี call site เมธอดเปลี่ยน-state ใน `src/LongYinCoop/S2/**`) · ข้อใดแดง = แก้แล้วรันซ้ำในวง offline · PASS-2 เป็น **prerequisite ของ GO-3** เท่านั้น
++หลักฐาน: T0–T4 ทั้งชุด (+T2h เมื่อ M5 อนุมัติและทำ W4(a)) + **regression 466+53** เขียวครบ + ผล static check (b) + diff รีวิว (ไม่มี call site เมธอดเปลี่ยน-state ใน `src/LongYinCoop/S2/**` และ — ถ้า M5 ยังไม่มีมติ — **ไม่มีไฟล์/call ติดตั้ง hook ใหม่แม้แต่อันเดียว**) · ข้อใดแดง = แก้แล้วรันซ้ำในวง offline · PASS-2 เป็น **prerequisite ของ GO-3** เท่านั้น
+ 
+ **GO-3 — build/deploy/runtime (อนุมัติแยก)**
+ ต้องมี: อนุมัติ build/deploy เป็นลายลักษณ์ (แยกจาก GO-1 เสมอ) · PASS-2 ผ่าน · **provenance ครบตาม §9** · preflight: hash เกมตรง `VERSION.md` + เกมไม่รัน + `split --expected-baseline coop-test/baselines/20261025-201545/savehash.real.before.txt` + preflight READY · runtime เริ่มที่เกตย่อย **G0** (ตรวจ `MelonEvents.OnGUI` ยิงจริง — ไม่ยิง = หยุดรายงาน ไม่เดาทางแก้ก่อนอนุมัติ) แล้ววัด E1–E8 (§11)
+@@ -69,7 +70,7 @@
+ 
+ ---
+ 
+-## 4. งาน W0–W6 (เรียงตาม dependency)
++## 4. งาน W0–W5 + GO-3 (เรียงตาม dependency — W4 แยกเป็น W4(b)(c) และ W4(a) ตามป้าย `S2-plan.md §13.2` ข้อ 5)
+ 
+ | ขั้น | งาน | เปิดเกม? | ไฟล์ที่คาดว่าเปลี่ยน | เกณฑ์จบขั้น |
+ |---|---|---|---|---|
+@@ -77,8 +78,9 @@
+ | W1 | `S2GuestDecoder` — decode payload `CompactCodec` → display struct (pure) | ไม่ | `src/LongYinCoop/S2/Guest/S2GuestDecoder.cs` (ใหม่) | T0 vectors ผ่าน 100% |
+ | W2 | `S2OverlayClient` — in-process TCP client (แพตเทิร์น `S2TcpSelfTest`) + handshake + PING ตามรอบ | ไม่ | `S2/Guest/S2OverlayClient.cs` (ใหม่) | T1 ผ่าน |
+ | W3 | `S2OverlayService` — subscribe `MelonEvents.OnGUI` + render จาก buffer ล่าสุด (smoothing 100 ms, `extrapolate=false` ตาม STAGEPLAN §5) · string ทั้งหมดจาก `UIStrings` · **ไม่มี interactive control** (วาด Label/Box เท่านั้น — ไม่กิน input) | ไม่ | `S2/Guest/S2OverlayService.cs` (ใหม่), `UIStrings.cs`, `CoopMod.cs` | T3 ผ่าน |
+-| W4 | WriteGuard (a) **ห้ามเริ่มจนกว่า M5 มีมติ** — ก่อนหน้านั้นทำเฉพาะ (b)(c) | ไม่ | `S2/Host/S2WriteGuardHooks.cs` (ใหม่, หลังอนุมัติ), `S2WriteGuard.cs` (แตะน้อย) | T2 ผ่าน (เมื่อทำ) |
+-| W5 | `set_pref` gate: ปฏิเสธการ**เปิด** write-path pref ขณะ `_s2.Active==true` (ปิดยังอนุญาต) + wire ref `_s2` เข้า `IpcServer` + `tools/s2_static_check.py` (b) | ไม่ | `IpcServer.cs`, `CoopMod.cs`, `tools/s2_static_check.py` (ใหม่) | T4 ผ่าน + static check จับ fake violation ได้ |
++| **W4(b)(c)** | WriteGuard **ส่วนที่อนุญาตก่อนมีมติ M5** — นิยามป้าย (ตาม `S2-plan.md §13.2` ข้อ 5): **(a) runtime hook** = การสร้างโค้ด hook และ/หรือการติดตั้ง Harmony patch ที่จุด hook 4 กลุ่ม (§8.1) — **ก่อนมีมติ M5 ห้ามทั้งสร้างและติดตั้ง ทุกกรณี แม้จะตั้งใจให้เป็น no-op/ปิดอยู่** · **(b) static check** = `tools/s2_static_check.py` สแกน call sites ของเมธอดเปลี่ยน-state ใน `src/LongYinCoop/S2/**` · **(c) audit** = หลักฐาน "ไม่มี write" จากกลไก audit/`coopctl` ที่มีอยู่แล้ว (วัดจริงที่ E5 — ไม่มีงานโค้ดใหม่) · งานของขั้นนี้ = (b) + จัดเตรียม (c) + **ตรรกะ flag แบบ pure** (decision function ของ guard เป็น pure function + T2 — ไม่มีการ patch อะไรทั้งสิ้น) | ไม่ | `tools/s2_static_check.py` (ใหม่), `S2/Host/S2WriteGuard.cs` (แตะน้อย), `tests/S2Protocol.Tests/S2a4Tests.cs` | T2 ผ่าน + static check จับ fake violation ได้ + **diff ไม่มีไฟล์ hook ใหม่และไม่มี call ติดตั้ง patch ใหม่** |
++| **W4(a)** | WriteGuard **runtime hook** — สร้าง + ติดตั้ง Harmony patch **เฉพาะกลุ่มที่ M5 เลือก** (§8.3) ตามพฤติกรรม §8.5–§8.7 · **ห้ามเริ่มจนกว่า M5 จะมีมติเป็นลายลักษณ์** — ตัวเลือก "ไม่ hook เลย" (M5-3) = ขั้นนี้ NOT-RUN ถาวรของ stage | ไม่ | `S2/Host/S2WriteGuardHooks.cs` (ใหม่ — สร้างหลังอนุมัติเท่านั้น) | T2h ผ่าน (เมื่อทำ) |
++| W5 | `set_pref` gate: ปฏิเสธการ**เปิด** write-path pref ขณะ `_s2.Active==true` (ปิดยังอนุญาต) + wire ref `_s2` เข้า `IpcServer` | ไม่ | `IpcServer.cs`, `CoopMod.cs` | T4 ผ่าน |
+ | GO-3 | build (provenance §9) → deploy (backup `.prev-1b4c17aa`) → G0 → วัด E1–E8 | **ใช่** | — | §11 + save protocol ครบ |
+ 
+ **Regression:** suite 466+53 เดิมต้องผ่านครบทุกครั้งที่รัน (ทุก W)
+@@ -104,11 +106,32 @@ overlay in-process และ `viewer-client.py` ใช้ slot guest เดี
+ - การปฏิเสธต้อง: ตอบ error พร้อมเหตุผล + **ไม่เปลี่ยนค่า pref** + log + นับเป็น evidence (T4)
+ - อนึ่ง: กฎนี้ไม่ได้กันการแก้ `MelonPreferences.cfg` ด้วยมือ (นอกสโคป — บันทึกเป็นข้อจำกัด)
+ 
+-## 8. WriteGuard — ประเมินความเสี่ยง (M5: ห้าม implement จนอนุมัติแยก · ห้ามตัดสินแทนผู้ใช้)
++## 8. WriteGuard — ป้ายงาน, ความเสี่ยงรายกลุ่ม และตัวเลือก M5 (ห้ามสร้าง/ติดตั้ง hook ก่อนมีมติ M5 · ห้ามตัดสินแทนผู้ใช้)
+ 
+-**8.1 จุด hook (ตาม `S2-plan.md §13.2` ข้อ 5a):** `MoveCommand.StartMove`, `AttackCommand.StartAttack` (เมธอดของ mod — เรียกเฉพาะผ่าน `spike` ที่ถูก `AllowRemoteInput` กันอยู่แล้ว) · `BattleController.BattlePauseButtonClicked` (UI ของเกม — คลิกเท่านั้น) · `GameDataController.Save/Load` (เส้นทางเซฟของเกม — **ความเสี่ยงสูงสุด**: postfix นี้รันอยู่ใน flow การเซฟจริงของ host)
++**กติกาพื้นฐานของ stage นี้:** ก่อนมีมติ M5 เป็นลายลักษณ์ **ห้ามสร้างหรือติดตั้ง hook ทุกกรณี** — รวมการเขียนโค้ด hook ไว้ล่วงหน้าแม้ยังไม่ติดตั้ง และแม้จะออกแบบให้เป็น no-op · สิ่งที่อนุญาตมีเท่านั้น: **(b) static check**, **(c) audit ด้วยกลไกที่มีอยู่** และ**ตรรกะ flag แบบ pure** (ทั้งหมดคืองาน W4(b)(c))
+ 
+-**8.2 ทางเลือก:**
++**8.1 จุด hook (ตาม `S2-plan.md §13.2` ข้อ 5a):** `MoveCommand.StartMove`, `AttackCommand.StartAttack` (เมธอดของ mod — เรียกเฉพาะผ่าน `spike` ที่ถูก `AllowRemoteInput` กันอยู่แล้ว) · `BattleController.BattlePauseButtonClicked` (UI ของเกม — คลิกเท่านั้น) · `GameDataController.Save/Load` (เส้นทางเซฟของเกม)
++
++**8.2 ตารางความเสี่ยงรายกลุ่ม hook (ฐานผลักดันการเลือก M5):**
++
++| กลุ่ม hook | เจ้าของโค้ด / path | ความเสี่ยงเฉพาะเมื่อ hook | แตะเส้นทางเซฟ? |
++|---|---|---|---|
++| `MoveCommand.StartMove` | โค้ด **mod** — ทางเดียวที่ถูกเรียกคือคำสั่ง `spike` (มี `AllowRemoteInput` กันอยู่แล้ว) | ต่ำสุดของ 4 กลุ่ม — exception ใน postfix กระทบเฉพาะ path คำสั่งของ mod ไม่แตะ UI/เซฟของเกม | ไม่ |
++| `AttackCommand.StartAttack` | โค้ด **mod** — คู่ขนานของ StartMove | ต่ำ (เหมือน StartMove) | ไม่ |
++| `BattleController.BattlePauseButtonClicked` | โค้ด **เกม** — UI คลิกเท่านั้น | กลาง — patch โค้ดเกมบน Unity main thread · exception ตอนผู้ใช้กดปุ่ม = กระทบ UI ของเกมโดยตรง (แต่ไม่อยู่ใน flow เซฟ) | ไม่โดยตรง |
++| `GameDataController.Save` / `Load` | โค้ด **เกม** — **เส้นทางเซฟ/โหลดจริงของ host** | **สูงสุด** — postfix รันอยู่ใน flow การเซฟจริง · exception ตรงนี้คือความเสี่ยงต่อความสมบูรณ์ของเซฟ (กติกาข้อ 4–5, E7) · ไม่ว่าจะเลือกตัวเลือก M5 ใด กลุ่มนี้ต้องออกแบบเป็น log+count เท่านั้น ห้าม throw | **ใช่ — โดยตรง** |
++
++**8.3 ตัวเลือก M5 (ผู้ใช้เลือกหนึ่งตัวเลือก):**
++
++| ตัวเลือก | กลุ่มที่ถูก hook | ผลต่อ E5(a) | ความเสี่ยงที่ยอมรับ |
++|---|---|---|---|
++| **M5-1 hook ครบ 4 กลุ่ม** | ทั้ง 4 กลุ่ม | วัดได้ครบทุกกลุ่ม — E5 เต็ม (3 แนว) ได้ | สูงสุด — รวม patch บนเส้นทางเซฟของเกม (แถวที่ 4 ของ §8.2) |
++| **M5-2 ไม่ hook Save/Load** | StartMove + StartAttack + BattlePauseButtonClicked | วัดได้ 3 กลุ่ม — Save/Load = NOT-RUN (ระบุในผล E5) ⇒ E5 สูงสุด = PASS-with-limitation | ตัดกลุ่มเสี่ยงสูงสุด (เส้นทางเซฟ) ออก — เหลือการ patch โค้ดเกมเฉพาะปุ่ม pause |
++| **M5-3 ไม่ hook เลย** | ไม่มี | (a) = NOT-RUN ทั้งหมด ⇒ E5 ตัดสินด้วย (b)+(c) = PASS-with-limitation | ศูนย์ — ไม่มี patch ใหม่ · ยึด static check + audit เป็นหลักฐานตาม §13.2 |
++
++หมายเหตุ: M5-1/M5-2 ต้องเลือก**มิติ build** ต่ออีกชั้น (§8.4) · M5-3 ไม่มี hook จึงไม่เกี่ยวกับ §8.4 · ทุกตัวเลือก — W4(a) เริ่มไม่ได้จนกว่า M5 จะมีมติเป็นลายลักษณ์
++
++**8.4 มิติ build ของตัวเลือกที่มี hook (M5-1/M5-2 เท่านั้น):**
+ 
+ | | (ก) Debug-only hook | (ข) Release hook แบบ default-off |
+ |---|---|---|
+@@ -116,13 +139,13 @@ overlay in-process และ `viewer-client.py` ใช้ slot guest เดี
+ | การวัด E5(a) | ต้องมี session วัดแยกบน Debug build (= เปิดเกมเพิ่มอีกชุด) | วัดได้ใน session เดียวกับ E1–E8 |
+ | ช่องเปิดโดยไม่ตั้งใจ | ไม่มี | มีได้ถ้า pref ถูกเปิด (ผ่าน cfg ด้วยมือ) — ต้องกัน `set_pref` ไม่ให้เปิดได้ (hardcode ห้ามอยู่ใน allowlist) |
+ 
+-**8.3 พฤติกรรมเมื่อ hook ติดตั้งแต่ ambient flag ปิด:** จุด entry ทั้ง 4 กลุ่มทำงานเฉพาะนับ counter ราย method (เขียน marker `writeguard` เป็นระยะ) — ไม่เปลี่ยนพฤติกรรมเกม · ความถี่การถูกเรียกต่ำมาก (Save/Load เฉพาะเปิด/ปิด/เซฟจริง, PauseButton เฉพาะคลิก, StartMove/StartAttack เฉพาะ path คำสั่ง mod) ⇒ ต้นทุน performance คาดว่าเชิงปริมาณต่ำ (INFER — ต้องวัดที่ E4 ร่วมกับ overlay)
++**8.5 พฤติกรรมเมื่อ hook ติดตั้งแต่ ambient flag ปิด:** จุด entry ที่ถูก hook (เฉพาะกลุ่มที่ M5 เลือก) ทำงานเฉพาะนับ counter ราย method (เขียน marker `writeguard` เป็นระยะ) — ไม่เปลี่ยนพฤติกรรมเกม · ความถี่การถูกเรียกต่ำมาก (Save/Load เฉพาะเปิด/ปิด/เซฟจริง, PauseButton เฉพาะคลิก, StartMove/StartAttack เฉพาะ path คำสั่ง mod) ⇒ ต้นทุน performance คาดว่าเชิงปริมาณต่ำ (INFER — ต้องวัดที่ E4 ร่วมกับ overlay) · M5-3 = ไม่มีส่วนนี้ทั้งหมด
+ 
+-**8.4 ความเสี่ยง stability/thread/exception:** hook ทั้งหมดอยู่บน Unity main thread (path เดียวกับ `BattleLogHook`/`JitProbe` ที่ใช้มาตั้งแต่ S1 — กลไก Harmony เดียวกัน) · ความเสี่ยงเฉพาะ: (i) method ถูก inline ⇒ patch ติดแต่ไม่โดนเรียก — ตรวจด้วย `PatchApplied` + hit counter (แพตเทิร์นเดิม) (ii) **throw ใน postfix ของ `Save` ขณะ host เซฟปกติ** — การออกแบบห้าม throw เว้นแต่ ambient flag (S2 code path กำลังทำงาน) ตั้งอยู่ และแม้ในกรณีนั้นต้องชั่งการ throw ใน flow เซฟ — **ทางเลือกที่ปลอดกว่า: log+count อย่างเดียว (ไม่ throw เลย) + ยึด (b) static check เป็นหลักฐานหลัก** (ยังเป็นไปตาม §13.2: ได้ a+b ⇒ PASS-with-limitation ตามเกณฑ์เดิม)
++**8.6 ความเสี่ยง stability/thread/exception:** hook ทั้งหมดอยู่บน Unity main thread (path เดียวกับ `BattleLogHook`/`JitProbe` ที่ใช้มาตั้งแต่ S1 — กลไก Harmony เดียวกัน) · ความเสี่ยงเฉพาะ: (i) method ถูก inline ⇒ patch ติดแต่ไม่โดนเรียก — ตรวจด้วย `PatchApplied` + hit counter (แพตเทิร์นเดิม) (ii) **throw ใน postfix ของ `Save` ขณะ host เซฟปกติ** — การออกแบบห้าม throw เว้นแต่ ambient flag (S2 code path กำลังทำงาน) ตั้งอยู่ และแม้ในกรณีนั้นต้องชั่งการ throw ใน flow เซฟ — **ทางเลือกที่ปลอดกว่า: log+count อย่างเดียว (ไม่ throw เลย) + ยึด (b) static check เป็นหลักฐานหลัก** (ยังเป็นไปตาม §13.2: ได้ a+b ⇒ PASS-with-limitation ตามเกณฑ์เดิม)
+ 
+-**8.5 hook ติดตั้งไม่สำเร็จ:** `Apply()` ต่อ method มี log `PatchApplied` (แพตเทิร์นเดิม) — ตัวใดล้ม ⇒ log warn + marker `writeguard.partial` + **ไม่ throw** · E5 วัดตามจำนวนที่ติดจริง · ถอด: `Uninstall()` ตอน deinit (แบบเดียวกับ probe ที่มี)
++**8.7 hook ติดตั้งไม่สำเร็จ:** `Apply()` ต่อ method มี log `PatchApplied` (แพตเทิร์นเดิม) — ตัวใดล้ม ⇒ log warn + marker `writeguard.partial` + **ไม่ throw** · E5 วัดตามจำนวนที่ติดจริง · ถอด: `Uninstall()` ตอน deinit (แบบเดียวกับ probe ที่มี)
+ 
+-**8.6 test evidence ที่ต้องมีก่อนพิจารณาอนุมัติ M5:** T2 (flag logic ครบชุด) · self-test marker ตอน activate (`writeguard.installed n=X`) · runtime session ที่ E5(a) มีหลักฐาน (ติด + ไม่ throw + counter เดิน) · ถ้าเกมอนุญาต (K16) ให้มีการกดเซฟของ host หนึ่งครั้งระหว่าง S2 active เป็นหลักฐานว่าไม่ขวาง · ผล E4 ที่รวมต้นทุน hook
++**8.8 test evidence ที่ต้องมีก่อนพิจารณาอนุมัติ M5:** T2 (flag logic pure ครบชุด — ทำได้ก่อนมติ M5) · T2h (hook runtime — เมื่อ M5 อนุมัติและทำ W4(a)) · self-test marker ตอน activate (`writeguard.installed n=X`) · runtime session ที่ E5(a) มีหลักฐาน (ติด + ไม่ throw + counter เดิน) · ถ้าเกมอนุญาต (K16) ให้มีการกดเซฟของ host หนึ่งครั้งระหว่าง S2 active เป็นหลักฐานว่าไม่ขวาง (เกี่ยวข้องเฉพาะ M5-1 — กลุ่มเดียวที่ hook Save/Load) · ผล E4 ที่รวมต้นทุน hook
+ 
+ **การตัดสิน "ความเสี่ยงยอมรับได้หรือไม่" เป็นของผู้ใช้เท่านั้น** — แผนนี้นำเสนอตัวเลือกและหลักฐานที่ต้องมีเท่านั้น
+ 
+@@ -139,9 +162,10 @@ overlay in-process และ `viewer-client.py` ใช้ slot guest เดี
+ |---|---|---|
+ | T0 | decoder vectors | snapshot ปกติ · ศพ (`hp=0`+`isAlive=false`) · synthetic 60-unit frame · edge ขอบช่วง |
+ | T1 | client↔fake-host | handshake ผ่าน/ผิด secret · DENY busy · resync · PING offset |
+-| T2 | hook flag logic (เมื่อ M5 อนุมัติ) | ambient flag set/clear · throw-condition · installed-but-off |
++| T2 | WriteGuard ก่อน hook — **อนุญาตทำได้ก่อนมติ M5** (W4(b)(c)) | ตรรกะ flag แบบ pure: ambient flag set/clear เป็น pure function · static check จับ fixture ที่มี call site ปลอมได้ และชุดสะอาด = 0 |
++| T2h | WriteGuard hook runtime — **หลังมติ M5 เท่านั้น** (W4(a)) | installed-but-off ไม่เปลี่ยนพฤติกรรมเกม · throw-condition ตามที่มติ M5 กำหนด (ข้อเสนอค่าเริ่มต้น = log+count ไม่ throw ตาม §8.6) · partial install (§8.7) |
+ | T3 | render model | เลือกเฟรมตามอายุ (smoothing 100 ms) · ไม่ extrapolate · overlay=false ไม่มีผล |
+-| T4 | `set_pref` gate + static check | matrix (active × key × value) · static check จับ fixture ที่มี call site ปลอมได้ · parser `overlay` key + reload semantics |
++| T4 | `set_pref` gate | matrix (active × key × value) · parser `overlay` key + reload semantics |
+ | RG | regression | **466+53 เดิมผ่านครบทุกครั้ง** |
+ 
+ ## 11. Exit criteria ของ S2a-4 (runtime ภายใต้ GO-3)
+@@ -151,8 +175,8 @@ overlay in-process และ `viewer-client.py` ใช้ slot guest เดี
+ | E1 | โหลด + ไม่พัง | 0 ERROR/0 Exception ตลอด session + ผู้ใช้จบ 1 ศึก | ตรงเกณฑ์ |
+ | E2 | overlay ตรงข้อมูลจริง | เทียบ grid/unit/hp บน overlay กับ `spike status` ณ key เดียวกัน | ≥ 20/20 |
+ | E3 | input isolation | ผู้ใช้เล่น 1 เทิร์นเต็มระหว่าง overlay เปิด: คลิกเกมทำงานปกติ · `commandsAccepted=0` · audit เปลี่ยนเฉพาะจาก action ผู้ใช้ | ตรงเกณฑ์ |
+-| E4 | ต้นทุนเฟรม | Δmean overlay ON vs OFF ด้วย `S2FrameMeter`/`s2.metrics` (ศึกนิ่ง `WaitPlayerInput`, protocol v2, wall-clock+sha256 net.cfg ทุกสลับ) | \|Δmean\| ≤ 1.0 ms (band ±0.5 = INCONCLUSIVE ตามมติ X5 — รายงานตามจริง) |
+-| E5 | guest อ่านอย่างเดียว (§13.4 #7) | (a) hook ติด + ไม่ throw (เมื่อ M5 อนุมัติ) · (b) static check call sites = 0 · (c) IPC audit ไม่มี write ตลอด session | 3/3 = PASS · a+b = PASS-with-limitation · ถ้า M5 ยังไม่อนุมัติ: b+c โดยระบุ a = NOT-RUN(รอมติ) |
++| E4 | ต้นทุนเฟรม | Δmean overlay ON vs OFF ด้วย `S2FrameMeter`/`s2.metrics` (ศึกนิ่ง `WaitPlayerInput`, protocol v2, wall-clock+sha256 net.cfg ทุกสลับ · รวมต้นทุน hook ถ้า M5 อนุมัติและติดตั้ง — M5-3 = ต้นทุน overlay ล้วน) | \|Δmean\| ≤ 1.0 ms (band ±0.5 = INCONCLUSIVE ตามมติ X5 — รายงานตามจริง) |
++| E5 | guest อ่านอย่างเดียว (§13.4 #7) | (a) hook ติดตั้งเฉพาะกลุ่มที่ M5 เลือก (§8.3) + ไม่ throw · (b) static check call sites = 0 · (c) IPC audit ไม่มี write ตลอด session | ครบทั้ง 3 แนว = PASS · ได้แค่ a+b = PASS-with-limitation (ตาม §13.2) · **M5 ยังไม่อนุมัติ หรือเลือก M5-3 "ไม่ hook เลย": ผลสูงสุด = PASS-with-limitation จาก (b)+(c) โดย (a) = NOT-RUN พร้อมระบุเหตุ (รอมติ M5 / มติไม่ hook / กลุ่มที่ตัดออก เช่น Save/Load ของ M5-2) — ห้ามอ้างว่า "hook ผ่าน" หรือ "write path ถูก hook ตรวจแล้ว" ในรายงานทุกฉบับ** |
+ | E6 | `set_pref` hardening | ขณะ active: `allowRemoteInput=true` → ปฏิเสธ + S2 ยัง active + `spike move` ยัง DISARMED · ขณะ idle: พฤติกรรมเดิมทุกประการ | ครบสองฝั่ง |
+ | E7 | เซฟปลอดภัย | `SaveSlot*` เปลี่ยน 0 · digest ตรง baseline `58883949…` (ยกเว้น volatile) · `leftovers: none` · restore EXACT | ตรงเกณฑ์ |
+ | E8 | สเกล (มติ Q4) | บันทึก unit count จริงทุกหน้าต่างวัด — ไม่มี fixture 60 = บันทึกเป็นข้อจำกัดของ S2a-4 (ไม่ใช่ของ S2 ทั้ง stage) | บันทึกตามจริง |
+@@ -191,7 +215,7 @@ GO ต้องมี: S2b-1 ปิด · อนุมัติแยกเร
+ 
+ ## 15. Rollback + evidence checklist
+ 
+-**Rollback:** net.cfg `overlay=false`/`enabled=false` (เอฟเฟกต์ ≤ ~1 s ตาม K30 — ยืนยันจริงที่ runtime) → DLL กลับ `.prev-1b4c17aa` → git tag `stage-S2a-4` ตอนปิด (checkpoint ระหว่างทำตามขั้น) → เซฟ `verify`/`restore` ตาม protocol · WriteGuard hook (ถ้าทำ): pref/gate ปิด = no-op, ถอดที่ deinit, ลบทิ้งด้วย `.prev-*`
++**Rollback:** net.cfg `overlay=false`/`enabled=false` (เอฟเฟกต์ ≤ ~1 s ตาม K30 — ยืนยันจริงที่ runtime) → DLL กลับ `.prev-1b4c17aa` → git tag `stage-S2a-4` ตอนปิด (checkpoint ระหว่างทำตามขั้น) → เซฟ `verify`/`restore` ตาม protocol · WriteGuard hook (เฉพาะเมื่อมีมติ M5 และติดตั้งแล้ว): pref/gate ปิด = no-op, ถอดที่ deinit, ลบทิ้งด้วย `.prev-*` · M5-3 = ไม่มี hook ให้ถอด
+ **Evidence (`evidence/S2a4-<label>/`):** `s2a4-report.md` (วัด E1–E8 เทียบเกณฑ์ทีละข้อ + สถานะ NOT-RUN ของ E5(a) ถ้า M5 ค้าง) · `s2-snapshots.ndjson` (marker `overlay.*`, `writeguard.*`) · sampler + `blocks.txt` (A/B) · `savehash.*` + verify/restore · static check output · **build provenance ครบตาม §9** · unit count จริงทุกหน้าต่างวัด · wall-clock + sha256 net.cfg ทุกสลับ (protocol v2) · **ห้ามมีค่า secret ใดใน evidence**
+ 
+ ## 16. UNKNOWN รวม (ณ วันจัดทำ)
+@@ -200,7 +224,7 @@ fixture 60 ยูนิต (บล็อกการปิด S2 ทั้ง st
+ 
+ ## 17. สิ่งที่รออนุมัติ/คำตอบ (ห้ามเริ่มจนมีคำตอบ)
+ 
+-1. **GO-1:** อนุมัติแผนฉบับนี้ + ขอบเขต
+-2. **M5:** WriteGuard hook ใน build ไหน (หรือ log-only ไม่ throw ตามข้อเสนอ §8.4) — ต้องมีมติก่อนจบ W4
++1. **GO-1:** อนุมัติแผนฉบับนี้ + ขอบเขต — **ครอบเฉพาะ W0–W3, W5, W4(b)(c) เท่านั้น** (ไม่รวม W4(a) runtime hook)
++2. **M5:** เลือกตัวเลือกตาม §8.3 — **M5-1** hook ครบ 4 กลุ่ม / **M5-2** ไม่ hook Save/Load / **M5-3** ไม่ hook เลย (+ มิติ build §8.4 ถ้าเลือก M5-1/M5-2 · ข้อเสนอค่าเริ่มต้น = log+count ไม่ throw ตาม §8.6) — ต้องมีมติเป็นลายลักษณ์**ก่อนเริ่ม W4(a)** · ไม่มีมติ = W4(a) และ E5(a) = NOT-RUN (E5 สูงสุด = PASS-with-limitation ตาม §11)
+ 3. **GO-3:** อนุมัติ build/deploy/runtime (แยกจาก GO-1)
+ 4. (ถัดไป นอกแผนนี้) S2b-1: อนุมัติ `allowNonLoopback` + bind IP ของ ZT · S2b-2: อนุมัติแนวทางแยก instance + Steam
