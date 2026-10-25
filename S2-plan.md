@@ -1,6 +1,6 @@
-# S2 — แผน Spectator (transport + viewer) · ฉบับเสนอ 2026-10-21 · **rev2 (2026-10-21 20:50) — อ่าน §13 ก่อนใช้ §1–§12 · รออนุมัติ (ยังไม่ลงมือ)**
+# S2 — แผน Spectator (transport + viewer) · ฉบับเสนอ 2026-10-21 · **rev2 (2026-10-21 20:50 · ทบทวนสถานะ 2026-10-26) — อ่าน §13 ก่อนใช้ §1–§12 · S2a-0…S2a-3 ปิดแล้ว (tag ขั้นหลัก `stage-S2a-2`/`stage-S2a-3` · `checkpoint-S2a`) · มติ Q1/Q2/Q4/Q5/Q6 มีผลตาม §13.9 · Q3 ยังไม่ตัดสิน · การใช้ §13 แทน §1–§12 ทั้งฉบับยังรอยืนยันจากผู้ใช้**
 
-> **rev2:** §13 = ผลตรวจแผนเทียบข้อเท็จจริง RUNTIME ล่าสุด + ข้อบังคับใหม่ (field ความตาย, audit ที่ไม่ใช้ `stateHash`, bind loopback, preflight, fixture 60 ยูนิต) — **§13 มีผลเหนือ §1–§12 เมื่อขัดกัน**
+> **rev2:** §13 = ผลตรวจแผนเทียบข้อเท็จจริง RUNTIME ล่าสุด + ข้อบังคับใหม่ (field ความตาย, audit ที่ไม่ใช้ `stateHash`, bind loopback, preflight, fixture 60 ยูนิต) — **มติรายข้อ (§13.9) มีผลแล้ว · การใช้ §13 แทน §1–§12 เมื่อขัดกัน ยังรอยืนยันจากผู้ใช้ (ดูบล็อกสถานะใต้หัวข้อ §13)**
 
 อ้างอิง: `STAGEPLAN.md §5 (S2)`, `§1.1` (สิทธิ์การเขียน), `§1.6` (เครือข่าย/IPC), `§1.4` (main thread), `§1.7` (denylist)
 สถานะก่อนเริ่ม: S1.5 ปิดแล้ว (tag `stage-S1.5`) · เซฟจริง `57 ไฟล์ digest 2b0548fe464b` · build `dll 517758147f59…`
@@ -242,7 +242,12 @@ sha256( "s2|1" + battleKey + turnIndex + activeUnitId + paused
 
 ---
 
-## 13. rev2 — ผลตรวจแผนเทียบข้อเท็จจริง RUNTIME (2026-10-21 20:50) · **มีผลเหนือ §1–§12**
+## 13. rev2 — ผลตรวจแผนเทียบข้อเท็จจริง RUNTIME (2026-10-21 20:50) · revision ที่มีมติรายข้อแล้ว (§13.9) — **การใช้ §13 แทน §1–§12 ยังรอยืนยันจากผู้ใช้**
+
+> **สถานะการอนุมัติ (ทบทวน 2026-10-26):**
+> 1. **มติระดับเนื้อหา — มีหลักฐานแล้ว:** Q1/Q2/Q4/Q5/Q6 ตาม §13.9 บันทึกใน mod repo commit `ba0d240` (2026-10-21 21:02) ได้แก่ อนุมัติ F3/F4/F5 + audit tuple (Q1) · อนุมัติ preflight เฉพาะ `tools/save-split.py` (Q2) · คงเป้า 60 ยูนิต ห้ามลดเอง (Q4) · แยก S2a/S2b (Q5) · ถ้อยคำ protocol ตาม §13.2/§13.4 (Q6)
+> 2. **Q3 (VPN ค่ายไหน + เครื่อง guest) ยังไม่ได้ตัดสิน** — บล็อกเฉพาะ S2b-1/S2b-2 ไม่บล็อก S2a และการทดสอบ S3 แบบ loopback
+> 3. **การใช้ §13 แทน §1–§12 ทั้งฉบับ — ยังรอยืนยันจากผู้ใช้:** มติในข้อ 1 ครอบเฉพาะเนื้อหาที่ระบุ ไม่ใช่การให้อำนาจทั้ง §13 · §13 นี้**ไม่มีอำนาจเหนือ `STAGEPLAN.md` หรือเอกสารลำดับสูงกว่าโดยอัตโนมัติ** (ลำดับอำนาจตาม AGENTS: STAGEPLAN > notes > dump.cs) · AGENTS.md (ฉบับ 2026-10-24) ยังระบุ "§13 rev2 รออนุมัติ" ซึ่งขัดกับข้อ 1 — ต้องแก้ฝ่ายใดฝ่ายหนึ่งตามมติผู้ใช้ จึงบันทึกไว้ตรงนี้เป็นข้อค้าง
 
 ตรวจโดย: อ่าน `S2-plan.md` + `STAGEPLAN.md §1.1/§1.4/§1.6/§1.7/§5/§10/§11.1` + โค้ด S1/S1.5 ที่ ship (`Mods\LongYinCoop.dll` = `517758147f59…`) + หลักฐาน S1.5f/S1.5g/S1.5gB
 ไม่ได้รันเกม ไม่ได้แตะเซฟ ไม่ได้แก้ `src/` — ข้อที่เป็น RUNTIME คือค่าที่วัดไว้แล้วในหลักฐาน/อ่านจากโค้ดที่รันจริง
@@ -326,7 +331,7 @@ sha256( "s2|1" + battleKey + turnIndex + activeUnitId + paused
 | 10 | ความตายใน replica | เคสศพจริง: `hp=0` และ `isAlive=false`; `unitAlive` เปลี่ยนภายใน ≤3 snapshot | S1.5f fixture |
 | 11 | ไม่แตะเซฟ | `SaveSlot*` เปลี่ยน 0 ไฟล์; digest ตรง baseline อนุมัติ (ยกเว้น volatile) | ทุก run |
 
-### 13.5 Pre-flight guard (ยังไม่แก้ไฟล์ — **รออนุมัติ**)
+### 13.5 Pre-flight guard (อนุมัติตาม §13.9 Q2 — ขอบเขต: **เพิ่ม subcommand `preflight` ใน `tools/save-split.py` ไฟล์เดียว ห้ามแก้ subcommand เดิม** · ใช้งานจริงแล้วใน S2a-2/S2a-3)
 
 ลำดับบังคับ: **`split` → เปิด sampler → `preflight` PASS → ผู้ใช้เปิดเกม**
 
@@ -341,15 +346,20 @@ sha256( "s2|1" + battleKey + turnIndex + activeUnitId + paused
 
 เหตุผล: เกมถูกเปิดบนเซฟจริงก่อน split 2 ครั้ง (16:07, 19:49) — tool เดิมไม่มี gate ก่อนเปิดเกม
 
-### 13.6 Rollback (rev2)
+### 13.6 Rollback (rev2 — ทบทวนค่า 2026-10-26)
 
 | ชั้น | ทำอะไร | ตรวจว่าใช้ได้ |
 |---|---|---|
-| pref | `coop.net.enabled=false` / `role=off` → ปิด listener + ตัด connection | `coopctl get_version` ยังตอบ, ไม่มี port ฟัง |
-| DLL | `Mods\LongYinCoop.dll` → `.dll.off` (เกมกลับ vanilla) | เปิดเกมได้, ไม่มี log ของ mod |
-| git | tag ฐาน `stage-S1.5g` (`e3e798a`) | `git checkout stage-S1.5g` build ได้ |
-| เซฟ | `save-split.py verify --label …` + `restore` | `Save` 57 ไฟล์ `6dd645d9ef17`, `leftovers: none` |
-| tag | `checkpoint-S2a` / `checkpoint-S2b` ตอนปิดงาน · `stage-S2` เมื่ออนุมัติรายงาน | tag annotated |
+| net.cfg (kill switch) | ตั้ง `enabled=false` ใน `UserData\LongYinCoop\net.cfg` (flat key=value — MelonLoader ไม่แตะไฟล์นี้; **ห้าม**ใช้ dotted `coop.net.*` ใน MelonPreferences.cfg — พัง 2 ทาง เหตุการณ์ 2026-10-22, work A `1372bc3`) | ไม่มี port ฟัง (47800) · `enabled` ถูก poll สด · RUNTIME 2026-10-24: `heartbeatMs` อ่านเฉพาะตอน activate listener |
+| DLL กลับ build ก่อนหน้า (**binary**) | copy `Mods\LongYinCoop.dll.prev-f2ad30cd` (= `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8`) ทับตำแหน่งเดิม | `sha256sum` ตรง · เปิดเกมได้ |
+| DLL ปิดทั้ง mod (vanilla) | `Mods\LongYinCoop.dll` → `.dll.off` | เปิดเกมได้ · ไม่มี log ของ mod |
+| git (**source** ยุค S2a-3) | tag `stage-S2a-3` (annotated → `c60f405`) — **เป็นการย้อน source tree เท่านั้น ไม่ใช่การคืน binary ปัจจุบัน** · provenance ของ artifact ปัจจุบัน (แยกชั้นตามหลักฐาน git): DLL ที่ deploy = `1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177` **ถูก build ตอนที่ patch rangecells ยังเป็น uncommitted changes บนฐาน HEAD `8fe33ce`** (build 2026-10-25 22:52 · deploy 23:05) · patch นั้น**ถูก commit ภายหลังใน `82e9093`** (2026-10-26 00:18, parent = `8fe33ce`, รวม `TurnGate.cs` + `S3/RangeCells.cs`) · **ไม่มีหลักฐานว่ามีการ build ใหม่หลัง commit — ห้ามเขียนว่า DLL นี้ build จาก HEAD `82e9093`** (จะยืนยันได้ต่อเมื่อ deterministic rebuild จาก `82e9093` แล้ว hash ตรง) · full SHA-256 ของ deployed DLL อ้างตาม `VERSION.md` ⇒ การกลับ binary ใช้ชั้น `.prev-*` เท่านั้น ไม่ใช่ checkout tag | `git checkout stage-S2a-3` build ได้ (source ยุค S2a-3) |
+| เซฟ | `save-split.py verify --label …` + `restore` | `Save` 57 ไฟล์ (SaveSlot* 55 + `PlayerprefData.dat` + `steam_autocloud.vdf`) digest **`588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485`** ตรง `coop-test/baselines/20261025-201545/savehash.real.before.txt` EXACT · `leftovers: none` · ทุก `split` บังคับ `--expected-baseline` ชี้ไฟล์นี้ (ห้ามพึ่ง default ของ tool) |
+| tag | **มีแล้ว:** `checkpoint-S2a` (→ `ffc2c88`), `stage-S2a-2` (→ `14757e3`), `stage-S2a-3` (→ `c60f405`) · **คงเหลือ:** `checkpoint-S2b` ตอนปิดงาน S2b, `stage-S2` เมื่ออนุมัติรายงาน | tag annotated |
+
+**ประวัติค่า rollback ของ rev2 ตอนเขียนแรก (2026-10-21 — คงไว้ ห้ามลบ):** git ฐาน `stage-S1.5g` (`e3e798a`) · เซฟ 57 ไฟล์ digest `6dd645d9ef17` @ `coop-test/baselines/20261021-200450` · pref kill-switch `coop.net.enabled=false` (dotted pref ยุคก่อน work A) — ค่าเหล่านี้ถูกแทนด้วยตารางด้านบนตามหลักฐาน 2026-10-25/26 (`VERSION.md` สายโซ่ baseline · `git for-each-ref`)
+
+หมายเหตุ net.cfg (ค่าสังเกต ณ 2026-10-26 — **ยังไม่ใช้เป็น rollback criterion จนกว่าจะมีการอนุมัติ**): hash = `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false` · `heartbeatMs=1000`) — คงที่ตั้งแต่ 2026-10-24 03:04 ตรงสถานะปิด X5 re-measure (`evidence/S2a3x5r-20261024-0248/measurements-20261024.md`) และ SP0 session-purity 2026-10-25 (`evidence/SP0-20261025-0211/session-purity.md`) · `VERSION.md` ยังเขียน `dc8e9098…` (ค่ายุค stage ก่อน 2026-10-24 02:16) = stale — ต้องแก้ `VERSION.md` ก่อน (งานแยก รออนุมัติ) จึงจะยก hash นี้ขึ้นเป็นเกณฑ์ได้
 
 ### 13.7 ความเสี่ยงต่อเซฟ/Steam (rev2 — เฉพาะที่เกี่ยวกับงานนี้)
 
@@ -360,7 +370,7 @@ sha256( "s2|1" + battleKey + turnIndex + activeUnitId + paused
 | Esc ค้าง → เข้าใจผิดว่า sim เดิน | วัด latency/divergence ผิด | ตรวจ `battleTime`/`turnIndex`/state, บันทึกหน้าต่าง exclude |
 | 2 อินสแตนซ์บนเครื่องเดียว (T3) | Steam user เดียว/เซฟชน | ไม่อยู่ใน S2a; S2b-2 ต้องอนุมัติแยก |
 | bind นอก loopback | เครื่องอื่นเข้าถึงได้ | default loopback + `allowNonLoopback=false` + อนุมัติเป็นลายลักษณ์ |
-| secret ใน `MelonPreferences.cfg` (plaintext) | เครื่องที่เข้าถึงไฟล์อ่านได้ | secret ≥32 ไบต์, จำกัดสิทธิ์ไฟล์, บันทึกเป็นข้อจำกัด (ไม่มี TLS ใน S2) |
+| secret ใน `UserData\LongYinCoop\net.cfg` (plaintext — ย้ายจาก `MelonPreferences.cfg` ตาม work A `1372bc3` หลังเหตุการณ์ dotted pref พัง 2026-10-22) | เครื่องที่เข้าถึงไฟล์อ่านได้ | secret ≥32 ไบต์, จำกัดสิทธิ์ไฟล์, บันทึกเป็นข้อจำกัด (ไม่มี TLS ใน S2) |
 | เข้าใจว่า guest สั่งได้ | ขัดเจตนา co-op | allowlist + audit tuple + `WriteGuard` + static check |
 
 ### 13.8 คำถามที่ต้องให้ผู้ใช้ตัดสิน (ห้ามเริ่มจนได้คำตอบ)
