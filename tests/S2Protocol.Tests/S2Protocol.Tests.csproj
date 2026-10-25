@@ -33,6 +33,9 @@
     <Compile Include="..\..\src\LongYinCoop\S3\AliveRule.cs" LinkBase="S3" />
     <!-- NEG20 follow-up: RangeCells pure — expose attack range cells (status) -->
     <Compile Include="..\..\src\LongYinCoop\S3\RangeCells.cs" LinkBase="S3" />
+    <!-- S2a-4: guest side (pure) — decoder (W1), overlay client (W2), render model (W3) -->
+    <!-- (S2OverlayService.cs ไม่ถูกลิงก์: MelonEvents.OnGUI/GUI เป็นของ runtime — compile เฉพาะใน mod csproj) -->
+    <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2GuestDecoder.cs" LinkBase="Guest" />
   </ItemGroup>
 
   <ItemGroup>
