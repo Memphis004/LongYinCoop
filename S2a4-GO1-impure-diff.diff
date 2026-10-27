@@ -1,0 +1,119 @@
+diff --git a/src/LongYinCoop/CoopMod.cs b/src/LongYinCoop/CoopMod.cs
+index 167fa29..9e0cfb9 100644
+--- a/src/LongYinCoop/CoopMod.cs
++++ b/src/LongYinCoop/CoopMod.cs
+@@ -16,6 +16,7 @@ namespace LongYinCoop
+         private MainThreadDispatcher _dispatcher;
+         private IpcServer _ipc;
+         private S2HostService _s2;
++        private S2.S2OverlayService _overlay;
+         private bool _threadReported;
+         private int _ticks;
+ 
+@@ -53,7 +54,8 @@ namespace LongYinCoop
+ 
+             if (CoopPrefs.Ipc.Value)
+             {
+-                _ipc = new IpcServer(_dispatcher);
++                // S2a-4 W5: ส่งสถานะ S2 ให้ set_pref gate (ปฏิเสธการเปิด write-path pref ขณะ S2 active)
++                _ipc = new IpcServer(_dispatcher, delegate { return _s2 != null && _s2.Active; });
+                 _ipc.Start();
+             }
+ 
+@@ -62,10 +64,17 @@ namespace LongYinCoop
+             // (rev4: DevCommands ไม่ถูกตรวจ — ต้องเปิดไว้ให้ `spike status` = เครื่องมือวัดทำงาน)
+             // ไฟล์อยู่ที่ UserData\LongYinCoop\net.cfg — MelonLoader ไม่แตะ (มติ 2026-10-22)
+             _s2 = new S2HostService(CoopPaths.NetCfgPath, CoopPaths.S2EvidenceDir);
++            // S2a-4 W3: guest overlay in-process — วาดอย่างเดียว (ไม่กิน input), เปิดด้วย net.cfg overlay=true
++            _overlay = new S2.S2OverlayService(_s2);
+         }
+ 
+         public override void OnDeinitializeMelon()
+         {
++            if (_overlay != null)
++            {
++                _overlay.Dispose();
++                _overlay = null;
++            }
+             if (_s2 != null)
+             {
+                 _s2.Stop();
+@@ -105,6 +114,8 @@ namespace LongYinCoop
+             AttackCommand.Tick();
+             // S2a-2: snapshot sampler/sender (main thread; sample only, never touches game state)
+             if (_s2 != null) _s2.Tick();
++            // S2a-4: overlay service (เปิด/ปิด client ตาม net.cfg + สถานะ listener — main thread)
++            if (_overlay != null) _overlay.Tick();
+ 
+             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
+             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)
+diff --git a/src/LongYinCoop/IpcServer.cs b/src/LongYinCoop/IpcServer.cs
+index 1137063..f906456 100644
+--- a/src/LongYinCoop/IpcServer.cs
++++ b/src/LongYinCoop/IpcServer.cs
+@@ -6,6 +6,7 @@ using System.IO.Pipes;
+ using System.Text;
+ using System.Text.Json;
+ using System.Threading;
++using LongYinCoop.S2.Host;
+ 
+ namespace LongYinCoop
+ {
+@@ -19,12 +20,17 @@ namespace LongYinCoop
+ 
+         private readonly MainThreadDispatcher _dispatcher;
+         private readonly string _pipeName;
++        private readonly Func<bool> _s2Active;
+         private volatile bool _running;
+         private Thread _thread;
+ 
+-        public IpcServer(MainThreadDispatcher dispatcher)
++        /// <summary>S2a-4 W5: จำนวนคำสั่ง set_pref ที่ถูก gate ปฏิเสธ (evidence ของ E6)</summary>
++        public static long SetPrefRejections;
++
++        public IpcServer(MainThreadDispatcher dispatcher, Func<bool> s2Active = null)
+         {
+             _dispatcher = dispatcher;
++            _s2Active = s2Active;
+             _pipeName = "longyin-coop-" + Environment.ProcessId;
+         }
+ 
+@@ -406,6 +412,21 @@ namespace LongYinCoop
+         {
+             string key = GetString(root, "key");
+             string value = GetString(root, "value");
++
++            // S2a-4 W5 (§7 ของแผน): ปิดช่อง K9/K10 — ขณะ S2 active ห้าม "เปิด" write-path pref
++            // (การปิด false อนุญาตทุกสถานะ · pref นอกชุด เช่น capture ไม่ถูก gate นี้บังคับ)
++            if (S2SetPrefGate.IsWritePathKey(key))
++            {
++                bool on;
++                if (bool.TryParse(value, out on)
++                    && S2SetPrefGate.ShouldReject(_s2Active != null && _s2Active(), key, on))
++                {
++                    Interlocked.Increment(ref SetPrefRejections);
++                    CoopLog.Warn("[S2] set_pref " + key + "=" + on + ": " + S2SetPrefGate.RejectError(key));
++                    return Fail(cmd, S2SetPrefGate.RejectError(key));
++                }
++            }
++
+             if (key == "capture")
+             {
+                 bool on;
+diff --git a/src/LongYinCoop/S2/S2HostService.cs b/src/LongYinCoop/S2/S2HostService.cs
+index afc8cdf..968bc52 100644
+--- a/src/LongYinCoop/S2/S2HostService.cs
++++ b/src/LongYinCoop/S2/S2HostService.cs
+@@ -94,6 +94,12 @@ namespace LongYinCoop.S2
+ 
+         public bool Authenticated { get { return _authenticated; } }
+ 
++        /// <summary>S2a-4 W3: endpoint จริงของ listener tcp (port=0 ใน cfg = OS เลือก) — ให้ overlay in-process ต่อกลับ · 0 = ไม่มี listener</summary>
++        public int ActiveTcpPort { get { return _tcpHost != null ? _tcpHost.Port : 0; } }
++
++        /// <summary>S2a-4 W3: มี listener tcp อยู่หรือไม่ (แม้ยังไม่มี guest)</summary>
++        public bool TcpListening { get { return _tcpHost != null && _tcpHost.Listening; } }
++
+         public S2Counters Counters { get { return _counters; } }
+ 
+         public S2NetConfig Config { get { return _config; } }

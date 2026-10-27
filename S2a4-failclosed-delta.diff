@@ -1,0 +1,113 @@
+--- a/S2SetPrefGate.cs
++++ b/S2SetPrefGate.cs
+@@ -65,13 +65,34 @@
+         ///
+         /// ลำดับภายในฟังก์ชันนี้: อ่าน `activeNow()` สด → `ShouldReject` → เรียก `write()` เฉพาะเมื่อผ่าน
+         /// — ผู้เรียกต้องเรียกจาก thread เดียวกับที่ S2 เปลี่ยนสถานะ (main thread) เพื่อให้ไม่มีอะไร
+-        /// แทรกระหว่างตรวจกับเขียนได้ · `activeNow` = null ถือว่า inactive (คงสัญญาของ IpcServer)
++        /// แทรกระหว่างตรวจกับเขียนได้
++        ///
++        /// **fail-closed เมื่อสถานะอ่านไม่ได้** (PASS-2 audit รอบสุดท้าย) — "inactive ที่อ่านได้จริง"
++        /// แยกจาก "ไม่ทราบ": `activeNow` เป็น null หรือโยน exception = ไม่ทราบ ⇒ ปฏิเสธ `true`
++        /// ของ write-path ทั้ง 6 key และ**ไม่เรียก `write()`** · `false` (ปิด) ผ่านเสมอ ·
++        /// key นอกชุด (เช่น `capture`) อยู่นอก gate ตามเดิม
+         /// </summary>
+         public static S2SetPrefWriteOutcome CheckedWrite(Func<bool> activeNow, string key, bool value,
+                                                           Func<object> write)
+         {
+             if (write == null) throw new ArgumentNullException(nameof(write));
+-            bool active = activeNow != null && activeNow();
++
++            // สถานะไม่ทราบ (callback null / อ่านล้ม) ประมวลผลเหมือน active ⇒ fail-closed
++            // (ShouldReject ปฏิเสธเฉพาะ write-path key และ value=true — false ผ่านเสมอ,
++            //  capture ไม่อยู่ในชุดจึงไม่เคยถูกปฏิเสธ)
++            bool active = true;
++            if (activeNow != null)
++            {
++                try
++                {
++                    active = activeNow();
++                }
++                catch (Exception)
++                {
++                    active = true;
++                }
++            }
++
+             if (ShouldReject(active, key, value)) return S2SetPrefWriteOutcome.Reject();
+             return new S2SetPrefWriteOutcome { Value = write() };
+         }
+--- a/IpcServer.cs
++++ b/IpcServer.cs
+@@ -625,10 +625,9 @@
+             bool ran = _dispatcher.Invoke(delegate
+             {
+                 // main thread — ตรรกะ "ตรวจแล้วเขียน" อยู่ใน S2SetPrefGate.CheckedWrite (pure, ตัวเดียว
+-                // ที่ทุก branch ใช้): อ่าน Active สด ณ จุดนี้ → ปฏิเสธ = ไม่เรียก write เลย
+-                S2SetPrefWriteOutcome outcome = S2SetPrefGate.CheckedWrite(
+-                    delegate { return _s2Active != null && _s2Active(); },
+-                    key, value, write);
++                // ที่ทุก branch ใช้): ส่ง _s2Active ตรง ๆ ห้ามแปลง null→false — CheckedWrite fail-closed
++                // เมื่อสถานะอ่านไม่ได้ (null/โยน exception = ปฏิเสธ true ทั้ง 6 key ไม่เรียก write)
++                S2SetPrefWriteOutcome outcome = S2SetPrefGate.CheckedWrite(_s2Active, key, value, write);
+                 rejected = outcome.Rejected;
+                 return outcome.Value;
+             }, 500, out result);
+--- a/S2a4Tests.cs
++++ b/S2a4Tests.cs
+@@ -734,10 +734,51 @@
+             Check("T4 CheckedWrite reads active fresh at call time", !first.Rejected && second.Rejected
+                 && reads == 2 && !writeRan);
+ 
+-            // 6) activeNow = null ถือว่า inactive (คงสัญญาของ IpcServer._s2Active != null)
+-            S2SetPrefWriteOutcome nullGate = S2SetPrefGate.CheckedWrite(null, "allowRemoteInput", true,
+-                delegate { return (object)"idle"; });
+-            Check("T4 CheckedWrite null activeNow = treated inactive", !nullGate.Rejected);
++            // 6) fail-closed เมื่อสถานะอ่านไม่ได้ (PASS-2 audit รอบสุดท้าย): callback null / โยน
++            //    = สถานะ "ไม่ทราบ" แยกจาก "inactive ที่อ่านได้จริง" — true ของ write-path ทั้ง 6 key
++            //    ถูกปฏิเสธ (ไม่เรียก write) · false ผ่านเสมอ · capture อยู่นอก gate
++            writeRan = false;
++            S2SetPrefWriteOutcome nullTrue = S2SetPrefGate.CheckedWrite(null, "allowRemoteInput", true,
++                delegate { writeRan = true; return (object)"SHOULD-NOT-RUN"; });
++            S2SetPrefWriteOutcome nullFalse = S2SetPrefGate.CheckedWrite(null, "allowRemoteInput", false,
++                delegate { return (object)"closed"; });
++            Check("T4 fail-closed: null callback rejects true without writing (null ≠ inactive)",
++                nullTrue.Rejected && !writeRan);
++            Check("T4 fail-closed: null callback still allows closing with false",
++                !nullFalse.Rejected && (string)nullFalse.Value == "closed");
++
++            Func<bool> throwing = delegate { throw new InvalidOperationException("state unreadable"); };
++            writeRan = false;
++            S2SetPrefWriteOutcome throwTrue = S2SetPrefGate.CheckedWrite(throwing, "jitprobe", true,
++                delegate { writeRan = true; return (object)1; });
++            S2SetPrefWriteOutcome throwFalse = S2SetPrefGate.CheckedWrite(throwing, "jitprobe", false,
++                delegate { return (object)"closed"; });
++            S2SetPrefWriteOutcome throwCapture = S2SetPrefGate.CheckedWrite(throwing, "capture", true,
++                delegate { return (object)"captured"; });
++            Check("T4 fail-closed: throwing callback rejects true without writing", throwTrue.Rejected
++                && !writeRan);
++            Check("T4 fail-closed: throwing callback allows false (close works)", !throwFalse.Rejected
++                && (string)throwFalse.Value == "closed");
++            Check("T4 fail-closed: capture stays outside gate even when state unreadable",
++                !throwCapture.Rejected && (string)throwCapture.Value == "captured");
++
++            // แยก "inactive ที่อ่านได้จริง" ออกจาก "ไม่ทราบ": callback คืน false/true ตรงตามค่า
++            S2SetPrefWriteOutcome readableFalse = S2SetPrefGate.CheckedWrite(() => false,
++                "allowRemoteInput", true, delegate { return (object)"idle-write"; });
++            S2SetPrefWriteOutcome readableTrue = S2SetPrefGate.CheckedWrite(() => true, "jitprobeW4", true,
++                delegate { writeRan = true; return (object)1; });
++            Check("T4 callback returns false = readable inactive, true allowed", !readableFalse.Rejected
++                && (string)readableFalse.Value == "idle-write");
++            Check("T4 callback returns true = rejected", readableTrue.Rejected && !writeRan);
++
++            // 6 key ทั้งชุดภายใต้สถานะไม่ทราบ: true ถูกปฏิเสธครบทุก key
++            int unknownLeak = 0;
++            foreach (string key in keys)
++            {
++                if (!S2SetPrefGate.CheckedWrite(null, key, true,
++                        delegate { writeRan = true; return (object)1; }).Rejected) unknownLeak++;
++            }
++            Check("T4 fail-closed: unknown state rejects true on all 6 write-path keys", unknownLeak == 0);
+         }
+ 
+         /// <summary>

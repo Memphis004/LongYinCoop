@@ -1,0 +1,226 @@
+--- a/IpcServer.cs
++++ b/IpcServer.cs
+@@ -423,11 +423,14 @@
+ 
+             // S2a-4 W5 (§7 ของแผน): ปิดช่อง K9/K10 — ขณะ S2 active ห้าม "เปิด" write-path pref
+             // (การปิด false อนุญาตทุกสถานะ · pref นอกชุด เช่น capture ไม่ถูก gate นี้บังคับ)
++            // PASS-2 final IPC pre-check closure: อ่านสถานะผ่าน ReadGateActive (helper เดียวกับ
++            // CheckedWrite — null/โยน exception = "ไม่ทราบ" ⇒ ปฏิเสธ true ทันทีที่นี่ ไม่เรียก
++            // dispatcher และไม่เขียน pref · counter/log ตามกลไกเดิม)
+             if (S2SetPrefGate.IsWritePathKey(key))
+             {
+                 bool on;
+                 if (bool.TryParse(value, out on)
+-                    && S2SetPrefGate.ShouldReject(_s2Active != null && _s2Active(), key, on))
++                    && S2SetPrefGate.ShouldReject(S2SetPrefGate.ReadGateActive(_s2Active), key, on))
+                 {
+                     Interlocked.Increment(ref SetPrefRejections);
+                     CoopLog.Warn("[S2] set_pref " + key + "=" + on + ": " + S2SetPrefGate.RejectError(key));
+--- a/S2SetPrefGate.cs
++++ b/S2SetPrefGate.cs
+@@ -60,6 +60,27 @@
+         }
+ 
+         /// <summary>
++        /// อ่านสถานะ gate จาก callback — **helper เดียวกันทั้งสองชั้น** (PASS-2 final IPC pre-check
++        /// closure): ใช้ทั้งใน pre-check ของ `IpcServer.SetPref` (IPC thread) และใน `CheckedWrite`
++        /// (main thread) เพื่อไม่ให้สองชั้นมี semantics ต่างกัน
++        ///
++        /// callback เป็น null หรือโยน exception = สถานะ "ไม่ทราบ" ⇒ คืน **true (active)** — fail-closed
++        /// · อ่านได้ = ค่าจริง (inactive ที่อ่านได้จริง = false)
++        /// </summary>
++        public static bool ReadGateActive(Func<bool> activeNow)
++        {
++            if (activeNow == null) return true;
++            try
++            {
++                return activeNow();
++            }
++            catch (Exception)
++            {
++                return true;
++            }
++        }
++
++        /// <summary>
+         /// "ตรวจแล้วเขียน" ในการเรียกเดียว (PASS-2 audit ข้อ TOCTOU) — ตัวเดียวที่ 6 branch ของ
+         /// `IpcServer.SetPref` ใช้ (ผ่าน `IpcServer.OnMainGated` บน main thread)
+         ///
+@@ -77,21 +98,10 @@
+         {
+             if (write == null) throw new ArgumentNullException(nameof(write));
+ 
+-            // สถานะไม่ทราบ (callback null / อ่านล้ม) ประมวลผลเหมือน active ⇒ fail-closed
++            // สถานะไม่ทราบ (callback null / อ่านล้ม) ⇒ ReadGateActive คืน true ⇒ fail-closed
+             // (ShouldReject ปฏิเสธเฉพาะ write-path key และ value=true — false ผ่านเสมอ,
+             //  capture ไม่อยู่ในชุดจึงไม่เคยถูกปฏิเสธ)
+-            bool active = true;
+-            if (activeNow != null)
+-            {
+-                try
+-                {
+-                    active = activeNow();
+-                }
+-                catch (Exception)
+-                {
+-                    active = true;
+-                }
+-            }
++            bool active = ReadGateActive(activeNow);
+ 
+             if (ShouldReject(active, key, value)) return S2SetPrefWriteOutcome.Reject();
+             return new S2SetPrefWriteOutcome { Value = write() };
+--- a/S2a4Tests.cs
++++ b/S2a4Tests.cs
+@@ -836,6 +836,59 @@
+                 && (string)absentClose.Value == "closed");
+             Check("T4 service-absent: capture still outside gate", !absentCapture.Rejected
+                 && (string)absentCapture.Value == "captured");
++
++            // ---- final IPC pre-check closure: ReadGateActive ตัวจริง (helper เดียวกันทั้งสองชั้น) ----
++            // (a) ตัว helper โดยตรง
++            Check("T4 ReadGateActive: null callback ⇒ active (fail-closed)",
++                S2SetPrefGate.ReadGateActive(null));
++            Check("T4 ReadGateActive: throwing callback ⇒ active",
++                S2SetPrefGate.ReadGateActive(throwing));
++            Check("T4 ReadGateActive: returns false = readable inactive",
++                !S2SetPrefGate.ReadGateActive(() => false));
++            Check("T4 ReadGateActive: returns true = active",
++                S2SetPrefGate.ReadGateActive(() => true));
++
++            // (b) mirror ของ pre-check จริง (IpcServer.SetPref) ซึ่งใช้ ReadGateActive ตัวจริง
++            int preLeak = 0;
++            foreach (string key in keys)
++            {
++                if (!MirrorIpcPreCheckRejects(null, key, "true")) preLeak++;
++                if (!MirrorIpcPreCheckRejects(throwing, key, "true")) preLeak++;
++            }
++            Check("T4 pre-check fail-closed: null/throwing callback rejects true on all 6 keys",
++                preLeak == 0);
++            int preFalsePass = 0;
++            foreach (string key in keys)
++            {
++                if (MirrorIpcPreCheckRejects(null, key, "false")) preFalsePass++;
++                if (MirrorIpcPreCheckRejects(throwing, key, "false")) preFalsePass++;
++            }
++            Check("T4 pre-check: false never rejected (close flows to main-thread layer)",
++                preFalsePass == 0);
++            Check("T4 pre-check: capture never rejected regardless of callback state",
++                !MirrorIpcPreCheckRejects(null, "capture", "true")
++                && !MirrorIpcPreCheckRejects(throwing, "capture", "true"));
++            Check("T4 pre-check: readable inactive flows past pre-check (layer 2 decides)",
++                !MirrorIpcPreCheckRejects(() => false, "allowRemoteInput", "true"));
++            Check("T4 pre-check: readable active rejects immediately at IPC thread",
++                MirrorIpcPreCheckRejects(() => true, "allowRemoteInput", "true"));
++
++            // (c) TOCTOU มุมใหม่: IPC อ่านสถานะไม่ได้เลย (callback null) ⇒ ชั้น 1 ปฏิเสธเอง
++            Check("T4 TOCTOU unreadable-IPC: null callback rejects true at pre-check",
++                MirrorGatedSetPref(null, true, "allowRemoteInput", "true") == null);
++        }
++
++        /// <summary>
++        /// mirror ของ pre-check ใน IpcServer.SetPref (IpcServer.cs:429-441) — ใช้
++        /// `ReadGateActive` ตัวจริงเดียวกับ production ⇒ ทดสอบ semantics ของ pre-check โดยตรง
++        /// คืน true = pre-check ปฏิเสธ (counter/log ที่ IpcServer — ไม่ถึง dispatcher/OnMainGated)
++        /// </summary>
++        private static bool MirrorIpcPreCheckRejects(Func<bool> callback, string key, string value)
++        {
++            bool on;
++            return S2SetPrefGate.IsWritePathKey(key)
++                && bool.TryParse(value, out on)
++                && S2SetPrefGate.ShouldReject(S2SetPrefGate.ReadGateActive(callback), key, on);
+         }
+ 
+         /// <summary>
+@@ -887,21 +940,23 @@
+         }
+ 
+         /// <summary>
+-        /// mirror ของ IpcServer.SetPref **หลังปิด TOCTOU** (ตรวจ 2 ชั้น — IpcServer.cs:418-427 pre-check
+-        /// + OnMainGated 419-441 ตรวจซ้ำบน main thread ใน callback เดียวกับการเขียน) — คืนค่า bool
++        /// mirror ของ IpcServer.SetPref **หลังปิด TOCTOU** (ตรวจ 2 ชั้น — IpcServer.cs:431-443 pre-check
++        /// + OnMainGated ตรวจซ้ำบน main thread ใน callback เดียวกับการเขียน) — คืนค่า bool
+         /// ที่ "จะถูกเขียนลง pref" · null = ไม่มีการเขียนเกิดขึ้น
+-        /// `activeAtIpc` = สถานะที่ pre-check บน IPC thread เห็น (อาจ stale)
++        /// `activeAtIpc` = **callback จริง** ที่ pre-check อ่าน (อาจ null/โยน — ผ่าน ReadGateActive ตัวจริง
++        /// เดียวกับ production ⇒ สถานะไม่ทราบ = มองเป็น active)
+         /// `activeAtMainCallback` = สถานะจริงตอน callback บน main thread (จุดที่ S2 เปลี่ยนสถานะเท่านั้น)
+         /// **แก้ IpcServer.SetPref/OnMainGated ต้องแก้ mirror นี้คู่กัน**
+         /// </summary>
+-        private static bool? MirrorGatedSetPref(bool activeAtIpc, bool activeAtMainCallback,
++        private static bool? MirrorGatedSetPref(Func<bool> activeAtIpc, bool activeAtMainCallback,
+                                                 string key, string value)
+         {
+             bool on;
+-            // ชั้น 1: pre-check บน IPC thread (fast-fail — อาจอ่านค่า stale จึงไม่ใช่หลักประกัน)
++            // ชั้น 1: pre-check บน IPC thread (fast-fail — ใช้ ReadGateActive ตัวจริงเดียวกับ production;
++            // สถานะไม่ทราบ = fail-closed แต่ไม่ใช่หลักประกัน ชั้น 2 ตัดสินอีกครั้งบน main thread)
+             if (S2SetPrefGate.IsWritePathKey(key)
+                 && bool.TryParse(value, out on)
+-                && S2SetPrefGate.ShouldReject(activeAtIpc, key, on))
++                && S2SetPrefGate.ShouldReject(S2SetPrefGate.ReadGateActive(activeAtIpc), key, on))
+             {
+                 return null;
+             }
+@@ -935,12 +990,12 @@
+             {
+                 foreach (string value in values)
+                 {
+-                    bool? written = MirrorGatedSetPref(true, true, key, value);
++                    bool? written = MirrorGatedSetPref(() => true, true, key, value);
+                     if (written == true) activeWriteTrue++;
+                     if (written != null && !"true".Equals(value, StringComparison.OrdinalIgnoreCase)
+                         && !"false".Equals(value, StringComparison.OrdinalIgnoreCase)) malformedWritten++;
+ 
+-                    bool? idleWritten = MirrorGatedSetPref(false, false, key, value);
++                    bool? idleWritten = MirrorGatedSetPref(() => false, false, key, value);
+                     bool parseOk = bool.TryParse(value, out bool parsed);
+                     bool? expectedIdle = parseOk ? parsed : (bool?)null;
+                     if (idleWritten != expectedIdle) idleMismatch++;
+@@ -959,8 +1014,8 @@
+             {
+                 // กรณีสำคัญ: pre-check อ่าน stale false (S2 ยัง idle ตอนตรวจ) แต่พอถึง callback บน
+                 // main thread S2 active แล้ว → ชั้น 2 ต้องกัน "true" ไม่ให้เขียน
+-                if (MirrorGatedSetPref(false, true, key, "true") != null) toctouLeak++;
+-                if (MirrorGatedSetPref(false, true, key, "TRUE") != null) toctouLeak++;
++                if (MirrorGatedSetPref(() => false, true, key, "true") != null) toctouLeak++;
++                if (MirrorGatedSetPref(() => false, true, key, "TRUE") != null) toctouLeak++;
+             }
+             Check("T4 TOCTOU (stale pre-check=false, callback sees active): true never written",
+                 toctouLeak == 0);
+@@ -969,7 +1024,7 @@
+             int earlyReject = 0;
+             foreach (string key in keys)
+             {
+-                if (MirrorGatedSetPref(true, false, key, "true") != null) earlyReject++;
++                if (MirrorGatedSetPref(() => true, false, key, "true") != null) earlyReject++;
+             }
+             Check("T4 pre-check sees active: rejected on IPC thread (never reaches callback)",
+                 earlyReject == 0);
+@@ -978,20 +1033,20 @@
+             bool falseCloses = true;
+             foreach (string key in keys)
+             {
+-                falseCloses &= MirrorGatedSetPref(false, true, key, "false") == false
+-                            && MirrorGatedSetPref(true, true, key, "false") == false;
++                falseCloses &= MirrorGatedSetPref(() => false, true, key, "false") == false
++                            && MirrorGatedSetPref(() => true, true, key, "false") == false;
+             }
+             Check("T4 'false' still closes the pref in every state (both layers)", falseCloses);
+ 
+             // เคสเดี่ยวที่ละเอียดสุด
+             Check("T4 TOCTOU key case: allowRemoteInput stale-false → active callback = no write",
+-                MirrorGatedSetPref(false, true, "allowRemoteInput", "true") == null);
++                MirrorGatedSetPref(() => false, true, "allowRemoteInput", "true") == null);
+             Check("T4 idle both layers + true = writes true (behavior unchanged)",
+-                MirrorGatedSetPref(false, false, "allowRemoteInput", "true") == true);
++                MirrorGatedSetPref(() => false, false, "allowRemoteInput", "true") == true);
+             Check("T4 idle pre-check + active callback + \"1\" = no write (parse fail before callback)",
+-                MirrorGatedSetPref(false, true, "allowRemoteInput", "1") == null);
++                MirrorGatedSetPref(() => false, true, "allowRemoteInput", "1") == null);
+             Check("T4 idle pre-check + active callback + unknown key (case mismatch) = no write",
+-                MirrorGatedSetPref(false, true, "AllowRemoteInput", "true") == null);
++                MirrorGatedSetPref(() => false, true, "AllowRemoteInput", "true") == null);
+             Check("T4 capture=true unaffected by gate (not a write-path key)",
+                 !S2SetPrefGate.ShouldReject(true, "capture", true));
+         }

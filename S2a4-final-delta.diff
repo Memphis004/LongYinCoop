@@ -1,0 +1,107 @@
+--- a/CoopMod.cs
++++ b/CoopMod.cs
+@@ -57,10 +57,13 @@
+                 // S2a-4 W5: ส่งสถานะ S2 ให้ set_pref gate (ปฏิเสธการเปิด write-path pref ขณะ S2 active)
+                 // (PASS-2 audit: อ่าน _s2 ใส่ local ครั้งเดียว — กัน NRE ตอน OnDeinitializeMelon เคลียร์ _s2
+                 //  ระหว่างที่ IPC thread กำลังเรียก delegate; ความสดของ Active มาจาก volatile ฝั่ง S2HostService)
++                // (final fail-closed audit: _s2 == null = สถานะ "ไม่ทราบ" ⇒ มองเป็น active เพื่อให้ gate
++                //  ปฏิเสธการเปิด write-path — นโยบายเดียวกับ S2SetPrefGate.ServiceStateToActive ที่ T4 ทดสอบ;
++                //  callback นี้ถูกเรียกทั้งบน IPC thread (pre-check) และบน main thread (ใน CheckedWrite))
+                 _ipc = new IpcServer(_dispatcher, delegate
+                 {
+                     S2HostService s = _s2;
+-                    return s != null && s.Active;
++                    return s == null || s.Active;
+                 });
+                 _ipc.Start();
+             }
+--- a/S2SetPrefGate.cs
++++ b/S2SetPrefGate.cs
+@@ -96,5 +96,21 @@
+             if (ShouldReject(active, key, value)) return S2SetPrefWriteOutcome.Reject();
+             return new S2SetPrefWriteOutcome { Value = write() };
+         }
++
++        /// <summary>
++        /// นโยบาย "S2 service ไม่มีอยู่" (PASS-2 final fail-closed audit) — pure, ทดสอบใน suite ได้
++        /// โดยไม่ดึง Unity/MelonLoader เข้า test project
++        ///
++        /// `servicePresent = false` (CoopMod._s2 == null: ยังไม่ init หรืออยู่ระหว่าง shutdown)
++        /// = สถานะ "ไม่ทราบ" ⇒ คืน **true (active)** เพื่อให้ gate ปฏิเสธการเปิด write-path
++        /// · service มีอยู่ = อ่าน `Active` จริง (inactive ที่อ่านได้จริง = อนุญาตตามพฤติกรรมเดิม)
++        ///
++        /// ฝั่ง production: callback ของ `IpcServer` ใน CoopMod ใช้สูตรเดียวกัน (`s == null || s.Active`)
++        /// — แก้ callback ต้องปรับฟังก์ชันนี้ (หรือกลับด้าน) คู่กัน
++        /// </summary>
++        public static bool ServiceStateToActive(bool servicePresent, bool serviceActiveWhenPresent)
++        {
++            return servicePresent ? serviceActiveWhenPresent : true;
++        }
+     }
+ }
+--- a/S2a4Tests.cs
++++ b/S2a4Tests.cs
+@@ -779,6 +779,63 @@
+                         delegate { writeRan = true; return (object)1; }).Rejected) unknownLeak++;
+             }
+             Check("T4 fail-closed: unknown state rejects true on all 6 write-path keys", unknownLeak == 0);
++
++            // ---- final fail-closed audit: throwing sweep ครบทั้ง 6 keys (ก่อนหน้าทดสอบตรงแค่ jitprobe)
++            int throwSweepLeak = 0;
++            foreach (string key in keys)
++            {
++                writeRan = false;
++                if (!S2SetPrefGate.CheckedWrite(throwing, key, true,
++                        delegate { writeRan = true; return (object)1; }).Rejected) throwSweepLeak++;
++                if (writeRan) throwSweepLeak++;   // write ต้องไม่ถูกเรียกเลย
++            }
++            Check("T4 fail-closed: throwing callback rejects true on all 6 keys, write never invoked",
++                throwSweepLeak == 0);
++
++            int throwCloseLeak = 0;
++            foreach (string key in keys)
++            {
++                S2SetPrefWriteOutcome closed = S2SetPrefGate.CheckedWrite(throwing, key, false,
++                    delegate { return (object)"closed"; });
++                if (closed.Rejected || (string)closed.Value != "closed") throwCloseLeak++;
++            }
++            Check("T4 fail-closed: throwing callback still allows false (close) on all 6 keys",
++                throwCloseLeak == 0);
++            Check("T4 fail-closed: capture passes under throwing callback (outside gate)",
++                !throwCapture.Rejected && (string)throwCapture.Value == "captured");
++
++            // ---- นโยบาย "S2 service ไม่มีอยู่" — pure helper ServiceStateToActive (ตัวจริง) -----------
++            // callback จริงใน CoopMod ใช้สูตรเดียวกัน (s == null || s.Active) — ดู CoopMod.cs
++            Check("T4 service-absent: null service ⇒ gate sees active (fail-closed)",
++                S2SetPrefGate.ServiceStateToActive(false, false)
++                && S2SetPrefGate.ServiceStateToActive(false, true));
++            Check("T4 service-absent: present+inactive ⇒ readable inactive (original behavior)",
++                !S2SetPrefGate.ServiceStateToActive(true, false));
++            Check("T4 service-absent: present+active ⇒ active",
++                S2SetPrefGate.ServiceStateToActive(true, true));
++
++            // end-to-end ผ่าน CheckedWrite: สถานะจาก helper ป้อนเข้า gate จริง
++            writeRan = false;
++            S2SetPrefWriteOutcome absentReject = S2SetPrefGate.CheckedWrite(
++                () => S2SetPrefGate.ServiceStateToActive(false, false),
++                "allowRemoteInput", true, delegate { writeRan = true; return (object)1; });
++            S2SetPrefWriteOutcome idlePresent = S2SetPrefGate.CheckedWrite(
++                () => S2SetPrefGate.ServiceStateToActive(true, false),
++                "allowRemoteInput", true, delegate { return (object)"idle-ok"; });
++            S2SetPrefWriteOutcome absentClose = S2SetPrefGate.CheckedWrite(
++                () => S2SetPrefGate.ServiceStateToActive(false, false),
++                "allowRemoteInput", false, delegate { return (object)"closed"; });
++            S2SetPrefWriteOutcome absentCapture = S2SetPrefGate.CheckedWrite(
++                () => S2SetPrefGate.ServiceStateToActive(false, false),
++                "capture", true, delegate { return (object)"captured"; });
++            Check("T4 service-absent: true rejected end-to-end without writing",
++                absentReject.Rejected && !writeRan);
++            Check("T4 service-absent: present+inactive keeps original behavior (true allowed)",
++                !idlePresent.Rejected && (string)idlePresent.Value == "idle-ok");
++            Check("T4 service-absent: false still closes", !absentClose.Rejected
++                && (string)absentClose.Value == "closed");
++            Check("T4 service-absent: capture still outside gate", !absentCapture.Rejected
++                && (string)absentCapture.Value == "captured");
+         }
+ 
+         /// <summary>
