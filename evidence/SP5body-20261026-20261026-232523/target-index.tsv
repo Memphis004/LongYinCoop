@@ -1,0 +1,43 @@
+label	VA	RVA	file_offset	decl
+ForceLevelData::.ctor	0x180210b70	0x210B70	0x20FF70	public void .ctor() { }
+ForceLevelData::Clone	0x18077b710	0x77B710	0x77AB10	public object Clone() { }
+GameController::GenerateHeroData_C	0x1807ab1f0	0x7AB1F0	0x7AA5F0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, HeroData heroDataBas
+GameController::GenerateHeroData_A	0x1807ac840	0x7AC840	0x7ABC40	public HeroData GenerateHeroData(int heroID, int belongForceID, float heroForceLv, HeroData heroDataBase, bool isTempHer
+GameController::GenerateHeroData_B	0x1807ac8a0	0x7AC8A0	0x7ABCA0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, bool isRandomEnemy =
+GameController::GenerateHero	0x1807ac8f0	0x7AC8F0	0x7ABCF0	public void GenerateHero() { }
+GameController::GenerateRandomEnemy	0x1807b12e0	0x7B12E0	0x7B06E0	public void GenerateRandomEnemy(int maxNum = 999) { }
+GameController::GenerateRelationShip	0x1807b4400	0x7B4400	0x7B3800	public void GenerateRelationShip() { }
+GameController::GetMaxHeroNum	0x1807b9fb0	0x7B9FB0	0x7B93B0	public int GetMaxHeroNum() { }
+GameController::GetRecommendHeroNum	0x1807beed0	0x7BEED0	0x7BE2D0	public int GetRecommendHeroNum() { }
+GameController::HeroRealAutoRemove	0x1807c1520	0x7C1520	0x7C0920	public void HeroRealAutoRemove(HeroData targetHero) { }
+GameController::ManageHeroAutoQuitAndEnter	0x1807cc020	0x7CC020	0x7CB420	public void ManageHeroAutoQuitAndEnter() { }
+GameController::ManageNewHeroJoinForce	0x1807d2ce0	0x7D2CE0	0x7D20E0	public void ManageNewHeroJoinForce(HeroData targetHero, bool isNewHero, int targetForceID, int targetForceLv = -1, int t
+GameController::ManagePlayerRecruitHero	0x1807d39c0	0x7D39C0	0x7D2DC0	public void ManagePlayerRecruitHero(HeroData targetHero, bool isNewHero) { }
+GameController::StartNewGameSetting	0x1807dfb60	0x7DFB60	0x7DEF60	public void StartNewGameSetting() { }
+GameController::StartNewGame	0x1807e0fc0	0x7E0FC0	0x7E03C0	public void StartNewGame() { }
+GameController::<StartNewGame>b__7_0	0x1807e3990	0x7E3990	0x7E2D90	private void <StartNewGame>b__7_0() { }
+GameController::WorldAddNewHero	0x1807e5b50	0x7E5B50	0x7E4F50	public HeroData WorldAddNewHero(int forceID, int heroForceLv, bool outSideForce, bool _showInfo = True) { }
+GameController::.cctor	0x1807e5d40	0x7E5D40	0x7E5140	private static void .cctor() { }
+WorldData::AddNewHero	0x1809cc0c0	0x9CC0C0	0x9CB4C0	public void AddNewHero(HeroData target) { }
+WorldData::AddTempHero	0x1809cc280	0x9CC280	0x9CB680	public void AddTempHero(HeroData target) { }
+WorldData::FindAvailableHeroID	0x1809cccf0	0x9CCCF0	0x9CC0F0	public int FindAvailableHeroID() { }
+WorldData::FindAvailableTempHeroID	0x1809cce70	0x9CCE70	0x9CC270	public int FindAvailableTempHeroID() { }
+WorldData::GenerateHeroDict	0x1809cd210	0x9CD210	0x9CC610	public void GenerateHeroDict() { }
+WorldData::GetHeroCount	0x1809cded0	0x9CDED0	0x9CD2D0	public int GetHeroCount() { }
+WorldData::GetHeroForce	0x1809cdfa0	0x9CDFA0	0x9CD3A0	public ForceData GetHeroForce(int heroID) { }
+WorldData::GetHero_l367849	0x1809ce010	0x9CE010	0x9CD410	public HeroData GetHero(int heroID) { }
+WorldData::GetHero_l367843	0x1809ce110	0x9CE110	0x9CD510	public HeroData GetHero(string heroName) { }
+WorldData::GetRandomEnemyCount	0x1809cea70	0x9CEA70	0x9CDE70	public int GetRandomEnemyCount() { }
+WorldData::GetTempHeroCount	0x1809ceea0	0x9CEEA0	0x9CE2A0	public int GetTempHeroCount() { }
+WorldData::RemoveHero	0x1809cfb30	0x9CFB30	0x9CEF30	public void RemoveHero(HeroData target) { }
+WorldData::RemoveTempHero	0x1809cfcc0	0x9CFCC0	0x9CF0C0	public void RemoveTempHero(HeroData target) { }
+WorldData::.ctor	0x1809d08d0	0x9D08D0	0x9CFCD0	public void .ctor() { }
+GlobalData::.cctor	0x180a8a670	0xA8A670	0xA89A70	private static void .cctor() { }
+GameDataController::InitWithEtag	0x180c1f6f0	0xC1F6F0	0xC1EAF0	public void InitWithEtag() { }
+GameDataController::InitWithLocalFile	0x180c1f850	0xC1F850	0xC1EC50	public void InitWithLocalFile() { }
+GameDataController::LoadAllGameData	0x180c1f9c0	0xC1F9C0	0xC1EDC0	private void LoadAllGameData() { }
+GameDataController::WriteGameDataCsv	0x180c2e510	0xC2E510	0xC2D910	public void WriteGameDataCsv() { }
+GameDataController::.cctor	0x180c2ebb0	0xC2EBB0	0xC2DFB0	private static void .cctor() { }
+GameDataController::.ctor	0x180c2ed50	0xC2ED50	0xC2E150	public void .ctor() { }
+StartGameSettingController::BirthSettingPlayerData	0x180c6e3d0	0xC6E3D0	0xC6D7D0	public void BirthSettingPlayerData() { }
+StartGameSettingController::StartSettingPlayerData	0x180c6f6f0	0xC6F6F0	0xC6EAF0	public void StartSettingPlayerData() { }

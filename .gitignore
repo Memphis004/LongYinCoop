@@ -61,3 +61,8 @@ evidence/**/*.ndjson
 
 # binary drops inside evidence stay local
 evidence/**/*.dll
+
+# SP5body: full-binary disasm of GameAssembly.dll (471MB, game-derived dump)
+# stays local per the never-commit rule for game assets; the extracted bodies
+# (target-bodies.disasm.txt), TSVs and reports are what git tracks.
+evidence/**/gameassembly.disasm.txt

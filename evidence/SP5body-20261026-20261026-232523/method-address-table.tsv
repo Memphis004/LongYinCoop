@@ -1,0 +1,147 @@
+kind	class	method	dump_line	RVA	Offset	VA	signature
+target	ForceLevelData	Clone	369305	0x77B710	0x77AB10	0x18077B710	public object Clone() { }
+target	GameController	StartNewGame	376470	0x7E0FC0	0x7E03C0	0x1807E0FC0	public void StartNewGame() { }
+target	GameController	StartNewGameSetting	376476	0x7DFB60	0x7DEF60	0x1807DFB60	public void StartNewGameSetting() { }
+target	GameController	GenerateHero	376611	0x7AC8F0	0x7ABCF0	0x1807AC8F0	public void GenerateHero() { }
+target	GameController	GenerateHeroData	376620	0x7AC840	0x7ABC40	0x1807AC840	public HeroData GenerateHeroData(int heroID, int belongForceID, float heroForceLv, HeroData heroDataBase, bool isTempHero = True, bool isRandomEnemy =
+target	GameController	GenerateHeroData	376623	0x7AC8A0	0x7ABCA0	0x1807AC8A0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, bool isRandomEnemy = False) { }
+target	GameController	GenerateHeroData	376626	0x7AB1F0	0x7AA5F0	0x1807AB1F0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, HeroData heroDataBase, bool isTempHero, SexLimit s
+target	GameController	GenerateRelationShip	376629	0x7B4400	0x7B3800	0x1807B4400	public void GenerateRelationShip() { }
+target	GameController	WorldAddNewHero	376761	0x7E5B50	0x7E4F50	0x1807E5B50	public HeroData WorldAddNewHero(int forceID, int heroForceLv, bool outSideForce, bool _showInfo = True) { }
+target	GameController	HeroRealAutoRemove	376776	0x7C1520	0x7C0920	0x1807C1520	public void HeroRealAutoRemove(HeroData targetHero) { }
+target	GameController	ManageHeroAutoQuitAndEnter	376779	0x7CC020	0x7CB420	0x1807CC020	public void ManageHeroAutoQuitAndEnter() { }
+target	GameController	GetMaxHeroNum	376782	0x7B9FB0	0x7B93B0	0x1807B9FB0	public int GetMaxHeroNum() { }
+target	GameController	GetRecommendHeroNum	376785	0x7BEED0	0x7BE2D0	0x1807BEED0	public int GetRecommendHeroNum() { }
+target	GameController	GenerateRandomEnemy	376980	0x7B12E0	0x7B06E0	0x1807B12E0	public void GenerateRandomEnemy(int maxNum = 999) { }
+target	GameController	ManagePlayerRecruitHero	377163	0x7D39C0	0x7D2DC0	0x1807D39C0	public void ManagePlayerRecruitHero(HeroData targetHero, bool isNewHero) { }
+target	GameController	ManageNewHeroJoinForce	377166	0x7D2CE0	0x7D20E0	0x1807D2CE0	public void ManageNewHeroJoinForce(HeroData targetHero, bool isNewHero, int targetForceID, int targetForceLv = -1, int targetAreaID = -1, bool _showIn
+target	GameDataController	InitWithEtag	377313	0xC1F6F0	0xC1EAF0	0x180C1F6F0	public void InitWithEtag() { }
+target	GameDataController	InitWithLocalFile	377316	0xC1F850	0xC1EC50	0x180C1F850	public void InitWithLocalFile() { }
+target	GameDataController	LoadAllGameData	377418	0xC1F9C0	0xC1EDC0	0x180C1F9C0	private void LoadAllGameData() { }
+target	GameDataController	WriteGameDataCsv	377433	0xC2E510	0xC2D910	0x180C2E510	public void WriteGameDataCsv() { }
+target	StartGameSettingController	StartSettingPlayerData	390008	0xC6F6F0	0xC6EAF0	0x180C6F6F0	public void StartSettingPlayerData() { }
+target	StartGameSettingController	BirthSettingPlayerData	390011	0xC6E3D0	0xC6D7D0	0x180C6E3D0	public void BirthSettingPlayerData() { }
+target	StartMenuController	get_Instance	390085	0xC7AFA0	0xC7A3A0	0x180C7AFA0	public static StartMenuController get_Instance() { }
+target	StartMenuController	Awake	390088	0xC6F9C0	0xC6EDC0	0x180C6F9C0	private void Awake() { }
+target	StartMenuController	Start	390091	0xC790C0	0xC784C0	0x180C790C0	private void Start() { }
+target	StartMenuController	Update	390094	0xC7ADC0	0xC7A1C0	0x180C7ADC0	private void Update() { }
+target	StartMenuController	ShowStartMenu	390097	0xC78150	0xC77550	0x180C78150	public void ShowStartMenu() { }
+target	StartMenuController	UnshowStartMenu	390100	0xC7AB90	0xC79F90	0x180C7AB90	public void UnshowStartMenu() { }
+target	StartMenuController	TabButtonValueChanged	390103	0xC7A8F0	0xC79CF0	0x180C7A8F0	public void TabButtonValueChanged(GameObject targetTab) { }
+target	StartMenuController	ChangeBackMountainState	390106	0xC70330	0xC6F730	0x180C70330	public void ChangeBackMountainState(int id) { }
+target	StartMenuController	ResetPlayerTag	390109	0xC77130	0xC76530	0x180C77130	public void ResetPlayerTag() { }
+target	StartMenuController	RefreshTagMenu	390112	0xC75740	0xC74B40	0x180C75740	public void RefreshTagMenu() { }
+target	StartMenuController	StartChooseTagClicked	390115	0xC78860	0xC77C60	0x180C78860	public void StartChooseTagClicked(int tagID) { }
+target	StartMenuController	StartUnchooseTagClicked	390118	0xC78D30	0xC78130	0x180C78D30	public void StartUnchooseTagClicked(int tagID) { }
+target	StartMenuController	CheckMeetCondition	390121	0xC70400	0xC6F800	0x180C70400	public bool CheckMeetCondition(HeroData checkHero, HeroTagDataBase targetTag) { }
+target	StartMenuController	CheckMeetOneCondition	390124	0xC705D0	0xC6F9D0	0x180C705D0	public bool CheckMeetOneCondition(HeroData checkHero, string requirement) { }
+target	StartMenuController	RandomFaceButtonClicked	390127	0xC736B0	0xC72AB0	0x180C736B0	public void RandomFaceButtonClicked() { }
+target	StartMenuController	ResetFaceSetting	390130	0xC762A0	0xC756A0	0x180C762A0	public void ResetFaceSetting() { }
+target	StartMenuController	ResetPlayerSkeleton	390133	0xC77040	0xC76440	0x180C77040	public void ResetPlayerSkeleton() { }
+target	StartMenuController	FaceSliderButtonClicked	390136	0xC711F0	0xC705F0	0x180C711F0	public void FaceSliderButtonClicked(GameObject target) { }
+target	StartMenuController	FaceSliderChanged	390139	0xC71860	0xC70C60	0x180C71860	public void FaceSliderChanged(GameObject target) { }
+target	StartMenuController	OutFaceCodeButtonClicked	390142	0xC72AB0	0xC71EB0	0x180C72AB0	public void OutFaceCodeButtonClicked() { }
+target	StartMenuController	LoadFaceCodeButtonClicked	390145	0xC72300	0xC71700	0x180C72300	public void LoadFaceCodeButtonClicked() { }
+target	StartMenuController	SexButtonClicked	390148	0xC78090	0xC77490	0x180C78090	public void SexButtonClicked(GameObject buttonClicked) { }
+target	StartMenuController	RandomNameButtonClicked	390151	0xC739D0	0xC72DD0	0x180C739D0	public void RandomNameButtonClicked() { }
+target	StartMenuController	ResetPlayerName	390154	0xC76D80	0xC76180	0x180C76D80	public void ResetPlayerName() { }
+target	StartMenuController	OnResetPlayerNameFliterResult	390157	0xC72A10	0xC71E10	0x180C72A10	public void OnResetPlayerNameFliterResult(RAILEventID id, EventBase data) { }
+target	StartMenuController	SetFliteredPlayerName	390160	0xC77EA0	0xC772A0	0x180C77EA0	public void SetFliteredPlayerName(string fliteredTotalName) { }
+target	StartMenuController	ShowTextOnMouse	390163	0xC78650	0xC77A50	0x180C78650	public GameObject ShowTextOnMouse(string text) { }
+target	StartMenuController	GetPointPlusCost	390166	0xC722D0	0xC716D0	0x180C722D0	public int GetPointPlusCost(int nowPoint) { }
+target	StartMenuController	PlusMinus	390169	0xC72EE0	0xC722E0	0x180C72EE0	public void PlusMinus(string type, int id, bool plus) { }
+target	StartMenuController	PlusMinusButtonClicked	390172	0xC72D10	0xC72110	0x180C72D10	public void PlusMinusButtonClicked(GameObject buttonClicked) { }
+target	StartMenuController	RefreshPlayerAttri	390175	0xC74EE0	0xC742E0	0x180C74EE0	public void RefreshPlayerAttri() { }
+target	StartMenuController	SetAttriDetail	390178	0xC77640	0xC76A40	0x180C77640	public void SetAttriDetail(Transform parent, float baseNum, float maxNum) { }
+target	StartMenuController	RandomPlayerBaseAttri	390181	0xC73C10	0xC73010	0x180C73C10	public void RandomPlayerBaseAttri() { }
+target	StartMenuController	RandomPlayerBaseFightSkill	390184	0xC73F90	0xC73390	0x180C73F90	public void RandomPlayerBaseFightSkill() { }
+target	StartMenuController	RandomPlayerBaseLivingSkill	390187	0xC74310	0xC73710	0x180C74310	public void RandomPlayerBaseLivingSkill() { }
+target	StartMenuController	ResetPlayerAttri	390190	0xC76CB0	0xC760B0	0x180C76CB0	public void ResetPlayerAttri() { }
+target	StartMenuController	SetAttriPreset	390193	0xC779E0	0xC76DE0	0x180C779E0	public void SetAttriPreset(int presetID) { }
+target	StartMenuController	EvilChaosSliderChanged	390196	0xC70F90	0xC70390	0x180C70F90	public void EvilChaosSliderChanged(GameObject target) { }
+target	StartMenuController	RefreshEvilChaosSlider	390199	0xC74C50	0xC74050	0x180C74C50	public void RefreshEvilChaosSlider() { }
+target	StartMenuController	CustomDifficultySliderChanged	390202	0xC70950	0xC6FD50	0x180C70950	public void CustomDifficultySliderChanged(GameObject target) { }
+target	StartMenuController	RefreshDifficultyTotalLv	390205	0xC74900	0xC73D00	0x180C74900	public void RefreshDifficultyTotalLv() { }
+target	StartMenuController	RefreshDifficultySliderText	390208	0xC74690	0xC73A90	0x180C74690	public void RefreshDifficultySliderText(GameObject target) { }
+target	StartMenuController	NatureDropDownValueChange	390211	0xC72920	0xC71D20	0x180C72920	public void NatureDropDownValueChange() { }
+target	StartMenuController	ClothDropDownValueChange	390214	0xC70700	0xC6FB00	0x180C70700	public void ClothDropDownValueChange() { }
+target	StartMenuController	ToggleLvValueChange	390217	0xC7AA20	0xC79E20	0x180C7AA20	public void ToggleLvValueChange(GameObject obj) { }
+target	StartMenuController	EndingTagClicked	390220	0xC70D30	0xC70130	0x180C70D30	public void EndingTagClicked(GameObject buttonClicked) { }
+target	StartMenuController	BirthSettingClicked	390223	0xC6FAA0	0xC6EEA0	0x180C6FAA0	public void BirthSettingClicked(GameObject buttonClicked) { }
+target	StartMenuController	DifficultyButtonClicked	390226	0xC70AD0	0xC6FED0	0x180C70AD0	public void DifficultyButtonClicked(GameObject buttonClicked) { }
+target	StartMenuController	GameModeButtonClicked	390229	0xC72010	0xC71410	0x180C72010	public void GameModeButtonClicked(GameObject buttonClicked) { }
+target	StartMenuController	ctor	390232	0xC7AF70	0xC7A370	0x180C7AF70	public void .ctor() { }
+target	StartMenuController	cctor	390235	0xC7ADE0	0xC7A1E0	0x180C7ADE0	private static void .cctor() { }
+target	StartMenuController	b__40_0	390239	0xA7A6D0	0xA79AD0	0x180A7A6D0	private void <UnshowStartMenu>b__40_0() { }
+target	WorldData	GetRandomEnemyCount	367807	0x9CEA70	0x9CDE70	0x1809CEA70	public int GetRandomEnemyCount() { }
+target	WorldData	FindAvailableHeroID	367810	0x9CCCF0	0x9CC0F0	0x1809CCCF0	public int FindAvailableHeroID() { }
+target	WorldData	FindAvailableTempHeroID	367813	0x9CCE70	0x9CC270	0x1809CCE70	public int FindAvailableTempHeroID() { }
+target	WorldData	AddTempHero	367816	0x9CC280	0x9CB680	0x1809CC280	public void AddTempHero(HeroData target) { }
+target	WorldData	RemoveTempHero	367819	0x9CFCC0	0x9CF0C0	0x1809CFCC0	public void RemoveTempHero(HeroData target) { }
+target	WorldData	GetTempHeroCount	367822	0x9CEEA0	0x9CE2A0	0x1809CEEA0	public int GetTempHeroCount() { }
+target	WorldData	AddNewHero	367825	0x9CC0C0	0x9CB4C0	0x1809CC0C0	public void AddNewHero(HeroData target) { }
+target	WorldData	RemoveHero	367828	0x9CFB30	0x9CEF30	0x1809CFB30	public void RemoveHero(HeroData target) { }
+target	WorldData	GetHeroCount	367831	0x9CDED0	0x9CD2D0	0x1809CDED0	public int GetHeroCount() { }
+target	WorldData	GetHeroForce	367840	0x9CDFA0	0x9CD3A0	0x1809CDFA0	public ForceData GetHeroForce(int heroID) { }
+target	WorldData	GetHero	367843	0x9CE110	0x9CD510	0x1809CE110	public HeroData GetHero(string heroName) { }
+target	WorldData	GenerateHeroDict	367846	0x9CD210	0x9CC610	0x1809CD210	public void GenerateHeroDict() { }
+target	WorldData	GetHero	367849	0x9CE010	0x9CD410	0x1809CE010	public HeroData GetHero(int heroID) { }
+candidate	GameController	GenerateHero	376611	0x7AC8F0	0x7ABCF0	0x1807AC8F0	public void GenerateHero() { }
+candidate	GameController	GenerateHeroData	376620	0x7AC840	0x7ABC40	0x1807AC840	public HeroData GenerateHeroData(int heroID, int belongForceID, float heroForceLv, HeroData heroDataBase, bool isTempHero = True, bool isRandomEnemy =
+candidate	GameController	GenerateHeroData	376623	0x7AC8A0	0x7ABCA0	0x1807AC8A0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, bool isRandomEnemy = False) { }
+candidate	GameController	GenerateHeroData	376626	0x7AB1F0	0x7AA5F0	0x1807AB1F0	public HeroData GenerateHeroData(string heroName, int heroID, int belongForceID, float heroForceLv, HeroData heroDataBase, bool isTempHero, SexLimit s
+candidate	GameController	GenerateRelationShip	376629	0x7B4400	0x7B3800	0x1807B4400	public void GenerateRelationShip() { }
+candidate	GameController	RandomGenerateHeroTag	376641	0x7D9B20	0x7D8F20	0x1807D9B20	public void RandomGenerateHeroTag(HeroData hero) { }
+candidate	GameController	WorldAddNewHero	376761	0x7E5B50	0x7E4F50	0x1807E5B50	public HeroData WorldAddNewHero(int forceID, int heroForceLv, bool outSideForce, bool _showInfo = True) { }
+candidate	GameController	GenerateRandomEnemy	376980	0x7B12E0	0x7B06E0	0x1807B12E0	public void GenerateRandomEnemy(int maxNum = 999) { }
+candidate	HeroData	SetRandomEnemyBadFame	370542	0x8A5760	0x8A4B60	0x1808A5760	public void SetRandomEnemyBadFame() { }
+candidate	HeroData	GenerateHeroSkeleton	370752	0x8880D0	0x8874D0	0x1808880D0	public SkeletonAnimation GenerateHeroSkeleton(GameObject parent, Vector3 scale) { }
+candidate	HeroData	GenerateHeroSkeleton	370767	0x8882D0	0x8876D0	0x1808882D0	public SkeletonAnimation GenerateHeroSkeleton(SkeletonAnimation skeleton) { }
+candidate	HeroSearchController	RegenerateHeroIcon	379568	0xAFBE80	0xAFB280	0x180AFBE80	public void RegenerateHeroIcon() { }
+candidate	PlotController	GetRandomEnemyNum	382925	0x50B160	0x50A560	0x18050B160	public int GetRandomEnemyNum(float targetEnemyLv, float minNum, float minRate, float maxNum, float maxRate) { }
+candidate	PlotController	MercyRandomEnemy	385383	0x54EC70	0x54E070	0x18054EC70	public void MercyRandomEnemy(string param) { }
+candidate	PlotController	DebateRandomEnemy	385386	0x4BD650	0x4BCA50	0x1804BD650	public void DebateRandomEnemy() { }
+candidate	PlotController	DebateRandomEnemyResult	385389	0x4BD3E0	0x4BC7E0	0x1804BD3E0	public void DebateRandomEnemyResult(string param) { }
+candidate	PlotController	GiveRandomEnemyMoney	385392	0x520200	0x51F600	0x180520200	public void GiveRandomEnemyMoney() { }
+candidate	PlotController	EscapeRandomEnemy	385395	0x4C60B0	0x4C54B0	0x1804C60B0	public void EscapeRandomEnemy() { }
+candidate	PlotController	FightRandomEnemyResult	385398	0x4CDA20	0x4CCE20	0x1804CDA20	public void FightRandomEnemyResult(string winTeamID) { }
+candidate	PlotController	StartBeatRandomEnemy	385401	0x5A3C60	0x5A3060	0x1805A3C60	public void StartBeatRandomEnemy(string winTeamID) { }
+candidate	PlotController	CatchRandomEnemy	385407	0x48DB30	0x48CF30	0x18048DB30	public void CatchRandomEnemy(string winTeamID) { }
+candidate	PlotController	RecruitRandomEnemy	385416	0x570540	0x56F940	0x180570540	public void RecruitRandomEnemy(string winTeamID) { }
+candidate	PlotController	FinishRecruitRandomEnemy	385437	0x4ED290	0x4EC690	0x1804ED290	public void FinishRecruitRandomEnemy() { }
+candidate	PlotController	DeleteInteractTempHero	385494	0x4BDE50	0x4BD250	0x1804BDE50	public void DeleteInteractTempHero() { }
+candidate	PlotController	HideSpeHero	386654	0x5384F0	0x5378F0	0x1805384F0	public void HideSpeHero(string param) { }
+candidate	PlotController	SpeHeroDeath	386687	0x58CC50	0x58C050	0x18058CC50	public void SpeHeroDeath(string param) { }
+candidate	StartGameSettingController	StartSettingPlayerData	390008	0xC6F6F0	0xC6EAF0	0x180C6F6F0	public void StartSettingPlayerData() { }
+candidate	StartGameSettingController	BirthSettingPlayerData	390011	0xC6E3D0	0xC6D7D0	0x180C6E3D0	public void BirthSettingPlayerData() { }
+candidate	WorldData	GetRandomEnemyCount	367807	0x9CEA70	0x9CDE70	0x1809CEA70	public int GetRandomEnemyCount() { }
+candidate	WorldData	FindAvailableTempHeroID	367813	0x9CCE70	0x9CC270	0x1809CCE70	public int FindAvailableTempHeroID() { }
+candidate	WorldData	AddTempHero	367816	0x9CC280	0x9CB680	0x1809CC280	public void AddTempHero(HeroData target) { }
+candidate	WorldData	RemoveTempHero	367819	0x9CFCC0	0x9CF0C0	0x1809CFCC0	public void RemoveTempHero(HeroData target) { }
+candidate	WorldData	GetTempHeroCount	367822	0x9CEEA0	0x9CE2A0	0x1809CEEA0	public int GetTempHeroCount() { }
+candidate	WorldData	AddNewHero	367825	0x9CC0C0	0x9CB4C0	0x1809CC0C0	public void AddNewHero(HeroData target) { }
+candidate	WorldData	GenerateHeroDict	367846	0x9CD210	0x9CC610	0x1809CD210	public void GenerateHeroDict() { }
+target	ForceLevelData	.ctor	369302	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.ctor	376332	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.cctor	376358	0x959830	0x958C30	0x180959830	private static void .cctor() { }
+target	GameController	.ctor	376361	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.ctor	376393	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.ctor	376409	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.ctor	376425	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameController	.ctor	377169	0x3A1810	0x3A0C10	0x1803A1810	public void .ctor() { }
+target	GameController	.cctor	377172	0x7E5D40	0x7E5140	0x1807E5D40	private static void .cctor() { }
+target	GameController	<StartNewGame>b__7_0	377176	0x7E3990	0x7E2D90	0x1807E3990	private void <StartNewGame>b__7_0() { }
+target	GameDataController	.ctor	377199	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GameDataController	.ctor	377496	0xC2ED50	0xC2E150	0x180C2ED50	public void .ctor() { }
+target	GameDataController	.cctor	377499	0xC2EBB0	0xC2DFB0	0x180C2EBB0	private static void .cctor() { }
+target	GlobalData	.ctor	377976	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.ctor	377992	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.cctor	378016	0x959770	0x958B70	0x180959770	private static void .cctor() { }
+target	GlobalData	.ctor	378019	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.ctor	378056	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.ctor	378072	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.ctor	378088	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.ctor	378672	0x210B70	0x20FF70	0x180210B70	public void .ctor() { }
+target	GlobalData	.cctor	378675	0xA8A670	0xA89A70	0x180A8A670	private static void .cctor() { }
+target	StartGameSettingController	.ctor	390014	0xC6F880	0xC6EC80	0x180C6F880	public void .ctor() { }
+target	WorldData	.ctor	367724	0x9D08D0	0x9CFCD0	0x1809D08D0	public void .ctor() { }

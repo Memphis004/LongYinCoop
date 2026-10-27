@@ -49,6 +49,8 @@ namespace LongYinCoop
             JitProbeW6.Apply(CoopPrefs.JitProbeW6.Value);
             // S1.5e W7: probe อ่าน chain ของ attack (default false = ไม่ติด patch)
             JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
+            // SP5-T0: probe บัญชี NPC log-only (default false = ไม่ติด hook; one-shot ต่อ session)
+            Sp5T0Probe.Apply(CoopPrefs.Sp5T0.Value);
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -99,6 +101,7 @@ namespace LongYinCoop
             JitProbeW4.Uninstall();
             JitProbeW6.Uninstall();
             JitProbeW7.Uninstall();
+            Sp5T0Probe.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -113,6 +116,7 @@ namespace LongYinCoop
                 JitProbeW4.Uninstall();
                 JitProbeW6.Uninstall();
                 JitProbeW7.Uninstall();
+                Sp5T0Probe.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 return;
@@ -148,6 +152,16 @@ namespace LongYinCoop
             if (CoopPrefs.JitProbeW7.Value != JitProbeW7.Installed)
             {
                 JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
+            }
+
+            // SP5-T0: ติด/ถอดตาม pref + เช็ค settle/cap (สำคัญ: เรียก Tick ทุกเฟรมเมื่อติดอยู่)
+            if (CoopPrefs.Sp5T0.Value != Sp5T0Probe.Installed)
+            {
+                Sp5T0Probe.Apply(CoopPrefs.Sp5T0.Value);
+            }
+            if (Sp5T0Probe.Installed)
+            {
+                Sp5T0Probe.Tick();
             }
 
             // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)
