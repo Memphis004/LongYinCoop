@@ -70,18 +70,20 @@ class TestSp5T0Audit(unittest.TestCase):
 
     def test_hist_mismatch_fails_e7(self):
         ev = self.base_round()
-        ev[-3] = {**ev[-3], "H": 6}  # corrupt snapshot H
+        idx = next(i for i, e in enumerate(ev) if e.get("ev") == "worldcount")
+        ev[idx] = {**ev[idx], "H": 6}  # corrupt snapshot H only
         f = self.audit(ev)
-        self.assertEqual(len(f["e7_failures"]), 1)
+        self.assertEqual(len(f["e7_failures"]), 1, f["e7_failures"])
         self.assertIn("FAIL (structural)", aud.verdict(f))
 
     def test_perforce_mismatch_fails_e7(self):
         ev = self.base_round()
-        # perForce sums to 2 but hist[sect]=2 is fine; make sect=3
         idx = next(i for i, e in enumerate(ev) if e.get("ev") == "worldcount")
-        ev[idx] = {**ev[idx], "hist": {"protagonist": 1, "spehero": 2, "sect": 3}}
+        # break ONLY perForce (sum 3 != hist[sect] 2); hist sum stays == H
+        ev[idx] = {**ev[idx], "perForce": {0: 1, 1: 2}}
         f = self.audit(ev)
-        self.assertEqual(len(f["e7_failures"]), 1)
+        self.assertEqual(len(f["e7_failures"]), 1, f["e7_failures"])
+        self.assertIn("perForce", f["e7_failures"][0]["why"])
 
     def test_phase_stuck_fails_round(self):
         ev = self.base_round()
