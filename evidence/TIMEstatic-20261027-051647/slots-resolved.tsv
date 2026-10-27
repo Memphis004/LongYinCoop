@@ -1,0 +1,1017 @@
+slot	kind	name	bodies
+0x1D737D0	string	飞龙门赛马场可提升潜力	GlobalData_cctor
+0x1D73858	string	食材	GlobalData_cctor
+0x1D73968	string	食窦	GlobalData_cctor
+0x1D739B0	string	"
+<i>{2}(因超过{0}级，练习只获取{1}%经验！)</color></i>"	StudySkillController_StartStudySkill
+0x1D739F0	string	饕餮纹鼎	GlobalData_cctor
+0x1D73A48	string	捕头	GlobalData_cctor
+0x1D73B00	string	饮食	GlobalData_cctor
+0x1D73B88	string	饰品	GlobalData_cctor
+0x1D73D20	string	首座	GlobalData_cctor
+0x1D73DA8	string	香囊	GlobalData_cctor
+0x1D73E30	string	香炉	GlobalData_cctor
+0x1D73EB8	string	马丹心	GlobalData_cctor
+0x1D73EE0	string	中	GlobalData_cctor
+0x1D73F40	string	马匹	GlobalData_cctor
+0x1D73FF0	string	中品	GlobalData_cctor
+0x1D740A8	string	据点攻略	GlobalData_cctor
+0x1D740D8	string	马宝郭	GlobalData_cctor
+0x1D74160	string	马应龙	GlobalData_cctor
+0x1D74240	string	掌门	GlobalData_cctor
+0x1D743A8	string	中府	GlobalData_cctor
+0x1D74408	string	马超群	GlobalData_cctor
+0x1D74430	string	中庸	GlobalData_cctor
+0x1D744B8	string	中极	GlobalData_cctor
+0x1D74540	string	中止;MiddleStopWork	WorkingUIController_TryCancelWorking
+0x1D745C8	string	中毒	GlobalData_cctor
+0x1D74628	string	骁骑尉	GlobalData_cctor
+0x1D746D8	string	中渚	GlobalData_cctor
+0x1D74760	string	中立	GlobalData_cctor
+0x1D747C0	string	骑都尉	GlobalData_cctor
+0x1D74870	string	中级武师	GlobalData_cctor
+0x1D748F8	string	中脘	GlobalData_cctor
+0x1D74C88	string	高级武师	GlobalData_cctor
+0x1D74CE8	class	GameController_TypeInfo	BigMapController_FixedUpdate,GameController_ChangeDay_leaf,GameController_cctor,PlotController_StudyMaxFightSkillFinish,StudySkillController_FinishStudySkill,StudySkillController_StartStudySkill,StudySkillController_SureStartStudySkill,WeatherController_Update,WorkingUIController_Update
+0x1D74D70	class	GameDataController_TypeInfo	GameController_ChangeDay_leaf,GameController_Update,WeatherController_Update,WorkingUIController_Update
+0x1D74E20	string	魂门	GlobalData_cctor
+0x1D750B0	method	Method$UnityEngine.GameObject.GetComponent<ResourcePointController>()	BigMapController_FixedUpdate
+0x1D751D8	string	魔首	GlobalData_cctor
+0x1D75260	string	鱼腰	GlobalData_cctor
+0x1D752E8	string	鲜血狂乱	GlobalData_cctor
+0x1D75370	string	鸠尾	GlobalData_cctor
+0x1D75590	string	黄州寒食帖	GlobalData_cctor
+0x1D75838	string	黄豺	GameController_cctor,GlobalData_cctor
+0x1D75A90	method	Method$System.Collections.Generic.Dictionary<string, int>..ctor()	GameController_cctor
+0x1D75C28	method	Method$System.Collections.Generic.Dictionary<string, int>.Add()	GameController_cctor
+0x1D75CE8	method	Method$UnityEngine.GameObject.GetComponent<SpringPosition>()	BigMapController_FixedUpdate
+0x1D75D60	class	GlobalData_TypeInfo	BigMapController_FixedUpdate,GameController_ChangeDay_leaf,GameController_LateUpdate,GameController_Update,GlobalData_cctor,PlotController_StudyFightSelfFinish,PlotController_StudyMaxFightSkillFinish,StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill,WorkingUIController_SetSkippingState,WorkingUIController_SkipButtonClicked
+0x1D75D70	method	Method$UnityEngine.GameObject.GetComponent<SpriteRenderer>()	BigMapController_FixedUpdate
+0x1D75E10	string	默写	GlobalData_cctor
+0x1D76000	string	撞到大爷手里，算你倒霉！今天你是想吃“板刀面”，还是吃“馄饨”？	GlobalData_cctor
+0x1D76030	string	鼻	GlobalData_cctor
+0x1D762D8	string	龙灭	GlobalData_cctor
+0x1D76330	string	支持者包	GlobalData_cctor
+0x1D76410	string	临泣	GlobalData_cctor
+0x1D76498	string	丹药	GlobalData_cctor
+0x1D76788	method	Method$UnityEngine.GameObject.GetComponent<TweenScale>()	BigMapController_FixedUpdate
+0x1D76AF8	string	主要	GlobalData_cctor
+0x1D76CE8	string	h_lb	GlobalData_cctor
+0x1D76D70	string	h_lf	GlobalData_cctor
+0x1D76DF8	string	h_rb	GlobalData_cctor
+0x1D76E80	string	h_rf	GlobalData_cctor
+0x1D770A0	string	hair	GlobalData_cctor
+0x1D773D0	string	hairback	GlobalData_cctor
+0x1D77620	string	乐器	GlobalData_cctor
+0x1D777B8	string	乐经	GlobalData_cctor
+0x1D77A08	string	教头	GlobalData_cctor
+0x1D77A60	string	九品	GlobalData_cctor
+0x1D77B70	string	九死一生	GlobalData_cctor
+0x1D77E48	string	整合	GlobalData_cctor
+0x1D78288	string	斗酒僧	GlobalData_cctor
+0x1D782E0	string	乳中	GlobalData_cctor
+0x1D78310	string	斜线	GlobalData_cctor
+0x1D78368	string	乳根	GlobalData_cctor
+0x1D78B90	string	方向	GlobalData_cctor
+0x1D78C18	string	方形	GlobalData_cctor
+0x1D78C70	string	二品	GlobalData_cctor
+0x1D78E90	string	云骑尉	GlobalData_cctor
+0x1D78EC8	class	HudController_TypeInfo	WorkingUIController_Update
+0x1D78F18	string	五代史	GlobalData_cctor
+0x1D79028	string	五品	GlobalData_cctor
+0x1D791C0	string	五毒教万毒池可提升潜力	GlobalData_cctor
+0x1D79328	string	horse_back	GlobalData_cctor
+0x1D79358	string	五牛图	GlobalData_cctor
+0x1D79388	string	旗鼓相当	GlobalData_cctor
+0x1D793B0	string	horse_back_l_leg	GlobalData_cctor
+0x1D79410	string	无	GlobalData_cctor
+0x1D79438	string	horse_back_r_leg	GlobalData_cctor
+0x1D794C0	string	horse_front	GlobalData_cctor
+0x1D79548	string	horse_front_fur	GlobalData_cctor
+0x1D795C8	string	horse_front_l_leg	GlobalData_cctor
+0x1D79648	string	horse_front_r_leg	GlobalData_cctor
+0x1D796C8	string	horse_head	GlobalData_cctor
+0x1D79748	string	horse_head_fur	GlobalData_cctor
+0x1D797C8	string	horse_head_rein	GlobalData_cctor
+0x1D79920	string	无序	GlobalData_cctor
+0x1D79948	string	horse_tail	GlobalData_cctor
+0x1D79970	string	京门	GlobalData_cctor
+0x1D799F0	string	亲传弟子	GlobalData_cctor
+0x1D79B70	string	亲密	GlobalData_cctor
+0x1D79CE8	string	人中	GlobalData_cctor
+0x1D79D68	string	人口	GlobalData_cctor
+0x1D79E50	method	Method$System.Threading.ThreadLocal<Random>..ctor()	GlobalData_cctor
+0x1D79F48	class	GlobalData.<>c_TypeInfo	GlobalData_cctor
+0x1D7A2E0	string	人迎	GlobalData_cctor
+0x1D7A660	string	仁义	GlobalData_cctor
+0x1D7A6E0	string	仁慈	GlobalData_cctor
+0x1D7A720	method	Method$System.Collections.Generic.List<List<HeroSpeAddDataType>>..ctor()	GlobalData_cctor
+0x1D7A7A0	method	Method$System.Collections.Generic.List<List<HeroSpeAddDataType>>.Add()	GlobalData_cctor
+0x1D7A8A0	method	Method$System.Collections.Generic.List<List<int>>..ctor()	GlobalData_cctor
+0x1D7A9A0	method	Method$System.Collections.Generic.List<List<int>>.Add()	GlobalData_cctor
+0x1D7A9E0	string	仇恨	GlobalData_cctor
+0x1D7AB20	method	Method$System.Collections.Generic.List<List<int>>.get_Item()	GameController_ChangeDay_leaf
+0x1D7B120	method	Method$System.Collections.Generic.List<List<ParticleSystem>>.get_Item()	WeatherController_Update
+0x1D7B210	string	日月	GlobalData_cctor
+0x1D7B220	method	Method$System.Collections.Generic.List<List<float>>..ctor()	GlobalData_cctor
+0x1D7B2A0	method	Method$System.Collections.Generic.List<List<float>>.Add()	GlobalData_cctor
+0x1D7B3A0	method	Method$System.Collections.Generic.List<List<string>>..ctor()	GlobalData_cctor
+0x1D7B420	method	Method$System.Collections.Generic.List<List<string>>.Add()	GlobalData_cctor
+0x1D7B4E0	string	从一品	GlobalData_cctor
+0x1D7B590	string	"时序{0}后进入疲劳
+无法使用道具
+战斗结束恢复至战前状态"	GlobalData_cctor
+0x1D7B610	string	"时序{0}后进入疲劳
+被击倒产生中量伤势
+战斗结束恢复50%损失状态"	GlobalData_cctor
+0x1D7B690	string	"时序{0}后进入疲劳
+被击倒产生大量伤势"	GlobalData_cctor
+0x1D7B738	string	https://store.steampowered.com/app/4383960	GlobalData_cctor
+0x1D7B760	string	从事工作_修炼	StudySkillController_FinishStudySkill
+0x1D7B7B8	string	https://www.wegame.com.cn/store/2002712	GlobalData_cctor
+0x1D7B810	string	昆仑	GlobalData_cctor
+0x1D7BA90	string	春	GlobalData_cctor
+0x1D7BB10	string	春秋	GlobalData_cctor
+0x1D7BBE0	string	从二品	GlobalData_cctor
+0x1D7C060	string	他人	GlobalData_cctor
+0x1D7CAC0	string	仲尼梦奠帖	GlobalData_cctor
+0x1D7D1C0	string	仿本	GlobalData_cctor
+0x1D7D1F0	string	晋书	GlobalData_cctor
+0x1D7D640	string	优	GlobalData_cctor
+0x1D7D6C0	string	优质	GlobalData_cctor
+0x1D7D770	string	普通	GlobalData_cctor
+0x1D7D7C0	string	会阴	GlobalData_cctor
+0x1D7D870	string	晴明	GlobalData_cctor
+0x1D7D8F0	string	智力	GlobalData_cctor
+0x1D7E0D8	string	曲佩环	GlobalData_cctor
+0x1D7E350	string	曲池	GlobalData_cctor
+0x1D7E3D0	string	曲泽	GlobalData_cctor
+0x1D7E4D0	string	曲骨	GlobalData_cctor
+0x1D7E7D8	method	Method$System.Collections.Generic.List<AreaData>.GetEnumerator()	GameController_LateUpdate
+0x1D7ED98	string	体质	GlobalData_cctor
+0x1D7EDC8	string	朋友	GlobalData_cctor
+0x1D7EEC8	string	服饰	GlobalData_cctor
+0x1D7F148	string	期门	GlobalData_cctor
+0x1D7F1C8	string	木料	GlobalData_cctor
+0x1D7F248	string	木材	GlobalData_cctor
+0x1D7F2C8	string	木植	GlobalData_cctor
+0x1D7FF38	string	本大爷今日心情不错，乖乖交出银两细软，便可饶你不死！	GlobalData_cctor
+0x1D80148	method	Method$System.Collections.Generic.List<AudioSource>.get_Item()	WeatherController_Update
+0x1D80280	string	佳肴	GlobalData_cctor
+0x1D80600	string	侍御史	GlobalData_cctor
+0x1D808F8	string	侧击	GlobalData_cctor
+0x1D81720	class	InfoController_TypeInfo	StudySkillController_FinishStudySkill
+0x1D81850	method	Method$System.Collections.Generic.Dictionary.ValueCollection<int, ResourcePointController>.GetEnumerator()	BigMapController_FixedUpdate
+0x1D81928	method	Method$System.Collections.Generic.List<BattleTeam>.get_Count()	GameController_LateUpdate
+0x1D819A0	method	Method$System.Collections.Generic.List<BattleTeam>.get_Item()	GameController_LateUpdate
+0x1D81D18	method	Method$System.Collections.Generic.List<BattleUnit>.get_Count()	GameController_LateUpdate
+0x1D81D98	method	Method$System.Collections.Generic.List<BattleUnit>.get_Item()	GameController_LateUpdate
+0x1D81DD8	string	傅砚之	GlobalData_cctor
+0x1D82088	string	杂	GlobalData_cctor
+0x1D82108	string	杂役	GlobalData_cctor
+0x1D82408	string	李天临	GlobalData_cctor
+0x1D82488	string	李潇湘	GameController_cctor
+0x1D82490	class	int_TypeInfo	GameController_LateUpdate,StudySkillController_StartStudySkill,WorkingUIController_Update
+0x1D82508	string	材料	GlobalData_cctor
+0x1D82518	method	Method$System.Collections.Generic.List<BookWriterData>.get_Count()	GameController_ChangeDay_leaf
+0x1D82588	string	材质	GlobalData_cctor
+0x1D82598	method	Method$System.Collections.Generic.List<BookWriterData>.get_Item()	GameController_ChangeDay_leaf
+0x1D82688	string	村镇	GlobalData_cctor
+0x1D82AD8	string	入门弟子	GlobalData_cctor
+0x1D82D88	string	杨思迟	GlobalData_cctor
+0x1D83008	string	极	GlobalData_cctor
+0x1D83060	class	System.Collections.Generic.Dictionary<int, int>_TypeInfo	GameController_cctor
+0x1D83088	string	极品	GlobalData_cctor
+0x1D83158	string	全部	GlobalData_cctor
+0x1D83188	string	极泉	GlobalData_cctor
+0x1D832D8	string	八品	GlobalData_cctor
+0x1D83358	string	八邪	GlobalData_cctor
+0x1D83558	string	公孙	GlobalData_cctor
+0x1D83588	string	枭雄	GlobalData_cctor
+0x1D835D8	string	公孙防	GameController_cctor
+0x1D83658	string	六品	GlobalData_cctor
+0x1D836D8	string	兰亭序	GlobalData_cctor
+0x1D83958	string	关元	GlobalData_cctor
+0x1D83B88	string	柱国	GlobalData_cctor
+0x1D83C08	string	柳如月	GlobalData_cctor
+0x1D83E58	string	典籍	GlobalData_cctor
+0x1D83FD8	string	内伤	GlobalData_cctor
+0x1D840D8	string	内关	GlobalData_cctor
+0x1D84158	string	内力	StudySkillController_RealStartStudySkill
+0x1D84288	string	梁门	GlobalData_cctor
+0x1D84308	string	棋谱	GlobalData_cctor
+0x1D84488	string	横骨	GlobalData_cctor
+0x1D844D8	string	内功	GlobalData_cctor
+0x1D846D8	string	内政整备	GlobalData_cctor
+0x1D84AD8	string	冠	GlobalData_cctor
+0x1D84BB0	string	l_l4	GlobalData_cctor
+0x1D84DD8	string	冬	GlobalData_cctor
+0x1D84DE0	class	System.Collections.Generic.Dictionary<string, int>_TypeInfo	GameController_cctor
+0x1D84E08	string	欲寻人切磋武艺	GameController_cctor
+0x1D84E88	string	欲寻人协助鉴宝	GameController_cctor
+0x1D84F08	string	欲寻人赌上两把，试试手气	GameController_cctor
+0x1D84F88	string	欲寻人辩论演练	GameController_cctor
+0x1D84F98	method	Method$System.Collections.Generic.List<Color>..ctor()	GlobalData_cctor
+0x1D85018	method	Method$System.Collections.Generic.List<Color>.Add()	GlobalData_cctor
+0x1D851D8	string	决战	GlobalData_cctor
+0x1D85308	string	正式弟子	GlobalData_cctor
+0x1D854D8	string	冷漠	GlobalData_cctor
+0x1D85558	string	冷酷	GlobalData_cctor
+0x1D860D8	string	凶狠	GlobalData_cctor
+0x1D86158	string	凶邪	GlobalData_cctor
+0x1D86910	class	LTLocalization_TypeInfo	WorkingUIController_Update
+0x1D86DD8	string	刀	GlobalData_cctor
+0x1D86E58	string	刀剑无眼，不想死就把钱财乖乖交出来！	GlobalData_cctor
+0x1D86F58	string	刀法	GlobalData_cctor
+0x1D87088	string	此物品质低劣，细节颇为粗糙，恐怕是出自下等工匠之手。	GlobalData_cctor
+0x1D87358	string	切磋	GlobalData_cctor
+0x1D876D8	string	列缺	GlobalData_cctor
+0x1D87788	string	此路是我开，此树是我栽，要想从此过，留下买路财！	GlobalData_cctor
+0x1D87888	string	步履维艰	GlobalData_cctor
+0x1D87908	string	步廊	GlobalData_cctor
+0x1D87988	string	步辇图	GlobalData_cctor
+0x1D87C08	string	武器	GlobalData_cctor
+0x1D87C58	string	初级武师	GlobalData_cctor
+0x1D87CD8	string	初露锋芒	GlobalData_cctor
+0x1D87F98	method	Method$System.Collections.Generic.List<EventData>.get_Count()	GameController_ChangeDay_leaf
+0x1D87FD8	string	别派挑衅	GameController_cctor
+0x1D88018	method	Method$System.Collections.Generic.List<EventData>.get_Item()	GameController_ChangeDay_leaf
+0x1D88058	string	别派比试	GameController_cctor
+0x1D880D8	string	别派盗匪	GameController_cctor
+0x1D88180	string	TimeAnim	WorkingUIController_StartWorking_6p,WorkingUIController_StartWorking_7p,WorkingUIController_Update
+0x1D88280	string	TimeLabel	WorkingUIController_Update
+0x1D88378	string	"#PlayerName#适才练习中有些错漏之处，我来给你演示演示好了。
+(对方{0}点{1}技能，经验额外增加{2}%)"	PlotController_StudyFightSelfFinish
+0x1D88808	string	武者	GlobalData_cctor
+0x1D88958	string	剑	GlobalData_cctor
+0x1D889D8	string	剑法	GlobalData_cctor
+0x1D88A08	string	武馆教头	GlobalData_cctor
+0x1D88A58	string	剧情	GlobalData_cctor
+0x1D88A88	string	武馆盟主	GlobalData_cctor
+0x1D88B08	string	武馆馆主	GlobalData_cctor
+0x1D88B88	string	武骑尉	GlobalData_cctor
+0x1D88BD8	string	剧情模式	GlobalData_cctor
+0x1D88C08	string	残	GlobalData_cctor
+0x1D88C88	string	残品	GlobalData_cctor
+0x1D88D88	string	残本	GlobalData_cctor
+0x1D88F08	string	殷雨霏	GlobalData_cctor
+0x1D89158	string	副掌门	GlobalData_cctor
+0x1D89488	string	毒术	GlobalData_cctor
+0x1D89508	string	毒物	GlobalData_cctor
+0x1D89558	string	力道	GlobalData_cctor
+0x1D89608	string	毒雾	GlobalData_cctor
+0x1D89C58	string	加彩博山炉	GlobalData_cctor
+0x1D89DD8	string	劣质	GlobalData_cctor
+0x1D89DE0	class	System.Func<Random>_TypeInfo	GlobalData_cctor
+0x1D8A218	method	Method$System.Collections.Generic.List<ForceData>.GetEnumerator()	GameController_LateUpdate
+0x1D8A488	string	民心	GlobalData_cctor
+0x1D8A580	string	气冲	GlobalData_cctor
+0x1D8A700	string	气穴	GlobalData_cctor
+0x1D8A828	string	mouth	GlobalData_cctor
+0x1D8A880	string	水晶	GlobalData_cctor
+0x1D8A900	string	水沟	GlobalData_cctor
+0x1D8A980	string	水清秋	GlobalData_cctor
+0x1D8AA88	class	MeetingController_TypeInfo	GameController_ChangeDay_leaf
+0x1D8ADD0	string	北	GlobalData_cctor
+0x1D8AE50	string	北冥雪	GlobalData_cctor
+0x1D8B080	string	汉书	GlobalData_cctor
+0x1D8B2D0	string	医术	GlobalData_cctor
+0x1D8B450	string	十字斩	GlobalData_cctor
+0x1D8B610	method	Method$System.Collections.Generic.List<GameObject>.Clear()	StudySkillController_FinishStudySkill
+0x1D8B850	string	千里江山图	GlobalData_cctor
+0x1D8BA90	method	Method$System.Collections.Generic.List<GameObject>.get_Count()	StudySkillController_FinishStudySkill
+0x1D8BB10	method	Method$System.Collections.Generic.List<GameObject>.get_Item()	StudySkillController_FinishStudySkill
+0x1D8BCD0	string	南	GlobalData_cctor
+0x1D8BEE0	method	Method$System.Collections.Generic.List.Enumerator<AreaData>.Dispose()	GameController_LateUpdate
+0x1D8BF60	method	Method$System.Collections.Generic.List.Enumerator<AreaData>.MoveNext()	GameController_LateUpdate
+0x1D8BFE0	method	Method$System.Collections.Generic.List.Enumerator<AreaData>.get_Current()	GameController_LateUpdate
+0x1D8C150	string	印堂	GlobalData_cctor
+0x1D8C400	string	"没想到{0}竟还有此等精妙之处，实在令人眼界大开！
+如此修行一番，我的{0}潜力也算是更上一层楼矣。"	PlotController_StudyMaxFightSkillFinish
+0x1D8C5D0	string	厌恶	GlobalData_cctor
+0x1D8CBD0	string	县尉	GlobalData_cctor
+0x1D8D100	string	治安	GlobalData_cctor
+0x1D8D250	string	又要被掌门责骂了...;MissMeeting	GameController_ChangeDay_leaf
+0x1D8D378	string	UIAtlas	StudySkillController_FinishStudySkill
+0x1D8D4D0	string	友好	GlobalData_cctor
+0x1D8D628	string	nose	GlobalData_cctor
+0x1D8D808	class	MouseController_TypeInfo	BigMapController_FixedUpdate
+0x1D8D810	method	Method$System.Collections.Generic.List<HeroData>.Clear()	BigMapController_FixedUpdate
+0x1D8D8D0	string	发	GlobalData_cctor
+0x1D8D950	string	发后	GlobalData_cctor
+0x1D8DB80	string	洛神赋图	GlobalData_cctor
+0x1D8DC50	string	取消;HideInteractUI	WorkingUIController_TryCancelWorking
+0x1D8DD10	method	Method$System.Collections.Generic.List<HeroData>.get_Count()	BigMapController_FixedUpdate,GameController_LateUpdate,PlotController_StudyFightSelfFinish
+0x1D8DD88	class	NGUITools_TypeInfo	GameController_ChangeDay_leaf,GameController_Update,StudySkillController_SureStartStudySkill,WeatherController_Update,WorkingUIController_Update
+0x1D8DD90	method	Method$System.Collections.Generic.List<HeroData>.get_Item()	BigMapController_FixedUpdate,GameController_LateUpdate,PlotController_StudyFightSelfFinish
+0x1D8DF00	string	流血持续	GlobalData_cctor
+0x1D8E180	string	消毒	GlobalData_cctor
+0x1D8E290	method	Method$System.Collections.Generic.List<HeroSpeAddDataType>..ctor()	GlobalData_cctor
+0x1D8E310	method	Method$System.Collections.Generic.List<HeroSpeAddDataType>.Add()	GlobalData_cctor
+0x1D8E400	string	消耗{0}点好感(徒弟减半)	GameController_LateUpdate
+0x1D8E660	method	Method$System.Collections.Generic.List.Enumerator<ForceData>.Dispose()	GameController_LateUpdate
+0x1D8E6E0	method	Method$System.Collections.Generic.List.Enumerator<ForceData>.MoveNext()	GameController_LateUpdate
+0x1D8E760	method	Method$System.Collections.Generic.List.Enumerator<ForceData>.get_Current()	GameController_LateUpdate
+0x1D8E800	string	涌泉	GlobalData_cctor
+0x1D8E850	string	叛逆	GlobalData_cctor
+0x1D8E8D0	string	口才	GlobalData_cctor
+0x1D8E900	string	淬毒	GlobalData_cctor
+0x1D8E950	string	古本	GlobalData_cctor
+0x1D8EA00	string	混乱	GlobalData_cctor
+0x1D8EA80	string	清明上河图	GlobalData_cctor
+0x1D8EC80	string	渊腋	GlobalData_cctor
+0x1D8ED80	string	游侠	GlobalData_cctor
+0x1D8F980	string	潇洒	GlobalData_cctor
+0x1D90100	string	火柱	GlobalData_cctor
+0x1D90200	string	灰烟	GlobalData_cctor
+0x1D90208	class	object_TypeInfo	GameController_cctor
+0x1D90288	class	UnityEngine.Object_TypeInfo	BigMapController_FixedUpdate,WeatherController_Update
+0x1D90300	string	灵巧	GlobalData_cctor
+0x1D90400	string	灵活	GlobalData_cctor
+0x1D90580	string	炮制	GlobalData_cctor
+0x1D905A8	string	other	GlobalData_cctor
+0x1D90780	string	炼气士	GlobalData_cctor
+0x1D90800	string	炼药	GlobalData_cctor
+0x1D90A00	string	烂柯谱	GlobalData_cctor
+0x1D90A80	string	烹饪	GlobalData_cctor
+0x1D90B80	string	照海	GlobalData_cctor
+0x1D90E80	string	爆炸圆	GlobalData_cctor
+0x1D90F00	string	爆炸星	GlobalData_cctor
+0x1D90F50	string	史书	GlobalData_cctor
+0x1D90F80	string	爆炸火	GlobalData_cctor
+0x1D90FD0	string	史记	GlobalData_cctor
+0x1D91000	string	爆炸灰	GlobalData_cctor
+0x1D91080	string	爆血	GlobalData_cctor
+0x1D91100	string	爆血迹	GlobalData_cctor
+0x1D91250	string	叶寒	GlobalData_cctor
+0x1D91280	string	爷横行江湖，平日最看不惯装腔作势的鸟侠客，今次非叫你尝尝苦头不可！	GlobalData_cctor
+0x1D91290	method	Method$System.Collections.Generic.List<int>..ctor()	GameController_cctor,GlobalData_cctor
+0x1D91350	string	司马德源	GameController_cctor
+0x1D91410	method	Method$System.Collections.Generic.List<int>.Add()	GameController_cctor,GlobalData_cctor
+0x1D91590	method	Method$System.Collections.Generic.List<int>.Contains()	GameController_ChangeDay_leaf,GameController_LateUpdate
+0x1D91650	string	合谷	GlobalData_cctor
+0x1D91910	method	Method$System.Collections.Generic.List<int>.RemoveAt()	GameController_LateUpdate
+0x1D91950	string	同门争斗	GameController_cctor
+0x1D919D0	string	同门切磋	GameController_cctor
+0x1D91A50	string	同门求助	GameController_cctor
+0x1D91AD0	string	同门论战	GameController_cctor
+0x1D91B90	method	Method$System.Collections.Generic.List<int>.get_Count()	BigMapController_FixedUpdate,GameController_LateUpdate
+0x1D91C10	method	Method$System.Collections.Generic.List<int>.get_Item()	BigMapController_FixedUpdate,GameController_LateUpdate
+0x1D91C50	string	名家	GlobalData_cctor
+0x1D91C80	string	犀角杯	GlobalData_cctor
+0x1D91E00	string	狄坤	GameController_cctor
+0x1D92158	class	System.Collections.Generic.List<List<HeroSpeAddDataType>>_TypeInfo	GlobalData_cctor
+0x1D92180	string	独孤剑	GlobalData_cctor
+0x1D921D8	class	System.Collections.Generic.List<List<int>>_TypeInfo	GlobalData_cctor
+0x1D92200	string	独臂刀	GlobalData_cctor
+0x1D92250	string	后溪	GlobalData_cctor
+0x1D923D8	class	System.Collections.Generic.List<List<float>>_TypeInfo	GlobalData_cctor
+0x1D92450	string	吕子芳	GameController_cctor
+0x1D92458	class	System.Collections.Generic.List<List<string>>_TypeInfo	GlobalData_cctor
+0x1D92650	string	听宫	GlobalData_cctor
+0x1D92900	string	率谷	GlobalData_cctor
+0x1D92980	string	玉佩	GlobalData_cctor
+0x1D92A00	string	玉屏洞箫	GlobalData_cctor
+0x1D92E00	string	王霸	GlobalData_cctor
+0x1D92E80	string	玛瑙	GlobalData_cctor
+0x1D934D0	string	告辞;SureHeroLeaveTeam	GameController_LateUpdate
+0x1D93650	string	呕血谱	GlobalData_cctor
+0x1D937D0	string	周易	GlobalData_cctor
+0x1D93800	string	玲珑剔透，韵味盎然，此物想必出自名家之手，可谓收获颇丰。	GlobalData_cctor
+0x1D93880	string	玳瑁	GlobalData_cctor
+0x1D93900	string	珊瑚	GlobalData_cctor
+0x1D93980	string	珍	GlobalData_cctor
+0x1D93A00	string	珍品	GlobalData_cctor
+0x1D93A78	string	珍宝	GlobalData_cctor
+0x1D93C00	class	PlotController_TypeInfo	GameController_ChangeDay_leaf,GameController_LateUpdate,StudySkillController_FinishStudySkill,WorkingUIController_StopWorking,WorkingUIController_TryCancelWorking,WorkingUIController_Update
+0x1D93DF8	string	珍本	GlobalData_cctor
+0x1D93E50	class	System.Collections.Generic.List<Color>_TypeInfo	GlobalData_cctor
+0x1D93E78	string	珍珠	GlobalData_cctor
+0x1D93EF8	string	珠玉	GlobalData_cctor
+0x1D94078	string	琉璃杯	GlobalData_cctor
+0x1D940F8	string	琴	GlobalData_cctor
+0x1D943C8	string	命门	GlobalData_cctor
+0x1D94478	string	生命	StudySkillController_RealStartStudySkill
+0x1D944C8	string	和{0}银两	StudySkillController_StartStudySkill
+0x1D946A0	string	r_l4	GlobalData_cctor
+0x1D949F8	string	甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥	GlobalData_cctor
+0x1D94A78	string	申脉	GlobalData_cctor
+0x1D94BF8	string	画本	GlobalData_cctor
+0x1D950E8	string	({0})	WorkingUIController_Update
+0x1D95188	method	Method$System.Collections.Generic.List<LivingSkillType>..ctor()	GlobalData_cctor
+0x1D95208	method	Method$System.Collections.Generic.List<LivingSkillType>.Add()	GlobalData_cctor
+0x1D952C8	string	品相	GlobalData_cctor
+0x1D954C8	class	System.Collections.Generic.List<HeroSpeAddDataType>_TypeInfo	GlobalData_cctor
+0x1D95D48	class	System.Collections.Generic.List<int>_TypeInfo	GameController_cctor,GlobalData_cctor
+0x1D95D70	string	白玉杯	GlobalData_cctor
+0x1D95DF0	string	百会	GlobalData_cctor
+0x1D965F0	string	皮袄	GlobalData_cctor
+0x1D96658	method	Method$UnityEngine.Component.GetComponent<Image>()	WorkingUIController_SetSkippingState,WorkingUIController_SkipButtonClicked
+0x1D966F0	string	监察御史	GlobalData_cctor
+0x1D967C8	class	System.Collections.Generic.List<LivingSkillType>_TypeInfo	GlobalData_cctor
+0x1D96E00	method	Method$System.Collections.Generic.List<MissionData>.get_Count()	GameController_ChangeDay_leaf
+0x1D96E80	method	Method$System.Collections.Generic.List<MissionData>.get_Item()	GameController_ChangeDay_leaf
+0x1D96FF0	string	直线	GlobalData_cctor
+0x1D970F0	string	相识	GlobalData_cctor
+0x1D97170	string	眉	GlobalData_cctor
+0x1D975C0	string	"哎呀，一不小心玩过头，连续{0}个月没参加门派会议。
+掌门该不会生气吧......"	GameController_ChangeDay_leaf
+0x1D97798	string	rotate	WorkingUIController_Update
+0x1D978D8	method	Method$UnityEngine.Component.GetComponent<SkeletonGraphic>()	WorkingUIController_StartWorking_6p,WorkingUIController_StartWorking_7p,WorkingUIController_Update
+0x1D98358	method	Method$UnityEngine.Component.GetComponent<Text>()	WorkingUIController_Update
+0x1D98470	string	眼	GlobalData_cctor
+0x1D98B00	method	Method$System.Collections.Generic.List<ParticleSystem>.get_Count()	WeatherController_Update
+0x1D98B80	method	Method$System.Collections.Generic.List<ParticleSystem>.get_Item()	WeatherController_Update
+0x1D98C40	string	哑门	GlobalData_cctor
+0x1D98E70	string	瞬杀	GlobalData_cctor
+0x1D98F48	class	System.Collections.Generic.List<float>_TypeInfo	GlobalData_cctor,StudySkillController_cctor
+0x1D99070	string	知难而进	GlobalData_cctor
+0x1D991F0	string	矿料	GlobalData_cctor
+0x1D99270	string	矿石	GlobalData_cctor
+0x1D997C8	class	System.Collections.Generic.List<string>_TypeInfo	GameController_ChangeDay_leaf,GameController_LateUpdate,GameController_cctor,GlobalData_cctor,WorkingUIController_TryCancelWorking
+0x1D99870	string	确定要中止{0}吗？	WorkingUIController_TryCancelWorking
+0x1D9A170	string	确认消耗{1}天{4}练习{0}？{3}{2}	StudySkillController_StartStudySkill
+0x1D9A1C0	string	哼哼，算你今天不走运，撞上我#$TargetInteractName#，还不快快交出买命钱！	GlobalData_cctor
+0x1D9A668	string	WorkLabel	WorkingUIController_Update
+0x1D9AB48	class	System.Collections.Generic.List<ulong>_TypeInfo	GlobalData_cctor
+0x1D9ADF0	string	礼记	GlobalData_cctor
+0x1D9AEF0	string	神	GlobalData_cctor
+0x1D9B170	string	神庭	GlobalData_cctor
+0x1D9B1F0	string	神机门机关坊可提升潜力	GlobalData_cctor
+0x1D9B370	string	神阙	GlobalData_cctor
+0x1D9B3F0	string	祭侄文稿	GlobalData_cctor
+0x1D9B840	string	唐书	GlobalData_cctor
+0x1D9B938	string	PencilWriting	StudySkillController_FinishStudySkill
+0x1D9BD40	string	唐门暗室可提升潜力	GlobalData_cctor
+0x1D9BD70	string	秋	GlobalData_cctor
+0x1D9BE70	string	秘传	GlobalData_cctor
+0x1D9BEF0	string	秘籍	GlobalData_cctor
+0x1D9C370	string	稳重	GlobalData_cctor
+0x1D9C3F0	string	究极	GlobalData_cctor
+0x1D9CB50	method	Method$System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int, ResourcePointController>.Dispose()	BigMapController_FixedUpdate
+0x1D9CBD0	method	Method$System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int, ResourcePointController>.MoveNext()	BigMapController_FixedUpdate
+0x1D9CC38	string	PlayerStudySkill	StudySkillController_RealStartStudySkill
+0x1D9CC50	method	Method$System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int, ResourcePointController>.get_Current()	BigMapController_FixedUpdate
+0x1D9D140	string	商曲	GlobalData_cctor
+0x1D9D170	string	章门	GlobalData_cctor
+0x1D9D1F0	string	竹笛	GlobalData_cctor
+0x1D9D3F0	string	笔	GlobalData_cctor
+0x1D9D5E0	string	0	GameController_ChangeDay_leaf,GameController_LateUpdate,PlotController_StudyFightSelfFinish,PlotController_StudyMaxFightSkillFinish
+0x1D9DB40	string	善意	GlobalData_cctor
+0x1D9DBC0	string	善本	GlobalData_cctor
+0x1D9DC40	string	善良	GlobalData_cctor
+0x1D9DE70	string	简	GlobalData_cctor
+0x1D9DEC0	string	喷水	GlobalData_cctor
+0x1D9DEF0	string	简单	GlobalData_cctor
+0x1D9DF40	string	喷泉	GlobalData_cctor
+0x1D9DFC0	string	喷血	GlobalData_cctor
+0x1D9DFF0	string	箕门	GlobalData_cctor
+0x1D9E040	string	喷血迹	GlobalData_cctor
+0x1D9E370	string	算计	GlobalData_cctor
+0x1D9E4F0	string	箭塔	GlobalData_cctor
+0x1D9E8F0	string	粗看尚可，然细节处处透出庸俗之气，可谓食之无味，弃之可惜。	GlobalData_cctor
+0x1D9E940	string	嘴	GlobalData_cctor
+0x1D9E970	string	粮食	GlobalData_cctor
+0x1D9E9F0	string	精	GlobalData_cctor
+0x1D9EDF0	string	精烩	GlobalData_cctor
+0x1D9EE40	string	嘿嘿，最近手头紧，敢问同道借点银两花花。	GlobalData_cctor
+0x1D9EF70	string	精良	GlobalData_cctor
+0x1D9F0C0	string	四品	GlobalData_cctor
+0x1D9F140	string	四满	GlobalData_cctor
+0x1D9F170	string	糟糕，好像错过了门派会议！	GameController_ChangeDay_leaf
+0x1D9F3E0	string	1.1.2	GlobalData_cctor
+0x1D9F3F0	string	素纱	GlobalData_cctor
+0x1D9F470	string	素胶	GlobalData_cctor
+0x1D9F5C0	string	团练推官	GlobalData_cctor
+0x1D9F670	string	紫檀琵琶	GlobalData_cctor
+0x1D9F6C0	string	围墙	GlobalData_cctor
+0x1D9F740	string	围棋义例	GlobalData_cctor
+0x1D9F8C0	string	固执	GlobalData_cctor
+0x1D9F940	string	圆斩电	GlobalData_cctor
+0x1D9F970	string	"约定之期已至，我先行告辞了。
+#PlayerName#后会有期！"	GameController_LateUpdate
+0x1D9F9C0	string	圆斩血	GlobalData_cctor
+0x1D9FAF0	string	纯粹	GlobalData_cctor
+0x1D9FB70	string	纯粹减料偷工，滥竽充数之物，还是赶紧扔掉免得丢人现眼吧。	GlobalData_cctor
+0x1D9FCF0	string	纺锤	GlobalData_cctor
+0x1D9FDF0	string	练习{0}	StudySkillController_SureStartStudySkill
+0x1DA0348	class	System.Threading.ThreadLocal<Random>_TypeInfo	GlobalData_cctor
+0x1DA06F0	string	经脉	GlobalData_cctor
+0x1DA0D68	class	SaveLoadMenuController_TypeInfo	GameController_Update
+0x1DA1630	string	城市	GlobalData_cctor
+0x1DA1730	string	基础	GlobalData_cctor
+0x1DA1760	string	绝	GlobalData_cctor
+0x1DA17E0	string	绝世	GlobalData_cctor
+0x1DA18E0	string	绝技	GlobalData_cctor
+0x1DA1B60	string	绢袍	GlobalData_cctor
+0x1DA1EB0	string	壮班	GlobalData_cctor
+0x1DA1EE0	string	维道	GlobalData_cctor
+0x1DA21D0	string	1280x720	GlobalData_cctor
+0x1DA2360	string	缺盆	GlobalData_cctor
+0x1DA2460	string	罗八怪	GlobalData_cctor
+0x1DA24B0	string	夏	GlobalData_cctor
+0x1DA24D0	string	1366x768	GlobalData_cctor
+0x1DA26B0	string	外伤	GlobalData_cctor
+0x1DA27B0	string	外关	GlobalData_cctor
+0x1DA28E0	string	美酒	GlobalData_cctor
+0x1DA2A30	string	外门弟子	GlobalData_cctor
+0x1DA2A60	string	羽扇	GlobalData_cctor
+0x1DA2AE0	string	翡翠	GlobalData_cctor
+0x1DA2B60	string	翳风	GlobalData_cctor
+0x1DA2CD0	string	1600x900	GlobalData_cctor
+0x1DA2EF0	method	Method$System.Collections.Generic.List<float>..ctor()	GlobalData_cctor,StudySkillController_cctor
+0x1DA2FF0	method	Method$System.Collections.Generic.List<float>.Add()	GlobalData_cctor,StudySkillController_cctor
+0x1DA30B8	class	char[]_TypeInfo	GameController_ChangeDay_leaf,PlotController_StartWorking
+0x1DA31B8	class	UnityEngine.Color[]_TypeInfo	GlobalData_cctor
+0x1DA3270	method	Method$System.Collections.Generic.List<float>.get_Item()	PlotController_StudyFightSelfFinish,StudySkillController_StartStudySkill,WeatherController_Update
+0x1DA34C8	string	1920x1080	GlobalData_cctor
+0x1DA3758	string	耳门	GlobalData_cctor
+0x1DA37A0	string	RealStartStudySkill	StudySkillController_SureStartStudySkill
+0x1DA38D8	string	聪颖	GlobalData_cctor
+0x1DA3950	string	肝俞	GlobalData_cctor
+0x1DA39D0	string	肩井	GlobalData_cctor
+0x1DA3A50	string	肾俞	GlobalData_cctor
+0x1DA3AD0	string	胃仓	GlobalData_cctor
+0x1DA3B50	string	背击	GlobalData_cctor
+0x1DA3F18	string	夜光杯	GlobalData_cctor
+0x1DA3F98	string	夜宴图	GlobalData_cctor
+0x1DA4118	string	大侠	GlobalData_cctor
+0x1DA4350	class	float_TypeInfo	PlotController_StudyFightSelfFinish,StudySkillController_RealStartStudySkill
+0x1DA43C8	string	胡	GlobalData_cctor
+0x1DA4548	string	胸	GlobalData_cctor
+0x1DA4550	class	SinglePlotData_TypeInfo	GameController_ChangeDay_leaf,GameController_LateUpdate,PlotController_StudyFightSelfFinish,PlotController_StudyMaxFightSkillFinish,WorkingUIController_TryCancelWorking
+0x1DA46C0	string	脊中	GlobalData_cctor
+0x1DA4740	string	脑户	GlobalData_cctor
+0x1DA4840	string	脸	GlobalData_cctor
+0x1DA48C0	string	腕骨	GlobalData_cctor
+0x1DA4940	string	腥风血雨	GlobalData_cctor
+0x1DA49C0	string	腰带	GlobalData_cctor
+0x1DA4A40	string	腰眼	GlobalData_cctor
+0x1DA4B40	string	腹	GlobalData_cctor
+0x1DA4BC0	string	腹哀	GlobalData_cctor
+0x1DA4D40	string	膏肓俞	GlobalData_cctor
+0x1DA4DC0	string	膝阳关	GlobalData_cctor
+0x1DA4E40	string	膻中	GlobalData_cctor
+0x1DA4EC0	string	臂臑	GlobalData_cctor
+0x1DA5140	string	自叙帖	GlobalData_cctor
+0x1DA5190	string	大包	GlobalData_cctor
+0x1DA51B0	string	2560x1440	GlobalData_cctor
+0x1DA5248	class	SkillMaxPracticeExpData_TypeInfo	StudySkillController_FinishStudySkill
+0x1DA5690	string	大椎	GlobalData_cctor
+0x1DA56C0	string	自由模式	GlobalData_cctor
+0x1DA56D0	method	Method$System.Collections.Generic.List<SlowTimeData>.RemoveAt()	TimeScaleController_Update
+0x1DA5750	method	Method$System.Collections.Generic.List<SlowTimeData>.get_Count()	TimeScaleController_Update
+0x1DA57D0	method	Method$System.Collections.Generic.List<SlowTimeData>.get_Item()	TimeScaleController_Update
+0x1DA58B0	string	3840x2160	GlobalData_cctor
+0x1DA58C0	string	自身	GlobalData_cctor
+0x1DA5AC0	string	至交	GlobalData_cctor
+0x1DA5C40	string	至阳	GlobalData_cctor
+0x1DA5DC0	string	良	GlobalData_cctor
+0x1DA5DD0	method	Method$System.Collections.Generic.List<string>..ctor()	GameController_ChangeDay_leaf,GameController_LateUpdate,GameController_cctor,GlobalData_cctor,WorkingUIController_TryCancelWorking
+0x1DA5E40	string	节察判官	GlobalData_cctor
+0x1DA5F10	string	大赫	GlobalData_cctor
+0x1DA5F40	string	花瓷腰鼓	GlobalData_cctor
+0x1DA5F50	method	Method$System.Collections.Generic.List<string>.Add()	GameController_ChangeDay_leaf,GameController_LateUpdate,GameController_cctor,GlobalData_cctor,WorkingUIController_TryCancelWorking
+0x1DA5FC0	string	花绫	GlobalData_cctor
+0x1DA6190	string	大隐阁星辰楼可提升潜力	GlobalData_cctor
+0x1DA6198	class	object[]_TypeInfo	StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill
+0x1DA64C8	class	SpeShowController_TypeInfo	WorkingUIController_Update
+0x1DA6550	method	Method$System.Collections.Generic.List<string>.get_Item()	PlotController_StudyFightSelfFinish,PlotController_StudyMaxFightSkillFinish
+0x1DA6A10	string	天宗	GlobalData_cctor
+0x1DA6A90	string	天容	GlobalData_cctor
+0x1DA6B10	string	天山派玄冰池可提升潜力	GlobalData_cctor
+0x1DA6C10	string	天枢	GlobalData_cctor
+0x1DA6C90	string	天柱	GlobalData_cctor
+0x1DA6D00	method	Method$GlobalData.<>c.<.cctor>b__343_0()	GlobalData_cctor
+0x1DA6F08	string	天牖	GlobalData_cctor
+0x1DA6FF8	string	天突	GlobalData_cctor
+0x1DA7070	string	天窗	GlobalData_cctor
+0x1DA71D0	string	ResourceLabel	WorkingUIController_Update
+0x1DA7300	string	茅山派华阳洞可提升潜力	GlobalData_cctor
+0x1DA7480	string	草木谱	GlobalData_cctor
+0x1DA7500	string	药引	GlobalData_cctor
+0x1DA7550	string	天鼎	GlobalData_cctor
+0x1DA75D0	string	太溪	GlobalData_cctor
+0x1DA7600	string	药材	GlobalData_cctor
+0x1DA76D0	string	太阳	GlobalData_cctor
+0x1DA7700	string	药王谷万花谷可提升潜力	GlobalData_cctor
+0x1DA7A50	string	头	GlobalData_cctor
+0x1DA7AD0	string	头盔	GlobalData_cctor
+0x1DA7B80	string	"获得100%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(祠堂)宴会：举办门派宴会
+♦(仓库)门派仓库：管理门派仓库
+♦(正厅)挥师出征：进攻其他区域</color></i>"	GlobalData_cctor
+0x1DA7CF0	string	;	GameController_ChangeDay_leaf
+0x1DA7E50	string	奇门	GlobalData_cctor
+0x1DA7F00	string	菱形	GlobalData_cctor
+0x1DA7F80	string	菲燕子	GlobalData_cctor
+0x1DA82D0	string	奸恶	GlobalData_cctor
+0x1DA8380	string	蓝旋风	GlobalData_cctor
+0x1DA8400	string	蓬莱派蓬莱阁可提升潜力	GlobalData_cctor
+0x1DA8A00	string	蜀素帖	GlobalData_cctor
+0x1DA8A80	string	蝴蝶斩	GlobalData_cctor
+0x1DA8B00	string	蟒虺胡琴	GlobalData_cctor
+0x1DA8B80	string	蟠龙	GlobalData_cctor
+0x1DA8C80	string	血十字	GlobalData_cctor
+0x1DA8D00	string	血圈	GlobalData_cctor
+0x1DA8E00	string	血斩	GlobalData_cctor
+0x1DA8E80	string	血海	GlobalData_cctor
+0x1DA8F00	string	血爪卷	GlobalData_cctor
+0x1DA8F80	string	血爪爆	GlobalData_cctor
+0x1DA9000	string	血爪狂	GlobalData_cctor
+0x1DA9800	string	血轮	GlobalData_cctor
+0x1DA9880	string	血雾	GlobalData_cctor
+0x1DA9900	string	血龙卷	GlobalData_cctor
+0x1DA9F80	string	衙役	GlobalData_cctor
+0x1DAA208	class	StudySkillController_TypeInfo	PlotController_RealStartStudySkill,PlotController_StudyFightSelfFinish,StudySkillController_StartStudySkill,StudySkillController_cctor
+0x1DAA788	class	SureMenu_TypeInfo	GameController_Update,StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill
+0x1DAA880	string	装备	GlobalData_cctor
+0x1DAAB00	string	西	GlobalData_cctor
+0x1DAAC70	string	"<b><color=teal>新手推荐！
+适合寻求轻松体验的玩家</color></b>
+玩家伤害+10%/受伤-10%
+全属性/全技能+15
+玩家经验/声望+80%
+本门弟子经验+40%
+非本门弟子经验-40%
+<color=green>天赋数上限 10
+特殊建筑上限 5</color>"	GlobalData_cctor
+0x1DAACF0	string	"<b><color=teal>新手推荐！
+适合寻求轻松体验的玩家</color></b>
+玩家伤害+20%/受伤-20%
+全属性/全技能+20
+玩家经验/声望+100%
+本门弟子经验+60%
+非本门弟子经验-60%
+<color=green>天赋数上限 9
+特殊建筑上限 5</color>"	GlobalData_cctor
+0x1DAAD70	string	"<b><color=teal>适合了解游戏机制的玩家</color></b>
+全属性/全技能+10
+玩家经验/声望+60%
+本门弟子经验+20%
+非本门弟子经验-20%
+<color=green>天赋数上限 11
+特殊建筑上限 5</color>"	GlobalData_cctor
+0x1DAADF0	string	"<b><color=teal>适合仅体验剧情的玩家</color></b>
+<color=red>无法获得成就</color>
+玩家伤害+100%/受伤-50%
+全属性/全技能+20
+玩家经验/声望+100%
+本门弟子经验+60%
+非本门弟子经验-60%
+<color=red>天赋数上限 9
+特殊建筑上限 5</color>"	GlobalData_cctor
+0x1DAAE70	string	"<b><color=teal>适合寻求挑战的玩家</color></b>
+全属性/全技能+4
+玩家经验/声望+20%
+非本门弟子经验+20%
+难度提升速度++
+<color=green>天赋数上限 13
+特殊建筑上限 6</color>"	GlobalData_cctor
+0x1DAAEF0	string	"<b><color=teal>适合寻求挑战的玩家</color></b>
+全属性/全技能+6
+玩家经验/声望+40%
+难度提升速度+
+<color=green>天赋数上限 12
+特殊建筑上限 6</color>"	GlobalData_cctor
+0x1DAAF70	string	"<b><color=teal>适合寻求高难挑战的玩家</color></b>
+全属性/全技能+2
+非本门弟子经验+40%
+难度提升速度+++
+<color=green>天赋数上限 14
+特殊建筑上限 7</color>"	GlobalData_cctor
+0x1DAAFF0	string	"<b><color=teal>适合寻求高难挑战的玩家</color></b>
+非本门弟子经验+60%
+难度提升速度++++
+<color=green>天赋数上限 15
+特殊建筑上限 7</color>"	GlobalData_cctor
+0x1DAB8D0	string	委中	GlobalData_cctor
+0x1DABBD8	class	string[,]_TypeInfo	GlobalData_cctor
+0x1DABBF0	string	"<b>可两个月参加一次门派会议</b>
+获得70%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(藏经阁)编纂秘籍：整合/抄录/默写
+♦(疗伤室)坐诊：替同门治疗伤病
+♦(祠堂)展厅：放置藏品
+♦(仓库)门派金库：领取银两
+♦制作功能：铸造/炮制</color></i>"	GlobalData_cctor
+0x1DABC50	string	委托	GlobalData_cctor
+0x1DABC70	string	"<b>可两个月参加一次门派会议</b>
+获得80%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(正厅)科研项目：进行科研安排
+♦制作功能：煅烧
+♦建造模式：升级建筑</color></i>"	GlobalData_cctor
+0x1DABCF0	string	"<b>可以不参加门派会议</b>
+获得100%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(藏经阁)管理藏书：调整藏经阁
+♦(仓库)管理售价：调整仓库售价
+♦(资源点)进攻：进攻资源点
+♦建造模式：迁移建筑/升级道路</color></i>"	GlobalData_cctor
+0x1DABD50	string	姜婉	GlobalData_cctor
+0x1DABD70	string	"<b>可以不参加门派会议</b>
+获得90%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(正厅)门派职位：任免门派职位
+♦(正厅)弟子方针：设定弟子行动方针
+♦(分舵)分舵管理：任免舵主和升级分舵设施
+♦建造模式：新建/拆除建筑</color></i>"	GlobalData_cctor
+0x1DABEF0	string	"<b>每个月都需参加门派会议</b>
+获得50%门派加成效果
+<i><color=#696969>♦门派贡献积累满后，便可在正厅-弟子职位中提升门派地位。
+♦提升门派地位可在藏经阁阅读更高级秘籍，并解锁更多门派功能。</color></i>"	GlobalData_cctor
+0x1DABF70	string	"<b>每个月都需参加门派会议</b>
+获得60%门派加成效果
+<i><color=#696969>新增门派功能：
+♦(正厅)门派委托：领取门派委托
+♦(祠堂)鉴定：主动鉴定珍宝
+♦(仓库)门派金库：捐献银两
+♦制作功能：精烩/炼药/用毒</color></i>"	GlobalData_cctor
+0x1DAC100	string	解溪	GlobalData_cctor
+0x1DAC1F0	string	<color=#0000FF>	GlobalData_cctor
+0x1DAC350	string	威望	GlobalData_cctor
+0x1DAC370	string	<color=#009600>	GlobalData_cctor
+0x1DAC470	string	<color=#00B400>	GlobalData_cctor
+0x1DAC550	string	媪妇谱	GlobalData_cctor
+0x1DAC580	string	计略探索	GlobalData_cctor
+0x1DAC5D0	string	字体家AI造字剑客	GlobalData_cctor
+0x1DAC5F0	string	<color=#00FF00>	GlobalData_cctor
+0x1DAC650	string	字体家AI造字霸行	GlobalData_cctor
+0x1DAC670	string	<color=#00FFFF>	GlobalData_cctor
+0x1DAC6F0	string	<color=#708090>	GlobalData_cctor
+0x1DAC750	string	字帖	GlobalData_cctor
+0x1DAC770	string	<color=#960000>	GlobalData_cctor
+0x1DAC780	string	让我瞧瞧，又是哪只肥羊送上门来了？	GlobalData_cctor
+0x1DAC7F0	string	<color=#B40000>	GlobalData_cctor
+0x1DAC870	string	<color=#BE8100>	GlobalData_cctor
+0x1DACAF0	string	<color=#FF0000>	GlobalData_cctor
+0x1DACB70	string	<color=#FF6600>	GlobalData_cctor
+0x1DACC70	string	<color=#FFFF00>	GlobalData_cctor
+0x1DACF00	string	"试玩时间已结束，感谢您的游玩体验！
+敬请期待《龙胤立志传》的正式版本。"	GameController_Update
+0x1DACF80	string	诗经	GlobalData_cctor
+0x1DAD350	string	学识	GlobalData_cctor
+0x1DAD690	method	Method$System.Collections.Generic.List<ulong>..ctor()	GlobalData_cctor
+0x1DAD750	string	守卫	GlobalData_cctor
+0x1DAD790	method	Method$System.Collections.Generic.List<ulong>.Add()	GlobalData_cctor
+0x1DAD8D0	string	守序	GlobalData_cctor
+0x1DADAD0	string	宋明公	GlobalData_cctor
+0x1DADB50	string	完	WorkingUIController_Update
+0x1DAE3C8	string	完本	GlobalData_cctor
+0x1DAE448	string	完美	GlobalData_cctor
+0x1DAE548	string	宗师	GlobalData_cctor
+0x1DAEA00	method	Method$System.Collections.Generic.List<WeatherData>.get_Count()	WeatherController_Update
+0x1DAEA80	method	Method$System.Collections.Generic.List<WeatherData>.get_Item()	WeatherController_Update
+0x1DAEC80	method	Method$System.Collections.Generic.List<WorldNewsData>.RemoveAt()	GameController_ChangeDay_leaf
+0x1DAED00	method	Method$System.Collections.Generic.List<WorldNewsData>.get_Count()	GameController_ChangeDay_leaf
+0x1DAED80	method	Method$System.Collections.Generic.List<WorldNewsData>.get_Item()	GameController_ChangeDay_leaf
+0x1DAF080	method	Method$System.Collections.Generic.List<WorldPlotEventStartData>.RemoveAt()	GameController_ChangeDay_leaf
+0x1DAF100	method	Method$System.Collections.Generic.List<WorldPlotEventStartData>.get_Count()	GameController_ChangeDay_leaf
+0x1DAF180	method	Method$System.Collections.Generic.List<WorldPlotEventStartData>.get_Item()	GameController_ChangeDay_leaf
+0x1DAF5B8	string	客卿	GlobalData_cctor
+0x1DAF768	string	豪杰	GlobalData_cctor
+0x1DAF7E8	string	貂裘	GlobalData_cctor
+0x1DAFEE8	string	质感上佳，细节丰满，关键之处不乏亮点，能够得此良品已属运气不错。	GlobalData_cctor
+0x1DB0538	string	对刺	GlobalData_cctor
+0x1DB0C68	string	贼徒	GlobalData_cctor
+0x1DB1038	string	射术	GlobalData_cctor
+0x1DB13C0	class	UnityEngine.AudioClip_TypeInfo	GameController_ChangeDay_leaf,GameController_Update,StudySkillController_SureStartStudySkill,WeatherController_Update,WorkingUIController_Update
+0x1DB1A38	string	小试牛刀	GlobalData_cctor
+0x1DB21E8	string	超	GlobalData_cctor
+0x1DB2268	string	超群	GlobalData_cctor
+0x1DB22C0	class	BattleController_TypeInfo	GameController_LateUpdate
+0x1DB2468	string	足	GlobalData_cctor
+0x1DB24E8	string	足三里	GlobalData_cctor
+0x1DB2568	string	足履	GlobalData_cctor
+0x1DB26C8	method	Method$System.Func<Random>..ctor()	GlobalData_cctor
+0x1DB2B60	string	b_l_leg_c2	GlobalData_cctor
+0x1DB2BE0	string	b_r_leg_c2	GlobalData_cctor
+0x1DB2C40	class	BigMapController_TypeInfo	BigMapController_FixedUpdate,GameController_ChangeHour
+0x1DB31C8	string	少海	GlobalData_cctor
+0x1DB3250	string	尚书	GlobalData_cctor
+0x1DB3520	string	beard	GlobalData_cctor
+0x1DB3690	string	尺泽	GlobalData_cctor
+0x1DB3938	string	局势	GlobalData_cctor
+0x1DB40D0	string	轮	GlobalData_cctor
+0x1DB4128	string	山高皇帝远，老子称大王！今天不把钱财留下，就别想站着回去！	GlobalData_cctor
+0x1DB41E0	string	轻	GlobalData_cctor
+0x1DB4268	string	轻佻	GlobalData_cctor
+0x1DB42E8	string	轻功	GlobalData_cctor
+0x1DB44D0	string	Sound/SoundEffect/Fail	GameController_ChangeDay_leaf
+0x1DB44D8	string	峨眉派金顶可提升潜力	GlobalData_cctor
+0x1DB46A0	string	轻车都尉	GlobalData_cctor
+0x1DB46F8	string	崆峒派七十二洞可提升潜力	GlobalData_cctor
+0x1DB4728	string	辄筋	GlobalData_cctor
+0x1DB4808	string	巡按御史	GlobalData_cctor
+0x1DB4EF0	string	工艺	GlobalData_cctor
+0x1DB5088	string	巨盗	GlobalData_cctor
+0x1DB50D8	string	GetStudyFightExp;	PlotController_StudyFightSelfFinish
+0x1DB5220	string	巨骨	GlobalData_cctor
+0x1DB5498	string	{0}中...	WorkingUIController_Update
+0x1DB5A98	string	Sound/SoundEffect/Thunder/	WeatherController_Update
+0x1DB5ED8	string	Sound/SoundEffect/WrongClick	GameController_Update,StudySkillController_SureStartStudySkill
+0x1DB6070	string	Sound/SoundEffect/打更	WorkingUIController_Update
+0x1DB6080	class	BuildingUIController_TypeInfo	WeatherController_Update
+0x1DB65C0	string	SourceHanSerifCN-Bold	GlobalData_cctor
+0x1DB6E48	string	带脉	GlobalData_cctor
+0x1DB6ED0	string	帮佣	GlobalData_cctor
+0x1DB6F90	class	WeatherController_TypeInfo	GameController_ChangeHour,StudySkillController_FinishStudySkill,WeatherController_Update
+0x1DB7530	string	平常	GlobalData_cctor
+0x1DB75B8	string	平平	GlobalData_cctor
+0x1DB77D8	string	年代	GlobalData_cctor
+0x1DB79F8	string	库房	GlobalData_cctor
+0x1DB7C10	string	廉泉	GlobalData_cctor
+0x1DB7E60	class	WorkingUIController_TypeInfo	PlotController_MiddleStopWork,PlotController_RealStartStudySkill,PlotController_StartWorking,PlotController_StudyMaxFightSkillFinish,StudySkillController_RealStartStudySkill,StudySkillController_SureStartStudySkill,WorkingUIController_StartWorking_6p,WorkingUIController_StartWorking_7p,WorkingUIController_Update
+0x1DB7EE8	class	WorldEventController_TypeInfo	GameController_ChangeDay_leaf
+0x1DB7FF8	class	WorldPlotEventController_TypeInfo	GameController_ChangeDay_leaf
+0x1DB9228	string	{0}天	WorkingUIController_Update
+0x1DB9830	string	弓	GlobalData_cctor
+0x1DBA138	string	张弥勒	GlobalData_cctor
+0x1DBA628	string	进阶	GlobalData_cctor
+0x1DBABD0	string	"当前最高纪录：{1}点经验
+是否消耗{4}自动练习{0}？
+可得{2}%({3}点)"	StudySkillController_RealStartStudySkill
+0x1DBAE48	string	{0}新的练习最高纪录：{1}点	StudySkillController_FinishStudySkill
+0x1DBB198	string	当真称得上是精美绝伦，世间罕见，此等稀世珍宝千万要小心保管才是。	GlobalData_cctor
+0x1DBB2A8	string	影青香兽	GlobalData_cctor
+0x1DBBA18	string	得了一瓶好酒	GameController_cctor
+0x1DBBCC0	string	得找个好借口才行;MissMeeting	GameController_ChangeDay_leaf
+0x1DBBEE0	string	御史中丞	GlobalData_cctor
+0x1DBBF68	string	御史大夫	GlobalData_cctor
+0x1DBBF98	string	逍遥生	GlobalData_cctor
+0x1DBC210	string	心	GlobalData_cctor
+0x1DBC5C8	string	志室	GlobalData_cctor
+0x1DBC650	string	忘忧清乐集	GlobalData_cctor
+0x1DBC6D8	string	忠厚	GlobalData_cctor
+0x1DBC7C8	method	Method$System.Collections.Generic.Dictionary<int, int>..ctor()	GameController_cctor
+0x1DBC960	method	Method$System.Collections.Generic.Dictionary<int, int>.Add()	GameController_cctor
+0x1DBD170	string	急脉	GlobalData_cctor
+0x1DBDD90	string	恶斗	GlobalData_cctor
+0x1DBE3E8	string	StudySkillController	StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill
+0x1DBE830	string	悬锺	GlobalData_cctor
+0x1DBEFC0	string	都点检	GlobalData_cctor
+0x1DBF0A0	string	意志	GlobalData_cctor
+0x1DBF128	string	意舍	GlobalData_cctor
+0x1DBF1B0	string	愚钝	GlobalData_cctor
+0x1DBF268	string	酒器	GlobalData_cctor
+0x1DBF378	string	酒盂	GlobalData_cctor
+0x1DBF510	string	采伐	GlobalData_cctor
+0x1DBF678	string	慕容星辰	GameController_cctor
+0x1DBF6E0	method	Method$System.Collections.Generic.Dictionary<int, ResourcePointController>.TryGetValue()	BigMapController_FixedUpdate
+0x1DBF768	method	Method$System.Collections.Generic.Dictionary<int, ResourcePointController>.get_Values()	BigMapController_FixedUpdate
+0x1DBF840	string	重	GlobalData_cctor
+0x1DBF8E8	string	Icon	WorkingUIController_SetSkippingState,WorkingUIController_SkipButtonClicked
+0x1DBFBC0	string	SureStartStudySkill	StudySkillController_StartStudySkill
+0x1DBFD08	string	金刚密宗灵塔殿可提升潜力	GlobalData_cctor
+0x1DC0440	string	我#$TargetInteractName#也算是闻名一方的绿林豪杰！识相的快快束手就擒，免得场血光之灾！	GlobalData_cctor
+0x1DC04F8	string	钦冲	GlobalData_cctor
+0x1DC0E88	string	铜香炉	GlobalData_cctor
+0x1DC10A8	string	银钱	GlobalData_cctor
+0x1DC1240	string	银钱不足！	StudySkillController_SureStartStudySkill
+0x1DC1298	string	我劫道多年，刀下亡魂无数！要钱还是要命，自己选吧！	GlobalData_cctor
+0x1DC1350	string	铸剑山庄剑池可提升潜力	GlobalData_cctor
+0x1DC1790	string	铸造	GlobalData_cctor
+0x1DC1918	string	AutoSave	GameController_ChangeDay_leaf
+0x1DC1AC0	string	错金博山炉	GlobalData_cctor
+0x1DC1B38	string	AutoStudySkill	StudySkillController_RealStartStudySkill
+0x1DC1B48	string	锦缎	GlobalData_cctor
+0x1DC1BD0	string	锻烧	GlobalData_cctor
+0x1DC1C58	string	锻造	GlobalData_cctor
+0x1DC1D40	class	UnityEngine.Debug_TypeInfo	GameController_ChangeDay_leaf
+0x1DC1F00	string	镖师求助	GameController_cctor
+0x1DC1F88	string	长乐帮销金窟可提升潜力	GlobalData_cctor
+0x1DC2120	string	长兵	GlobalData_cctor
+0x1DC21A8	string	长强	GlobalData_cctor
+0x1DC2220	string	BackToMainTitleScene	GameController_Update
+0x1DC2230	string	长老	GlobalData_cctor
+0x1DC2670	string	门派	GlobalData_cctor
+0x1DC4498	string	一品	GlobalData_cctor
+0x1DC46E8	string	戒律	GlobalData_cctor
+0x1DC50A8	string	阎罗殿鬼门关可提升潜力	GlobalData_cctor
+0x1DC5100	string	战鼓	GlobalData_cctor
+0x1DC55C0	string	扁桃	GlobalData_cctor
+0x1DC5648	string	扇	GlobalData_cctor
+0x1DC5678	string	防御	GlobalData_cctor
+0x1DC56D0	string	扇形	GlobalData_cctor
+0x1DC5700	string	阳溪	GlobalData_cctor
+0x1DC5758	string	手	GlobalData_cctor
+0x1DC5788	string	阴包	GlobalData_cctor
+0x1DC57E0	string	手三里	GlobalData_cctor
+0x1DC5810	string	阴廉	GlobalData_cctor
+0x1DC5D00	string	七品	GlobalData_cctor
+0x1DC5D60	string	陆奇	GameController_cctor
+0x1DC5DE8	string	陆沉舟	GlobalData_cctor
+0x1DC60B8	string	三品	GlobalData_cctor
+0x1DC6140	string	三国志	GlobalData_cctor
+0x1DC62D8	string	三阴交	GlobalData_cctor
+0x1DC6360	string	上	GlobalData_cctor
+0x1DC63E8	string	上乘	GlobalData_cctor
+0x1DC6528	string	扳指	GlobalData_cctor
+0x1DC6558	string	陶道	GlobalData_cctor
+0x1DC6580	string	上品	GlobalData_cctor
+0x1DC65B0	string	扶突	GlobalData_cctor
+0x1DC65E0	string	陷阱	GlobalData_cctor
+0x1DC6718	string	上廉泉	GlobalData_cctor
+0x1DC6748	string	承山	GlobalData_cctor
+0x1DC67A0	string	上护军	GlobalData_cctor
+0x1DC67D0	string	承扶	GlobalData_cctor
+0x1DC6828	string	上柱国	GlobalData_cctor
+0x1DC6858	string	承泣	GlobalData_cctor
+0x1DC68B0	string	上脘	GlobalData_cctor
+0x1DC68E0	string	承浆	GlobalData_cctor
+0x1DC6930	string	上轻车都尉	GlobalData_cctor
+0x1DC69B8	string	下	GlobalData_cctor
+0x1DC6AE8			GameController_ChangeDay_leaf,GlobalData_cctor,StudySkillController_FinishStudySkill,StudySkillController_StartStudySkill,WorkingUIController_StopWorking,WorkingUIController_Update
+0x1DC6CE8	string	下关	GlobalData_cctor
+0x1DC6D70	string	下品	GlobalData_cctor
+0x1DC6DF8	string	下山游历	GameController_cctor
+0x1DC6E80	string	下毒	GlobalData_cctor
+0x1DC7128	string	下脘	GlobalData_cctor
+0x1DC7760	string	零一二三四五六七八九十	GlobalData_cctor
+0x1DC77A8	string	"
+"	GameController_ChangeDay_leaf
+0x1DC77B8	string	技能修炼	GlobalData_cctor
+0x1DC7950	string	抄录	GlobalData_cctor
+0x1DC7AE8	string	把身上细软交出来！若敢耍小心思，可别怪我刀下不留人	GlobalData_cctor
+0x1DC7BC8	string	不容	GlobalData_cctor
+0x1DC7D30	string	eye	GlobalData_cctor
+0x1DC7DB8	string	eyebrow	GlobalData_cctor
+0x1DC7FA8	string	TestMode	GameController_Update,WorkingUIController_Update
+0x1DC80E8	string	f0	GlobalData_cctor,StudySkillController_FinishStudySkill,StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill,WorkingUIController_Update
+0x1DC8420	string	霸业	GlobalData_cctor
+0x1DC8478	string	护军	GlobalData_cctor
+0x1DC84A8	string	霸刀门试刀台可提升潜力	GlobalData_cctor
+0x1DC8500	string	护卫	GlobalData_cctor
+0x1DC8530	string	霹雳堂火炼室可提升潜力	GlobalData_cctor
+0x1DC8588	string	护甲	GlobalData_cctor
+0x1DC8860	string	青灵	GlobalData_cctor
+0x1DC8970	string	青铜博山炉	GlobalData_cctor
+0x1DC89F0	string	f_l_leg_c2	GlobalData_cctor
+0x1DC89F8	string	青铜爵	GlobalData_cctor
+0x1DC8A78	string	f_r_leg_c2	GlobalData_cctor
+0x1DC8A80	string	青铜编钟	GlobalData_cctor
+0x1DC8C10	string	face	GlobalData_cctor
+0x1DC8F48	string	面具	GlobalData_cctor
+0x1DC8FD0	string	鞍具	GlobalData_cctor
+0x1DC9058	string	鞭	GlobalData_cctor
+0x1DC9168	string	韩狼	GameController_cctor,GlobalData_cctor
+0x1DC91F0	string	顶极	GlobalData_cctor
+0x1DC9370	method	Method$UnityEngine.GameObject.GetComponent<AreaIconController>()	BigMapController_FixedUpdate
+0x1DC9688	string	拳	GlobalData_cctor
+0x1DC9710	string	拳掌	GlobalData_cctor
+0x1DC9960	string	颈臂	GlobalData_cctor
+0x1DC99E8	string	颊车	GlobalData_cctor
+0x1DC9D40	string	丐帮大会台可提升潜力	GlobalData_cctor
+0x1DC9E28	string	风市	GlobalData_cctor
+0x1DC9EB0	string	风府	GlobalData_cctor
+0x1DC9F38	string	风池	GlobalData_cctor
+0x1DC9FC0	string	风门	GlobalData_cctor
+0x1DC9FE8	string	世事多艰，本人也是万不得已落草为寇，还望少侠行个方便，将身上财物“倾囊相赠”！	GlobalData_cctor
+0x1DCA0F8	string	世界	GlobalData_cctor
+0x1DCA1A0	string	"
+<i>(实战经验已满，将以{0}%比例转化为理论经验！)</i>"	StudySkillController_StartStudySkill
+0x1DCA228	string	"
+<i>(当前内力值较低)</i>"	StudySkillController_StartStudySkill
+0x1DCA268	string	飞骑尉	GlobalData_cctor
+0x1DCA2B0	string	"
+<i>(当前生命值较低)</i>"	StudySkillController_StartStudySkill
+0x1DCA338	string	"
+<i>(武功经验已满，需在闭关室进行突破！)</i>"	StudySkillController_StartStudySkill
+0x1DCA3D0	string	"挽留;AskHeroStayTeam;;;♦延长入队时间30天
+♦{0};FavorDegree/{1}"	GameController_LateUpdate
+0x1DCA428	string	东	GlobalData_cctor
+0x1E918CF			PlotController_RealStartStudySkill
+0x1E91944			PlotController_MiddleStopWork
+0x1E91979			PlotController_StudyMaxFightSkillFinish
+0x1E9198E			PlotController_StartWorking
+0x1E91D45			GameController_LateUpdate
+0x1E91D49			PlotController_MiddleStopWork,PlotController_RealStartStudySkill,PlotController_StartWorking,PlotController_StudyMaxFightSkillFinish,StudySkillController_RealStartStudySkill,StudySkillController_SureStartStudySkill
+0x1E91D4C			BigMapController_FixedUpdate,PlotController_StudyMaxFightSkillFinish,StudySkillController_FinishStudySkill,StudySkillController_StartStudySkill,StudySkillController_SureStartStudySkill,WeatherController_Update
+0x1E91D57			GameController_ChangeDay_leaf
+0x1E91D58			StudySkillController_FinishStudySkill
+0x1E91D5B			WeatherController_Update
+0x1E91D60			GameController_ChangeHour
+0x1E91D64			WorkingUIController_Update
+0x1E91D7C			GameController_ChangeHour,StudySkillController_FinishStudySkill
+0x1E9CD50			GameController_Update
+0x1E9CD52			GameController_Update
+0x1E9CD54			GameController_LateUpdate
+0x1E9CD61			GameController_ChangeHour
+0x1E9CD63			GameController_ChangeDay_leaf
+0x1E9CD9F			GameController_ChangeDay_leaf
+0x1E9CDE0			GameController_Update,StudySkillController_RealStartStudySkill,StudySkillController_StartStudySkill
+0x1E9F26F			BigMapController_FixedUpdate
+0x1E9F834			WorkingUIController_Update
+0x1E9F835			WorkingUIController_TryCancelWorking
+0x1E9F83B			WorkingUIController_StopWorking,WorkingUIController_Update
+0x1E9F83D			WorkingUIController_SetSkippingState,WorkingUIController_SkipButtonClicked
+0x1E9FBDB			GlobalData_cctor
+0x1E9FC41			TimeScaleController_Update
+0x1EA28EC			StudySkillController_StartStudySkill
+0x1EA28EE			StudySkillController_StartStudySkill
+0x1EA28EF			StudySkillController_SureStartStudySkill
+0x1EA28F0			StudySkillController_RealStartStudySkill
+0x1EA28F3			StudySkillController_FinishStudySkill
+0x1EA28F4			StudySkillController_cctor
