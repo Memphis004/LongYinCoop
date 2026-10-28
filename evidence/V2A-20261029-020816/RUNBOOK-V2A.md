@@ -81,9 +81,9 @@ ML log ต้องมีบรรทัด `[TimeV2a] writer open -> …<LABEL>
 
 กติกาบังคับทุกเคส (time-plan §E.2/§E.3):
 
-- **ถ้ามี popup/เหตุการณ์ค้าง/งานหยุดกลางทาง ห้ามกดเริ่มใหม่** ให้ปล่อยจนจบหรือปิดเกมแล้วแจ้ง agent ทันที —
-  รันนั้นจะถูกทิ้งเป็น INVALID แล้วรันใหม่ (บทเรียน A2-r1: work_start ×4 ในเกมรอบเดียว — StartWorking เขียนทับ
-  state ขณะงานเดิน ทำให้ day_ticks รวมกัน ≠ N)
+- **ถ้ามี popup ระหว่างงาน: ปิด popup แล้วปล่อยงานวิ่งจนจบ — ห้ามกดเริ่มใหม่** · ปิดเกมหลังงานจบแล้วแจ้ง
+  agent ทันที — **รันนั้นจะถูกติดป้าย CONTAMINATED และทิ้ง** (ตรวจอัตโนมัติด้วยกฎ gap > 2 s ด้านล่าง ·
+  บทเรียน A2-r1: เริ่มงานซ้ำ = work_start ×4 · A3-r2: popup ค้างปั๊ม 16.1 s กลางงาน)
 - ระหว่างงานเดิน **ห้าม action อื่นแทรก** (ไม่เดินทาง ไม่เปิดพล็อต ไม่เปิดเมนู Esc ค้าง — native freeze 3 ทางเป็น
   noise ที่ทำให้ T(N) เพี้ยน) · จด fps/การกระตุกของหน้าจอรายรอบ
 - เคส A4 (skip): ก่อนรอบแรก **ยืนยัน `TestMode` ด้วยสองสัญญาณตาม §E.3 ข้อ 1–2** (อ่าน `PlayerPrefDictionary` ผ่าน
@@ -167,6 +167,13 @@ python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjso
   เว้นแต่มีหลักฐานในไฟล์**
 - **pilot:** A1-r1 (MISMATCH ตาม [TOL] เดิม — `pilot-a1r1-analysis.md`) **ไม่นับเป็นผลยืนยัน ⇒ กันออกจาก fit
   ด้วย `--exclude <path>` เสมอ** (ข้อความมติ 2026-10-29 ข้อ 2)
+- **กฎคุณภาพข้อมูล (เพิ่มหลังเจอ A3-r2 · ใช้ย้อนกับทุกรัน — ผลของรัน valid เดิมไม่เปลี่ยน):** รันใดมีช่องว่าง
+  ระหว่าง event ติดกัน **> 2.0 s ภายใน work_start→work_end** = **CONTAMINATED** — กันออกจาก fit
+  อัตโนมัติและรายงานเป็นรายการแยก (พร้อมตำแหน่ง gap และ field ที่ค้าง) · **หลักฐานใช้ย้อน (scan ทุกไฟล์
+  2026-10-29):** A3-r1 max 1106 · A2-r2 max 1069 · A1-r2 max 1053 · A1-r1 max 1077 — ทุกตัว < 2000 ⇒
+  ผลเดิมไม่เปลี่ยน · A2-r1 43,428–77,289 (INVALID เดิม — ผล excluded ไม่เปลี่ยน) · A3-r2 16,118 ⇒
+  **CONTAMINATED** (ตรวจอัตโนมัติ: `GAP_CONTAMINATION_MS = 2000` ใน time_v2a_fit.py ·
+  เทสต์ retroactive ครอบไฟล์จริงทั้ง 4)
 - **เครื่องมือ:** `python tools\time_v2a_fit.py <ndjson รอบ normal ทุกไฟล์> [--exclude <pilot>]` — ตรวจโครงรายรัน →
   fit รวม → พิมพ์ slope/intercept/CI/verdict/residual/segments รายรัน · exit code: **0** = fit สำเร็จ (รวม
   INDISTINGUISHABLE/UNRESOLVED_OFFSET — ยอมรับได้) · **3** = slope MISMATCH (หยุดรายงาน) · **1** = ไม่มี run
