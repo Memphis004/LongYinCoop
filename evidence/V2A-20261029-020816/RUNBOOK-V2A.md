@@ -42,18 +42,29 @@
    · **สลับ pointer ต่อ run = แก้บรรทัดเดียวให้ชี้ไฟล์ของ run ใหม่ระหว่างเกมปิด + touch ไฟล์ใหม่** ก่อน split/preflight
      (fail-closed: ไม่มีไฟล์/ว่าง = ไม่เขียน) · pointer ต้องชี้ถูกไฟล์ก่อนผู้ใช้เปิดเกม**ทุกรอบ**
 
-## ขั้น 3 — split + preflight (ต่อเคสทุกครั้ง — กฎ 2 ของ time-plan §D.0)
+## ขั้น 3 — split + preflight-launch (ต่อรันทุกครั้ง — กฎ 2 ของ time-plan §D.0: รอบซ้ำแต่ละรอบ = เคสอิสระ)
 
-ต่อ**เคส** (สำเนาใหม่ทุกครั้ง เกมยังปิด):
+ต่อ**รัน** (สำเนาใหม่ทุกรัน เกมยังปิด — มติ 2026-10-29 รอบเริ่ม session):
 
 ```
 python tools\save-split.py split --label <LABEL> --expected-baseline coop-test\baselines\20261028-071340\savehash.real.before.txt
-python tools\save-split.py preflight   # ต้อง READY ก่อนเปิดเกมเสมอ
+python tools\save-split.py preflight-launch --label <LABEL>   # ต้อง "READY - you may launch the game" ก่อนเปิดเกมเสมอ
 ```
 
+- **preflight-launch** (tools/save-split.py 773–886) = green light แบบ read-only สำหรับกรณี**ไม่มี recorder ภายนอก**
+  (sampler อยู่ใน mod DLL) — ตรวจ: เกมปิด · copy mounted · leftovers = 1 Save.real-* · manifest ·
+  real-aside-untouched · mounted-is-copy (hash) · **ห้ามใส่ --dry-run** (dry-run ไม่ให้ green light — บรรทัด 882–883)
+  · **ไม่เขียน history.ndjson โดยดีไซน์** (docstring 776–777 — `append_history` ไม่มีใน 773–886) ⇒
+  **เก็บผล stdout ลง `evidence\<LABEL>\preflight-launch.txt` เป็นหลักฐานแทน**
+- **hand-check ก่อนเปิดเกมทุกรัน** (ชดเชยข้อ 4–5 ของ `preflight` เดิมที่ผูกกับ recorder ภายนอก):
+  (ก) pointer file `UserData\LongYinCoop\time-v2a.out` ชี้ไฟล์ของ run นี้ — **ตรวจไบต์ด้วย `od -c`** ห้ามแค่ cat
+  (ข) ไฟล์ปลายทาง `evidence\<LABEL>\<เคส>-r<รอบ>.ndjson` มีอยู่จริง (touch แล้วจากขั้น 2)
+  (ค) `TimeV2a = true` **และ** `Sp5T0 = false` ใน `MelonPreferences.cfg` (ตรวจค่า key)
+- **บทเรียน (incident จริง 2026-10-29 ตอนเตรียม A1-r1): เขียน pointer file ด้วย heredoc (`cat > file <<'EOF'`)
+  ห้าม printf** — printf ตีความ `\e`/`\a` เป็น escape character ทำ path เสีย — **ตรวจไบต์ด้วย `od -c` ทุกครั้งหลังเขียน**
 - baseline อ้างตามมติ [V2A-2]: `df8e5a11beed…` @ `20261028-071340` — **ห้ามใช้ baseline เดิม `4226730f66ff`**
   (errata E1–E3) · ถ้า digest ไม่ตรง = **หยุดรายงาน ห้าม rebaseline กลบ**
-- snapshot ก่อนทดสอบ = `savehash.real.before.txt` ของ split นั้นเอง (เกณฑ์ตรวจคืนของเคส)
+- snapshot ก่อนทดสอบ = `savehash.real.before.txt` ของ split นั้นเอง (เกณฑ์ตรวจคืนของรัน)
 
 ## ขั้น 4 — ผู้ใช้เปิดเกมเอง + ตารางเคส (ชุด A — Gate 5a; ไม่รวมชุด B/C)
 
