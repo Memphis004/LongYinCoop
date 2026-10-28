@@ -14,10 +14,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import time_v2a_fit as ft
 
 
-def session(n, measured_ms, start_ms=1_000_000.0, abort=False, drop_pause_index=None):
+def session(n, measured_ms, start_ms=1_000_000.0, abort=False, drop_pause_index=None,
+            stretch_pause_index=None, stretch_ms=0):
     """สร้าง session ตรงโครง: work_start → pause_end → [day_tick → pause_end]×N → work_end
     กระจาย measured_ms: initial 250 + n×(day+250) + finish 7 (float — ให้ fit ตรงเป้า)
     drop_pause_index = ลบ pause_end ตัวที่ index นั้น (0-based จาก pause_end ทั้งหมด) เพื่อทดสอบโครงพัง
+    stretch_pause_index/stretch_ms = ยืดช่องว่างก่อน pause_end ตัวนั้น (จำลอง stall กลางงาน)
     คืน (events, expected_segments)"""
     ev = [{"ev": "work_start", "t": start_ms, "leftWorkingDay": n, "skipping": False,
            "dayTime": 1.0, "pauseTime": 0.25}]
@@ -36,6 +38,12 @@ def session(n, measured_ms, start_ms=1_000_000.0, abort=False, drop_pause_index=
     if drop_pause_index is not None:
         pauses = [e for e in ev if e["ev"] == "pause_end"]
         ev = [e for e in ev if e is not pauses[drop_pause_index]]
+    if stretch_pause_index is not None:
+        pauses = [e for e in ev if e["ev"] == "pause_end"]
+        target_t = pauses[stretch_pause_index]["t"]
+        for e in ev:
+            if e["t"] >= target_t:
+                e["t"] += stretch_ms
     expected_segments = {
         "initial_ms": 250.0,
         "day_mean_ms": round(day_ms, 1), "day_min_ms": round(day_ms, 1),
@@ -230,6 +238,47 @@ class TestV2AFit(unittest.TestCase):
         self.assertIn('"intercept_ci_t": null', out)
         self.assertIn('"intercept_ci_196": null', out)
         self.assertIn('"form": "FORM2"', out)
+
+
+    def test_gap_rule_contaminated_auto_excluded(self):
+        # กฎคุณภาพข้อมูล: ช่องว่างระหว่าง event ติดกัน > 2000 ms = CONTAMINATED (กันออกจาก fit อัตโนมัติ)
+        # · จำลอง stall 2.5 s กลางงาน (ยืด inter-day pause ก่อน pause_end ตัวที่ 2)
+        s, _ = session(3, 5000, stretch_pause_index=2, stretch_ms=2500)
+        p = dump(self.tmp, "stall.ndjson", [s])
+        code, out = self.run_main([p])
+        self.assertEqual(code, 1)   # เหลือ 0 จุด valid
+        self.assertIn("CONTAMINATED", out)
+        row = [json.loads(l) for l in out.splitlines() if '"CONTAMINATED"' in l][0]
+        self.assertGreater(row["max_gap_ms"], 2000)
+        self.assertIn("day_tick", row["max_gap_after"])   # gap เกิดหลัง day_tick
+
+    def test_gap_rule_boundary_clean(self):
+        # ยืด pause 1.5 s (gap ~1750 < 2000) = ยัง OK — fit ทำงานปกติ (สร้าง offset ใน stream
+        # เพราะ stretch เลื่อน t ทุก event ถัดไป — จุดตรวจคือสถานะ gap rule ไม่ใช่ฟอร์ม)
+        files = [dump(self.tmp, f"gs-n{n}.ndjson",
+                      [session(n, 1250 * n + 500, stretch_pause_index=1, stretch_ms=1500)[0]])
+                 for n in (1, 5, 10)]
+        code, out = self.run_main(files)
+        self.assertEqual(code, 0)
+        self.assertNotIn("CONTAMINATED", out)
+        self.assertEqual(out.count('"status": "OK"'), 3)
+        self.assertIn('"slope_ok": true', out)
+
+    def test_gap_rule_retroactive_real_files(self):
+        # ใช้ย้อนกับไฟล์จริงของ session นี้: A3-r2 = CONTAMINATED (gap 16118 ms หลัง day_tick left=4) ·
+        # A3-r1/A2-r2/A1-r2 = OK เหมือนเดิม (clean — ไม่มี gap > 2 s) ⇒ ผลรัน valid เดิมไม่เปลี่ยน
+        base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "evidence")
+        f = lambda lbl, fn: os.path.join(base, lbl, fn)
+        files = [f("V2A-a3r1-20261029-030222", "a3-r1.ndjson"),
+                 f("V2A-a3r2-20261029-034639", "a3-r2.ndjson"),
+                 f("V2A-a2r2-20261029-032912", "a2-r2.ndjson"),
+                 f("V2A-a1r2-20261029-033639", "a1-r2.ndjson")]
+        code, out = self.run_main(files)
+        self.assertEqual(code, 0)
+        self.assertEqual(out.count('"status": "CONTAMINATED"'), 1)   # เฉพาะ A3-r2
+        self.assertIn('"max_gap_ms": 16118', out)
+        self.assertIn('after day_tick(left=4) -> pause_end(left=4)', out)
+        self.assertEqual(out.count('"status": "OK"'), 3)             # A3-r1/A2-r2/A1-r2 ไม่เปลี่ยน
 
 
 if __name__ == "__main__":

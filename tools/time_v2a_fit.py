@@ -28,6 +28,9 @@ import sys
 SLOPE_TARGET = 1.25
 SLOPE_TOL = 0.1
 I1, I2, ITOL = 0.0, 0.5, 0.1
+# กฎคุณภาพข้อมูล (เพิ่มหลังเจอ A3-r2 — ใช้ย้อนกับทุกรัน: ผลของรัน valid เดิมไม่เปลี่ยน):
+# ช่องว่างระหว่าง event ติดกัน > 2.0 s ภายใน work_start→work_end = CONTAMINATED (กันออกจาก fit อัตโนมัติ)
+GAP_CONTAMINATION_MS = 2000.0
 
 # t-critical สองด้านที่ 95% ตามองศาอิสระของ fit (n_points − 2) — ดีฟอลต์ >10 จุด = 1.96
 T_CRIT_95 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571,
@@ -157,6 +160,19 @@ def form_verdict(intercept, ci_half):
                                  if ci_half is not None else None)
 
 
+def max_gap_of(s):
+    """ช่องว่างระหว่าง event ติดกันที่ยาวสุดภายใน session — คืน (ms, คำอธิบายตำแหน่ง)"""
+    evs = s["events"]
+    best, desc = 0.0, ""
+    for i in range(len(evs) - 1):
+        g = evs[i + 1]["t"] - evs[i]["t"]
+        if g > best:
+            best = g
+            desc = (f"after {evs[i]['ev']}(left={evs[i].get('leftWorkingDay')}) "
+                    f"-> {evs[i + 1]['ev']}(left={evs[i + 1].get('leftWorkingDay')})")
+    return best, desc
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("ndjson", nargs="+", help="NDJSON รายรัน (รอบ normal เท่านั้น — ดูภาคผนวก A)")
@@ -181,6 +197,16 @@ def main(argv=None):
             if s["aborted"]:
                 rows.append({"file": path, "n": s["n"], "measured_s": round(measured, 3),
                              "status": "EXCLUDED", "reason": "aborted session is not a T(N) result"})
+                continue
+            max_gap, gap_after = max_gap_of(s)
+            if max_gap > GAP_CONTAMINATION_MS:
+                ok, sreason, day_ticks = validate_structure(s)
+                rows.append({"file": path, "n": s["n"], "measured_s": round(measured, 3),
+                             "day_ticks": day_ticks, "status": "CONTAMINATED",
+                             "max_gap_ms": round(max_gap, 1), "max_gap_after": gap_after,
+                             "structure": sreason if not ok else "ok",
+                             "reason": (f"inter-event gap {max_gap:.0f} ms > {GAP_CONTAMINATION_MS:.0f} ms "
+                                        f"ภายใน work_start→work_end — กันออกจาก fit อัตโนมัติ (กฎคุณภาพข้อมูล)")})
                 continue
             ok, reason, day_ticks = validate_structure(s)
             if not ok:
