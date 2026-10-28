@@ -137,3 +137,24 @@ python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjso
 - ML log มี Harmony/patch/install ใด (TimeV2a/SP5) ที่ไม่ใช่ `[TimeV2a] writer open/close`
 - day_ticks ≠ N (INVALID), T(N) ผิดปกติชัด (งานไม่จบตามโครง), เกม crash/soft-lock, เซฟ hash เปลี่ยน
 - MISMATCH ของ analyzer บนเคสปกติ → **หยุด รายงาน ห้าม refit** · สองสัญญาณ TestMode ไม่ตรงกัน (เคส A4)
+
+## ภาคผนวก A — เกณฑ์ตัดสินฉบับที่ 2 [CRITERIA] (มติผู้ใช้ 2026-10-29 หลัง pilot A1-r1 — ล็อกก่อนรัน A3-r1)
+
+> **สถานะของ A1-r1:** MISMATCH ตาม [TOL]=0.1 เดิมคงอยู่ตามจริง (`analyze-result.txt` ไม่แก้) — จัดเป็น
+> **pilot — ไม่นับเป็นผลยืนยัน** (`evidence\V2A-a1r1-20261029-022648\pilot-a1r1-analysis.md`) · ตั้งแต่รัน A3-r1
+> เป็นต้นไปตัดสินด้วยเกณฑ์นี้เท่านั้น — ผล `time_v2a_analyze.py --tolerance 0.1` รายรอบคงพิมพ์ตามจริงเป็น
+> ข้อมูลประกอบ แต่**ไม่ใช่ตัวตัดสินผ่าน/ไม่ผ่านอีกต่อไป**
+
+- **โครง:** ทุกรัน `day_ticks == N` **และ** ลำดับ event ตรงโครง = `work_start → pause_end → [day_tick →
+  pause_end]×N → work_end` (ตาม static §2.4; abort = work_abort แทน work_end)
+- **ความชัน:** fit เชิงเส้น `measured = slope×N + intercept` จาก **N=1,5,10 ทุกรอบรวม** (least squares ราย run —
+  เฉพาะรอบ normal A1/A2/A3; **รอบ skip A4 รายงานแยก ไม่เข้า fit** เพราะ k ต่าง จะบิดเบือนความชัน) —
+  slope ต้องอยู่ใน **1.25 ± 0.1 s/วัน** ผิด = **MISMATCH จริง → หยุดรายงาน**
+- **ฟอร์ม:** ค่าตัดแกน (intercept) ที่ fit ได้ — ใน **[−0.1, +0.1]** = **FORM1** · ใน **[+0.4, +0.6]** = **FORM2** ·
+  นอกนั้น/คาบเกี่ยว (0.1–0.4 หรือเกิน 0.6/ต่ำกว่า −0.1) = **INDISTINGUISHABLE** (ผลที่ยอมรับได้ ไม่ใช่ความล้มเหลว) ·
+  **ห้าม refit โมเดล ห้ามเพิ่มพารามิเตอร์แอนิเมชันเข้าสูตรเอง**
+- **ส่วนเกินที่อธิบายไม่ได้:** residual รายรัน = `measured − (slope×N + intercept)` รายงานเป็นค่าแยก (พร้อมช่วง
+  event ที่เกิด เมื่อวิเคราะห์ได้) — **ไม่ใช้ตัดสินฟอร์ม**
+- **เครื่องมือ:** `python tools\time_v2a_fit.py <ndjson ของรอบ normal ทุกไฟล์>` — ตรวจโครงรายรัน → fit รวม →
+  พิมพ์ slope/intercept/verdict/residual รายรัน · exit code: **0** = fit สำเร็จ · **3** = slope MISMATCH (หยุด
+  รายงาน) · **1** = ไม่มี run ที่ใช้ได้ · **2** = args/ไฟล์ผิด · ห้ามแก้ `time_v2a_analyze.py`
