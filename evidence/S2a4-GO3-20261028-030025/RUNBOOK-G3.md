@@ -112,3 +112,10 @@
 
 net.cfg `overlay=false`/`enabled=false` (ผล ≤ ~1 s ตาม K30 — ยืนยันจริงตอนรัน) → DLL กลับ `.prev-*` →
 restore เซฟตามขั้น 8 → M5-3 = ไม่มี hook ให้ถอด
+
+## บทเรียนจากการรันจริง (GO-3 = `S2a4-GO3-20261028-074003`, 2026-10-28/29 — สำหรับ session ถัดไป · ไม่แก้เกณฑ์ E1–E8/G0/E6)
+
+1. **recorder `--wait` ควรยาวกว่า 3600 s** — GO-3: ผู้ใช้เปิดเกมช้ากว่ากำหนด 3 ชม. 16 น. ⇒ recorder ตายเองตอน `--wait` หมด (08:44, exit "game not running") และต้องรีสตาร์ทหลังเกมเปิด · ครั้งหน้าใช้ `--wait` ยาวขึ้น (เช่น ≥4 ชม.) หรือรีสตาร์ทหลังผู้ใช้แจ้งว่าเปิดเกมแล้ว (recorder ต่อ pipe ทันทีเมื่อเกมรันอยู่) · recorder จบสะอาดเองเมื่อเกมปิด (`game exited`)
+2. **สร้างไฟล์ sampler-out เปล่าก่อน `preflight`** — preflight ตรวจ `Path(sampler_out).is_file()` แต่ recorder สร้างไฟล์เมื่อ connect กับ pipe (ต้องมีเกมก่อน) = ไข่ไก่ · ทำ: `touch <sampler-out>` ก่อน preflight — ปลอดภัยเพราะ recorder เปิดไฟล์แบบ `"w"` (truncate) เมื่อ connect (พิสูจน์แล้วใน GO-3: preflight REFUSED → READY หลัง touch)
+3. **`MelonPreferences.cfg` hash จะเปลี่ยนหลังมี E6 (หรือ pref ใด dirty แล้ว ML save ตอนปิดเกม)** — ML เขียนไฟล์ใหม่ตอน exit ("Preferences Saved!") แม้ค่าสุดท้ายกลับเป็น false แล้ว ⇒ **ตอนปิด session ให้ตรวจค่า key (`AllowRemoteInput = false`) แทนการเทียบ hash** (hash เปลี่ยนจาก `269b571c…` → `66fb92d5…` ใน GO-3 — divergence record ใน VERSION.md แล้ว)
+4. (สังเกตประกอบ — อ่าน counter ให้ถูก) `auth`/`forbidden` ของ `[S2] active …` เพิ่ม **+1/+3 ต่อการ activate S2 หนึ่งครั้ง** เพราะ TCP self-test รันอัตโนมัติตอน activate (inject 3 frame ต้องห้าม) — counter คงที่ระหว่าง session ปกติ, `commandsAccepted=0` คือตัวตัดสิน isolation
