@@ -138,4 +138,4 @@
 | เซฟ | EXACT 57/57 `df8e5a11beed…` + `leftovers: none` | ✓ |
 | DLL | `983b2384…` (366,080 B) + `.prev-6a94abb5` — **มติหลังปิด session: rollback ทาง (ข) กลับ `6a94abb5…` ทำแล้ว** (verify hash ตรง 2026-10-29 · บันทึก VERSION.md หัวข้อ V2-A) | ✓ |
 | commits ของ session | `21e99a0`(A) `b0ca9f7`/`91bf85c`/`211ea21`(B) `bd7885e`(C) `397b569` `789f670` `3490cff` `2952e1c` `0c9202d` `516197d` `646f0f5` `1a5797b` `81580f0` `e90de47` — src/ ไม่เปลี่ยนจาก `bd7885e` | ✓ |
-| ไฟล์รายงาน/หลักฐาน | v2a-report.md (ไฟล์นี้) · interim-report-3run.md/-v2.md · README-a2r1/a2r3 · ผล analyze/fit ราย label — **บนดิสก์ ยังไม่ commit** (รอสั่ง) | — |
+| ไฟล์รายงาน/หลักฐาน | v2a-report.md (ไฟล์นี้) · interim-report-3run.md/-v2.md · README-a2r1/a2r3 · ผล analyze/fit ราย label — **commit แล้ว** (มติผู้ใช้ 2026-10-29 · `f395ff9` — เดิมเขียน "บนดิสก์ ยังไม่ commit รอสั่ง" ซึ่งล้าสมัย) + แก้ไขเพิ่ม `44b255b`/`c07ae7c`/`ee993d1` · NDJSON ดิบและ .log ยัง gitignored | — |
