@@ -1,16 +1,17 @@
 # RUNBOOK-G3 — ลำดับ session เมื่อผู้ใช้พิมพ์ "เริ่ม GO-3 session" (S2a-4)
 
-> **ฉบับ:** 2026-10-28 (session `AUTO-20261028-023904`, B5) · **แผนอ้างอิง:** `S2a-4-plan.md` rev4 — §3 (เกต GO-3),
+> **ฉบับ:** 2026-10-28 (session `AUTO-20261028-023904`, B5 · อัปเดตสถานะ 2026-10-28 โดย session `AUTO-20261028-070417`) · **แผนอ้างอิง:** `S2a-4-plan.md` rev4 — §3 (เกต GO-3),
 > §9 (provenance), §11 (เกณฑ์ E1–E8 ตรงตัว **ไม่แก้เกณฑ์**), §15 (rollback) · **มติที่ใช้:** M3 (overlay = flat key
 > net.cfg, default off, ไม่มี hotkey) · M4 (guest slot เดียว) · **M5 = M5-3 ไม่ hook เลย** ⇒ W4(a) = NOT-RUN,
 > E5(a) = NOT-RUN ทั้ง 4 กลุ่ม, E5 สูงสุด = PASS-with-limitation, **ห้ามติดตั้ง hook ใด ๆ**
-> **เงื่อนไขเบื้องต้น 2 ข้อที่ยัง BLOCKED (ต้องปิดก่อนพิมพ์วลีสั่งงาน):**
-> 1. **Release artifact** — build ณ HEAD `91c276b` ล้ม (`Sp5T0Probe.cs` ขาด using — ดู `provenance.md`)
->    ⇒ ต้องมีมติแก้ (using / exclude SP5) + build ผ่าน 0W/0E + artifact ในโฟลเดอร์นี้ครบ ก่อนเริ่ม
-> 2. **baseline เซฟ** — ณ 2026-10-28 02:39 digest ของ `Save` = `df8e5a11beed` ≠ baseline ที่อนุมัติ
->    `58883949…` (`coop-test/baselines/20261025-201545`) — ต่างเฉพาะ `PlayerprefData.dat` (volatile, จากการเปิด
->    เกมของผู้ใช้ 2026-10-27 ×3; SaveSlot* 55 ไฟล์ EXACT) ⇒ ต้องมีมติ **rebaseline volatile-only** หรือ restore
->    ให้ตรงก่อน มิฉะนั้นขั้นที่ 5 จะ REFUSE และ session หยุด (ห้าม rebaseline เอง)
+> **เงื่อนไขเบื้องต้น (สถานะล่าสุด 2026-10-28 07:1x):**
+> 1. **Release artifact — ยัง BLOCKED** — build ณ HEAD `91c276b` ล้ม (`Sp5T0Probe.cs` ขาด using — ดู `provenance.md`) ·
+>    session `AUTO-20261028-070417` พบว่า**เงื่อนไขก่อนแก้ของมติ [G-1] ติด**: `CoopMod.cs:53` เรียก `Sp5T0Probe.Apply`
+>    จาก `OnInitializeMelon` (load path) ⇒ การแก้ using **ยังไม่ถูกทำ** รอมติผู้ใช้รอบใหม่ (หลักฐาน `evidence/AUTO-20261028-070417/a1-a2-reachability.md`) ·
+>    ยังต้องมีมติแก้ + build ผ่าน 0W/0E + artifact ในโฟลเดอร์นี้ครบ ก่อนเริ่ม
+> 2. **baseline เซฟ — ปิดแล้ว (2026-10-28, มติ [G-2])** — rebaseline volatile-only แล้ว: baseline ปัจจุบัน
+>    **`df8e5a11beed…` @ `coop-test/baselines/20261028-071340/savehash.real.before.txt`** (57 ไฟล์ · ต่างจาก `58883949…` เฉพาะ `PlayerprefData.dat`) ·
+>    หลักฐาน `evidence/AUTO-20261028-070417/c3-c4-rebaseline-record.md` · ขั้นที่ 4 ข้างล่างใช้ baseline นี้แล้ว
 > **การอนุมัติที่วลี "เริ่ม GO-3 session" ให้:** [N1] deploy/swap ใน `Mods\` + [N2] save-split split/restore —
 > **เฉพาะตาม RUNBOOK นี้** · สิ่งอื่นที่ไม่อยู่ใน RUNBOOK ยังห้าม (เช่น tag, rebaseline นอกมติ, แก้ source)
 
@@ -51,8 +52,8 @@
 ## ขั้น 4 — save-split + preflight
 
 - `python tools/save-split.py split --label S2a4-GO3-<ts> --expected-baseline
-  coop-test\baselines\20261025-201545\savehash.real.before.txt` — **ต้องระบุ flag นี้ตรง ๆ ห้ามพึ่ง default**
-  (ถ้ามีมติ rebaseline ใหม่ ให้ชี้ไฟล์ baseline ที่อนุมัติล่าสุดตาม VERSION.md แทน)
+  coop-test\baselines\20261028-071340\savehash.real.before.txt` — **ต้องระบุ flag นี้ตรง ๆ ห้ามพึ่ง default**
+  (baseline ปัจจุบันตาม VERSION.md ตั้งแต่ 2026-10-28 = `20261028-071340` · ถ้า VERSION.md ระบุตัวใหม่กว่านั้นภายหลัง ให้ใช้ตาม VERSION.md แทน)
 - แล้ว `save-split preflight` ต้อง **READY** — ถ้า split **REFUSE แม้แต่ไฟล์เดียว (รวม pref)** = **หยุดรายงาน
   ห้าม rebaseline เอง**
 - เก็บ `savehash.real.before.txt` + `savehash.copy.before.txt` ลง evidence ของ session
