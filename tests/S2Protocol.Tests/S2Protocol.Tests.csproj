@@ -44,6 +44,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2GuestDecoder.cs" LinkBase="Guest" />
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayClient.cs" LinkBase="Guest" />
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayRenderModel.cs" LinkBase="Guest" />
+    <!-- V2-A (มติ V2A-4): ตรรกะ pure ของ sampler อ่านอย่างเดียว — TimeV2aSampler.cs ไม่ถูกลิงก์ (อ้าง Il2Cpp/Unity) -->
+    <Compile Include="..\..\src\LongYinCoop\TimeV2a\TimeV2aRules.cs" LinkBase="TimeV2a" />
   </ItemGroup>
 
   <ItemGroup>

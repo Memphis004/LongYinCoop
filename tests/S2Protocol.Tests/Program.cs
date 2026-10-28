@@ -43,6 +43,7 @@ namespace LongYinCoop.S2.Tests
             // ---- CLI ช่วยงาน C1 (ไม่แตะเกม ไม่มี mod runtime) -------------------
             // --emit-vectors <path>                       เขียน fixtures/replica-vectors.ndjson
             // --fake-host <port> <sec> [secretHex] [hz] [skipSeqAt]   host จำลอง (I9/Python)
+            // --emit-v2a-fixture <path>                   NDJSON จำลอง V2-A (ตรวจ time_v2a_analyze.py จริง)
             if (args != null && args.Length > 0)
             {
                 if (args[0] == "--emit-vectors" && args.Length >= 2)
@@ -54,6 +55,12 @@ namespace LongYinCoop.S2.Tests
                 if (args[0] == "--fake-host")
                 {
                     return FakeS2Host.RunCli(args.Skip(1).ToArray());
+                }
+                if (args[0] == "--emit-v2a-fixture" && args.Length >= 2)
+                {
+                    string written = TimeV2aTests.EmitFixture(args[1]);
+                    Console.WriteLine("V2A FIXTURE written " + written);
+                    return 0;
                 }
                 Console.WriteLine("unknown args: " + string.Join(" ", args));
                 return 2;
@@ -69,6 +76,7 @@ namespace LongYinCoop.S2.Tests
             _fail += S2a2Tests.Run();
             _fail += S2a3Tests.Run();
             _fail += S2a4Tests.Run();
+            _fail += TimeV2aTests.Run();
 
             Console.WriteLine();
             Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0/T1 checks)" : $"RESULT FAIL ({_fail} checks failed)");
