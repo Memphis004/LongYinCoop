@@ -1,0 +1,2 @@
+{"file": "evidence/V2A-a3r1-20261029-030222/a3-r1.ndjson", "n": 10, "measured_s": 13.5, "day_ticks": 10, "status": "OK", "segments_observed": {"initial_ms": 544.0, "day_mean_ms": 1060.9, "day_min_ms": 1043.0, "day_max_ms": 1106.0, "final_ms": 469.0, "tail_ms": 6.0}}
+summary: valid_runs=1 points=1 fit=NOT_POSSIBLE (need >=2 runs with distinct N) invalid=0 excluded=0

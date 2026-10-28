@@ -1,0 +1,2 @@
+{"n": 5, "k": 1.0, "day_time": 1, "pause_time": 0.25, "measured_s": 189.037, "day_ticks": 13, "form1_s": 6.25, "form2_s": 6.75, "form_gap_s": 0.5, "verdict": "INVALID", "reason": "day_ticks (13) != N (5) — per plan E1: leaf hits must equal N"}
+summary: sessions=1 decided=0 indistinguishable=0 invalid=1 mismatch=0

@@ -1,0 +1,6 @@
+{"file": "evidence/V2A-a3r1-20261029-030222/a3-r1.ndjson", "n": 10, "measured_s": 13.5, "day_ticks": 10, "status": "OK", "segments_observed": {"initial_ms": 544.0, "day_mean_ms": 1060.9, "day_min_ms": 1043.0, "day_max_ms": 1106.0, "final_ms": 469.0, "tail_ms": 6.0}}
+{"file": "evidence/V2A-a2r2-20261029-032912/a2-r2.ndjson", "n": 5, "measured_s": 7.136, "day_ticks": 5, "status": "OK", "segments_observed": {"initial_ms": 557.0, "day_mean_ms": 1055.6, "day_min_ms": 1044.0, "day_max_ms": 1069.0, "final_ms": 445.0, "tail_ms": 6.0}}
+{"points": 2, "slope": 1.2728, "intercept": 0.772, "intercept_ci_half_ms": null, "intercept_ci": null, "slope_ok": true, "form": "UNRESOLVED_OFFSET", "criteria": "slope in 1.25±0.1; point in [-0.1,+0.1]=FORM1, [+0.4,+0.6]=FORM2; outside both + CI overlaps both windows = INDISTINGUISHABLE; outside both otherwise = UNRESOLVED_OFFSET (acceptable, no refit)"}
+{"file": "evidence/V2A-a3r1-20261029-030222/a3-r1.ndjson", "n": 10, "residual_s": 0.0, "note": "unexplained per-run residual — not used for form verdict"}
+{"file": "evidence/V2A-a2r2-20261029-032912/a2-r2.ndjson", "n": 5, "residual_s": 0.0, "note": "unexplained per-run residual — not used for form verdict"}
+summary: slope OK (1.2728 in 1.25±0.1) · form=UNRESOLVED_OFFSET · valid_runs=2 invalid=0 excluded=0

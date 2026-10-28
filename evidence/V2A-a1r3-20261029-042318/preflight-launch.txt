@@ -1,0 +1,12 @@
+  OK   game-not-running: not running
+  OK   leftovers-unexpected: none
+  OK   leftovers-state: 1 expected aside: Save.real-V2A-a1r3-20261029-042318
+  OK   no-hidden-sentinel: none
+  OK   label: V2A-a1r3-20261029-042318
+  OK   manifest: MANIFEST.json label=V2A-a1r3-20261029-042318
+  OK   aside-matches-manifest: ['Save.real-V2A-a1r3-20261029-042318'] vs manifest 'Save.real-V2A-a1r3-20261029-042318'
+  OK   copy-baseline-file: savehash.copy.before.txt
+  OK   real-save-mounted: no
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  OK   real-aside-untouched: Save.real-V2A-a1r3-20261029-042318 files=57 digest=df8e5a11beed
+PREFLIGHT-LAUNCH READY - you may launch the game

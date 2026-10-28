@@ -1,0 +1,2 @@
+{"n": 10, "k": 1.0, "day_time": 1, "pause_time": 0.25, "measured_s": 13.5, "day_ticks": 10, "form1_s": 12.5, "form2_s": 13.0, "form_gap_s": 0.5, "verdict": "MISMATCH", "reason": "measured 13.500s differs from BOTH forms beyond tolerance (form1 Δ=1.000, form2 Δ=0.500) — STOP and report, do not refit"}
+summary: sessions=1 decided=0 indistinguishable=0 invalid=0 mismatch=1
