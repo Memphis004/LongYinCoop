@@ -1,0 +1,2 @@
+{"n": 5, "k": 1.0, "day_time": 1, "pause_time": 0.25, "measured_s": 6.656, "day_ticks": 5, "form1_s": 6.25, "form2_s": 6.75, "form_gap_s": 0.5, "verdict": "FORM2", "reason": "measured closer to FORM2 (Δ1=0.406, Δ2=0.094, gap=0.500)"}
+summary: sessions=1 decided=1 indistinguishable=0 invalid=0 mismatch=0
