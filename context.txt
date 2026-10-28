@@ -1,0 +1,888 @@
+# MASTER PROMPT — LongYinLiZhiZhuan Co-op Mod
+
+## เป้าหมาย
+ทำ co-op mod ให้เกม LongYinLiZhiZhuan (Unity 2020.3.48f1c1 IL2CPP, MelonLoader 0.7.3 ที่ติดตั้งอยู่แล้ว)
+ให้เพื่อนเข้าปาร์ตี้ ตาม host บนแผนที่ และคุมยูนิตในศึกเทิร์นเบสของ host ได้
+โมเดลคือ host เป็นผู้ตัดสินเพียงคนเดียว (authoritative) guest ไม่จำลอง ไม่สุ่ม ไม่คำนวณผล
+เป็น co-op กับเพื่อนเท่านั้น ห้ามทำอะไรที่โกงในเกมออนไลน์ของคนอื่นหรือแตะระบบ anti-cheat
+
+## เอกสารอ้างอิง (ถือเป็นแหล่งความจริงตามลำดับ)
+STAGEPLAN.md > battle-notes.md, worldmap-notes.md > dump.cs
+ถ้าเอกสารขัดกันหรือขัดกับสิ่งที่วัดได้จริง ให้หยุดแล้วรายงาน อย่าเลือกเอง
+
+## กติกาตายตัว
+1. ทำทีละ stage ตาม STAGEPLAN เท่านั้น ห้ามข้าม ห้ามทำล่วงหน้า ห้ามขยายขอบเขต
+   ก่อนเริ่มแต่ละ stage รายงานแผนของ stage นั้นแล้วรอฉันอนุมัติ
+2. จบแต่ละ stage ต้องมีรายงานผลวัดเทียบ exit criteria ทีละข้อ, hash เซฟก่อน/หลัง, git tag stage-SN
+   ถ้าข้อไหนไม่ผ่าน ให้บอกตรง ๆ ว่าไม่ผ่าน ห้ามเลื่อนเกณฑ์เอง
+3. ใช้ตารางสิทธิ์การเขียนใน STAGEPLAN §1.1 เป็นข้อบังคับ stage ไหนห้ามเขียนก็ห้าม
+4. ทดสอบบนสำเนาเซฟเท่านั้น ตามโปรโตคอล §1.2 ห้ามแตะเซฟจริง
+5. ห้ามแตะ Steam, achievements/stats, APIDispatcher, DnsChecker, CheatCheck และ flag cheat* ในเซฟ
+6. ทุกการเรียก IL2CPP ต้องผ่านคิวและรันบน Unity main thread ตาม §1.4
+7. ต้องมี rollback ที่ใช้ได้จริงทุก stage (pref, .dll.off, git tag)
+## กติกาเพิ่มเติม
+8. ในโค้ด mod ให้เข้าถึงข้อมูลผ่าน Il2CppInterop แบบมีชนิด (เช่น heroData.bigMapPos, text.text)
+   ห้ามอ่าน/เขียนด้วย raw offset หรือ pointer ยกเว้นไม่มีทางอื่น และต้องบอกฉันก่อน
+   offset ใน notes มีไว้สำรวจเท่านั้น
+9. ปักหมุดเวอร์ชันเกม: บันทึก SHA-256 ของ GameAssembly.dll และ global-metadata.dat ไว้ใน VERSION.md
+   ตอนเริ่มทุก session ให้เทียบ hash ถ้าเกมอัปเดต ให้หยุดและรายงาน ห้ามเดาว่ายังใช้ได้
+10. โปรเจค mod อยู่นอกโฟลเดอร์เกม (git repo แยก) build แล้วค่อย copy DLL เข้า Mods\
+    ห้าม commit DLL ของเกม, Il2CppAssemblies หรือ dump.cs เข้า git
+
+## วินัยเรื่องหลักฐาน
+- ทุกข้อเท็จจริงติดป้าย RUNTIME / DUMP / GUESS / SPEC
+- ห้ามเขียนว่าอะไรยืนยันแล้ว ถ้าไม่ได้วัดหรือเห็นเอง
+- ค่าที่ถอดจาก hex หรือ memory read ให้ตรวจซ้ำกับตัวเลขบนจอก่อนใช้
+- RVA/offset จาก notes ยังไม่ถือว่ายืนยัน ต้อง re-resolve ผ่าน interop ก่อนใช้เขียน
+- เจอสิ่งที่ขัดกับที่เคยเขียนไว้ ให้แก้เอกสารและบอกฉัน อย่าเงียบ
+
+## เมื่อไรต้องหยุดถามฉัน
+- เกม crash, เทิร์นค้าง (soft-lock), หรือเซฟ hash เปลี่ยน
+- ต้องทำสิ่งที่นอกตารางสิทธิ์ หรือนอกขอบเขต stage
+- มีหลายทางเลือกที่ต่างกันที่ความเสี่ยงต่อเซฟหรือ Steam
+- ผลวัดต่างจากสมมติฐานของแผนอย่างมีนัยสำคัญ
+
+## ห้ามทำ
+- ห้ามสำรวจนอกเรื่อง (IAP, เพิ่ม stat, โกง) แม้จะมีปุ่ม followup แนะนำ
+- ห้ามเพิ่ม dependency ใหม่หรืออัปเกรด/ดาวน์เกรด MelonLoader โดยไม่ถาม
+- ห้ามแก้ไฟล์ของ mod อื่น (LongYinThai, UnityExplorer)
+
+## รูปแบบการรายงาน
+ตอบเป็นภาษาไทย โค้ดและชื่อ identifier เป็นภาษาอังกฤษ
+ปิดท้ายทุกครั้งด้วย 3 หัวข้อสั้น ๆ: ทำอะไรไป / ผลวัดเทียบเกณฑ์ / สิ่งที่ยังไม่รู้และขั้นถัดไปที่เสนอ
+
+## สถานะปัจจุบัน
+STAGEPLAN อนุมัติแล้ว ลำดับ: S0 → S1 → S1.5 (S3-spike) → S1.5g (pause/stability gate) → S2 → S3 → S5 → S4 → S6
+S0 ปิดแล้ว (2026-10-20 · tag `stage-S0` · ผ่าน 12/12 ข้อ · หลักฐาน `evidence/S0-20261020-044245/`)
+S1 ปิดแล้ว (2026-10-20 · tag `stage-S1` · 7 PASS · 2 PASS-with-limitation · 0 FAIL · 0 NOT-RUN · หลักฐาน `evidence/S1-20261020-113926/S1-report.md`)
+carry-over: §2 "carry-over จาก S0" (ข้อ 4 → S1, ข้อ 9 ครึ่งศึก → S1) — **ปิดครบแล้วใน S1**
+carry-over ใหม่: งานวัดนาฬิกาที่เหลือ (เดินในเมือง / พักโรงแรม / งานคราฟต์) เลื่อนเป็น **JIT ของ S4** ไม่ทำใน S1.5
+repo โค้ด: `C:\Users\memph\LongYinCoop` (แยกจากโฟลเดอร์เกม) — เข้าถึงได้จาก workspace ผ่าน **junction** `<เกม>\LongYinCoop` (2026-10-20, ไม่ได้ย้ายไฟล์; superproject ignore path นี้แล้ว)
+S1.5 (S3-spike) **ปิดแล้ว (2026-10-21 · tag `stage-S1.5` @ `468fbaa` · checkpoint `checkpoint-S1.5f` @ `a6f8203`)** — 6 PASS + 3 PASS-with-limitation (ข้อ 5, 6, 7) + 0 FAIL · **GO** · แผน `C:\Users\memph\LongYinCoop\S1.5-plan.md` · รายงานปิด stage `LongYinCoop/evidence/S1.5-close-20261021-031700/S1.5-report.md`
+S1.5 exit 1 = move 10/10 (`evidence/S1.5d-20261020-2215/`) · exit 2 = attack 10/10 (`evidence/S1.5e-20261021-0101/`) · exit 3 = negative 20/20 + exit 9 = panic 3/3 (`evidence/S1.5f-20261021-0247/`) · exit 4 = หยุดรอ input ทั้ง x1/x10 (`evidence/S1.5c-battleTimeScale-20261020-2143/`)
+**มติ 2026-10-21:** exit 5 = ทาง A (นับเฉพาะรอบที่ปุ่มกดได้ = `nowActiveState ≠ 2`) — **stage ถัดไปห้ามสั่ง pause ตอน `WaitPlayerInput`** (เกมไม่รับ 0/29)
+S1.5g (pause/resume + 10-min stability) **ปิดแล้ว (2026-10-21 · tag `stage-S1.5g`)** — Phase A pause/resume **16/16** (clock นิ่งสนิททุกรอบ, 0 คลิกตอน `WaitPlayerInput`, 0 รอบ excluded) · Phase B stability **PASS 694.8 s ของการเล่นจริง** · Save 57/57 digest `6dd645d9ef17`
+S1.5g หลักฐาน: `evidence/S1.5g-20261021-160331/` (Phase A + Phase B รอบแรก = NOT-RUN 411 s, คงไว้ตามจริง) · `evidence/S1.5gB-20261021-200449/` (Phase B รอบใหม่ = PASS)
+incident 2 ครั้ง (เกมถูกเปิดบนเซฟจริงก่อน split: 16:07 และ 19:49) — ทั้งคู่ `SaveSlot*` **ไม่ถูกเขียน**, drift เฉพาะ `PlayerprefData.dat` → `rebaseline` volatile-only (`coop-test/baselines/20261021-161120`, `20261021-200450`) · ลำดับที่ปลอดภัยคือ **split → เปิด sampler → แล้วผู้ใช้ค่อยเปิดเกม**
+ข้อเท็จจริงที่ต้องถือ (RUNTIME, วัดแล้ว):
+- `nowActiveUnitAttacked` **ใช้ตัดสินไม่ได้** — true เฉพาะ `isPlayerTurn=false` (1,005/1,005; true ขณะ player turn = 0/10,177)
+- `HeroData.dead` **ไม่ใช่** ธงตายในศึก — ศพมี `dead=false`, `hp=0`, `BattleUnit.IsAlive=false`, grid `(-1,-1)` ⇒ ใช้ **`BattleUnit.IsAlive` ตัวเดียว** (`spike status` เรียกคีย์นี้ว่า `unitAlive` = `SafeUnitAlive(u) → u.IsAlive` ไม่ใช่ฟิลด์ที่สอง; ห้าม raw read) · `IsAlive` ยัง true ในเฟรมที่ hp→0 · `alive` ใน `stateHash` ไม่สะท้อนการตาย/ดาเมจ
+- `attackRangeGridUnits` ทำนายการรับคลิก 13/13 · `attackComfirmed` เป็น transient (อ่านเฟรมเดียวกับ `BattleGridClicked`) · hp ผู้โจมตีเปลี่ยนทุกครั้ง (AoE) ห้ามใช้เป็นเงื่อนไขคงที่
+- **prerequisite ของ S3 (แก้ก่อนเขียน validator):** guard `&& target.IsAlive` · `stateHash` ให้ `alive` มาจาก `IsAlive`+`hp` · **re-run negative 20 เคสบน build ใหม่** · ตรวจ "จบศึกได้ตามปกติ" เป็นการบังคับในศึกรอบแรกของ S3
+- **เมนู Esc หยุด sim แต่ `battlePaused` ยัง false และ `Time.timeScale` ยัง 1** — วัดได้ 67.8 s ที่ `battleTime`/`turnIndex` นิ่งสนิท (`Finish`) ขณะ `frame` เดิน ~128 fps ⇒ **ห้ามใช้ `battlePaused`/`timeScale` ตัดสินว่าเกมเดินอยู่** ให้ดู `battleTime`/`turnIndex`/state
+- ปุ่ม "หยุด" ของเกม pause ได้ใน state ที่ทดสอบ (Rest/Moving/WaitMoving/WaitAttacking/Attacking/None/Finish) — 16/16 รอบ clock นิ่งสนิท, `timeScale`=1 ตลอด · build นี้ **ไม่มีคำสั่ง `spike pause`** (pause ที่ทดสอบคือ UI ของเกม)
+- **เกมไม่มี autosave ตอนออก** — ปิดเกมกลางศึก 2 ครั้ง (`19:09`, `20:28`) `SaveSlot*` ไม่ถูกเขียน · `PlayerprefData.dat` เขียนทุกครั้งที่เปิด/ปิด ⇒ pref drift เป็นเรื่องปกติ ต้อง `rebaseline` (volatile-only) และบันทึกทุกครั้ง
+ห้ามเรียก method ใดที่เปลี่ยน state ของเกมจนกว่าจะอนุมัติเป็นรายขั้น — **S2 ไม่มี write path เลย** (spectator อ่านอย่างเดียว); **S3 = stage แรกที่รับคำสั่งจากเครือข่ายแล้วรัน** (ผ่าน validator)
+เซฟ: **restore แล้ว 2026-10-21 20:29** — `Save` = ของจริง 57 ไฟล์ digest `6dd645d9ef17` ตรง baseline `coop-test/baselines/20261021-200450` เป๊ะ (rehash อิสระ 0/0/0, `leftovers: none`) · ต่างจาก canonical `2b0548fe464b` เพียง `PlayerprefData.dat` (pref drift จาก incident 16:07 + 19:49, rebaseline บันทึกไว้) · สำเนาทดสอบเก็บ `coop-test/S1.5gB-20261021-200449/Save.used-20261021-202904` · หลักฐาน `LongYinCoop/evidence/S1.5gB-20261021-200449/save-verification.md`
+**Session 2026-10-21 20:50 (ก่อน S2):** session-start checks ผ่านทั้งหมด — hash เกมตรง `VERSION.md` (ทั้งสองไฟล์), เกมไม่รัน, `save-split status` = `Save` 57 ไฟล์ `6dd645d9ef17` + `leftovers: none` (ไม่มี `Save.real-*`/`Save.used-*`), `JitProbeW4=false` · mod repo HEAD `e3e798a` tree สะอาด · tag `stage-S1.5g` (annotated) ชี้ `e3e798a` ซึ่งมีหลักฐาน S1.5gB ครบ · game repo HEAD `65dbd6a` (commit อัปเดต AGENTS นี้) — **tag อยู่ใน mod repo จึงครอบ commit ของ game repo ไม่ได้**; game repo มี tag แค่ `stage-S0`/`stage-S1` (ไม่ได้ย้าย/สร้าง tag ใหม่)
+**Baseline เซฟที่อนุมัติ:** `6dd645d9ef17` (`coop-test/baselines/20261021-200450`, มติ 2026-10-21) · **baseline ปัจจุบันของ S2a-2 = `854cc890430f`** (`coop-test/baselines/20261021-225856`, rebaseline volatile-only, มติ 2026-10-21 ข้อ (ก)) — ต่างจากตัวก่อนเพียง `PlayerprefData.dat` · บันทึกใน `VERSION.md` + `REBASELINE.json` · **baseline ปัจจุบันของ S2a-3 (2026-10-22) = `4226730f66ff`** (`coop-test/baselines/20261022-075422`, มติผู้ใช้ 2026-10-22 หลัง restore `explore-20261022-0755` ผ่าน post-check 6/6) — `854cc890430f` คงไว้เป็นประวัติของ S2a-2
+incident ครั้งที่ 3 (22:54:18): เกมถูกเปิดบนเซฟจริง **ระหว่างเตรียม S2a-2** (14 s หลัง session-start check ที่ยังพบเกมปิด) — `SaveSlot*` ทั้ง 57 ไฟล์ไม่ถูกเขียน, drift เฉพาะ `PlayerprefData.dat` → ผู้ใช้อนุมัติ `rebaseline` volatile-only แล้วรันต่อ · หลักฐาน `LongYinCoop/evidence/S2a2-20261021-2254/incident-game-open-2254.md`
+**สืบเหตุ 22:54:18 (2026-10-21, อ่านอย่างเดียว) — สรุป:** เปิดผ่าน **Steam client session ที่รันค้างตั้งแต่ 15:54:35** (`console_log.txt`: `[22:54:16] GameAction [AppID 3202030, ActionID 6] … CheckShaderDepotManifest → … → CreatingProcess`, `[22:54:18] Game process added … ProcID 45256`, ออก `22:58:34` exit code 0) · **ไม่มี** `ExecuteSteamURL`/`ExecCommandLine` ของการเปิดครั้งนี้ ⇒ ไม่ได้มาจาก external `steam://` URL หรือ `steam.exe -applaunch` · `MelonLoader\Logs\26-10-21_22-54-18.log` = `Command-Line:` ว่าง (เปิดแบบไม่มี argument) · `cef_log.txt` `22:54:15.043` มี display-config change (สาเหตุ UNKNOWN) · ย้อนหลังหา parent **ไม่ได้**: Security 4688 ไม่เปิด (`auditpol` = privilege error, ไม่มี event), `C:\Windows\Prefetch` list ได้ 0, ไม่มี event RDP, ไม่มี scheduled task, ไม่มีสคริปต์อ้าง `steam://`/`-applaunch`/ตัว exe ใน `LongYinCoop/**`, `<เกม>\.opencode/**`, `%USERPROFILE%\.opencode` ⇒ **ระบุตัวผู้เปิดไม่ได้** (ลายที่เห็น = การกดใน Steam UI หรือ UI automation ที่ทิ้งร่องรอยเหมือนกัน) · ครั้งหน้าจะได้ parent ทันทีเพราะมี watcher (read-only) `watch-parent.ps1` pid 21580 เขียน `parent-watch.ndjson` (game PID/PPID/creation/cmdline + ancestor chain 6 ระดับจาก rolling PID map + process snapshot + foreground window owner + tail ของ Steam logs) · หลักฐานเต็ม `LongYinCoop/evidence/S2a2-20261021-2254/launch-forensics-2254.md`
+**S2a-2 (host sampler/sender, loopback) ปิดแล้ว — 2026-10-22 · tag `stage-S2a-2` @ mod repo `14757e3` · รายงาน `evidence/S2a2-20261021-2254/S2a2-report.md`** (ย่อหน้าต่อจากนี้ = ประวัติการเตรียม stage): ขั้น 1–10 ทำเสร็จถึง **`PREFLIGHT READY`** (2026-10-21 ~23:01, label `S2a2-20261021-2254`) — ยังไม่เปิดเกม · commit: game repo `61e3e3e` (แก้โน้ต `unitAlive` ใน AGENTS นี้, แยก commit) · mod repo `427f815` (step 0 + plan rev4, 232 checks PASS) · DLL ใหม่ `cb35a93f…ceee0` อยู่ใน `Mods\` (ของเดิมสำรอง `LongYinCoop.dll.off`) · `Save.real-S2a2-20261021-2254` = เซฟจริง (aside) · `Save` = สำเนา · recorder `tools\s15d_sample.py` pid 46824 (รอเกม ≤3600 s) — **ตายเงียบ 23:15:20** (ยังไม่เคยต่อ pipe, `sampler.ndjson` 0 byte, ไม่มีข้อมูลหาย, สาเหตุ UNKNOWN = น่าจะเป็น process ลูกของ shell ที่ถูกเก็บตอน session จบ) → **รีสตาร์ท pid 29824** (23:40:38, window ถึง ~00:40:38) + `preflight` ใหม่ **`PREFLIGHT READY` 5/5 (23:41)** · watcher parent-process (read-only) pid **21580** · หลักฐาน `LongYinCoop/evidence/S2a2-20261021-2254/` (deviation: `step9-10-restart-2340.md`, `preflight-restart-2341.txt`)
+**มติ 2026-10-21 (S2a-2 rev4):** `DevCommands=true` อนุญาตให้ใช้ตอนวัด (จำเป็นให้ `spike status` ทำงาน) — guard ของ S2 = ฟังก์ชัน pure ตรวจ **6 pref** (`AllowRemoteInput` + `JitProbe/JitProbeW2/W4/W6/W7`), **`DevCommands` ไม่มีผล** (เทสต์ครบ 64 ชุด) · audit คำสั่ง IPC: คำสั่งที่ **เขียน state เกม** มี 2 ตัว (`spike move/attack`) ผ่าน `AllowRemoteInput` ทั้งคู่ ⇒ ไม่มี bypass; `spike disarm`/`bench_dispatch`/`set_pref` เขียนได้แค่ **mod-state** (mod-state writer) — `set_pref` ยังไม่มี gate เลย เสนอเก็บเป็นงาน S2a-4 (`S2a-2-plan.md §8`, `evidence/S2a2-20261021-2213-step0/ipc-audit-20261021.md`)
+**มติ 2026-10-21 (S2a-2 rev5 — หลังตอบคำถามก่อนเปิดเกม):** (1) **exit 3 = mean อย่างเดียว · ไม่เพิ่ม p99 · ไม่ redeploy** — ผ่านเกณฑ์ mean = **PASS-with-limitation** (p99 ของ frame time = **NOT-RUN** ห้ามอัปเป็น PASS เต็มด้วยข้อมูลหยาบ) · `delta = mean(B) − mean(A)` เข้า ±0.5 ms รอบ margin 1.0 ms = **INCONCLUSIVE** ห้ามขยับเกณฑ์ · เหตุผลเชิงวัด (ใช้ชุด 100 ms ของ S1.5gB: 750.5 s, 7,438 samples): mean ต่อบล็อก 30 s จาก Δ`frame`/Δ`t` แม่น — จำลอง recorder 500 ms เทียบ reference 100 ms ต่าง **0.0000 ms** แต่ **noise ธรรมชาติระหว่างบล็อก 30 s** = median 0.067 / p95 0.568 / max 1.101 ms ซึ่งพอ ๆ กับ band ⇒ INCONCLUSIVE เกิดขึ้นได้เองไม่เกี่ยวกับ S2 · p99 วัดจาก 2 Hz **ไม่ได้** (p99 จริง 33.5 ms) · หลักฐาน `evidence/S2a2-20261021-2254/frame-time-measurability-2345.txt(.py)` · (2) **protocol วัด v2** (`evidence/S2a2-20261021-2254/ab-protocol-v2.md`): ตลอด A-B-A-B 120 s ศึกต้องนิ่งที่ **`nowActiveState = WaitPlayerInput`** และห้ามสั่ง action ใด ๆ · **exit 4 (per-unit) ย้ายไปทำหลังจบ A-B-A-B** โดยเปิดเฟส B ค้างไว้แล้วเล่น 1 เทิร์น · ก่อนทุกบล็อกตรวจ `sampler.ndjson` ยังโต (recorder ตายกลางบล็อก = ทิ้งบล็อกนั้นและรายงาน) · จด wall-clock ทุกการสลับ pref + sha256 ของ `MelonPreferences.cfg` ก่อน/หลัง ลง `frame-time-ab.txt` · ถ้า `phase.start`/`phase.idle` ไม่ปรากฏใน ~3 s หลังสลับ → หยุดและรายงาน · **exit 6 self-test ต้องเกิดในศึกจริงเท่านั้น** marker `selftest` ต้องมี `haveBefore=true` **และ** `haveAfter=true` (ถ้า false = โมฆะ เพราะ `S2Sampler.Read()` คืน null นอกศึก ทำให้ `auditEqual` เป็น true แบบกลวง)
+**S2a-2 ผลวัด (ปิด 2026-10-22 · tag `stage-S2a-2` @ mod repo `14757e3`):** **8 PASS/PASS-with-limitation · 1 NOT-RUN · 0 FAIL** — exit 1 PASS (โหลด/ไม่ crash · 1 เทิร์นจบ 00:45:47 · ERROR=0, Exception=0, WARN=3 = forbidden frame ที่ self-test ยัดเอง) · exit 2 PASS (`sampleMs+serializeMs` p99 **0.1047 ms** ≤ 4 ms, n=48,565) · exit 3 **PASS-with-limitation** (A 7.6927 / B 7.9213 ms ⇒ **delta +0.2285 ms**, p99 = NOT-RUN ตามมติ rev5) · exit 4 PASS (**45 field + 9 alive เปรียบเทียบ mismatch 0** ที่ key battleTime 0.689 / turn 1 / frame 44677) · exit 5 **NOT-RUN** (ไม่มีศพ: `hp==0`/`isAlive=false`/`unitAlive=false` = 0 เฟรม) · exit 6 PASS (`haveBefore/haveAfter=true`, `commandsAccepted=0`, `auditEqual=true`, `exit6=PASS`) · exit 7 PASS (`SaveSlot*` ไม่ถูกเขียนเลยตลอด stage · หลัง restore 57 ไฟล์ `854cc890430f` **EXACT** ทั้ง `savehash.real.before.txt` และ `savehash.copy.before.txt`, `leftovers: none`) · exit 8 **PASS-with-limitation** (`unitCount=9` ทุกเฟรม — เล็กกว่าเคส 18 ของแผน · ห้ามขยายผลถึง 60) · exit 9 **PASS** (วัดจริง 2026-10-22 01:11–01:12 = **งาน B**, mod repo `e6d49b7`: สลับ `Mods\LongYinCoop.dll` เป็น build ก่อนหน้า `517758147f59…2612` แล้วผู้ใช้เปิดเกมเอง 65 s · mod เก่าโหลดได้ `stage=S1.5e-W7` + `IPC listening` + heartbeat `err=0 ticks=7800` + `probe: unpatched before=1 after=0` · `[S2]` = 0 lines และ `s2-snapshots.ndjson` ไม่โต (build เก่าไม่มี S2 ตามคาด) · เซฟเปลี่ยนเฉพาะ `PlayerprefData.dat` ในสำเนา, real folder `changed=0` · หลัง restore `854cc890430f` EXACT + `leftovers: none` · คืน DLL `cb35a93f…ceee0` แล้ว · หลักฐาน `evidence/rollbackB-20261022-0108/` + §8 ของ `S2a2-report.md`)
+**สถานะเซฟ/pref หลังปิด stage (2026-10-22 00:48):** `save-split restore --label S2a2-20261021-2254` แล้ว — `Save` = **โฟลเดอร์จริง renamed กลับ ไม่ถูกเขียนทับ**, 57 ไฟล์ `854cc890430f` EXACT ทั้งสอง baseline, `leftovers: none`; สำเนาทดสอบ `coop-test/S2a2-20261021-2254/Save.used-20261022-004827` · pref คืนจาก `prefs.before.cfg` sha256 `269b571c…098d1` = `prefs-sha-before.txt` (ไฟล์ที่ ML เขียนตอนออกเกมเก็บเป็น `UserData\MelonPreferences.cfg.during-S2a2`) · recorder หยุดแล้ว (1,776 samples)
+**ข้อเท็จจริงใหม่ (RUNTIME, วัดแล้ว 2026-10-22) — MelonLoader ทำให้ dotted pref พังสองทาง:** (1) ค่า string ดิบที่ไม่ครอบ quote (`coop.role = host`, `coop.secret = <hex>`) ทำให้ TOML ทั้งไฟล์เสีย → ML ใช้ default ⇒ `Enabled=false` ⇒ **mod นิ่งสนิท ไม่มี IPC pipe เลย** (เกิดจริงตอนเปิด 23:54; แก้ตามมติ A = เก็บเฉพาะ boolean ใน cfg แล้วฉีด `role`/`secret` ตอนรัน) · (2) ตอน **ออกเกม** ML เขียน cfg ใหม่และแปลง `coop.net.enabled`/`coop.allowNonLoopback` เป็นตารางซ้อน `[LongYinCoop.coop]` + `net = { enabled = false }` และ **ทิ้ง `coop.role`/`coop.secret`** ⇒ `S2NetConfig` ที่อ่านเฉพาะ section literal `[LongYinCoop]` จะอ่านไม่เจอเงียบ ๆ หลัง ML เซฟไฟล์ · **มติ 2026-10-22: ย้าย `coop.net.*` ไป `UserData\LongYinCoop\net.cfg`** (ไฟล์ที่ ML ไม่แตะ) — **ทำเสร็จแล้ว 2026-10-22 (งาน A, mod repo `1372bc3`)**: ไฟล์ flat `key = value` (`enabled` / `role` / `secret` / `allowNonLoopback`), fail-closed, **ปฏิเสธ `[section]`** (กันการก๊อป pref/TOML มาใส่) · tests **242 PASS / 0 FAIL** · ยังไม่ build/deploy DLL และยังไม่เปิดเกม · หลักฐาน `evidence/S2a4-20261022-workA/` · หลักฐาน `evidence/S2a2-20261021-2254/incident-mod-inert-20261022-0015.md`, `fix-addendum-20261022-0027.md`, `S2a2-report.md §3`
+**ค้างอนุมัติ:** (1) pre-flight guard ใน `tools/` (ตรวจ เกมไม่รัน + Save ที่ mount เป็นสำเนา + sampler พร้อม ก่อนสั่งเปิดเกม) — **ใช้ได้แล้วในทางปฏิบัติ (`save-split preflight` ผ่าน READY); ยังไม่แก้ไฟล์อื่น** · (2) `S2-plan.md §13` (rev2) รออนุมัติ · (3) คำถาม VPN/เครื่อง guest/ศึก 60 ยูนิต (§11.1 ของ STAGEPLAN) ยังไม่มีคำตอบ · (4) hardening `set_pref` (ห้ามเปิด `allowRemoteInput` ขณะ S2 active) — เสนอ S2a-4
+ถัดไป (งาน A + B เสร็จแล้ว 2026-10-22 · tag `stage-S2a-2` ไม่ถูกย้าย): (1) **งาน C = S2a-3** — `TcpTransport` (loopback) + `tools/viewer-client.py` + metrics + resync: **ต้องวางแผนราย stage แล้วรออนุมัติก่อนลงมือ** และต้อง **build/deploy DLL ใหม่จาก source งาน A (net.cfg) ซึ่งยังไม่ได้รับอนุมัติ** ⇒ ห้าม build/deploy จนสั่ง · (2) exit 9 = **PASS แล้ว** (งาน B, `e6d49b7`) — ไม่ต้องเปิดเกมซ้ำเพื่อข้อนี้ · (3) ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest/60 ยูนิต, hardening `set_pref` (S2a-4) · (4) S1.5 carry-over (นาฬิกา เดินในเมือง/พักโรงแรม/งานคราฟต์) = JIT ของ S4 · ห้ามเปิดเกมเอง และห้ามเปิด IPC client อื่นระหว่างวัด (recorder ถือ pipe เดียว) · แผนหลัก `C:\Users\memph\LongYinCoop\S2-plan.md` (rev2 ที่ §13) — มี `STAGEPLAN.v2-draft.md` ในโฟลเดอร์เกมที่ยังไม่อยู่ใน git **ห้ามใช้เป็นแหล่งความจริง**
+
+## S2 ChangeDay — ข้อเท็จจริง RUNTIME (2026-10-22) · อ่านก่อนแตะ S4c
+
+**RUNTIME-confirmed — ทดสอบ 2 รอบ บนสำเนาเซฟ ด้วย hook log-only 2 จุด**
+
+| ข้อ | งาน 10 วัน | งาน 5 วัน |
+|---|---|---|
+| `GameController.ChangeDay()` (0 พารามิเตอร์) | **10 ครั้ง** | **5 ครั้ง** |
+| `GameController.ChangeDay(int)` (wrapper) | **0 ครั้ง** | **0 ครั้ง** |
+| ปฏิทิน | `10/8/25` → `10/9/5` | `10/9/5` → `10/9/10` |
+| `hour` | คงเดิม | คงเดิม |
+
+- ปุ่ม `>>` = ลูป `skipping` เรียก `ChangeDay()` **วันละครั้ง** ไม่ผ่าน `ChangeDay(int)` (wrapper นั้นเป็นแค่ `for (i<delta) ChangeDay()` — RVA `0x7925f0` / leaf `0x790e30`)
+- วันที่และทรัพยากร 6 ค่าจาก `snapshot()` **ตรงกับ UI** (`HudController.timeLabel` + แถบทรัพยากร) โดยตัวเลขบนจอ **ตัดทศนิยมทิ้ง** (4733.7 → `4733`)
+- เซฟจริงหลัง restore (07:31) ตรง baseline `de7e2af49b23`: 57/57 ไฟล์ · changed=0 · missing=0 · added=0 · `leftovers: none` — **ต่อมา 07:54 มี rebaseline volatile-only เป็น `4226730f66ff`** (incident 07:48, ดูหัวข้อสถานะปัจจุบันด้านล่าง)
+- หลักฐาน: `LongYinCoop/evidence/S2cd-20261022-0710/measurement-skip1.md`, `measurement-skip2.md`, `ui-crosscheck.md`, `inspect-analysis.md` · mod repo commits `5be9739`, `27487a3`, `37403af`, `dd3d18d`
+- **ข้อสรุปเก่า "`>>` เดินปฏิทินเพิ่ม +1 วัน" ถูกหักล้างแล้ว — ห้ามอ้างกลับเป็นข้อเท็จจริง** (sample เดิมถ่ายระหว่างการ์ตูน skip ที่ใช้ ~10.5 วิ ขณะ `leftWorkingDay=1` จึงเห็นแค่วันสุดท้าย)
+
+**UNKNOWN / NOT TESTED**
+
+- body ของ `ChangeDay()` ยังไม่ได้อ่าน ⇒ ยังอธิบายกลไกการเปลี่ยนวัน และเหตุที่ `hour` คงเดิม ไม่ได้
+- ยังไม่ทดสอบ: ความยาวเดือนกรณีอื่น · `TimeData.DeltaDay` · เพดานจำนวนวันของ `>>` · ยกเลิกกลางคัน (`TryCancelWorking`)
+- "1 leaf hit = 1 วัน" ได้รับการสนับสนุนจากงาน 5 และ 10 วันเท่านั้น — **อย่าเหมารวมว่าพิสูจน์ทุกกรณีแล้ว**
+- `workFinished=true` / `working=false` ยืนยันได้จากข้อมูล แต่ยังไม่ได้ยืนยันว่าข้อความสรุปงานกำลังแสดงอยู่บนจอจริง
+
+## สถานะปัจจุบัน (2026-10-22 ~14:4x) — หลังคืนเซฟ `explore-20261022-0755`
+
+- **S2a-3 (งาน C)**: C1 = โค้ด + เทสต์ T0/T1 **PASS** (421 checks / 0 FAIL, S2a-3 suite 179 PASS) · C3 = `dotnet build -c Release` **0 error / 0 warning** → `src\LongYinCoop\bin\Release\LongYinCoop.dll` sha256 `c51debef8c08f8a29524b51f20785f9f71ab9ed29d2eee889977c718af94ae96` · mod repo commits `a0ba387` (code), `a2eae06`/`ea7d61f` (C1/C3 evidence), `8bb1c63` (presave-check), `392689d` (restore evidence) + commit เอกสาร baseline (ตัวล่าสุดใน `git log` ของ mod repo) · หลักฐาน `LongYinCoop/evidence/S2a3-20261022-0156/`
+- **ยังไม่ deploy**: `Mods\LongYinCoop.dll` = `cb35a93f617b16b3cdf069a9c7e76d166dde757b8692b943c8b42b92026ceee0` (build S2a-2, lastWrite 2026-10-21 22:55:43) · **`LongYinCoop.dll.off` = `517758147f59…2612` เป็น build เก่ากว่า (S1.5e-W7) ไม่ใช่ S2a-2** ⇒ C4 ต้องสำรอง `cb35a93f` เป็น `.prev-cb35a93f` ก่อนทับ
+- **เซฟ**: restore `explore-20261022-0755` แล้ว (2026-10-22 14:23, มติผู้ใช้) — `Save` = **ของจริง 57 ไฟล์ digest `4226730f66ff` EXACT** ทั้ง `savehash.real.before.txt` และ copy baseline · `leftovers: none` · rehash อิสระ (ordinal) ตรง · สำเนาเก็บที่ `coop-test/explore-20261022-0755/Save.used-20261022-142312` (57 ไฟล์ `2e593e635ad9…`, drift `PlayerprefData.dat` ไฟล์เดียว)
+- **baseline ที่อนุมัติของ S2a-3 = `4226730f66ff`** (`coop-test/baselines/20261022-075422`) · `APPROVAL.md` + `REBASELINE.json` อยู่ในโฟลเดอร์เดียวกัน · `VERSION.md` และ `S2a-3-plan.md` อัปเดตแล้ว (X9/E7/C6/C8)
+- `net.cfg` ยังไม่มี (`UserData\LongYinCoop\net.cfg` = absent) · `MelonPreferences.cfg` sha256 `269b571c…098d1` · ไม่มี dotted `coop.*`
+- ถัดไป: **C4–C6 รออนุมัติ (Gate #2)** — ยังไม่ build/deploy/เปิดเกม
+
+## สถานะปัจจุบัน (2026-10-24 02:12) — **C9 ปิดแล้ว · tag `checkpoint-S2a` @ `ffc2c88`** · build `5d7b7cc5` · X5 = FAIL (ตัวชี้วัดจำแนกไม่ได้)
+
+> หัวข้อนี้แทนที่ “สถานะปัจจุบัน (2026-10-22 ~14:4x)” ด้านบน
+
+- **เกม**: hash ตรง `VERSION.md` ทั้งสองไฟล์ (วัด 2026-10-24 00:38) · Unity/MelonLoader เดิม
+- **build ที่ deploy**: `Mods\LongYinCoop.dll` = `3c9584a4dd851b8567450a0802db0dae171fd9fb1529ecd35922e7eb7b74e625` · PDB `9cd7cbd0aabde6c56ca04e62486b03180f6f94b10a339b615552808fbc119020` · backup `LongYinCoop.dll.prev-c51debef` = `c51debef…ae96` · เทสต์ **421 PASS / 0 FAIL**
+- build นี้มี: (1) resync fix — ตั้ง `frame.Resync/ResyncFromSeq` **ก่อน** `Encode` (เดิม envelope เป็น false/0 ตลอด) (2) marker `s2.metrics` ทุก 60 s (`combinedP99` = p99 ของ sampleMs+encodeMs ต่อเฟรม) (3) `viewer-client.py --inject-gap` แก้ semantics (inject หลัง ≥4 snapshot, ลด expected_seq)
+- **X4 = PASS** (label `S2a3r-20261024-0115`): gap 1 (ขนาด 3) · resync sent/ack/closed = 1/1/1 · giveUp 0 · gapOpenMs 13 · guest ถอด `seq=6 resync=true,resyncFromSeq=2` · Div-A 0/61 · errors 0 · หลักฐาน `evidence/S2a3-20261022-143608/x4-rerun-20261024.md`
+- **X6 = PASS** — วัดครบสอง rate: default **1 Hz** (label `S2a3x5-20261024-0132`, 01:48–02:05) `window=1413` → `combinedP99=0.1337 ms` (sampleP99 0.1184, serializeP99 0.0070) และ 5 Hz (label `S2a3x6-20261024-0120`) `window=1080` → `0.1258 ms` ⇒ **ไม่ใช่ผลของ rate** · guest รอบ 1 Hz: 1015 snapshots, gaps 0, Div-A 0/1015
+- **X5 = FAIL ตามเกณฑ์** (label `S2a3x5-20261024-0132`, meter ring 65536, 5 หน้าต่าง 60 s): p99 A = 27.783 / 27.783 / **34.720**, B(stall) = 34.719 / 34.720 ⇒ `delta = +4.624 ms` (> 1.5 = FAIL) · **แต่ A2 ที่ S2 ปิดให้ 34.720 เท่ากับ B** ⇒ p99 ตกบน bucket 1/144 s (p50 = 6.945 ทุกหน้าต่าง) จำแนกไม่ได้ · mean frame Δ **−0.035 ms**, p95 เท่ากัน · guest stall เกิดจริง (guest latencyP95 ≈ 57 s) แต่ `TcpTransport.Send` ไม่บล็อก (TryAdd outbox 256) ⇒ ไม่มี backpressure ที่ 1 Hz · **ห้ามขยับเกณฑ์เอง — ต้องอนุมัติตัวชี้วัดใหม่/สตรีสใหม่ถ้าจะวัดซ้ำ**
+- **เซฟ**: label `S2a3x6-20261024-0120` **C8 เสร็จแล้ว (01:27)** — verify PASS (copy drift เฉพาะ `PlayerprefData.dat`), restore แล้ว `Save` 57 ไฟล์ `4226730f66ff` **EXACT** ทุก baseline, `leftovers: none`, rehash อิสระ 0 diff · สำเนา `Save.used-20261024-012725` · ก่อนหน้านี้ `S2a3r-20261024-0115` restore แล้วเช่นกัน
+- `net.cfg` คืนเป็น `dc8e9098…61b61` (454 B · `enabled=false` · `heartbeatMs=1000`) · `MelonPreferences.cfg` `269b571c…98d1` · baseline **ไม่เปลี่ยน** (`4226730f66ff`, `coop-test/baselines/20261022-075422`)
+- source ที่ยัง **uncommitted** ใน mod repo: `src/.../S2Sender.cs`, `S2HostService.cs`, `S2FrameMeter.cs`, `tools/viewer-client.py` + `VERSION.md` (+ evidence ใหม่)
+- **C9 ปิดแล้ว + tag `checkpoint-S2a` (annotated) @ `ffc2c88`** (mod repo) — รายงาน `LongYinCoop/evidence/S2a3x5-20261024-0132/S2a3-report.md`: **7 PASS (X1,X2 มี limitation) · 1 FAIL (X5) · 0 NOT-RUN** · X1 p95 0.277 ms (n=1015) · X2 0.355 KB/s @9 units · X3 Div-A 0/1015 · X4 resync 1/1/1 closed giveUp 0 · X6 PASS · X7 DENY hmac/fieldHash ≤0.3 s + bind loopback only · X8 exit6=PASS + `selftest.tcp` exit8=PASS + `commandsAccepted=0` · X9 57 ไฟล์ `4226730f66ff` EXACT, `leftovers: none`
+- **เซฟ/pref หลังปิด stage (02:09)**: restore `S2a3x5-20261024-0132` → `Save` = โฟลเดอร์จริง renamed กลับ · `status` EXACT ทุก baseline (10 ไฟล์), rehash อิสระ 0/0/0 · `net.cfg` `12541f34c633` (454 B, `enabled=false`, `heartbeatMs=1000`) · `MelonPreferences.cfg` `269b571c…98d1` · recorder หยุดแล้ว · สำเนาทดสอบ `coop-test/S2a3x5-20261024-0132/Save.used-20261024-020908`
+- ถัดไปที่เสนอ: (1) ตัดสินใจเรื่อง X5 — เปลี่ยนตัวชี้วัด (mean/p99.9/tail slope) หรือสร้าง backpressure จริง (`SO_RCVBUF` เล็ก + rate สูง) แล้ววัดซ้ำ **ต้องอนุมัติก่อน** (2) tag `stage-S2a-3` เมื่อ X5 มีมติ (3) ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest/60 ยูนิต, hardening `set_pref`
+
+## สถานะปัจจุบัน (2026-10-24 02:34) — **มติ X5 แล้ว: ตัดสินด้วย mean + BP-1 ควบคู่** · ยังไม่วัดซ้ำ
+
+- **มติ 2026-10-24 (ผู้ใช้เลือก):** X5 ตัดสินด้วย **mean frame time เดี่ยว** (M1) — margin/band **คงเดิม** ของ `S2FrameRule` (Δmean ≤1.0 PASS · 1.0–1.5 INCONCLUSIVE · >1.5 FAIL) · **BP-1 อนุมัติรวมในรอบวัด** (guest `--rcvbuf 1024` + `heartbeatMs=100` ชั่วคราว; พิสูจน์ stressor ด้วย `queuedDropped>0` — field มีจริงใน `S2Counters`) · p99/p95/max รายงานควบคู่เป็น observational · เหตุผลเชิงวัดครบ: `LongYinCoop/X5-metric-proposal.md` (rev2, untracked)
+- **ร่าง rev2 แทน rev1:** rev1 มีตัวเลข noise-floor §1.3 ที่**ไม่พบในไฟล์หลักฐาน** — rev2 ใช้ 8 หน้าต่าง S2-off จริงจากทั้งสอง session: p99 span 13.881 ms = **2 ถัง** (sd 4.45) · p95 ข้าม session ขยับ 1 ถัง (13.894↔6.952) · mean sd 0.195 ข้าม session / **0.034 ใน session เดียว** ⇒ percentile ทุกตัวถูก quantize ที่ 6.945 ms (1/144 s) = 7× margin ใช้ตัดสินไม่ได้ · mean แยกได้ถึง ~0.1–0.5 ms (3A/2–3B, t≈3.18) [INFER จาก sd จริง]
+- **net.cfg:** คืนสถานะอนุมัติ **`12541f34c633`** (`heartbeatMs=1000`) แล้ว (02:30) — สถานะ heartbeat=100 ที่เตรียม BP-1 ไว้หลังปิด stage (แก้ 02:16:45, **ยังไม่เคยรัน**) เก็บใน `net.cfg.bak-heartbeat100-20261024` · `viewer-client.py --rcvbuf` = uncommitted diff
+- **mod repo:** HEAD `5769194` (เพิ่มจาก `ffc2c88`: VERSION deploy sha + gitignore note) · `X5-metric-proposal.md` ยัง untracked
+- **ถัดไป (ลำดับบังคับ):** save-split/preflight → ผู้ใช้เปิดเกม → รัน A-B-A-B-A 60 s (stall 1 Hz เหมือนเดิม) + บล็อก BP-1 (`--rcvbuf 1024`, สลับ `heartbeatMs=100` ชั่วคราว) → ตัดสิน Δmean ตาม margin บน → รายงาน → restore เซฟ + คืน `heartbeatMs=1000` → tag `stage-S2a-3` เมื่อ X5 มี verdict · ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest/60 ยูนิต, hardening `set_pref`
+
+## สถานะปัจจุบัน (2026-10-24 03:12) — **X5 วัดซ้ำแล้ว = PASS ตามมติ mean (Δ = −0.023 ms)** · label `S2a3x5r-20261024-0248`
+
+- **X5 = PASS** (margin 1.0/band ±0.5 ตามมติ 02:30): A {8.183, 8.234, 8.102} vs B(stall 1 Hz) {8.124, 8.176} ⇒ **Δmean = −0.023 ms** · paired −0.059/−0.058 · A-spread 0.132 · **A1 (S2 ปิด) ให้ p99 = 34.720 สูงกว่า B ทั้งคู่** — ยืนยันซ้ำว่า p99 จำแนกไม่ได้ · p95 เท่ากัน 13.894–13.895 · max ฝั่ง B ต่ำกว่า (90.3 vs 97.2–131.9) · ERROR/Exception = 0, `commandsAccepted=0` · หลักฐาน `LongYinCoop/evidence/S2a3x5r-20261024-0248/measurements-20261024.md` + `blocks.txt`, `run.log`
+- **Deviation ที่ผู้ใช้อนุมัติ (วัดบนเซฟจริง ไม่มี split — เกมเปิดก่อน):** ชดเชยด้วย save-watch sha256 57 ไฟล์ ก่อน/หลัง = **changed 0 ทั้งคู่** · diff ปลายทางเทียบ baseline = 5 ไฟล์เดิมพอดี (SaveSlot8 ที่ผู้ใช้เซฟเอง 02:15:47 + pref — ไม่มี write ใหม่จากการวัด) · ปิด session: `net.cfg` กลับ `12541f34c633` ✓, recorder หยุด, ไม่มี orphan process, เกมยังเปิดอยู่ (ผู้ใช้เล่นต่อได้)
+- **ข้อเท็จจริงใหม่ (RUNTIME):** (1) mod อ่าน `heartbeatMs` **ตอน activate listener เท่านั้น** (`enabled` poll สด) — BP1 ครั้งแรก hb ไม่ถูก apply (0.9/s), BP1b ตั้ง hb=100 **ก่อน** activate แล้วได้ **9.3/s** ✓ (2) ที่ 9.3 msg/s (~3.2 KB/s) stall 60 s + guest `SO_RCVBUF=1024` ⇒ **`queuedDropped = 0`** — kernel send buffer กลืนหมด (~195 KB), writer ไม่ block, outbox 256 ไม่เต็ม ⇒ drop path เข้าไม่ได้จนกว่าจะแก้ mod (`SO_SNDBUF` เล็ก) หรือวอลุ่มจริง (ศึกเดิน + sendHz=30) — ยืนยันเชิงประจักษ์ว่า guest stall แตะ main thread ไม่ได้ใน build นี้ · guest BP1b: 668 snapshots, gaps 0, Div-A 0/668
+- **ค้างตัดสิน (ผู้ใช้):** baseline `4226730f66ff` ล้าสมัยจากการเล่นของผู้ใช้เอง (SaveSlot8 02:15) — rebaseline หรือคง canonical+บันทึก divergence แล้วแต่มติ · ถัดไป: tag `stage-S2a-3` (X5 มี verdict แล้ว) · ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest/60 ยูนิต, hardening `set_pref` · ยังไม่ commit (mod repo: HEAD `5769194` + untracked evidence/coop-test รอบนี้)
+
+## สถานะปัจจุบัน (2026-10-24 03:2x) — **S2a-3 เตรียมปิดเสร็จ: รายงาน/AGENTS อัปเดต X5 = PASS, commit แล้ว · tag `stage-S2a-3` รออนุมัติขั้นสุดท้าย**
+
+- **C9 report อัปเดตแล้ว** (`evidence/S2a3x5-20261024-0132/S2a3-report.md`): X5 = **PASS** ตามมติ 2026-10-24 (ตัดสินด้วย **Δmean = −0.023 ms**, margin 1.0/band ±0.5; ค่าดิบ p99/p95/max เป็นข้อมูลประกอบ — รอบแรกตามเกณฑ์ p99 = FAIL +4.624 เก็บเป็นประวัติ) · ยอดรวม: **7 PASS · 2 PASS-with-limitation (X1 = raw latency only NTP ใช้ไม่ได้, X2 = 9 units < 60 ตาม Q9) · 0 FAIL · 0 NOT-RUN** · ข้อจำกัด BP-1 บันทึกใน §X5 (drop path ยังไม่ถูกกระตุ้น)
+- **mod repo commit `c60f405`** (41 ไฟล์): viewer-client `--rcvbuf` · เอกสาร X5-metric-proposal rev2 / X5-remeter-plan / X6 plans · evidence ค้างของ `S2a3-20261022-143608` (C7/C8/build/tests/blocks/x4-rerun/x6-run) · re-measure `S2a3x5r-20261024-0248` (measurements/blocks/savehash-watch; `run*.log` ถูก .gitignore ตาม convention) · ห้ามใช้ add -A: ยังเหลือ untracked ที่**ไม่ใช่ S2a-3** — `.probe.js`, `STAGEPLAN.md`, `STAGEPLAN.v2-draft.md`, `battle-notes.md`, `coop-test/*` (ดิบ, เฉพาะ `coop-test/baselines/*` ถูก track), `evidence/explore-*` 3 โฟลเดอร์
+- **ตรวจก่อน commit:** `dotnet run --project tests/S2Protocol.Tests` = **PASS ทั้งหมด (S2a-3: 179/0, T0/T1 ครบ)** · `git diff ffc2c88 -- src/` ว่าง (ซอร์สตรง build) · **DLL ที่ทดสอบ = `Mods\LongYinCoop.dll` `5d7b7cc5…5953` ตรง `VERSION.md`** (mtime 01:28) — build↔ทดสอบ ตรงกัน
+- **เซฟ (ข้อ 5–6):** ห้าม restore/ห้ามแตะ — **baseline `4226730f66ff` คงเดิม** เป็นหลักอ้างอิง X9 ของ S2a-3 · เซฟปัจจุบันต่าง baseline **5 ไฟล์** (`SaveSlot8/{Hero,Info,Save,TempHero}` + `PlayerprefData.dat`) จาก**การเซฟของผู้ใช้เอง 02:15:47 หลังจบการทดสอบ** — รักษาไว้ · เสนอ: baseline ใหม่สำหรับ stage ถัดไป (rebaseline volatile-only + บันทึก divergence SaveSlot8) — **ต้องขออนุมัติก่อน**
+- **tag `stage-S2a-3` (annotated, mod repo) รออนุมัติขั้นสุดท้าย** — จะชี้ `c60f405` · `checkpoint-S2a` @ `ffc2c88` ไม่แตะ/ไม่ย้าย
+
+## สถานะปัจจุบัน (2026-10-28 02:5x) — **S2a-4 GO-1 + PASS-2 (offline) ปิดแล้ว · มติ M5 = M5-3 · เตรียม GO-3 (ยังไม่ deploy) · Gate 2 = PASS (S3 prerequisite ปิด แต่ S3 ยังไม่เริ่ม)**
+
+> หัวข้อนี้ append ตามคำสั่งผู้ใช้ 2026-10-28 (งาน A4 ของ session `AUTO-20261028-023904`) — ประวัติ S2a-3 ด้านบนคงไว้ครบ
+
+- **GO-1 ของ S2a-4 ทำแล้ว (mod repo, ลำดับ commit):** `14a19af` (แผน rev4 track + diff rev3/rev4 — GO-1 อนุมัติครอบเฉพาะ W0–W3, W5, W4(b)(c)) · `0ced574` (W0 scaffold S2a4Tests) · `056a3a8` (W1 S2GuestDecoder pure + T0) · `cf7b77f` (W2 S2OverlayClient in-process TCP + T1) · `9a6723b` (W3 S2OverlayRenderModel/Service + OnGUI + T3) · `759a6f1` (W4(b)(c) S2WriteGuardHook pure flag + s2_static_check.py + T2) · `3d7e7cc` (W5 S2SetPrefGate + IpcServer gate + T4 + net.cfg reload K30) · `dad408c` (W5 fail-closed + TOCTOU closure) · `dd13491` (W5 เทสต์ T4 fail-closed/TOCTOU) — **ไม่มี W4(a) ไม่มี hook ใดถูกสร้าง/ติดตั้ง** ตามมติ M5-3
+- **ผลวัด offline ที่รายงาน:** C# suite **596 PASS / 0 FAIL** (66+221+179+130) · python `cd tools; python -m unittest test_negative_preconditions` = **53 OK** · `python tools/s2_static_check.py` = **CLEAN** · Debug build **0 warning / 0 error** (session `AUTO-20261028-023904` จะรันซ้ำจาก HEAD และรายงานตัวเลขจริงใน HANDOFF — ถ้าไม่ตรง รายงานตามจริง)
+- **มติที่ประกาศแล้ว (คำสั่งผู้ใช้ 2026-10-28):** **[A1]** PASS-2 (offline) ของ S2a-4 = **PASS** — ขอบเขต**ไม่ครอบ** E6, G0, Release provenance, E1–E8 (อยู่ใน GO-3) · **[A2]** มติ M5 = **M5-3 (ไม่ hook เลยใน S2a-4)** ⇒ E5(a) = NOT-RUN · ผลสูงสุดของ E5 = **PASS-with-limitation** · **ห้าม W4(a) ห้ามติดตั้ง hook ใด ๆ**
+- **Gate 2 = PASS (มติผู้ใช้ 2026-10-26; NEG20R 20/20 บน build `1b4c17aa`, patch rangecells commit `82e9093`)** ⇒ **prerequisite ของ S3 ปิดแล้ว — แต่ S3 ยังไม่เริ่ม** (ร่าง `S3-plan-draft.md` + ร่าง rev2 ยังเป็นเอกสารรีวิว)
+- **baseline ปัจจุบัน (จาก VERSION.md · อัปเดต 2026-10-28 มติ [G-2]):** `df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920` @ `coop-test/baselines/20261028-071340/savehash.real.before.txt` (57 ไฟล์) — split ทุกครั้งต้อง `--expected-baseline` ไฟล์นี้ตรง ๆ · ตัวเก่า `58883949…` @ `20261025-201545` = **superseded เก็บเป็นประวัติ ห้ามลบ** (สายโซ่ครบใน VERSION.md หัวข้อ "Baseline ที่อนุมัติปัจจุบัน")
+- **เอกสารแผนใหม่ = ร่างรออนุมัติ (ยังไม่มีสิทธิ์รัน):** `time-plan-draft.md` (label `TIME-plan-draft-20261028` — V1/V2 + Gate 0–6, D1–D10 ห้ามตัดสินแทนผู้ใช้) · `sp5-t0-plan.md` (rev 13 — รายการอนุมัติ §4 ข้อ 1–8 ยังไม่ผ่าน) · T5 audit (`evidence/TIME-T5-20261028-003723/activity-multiplayer-audit.md`) + P-T0 (`evidence/TIME-T5-P0-20261028-011213/`) = หลักฐาน read-only
+- **net.cfg วัดจริง 2026-10-28:** **444 B** · sha256 `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (เนื้อหา `enabled=false`, `heartbeatMs=1000`) — บันทึก `dc8e9098…` 454 B เดิม = **เคยบันทึกเป็น** (เก็บไว้แล้วใน VERSION.md divergence record) · **VERSION.md แก้ให้ตรงแล้ว (มติ [DEV-2], session `AUTO-20261028-070417`)**
+- **deviation เซฟ (2026-10-28 ตรวจ session-start) — ปิดแล้ว (มติ [G-2], session `AUTO-20261028-070417`):** digest `Save` = `df8e5a11beed` ≠ baseline เดิม — ต่าง **เฉพาะ `PlayerprefData.dat`** (volatile) จากการเปิดเกมของผู้ใช้ 3 ครั้งบน 2026-10-27 (ML logs 00:47/02:16/02:26) · `SaveSlot*` 55 ไฟล์ **EXACT** · `leftovers: none` · rebaseline volatile-only ทำแล้วด้วย tool ⇒ baseline ใหม่ `20261028-071340` (ดูบรรทัด baseline ปัจจุบันด้านบน) — GO-3 ขั้น split ใช้ baseline ใหม่นี้แล้ว (RUNBOOK-G3 ขั้น 4)
+- **build ที่ deploy ยังเป็น `1b4c17aa…`** (316,416 B · ไม่ใช่ build S2a-4) — build ของ S2a-4 ยังไม่ deploy; **Release artifact พร้อมแล้ว (READY, session `AUTO-20261028-072525`)** = DLL `6a94abb5…` + PDB `856d3bed…` ใน `evidence/S2a4-GO3-20261028-030025/` (provenance READY) — รอวลี `เริ่ม GO-3 session`
+- **ตารางวลีสั่งงาน (รายละเอียดเต็มใน `LongYinCoop/evidence/AUTO-20261028-023904/TRIGGERS.md`):**
+  | วลีที่ผู้ใช้พิมพ์ | ความหมาย |
+  |---|---|
+  | `เริ่ม GO-3 session` | อนุมัติ [N1][N2] เฉพาะ S2a-4 GO-3 — ทำตาม `evidence/S2a4-GO3-<ts>/RUNBOOK-G3.md` ขั้น 1–9 (ตรวจ artifact/HEAD → สำรอง .prev → deploy → net.cfg → split+preflight → ผู้ใช้เปิดเกมเอง → วัด G0→E6→E1–E8 → ปิด session restore+คืน net.cfg → รายงานราย E ไม่ปรับเกณฑ์ ไม่ปิด stage เอง) |
+  | `เตรียม V2-A ให้พร้อมรัน` / `เตรียม SP5-T0 ให้พร้อมรัน` | งาน offline เท่านั้น: เขียนโค้ด probe/sampler + เทสต์ offline + compile-only build + provenance — **ยังไม่ deploy/ไม่เปิดเกม** · ต้องมีข้อความผู้ใช้ระบุมติที่จำเป็นครบตามแผนต้นทาง ถ้าไม่ครบ agent ต้องปฏิเสธและแสดงรายการมติที่ขาด |
+  | `เริ่ม V2-A session` / `ร่าง S3 rev2` | ต้องมีมติครบตามแผนต้นทาง (time-plan-draft §F.0 / §C.3, sp5-t0-plan §4) — ไม่ครบ = ปฏิเสธ+รายงานที่ขาด |
+  | (กติกาคาดโทษ) | 4 สายงาน (S2a-4 GO-3, V1/V2, SP5-T0, S3) **ห้ามอยู่ในเซสชันเกมเดียวกัน** |
+
+## สถานะปัจจุบัน (2026-10-28 07:4x) — **G-1/G-2/DEV-2 ปิดครบ · Release artifact S2a-4 GO-3 = READY (ยังไม่ deploy)**
+
+> หัวข้อนี้แทนที่บรรทัด baseline/net.cfg/deviation/build ในหัวข้อ 02:5x ด้านบน (แก้ในที่แล้ว) · ประวัติคงไว้ครบ
+
+- **มติ [G-2] ปิดแล้ว (session `AUTO-20261028-070417`, commit `9f5c17a`):** rebaseline volatile-only ด้วย `save-split.py rebaseline --against 20261025-201545` → **baseline ปัจจุบัน `df8e5a11beed…` @ `coop-test/baselines/20261028-071340`** (ต่างจากเก่าเฉพาะ `PlayerprefData.dat`, SaveSlot* 55 EXACT, ไฟล์เซฟไม่ถูกแตะ, baseline เก่าไม่ถูกเขียน) · หลักฐาน `LongYinCoop/evidence/AUTO-20261028-070417/c3-c4-rebaseline-record.md`
+- **มติ [DEV-2] ปิดแล้ว (session เดียวกัน):** VERSION.md แก้บันทึก net.cfg = **`12541f34…` 444 B** (ค่าเก่า `dc8e9098…` 454 B เก็บเป็น "เคยบันทึกเป็น" + divergence record) · ไฟล์ net.cfg จริงไม่ถูกแตะ · ไม่มี secret ลงเอกสาร
+- **มติ [G-1] รอบใหม่ ปิดแล้ว (session `AUTO-20261028-072525`):** ทาง (ก) `using System.Diagnostics;` 1 บรรทัดใน `SP5/Sp5T0Probe.cs` — เงื่อนไขก่อนแก้ **C1–C4 ผ่านครบ** (อ่านอย่างเดียว: ณ `Sp5T0=false` default, `Apply(false)` จาก load path = no-op ล้วน — ไม่สร้าง Harmony/patch/ไฟล์/เธรด; `MelonPreferences.cfg` ไม่มี key `Sp5T0`; S2/** ไม่มี hook — `LongYinCoop/evidence/AUTO-20261028-072525/c1-c4-precondition-checks.md`) · การตีความ tripwire ใหม่ของผู้ใช้ = "กัน hook ที่ติดตั้งจริงตอนโหลด ไม่ใช่การเรียก no-op"
+- **Phase A (commit `636c209`):** แก้ using +1 บรรทัด (diff ตรง) · **C# suite 596 PASS/0 FAIL (exit 0)** · python **53 OK + discover 68 OK (exit 0)** · `s2_static_check.py` **CLEAN (exit 0)** — exit code จริงทุกคำสั่ง
+- **Phase B (commit `1359217`):** `dotnet build src/LongYinCoop -c Release --no-incremental` ณ `636c209` = **0W/0E, exit 0** (dotnet 9.0.311) · **artifact READY ใน `evidence/S2a4-GO3-20261028-030025/`**: DLL `6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334` (359,936 B) + PDB `856d3bed…196035` (97,128 B) — ไม่ commit (gitignore .dll) **ไม่อยู่ใน Mods\** · **ตรวจ #Strings heap ดิบ (ไม่โหลดแอสเซมบลี): 6 ชนิด FOUND ครบ** (สคริปต์+ผลใน `evidence/AUTO-20261028-072525/`) · provenance.md สถานะ **READY** · RUNBOOK-G3 ขั้น 6 เพิ่มข้อตรวจ **ML log ต้องไม่มีบรรทัด SP5/Sp5T0 install/patch ใด (ถ้ามี = หยุด)** + E5 เพิ่มหลักฐาน (d) — เกณฑ์ E1–E8/G0/E6 ไม่แก้
+- **ยังไม่ deploy:** `Mods\LongYinCoop.dll` ยังเป็น `1b4c17aa…` — deploy เกิดเฉพาะใน GO-3 ขั้น 2 ตาม RUNBOOK (ผู้ใช้พิมพ์วลีเอง)
+- **mod repo HEAD `1359217`** (สายโซ่: `ec78a8b` → รอบ 070417: `d4fdf12`, `9f5c17a`, `8ea8a90` → รอบนี้ 072525: `636c209`, `1359217`) · game repo HEAD = commit AGENTS นี้ · ไม่มี tag/push/amend/add -A
+- ถัดไป: พิมพ์ **`เริ่ม GO-3 session`** — RUNBOOK-G3 พร้อมขั้น 0–9 (prerequisite 2 ข้อปิดครบ) · ผู้ใช้เปิดเกมเอง · ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest/60 ยูนิต, hardening เพิ่มเติม, tag `stage-S2a-3` และ `stage-S2a-4` (รอมติ), แพ็กเกจ V2-A/SP5-T0/V1 ตาม APPROVAL-REQUESTS
+
+## สถานะปัจจุบัน (2026-10-29 01:1x) — **GO-3 รันจริงปิดแล้ว: 8 PASS · 1 PASS-with-limitation · 0 FAIL · มติ [G-3] = (ก) คง build ใหม่** · stage ยังไม่ปิด/ยังไม่ tag
+
+> หัวข้อนี้ append ต่อจากหัวข้อ 07:4x (session `AUTO-20261029-011423`) · รายงานเต็ม `LongYinCoop/evidence/S2a4-GO3-20261028-074003/s2a4-report.md`
+
+- **GO-3 รันจริง (label `S2a4-GO3-20261028-074003`, เกมเปิด 00:00:24 ปิด 01:06:22 ตามปกติ):** **G0, E1, E2, E3, E4, E6, E7, E8 = PASS · E5 = PASS-with-limitation** (M5-3: E5(a) NOT-RUN — ไม่มี hook, ห้ามเขียนว่า hook ผ่าน) · ตัวเลขหลัก: E2 = **42/42 คู่** overlay↔spike status (เลขที่สองของ overlay = `maxHp` ของ payload; UI เกมปัดขึ้น/overlay ปัดลง — ค่า float เดียวกัน) · E3 = `commandsAccepted=0` ตลอด · E4 = **Δmean +0.244 ms ≤ 1.0** (A/B/A2 protocol v2; ความละเอียด ~0.25 ms — 4 หน้าต่างสะอาด) · E6 = PASS สองฝั่ง · E7 = `SaveSlot*` 55 EXACT + restore EXACT + `leftovers: none` · E8 = unitCount 7 (**fixture 60 ยูนิตยังค้าง — Q9**) · ML log **ไม่มีบรรทัด SP5/Sp5T0** · ERROR=12 = noise MelonLoader type-cache เดิม (เท่ากัน log build เก่า)
+- **มติ [G-3] = ทาง (ก) (ผู้ใช้ 2026-10-29):** **คง build ใหม่ใน `Mods\`** — DLL `6a94abb5…` (359,936 B) / PDB `856d3bed…` (97,128 B · source `636c209`, provenance READY @ `1359217`) · **ห้าม rollback · ไม่แตะ Mods\** · rollback point คงไว้: `LongYinCoop.dll.prev-1b4c17aa` + `.pdb.prev-dcd78ebd` (hash ยืนยัน 01:14)
+- **สถานะไฟล์หลังปิด GO-3:** `net.cfg` คืน **`12541f34…` EXACT** (`enabled=false`) · เซฟ restore EXACT = baseline `20261028-071340` (`df8e5a11beed…`, leftovers none) · **`MelonPreferences.cfg` = `66fb92d5…`** (ML เขียนตอนปิดเกมหลัง pref dirty จาก E6 — **ค่า `AllowRemoteInput=false` ถูกต้อง**; เดิม `269b571c…` — divergence record ใน VERSION.md) · เกม 2 ไฟล์ตรง VERSION.md
+- **mod repo commits ใหม่:** `fb6c4d1` (VERSION.md — deploy record ใหม่ + divergence), `3ac0761` (RUNBOOK-G3 บทเรียน 3+1 ข้อจาก GO-3) · game repo = commit AGENTS นี้ · HEAD ก่อนรอบนี้: mod `1359217` / game `36f1150`
+- **ค้าง:** **การปิด stage S2a-4 + tag `stage-S2a-4` = มติผู้ใช้แยก (ยังไม่ทำ)** · E8 fixture 60 ยูนิต (Q9/§11.1) · E4 วัดซ้ำความละเอียดสูง (ถ้าต้องการ <0.25 ms — อนุมัติแยก) · ค้างเดิม: `S2-plan.md §13` rev2, VPN/เครื่อง guest, tag `stage-S2a-3`, hardening เพิ่มเติม, แพ็กเกจ V2-A/SP5-T0/V1 (ห้ามรวมเซสชันเกมเดียวกัน)
+
+## สถานะปัจจุบัน (2026-10-29 01:2x) — **stage S2a-3 + S2a-4 ปิดแล้วตามมติผู้ใช้: tag `stage-S2a-3` @ `c60f405` (มีอยู่แล้วจากผู้ใช้) · tag `stage-S2a-4` @ `3ac0761` (สร้าง session นี้)**
+
+> append โดย session `AUTO-20261029-012457` (งาน tag-only) · แทนบรรทัด "ค้าง: … tag … (รอมติ)" ของหัวข้อ 01:1x ด้านบน
+
+- **[มติ 2026-10-29]:** อนุมัติปิด stage S2a-4 โดย**รับทราบข้อจำกัด**: E5(a) NOT-RUN ตาม M5-3, E8 ไม่มี fixture 60 ยูนิต, E4 ความละเอียด ~0.25 ms · อนุมัติปิด stage S2a-3 และสร้าง tag
+- **tag `stage-S2a-3`:** พบว่า**มีอยู่แล้ว** — ผู้ใช้สร้างเอง 2026-10-25 01:24:57 (annotated) ชี้ **`c60f40517502171827918ba36c82c788bd22812a`** = commit ปลาย S2a-3 (C9 addendum: X1–X9 = 7 PASS/2 PASS-with-limitation/0 FAIL) — ยืนยันถูกต้องทั้งจากเนื้อ commit และบันทึกเดิม "จะชี้ c60f405" ⇒ **ไม่สร้างซ้ำ/ไม่ย้าย** · `checkpoint-S2a` @ `ffc2c88` ไม่แตะ
+- **tag `stage-S2a-4`:** สร้างใหม่ (annotated, 2026-10-29 01:27) ที่ mod repo HEAD **`3ac0761`** — จุดถูกต้อง: มี `636c209` (build source), `1359217` (provenance READY), `fb6c4d1`+`3ac0761` (มติ G-3 + docs) · `src/` ไม่เปลี่ยนหลัง `636c209` (diff ว่าง) · ข้อความ tag อ้างผลราย E ของ `s2a4-report.md` ตามจริง + ข้อจำกัดครบ
+- **STAGEPLAN.md §14 อัปเดตแล้ว** (commit `ba33ec7` — รวม diff เดิม 1 บรรทัด SP0 ที่ค้างใน working tree มาก่อน) · mod repo ไม่มี commit ใหม่ (tag อย่างเดียว)
+- **ค้างหลังปิด 2 stage:** แพ็กเกจถัดไปตามลำดับ **V2-A → SP5-T0 → V1** (ต้องแนบมติครบตาม APPROVAL-REQUESTS, แยกเซสชันเกม) · `S2-plan.md §13` rev2 · VPN/เครื่อง guest/ศึก 60 ยูนิต (Q9) · E4 วัดซ้ำความละเอียดสูง (อนุมัติแยก) · hardening เพิ่มเติม · tag ที่เหลือในโฟลว์เดิม (S3/S4 ฯลฯ = เมื่อ stage นั้นปิด)
+
+
+# VERSION — LongYinLiZhiZhuan build anchors
+
+ตรวจเมื่อ: 2026-10-20 (S0)
+เครื่อง: Windows / `C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan`
+
+| ไฟล์ | SHA-256 | ขนาด (bytes) |
+|---|---|---|
+| `GameAssembly.dll` | `33c56def4102844a1190eec963a05c834cfcf992d42b423d485ce8584d7920c1` | 33,669,120 |
+| `LongYinLiZhiZhuan_Data/il2cpp_data/Metadata/global-metadata.dat` | `451311d4dc8c1b8b5073905c8b39a9781bd7e1f44ed88fbf7b35f5345c18bfd0` | 7,960,432 |
+
+สภาพแวดล้อม: Unity **2020.3.48f1c1** · MelonLoader **0.7.3** · runtime **net6.0** · Il2CppInterop 1.5.1-ci.845
+
+## Baseline เซฟที่อนุมัติ (มติผู้ใช้ 2026-10-21, session ก่อนเริ่ม S2)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `6dd645d9ef17fb626c3b680d8c12b8bf5297d5fbce532b9e7bc4286d343ef19e` (57 ไฟล์) |
+| ไฟล์ baseline | `coop-test/baselines/20261021-200450/savehash.real.before.txt` |
+| เหตุผล | ต่างจาก canonical `2b0548fe464b` **เฉพาะ `PlayerprefData.dat`** (volatile/pref drift จาก incident เปิดเกมบนเซฟจริง 16:07 และ 19:49) · `REBASELINE.json` = `volatile_only: true`, `changed: ["PlayerprefData.dat"]` |
+| ผลบังคับ | ใช้เป็น expected baseline ของทุก `split` ตั้งแต่ S2 เป็นต้นไป — ต้องระบุ `--expected-baseline` ตรง ๆ ทุกครั้ง (ห้ามพึ่ง default ของ tool) |
+| หลักฐาน | `evidence/S1.5gB-20261021-200449/save-verification.md`, `coop-test/baselines/20261021-200450/APPROVAL.md` |
+
+`2b0548fe464b` ยังคงเป็นบันทึก canonical ของ S1.5 แต่ **ไม่ใช่เกณฑ์ผ่าน/ไม่ผ่านของ save อีกต่อไป** — เกณฑ์คือ `SaveSlot*` ต้องไม่เปลี่ยน และ digest ต้องตรง baseline ที่อนุมัติข้างต้น (ยกเว้น `PlayerprefData.dat`/`steam_autocloud.vdf`)
+
+## Baseline ยุค S2a-2 (ประวัติ — rebaseline volatile-only · มติผู้ใช้ 2026-10-21 · superseded ตามสายโซ่ด้านล่าง)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `854cc890430f` = `6dd645d9ef17…` ที่เปลี่ยน `PlayerprefData.dat` ไฟล์เดียว |
+| ไฟล์ baseline | `coop-test/baselines/20261021-225856/savehash.real.before.txt` |
+| เหตุผล | incident 2026-10-21 22:54:18 — เกมถูกเปิดบนเซฟจริงระหว่างเตรียม S2a-2 (14 s หลัง session-start check ที่ยังพบเกมปิด) · **`SaveSlot*` ทั้ง 55 ไฟล์ไม่ถูกเขียน (ทรีรวม 57 ไฟล์ — นับจาก baseline `20261021-225856`)** · ผู้ใช้อนุมัติ **ทาง (ก) rebaseline volatile-only** |
+| ผลบังคับ | ใช้ `--expected-baseline coop-test/baselines/20261021-225856/savehash.real.before.txt` สำหรับ `split` ของรอบ `S2a2-20261021-2254` (รันแล้ว) |
+| หลักฐาน | `evidence/S2a2-20261021-2254/incident-game-open-2254.md`, `rebaseline.txt`, `coop-test/baselines/20261021-225856/REBASELINE.json` |
+
+## Baseline ของรอบสำรวจ Area/UI (2026-10-22 · `area-20261022-0615`)
+
+| รายการ | ค่า |
+|---|---|
+| baseline ก่อน split | `coop-test/baselines/20261022-061550/savehash.real.before.txt` · digest `b069e56c1228` |
+| เหตุผล | เกมถูกเปิดบนเซฟจริง 06:00:22–06:1x **ก่อน** session (ผู้ใช้เป็นคนเปิด) ⇒ เขียน `PlayerprefData.dat` ไฟล์เดียว · **`SaveSlot*` ทั้ง 55 ไฟล์ไม่ถูกเขียน (ทรีรวม 57 ไฟล์)** |
+| baseline ณ ตอนนั้น (หลัง incident 06:39) | `coop-test/baselines/20261022-064205/savehash.real.before.txt` · digest **`1901ad90a2c7`** |
+| เหตุผล | incident 2026-10-22 06:39 — **เปิดเกมบนเซฟจริงหลัง restore** เพื่อทดสอบปุ่ม `>>` โดยไม่มี split/preflight · เปลี่ยนเฉพาะ `PlayerprefData.dat` (ตรวจ hash รายไฟล์) · ผู้ใช้ปิดเกมแล้ว · rebaseline volatile-only ตามกฎ |
+| baseline ณ ตอนนั้น (ถูกแทนที่ 07:54 — ดูหัวข้อถัดไป) | `coop-test/baselines/20261022-064714/savehash.real.before.txt` · digest **`de7e2af49b23`** |
+| เหตุผล | incident 2026-10-22 06:43 (ครั้งที่ 3) — เปิดเกมบนเซฟจริงหลัง restore อีกครั้งเพื่อวัด `>>` ซ้ำ · เปลี่ยนเฉพาะ `PlayerprefData.dat` · `SaveSlot*` 55 ไฟล์ไม่ถูกเขียน · rebaseline volatile-only |
+| ผลบังคับ (ประวัติ) | ใช้ `--expected-baseline …/20261022-064714` เฉพาะช่วงก่อน 07:54 · หลังจากนั้นใช้ `4226730f66ff` (ยุค S2a-3 — ดูหัวข้อประวัติ) · ตั้งแต่ 2026-10-25 ใช้ `b7f67154cff6` (ยุค A/B) → **ปัจจุบันคือ `58883949…` @ `20261025-201545` (หัวข้อ Baseline ท้ายสุด)** |
+
+## Baseline ของ S2a-3 (มติผู้ใช้ 2026-10-22 · หลังคืนเซฟ `explore-20261022-0755`) — **superseded สายโซ่ 2026-10-25: `20261025-052020` → `20261025-201545` (หัวข้อ Baseline ท้ายสุด)**
+
+> สถานะ: เป็น expected baseline **เฉพาะยุค S2a-3** — ถูกแทนสายโซ่ `b7f67154cff6` (ยุค A/B) → `58883949…` (ปัจจุบัน) ตามหัวข้อ Baseline ด้านล่าง · ค่าด้านล่างคงไว้เป็นประวัติ ห้ามลบ
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | `4226730f66ffdcf9adb110fd8e26e29ffa8ba40620ccc33b013ef11adfaa46d7` (57 ไฟล์ · 485,795,554 bytes) |
+| ไฟล์ baseline | `coop-test/baselines/20261022-075422/savehash.real.before.txt` |
+| คำสั่งบังคับ | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261022-075422\savehash.real.before.txt` |
+| เหตุผล | incident 2026-10-22 07:48 — เกมถูกเปิดบนเซฟจริงหลัง restore ของ `S2cd` · เทียบ `064714` แล้วเปลี่ยนเฉพาะ `PlayerprefData.dat` (`SaveSlot*` ไม่ถูกเขียน) · `REBASELINE.json` = `volatile_only: true`, `changed: ["PlayerprefData.dat"]` |
+| การอนุมัติ | **มติผู้ใช้ 2026-10-22** หลัง restore `explore-20261022-0755` ผ่าน post-check 6/6 · `coop-test/baselines/20261022-075422/APPROVAL.md` |
+| ยืนยันด้วยการวัด | `Save` 57 ไฟล์ digest `4226730f66ff` **EXACT** · `changed=0 missing=0 added=0` · `leftovers: none` · rehash อิสระ (ordinal sort) ตรงกัน · `evidence/S2a3-20261022-0156/restore-postcheck.md`, `presave-check.md` |
+| ผลบังคับ | เป็น expected baseline ของ **S2a-3** (C6) และใช้ตัดสิน E7/X9/C8 · ถ้า digest ไม่ตรง **หยุดและรายงาน** ห้าม rebaseline กลบ |
+
+## Baseline ของรอบ A/B (มติผู้ใช้ 2026-10-25 · Post-Close Save Verification · rebaseline volatile-only) — **superseded 2026-10-25 (ค่ำ) โดย `20261025-201545` (หัวข้อถัดไป)**
+
+> สถานะ: ใช้จริงเฉพาะรอบ A/B (`AB-oldbuild` / `AB-newbuild`) — **ตั้งแต่รอบ NEG20 เปลี่ยนไปใช้ `58883949…` ตามหัวข้อ "Baseline ที่อนุมัติสำหรับรอบ NEG20"** · ค่าด้านล่างคงไว้เป็นประวัติ ห้ามลบ
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ (ยุค A/B) | `b7f67154cff613c618994fbf6cb0866a0a8b360bbcb557f5b977320f57ce61cf` (57 ไฟล์ = SaveSlot* 55 + `PlayerprefData.dat` + `steam_autocloud.vdf`) |
+| ไฟล์ baseline | `coop-test/baselines/20261025-052020/savehash.real.before.txt` |
+| **คำสั่งบังคับ (ประวัติ — ยุค A/B)** | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261025-052020\savehash.real.before.txt` — **ทุก `split` ตั้งแต่ 2026-10-25 ต้องระบุ flag นี้ตรง ๆ ทุกครั้ง ห้ามพึ่ง default ของ tool** |
+| เหตุผล | ต่อ incident บูตบนเซฟจริง 2026-10-25 04:56 (`evidence/S3p-20261025-0341/incident-boot-on-real-save.md` §6): drift = `PlayerprefData.dat` ไฟล์เดียว (hash ใหม่ `5bc97eb2d9db7cf5b9e49141b89ae40162c407eab4f20ef3849810422ac62a19`) · **`SaveSlot*` ทั้ง 55 ไฟล์ตรงครบ (ทรีรวม 57 ไฟล์)** · `REBASELINE.json` = `volatile_only: true` |
+| สายโซ่ baseline | `4226730f66ff` (S2a-3 · `20261022-075422`) → `7332fc93eb98` (`20261024-232024` — SaveSlot8 ที่ผู้ใช้เซฟเอง + pref) → `b7f67154cff6` (ยุค A/B — pref เท่านั้น) → **`58883949…` (`20261025-201545` — ปัจจุบัน, หัวข้อถัดไป)** · ตัวเก่าคงไว้ไม่ลบ |
+| ยืนยันด้วยการวัด | restore ของ `AB-oldbuild-20261025-054139` (A/B test 2026-10-25): `Save` 57 ไฟล์ `b7f67154cff6` **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/ab/ab-report.md` |
+| ผลบังคับ (ประวัติ) | เป็น expected baseline **เฉพาะรอบ A/B** · **superseded — ตั้งแต่รอบ NEG20 ใช้ `20261025-201545` (หัวข้อถัดไป)** · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** |
+
+## Baseline ที่อนุมัติสำหรับรอบ NEG20 และ split ถัดไป (มติผู้ใช้ 2026-10-25 ค่ำ · rebaseline volatile-only) — **superseded 2026-10-28 โดย `20261028-071340` (หัวข้อถัดไป)**
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | **`588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485`** (57 ไฟล์ = SaveSlot* 55 + `PlayerprefData.dat` + `steam_autocloud.vdf`) |
+| ไฟล์ baseline | `coop-test/baselines/20261025-201545/savehash.real.before.txt` |
+| **คำสั่งบังคับ** | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261025-201545\savehash.real.before.txt` — **ทุก `split` ตั้งแต่รอบ NEG20 ต้องระบุ flag นี้ตรง ๆ ทุกครั้ง ห้ามพึ่ง default ของ tool** |
+| เหตุผล | ต่อเหตุการณ์เปิดเกมโดยไม่มี split 2 session (12:47:32, 15:05:27 — ไม่เข้าศึก, ปิดสะอาด): drift = `PlayerprefData.dat` ไฟล์เดียว (hash ใหม่ `50e1612b…`) · **`SaveSlot*` ทั้ง 55 ไฟล์ตรง baseline `20261025-052020` ครบ (ทรีรวม 57 ไฟล์)** · `REBASELINE.json` = `volatile_only: true` · อนุมัติ rebaseline volatile-only เฉพาะจุด (มติผู้ใช้ 2026-10-25 — ห้าม rebaseline แบบเหมารวม) |
+| สถานะ | baseline **ที่อนุมัติภายหลังสำหรับรอบ NEG20 และ split ถัดไปที่ใช้ baseline นี้** · baseline เก่าทุกตัว (ล่าสุดก่อนหน้า = `b7f67154cff6` @ `20261025-052020`) คงอยู่เป็นประวัติ ห้ามลบ/เขียนทับ |
+| ยืนยันด้วยการวัด | split ของ `NEG20-f2ad30cd-20261025-202331` EXACT (0/0/0) + restore หลังจบ NEG20: `Save` 57 ไฟล์ **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
+| ผลบังคับ | เป็น expected baseline ของ `split` ถัดไป · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** (rebaseline เพิ่มต้องอนุมัติแยก) |
+
+## Mod build ที่ deploy ล่าสุด (2026-10-25 ค่ำ · build `1b4c17aa…` — rangecells patch · ก่อนหน้า: `f2ad30cd…`) — **superseded 2026-10-29 โดย build `6a94abb5…` (หัวข้อถัดไป)**
+
+| รายการ | ค่า |
+|---|---|
+| `Mods\LongYinCoop.dll` | **`1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177`** (316,416 B · deploy 2026-10-25 ค่ำ เพื่อ Gate-2 closure retest — expose `attackRangeCells` ใน status (read-only) · byte-identical (`cmp`) กับ artifact `src\LongYinCoop\bin\Release\` · deterministic rebuild ยืนยัน hash ตรง source tree ปัจจุบัน) |
+| `Mods\LongYinCoop.pdb` | **`dcd78ebd5241f25196c1c71296ab05dae3d14a034959f9d0d934155e1d4c1e17`** (83,180 B · byte-identical กับ artifact) |
+| backup ก่อน deploy | `Mods\LongYinCoop.dll.prev-f2ad30cd` = `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8` · `Mods\LongYinCoop.pdb.prev-fab0e051` = `fab0e051a6d279e2dae583073af88257670cc16c4d9853e3d2af5663dee1f891` (สร้าง 2026-10-25 ค่ำ — ยืนยันชื่อว่างก่อนสำรอง) |
+| build ก่อนหน้า (ประวัติ) | `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8` (314,880 B · source `59276a4` — S3 prerequisite patch · ใช้ A/B สองรอบ + NEG20 ครบ 20 เคส · สำรองที่ `.prev-f2ad30cd` และ `.s3prereq-f2ad30cd`) · `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` (ยุค S2a-3 · source `ffc2c88` · A/B รอบแรก · สำรองที่ `.prev-5d7b7cc5`) |
+| source ที่ตรงกับ build ใหม่ | HEAD `8fe33ce` **+ patch ยังไม่ commit** (rangecells: `TurnGate.cs` + `S3/RangeCells.cs` + runner/tests — diff ตรวจแล้วใน Phase 2 · deterministic rebuild = `1b4c17aa…` ตรงทุก byte) |
+| `UserData\MelonPreferences.cfg` | `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1` (ไม่เปลี่ยน) |
+| `UserData\LongYinCoop\net.cfg` (A0/พัก) | **`12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8`** (444 B · `enabled=false` · `heartbeatMs=1000` — วัดจริง 2026-10-28, มติ [DEV-2] · **เคยบันทึกเป็น** `dc8e9098…61b61` 454 B — ค่านั้นล้าสมัย ดู divergence record หัวข้อ "Divergence record — net.cfg (DEV-2)" ท้ายไฟล์) |
+| baseline ที่ใช้กับ build นี้ | `coop-test/baselines/20261025-201545/savehash.real.before.txt` · digest `588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485` — split ทั้งสอง label บังคับ `--expected-baseline` และ restore แล้ว EXACT ทั้งคู่ |
+| สถานะ 2026-10-26 | **rangecells patch (attackRangeCells — read-only instrumentation) deploy แล้ว และผ่าน Phase 3 retest ครบ 20/20** · **Gate 2 = PASS (มติผู้ใช้ 2026-10-26)** · **ต้นเหตุ crash เดิม (Gate-2 incident 04:14) ยัง UNKNOWN — แยกจากผล Gate 2 ชัดเจน** · rollback พร้อม (`.prev-f2ad30cd`) · patch rangecells **ยังไม่ commit** (source ณ HEAD `8fe33ce` + patch) |
+| label ที่ใช้ล่าสุด | `NEG20R-case7-20261025-234850` (เคส 7 retest · restore EXACT · `leftovers: none`) · ก่อนหน้า: `NEG20R-1b4c17aa-20261025-230950` (w1/w2/w3 · restore EXACT · `leftovers: none`) · `NEG20-f2ad30cd-20261025-202331` + `AB-newbuild`/`AB-oldbuild` (restore EXACT ทั้งหมด) · ประวัติยุค S2a-3: `S2a3r-20261024-0115`, `S2a3x6-20261024-0120` |
+| ผล Gate 2 closure retest (NEG20R · 2026-10-25/26 · build `1b4c17aa`) | negative 20 เคส same-binary: **PASS 20 · NOT-RUN 0 · FAIL 0 · UNKNOWN 0** · เคส 7–10 พิสูจน์ด้วย `attackRangeCells` สด (ยิงจริง 4 เคสผ่าน 4 เงื่อนไข + กันยิงเมื่อเป้าในระยะ 1 เคส) · เคส 11–14 ศพจริง (`unitAlive=false`, hp=0, (-1,-1)) + ศัตรูมีชีวิตเหลือ · restore EXACT ทั้งสอง split · รายงาน `evidence/S3p-20261025-0341/neg20r/neg20r-report.md` |
+| ผล runtime รอบแรก (NEG20 · 2026-10-25 · build `f2ad30cd` — ประวัติ) | negative 20 เคส: **PASS 12 · NOT-RUN 8 (7–10 range-unverifiable + 11–14 structural) · FAIL 0 · UNKNOWN 0** · ทุกเคสที่ยิง stateHash ก่อน/หลังเหมือนเดิม · จบศึกปกติ (`state=Loot`) · restore EXACT · **NOT-RUN ทั้ง 8 ปิดครบด้วย NEG20R (หัวข้อข้างบน)** · รายงาน `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
+| หลักฐาน | `evidence/S3p-20261025-0341/{gate2-deploy.md,gate2-release-build.txt}` (provenance ยุคก่อน) · `ab/ab-report.md` · `neg20/neg20-report.md` · **`neg20r/neg20r-report.md` (Gate 2 closure)** · Phase 1–2 audit (diff + deterministic rebuild + tests 466+53) อยู่ในบันทึก session นี้ |
+
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-28 [G-2] · rebaseline volatile-only · session `AUTO-20261028-070417`)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | **`df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920`** (57 ไฟล์ = SaveSlot* 55 + `PlayerprefData.dat` + `steam_autocloud.vdf`) |
+| ไฟล์ baseline | `coop-test/baselines/20261028-071340/savehash.real.before.txt` |
+| **คำสั่งบังคับ** | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261028-071340\savehash.real.before.txt` — **ทุก `split` ตั้งแต่ 2026-10-28 ต้องระบุ flag นี้ตรง ๆ ทุกครั้ง ห้ามพึ่ง default ของ tool** |
+| เหตุผล | ปิด DEVIATION-1 ของ session `AUTO-20261028-023904`: drift = `PlayerprefData.dat` ไฟล์เดียว (hash `50e1612b…` → `efd4ac5b…`) จากการเปิดเกมของผู้ใช้ 2026-10-27 ×3 (ML logs 00:47/02:16/02:26) · **`SaveSlot*` ทั้ง 55 ไฟล์ EXACT baseline `20261025-201545`** · rehash อิสระ ADDED=0 MISSING=0 · `REBASELINE.json` = `volatile_only: true` |
+| สายโซ่ baseline | `4226730f66ff` (S2a-3) → `7332fc93eb98` → `b7f67154cff6` (ยุค A/B) → `58883949…` (`20261025-201545` — NEG20) → **`df8e5a11beed…` (`20261028-071340` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
+| ยืนยันด้วยการวัด | rebaseline ด้วย tool (`save-split.py rebaseline --against 20261025-201545`) exit 0 · Save 57 ไฟล์ EXACT baseline ใหม่ (rehash อิสระ diffs: NONE) · ไฟล์เซฟไม่ถูกแตะ (digest ก่อน/หลัง = `df8e5a11beed` เท่ากัน) · หลักฐาน `evidence/AUTO-20261028-070417/c2-independent-rehash.md`, `c3-c4-rebaseline-record.md` |
+| ผลบังคับ | เป็น expected baseline ของ `split` ถัดไป (รวม GO-3 ขั้น 4 ของ RUNBOOK-G3) · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** (rebaseline เพิ่มต้องอนุมัติแยก) |
+
+## Divergence record — `net.cfg` (มติ [DEV-2] ผู้ใช้ 2026-10-28 · แก้บันทึก ไม่แตะไฟล์)
+
+| รายการ | ค่า |
+|---|---|
+| ค่าที่วัดจริง (2026-10-28, session `AUTO-20261028-070417`) | sha256 **`12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8`** · ขนาด **444 B** · เนื้อหา semantic = `enabled=false`, `heartbeatMs=1000` (สถานะ "พัก" ตามอนุมัติ) |
+| **เคยบันทึกเป็น** (2026-10-24, ยุค S2a-3/งาน A — ล้าสมัย) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` · 454 B |
+| คำอธิบายหลักฐาน | ค่าที่วัดจริง `12541f34…` **ตรงกับบันทึก AGENTS.md หัวข้อ 2026-10-24** (net.cfg คืนสถานะอนุมัติหลังปิด stage S2a-3) · ขนาดที่รายงานเก่า (444 vs 454 B) ขัดกันเองในรายงานยุคนั้น — ค่าวัดจริงล่าสุด = 444 B · เนื้อหาไฟล์ไม่เปลี่ยน semantic (enabled=false, heartbeatMs=1000) ⇒ เป็นการแก้**บันทึก**เท่านั้น ไม่ใช่ไฟล์ |
+| ข้อจำกัด | ห้ามคัดลอกค่า `secret` ลงเอกสารใด (ไม่ได้ log ใน record นี้) · ไฟล์ `UserData\LongYinCoop\net.cfg` ไม่ถูกแตะใน session นี้ (hash ก่อน/หลัง = `12541f34…` เท่ากัน) |
+
+## Mod build ที่ deploy ล่าสุด (2026-10-29 · build `6a94abb5…` — S2a-4 GO-3: overlay + set_pref gate · ก่อนหน้า: `1b4c17aa…`)
+
+> deploy 2026-10-28 07:40:28 ใน GO-3 (วลี `เริ่ม GO-3 session` = สิทธิ์ [N1]) · วัดจริงครบเกณฑ์ GO-3 → **คงไว้ใน Mods\ ตามมติ [G-3] ทาง (ก) (ผู้ใช้ 2026-10-29 — ห้าม rollback, `.prev` คงไว้)** · รายงาน `evidence/S2a4-GO3-20261028-074003/s2a4-report.md` (8 PASS · 1 PASS-with-limitation · 0 FAIL)
+
+| รายการ | ค่า |
+|---|---|
+| `Mods\LongYinCoop.dll` (ปัจจุบัน) | **`6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334`** (359,936 B · deploy 2026-10-28 07:40:28 · hash หลัง deploy ตรง artifact provenance READY @ mod repo `1359217`) |
+| `Mods\LongYinCoop.pdb` (ปัจจุบัน) | **`856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035`** (97,128 B) |
+| **เคยบันทึกเป็น** (build ก่อน — rollback point) | DLL `1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177` (316,416 B) · PDB `dcd78ebd5241f25196c1c71296ab05dae3d14a034959f9d0d934155e1d4c1e17` (83,180 B) — สำรองไว้ **`Mods\LongYinCoop.dll.prev-1b4c17aa`** + **`Mods\LongYinCoop.pdb.prev-dcd78ebd`** (hash ตรง ยืนยัน 2026-10-29 01:14) |
+| source ที่ตรงกับ build ใหม่ | `636c209ecd61a572f25d40179b99de370e9892fb` (using fix — บล็อคเดียวที่ต่างจาก provenance build) · docs `1359217` · ยังไม่ tag `stage-S2a-4` (รอมติผู้ใช้) |
+| `UserData\MelonPreferences.cfg` | **`66fb92d51e5d9d24ca2578740b561a3bc6fb4876ebfeddce944535e9a02e74cf`** · **เคยบันทึกเป็น `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1`** — divergence record: ML เขียนไฟล์ตอนปิดเกม (01:06:22, "Preferences Saved!") หลัง pref dirty จาก E6 set_pref roundtrip (true→false คืนทันที) · **ค่า `AllowRemoteInput = false` ถูกต้อง** (บรรทัด 9 — ตรวจแล้ว 2026-10-29 01:14) · agent ไม่ได้แก้ไฟล์นี้ |
+| `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`, `heartbeatMs=1000` — คืน EXACT หลัง GO-3 ตาม RUNBOOK ขั้น 8 · ระหว่าง session ใช้ `5ce166da…` = enabled=true+overlay=true) |
+| baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` (คงเดิม — หลัง GO-3 restore EXACT + `leftovers: none`) |
+| ผล GO-3 สรุป | G0/E1/E2/E3/E4/E6/E7/E8 = PASS · E5 = PASS-with-limitation (M5-3: E5(a) NOT-RUN — ไม่มี hook) · E4 Δmean +0.244 ms ≤ 1.0 · ตรวจหลัง deploy ไม่มีบรรทัด SP5/Sp5T0 ใน ML log · `commandsAccepted=0` ตลอด |
+
+## กฎ
+
+1. เทียบ SHA-256 ทั้งสองไฟล์ทุกครั้งที่เริ่ม session — **ไม่ตรง = หยุดและรายงาน** (เกมอัปเดต = anchor ใน notes ทั้งหมดเชื่อไม่ได้)
+2. ห้าม commit `GameAssembly.dll`, `global-metadata.dat`, `MelonLoader/Il2CppAssemblies/`, `dump.cs` (ดู `.gitignore`)
+3. ค่าใน `STAGEPLAN.md §13` (RVA/offset) ใช้สำรวจเท่านั้น โค้ดต้อง re-resolve ผ่าน interop
+
+
+# APPROVAL-REQUESTS — แพ็กเกจที่รอมติผู้ใช้ (สร้าง 2026-10-28 โดย session `AUTO-20261028-023904`)
+
+> อ่านไฟล์นี้แล้วตัดสินใจได้เร็ว · **ทุกแพ็กเกจยังไม่มีสิทธิ์เริ่มจนกว่าผู้ใช้จะระบุมติครบตามที่แจกแจง**
+> · **กติกาคาดโทษ: 4 สายงาน (S2a-4 GO-3 / V1 / V2 / SP5-T0 และ S3) ห้ามอยู่ในเซสชันเกมเดียวกัน**
+> · ลำดับที่แนะนำ (เหตุผล: ลดตัวแปร — จบงาน deploy/runtime หนึ่งเรื่องให้จบ แล้วค่อยเปิดเรื่องใหม่):
+> **GO-3 → V2 ชุด A → SP5-T0 → V1 → (S3 แยกไปอีกที)** · V1 กับ V2 ชุด A ใช้ dependency ต่างกันตาม
+> time-plan-draft §F.0 (ชุด A ไม่ต้องรอ V1) — แต่การรันจริงยังแยกเซสชันเกม
+
+---
+
+## แพ็กเกจ 1 — S2a-4 GO-3 (build/deploy/runtime ของ Guest Overlay + set_pref gate)
+
+**จุดประสงค์:** deploy build ที่มี overlay in-process + `set_pref` gate แล้ววัด G0/E6/E1–E8 ตามเกณฑ์
+`S2a-4-plan.md` rev4 §11 (ตรงตัว ไม่ปรับเกณฑ์) บนสำเนาเซฟ · มติ M5 = M5-3 (ไม่ hook เลย) ใช้อยู่แล้ว
+
+**สถานะหลักฐาน:** PASS-2 (offline) = PASS [A1] · C# 596/0 ×3 รอบ (วัดซ้ำ 2026-10-28) · python 53 OK ·
+static CLEAN · **BLOCKED 2 ข้อ:** (1) Release build ล้ม — `SP5/Sp5T0Probe.cs` ขาด using
+(ดู `evidence/S2a4-GO3-20261028-030025/provenance.md`) (2) digest เซฟ ≠ baseline (ต่างเฉพาะ
+`PlayerprefData.dat` — ดู session-start.md DEVIATION-1) · RUNBOOK ครบแล้ว:
+`evidence/S2a4-GO3-20261028-030025/RUNBOOK-G3.md`
+
+**สิ่งที่ต้องมติผู้ใช้ (ลอกจากแผน/สถานะจริง — ค่าเริ่มต้นที่เสนอ + เหตุผลสั้น):**
+
+| # | มติ | ตัวเลือก | ค่าเริ่มต้นที่เสนอ | เหตุผล |
+|---|---|---|---|---|
+| G-1 | แก้ build break | (ก) เพิ่ม `using System.Diagnostics;` ใน Sp5T0Probe.cs (1 บรรทัด) / (ข) exclude `SP5/**` จาก csproj / (ค) ยังไม่แก้ — เลื่อน GO-3 | **(ก)** | แก้น้อยสุด ไม่เปลี่ยนพฤติกรรม probe (ยังไม่ถูกติดตั้งอยู่แล้ว); (ข) กระทบ build ทุก config มากกว่า |
+| G-2 | baseline เซฟ | (ก) rebaseline volatile-only (`PlayerprefData.dat` เดียว) / (ข) คง baseline `58883949…` + บันทึก divergence แล้ว restore เอง | **(ก)** | SaveSlot* 55 ไฟล์ EXACT อยู่แล้ว; drift = volatile ตามปกติทุกครั้งเปิดเกม; รูปแบบเดิมที่เคยอนุมัติซ้ำหลายครั้ง |
+| G-3 | หลัง session: DLL ใหม่คงไว้หรือ rollback `.prev-1b4c17aa` | ตัดสินตอนจบ session | — | RUNBOOK ขั้น 8.3 ห้ามตัดสินแทน |
+| G-4 | อนุมัติวลี "เริ่ม GO-3 session" = [N1]+[N2] ตาม RUNBOOK | ใช่/ยัง | — | วลีต้องมาหลัง G-1/G-2 มีมติแล้ว |
+
+**สิ่งที่ agent จะทำเมื่ออนุมัติ:** ขั้น 0–9 ตาม RUNBOOK-G3.md (session-start ใหม่ → ตรวจ artifact →
+สำรอง `.prev-*` + deploy → net.cfg (overlay=true) → split+preflight → **ผู้ใช้เปิดเกมเอง** → G0 → E6 →
+E1/E2/E3/E4/E7/E8 → ปิด session restore+คืน net.cfg → รายงานราย E)
+
+**ความเสี่ยง:** OnGUI อาจไม่ยิง (G0 = NO-GO หยุดก่อนอย่างอื่น) · overlay กิน guest slot เดียว (ห้ามรัน
+viewer-client พร้อมกัน) · E4 อาจ INCONCLUSIVE (band ±0.5 — รายงานตามจริง ห้ามขยับ) · deploy DLL ใหม่
+บนเกมจริง (rollback พร้อมทุกขั้น)
+
+**Rollback:** ขั้น 8 ของ RUNBOOK + `.prev-*` + restore เซฟ EXACT + คืน net.cfg
+
+**วลีสั่งงาน:** `"เริ่ม GO-3 session"` (แนบมติ G-1/G-2 มาในข้อความเดียวกัน — ถ้าไม่ครบ agent ปฏิเสธ)
+
+---
+
+## แพ็กเกจ 2 — V2 ชุด A (T(N) rate ปกติ — อ่านอย่างเดียว ไม่เขียน static field)
+
+**จุดประสงค์:** วัด T(N) ที่ `dayTime=1.0, pauseTime=0.25` ระดับเฟรม (N ∈ {1,5,10} + N=10 กด `>>`)
+เพื่อ**แยกสองรูปของสูตร T(N)** — `N*(D*k)+N*P` (12.5 s) vs `N*D+(N+2)*P` (13.0 s) ที่ N=10 — ซึ่งค่าวัด
+เดิม (~12.5, n=1) แยกไม่ได้ (time-static-notes หมายเหตุ 2026-10-28 + time-plan-draft B.6/§E.2)
+
+**สถานะหลักฐาน:** โครงสูตร OBSERVED เชิง disasm (Update 0x9CB4B0 — initial pause 0x9CACAA, threshold
+×k, final 2×pause) · สเปก sampler + สคริปต์วิเคราะห์**พร้อมแล้ว**: `tools/time_v2a_analyze.py` + เทสต์
+9/9 (commit `b1418a3`) — ตัดสิน FORM1/FORM2/INDISTINGUISHABLE/MISMATCH/INVALID (day_ticks ≠ N = INVALID)
+
+**สิ่งที่ต้องมติผู้ใช้ (จาก time-plan-draft §F.0 — ชุด A = Gate 0 + Gate 1 + Gate 5a โดยตรง ไม่ต้องรอ Gate 2–4):**
+
+| # | มติ | ตัวเลือก/ค่าเริ่มต้นที่เสนอ | เหตุผล |
+|---|---|---|---|
+| V2A-1 | **Gate 0** — อนุมัติ `time-plan-draft.md` เป็นแผนทำงาน | ใช่/แก้ก่อน | แผนยังสถานะ DRAFT รอรีวิว |
+| V2A-2 | **มติ D9** — baseline/fixture เซฟ | (ก) rebaseline / (ข) คง divergence + snapshot ก่อนทดสอบ | Gate 1 ไม่ผ่านถ้าไม่มี D9 (ระบุในแผนตรง ๆ) — แนะแนวทาง (ข) ตามที่แผนเขียนไว้เองว่า "ห้ามอ้าง fixture diverge ตรง baseline เดิม EXACT" |
+| V2A-3 | **Gate 5a** — อนุมัติรันชุด A เฉพาะตัว | ใช่/ยัง | การอนุมัติชุด A ไม่รวมชุด B/C โดยปริยาย (§F.0) |
+| V2A-4 | **อนุมัติเขียนโค้ด sampler อ่านอย่างเดียวชุดใหม่ใน mod** (ยังไม่มีสิทธิ์เขียน src/ — [N5]) | ใช่/ยัง | จำเป็นเพราะต้องวัดระดับเฟรม; spec อยู่ด้านล่าง — log-only, typed interop, ไม่มี write path |
+| V2A-5 | อนุมัติ build/deploy DLL ที่มี sampler (แยกจาก GO-3 build) | ใช่/ยัง | sampler = โค้ดใหม่ใน mod ต้อง deploy จึงวัดได้ |
+
+**สเปก sampler (ร่าง — เขียนจริงหลัง V2A-4):** อ่านผ่าน **typed interop เท่านั้น** ห้าม raw offset —
+`WorkingUIController.Instance` fields (`working`, `leftWorkingDay`, `totalWorkingDay`, `nextDayTime`,
+`leftPauseTime`, `workFinished`, `skipping`, `noCancel`) + statics `dayTime`/`pauseTime` (อ่าน) +
+`WorldData` `hour`/วันที่ · ความถี่: **per-frame ขณะ `working==1`** (นอกงานไม่เขียน) · รูปแบบ NDJSON ต่อ
+event: `t` (unix ms), `frame`, `ev ∈ {work_start, day_tick, pause_end, work_end, work_abort}`,
+`leftWorkingDay`, `totalWorkingDay`, `nextDayTime`, `leftPauseTime`, `workFinished`, `skipping`,
+`dayTime`, `pauseTime`, `hour` · day_tick ตรวจจับจาก `leftWorkingDay` ลดลงระหว่างเฟรม (ห้ามใช้ hook
+ChangeDay — ไม่มี hook ในเส้นนี้) · ทุกเคส = สำเนาแยก (กฎ §D.0 กฎ 2) · ทำซ้ำ ≥3 รอบ/ค่า
+
+**สิ่งที่ agent จะทำเมื่ออนุมัติ:** "เตรียม V2-A ให้พร้อมรัน" = เขียน sampler + เทสต์ + compile-only build +
+provenance (ยังไม่ deploy) → "เริ่ม V2-A session" = preflight/split → ผู้ใช้เปิดเกม → ผู้ใช้เริ่มงาน N วันตาม
+เคส → เก็บ ndjson → analyze → รายงาน → restore
+
+**ความเสี่ยง:** ต่ำสุดของสามแพ็กเกจ (ไม่มี write ใด ทั้งเกม/เซฟ/pref) · ความเสี่ยงหลัก = คุณภาพการวัด
+(แอนิเมชัน/freeze 3 ทางเป็น noise — แผน §B.7 กำหนดวัดแยก) · **MISMATCH = หยุดรายงาน ห้าม refit โมเดลเอง**
+
+**Rollback:** restore สำเนา + คืน net.cfg/pref + sampler ปิดด้วย pref default-off (idiom เดิม)
+
+**วลีสั่งงาน:** `"เตรียม V2-A ให้พร้อมรัน"` (ต้องแนบ V2A-4/V2A-5 ถ้าจะให้เขียนโค้ดไปด้วย) →
+`"เริ่ม V2-A session"` (ต้องแนบ V2A-1..3 + มติ D9 ครบ — ไม่ครบ agent ปฏิเสธและแสดงรายการที่ขาด)
+
+---
+
+## แพ็กเกจ 3 — SP5-T0 (บัญชี NPC 1 creation round — probe log-only)
+
+**จุดประสงค์:** ตรวจบัญชีการสร้าง NPC หนึ่งรอบ (`GenerateHero`/`GenerateRandomEnemy`/`AddTempHero`
+ฯลฯ) ด้วย probe log-only เพื่อปิดเงื่อนไขก่อนคิดเรื่องลด NPC (ห้ามลด NPC ในรอบนี้ — [N8])
+
+**สถานะหลักฐาน:** แผน `sp5-t0-plan.md` rev 13 ครบ · **โค้ด probe source มีแล้ว** (`SP5/Sp5T0Probe.cs`,
+commit `7ff47ab` — **ยังไม่เคย compile** และเป็นต้นเหตุ build พังปัจจุบัน) · สคริปต์ตรวจสมการพร้อมแล้ว:
+`tools/sp5t0_audit.py` + เทสต์ synthetic 6/6 (commits `16a38c3` + fix `ea3c7dd`) — ตรวจ bucket
+pre/creation/post, E5 unattributed, E7 Σhist==H + ΣperForce==hist[sect], phaseStuck==0,
+E1/E2 = observational UNKNOWN ตาม rev 13
+
+**รายการอนุมัติ §4 ของ sp5-t0-plan.md ที่ยังค้างทั้ง 8 (ห้าม agent ตัดสินแทน):**
+
+| # | รายการ | ค่าเริ่มต้นที่เสนอ | เหตุผลสั้น |
+|---|---|---|---|
+| 1 | อนุมัติแผน T0 (rev 13 — หมายเหตุ: §4 ข้อ 1 ในไฟล์ยังเขียน "rev 7" เป็นข้อความค้างของ revision เก่า) แล้วจึงแก้/ตรวจโค้ด probe | ใช่ (หลังรีวิว) | กติกา 1 — แผนก่อนลงมือ |
+| 2 | build/deploy DLL ที่มี probe + ตั้ง `Sp5T0=true` ก่อนเปิดเกม | ใช่ (ตามลำดับ preflight → split → probe → เปิดเกม) | probe ต้องอยู่ใน build จริง |
+| 3 | preflight §2.6 ขั้น A (read-only) PASS ครบ + **อนุมัติ save-split ขั้น B แยก** | ใช่ — แยกมติขั้น A / ขั้น B ชัด | ขั้น B เปลี่ยน filesystem (rev 5) |
+| 4 | ทดสอบบนสำเนาเซฟตาม §1.2 | ใช่ | กติกา 4 ของ repo |
+| 5 | OPTIONAL hooks H6–H11 | **ไม่ติดทั้งหมด** (CORE H1–H5 พอสำหรับ E1–E7) | ลดตัวแปรรอบแรก |
+| 6 | แผนสำรอง hook `List<T>.Add` | ไม่อนุมัติตอนนี้ — เสนอใหม่เมื่อ residual ≠ 0 จริง | hook กว้างเสี่ยง frame-time |
+| 7 | settle window / event cap / ตำแหน่ง evidence | ตามแผน: 10 นาที / 50,000 / `evidence/SP5t0-<ts>/` | ค่าที่แผนเสนอไว้ |
+| 8 | ถ้า typed read ล้มเหลวต้องใช้ raw offset | **ปฏิเสธ** (อ่านไม่ได้ = รายงาน readfail + ข้าม) | กติกา 8 |
+
+**รายการตรวจโค้ด probe (draft — ตรวจหลัง G-1 แก้ build แล้ว compile ผ่าน):** log-only 100% (ไม่มี write
+เข้า state เกม, ไม่แก้ args, `__result` อ่านเดี่ยวใน postfix) · try/catch กลืนครบทุก hook + err counter ·
+finalizer contract ฉบับ canonical (lifecycle ทุก invocation, คืน exception เดิม, `factory.finalizer` เชิงบวก /
+`factory.failure` conditional) · invocation linkage `iid` พิสูจน์ด้วย harness test · patch-audit 4 จุดตรวจ
+(expected inventory HarmonyX 2.10.2 ครบ 5 categories) · pref `Sp5T0` default false · Uninstall ตรวจ patch
+count คืน 0 · ประกาศชัด: ไม่มีกลไกพิสูจน์ `inventoryStability` ภายใน window ⇒ E1/E2 คาดหมายคง UNKNOWN
+
+**สิ่งที่ agent จะทำเมื่ออนุมัติ:** "เตรียม SP5-T0 ให้พร้อมรัน" = รีวิวโค้ด probe ตาม checklist + compile
+(หลัง build fix) + provenance (ยังไม่ deploy) → "เริ่ม SP5-T0 session" = preflight ขั้น A → [มติ split ขั้น B]
+→ split → deploy + `Sp5T0=true` → ผู้ใช้เปิดเกมแล้ว**สร้างโลกใหม่ทันที ไม่เปิด plot/recruit ระหว่างรอบ** →
+เก็บ ndjson → `sp5t0_audit.py` → รายงาน → restore
+
+**ความเสี่ยง:** probe โดนเรียก ~886+ ครั้ง/รอบ (buffered write แล้ว) · `StartNewGame` เปลี่ยน WorldData
+instance (rebaseline marker + สมการข้าม instance = ไม่ปิด) · E1/E2 คาดหมายคง UNKNOWN (rev 13 —
+ไม่ใช่ความล้มเหลว) · ห้ามสรุป "path ที่สอง" จาก unattributed เฉย ๆ
+
+**Rollback:** pref `Sp5T0=false` = Uninstall ทันที + `CompatInventory.CountOwnedPatches` ต้องคืน 0 ·
+restore สำเนา · deploy ตามขั้น .prev-* เดิม
+
+**วลีสั่งงาน:** `"เตรียม SP5-T0 ให้พร้อมรัน"` (แนบมติข้อ 1 อย่างน้อย) → `"เริ่ม SP5-T0 session"` (ต้องแนบ
+มติข้อ 1–7 ครบ แยกขั้น A/B ตามที่แผนกำหนด — ไม่ครบ agent ปฏิเสธและแสดงรายการที่ขาด)
+
+---
+
+## แพ็กเกจ V1 (อยู่ท้ายลำดับ — dependency หนักสุด)
+
+**จุดประสงค์:** ตรวจพฤติกรรม**ยกเลิกกิจกรรม** (TC-1/TC-2/TC-4 ผ่าน**ปุ่ม UI**) บนสำเนาเซฟ — refund/ทรัพยากร/
+dialog/latch `workFinished` (time-plan-draft §D)
+
+**สิ่งที่ต้องมติก่อนเสมอ:** **D1** (ยกเลิกผ่านปุ่ม UI เท่านั้น หรืออนุญาต invoke `MiddleStopWork` ด้วย) และ
+**D2** (ยอมรับหลักการ per-day credit ถาวรย้อนคืนไม่ได้) — Gate 2 · แล้ว Gate 3 (อนุมัติ V1 แยก รวม probe
+build log-only ที่ `StopWorking`/`MiddleStopWork`/จุดยิง finishFuc ตาม §D.1 ข้อ 5) · **เคส TC-3a/TC-3b
+(invoke method เกม) ไม่ถูกครอบด้วยแพ็กเกจนี้เว้นแต่ผู้ใช้อนุมัติแยก** (เป็นการเรียก method เกม = [N4]
+โดยตรง) · ตาม §F.0 ทาง V1 ต้องผ่าน Gate 0→1→2→3 — ทำหลังแพ็กเกจ 1–2 เพื่อไม่ให้มติ D1/D2 ไปผูกกับ
+ผลวัดอื่น
+
+**วลีสั่งงาน:** `"เตรียม V1 ให้พร้อมรัน"` / `"เริ่ม V1 session"` (ต้องแนบ D1 + D2 + ประกาศอนุมัติ Gate 3 —
+ไม่ครบ agent ปฏิเสธ)
+
+# RUNBOOK-V2A — ฉบับสั่งงาน `เริ่ม V2-A session` (V2 ชุด A — T(N) rate ปกติ อ่านอย่างเดียว)
+
+> สำหรับ session ที่ผู้ใช้พิมพ์วลี **`เริ่ม V2-A session`** — วลีต้องแนบมติ **V2A-1 (Gate 0) + V2A-2 (D9) +
+> V2A-3 (Gate 5a)** ครบ ไม่ครบ agent ต้องปฏิเสธและแสดงรายการมติที่ขาด (APPROVAL-REQUESTS แพ็กเกจ 2)
+> · artifact ที่จะ deploy = `evidence/V2A-20261029-020816/` (provenance READY @ commit `211ea21…`)
+> · **ห้ามรวมเซสชันเกมเดียวกันกับ** GO-3/SP5-T0/V1/S3 (กติกาคาดโทษ APPROVAL-REQUESTS)
+
+## ขั้น 0 — session-start (เกมยังไม่เปิด)
+
+1. เกมไม่รัน · hash เกม 2 ไฟล์ตรง `VERSION.md` (`33c56def…` / `451311d4…`)
+2. `Mods\LongYinCoop.dll` = `6a94abb5…` · `.pdb` = `856d3bed…` · `.prev` ทั้งคู่ (`1b4c17aa…`/`dcd78ebd…`)
+3. เซฟ EXACT 57/57 baseline `df8e5a11beed…` @ `coop-test/baselines/20261028-071340` + `leftovers: none`
+   (`python tools\save-split.py status`)
+4. `MelonPreferences.cfg` ตรวจ**ค่า key** ไม่ใช่ hash (บทเรียน GO-3): `Enabled = true` (โมด), `AllowRemoteInput = false`,
+   ไม่มี key `TimeV2a` หรือมีแล้วเป็น false · `net.cfg` = `12541f34…` (444 B, `enabled=false` — ไม่แตะตลอด session)
+5. ข้อใดไม่ตรง = **หยุดรายงาน** ไม่ลงมือ
+
+## ขั้น 1 — สำรอง + deploy artifact
+
+1. ตรวจ**ชื่อว่างก่อน**: `Mods\LongYinCoop.dll.prev-6a94abb5` และ `Mods\LongYinCoop.pdb.prev-856d3bed` **ต้องไม่มีอยู่**
+   (ถ้ามี = หยุดรายงาน)
+2. copy `Mods\LongYinCoop.dll` → `.prev-6a94abb5` + verify sha256 = `6a94abb5…`; ทำเช่นกันกับ `.pdb` → `.prev-856d3bed`
+   (verify = `856d3bed…`)
+3. deploy: copy `evidence\V2A-20261029-020816\LongYinCoop.dll` + `.pdb` → `Mods\` แล้ว **verify sha256 หลัง copy**
+   = `983b2384…` / `951de8fc…` (366,080 / 99,568 B)
+
+## ขั้น 2 — pref ของ sampler + pointer file (ก่อน split/preflight)
+
+1. แก้ `UserData\MelonPreferences.cfg` เฉพาะบรรทัด pref: เพิ่ม/ตั้ง `TimeV2a = true` ใน section `[LongYinCoop]`
+   (ค่าอื่นทุกตัวคงเดิม — โดยเฉพาะ `AllowRemoteInput = false` · จด sha256 ก่อน/หลัง แต่**ตรวจปลาย session ด้วยค่า key**)
+2. สร้าง pointer file `UserData\LongYinCoop\time-v2a.out` บรรทัดเดียว (path ของ NDJSON **ของ run นั้น** ใน evidence
+   ของ label นี้ ผ่าน junction) — **ชื่อไฟล์แยกต่อเคส×รอบ** (มติ 2026-10-29 รอบเริ่ม session: `<เคส>-r<รอบ>.ndjson`
+   เช่น `a1-r1.ndjson` — แทนชื่อตายตัว `time-v2a.ndjson` ที่เคยระบุไว้ก่อนหน้า):
+
+   ```
+   C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\<LABEL>\<เคส>-r<รอบ>.ndjson
+   ```
+
+   และ `mkdir` โฟลเดอร์ `LongYinCoop\evidence\<LABEL>\` ให้พร้อม (sampler เปิดแบบ append — ไฟล์ว่างเริ่มต้นได้)
+   · **touch ไฟล์ปลายทางให้มีอยู่จริง (ว่าง) ก่อน preflight ของ run นั้นทุกครั้ง** (บทเรียน RUNBOOK-G3 — กันไฟล์
+     evidence ไม่มีจริงตอนเปิดเกม)
+   · **สลับ pointer ต่อ run = แก้บรรทัดเดียวให้ชี้ไฟล์ของ run ใหม่ระหว่างเกมปิด + touch ไฟล์ใหม่** ก่อน split/preflight
+     (fail-closed: ไม่มีไฟล์/ว่าง = ไม่เขียน) · pointer ต้องชี้ถูกไฟล์ก่อนผู้ใช้เปิดเกม**ทุกรอบ**
+
+## ขั้น 3 — split + preflight-launch (ต่อรันทุกครั้ง — กฎ 2 ของ time-plan §D.0: รอบซ้ำแต่ละรอบ = เคสอิสระ)
+
+ต่อ**รัน** (สำเนาใหม่ทุกรัน เกมยังปิด — มติ 2026-10-29 รอบเริ่ม session):
+
+```
+python tools\save-split.py split --label <LABEL> --expected-baseline coop-test\baselines\20261028-071340\savehash.real.before.txt
+python tools\save-split.py preflight-launch --label <LABEL>   # ต้อง "READY - you may launch the game" ก่อนเปิดเกมเสมอ
+```
+
+- **preflight-launch** (tools/save-split.py 773–886) = green light แบบ read-only สำหรับกรณี**ไม่มี recorder ภายนอก**
+  (sampler อยู่ใน mod DLL) — ตรวจ: เกมปิด · copy mounted · leftovers = 1 Save.real-* · manifest ·
+  real-aside-untouched · mounted-is-copy (hash) · **ห้ามใส่ --dry-run** (dry-run ไม่ให้ green light — บรรทัด 882–883)
+  · **ไม่เขียน history.ndjson โดยดีไซน์** (docstring 776–777 — `append_history` ไม่มีใน 773–886) ⇒
+  **เก็บผล stdout ลง `evidence\<LABEL>\preflight-launch.txt` เป็นหลักฐานแทน**
+- **hand-check ก่อนเปิดเกมทุกรัน** (ชดเชยข้อ 4–5 ของ `preflight` เดิมที่ผูกกับ recorder ภายนอก):
+  (ก) pointer file `UserData\LongYinCoop\time-v2a.out` ชี้ไฟล์ของ run นี้ — **ตรวจไบต์ด้วย `od -c`** ห้ามแค่ cat
+  (ข) ไฟล์ปลายทาง `evidence\<LABEL>\<เคส>-r<รอบ>.ndjson` มีอยู่จริง (touch แล้วจากขั้น 2)
+  (ค) `TimeV2a = true` **และ** `Sp5T0 = false` ใน `MelonPreferences.cfg` (ตรวจค่า key)
+- **บทเรียน (incident จริง 2026-10-29 ตอนเตรียม A1-r1): เขียน pointer file ด้วย heredoc (`cat > file <<'EOF'`)
+  ห้าม printf** — printf ตีความ `\e`/`\a` เป็น escape character ทำ path เสีย — **ตรวจไบต์ด้วย `od -c` ทุกครั้งหลังเขียน**
+- baseline อ้างตามมติ [V2A-2]: `df8e5a11beed…` @ `20261028-071340` — **ห้ามใช้ baseline เดิม `4226730f66ff`**
+  (errata E1–E3) · ถ้า digest ไม่ตรง = **หยุดรายงาน ห้าม rebaseline กลบ**
+- snapshot ก่อนทดสอบ = `savehash.real.before.txt` ของ split นั้นเอง (เกณฑ์ตรวจคืนของรัน)
+
+## ขั้น 4 — ผู้ใช้เปิดเกมเอง + ตารางเคส (ชุด A — Gate 5a; ไม่รวมชุด B/C)
+
+ML log ต้องมีบรรทัด `[TimeV2a] writer open -> …<LABEL>\<เคส>-r<รอบ>.ndjson` หลังงานเริ่มครั้งแรก (ไฟล์ของ run
+นั้น — pointer ต้องชี้ถูกไฟล์ก่อนเปิดเกมทุกรอบ ตามขั้น 2)
+· **ต้องไม่มี**บรรทัด Harmony/patch/install ใด (มี = หยุด) · และต้องไม่มี SP5/Sp5T0 install/patch (ถ้ามี = หยุด)
+
+| เคส | รอบ | สิ่งที่ผู้ใช้ทำ (ต่อรอบ — สำเนาใหม่ทุกรอบ) | คาดหวังเชิงโครง |
+|---|---|---|---|
+| A1: N=1 ปกติ | ×3 | เริ่มงาน 1 วัน (job ใดก็ได้ที่กดผ่าน UI ปกติ) → **ไม่กดอะไรต่อ** จนงานจบเอง → ปิดเกม | work 1.75 s (form2) / 1.25 s (form1) |
+| A2: N=5 ปกติ | ×3 | เริ่มงาน 5 วัน → รอจบ → ปิดเกม | 6.75 (form2) / 6.25 (form1) |
+| A3: N=10 ปกติ | ×3 | เริ่มงาน 10 วัน → รอจบ → ปิดเกม | 13.0 (form2) / 12.5 (form1) — gap 0.5 = จุดตัดสิน |
+| A4: N=10 กด `>>` ค้าง | ×3 | เริ่มงาน 10 วัน → กด `>>` ค้างจนจบ → ปิดเกม | **observational เท่านั้น** (errata N4 — ไม่ใช่คำตัดสินฟอร์ม) |
+
+กติกาบังคับทุกเคส (time-plan §E.2/§E.3):
+
+- **บันทึกชนิดงาน (เพิ่มหลัง A2-r3 — มติ 2026-10-29): ในรอบต่อไปให้ผู้ใช้จดชนิดงานของแต่ละรัน และหากเป็นไปได้
+  ให้ใช้ชนิดเดียวกันทุกรัน** — NDJSON ไม่มีฟิลด์ชนิดงาน (ไม่มี workName — ตรวจ keys แล้ว 2026-10-29) จึงต้อง
+  พึ่งการจดของผู้ใช้เท่านั้น · [สมมติฐาน popup ผูกกับชนิดงาน = UNKNOWN]
+- **ถ้ามี popup ระหว่างงาน: ปิด popup แล้วปล่อยงานวิ่งจนจบ — ห้ามกดเริ่มใหม่** · ปิดเกมหลังงานจบแล้วแจ้ง
+  agent ทันที — **รันนั้นจะถูกติดป้าย CONTAMINATED และทิ้ง** (ตรวจอัตโนมัติด้วยกฎ gap > 2 s ด้านล่าง ·
+  บทเรียน A2-r1: เริ่มงานซ้ำ = work_start ×4 · A3-r2: popup ค้างปั๊ม 16.1 s กลางงาน · A2-r3: popup "ได้ไม้"
+  ค้าง 9.0 s หลัง day_tick วันที่ 1)
+- ระหว่างงานเดิน **ห้าม action อื่นแทรก** (ไม่เดินทาง ไม่เปิดพล็อต ไม่เปิดเมนู Esc ค้าง — native freeze 3 ทางเป็น
+  noise ที่ทำให้ T(N) เพี้ยน) · จด fps/การกระตุกของหน้าจอรายรอบ
+- เคส A4 (skip): ก่อนรอบแรก **ยืนยัน `TestMode` ด้วยสองสัญญาณตาม §E.3 ข้อ 1–2** (อ่าน `PlayerPrefDictionary` ผ่าน
+  log-only ไม่ได้ใน build นี้ ⇒ ใช้สัญญาณพฤติกรรม: คูณ skip ที่เกิดจาก `skipK` บน `day_tick` (0.5 vs 0.2) +
+  ความเร็ว anim ×2 vs ×5) — สองสัญญาณต้องตรงกัน ไม่ตรง = หยุดรายงาน · ห้ามเขียน `TestMode` เด็ดขาด
+- จบทุกรอบ: **ปิดเกมเอง** (งานจบก่อนเสมอ — ถ้าจบไม่ได้/soft-lock = หยุดรายงาน) → restore + verify ขั้น 6 → ค่อยรอบถัดไป
+
+## ขั้น 5 — เก็บข้อมูล
+
+- NDJSON แยกต่อเคส×รอบ = `LongYinCoop\evidence\<LABEL>\<เคส>-r<รอบ>.ndjson` (ตามขั้น 2 — มติ 2026-10-29) — ตรวจว่า
+  ไฟล์โตและมี `work_end`/`work_abort` ปิด session ครบทุกงานที่ทำ
+- ML log คัดลอกบรรทัด `[TimeV2a]` ทั้งหมดไป evidence ของ session
+
+## ขั้น 6 — restore + verify (ปิดเคสก่อนเคสถัดไป — กฎ 2)
+
+```
+python tools\save-split.py restore --label <LABEL>
+python tools\save-split.py status   # ต้อง EXACT ตามมติ [V2A-2]: 57 ไฟล์ digest df8e5a11beed… + leftovers: none
+```
+
+- ไม่ตรง = **หยุดรายงาน** (§G.1) · **ห้ามอ้างว่า fixture ตรง baseline เดิม `4226730f66ff` แบบ EXACT**
+
+## ขั้น 7 — วิเคราะห์ (offline, หลังปิดเกม)
+
+```
+python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjson --tolerance <T>
+```
+
+- **`--tolerance` ต้องประกาศก่อนวัด** — เสนอ **0.1 s** (การวัดระดับเฟรม; ดีฟอลต์ 0.5 ทำให้ N=10 ปกติ = INDISTINGUISHABLE
+  ตั้งแต่โครง — errata N4) · ผู้ใช้ยืนยันค่านี้ตอนพิมพ์วลีสั่งงาน (ไม่ตัดสินเอง)
+- ตัดสิน (ตาม analyzer เดิม ห้ามแก้): `day_ticks ≠ N` = INVALID · measured เข้าใกล้ฟอร์มเดียวภายใน tolerance =
+  FORM1/FORM2 · เข้าทั้งคู่ = INDISTINGUISHABLE · **MISMATCH = หยุดรายงาน ห้าม refit โมเดลเอง**
+- รอบ skip (A4): ไม่ใช้ verdict ของ analyzer เป็นคำตัดสิน — อ่าน k จริงจาก `skipK` บน `day_tick` (เฉลี่ยรายรอบ)
+  + เวลา wall-clock รายงานเป็นข้อมูลประกอบ
+- สรุปรวม ≥3 รอบ/ค่า: รายงาน measured รายรอบ + median/spread — ห้ามเลือกรอบที่ "สวย" มาแทนชุด
+
+## ขั้น 8 — ปิด session
+
+1. ปิดเกมแล้ว: restore ของ label สุดท้าย + `status` EXACT baseline + `leftovers: none`
+2. **คืน pref ด้วยการตรวจค่า key** (บทเรียน RUNBOOK-G3 — ML เขียน cfg ตอนออกเกม แฮชจึงเปลี่ยนได้เอง):
+   `TimeV2a = false` · `AllowRemoteInput = false` · `Enabled = true` คงเดิม · จด sha256 ก่อน/หลังเป็น divergence record
+   (ไม่ใช้ hash เป็นเกณฑ์ผ่าน)
+3. **`net.cfg` ห้ามแตะตลอด session** — ตรวจท้าย = `12541f34…` (444 B)
+4. pointer file `time-v2a.out`: ลบหรือคงไว้ก็ได้ (fail-closed — ไม่มีผลเมื่อ `TimeV2a=false`) — แนะนำ**ลบ**
+   เพื่อลดสิ่งแวดล้อมค้าง
+5. rollback ถ้าต้องถอน build: คืน `.prev-6a94abb5`/`.prev-856d3bed` (verify hash) — ตัดสินใจเรื่องคง build ใหม่
+   = **มติผู้ใช้แยก** (เหมือน G-3 ของ GO-3 — ห้ามตัดสินแทน)
+6. รายงานปิด: ผลรายเคส (INVALID/FORM/INDISTINGUISHABLE/MISMATCH + measured รายรอบ + skipK) · hash เซฟก่อน/หลัง ·
+   ข้อจำกัด (NOT-RUN รายเคส) · ข้อขัดแย้งกับหลักฐาน static ใด ๆ = หยุดและรายงานทันที (§G.1 ข้อ 4)
+
+## เงื่อนไขหยุดทันที (ระหว่าง session — เจอข้อใดข้อหนึ่ง = หยุด รายงาน ห้ามแก้เอง)
+
+- session-start ไม่ตรง · split/preflight ไม่ผ่าน (digest ≠ baseline `df8e5a11beed…`)
+- ML log มี Harmony/patch/install ใด (TimeV2a/SP5) ที่ไม่ใช่ `[TimeV2a] writer open/close`
+- day_ticks ≠ N (INVALID), T(N) ผิดปกติชัด (งานไม่จบตามโครง), เกม crash/soft-lock, เซฟ hash เปลี่ยน
+- MISMATCH ของ analyzer บนเคสปกติ → **หยุด รายงาน ห้าม refit** · สองสัญญาณ TestMode ไม่ตรงกัน (เคส A4)
+
+## ภาคผนวก A — เกณฑ์ตัดสินฉบับที่ 2 [CRITERIA] (มติผู้ใช้ 2026-10-29 หลัง pilot A1-r1 — ล็อกก่อนรัน A3-r1)
+
+> **สถานะของ A1-r1:** MISMATCH ตาม [TOL]=0.1 เดิมคงอยู่ตามจริง (`analyze-result.txt` ไม่แก้) — จัดเป็น
+> **pilot — ไม่นับเป็นผลยืนยัน** (`evidence\V2A-a1r1-20261029-022648\pilot-a1r1-analysis.md`) · ตั้งแต่รัน A3-r1
+> เป็นต้นไปตัดสินด้วยเกณฑ์นี้เท่านั้น — ผล `time_v2a_analyze.py --tolerance 0.1` รายรอบคงพิมพ์ตามจริงเป็น
+> ข้อมูลประกอบ แต่**ไม่ใช่ตัวตัดสินผ่าน/ไม่ผ่านอีกต่อไป**
+
+- **โครง:** ทุกรัน `day_ticks == N` **และ** ลำดับ event ตรงโครง = `work_start → pause_end → [day_tick →
+  pause_end]×N → work_end` (ตาม static §2.4; abort = work_abort แทน work_end)
+- **ความชัน:** fit เชิงเส้น `measured = slope×N + intercept` จาก **N=1,5,10 ทุกรอบรวม** (least squares ราย run —
+  เฉพาะรอบ normal A1/A2/A3; **รอบ skip A4 รายงานแยก ไม่เข้า fit** เพราะ k ต่าง) —
+  slope ต้องอยู่ใน **1.25 ± 0.1 s/วัน** ผิด = **MISMATCH จริง → หยุดรายงาน**
+- **ฟอร์ม (ตัวเลขคงเดิมทุกตัว — มติรอบ A):** จุด intercept อยู่ใน **[−0.1, +0.1]** = **FORM1** · ใน
+  **[+0.4, +0.6]** = **FORM2** · จุด**นอกทั้งสอง window และไม่ใช่กรณีคาบเกี่ยว** = **UNRESOLVED_OFFSET**
+  (รายงานค่า intercept + ช่วงความเชื่อมั่นถ้ามี — เชิงประมาณ ±1.96×SE ของ intercept จาก residual ของ fit เดิม)
+  · **INDISTINGUISHABLE สงวนไว้เฉพาะกรณีคาบเกี่ยว/ข้อมูลไม่พอแยก** (ช่วงความเชื่อมั่นครอบ/ทับ**ทั้งสอง**
+  window) — ทั้ง UNRESOLVED_OFFSET และ INDISTINGUISHABLE เป็น**ผลที่ยอมรับได้ ไม่ใช่ความล้มเหลว** ·
+  **ห้าม refit โมเดล ห้ามเพิ่มพารามิเตอร์แอนิเมชันเข้าสูตรเอง**
+- **ส่วนเกินที่อธิบายไม่ได้:** residual รายรัน = `measured − (slope×N + intercept)` รายงานเป็นค่าแยก — **ไม่ใช้
+  ตัดสินฟอร์ม**
+- **รายงาน observational รายช่วง (มติรอบ A ข้อ A2 — ไม่ใช้ตัดสินฟอร์ม):** ต่อรันและต่อ N รายงาน
+  initial (work_start→pause_end#1) · day ต่อวัน (mean/min/max) · final (day_tick สุดท้าย→pause_end สุดท้าย) ·
+  tail (→work_end) พร้อมบอกว่าแต่ละช่วงขึ้นกับ N หรือคงที่ — **OBSERVED เท่านั้น ห้ามใส่คำอธิบาย "แอนิเมชัน"
+  เว้นแต่มีหลักฐานในไฟล์**
+- **pilot:** A1-r1 (MISMATCH ตาม [TOL] เดิม — `pilot-a1r1-analysis.md`) **ไม่นับเป็นผลยืนยัน ⇒ กันออกจาก fit
+  ด้วย `--exclude <path>` เสมอ** (ข้อความมติ 2026-10-29 ข้อ 2)
+- **กฎคุณภาพข้อมูล (เพิ่มหลังเจอ A3-r2 · ใช้ย้อนกับทุกรัน — ผลของรัน valid เดิมไม่เปลี่ยน):** รันใดมีช่องว่าง
+  ระหว่าง event ติดกัน **> 2.0 s ภายใน work_start→work_end** = **CONTAMINATED** — กันออกจาก fit
+  อัตโนมัติและรายงานเป็นรายการแยก (พร้อมตำแหน่ง gap และ field ที่ค้าง) · **หลักฐานใช้ย้อน (scan ทุกไฟล์
+  2026-10-29):** A3-r1 max 1106 · A2-r2 max 1069 · A1-r2 max 1053 · A1-r1 max 1077 — ทุกตัว < 2000 ⇒
+  ผลเดิมไม่เปลี่ยน · A2-r1 43,428–77,289 (INVALID เดิม — ผล excluded ไม่เปลี่ยน) · A3-r2 16,118 ⇒
+  **CONTAMINATED** (ตรวจอัตโนมัติ: `GAP_CONTAMINATION_MS = 2000` ใน time_v2a_fit.py ·
+  เทสต์ retroactive ครอบไฟล์จริงทั้ง 4)
+- **เครื่องมือ:** `python tools\time_v2a_fit.py <ndjson รอบ normal ทุกไฟล์> [--exclude <pilot>]` — ตรวจโครงรายรัน →
+  fit รวม → พิมพ์ slope/intercept/CI/verdict/residual/segments รายรัน · exit code: **0** = fit สำเร็จ (รวม
+  INDISTINGUISHABLE/UNRESOLVED_OFFSET — ยอมรับได้) · **3** = slope MISMATCH (หยุดรายงาน) · **1** = ไม่มี run
+  ใช้ได้/จุดไม่พอ fit · **2** = args/ไฟล์ผิด · ห้ามแก้ `time_v2a_analyze.py`
+
+# provenance — V2-A artifact (สถานะ: **READY — build ผ่าน 0W/0E · artifact ครบ · metadata 12/12 · C4 ผ่าน**)
+
+> session `AUTO-20261029-013511` (2026-10-29) · งาน "เตรียม V2-A ให้พร้อมรัน" — **compile-only** ตามมติ [V2A-5]
+> · **การ deploy จริงทำเฉพาะใน "เริ่ม V2-A session"** (ต้องสำรอง `.prev-6a94abb5` ตอนนั้น — ดู RUNBOOK-V2A.md)
+> · **ไฟล์นี้ไม่ใช่การอนุมัติเปิดเกม/deploy** — วลีสั่งงานต้องมีมติ V2A-1..3 + D9 ครบ (APPROVAL-REQUESTS แพ็กเกจ 2)
+
+## ผล build (C1/C2 — ตรวจจาก committed tree, 0 untracked-modified ณ ตอน build)
+
+- **คำสั่ง:** `dotnet build src/LongYinCoop -c Release --no-incremental` (จาก mod repo)
+- **source commit:** `211ea21d27d3b56d95829052dcb23004d8196afe` (HEAD — `src/` สะอาด, `git status` tracked-modified = 0)
+- **dotnet SDK:** 9.0.311
+- **ผล: Build succeeded — 0 Warning(s) / 0 Error(s), exit 0**
+
+## ตาราง artifact (คัดลอกแล้ววัดซ้ำตรงต้นทาง — อยู่ในโฟลเดอร์นี้, ไม่ commit, **ไม่อยู่ใน Mods\**)
+
+| ไฟล์ | sha256 | ขนาด (bytes) |
+|---|---|---|
+| `LongYinCoop.dll` | `983b238432a466535e6f3bfad1408f4ee0a657f910f2169af84f0d2f9d16893b` | 366,080 |
+| `LongYinCoop.pdb` | `951de8fc1385a285cb1a02174639e92b1a6a3719bf6028e2adcfdbe52afee7d6` | 99,568 |
+
+- ต้นทาง: `src/LongYinCoop/bin/Release/` — สำเนาในโฟลเดอร์นี้ sha256 ตรงต้นทางเป๊ะ (วัดซ้ำหลัง copy)
+- `.dll` ถูก .gitignore กัน · `.pdb` untracked และ**ไม่ถูก add** ใน commit ใด
+- เทียบ build ก่อนหน้า (S2a-4 GO-3): DLL `6a94abb5…` 359,936 B → ตัวนี้โตขึ้น 6,144 B = โค้ด TimeV2a ใหม่ (สมเหตุสมผล)
+
+## เทสต์ก่อน build (exit code จริงทั้งหมด — บทเรียน `16a38c3`)
+
+| ชุด | คำสั่ง | ผล | exit |
+|---|---|---|---|
+| C# suite | `dotnet run --project tests/S2Protocol.Tests -c Release` | **633 PASS / 0 FAIL** (596 เดิม + 37 ใหม่ TimeV2a) | 0 |
+| python negative | `python -m unittest test_negative_preconditions` (ใน tools/) | Ran 53 tests — OK | 0 |
+| python ทั้งชุด | `python -m unittest discover -p "test_*.py"` (ใน tools/) | Ran 68 tests — OK (รวม test_time_v2a_analyze 9/9) | 0 |
+| static check | `python tools/s2_static_check.py` | CLEAN — 0 violations | 0 |
+| B4 analyzer cross-check | `dotnet run … -- --emit-v2a-fixture` + `python tools/time_v2a_analyze.py <fixture> --tolerance 0.1` | **FORM2**, day_ticks=5==N, sessions=1 decided=1 — analyzer อ่าน NDJSON ของ detector จริงได้ **โดยไม่แก้ analyzer** | 0 |
+
+หลักฐาน B4: `evidence/AUTO-20261029-013511/b4-analyzer-crosscheck.md` (+ `b4-analyze-result.txt` · fixture
+`v2a-fixture.ndjson` อยู่บนดิสก์เท่านั้นตาม `.gitignore:60`)
+
+## C3 — ตรวจ metadata ดิบ (#Strings heap — อ่านไบต์ล้วน **ไม่โหลดแอสเซมบลี**)
+
+สคริปต์ `evidence/AUTO-20261029-013511/c3_strings_heap_check.py` (วิธีเดียวกับ B3 ของ GO-3 — ไฟล์เดิมไม่แก้)
+ผล (`c3-strings-result.txt`, exit 0): **ครบ 12 ชนิด = FOUND ทั้งหมด**
+
+- V2-A ใหม่ 6: `TimeV2aObs` · `TimeV2aEvent` · `TimeV2aDetector` · `TimeV2aGate` · `TimeV2aNdjsonWriter` · `TimeV2aSampler`
+- S2a-4 เดิม 6 (ยังอยู่ครบ): `S2GuestDecoder` · `S2OverlayClient` · `S2OverlayRenderModel` · `S2OverlayService` · `S2SetPrefGate` · `S2WriteGuardHook`
+
+## C4 — ณ pref default (`TimeV2a=false`) sampler ทำงานเป็น no-op สมบูรณ์ (หลักฐานเชิงโค้ด ระบุบรรทัด)
+
+| ข้อพิสูจน์ | หลักฐาน |
+|---|---|
+| pref default = false | `src/LongYinCoop/CoopPrefs.cs:61` — `TimeV2a = Category.CreateEntry("TimeV2a", false);` |
+| ประตูที่ 1 (mod) | `src/LongYinCoop/CoopMod.cs:142-148` — `Tick()` เรียก `TimeV2aSampler.Tick()` เฉพาะเมื่อ pref true; ถ้า pref false และ writer ยังเปิด → Stop() (ปิดไฟล์) |
+| ประตูที่ 2 (sampler) | `src/LongYinCoop/TimeV2a/TimeV2aSampler.cs:45` — `if (!CoopPrefs.TimeV2a.Value) return;` (กันเรียกผิดฝั่ง) |
+| ไม่มี Harmony instance/patch/hook | grep `Harmony|HarmonyLib|Patch|PatchAll` ใน `TimeV2a/**` = **1 hit เดียว = comment** (`TimeV2aSampler.cs:15` ประโยค "ไม่มี Harmony instance/patch/hook ใด") — 0 ในโค้ด · **ไม่มี W4(a) ไม่มี hook ใหม่ถูกสร้าง** (คงมติ M5-3) |
+| ไม่เปิดเธรด/timer/process | grep `new Thread|new Timer|Process.Start|Dns` ใน `TimeV2a/**` = **0 hits** (exit 1) |
+| ไม่มี write path เข้า state เกม | grep กำหนดค่า field เกม (`\.working\s*=` ฯลฯ 11 field ตามสเปก) ใน `TimeV2a/**` = **0 hits** · โค้ดอ่านอย่างเดียวทั้งหมด (typed property getters) |
+| ไฟล์ I/O ทั้งหมดของ TimeV2a | (1) อ่าน pointer file `UserData\LongYinCoop\time-v2a.out` — `TimeV2aSampler.cs:118,123` (File.Exists/ReadAllLines, โพล ≤1 Hz เมื่อ pref on) (2) เขียน NDJSON ตาม path ที่ pointer ชี้ — `TimeV2aRules.cs:261` (StreamWriter append, flush ทุก 20 บรรทัด) · **fail-closed**: ไม่มี pointer/ว่าง/นามสกุล ≠ .ndjson = ไม่เขียนเลย (`TimeV2aGate` — เทสต์ 6 ข้อ) |
+| SP5 ไม่ถูกแตะ | `git diff 636c209 HEAD -- src/LongYinCoop/SP5` = ว่าง · `Sp5T0` default คง false (`CoopPrefs.cs:56`) |
+| สิ่งที่เปลี่ยนนับแต่ build source เดิม `636c209` | เฉพาะ: `TimeV2a/{TimeV2aRules,TimeV2aSampler}.cs` (ใหม่) · `CoopPrefs.cs`/`CoopMod.cs` (wiring 3 จุด) · tests (3 ไฟล์) · docs/evidence — **S2/**, SP5/, tools/, protocol ไม่ถูกแตะ** |
+
+## ข้อจำกัดที่ประกาศไว้ล่วงหน้า (errata N4 — อ่านก่อนวัด)
+
+1. analyzer อ่าน k จาก `work_start` เท่านั้น ⇒ **รอบ skip (กด `>>`) เป็นข้อมูลประกอบ ไม่ใช่คำตัดสิน FORM1/FORM2** — k จริงอ่านจากฟิลด์ `skipK` บน `day_tick` (ที่ sampler วัดเอง)
+2. tolerance ดีฟอลต์ 0.5 s ทำให้ N=10 ปกติ (gap 0.5) = **INDISTINGUISHABLE ตั้งแต่โครง** — ค่า tolerance ต้องประกาศก่อนวัด (RUNBOOK-V2A เสนอ 0.1 s — ผู้ใช้ยืนยันตอนสั่ง "เริ่ม V2-A session")
+3. `hour` = float (dump.cs 0xB4) — NDJSON พก float; ถ้าอ่านไม่ได้เฟรมใด = `null` (analyzer ไม่ใช้)
+4. session ที่เกมปิดกลางงาน = unterminated ใน stream ⇒ analyzer SystemExit ทั้งไฟล์ (ออกแบบไว้ปลอดภัย — วิเคราะห์เฉพาะ stream ที่ปิดครบ)
+
+# v2a-report — V2 ชุด A: T(N) runtime verification (session `AUTO-20261029-013511` · ปิด session 2026-10-29 04:33)
+
+> **สถานะ: PROVISIONAL — ไม่ปิด stage ไม่ tag** (ตามมติผู้ใช้) · เกณฑ์ตัดสิน = [CRITERIA] ภาคผนวก A
+> (RUNBOOK-V2A.md @ `e90de47`) · deviation จากแผน §E.1 ระบุในหัวข้อ 5 · **ห้ามอ้างเป็น runtime-confirmed โมเดลใด**
+
+## 1) สรุปผูกมัด
+
+- **8 runs** (6 ใช้งานจริง + A2-r2 + A3-r3 รวมในชุด valid) บนสำเนาเซฟทั้งหมด · restore EXACT ทุกรัน ·
+  เซฟจริงไม่ถูกแตะ (digest `df8e5a11beed…` คงเดิมทุกรอบ) · 0 crash · 0 soft-lock
+- **ผล fit (5 จุด non-pilot non-contaminated):** slope **1.2675 s/วัน** (ผ่าน 1.25±0.1) · intercept **0.8056 s** ·
+  CI_t (df=3, t=3.182) **[0.7665, 0.8446]** — ไม่คาบเกี่ยว window ฟอร์มใด ⇒ ป้าย **UNRESOLVED_OFFSET**
+  (ยอมรับได้ · PROVISIONAL) · residual รายรัน ≤ 20 ms
+- **2 runs CONTAMINATED** (กฎ gap > 2 s — A2-r1 77.3 s ก่อนเริ่มใหม่ · A3-r2 16.1 s popup กลางงาน) ·
+  1 run INVALID (A2-r1 โครง — day_ticks 13≠5) · 1 pilot (A1-r1) ไม่เข้า fit
+- **deviation จากแผน §E.1:** ≥3 รอบ/ค่า → **≥2 valid/ค่า** (ทาง B ลดรูป มติ 2026-10-29) — เหตุผล: N=10 ซ้ำ
+  ต่าง 36 ms · CI_t ห่าง window ฟอร์มชัด · popup กลางงานเสี่ยงซ้ำ — **ผลกระทบ: N=5 มี valid 1 รัน
+  (ไม่มี pure error)** · รอบซ้ำเพิ่ม = งานอนาคต
+- **ชนิดงาน:** ผู้ใช้ระบุ = **"ตัดไม้"** ตามที่จำได้ (รายรันไม่ได้แยก — จดหลัง A2-r3 เท่านั้น · NDJSON ไม่มีฟิลด์
+  ชนิดงาน — ไม่มี workName) · คำถาม popup (ปิดเอง/หายเอง กี่วินาที) **ยังไม่ได้ตอบ**
+
+## 2) ตารางรวมทุกรัน (OBSERVED)
+
+| run | N | measured (s) | max gap (ms) | สถานะ | fit |
+|---|---|---|---|---|---|
+| A1-r1 | 1 | 2.088 | 1,077 | pilot | ไม่เข้า fit |
+| A1-r2 | 1 | 2.082 | 1,053 | OK | ✓ |
+| A2-r1 | 5 | 189.037 (pooled) | **77,289** | INVALID (โครง: work_start ×4 · day_ticks 13≠5) + CONTAMINATED | ไม่เข้า |
+| A2-r2 | 5 | 7.136 | 1,069 | OK | ✓ |
+| A2-r3 | 5 | 16.018 | **9,043** | **CONTAMINATED** (popup "ได้ไม้" หลัง day_tick วันที่ 1) | ไม่เข้า |
+| A3-r1 | 10 | 13.500 | 1,106 | OK | ✓ |
+| A3-r2 | 10 | 29.440 | **16,118** | **CONTAMINATED** (popup กลางงานหลัง day_tick วันที่ 6) | ไม่เข้า |
+| A3-r3 | 10 | 13.464 | 1,064 | OK | ✓ |
+
+- กฎ gap > 2 s คัดถูกตัวทั้งสองตัว (scan ย้อนทุกไฟล์ — valid เดิม max gap 1053–1106 ไม่โดน) ·
+  ลายเซ็นต่างกัน: A2-r1 จบด้วย **work_start ใหม่** · A3-r2/A2-r3 จบด้วย **pause_end ของงานเดิม** (งานวิ่งต่อ)
+
+## 3) ผลตามเกณฑ์ [CRITERIA] (PROVISIONAL)
+
+| ข้อ | ผล | เกณฑ์ |
+|---|---|---|
+| slope | **1.2675 s/วัน** (4 จุด: 1.2670 · 5 จุด: 1.2675) | 1.25 ± 0.1 ⇒ **ผ่าน** |
+| intercept | **0.8056 s** (CI_t df=3: **[0.7665, 0.8446]**) | นอกทั้ง [−0.1,+0.1] และ [+0.4,+0.6] ไม่คาบเกี่ยว ⇒ **UNRESOLVED_OFFSET** (ยอมรับได้) |
+| residual รายรัน | +20/−16/−7/+9/−5 ms (N=10/10/5/1/1) | รายงานแยก — ไม่ใช้ตัดสิน |
+| day_ticks / ลำดับ event | ตรงโครงทุกรัน valid | day_ticks == N ⇒ ไม่ INVALID |
+
+- **CI สองวิธีคู่ขนาน** (มติรอบ A3-r2 เตรียม): แบบ t (valid ตาม df) = [0.7665, 0.8446] · แบบ 1.96
+  (**ไม่ valid สำหรับ df ต่ำ** — เทียบรอบก่อน) = [0.7815, 0.8296] · ทั้งคู่ไม่คาบเกี่ยว window ใด
+- **วิธี CI:** ±tcrit(95%, df)×SE(intercept) จาก OLS residual · **ข้อจำกัด: n=5 จุด / 1–2 รันต่อค่า /
+  N=5 มีจุดเดียว ⇒ CI ยังไม่ใช่ค่าที่น่าเชื่อถือเต็มที่** (ต้องมีรอบซ้ำเพิ่ม)
+- **ความหมายของ UNRESOLVED_OFFSET:** measured เป็นเส้นตรงกับ N แม่นมาก (residual ≤ 20 ms) แต่มี
+  ค่าคงที่ต่อ run ~0.81 s ที่**ไม่ตรงทั้ง FORM1 (0) และ FORM2 (0.5)** และยัง**ระบุสาเหตุไม่ได้จากไฟล์** —
+  จึงแยกฟอร์มไม่ได้ด้วยข้อมูลชุดนี้ (ไม่ใช่ความล้มเหลวของการวัด)
+
+## 4) ตารางรายช่วง + นิยามเหตุการณ์ที่กั้น (OBSERVED)
+
+**นิยามเหตุการณ์ (จาก TimeV2aRules.cs — ตรวจจับจากค่าต่อเฟรม ไม่มี hook):**
+- `work_start` = เฟรมแรกที่เห็น `working==1` (หลัง StartWorking เขียน field ครบ: left=N, nextDayTime=0,
+  leftPauseTime=pauseTime) — `TimeV2aRules.cs:144`
+- `pause_end` = เฟรมแรกที่เห็น `leftPauseTime` ข้ามจาก >0 ไป ≤0 (`:172–174` — ค่าติดลบเล็ก −0.007
+  คือ overshoot 1 เฟรมของปั๊ม ยังจับได้)
+- `day_tick` = เฟรมแรกที่เห็น `leftWorkingDay` ลดลง (`:161–163` — **หลังปั๊มทำครบ**: SendMessage(callFuc)
+  → leftWorkingDay−− → ChangeHour(24) → ตั้ง leftPauseTime — time-static-notes §2.4) ⇒ day segment
+  **รวมเวลา callFuc + housekeeping**
+- `work_end`/`work_abort` = working 1→0 โดย workFinished true/false (`:130`)
+
+**ตารางรายช่วง (ms — เฉพาะรัน valid):**
+
+| run | N | initial = work_start→pause_end#1 | day_i = pause_end#i→day_tick#i | inter-day_i = day_tick#i→pause_end#(i+1) | final = day_tick#N→pause_end#(N+1) | tail = →work_end |
+|---|---|---|---|---|---|---|
+| A3-r1 | 10 | 544 | 1060.9 (1043–1106) | 208.0 (186–226) ×9 | 469 | 6 |
+| A3-r3 | 10 | 577 | 1047.2 (1037–1064) | ≤235 ×9 | 465 | 13 |
+| A2-r2 | 5 | 557 | 1055.6 (1044–1069) | 199–218 ×4 | 445 | 6 |
+| A1-r2 | 1 | 564 | 1053 | — | 458 | 7 |
+| A1-r3 | 1 | 2.068 s รวม → initial **549** | 1061 | — | 451 | 7 |
+| A1-r1 (pilot) | 1 | **559** | 1077 | — | 445 | 7 |
+| โครงจาก statics | | **250** (pauseTime) | **1000** (dayTime) | **250** (pauseTime) | **500** (2×pauseTime) | — |
+
+## 5) หมายเหตุที่มติกำหนด: initial segment ≈ 0.56 s **ขัดกับ pauseTime จาก disasm**
+
+- **OBSERVED (ขัดกันทุกรัน):** initial segment (work_start → pause_end#1) วัดได้ **544–577 ms (~0.56 s)
+  ในทุก 6 รัน** ขณะที่ static/disasm ระบุ `StartWorking` เขียน `leftPauseTime = pauseTime = 0.25 s`
+  (time-static-notes §2.4/§2.6 · dump.cs 0x58) ⇒ **ส่วนเกิน +294–314 ms คงที่ข้ามทุก N ทุก run**
+- **สาเหตุ: UNKNOWN — ไม่มีหลักฐานในไฟล์ NDJSON** (ไม่มี event แอนิเมชัน/freeze) และคำตอบบนจอของ
+  ผู้ใช้ยังไม่ครบ ⇒ รายงานเป็น**ข้อขัดแย้งที่ต้องสืบสวนต่อ** (ตัวเลือกเชิงสืบสวนเสนอไว้ใน 7) —
+  **ห้ามอธิบายด้วยคำว่า "แอนิเมชัน" จนกว่าจะมีหลักฐาน**
+- สัมพันธ์กับผล fit: intercept 0.8056 − โครง form2 0.5 = **+0.3056 s ≈ ส่วนเกิน initial +0.31 s** —
+  ส่วนเกินของวัน (+19 ms/วัน) ถูกดูดเข้า slope (1.2675 vs 1.25) — **ทั้งหมดเป็นการพรรณนาเชิงเลข
+  จาก OBSERVED ไม่ใช่การอธิบายสาเหตุ**
+
+## 6) UNKNOWN (รวม)
+
+1. สาเหตุ offset ~0.81 s / initial segment ~0.56 s (ขัด pauseTime 0.25 จาก disasm) — UNKNOWN
+2. สาเหตุ inter-day/final pause วัด**สั้น**กว่าโครง 30–55 ms ทุกช่วงทุกรัน — UNKNOWN
+3. popup กลางงาน (A3-r2 หลังวันที่ 6 · A2-r3 "ได้ไม้" หลังวันที่ 1): ชนิด/สาเหตุ — ผู้ใช้ระบุชนิดงาน
+   = "ตัดไม้" ตามที่จำได้ แต่**คำถาม popup (ปิดเอง/หายเอง กี่วินาที) ยังไม่ได้ตอบ** · ตำแหน่งที่ไฟล์
+   ชี้ (หลัง day_tick) ต่างจาก "จบงาน" ที่บรรยาย — ค้างรอคำอธิบายเพิ่ม
+4. เลข frame ไม่ monotonic ใน A2-r1 — UNKNOWN (README-a2r1-invalid.txt)
+5. คำตอบชนิดงานรายรัน A1-r1…A3-r1 — ผู้ใช้จำรวมเป็น "ตัดไม้" (ไม่แยกรายรัน)
+
+## 7) สิ่งที่ยังต้องวัด/ทำเพื่อปิดผลสุดท้าย (อนาคต — ต้องมติแยก)
+
+1. รอบซ้ำต่อค่าให้ครบ ≥3 valid/ค่า (A2 ขาด: ต้อง ≥2 รอบสะอาดอีก) — เพื่อ CI แคบ + pure error ครบทุกค่า
+2. **A4-r1 (N=10 กด `>>`)** — observational (k จาก `skipK` ราย day_tick) · **ต้องยืนยัน TestMode
+   สองสัญญาณ** (§E.3 บรรทัด 426–429): สัญญาณ 2 (พฤติกรรม: กด `>>` งานสั้น ดู k 0.5/0.2 + anim ×2/×5)
+   ทำได้ทันที · สัญญาณ 1 (อ่าน `PlayerPrefDictionary.GetInt("TestMode")`) **ต้อง build ใหม่** (โค้ดปัจจุบัน
+   ไม่มี) — รอมติ
+3. สืบสวน initial segment ~0.56 s (static เพิ่ม: ถอด body ช่วง StartWorking→pause branch ละเอียด /
+   วัด runtime ที่มี event คั่น) — ก่อนตีความ offset ใด ๆ
+4. (ถ้า V1 อนุมัติ) popup กลางงานเข้าข่าย freeze 3 ทางของปั๊ม — ผูกกับ TC ของ V1
+
+## 8) สถานะ session (ปิดแล้ว 04:33)
+
+| รายการ | ค่า | ตรง |
+|---|---|---|
+| เกมรัน | ไม่ (ตรวจ 04:33) | ✓ |
+| `TimeV2a` | **false** (ตรวจค่า key — `976ccfb9…` · ก่อนแก้ `b07cab85…` ที่ ML เขียนตอนปิดเกม) | ✓ |
+| `AllowRemoteInput` / `Sp5T0` / `Enabled` | false / false / true | ✓ |
+| pointer `time-v2a.out` | **ลบแล้ว** | ✓ |
+| net.cfg | `12541f34…` (444 B) — ไม่ถูกแตะตลอด session | ✓ |
+| เซฟ | EXACT 57/57 `df8e5a11beed…` + `leftovers: none` | ✓ |
+| DLL | `983b2384…` (366,080 B) + `.prev-6a94abb5` — **รอมติ rollback/คง build** | ✓ |
+| commits ของ session | `21e99a0`(A) `b0ca9f7`/`91bf85c`/`211ea21`(B) `bd7885e`(C) `397b569` `789f670` `3490cff` `2952e1c` `0c9202d` `516197d` `646f0f5` `1a5797b` `81580f0` `e90de47` — src/ ไม่เปลี่ยนจาก `bd7885e` | ✓ |
+| ไฟล์รายงาน/หลักฐาน | v2a-report.md (ไฟล์นี้) · interim-report-3run.md/-v2.md · README-a2r1/a2r3 · ผล analyze/fit ราย label — **บนดิสก์ ยังไม่ commit** (รอสั่ง) | — |

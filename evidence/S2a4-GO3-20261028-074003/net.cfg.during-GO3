@@ -1,0 +1,12 @@
+# LongYinCoop S2 net config -- flat key = value (MelonLoader never reads/writes this file)
+# enabled=false by default; flip to true only for a measurement session
+enabled          = true
+role             = host
+secret           = 2721695f8fab75dc8d356c69e4f9195ee74332add9f1de317ee48b735bb2f4c2
+allowNonLoopback = false
+transport        = tcp
+bind             = 127.0.0.1
+port             = 47800
+sendHz           = 30
+heartbeatMs      = 1000
+overlay          = true

@@ -1,0 +1,96 @@
+; WorkingUIController_SetSkippingState  rva=0x9CA8E0 va=0x1809CA8E0 end(before)=0x9CAA60 insns=95
+0x01809ca8e0  mov      qword ptr [rsp + 8], rbx
+0x01809ca8e5  push     rdi
+0x01809ca8e6  sub      rsp, 0x30
+0x01809ca8ea  cmp      byte ptr [rip + 0x14d4f4c], 0  ; [0x1E9F83D .data] f64=2.49163e-265
+0x01809ca8f1  movzx    ebx, dl
+0x01809ca8f4  mov      rdi, rcx
+0x01809ca8f7  jne      0x1809ca924
+0x01809ca8f9  lea      rcx, [rip + 0x13cbd58]  ; [0x1D96658 .data] f32=-2.0163 f64=1.59153e-314
+0x01809ca900  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca905  lea      rcx, [rip + 0x13ab454]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01809ca90c  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca911  lea      rcx, [rip + 0x13f4fd0]  ; [0x1DBF8E8 .data] f32=-1.08556e-19
+0x01809ca918  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca91d  mov      byte ptr [rip + 0x14d4f19], 1  ; [0x1E9F83D .data] f64=2.49163e-265
+0x01809ca924  mov      rcx, qword ptr [rdi + 0x68]
+0x01809ca928  mov      byte ptr [rdi + 0x62], bl
+0x01809ca92b  test     bl, bl
+0x01809ca92d  jne      0x1809ca9dd
+0x01809ca933  test     rcx, rcx
+0x01809ca936  je       0x1809caa54
+0x01809ca93c  xor      edx, edx
+0x01809ca93e  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01809ca943  test     rax, rax
+0x01809ca946  je       0x1809caa54
+0x01809ca94c  mov      rdx, qword ptr [rip + 0x13f4f95]  ; [0x1DBF8E8 .data] f32=-1.08556e-19
+0x01809ca953  xor      r8d, r8d
+0x01809ca956  mov      rcx, rax
+0x01809ca959  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x01809ca95e  test     rax, rax
+0x01809ca961  je       0x1809caa54
+0x01809ca967  mov      rdx, qword ptr [rip + 0x13cbcea]  ; [0x1D96658 .data] f32=-2.0163 f64=1.59153e-314
+0x01809ca96e  mov      rcx, rax
+0x01809ca971  call     0x180967ef0  ; -> UnityEngine.Component$$GetComponent<ActionBarUnit> (0x967EF0)
+0x01809ca976  mov      rcx, qword ptr [rip + 0x13ab3e3]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01809ca97d  mov      rbx, rax
+0x01809ca980  test     byte ptr [rcx + 0x133], 4
+0x01809ca987  je       0x1809ca99e
+0x01809ca989  cmp      dword ptr [rcx + 0xe0], 0
+0x01809ca990  jne      0x1809ca99e
+0x01809ca992  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809ca997  mov      rcx, qword ptr [rip + 0x13ab3c2]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01809ca99e  mov      rdx, qword ptr [rcx + 0xb8]
+0x01809ca9a5  test     rbx, rbx
+0x01809ca9a8  je       0x1809caa54
+0x01809ca9ae  movups   xmm0, xmmword ptr [rdx + 0x398]
+0x01809ca9b5  mov      rax, qword ptr [rbx]
+0x01809ca9b8  lea      rdx, [rsp + 0x20]
+0x01809ca9bd  mov      rcx, rbx
+0x01809ca9c0  movaps   xmmword ptr [rsp + 0x20], xmm0
+0x01809ca9c5  mov      r8, qword ptr [rax + 0x2b0]
+0x01809ca9cc  call     qword ptr [rax + 0x2a8]
+0x01809ca9d2  mov      rbx, qword ptr [rsp + 0x40]
+0x01809ca9d7  add      rsp, 0x30
+0x01809ca9db  pop      rdi
+0x01809ca9dc  ret      
+0x01809ca9dd  test     rcx, rcx
+0x01809ca9e0  je       0x1809caa54
+0x01809ca9e2  xor      edx, edx
+0x01809ca9e4  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01809ca9e9  test     rax, rax
+0x01809ca9ec  je       0x1809caa54
+0x01809ca9ee  mov      rdx, qword ptr [rip + 0x13f4ef3]  ; [0x1DBF8E8 .data] f32=-1.08556e-19
+0x01809ca9f5  xor      r8d, r8d
+0x01809ca9f8  mov      rcx, rax
+0x01809ca9fb  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x01809caa00  test     rax, rax
+0x01809caa03  je       0x1809caa54
+0x01809caa05  mov      rdx, qword ptr [rip + 0x13cbc4c]  ; [0x1D96658 .data] f32=-2.0163 f64=1.59153e-314
+0x01809caa0c  mov      rcx, rax
+0x01809caa0f  call     0x180967ef0  ; -> UnityEngine.Component$$GetComponent<ActionBarUnit> (0x967EF0)
+0x01809caa14  xor      edx, edx
+0x01809caa16  lea      rcx, [rsp + 0x20]
+0x01809caa1b  mov      rbx, rax
+0x01809caa1e  call     0x1810d4c70  ; -> UnityEngine.Color$$get_red (0x10D4C70)
+0x01809caa23  test     rbx, rbx
+0x01809caa26  je       0x1809caa54
+0x01809caa28  mov      r9, qword ptr [rbx]
+0x01809caa2b  lea      rdx, [rsp + 0x20]
+0x01809caa30  movups   xmm0, xmmword ptr [rax]
+0x01809caa33  mov      rcx, rbx
+0x01809caa36  mov      r8, qword ptr [r9 + 0x2b0]
+0x01809caa3d  movaps   xmmword ptr [rsp + 0x20], xmm0
+0x01809caa42  call     qword ptr [r9 + 0x2a8]
+0x01809caa49  mov      rbx, qword ptr [rsp + 0x40]
+0x01809caa4e  add      rsp, 0x30
+0x01809caa52  pop      rdi
+0x01809caa53  ret      
+0x01809caa54  call     0x1800d6610  ; -> 0xD6610
+0x01809caa59  int3     
+0x01809caa5a  int3     
+0x01809caa5b  int3     
+0x01809caa5c  int3     
+0x01809caa5d  int3     
+0x01809caa5e  int3     
+0x01809caa5f  int3     

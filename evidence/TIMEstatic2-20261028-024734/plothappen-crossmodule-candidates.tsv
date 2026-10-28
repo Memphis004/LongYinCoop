@@ -1,0 +1,5 @@
+# owner	calls-PlotController-methods
+GameController$$Start	PlotController$$QuickScreenBlack
+BattleController$$BattleRealEnd	PlotController$$FightEndLoadInteractHero
+SteamManager$$Awake	Mono.Runtime$$SetGCAllowSynchronousMajor
+MissionData$$GetMissionExtraDescribe	PlotController$$CheckMeetRequire

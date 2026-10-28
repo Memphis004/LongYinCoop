@@ -1,0 +1,122 @@
+{
+  "label": "NEG20-f2ad30cd-20261025-202331",
+  "window": "w2-waitattacking",
+  "pref": true,
+  "settle_ms": 500,
+  "cases": [
+    {
+      "n": 5,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:51",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "is not the active unit"
+    },
+    {
+      "n": 6,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:86",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "is not the active unit"
+    },
+    {
+      "n": 15,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 1,
+        "col": 0
+      },
+      "arm": 120,
+      "expect": "expected WaitPlayerInput"
+    },
+    {
+      "n": 16,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 0,
+        "col": 1
+      },
+      "arm": 120,
+      "expect": "expected WaitPlayerInput"
+    },
+    {
+      "n": 19,
+      "group": "SELF",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "0:0"
+      },
+      "arm": 120,
+      "expect": "is the active unit"
+    },
+    {
+      "n": 7,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "OUT_OF_RANGE"
+    },
+    {
+      "n": 8,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "OUT_OF_RANGE"
+    },
+    {
+      "n": 9,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "OUT_OF_RANGE"
+    },
+    {
+      "n": 10,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "OUT_OF_RANGE"
+    }
+  ],
+  "id_mapping": {
+    "target": {
+      "1:10066": "1:10034",
+      "1:10067": "1:10034",
+      "1:10107": "1:10034",
+      "1:10102": "1:10034"
+    },
+    "id": {
+      "0:9": "0:51"
+    },
+    "mapped_from": "evidence/S3prereq-20261025-0248/plan-w2.json",
+    "rule": "case/group/expect unchanged - ids only (มติผู้ใช้ NEG20) — เคส 7-10 runner จะ NOT-RUN เอง (range cells ไม่ expose)"
+  }
+}

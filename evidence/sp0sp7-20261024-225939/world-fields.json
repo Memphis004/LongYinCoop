@@ -1,0 +1,173 @@
+{
+ "chapter": -1,
+ "cityAreaID": {
+  "listSize": 13
+ },
+ "villageAreaID": {
+  "listSize": 36
+ },
+ "forceAreaID": {
+  "listSize": 30
+ },
+ "Areas": {
+  "listSize": 79
+ },
+ "Inns": {
+  "listSize": 10
+ },
+ "ResourcePoints": {
+  "listSize": 130
+ },
+ "Forces": {
+  "listSize": 30
+ },
+ "Heros": {
+  "listSize": 883
+ },
+ "TempHeros": {
+  "listSize": 88
+ },
+ "BigMapRandomEventDatas": {
+  "listSize": 62
+ },
+ "AreaMapRandomEventDatas": {
+  "listSize": 9
+ },
+ "lastRandomWorldEventDay": 0,
+ "WorldEventDatasSaveRecord": {
+  "listSize": 0
+ },
+ "WorldEventDatas": {
+  "listSize": 0
+ },
+ "WorldNewsDatas": {
+  "listSize": 0
+ },
+ "MailDatas": {
+  "listSize": 0
+ },
+ "cheating": false,
+ "cheated": false,
+ "gameMode": "Free",
+ "gameDifficulty": 0,
+ "relaxMode": false,
+ "worldTime": "TimeData",
+ "TimeDifficulty": 0,
+ "hour": 0,
+ "forceMeetingStarted": false,
+ "forcePartyStarted": false,
+ "forceMeetingMissedTime": 0,
+ "playerBetrayForceBadTime": 0,
+ "playerGetTeacherTime": 0,
+ "playerServantForceTime": 0,
+ "playerReplaceForceTime": 0,
+ "infos": {
+  "listSize": 1
+ },
+ "plotHappened": "System.Collections.Generic.Dictionary`2[System.Int32,TimeData]",
+ "missionFinished": {
+  "listSize": 0
+ },
+ "PlotEventLog": "PlotEventLogData",
+ "worldPlotEventStartData": {
+  "listSize": 0
+ },
+ "worldPlotEventStartTime": "System.Collections.Generic.Dictionary`2[System.Int32,TimeData]",
+ "tutorialFinished": {
+  "listSize": 0
+ },
+ "openLeaveForce": true,
+ "openForceBuilding": true,
+ "openForceAttackResource": false,
+ "openForceAttackArea": false,
+ "openForceAttackBasement": false,
+ "monthCatchBadFamePlayerTime": 0,
+ "monthGambleTime": 0,
+ "monthPartyTime": 0,
+ "monthForcePartyTime": 0,
+ "monthDoctorTime": 0,
+ "monthPerformForMoneyTime": 0,
+ "monthCoachTime": 0,
+ "monthAttackMartialClubTime": 0,
+ "monthSpeReduceBadFameTime": 0,
+ "monthSpeAddFameTime": 0,
+ "monthSpeGetTalentPointTime": 0,
+ "monthChallengeTime": 0,
+ "monthBuyAreaInfoTime": 0,
+ "monthGiveMoneyToGovernTime": 0,
+ "monthBreakEquipTime": 0,
+ "monthKillTime": 0,
+ "monthFreshBountyTime": 0,
+ "monthFreshAuctionTime": 0,
+ "monthLeaderInteractOtherForceTime": 0,
+ "showRoomItems": {
+  "listSize": 3
+ },
+ "showRoomChangeFame": 0,
+ "nowWeather": 0,
+ "weatherLastTime": 15.396998405456543,
+ "skinUnlockData": {
+  "listSize": 1
+ },
+ "speBuildingUnlocked": {
+  "listSize": 0
+ },
+ "finishForceMissionCount": 0,
+ "totalFightCount": 0,
+ "totalWinFightCount": 0,
+ "totalEnemyKilled": 0,
+ "totalBadFame": 0,
+ "studyFightWithGreatHeroSingleWinNum": 0,
+ "studyFightWithGreatHeroMultiWinNum": 0,
+ "studyFightWithGreatHeroFinalWinNum": 0,
+ "totalHeroMeet": 0,
+ "prisonData": "PrisonData",
+ "gameResultTriggered": {
+  "listSize": 0
+ },
+ "playerBookWriter": {
+  "listSize": 0
+ },
+ "thisYearExploreSpeEventNum": 0,
+ "thisYearExploreBigSpeEventNum": 0,
+ "governStorage": "ItemListData",
+ "battleTimeScale": 1,
+ "tempTagDataBase": {
+  "listSize": 0
+ },
+ "weaponResearchData": "WeaponResearchData",
+ "meditationData": "MeditationData",
+ "forceSpeResearchData": "ForceSpeResearchData",
+ "forceSpeFunctionAddData": "HeroSpeAddData",
+ "getSpePoisonData": "SpePoisonData",
+ "combineSpePoisonData": "SpePoisonData",
+ "speBookStorage": "ItemListData",
+ "speBookStorageSpeAdd": "HeroSpeAddData",
+ "speSummonResearchData": "SpeSummonResearchData",
+ "speEnhanceStone": 0,
+ "speSpellRate": {
+  "listSize": 10
+ },
+ "autoResearch": false,
+ "playerAuctionItem": "null",
+ "itemSortType": "GetTime",
+ "itemReverseOrder": false,
+ "skillSortType": "GetTime",
+ "skillReverseOrder": false,
+ "customDifficultyData": "CustomDifficultyData",
+ "HerosDict": "System.Collections.Generic.Dictionary`2[System.Int32,HeroData]",
+ "herosDictLock": "System.Object",
+ "TempHerosDict": "System.Collections.Generic.Dictionary`2[System.Int32,HeroData]",
+ "tempHerosDictLock": "System.Object",
+ "ForcesDict": "System.Collections.Generic.Dictionary`2[System.Int32,ForceData]",
+ "AreasDict": "System.Collections.Generic.Dictionary`2[System.Int32,AreaData]",
+ "resourcePointDict": "System.Collections.Generic.Dictionary`2[System.Int32,ResourcePointData]",
+ "innDict": "null",
+ "__extra": {
+  "worldTime": {
+   "year": 1,
+   "month": 1,
+   "day": 1
+  }
+ }
+}

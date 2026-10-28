@@ -1,0 +1,539 @@
+; WeatherController_Update  rva=0xC19DE0 va=0x180C19DE0 end(before)=0xC1A780 insns=538
+0x0180c19de0  push     rdi
+0x0180c19de2  sub      rsp, 0xd0
+0x0180c19de9  cmp      byte ptr [rip + 0x128663a], 0
+0x0180c19df0  mov      rdi, rcx
+0x0180c19df3  jne      0x180c19eb4
+0x0180c19df9  lea      rcx, [rip + 0x11975c0]  ; [0x1DB13C0 .data] f32=1.08644e-19
+0x0180c19e00  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e05  lea      rcx, [rip + 0x119c274]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c19e0c  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e11  lea      rcx, [rip + 0x115aed0]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19e18  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e1d  lea      rcx, [rip + 0x115af4c]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x0180c19e24  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e29  lea      rcx, [rip + 0x117ecd0]  ; [0x1D98B00 .data] f32=-2.00924 f64=1.59152e-314
+0x0180c19e30  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e35  lea      rcx, [rip + 0x1194bc4]  ; [0x1DAEA00 .data] f32=-2.00999 f64=1.59152e-314
+0x0180c19e3c  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e41  lea      rcx, [rip + 0x11612d8]  ; [0x1D7B120 .data] f32=-2.00836 f64=1.59151e-314
+0x0180c19e48  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e4d  lea      rcx, [rip + 0x117ed2c]  ; [0x1D98B80 .data] f32=-2.00924 f64=1.59152e-314
+0x0180c19e54  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e59  lea      rcx, [rip + 0x1194c20]  ; [0x1DAEA80 .data] f32=-2.00999 f64=1.59152e-314
+0x0180c19e60  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e65  lea      rcx, [rip + 0x1189404]  ; [0x1DA3270 .data] f32=-2.00957 f64=1.59152e-314
+0x0180c19e6c  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e71  lea      rcx, [rip + 0x11662d0]  ; [0x1D80148 .data] f32=-2.00846 f64=1.59151e-314
+0x0180c19e78  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e7d  lea      rcx, [rip + 0x1173f04]  ; [0x1D8DD88 .data] f32=1.08779e-19
+0x0180c19e84  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e89  lea      rcx, [rip + 0x11763f8]  ; [0x1D90288 .data] f32=1.08785e-19
+0x0180c19e90  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19e95  lea      rcx, [rip + 0x119d0f4]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c19e9c  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19ea1  lea      rcx, [rip + 0x119bbf0]  ; [0x1DB5A98 .data] f32=-1.08619e-19
+0x0180c19ea8  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19ead  mov      byte ptr [rip + 0x1286576], 1
+0x0180c19eb4  mov      rax, qword ptr [rip + 0x115ae2d]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19ebb  mov      dword ptr [rsp + 0xf0], 0
+0x0180c19ec6  test     byte ptr [rax + 0x133], 4
+0x0180c19ecd  je       0x180c19ee7
+0x0180c19ecf  cmp      dword ptr [rax + 0xe0], 0
+0x0180c19ed6  jne      0x180c19ee7
+0x0180c19ed8  mov      rcx, rax
+0x0180c19edb  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c19ee0  mov      rax, qword ptr [rip + 0x115ae01]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19ee7  cmp      byte ptr [rip + 0x1277e5e], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x0180c19eee  jne      0x180c19f0a
+0x0180c19ef0  lea      rcx, [rip + 0x115adf1]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19ef7  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19efc  mov      rax, qword ptr [rip + 0x115ade5]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19f03  mov      byte ptr [rip + 0x1277e42], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x0180c19f0a  test     byte ptr [rax + 0x133], 4
+0x0180c19f11  je       0x180c19f2b
+0x0180c19f13  cmp      dword ptr [rax + 0xe0], 0
+0x0180c19f1a  jne      0x180c19f2b
+0x0180c19f1c  mov      rcx, rax
+0x0180c19f1f  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c19f24  mov      rax, qword ptr [rip + 0x115adbd]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x0180c19f2b  mov      rax, qword ptr [rax + 0xb8]
+0x0180c19f32  mov      qword ptr [rsp + 0xe0], rbx
+0x0180c19f3a  mov      qword ptr [rsp + 0xc8], rbp
+0x0180c19f42  mov      qword ptr [rsp + 0xc0], rsi
+0x0180c19f4a  mov      rcx, qword ptr [rax]
+0x0180c19f4d  mov      qword ptr [rsp + 0xb8], r12
+0x0180c19f55  mov      qword ptr [rsp + 0xb0], r13
+0x0180c19f5d  mov      qword ptr [rsp + 0xa8], r14
+0x0180c19f65  mov      qword ptr [rsp + 0xa0], r15
+0x0180c19f6d  movaps   xmmword ptr [rsp + 0x90], xmm6
+0x0180c19f75  movaps   xmmword ptr [rsp + 0x80], xmm7
+0x0180c19f7d  movaps   xmmword ptr [rsp + 0x70], xmm8
+0x0180c19f83  movaps   xmmword ptr [rsp + 0x60], xmm9
+0x0180c19f89  movaps   xmmword ptr [rsp + 0x50], xmm10
+0x0180c19f8f  movaps   xmmword ptr [rsp + 0x40], xmm11
+0x0180c19f95  test     rcx, rcx
+0x0180c19f98  je       0x180c1a735
+0x0180c19f9e  mov      rax, qword ptr [rcx + 0x20]
+0x0180c19fa2  test     rax, rax
+0x0180c19fa5  je       0x180c1a735
+0x0180c19fab  mov      rcx, qword ptr [rip + 0x119c0ce]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c19fb2  movsxd   r14, dword ptr [rax + 0x16c]
+0x0180c19fb9  mov      dword ptr [rsp + 0xf8], r14d
+0x0180c19fc1  test     byte ptr [rcx + 0x133], 4
+0x0180c19fc8  je       0x180c19fdf
+0x0180c19fca  cmp      dword ptr [rcx + 0xe0], 0
+0x0180c19fd1  jne      0x180c19fdf
+0x0180c19fd3  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c19fd8  mov      rcx, qword ptr [rip + 0x119c0a1]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c19fdf  cmp      byte ptr [rip + 0x1277d75], 0  ; [0x1E91D5B .data] f32=1.03943e-35 f64=-333.25
+0x0180c19fe6  jne      0x180c1a002
+0x0180c19fe8  lea      rcx, [rip + 0x119c091]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c19fef  call     0x1800d64a0  ; -> 0xD64A0
+0x0180c19ff4  mov      rcx, qword ptr [rip + 0x119c085]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c19ffb  mov      byte ptr [rip + 0x1277d59], 1  ; [0x1E91D5B .data] f32=1.03943e-35 f64=-333.25
+0x0180c1a002  test     byte ptr [rcx + 0x133], 4
+0x0180c1a009  je       0x180c1a020
+0x0180c1a00b  cmp      dword ptr [rcx + 0xe0], 0
+0x0180c1a012  jne      0x180c1a020
+0x0180c1a014  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a019  mov      rcx, qword ptr [rip + 0x119c060]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c1a020  mov      rax, qword ptr [rcx + 0xb8]
+0x0180c1a027  mov      rdx, qword ptr [rax + 8]
+0x0180c1a02b  test     rdx, rdx
+0x0180c1a02e  je       0x180c1a735
+0x0180c1a034  mov      rbx, qword ptr [rdi + 0x20]
+0x0180c1a038  mov      rbp, qword ptr [rdx + 0x18]
+0x0180c1a03c  mov      qword ptr [rsp + 0x30], rbp
+0x0180c1a041  test     rbx, rbx
+0x0180c1a044  je       0x180c1a735
+0x0180c1a04a  cmp      r14d, dword ptr [rbx + 0x18]
+0x0180c1a04e  jb       0x180c1a05e
+0x0180c1a050  xor      ecx, ecx
+0x0180c1a052  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180c1a057  mov      rcx, qword ptr [rip + 0x119c022]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c1a05e  mov      rax, qword ptr [rbx + 0x10]
+0x0180c1a062  mov      rsi, r14
+0x0180c1a065  mov      qword ptr [rsp + 0x38], r14
+0x0180c1a06a  mov      rdx, qword ptr [rax + r14*8 + 0x20]
+0x0180c1a06f  test     rdx, rdx
+0x0180c1a072  je       0x180c1a735
+0x0180c1a078  mov      rax, qword ptr [rip + 0x115acf1]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x0180c1a07f  movss    xmm6, dword ptr [rdx + 0x54]
+0x0180c1a084  test     byte ptr [rax + 0x133], 4
+0x0180c1a08b  je       0x180c1a0ac
+0x0180c1a08d  cmp      dword ptr [rax + 0xe0], 0
+0x0180c1a094  jne      0x180c1a0ac
+0x0180c1a096  mov      rcx, rax
+0x0180c1a099  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a09e  mov      rcx, qword ptr [rip + 0x119bfdb]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c1a0a5  mov      rax, qword ptr [rip + 0x115acc4]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x0180c1a0ac  mov      rax, qword ptr [rax + 0xb8]
+0x0180c1a0b3  xor      r15d, r15d
+0x0180c1a0b6  movss    xmm9, dword ptr [rax + 0x10]
+0x0180c1a0bc  mov      rax, qword ptr [rcx + 0xb8]
+0x0180c1a0c3  movaps   xmm10, xmm9
+0x0180c1a0c7  xor      ecx, ecx
+0x0180c1a0c9  mulss    xmm10, xmm6
+0x0180c1a0ce  mulss    xmm9, dword ptr [rax]
+0x0180c1a0d3  mov      rax, qword ptr [rdi + 0x20]
+0x0180c1a0d7  test     rax, rax
+0x0180c1a0da  je       0x180c1a735
+0x0180c1a0e0  movss    xmm8, dword ptr [rip + 0xd220fb]  ; [0x193C1E4 .rdata] f32=0.2 f64=7.43866e-07
+0x0180c1a0e9  lea      r12d, [r15 + 0x20]
+0x0180c1a0ed  movss    xmm11, dword ptr [rip + 0xd2221e]  ; [0x193C314 .rdata] f32=-0.2 f64=-1.19209e-07
+0x0180c1a0f6  xor      r13d, r13d
+0x0180c1a0f9  mov      rbx, rax
+0x0180c1a0fc  xorps    xmm7, xmm7
+0x0180c1a0ff  nop      
+0x0180c1a100  cmp      ecx, dword ptr [rax + 0x18]
+0x0180c1a103  jge      0x180c1a359
+0x0180c1a109  test     rbx, rbx
+0x0180c1a10c  je       0x180c1a735
+0x0180c1a112  cmp      r15d, dword ptr [rbx + 0x18]
+0x0180c1a116  jb       0x180c1a11f
+0x0180c1a118  xor      ecx, ecx
+0x0180c1a11a  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180c1a11f  mov      rax, qword ptr [rbx + 0x10]
+0x0180c1a123  mov      r14, qword ptr [r12 + rax]
+0x0180c1a127  test     r14, r14
+0x0180c1a12a  je       0x180c1a735
+0x0180c1a130  mov      rcx, qword ptr [rip + 0x1176151]  ; [0x1D90288 .data] f32=1.08785e-19
+0x0180c1a137  mov      rbx, qword ptr [r14 + 0x28]
+0x0180c1a13b  test     byte ptr [rcx + 0x133], 4
+0x0180c1a142  je       0x180c1a152
+0x0180c1a144  cmp      dword ptr [rcx + 0xe0], 0
+0x0180c1a14b  jne      0x180c1a152
+0x0180c1a14d  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a152  xor      r8d, r8d
+0x0180c1a155  xor      edx, edx
+0x0180c1a157  mov      rcx, rbx
+0x0180c1a15a  call     0x180d8f840  ; -> UnityEngine.Object$$op_Equality (0xD8F840)
+0x0180c1a15f  test     al, al
+0x0180c1a161  jne      0x180c1a34f
+0x0180c1a167  mov      rcx, qword ptr [rdi + 0x40]
+0x0180c1a16b  test     rcx, rcx
+0x0180c1a16e  je       0x180c1a735
+0x0180c1a174  mov      r8, qword ptr [rip + 0x1165fcd]  ; [0x1D80148 .data] f32=-2.00846 f64=1.59151e-314
+0x0180c1a17b  mov      edx, r15d
+0x0180c1a17e  call     0x180002f80  ; -> 0x2F80
+0x0180c1a183  xor      ecx, ecx
+0x0180c1a185  mov      rbx, rax
+0x0180c1a188  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180c1a18d  mulss    xmm0, xmm8
+0x0180c1a192  cmp      rsi, r13
+0x0180c1a195  jne      0x180c1a1a8
+0x0180c1a197  test     rbp, rbp
+0x0180c1a19a  je       0x180c1a1a2
+0x0180c1a19c  movaps   xmm3, xmm9
+0x0180c1a1a0  jmp      0x180c1a1ab  ; -> 0xC1A1AB (inside WeatherController$$Update)
+0x0180c1a1a2  movaps   xmm3, xmm10
+0x0180c1a1a6  jmp      0x180c1a1ab  ; -> 0xC1A1AB (inside WeatherController$$Update)
+0x0180c1a1a8  movaps   xmm3, xmm7
+0x0180c1a1ab  movaps   xmm2, xmm0
+0x0180c1a1ae  mov      qword ptr [rsp + 0x20], 0
+0x0180c1a1b7  mov      rdx, rbx
+0x0180c1a1ba  mov      rcx, rdi
+0x0180c1a1bd  call     0x180c18840  ; -> WeatherController$$ChangeParticleSystemAudioSourceVolumn (0xC18840)
+0x0180c1a1c2  mov      eax, dword ptr [r14 + 0x40]
+0x0180c1a1c6  cmp      eax, 1
+0x0180c1a1c9  je       0x180c1a279
+0x0180c1a1cf  cmp      eax, 2
+0x0180c1a1d2  jne      0x180c1a32d
+0x0180c1a1d8  mov      rcx, qword ptr [rdi + 0x48]
+0x0180c1a1dc  mov      byte ptr [rdi + 0x5c], 1
+0x0180c1a1e0  test     rcx, rcx
+0x0180c1a1e3  je       0x180c1a735
+0x0180c1a1e9  mov      r8, qword ptr [rip + 0x1160f30]  ; [0x1D7B120 .data] f32=-2.00836 f64=1.59151e-314
+0x0180c1a1f0  mov      edx, r15d
+0x0180c1a1f3  call     0x180002f80  ; -> 0x2F80
+0x0180c1a1f8  mov      rbp, rax
+0x0180c1a1fb  xor      esi, esi
+0x0180c1a1fd  nop      dword ptr [rax]
+0x0180c1a200  test     rbp, rbp
+0x0180c1a203  je       0x180c1a735
+0x0180c1a209  cmp      esi, dword ptr [rbp + 0x18]
+0x0180c1a20c  jge      0x180c1a315
+0x0180c1a212  mov      rcx, qword ptr [r14 + 0x38]
+0x0180c1a216  test     rcx, rcx
+0x0180c1a219  je       0x180c1a735
+0x0180c1a21f  mov      r8, qword ptr [rip + 0x118904a]  ; [0x1DA3270 .data] f32=-2.00957 f64=1.59152e-314
+0x0180c1a226  mov      edx, esi
+0x0180c1a228  call     0x1800d6780  ; -> 0xD6780
+0x0180c1a22d  mov      r8, qword ptr [rip + 0x117e94c]  ; [0x1D98B80 .data] f32=-2.00924 f64=1.59152e-314
+0x0180c1a234  mov      edx, esi
+0x0180c1a236  mov      rcx, rbp
+0x0180c1a239  movaps   xmm6, xmm0
+0x0180c1a23c  call     0x180002f80  ; -> 0x2F80
+0x0180c1a241  xor      ecx, ecx
+0x0180c1a243  mov      rbx, rax
+0x0180c1a246  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180c1a24b  mulss    xmm0, xmm11
+0x0180c1a250  movaps   xmm3, xmm6
+0x0180c1a253  mov      rdx, rbx
+0x0180c1a256  mov      qword ptr [rsp + 0x20], 0
+0x0180c1a25f  mov      rcx, rdi
+0x0180c1a262  mulss    xmm0, xmm6
+0x0180c1a266  movaps   xmm2, xmm0
+0x0180c1a269  call     0x180c189c0  ; -> WeatherController$$ChangeParticleSystemRateOverTimeMultiplier (0xC189C0)
+0x0180c1a26e  test     al, al
+0x0180c1a270  jne      0x180c1a275
+0x0180c1a272  mov      byte ptr [rdi + 0x5c], al
+0x0180c1a275  inc      esi
+0x0180c1a277  jmp      0x180c1a200  ; -> 0xC1A200 (inside WeatherController$$Update)
+0x0180c1a279  mov      rcx, qword ptr [rdi + 0x48]
+0x0180c1a27d  mov      byte ptr [rdi + 0x5c], 1
+0x0180c1a281  test     rcx, rcx
+0x0180c1a284  je       0x180c1a735
+0x0180c1a28a  mov      r8, qword ptr [rip + 0x1160e8f]  ; [0x1D7B120 .data] f32=-2.00836 f64=1.59151e-314
+0x0180c1a291  mov      edx, r15d
+0x0180c1a294  call     0x180002f80  ; -> 0x2F80
+0x0180c1a299  mov      rbp, rax
+0x0180c1a29c  xor      esi, esi
+0x0180c1a29e  nop      
+0x0180c1a2a0  test     rbp, rbp
+0x0180c1a2a3  je       0x180c1a735
+0x0180c1a2a9  cmp      esi, dword ptr [rbp + 0x18]
+0x0180c1a2ac  jge      0x180c1a315
+0x0180c1a2ae  mov      rcx, qword ptr [r14 + 0x38]
+0x0180c1a2b2  test     rcx, rcx
+0x0180c1a2b5  je       0x180c1a735
+0x0180c1a2bb  mov      r8, qword ptr [rip + 0x1188fae]  ; [0x1DA3270 .data] f32=-2.00957 f64=1.59152e-314
+0x0180c1a2c2  mov      edx, esi
+0x0180c1a2c4  call     0x1800d6780  ; -> 0xD6780
+0x0180c1a2c9  mov      r8, qword ptr [rip + 0x117e8b0]  ; [0x1D98B80 .data] f32=-2.00924 f64=1.59152e-314
+0x0180c1a2d0  mov      edx, esi
+0x0180c1a2d2  mov      rcx, rbp
+0x0180c1a2d5  movaps   xmm6, xmm0
+0x0180c1a2d8  call     0x180002f80  ; -> 0x2F80
+0x0180c1a2dd  xor      ecx, ecx
+0x0180c1a2df  mov      rbx, rax
+0x0180c1a2e2  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180c1a2e7  mulss    xmm0, xmm8
+0x0180c1a2ec  movaps   xmm3, xmm6
+0x0180c1a2ef  mov      rdx, rbx
+0x0180c1a2f2  mov      qword ptr [rsp + 0x20], 0
+0x0180c1a2fb  mov      rcx, rdi
+0x0180c1a2fe  mulss    xmm0, xmm6
+0x0180c1a302  movaps   xmm2, xmm0
+0x0180c1a305  call     0x180c189c0  ; -> WeatherController$$ChangeParticleSystemRateOverTimeMultiplier (0xC189C0)
+0x0180c1a30a  test     al, al
+0x0180c1a30c  jne      0x180c1a311
+0x0180c1a30e  mov      byte ptr [rdi + 0x5c], al
+0x0180c1a311  inc      esi
+0x0180c1a313  jmp      0x180c1a2a0  ; -> 0xC1A2A0 (inside WeatherController$$Update)
+0x0180c1a315  cmp      byte ptr [rdi + 0x5c], 0
+0x0180c1a319  je       0x180c1a323
+0x0180c1a31b  mov      dword ptr [r14 + 0x40], 0
+0x0180c1a323  mov      rsi, qword ptr [rsp + 0x38]
+0x0180c1a328  mov      rbp, qword ptr [rsp + 0x30]
+0x0180c1a32d  mov      rax, qword ptr [rdi + 0x20]
+0x0180c1a331  inc      r15d
+0x0180c1a334  inc      r13
+0x0180c1a337  add      r12, 8
+0x0180c1a33b  mov      ecx, r15d
+0x0180c1a33e  mov      rbx, rax
+0x0180c1a341  test     rax, rax
+0x0180c1a344  je       0x180c1a735
+0x0180c1a34a  jmp      0x180c1a100  ; -> 0xC1A100 (inside WeatherController$$Update)
+0x0180c1a34f  mov      dword ptr [r14 + 0x40], 0
+0x0180c1a357  jmp      0x180c1a32d  ; -> 0xC1A32D (inside WeatherController$$Update)
+0x0180c1a359  mov      eax, dword ptr [rsp + 0xf8]
+0x0180c1a360  cmp      eax, dword ptr [rbx + 0x18]
+0x0180c1a363  jb       0x180c1a36c
+0x0180c1a365  xor      ecx, ecx
+0x0180c1a367  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180c1a36c  mov      rax, qword ptr [rbx + 0x10]
+0x0180c1a370  mov      rcx, qword ptr [rax + rsi*8 + 0x20]
+0x0180c1a375  test     rcx, rcx
+0x0180c1a378  je       0x180c1a735
+0x0180c1a37e  cmp      byte ptr [rcx + 0x50], 0
+0x0180c1a382  je       0x180c1a61f
+0x0180c1a388  movss    xmm6, dword ptr [rdi + 0x30]
+0x0180c1a38d  xor      ecx, ecx
+0x0180c1a38f  call     0x180da9e50  ; -> UnityEngine.Time$$get_deltaTime (0xDA9E50)
+0x0180c1a394  subss    xmm6, xmm0
+0x0180c1a398  comiss   xmm7, xmm6
+0x0180c1a39b  movss    dword ptr [rdi + 0x30], xmm6
+0x0180c1a3a0  jb       0x180c1a61f
+0x0180c1a3a6  movss    xmm1, dword ptr [rip + 0xd21ebe]  ; [0x193C26C .rdata] f32=13 f64=8.38861e+06
+0x0180c1a3ae  xor      r8d, r8d
+0x0180c1a3b1  movss    xmm0, dword ptr [rip + 0xca6f83]  ; [0x18C133C .rdata] f32=4 f64=12831.7
+0x0180c1a3b9  call     0x180d97130  ; -> UnityEngine.Random$$Range (0xD97130)
+0x0180c1a3be  movss    xmm1, dword ptr [rip + 0xe33a22]  ; [0x1A4DDE8 .rdata] f32=0.55 f64=0.0520825
+0x0180c1a3c6  xor      r8d, r8d
+0x0180c1a3c9  movss    dword ptr [rdi + 0x30], xmm0
+0x0180c1a3ce  movss    xmm0, dword ptr [rip + 0xd9deba]  ; [0x19B8290 .rdata] f32=0.45 f64=0.000170898
+0x0180c1a3d6  call     0x180d97130  ; -> UnityEngine.Random$$Range (0xD97130)
+0x0180c1a3db  xor      r8d, r8d
+0x0180c1a3de  movss    dword ptr [rdi + 0x34], xmm0
+0x0180c1a3e3  xor      ecx, ecx
+0x0180c1a3e5  movss    dword ptr [rdi + 0x38], xmm0
+0x0180c1a3ea  lea      edx, [r8 + 6]
+0x0180c1a3ee  call     0x180d970f0  ; -> UnityEngine.Random$$Range (0xD970F0)
+0x0180c1a3f3  mov      dword ptr [rsp + 0xf0], eax
+0x0180c1a3fa  mov      edx, eax
+0x0180c1a3fc  mov      rax, qword ptr [rip + 0x119cb8d]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a403  test     byte ptr [rax + 0x133], 4
+0x0180c1a40a  je       0x180c1a42b
+0x0180c1a40c  cmp      dword ptr [rax + 0xe0], 0
+0x0180c1a413  jne      0x180c1a42b
+0x0180c1a415  mov      rcx, rax
+0x0180c1a418  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a41d  mov      edx, dword ptr [rsp + 0xf0]
+0x0180c1a424  mov      rax, qword ptr [rip + 0x119cb65]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a42b  mov      rax, qword ptr [rax + 0xb8]
+0x0180c1a432  mov      rcx, qword ptr [rax]
+0x0180c1a435  test     rcx, rcx
+0x0180c1a438  je       0x180c1a735
+0x0180c1a43e  movsxd   rax, edx
+0x0180c1a441  cmp      eax, dword ptr [rcx + 0x18]
+0x0180c1a444  jae      0x180c1a73b
+0x0180c1a44a  mov      rbx, qword ptr [rcx + rax*8 + 0x20]
+0x0180c1a44f  mov      rcx, qword ptr [rip + 0x1175e32]  ; [0x1D90288 .data] f32=1.08785e-19
+0x0180c1a456  test     byte ptr [rcx + 0x133], 4
+0x0180c1a45d  je       0x180c1a46d
+0x0180c1a45f  cmp      dword ptr [rcx + 0xe0], 0
+0x0180c1a466  jne      0x180c1a46d
+0x0180c1a468  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a46d  xor      r8d, r8d
+0x0180c1a470  xor      edx, edx
+0x0180c1a472  mov      rcx, rbx
+0x0180c1a475  call     0x180d8f840  ; -> UnityEngine.Object$$op_Equality (0xD8F840)
+0x0180c1a47a  test     al, al
+0x0180c1a47c  je       0x180c1a554
+0x0180c1a482  mov      rax, qword ptr [rip + 0x119cb07]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a489  test     byte ptr [rax + 0x133], 4
+0x0180c1a490  je       0x180c1a4aa
+0x0180c1a492  cmp      dword ptr [rax + 0xe0], 0
+0x0180c1a499  jne      0x180c1a4aa
+0x0180c1a49b  mov      rcx, rax
+0x0180c1a49e  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a4a3  mov      rax, qword ptr [rip + 0x119cae6]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a4aa  mov      rax, qword ptr [rax + 0xb8]
+0x0180c1a4b1  lea      rcx, [rsp + 0xf0]
+0x0180c1a4b9  movsxd   rbp, dword ptr [rsp + 0xf0]
+0x0180c1a4c1  xor      edx, edx
+0x0180c1a4c3  mov      rsi, qword ptr [rax]
+0x0180c1a4c6  call     0x180f93000  ; -> System.Int32$$ToString (0xF93000)
+0x0180c1a4cb  mov      rcx, qword ptr [rip + 0x119b5c6]  ; [0x1DB5A98 .data] f32=-1.08619e-19
+0x0180c1a4d2  xor      r8d, r8d
+0x0180c1a4d5  mov      rdx, rax
+0x0180c1a4d8  call     0x18171d350  ; -> System.String$$Concat (0x171D350)
+0x0180c1a4dd  xor      edx, edx
+0x0180c1a4df  mov      rcx, rax
+0x0180c1a4e2  call     0x180d9fe40  ; -> UnityEngine.Resources$$Load (0xD9FE40)
+0x0180c1a4e7  mov      rbx, rax
+0x0180c1a4ea  test     rsi, rsi
+0x0180c1a4ed  je       0x180c1a735
+0x0180c1a4f3  test     rax, rax
+0x0180c1a4f6  jne      0x180c1a4fc
+0x0180c1a4f8  xor      edx, edx
+0x0180c1a4fa  jmp      0x180c1a536  ; -> 0xC1A536 (inside WeatherController$$Update)
+0x0180c1a4fc  mov      rax, qword ptr [rip + 0x1196ebd]  ; [0x1DB13C0 .data] f32=1.08644e-19
+0x0180c1a503  xor      ecx, ecx
+0x0180c1a505  cmp      qword ptr [rbx], rax
+0x0180c1a508  cmove    rcx, rbx
+0x0180c1a50c  test     rcx, rcx
+0x0180c1a50f  je       0x180c1a52d
+0x0180c1a511  mov      rdx, qword ptr [rsi]
+0x0180c1a514  mov      rdx, qword ptr [rdx + 0x40]
+0x0180c1a518  call     0x1800d6030  ; -> 0xD6030
+0x0180c1a51d  test     rax, rax
+0x0180c1a520  je       0x180c1a74b
+0x0180c1a526  mov      rax, qword ptr [rip + 0x1196e93]  ; [0x1DB13C0 .data] f32=1.08644e-19
+0x0180c1a52d  xor      edx, edx
+0x0180c1a52f  cmp      qword ptr [rbx], rax
+0x0180c1a532  cmove    rdx, rbx
+0x0180c1a536  cmp      ebp, dword ptr [rsi + 0x18]
+0x0180c1a539  jae      0x180c1a75b
+0x0180c1a53f  lea      rax, [rbp + 4]
+0x0180c1a543  lea      rcx, [rsi + rax*8]
+0x0180c1a547  mov      qword ptr [rcx], rdx
+0x0180c1a54a  call     0x1800d6020  ; -> 0xD6020
+0x0180c1a54f  mov      rbp, qword ptr [rsp + 0x30]
+0x0180c1a554  mov      rax, qword ptr [rip + 0x119ca35]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a55b  test     byte ptr [rax + 0x133], 4
+0x0180c1a562  je       0x180c1a57c
+0x0180c1a564  cmp      dword ptr [rax + 0xe0], 0
+0x0180c1a56b  jne      0x180c1a57c
+0x0180c1a56d  mov      rcx, rax
+0x0180c1a570  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a575  mov      rax, qword ptr [rip + 0x119ca14]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180c1a57c  mov      rax, qword ptr [rax + 0xb8]
+0x0180c1a583  mov      rcx, qword ptr [rax]
+0x0180c1a586  test     rcx, rcx
+0x0180c1a589  je       0x180c1a735
+0x0180c1a58f  movsxd   rax, dword ptr [rsp + 0xf0]
+0x0180c1a597  cmp      eax, dword ptr [rcx + 0x18]
+0x0180c1a59a  jae      0x180c1a76b
+0x0180c1a5a0  mov      rbx, qword ptr [rcx + rax*8 + 0x20]
+0x0180c1a5a5  test     rbp, rbp
+0x0180c1a5a8  je       0x180c1a5e3
+0x0180c1a5aa  mov      rax, qword ptr [rip + 0x119bacf]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c1a5b1  test     byte ptr [rax + 0x133], 4
+0x0180c1a5b8  je       0x180c1a5d2
+0x0180c1a5ba  cmp      dword ptr [rax + 0xe0], 0
+0x0180c1a5c1  jne      0x180c1a5d2
+0x0180c1a5c3  mov      rcx, rax
+0x0180c1a5c6  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a5cb  mov      rax, qword ptr [rip + 0x119baae]  ; [0x1DB6080 .data] f32=1.08655e-19
+0x0180c1a5d2  mov      rax, qword ptr [rax + 0xb8]
+0x0180c1a5d9  movss    xmm6, dword ptr [rax]
+0x0180c1a5dd  addss    xmm6, xmm6
+0x0180c1a5e1  jmp      0x180c1a5eb  ; -> 0xC1A5EB (inside WeatherController$$Update)
+0x0180c1a5e3  movss    xmm6, dword ptr [rip + 0xca6b5d]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x0180c1a5eb  mov      rcx, qword ptr [rip + 0x1173796]  ; [0x1D8DD88 .data] f32=1.08779e-19
+0x0180c1a5f2  test     byte ptr [rcx + 0x133], 4
+0x0180c1a5f9  je       0x180c1a609
+0x0180c1a5fb  cmp      dword ptr [rcx + 0xe0], 0
+0x0180c1a602  jne      0x180c1a609
+0x0180c1a604  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180c1a609  mulss    xmm6, dword ptr [rip + 0xd21be3]  ; [0x193C1F4 .rdata] f32=0.6 f64=0.000511259
+0x0180c1a611  xor      r8d, r8d
+0x0180c1a614  mov      rcx, rbx
+0x0180c1a617  movaps   xmm1, xmm6
+0x0180c1a61a  call     0x180b8da80  ; -> NGUITools$$PlaySound (0xB8DA80)
+0x0180c1a61f  movss    xmm6, dword ptr [rdi + 0x38]
+0x0180c1a624  comiss   xmm6, xmm7
+0x0180c1a627  movss    xmm1, dword ptr [rdi + 0x58]
+0x0180c1a62c  ja       0x180c1a6cd
+0x0180c1a632  ucomiss  xmm1, xmm7
+0x0180c1a635  jp       0x180c1a639
+0x0180c1a637  je       0x180c1a664
+0x0180c1a639  mov      rax, qword ptr [rdi + 0x50]
+0x0180c1a63d  mov      dword ptr [rdi + 0x58], 0
+0x0180c1a644  test     rax, rax
+0x0180c1a647  je       0x180c1a735
+0x0180c1a64d  mov      rax, qword ptr [rax + 0xb0]
+0x0180c1a654  test     rax, rax
+0x0180c1a657  je       0x180c1a735
+0x0180c1a65d  mov      dword ptr [rax + 0x18], 0
+0x0180c1a664  movaps   xmm11, xmmword ptr [rsp + 0x40]
+0x0180c1a66a  movaps   xmm10, xmmword ptr [rsp + 0x50]
+0x0180c1a670  movaps   xmm9, xmmword ptr [rsp + 0x60]
+0x0180c1a676  movaps   xmm8, xmmword ptr [rsp + 0x70]
+0x0180c1a67c  movaps   xmm7, xmmword ptr [rsp + 0x80]
+0x0180c1a684  movaps   xmm6, xmmword ptr [rsp + 0x90]
+0x0180c1a68c  mov      r15, qword ptr [rsp + 0xa0]
+0x0180c1a694  mov      r14, qword ptr [rsp + 0xa8]
+0x0180c1a69c  mov      r13, qword ptr [rsp + 0xb0]
+0x0180c1a6a4  mov      r12, qword ptr [rsp + 0xb8]
+0x0180c1a6ac  mov      rsi, qword ptr [rsp + 0xc0]
+0x0180c1a6b4  mov      rbp, qword ptr [rsp + 0xc8]
+0x0180c1a6bc  mov      rbx, qword ptr [rsp + 0xe0]
+0x0180c1a6c4  add      rsp, 0xd0
+0x0180c1a6cb  pop      rdi
+0x0180c1a6cc  ret      
+0x0180c1a6cd  movaps   xmm0, xmm6
+0x0180c1a6d0  mulss    xmm0, dword ptr [rip + 0xd21bf0]  ; [0x193C2C8 .rdata] f32=150
+0x0180c1a6d8  divss    xmm0, dword ptr [rdi + 0x34]
+0x0180c1a6dd  ucomiss  xmm1, xmm0
+0x0180c1a6e0  jp       0x180c1a6e4
+0x0180c1a6e2  je       0x180c1a708
+0x0180c1a6e4  mov      rax, qword ptr [rdi + 0x50]
+0x0180c1a6e8  movss    dword ptr [rdi + 0x58], xmm0
+0x0180c1a6ed  test     rax, rax
+0x0180c1a6f0  je       0x180c1a735
+0x0180c1a6f2  mov      rcx, qword ptr [rax + 0xb0]
+0x0180c1a6f9  test     rcx, rcx
+0x0180c1a6fc  je       0x180c1a735
+0x0180c1a6fe  movss    dword ptr [rcx + 0x18], xmm0
+0x0180c1a703  movss    xmm6, dword ptr [rdi + 0x38]
+0x0180c1a708  xor      ecx, ecx
+0x0180c1a70a  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180c1a70f  subss    xmm6, xmm0
+0x0180c1a713  comiss   xmm7, xmm6
+0x0180c1a716  movss    dword ptr [rdi + 0x38], xmm6
+0x0180c1a71b  jb       0x180c1a664
+0x0180c1a721  movss    xmm0, dword ptr [rdi + 0x58]
+0x0180c1a726  ucomiss  xmm0, xmm7
+0x0180c1a729  mov      dword ptr [rdi + 0x38], 0
+0x0180c1a730  jmp      0x180c1a635  ; -> 0xC1A635 (inside WeatherController$$Update)
+0x0180c1a735  call     0x1800d6610  ; -> 0xD6610
+0x0180c1a73a  int3     
+0x0180c1a73b  call     0x1800d6240  ; -> 0xD6240
+0x0180c1a740  mov      rcx, rax
+0x0180c1a743  xor      edx, edx
+0x0180c1a745  call     0x1800d65e0  ; -> 0xD65E0
+0x0180c1a74a  int3     
+0x0180c1a74b  call     0x1800d6210  ; -> 0xD6210
+0x0180c1a750  mov      rcx, rax
+0x0180c1a753  xor      edx, edx
+0x0180c1a755  call     0x1800d65e0  ; -> 0xD65E0
+0x0180c1a75a  int3     
+0x0180c1a75b  call     0x1800d6240  ; -> 0xD6240
+0x0180c1a760  mov      rcx, rax
+0x0180c1a763  xor      edx, edx
+0x0180c1a765  call     0x1800d65e0  ; -> 0xD65E0
+0x0180c1a76a  int3     
+0x0180c1a76b  call     0x1800d6240  ; -> 0xD6240
+0x0180c1a770  mov      rcx, rax
+0x0180c1a773  xor      edx, edx
+0x0180c1a775  call     0x1800d65e0  ; -> 0xD65E0
+0x0180c1a77a  int3     
+0x0180c1a77b  int3     
+0x0180c1a77c  int3     
+0x0180c1a77d  int3     
+0x0180c1a77e  int3     
+0x0180c1a77f  int3     

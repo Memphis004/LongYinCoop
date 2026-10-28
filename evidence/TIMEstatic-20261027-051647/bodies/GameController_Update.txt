@@ -1,0 +1,326 @@
+; GameController_Update  rva=0x7E3BF0 va=0x1807E3BF0 end(before)=0x7E4180 insns=325
+0x01807e3bf0  push     rbx
+0x01807e3bf2  sub      rsp, 0x40
+0x01807e3bf6  cmp      byte ptr [rip + 0x16b9153], 0  ; [0x1E9CD50 .data] f32=1.4621e-39
+0x01807e3bfd  mov      rbx, rcx
+0x01807e3c00  jne      0x1807e3c69
+0x01807e3c02  lea      rcx, [rip + 0x15cd7b7]  ; [0x1DB13C0 .data] f32=1.08644e-19
+0x01807e3c09  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c0e  lea      rcx, [rip + 0x159115b]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3c15  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c1a  lea      rcx, [rip + 0x159213f]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3c21  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c26  lea      rcx, [rip + 0x15aa15b]  ; [0x1D8DD88 .data] f32=1.08779e-19
+0x01807e3c2d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c32  lea      rcx, [rip + 0x15bd12f]  ; [0x1DA0D68 .data] f32=1.08822e-19
+0x01807e3c39  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c3e  lea      rcx, [rip + 0x15c92bb]  ; [0x1DACF00 .data] f32=-1.08894e-19
+0x01807e3c45  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c4a  lea      rcx, [rip + 0x15de5cf]  ; [0x1DC2220 .data] f32=-1.08487e-19
+0x01807e3c51  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c56  lea      rcx, [rip + 0x15d227b]  ; [0x1DB5ED8 .data] f32=-1.08619e-19
+0x01807e3c5d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3c62  mov      byte ptr [rip + 0x16b90e7], 1  ; [0x1E9CD50 .data] f32=1.4621e-39
+0x01807e3c69  mov      rcx, qword ptr [rip + 0x15920f0]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3c70  test     byte ptr [rcx + 0x133], 4
+0x01807e3c77  je       0x1807e3c8e
+0x01807e3c79  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3c80  jne      0x1807e3c8e
+0x01807e3c82  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3c87  mov      rcx, qword ptr [rip + 0x15920d2]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3c8e  mov      rax, qword ptr [rcx + 0xb8]
+0x01807e3c95  mov      qword ptr [rsp + 0x50], rdi
+0x01807e3c9a  cmp      byte ptr [rax + 0x10], 0
+0x01807e3c9e  jne      0x1807e3d94
+0x01807e3ca4  cmp      byte ptr [rbx + 0x28], 0
+0x01807e3ca8  je       0x1807e3d94
+0x01807e3cae  xor      r8d, r8d
+0x01807e3cb1  mov      dl, 1
+0x01807e3cb3  mov      rcx, rbx
+0x01807e3cb6  call     0x1807905e0  ; -> GameController$$CanSaveLoad (0x7905E0)
+0x01807e3cbb  test     al, al
+0x01807e3cbd  je       0x1807e3d8d
+0x01807e3cc3  mov      rax, qword ptr [rip + 0x15910a6]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3cca  test     byte ptr [rax + 0x133], 4
+0x01807e3cd1  je       0x1807e3ceb
+0x01807e3cd3  cmp      dword ptr [rax + 0xe0], 0
+0x01807e3cda  jne      0x1807e3ceb
+0x01807e3cdc  mov      rcx, rax
+0x01807e3cdf  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3ce4  mov      rax, qword ptr [rip + 0x1591085]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3ceb  cmp      byte ptr [rip + 0x16ae05c], 0
+0x01807e3cf2  jne      0x1807e3d0e
+0x01807e3cf4  lea      rcx, [rip + 0x1591075]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3cfb  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3d00  mov      rax, qword ptr [rip + 0x1591069]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3d07  mov      byte ptr [rip + 0x16ae040], 1
+0x01807e3d0e  test     byte ptr [rax + 0x133], 4
+0x01807e3d15  je       0x1807e3d2f
+0x01807e3d17  cmp      dword ptr [rax + 0xe0], 0
+0x01807e3d1e  jne      0x1807e3d2f
+0x01807e3d20  mov      rcx, rax
+0x01807e3d23  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3d28  mov      rax, qword ptr [rip + 0x1591041]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3d2f  mov      rax, qword ptr [rax + 0xb8]
+0x01807e3d36  mov      rcx, qword ptr [rax + 0x20]
+0x01807e3d3a  test     rcx, rcx
+0x01807e3d3d  je       0x1807e4176
+0x01807e3d43  xor      edx, edx
+0x01807e3d45  call     0x180c1b650  ; -> GameDataController$$CanSaveLoad (0xC1B650)
+0x01807e3d4a  test     al, al
+0x01807e3d4c  je       0x1807e3d8d
+0x01807e3d4e  mov      byte ptr [rbx + 0x28], 0
+0x01807e3d52  mov      rcx, qword ptr [rip + 0x1591017]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3d59  test     byte ptr [rcx + 0x133], 4
+0x01807e3d60  je       0x1807e3d70
+0x01807e3d62  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3d69  jne      0x1807e3d70
+0x01807e3d6b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3d70  xor      ecx, ecx
+0x01807e3d72  call     0x18046c160  ; -> 0x46C160 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01807e3d77  test     rax, rax
+0x01807e3d7a  je       0x1807e4176
+0x01807e3d80  xor      r8d, r8d
+0x01807e3d83  xor      edx, edx
+0x01807e3d85  mov      rcx, rax
+0x01807e3d88  call     0x180c2cbb0  ; -> GameDataController$$Save (0xC2CBB0)
+0x01807e3d8d  mov      rcx, qword ptr [rip + 0x1591fcc]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3d94  test     byte ptr [rcx + 0x133], 4
+0x01807e3d9b  je       0x1807e3dab
+0x01807e3d9d  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3da4  jne      0x1807e3dab
+0x01807e3da6  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3dab  xor      edx, edx
+0x01807e3dad  mov      ecx, 0x11e
+0x01807e3db2  call     0x180a83ba0  ; -> GlobalData$$GetKeyDown (0xA83BA0)
+0x01807e3db7  test     al, al
+0x01807e3db9  jne      0x1807e3e73
+0x01807e3dbf  mov      rcx, qword ptr [rip + 0x1591f9a]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3dc6  test     byte ptr [rcx + 0x133], 4
+0x01807e3dcd  je       0x1807e3ddd
+0x01807e3dcf  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3dd6  jne      0x1807e3ddd
+0x01807e3dd8  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3ddd  xor      edx, edx
+0x01807e3ddf  mov      ecx, 0x122
+0x01807e3de4  call     0x180a83ba0  ; -> GlobalData$$GetKeyDown (0xA83BA0)
+0x01807e3de9  test     al, al
+0x01807e3deb  je       0x1807e3f4a
+0x01807e3df1  xor      r8d, r8d
+0x01807e3df4  mov      dl, 1
+0x01807e3df6  mov      rcx, rbx
+0x01807e3df9  call     0x1807905e0  ; -> GameController$$CanSaveLoad (0x7905E0)
+0x01807e3dfe  test     al, al
+0x01807e3e00  je       0x1807e3eff
+0x01807e3e06  mov      rcx, qword ptr [rip + 0x1590f63]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3e0d  test     byte ptr [rcx + 0x133], 4
+0x01807e3e14  je       0x1807e3e24
+0x01807e3e16  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3e1d  jne      0x1807e3e24
+0x01807e3e1f  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3e24  xor      ecx, ecx
+0x01807e3e26  call     0x18046c160  ; -> 0x46C160 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01807e3e2b  test     rax, rax
+0x01807e3e2e  je       0x1807e4176
+0x01807e3e34  xor      edx, edx
+0x01807e3e36  mov      rcx, rax
+0x01807e3e39  call     0x180c1b630  ; -> GameDataController$$CanLoad (0xC1B630)
+0x01807e3e3e  test     al, al
+0x01807e3e40  je       0x1807e3eff
+0x01807e3e46  mov      rcx, qword ptr [rip + 0x15bcf1b]  ; [0x1DA0D68 .data] f32=1.08822e-19
+0x01807e3e4d  test     byte ptr [rcx + 0x133], 4
+0x01807e3e54  je       0x1807e3e64
+0x01807e3e56  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3e5d  jne      0x1807e3e64
+0x01807e3e5f  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3e64  xor      edx, edx
+0x01807e3e66  lea      ecx, [rdx + 0xa]
+0x01807e3e69  call     0x180979560  ; -> SaveLoadMenuController$$LoadGame (0x979560)
+0x01807e3e6e  jmp      0x1807e3f4a  ; -> 0x7E3F4A (inside GameController$$Update)
+0x01807e3e73  xor      r8d, r8d
+0x01807e3e76  mov      dl, 1
+0x01807e3e78  mov      rcx, rbx
+0x01807e3e7b  call     0x1807905e0  ; -> GameController$$CanSaveLoad (0x7905E0)
+0x01807e3e80  test     al, al
+0x01807e3e82  je       0x1807e3eff
+0x01807e3e84  mov      rcx, qword ptr [rip + 0x1590ee5]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3e8b  test     byte ptr [rcx + 0x133], 4
+0x01807e3e92  je       0x1807e3ea2
+0x01807e3e94  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3e9b  jne      0x1807e3ea2
+0x01807e3e9d  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3ea2  xor      ecx, ecx
+0x01807e3ea4  call     0x18046c160  ; -> 0x46C160 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01807e3ea9  test     rax, rax
+0x01807e3eac  je       0x1807e4176
+0x01807e3eb2  xor      edx, edx
+0x01807e3eb4  mov      rcx, rax
+0x01807e3eb7  call     0x180c1b650  ; -> GameDataController$$CanSaveLoad (0xC1B650)
+0x01807e3ebc  test     al, al
+0x01807e3ebe  je       0x1807e3eff
+0x01807e3ec0  mov      rcx, qword ptr [rip + 0x1590ea9]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e3ec7  test     byte ptr [rcx + 0x133], 4
+0x01807e3ece  je       0x1807e3ede
+0x01807e3ed0  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3ed7  jne      0x1807e3ede
+0x01807e3ed9  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3ede  xor      ecx, ecx
+0x01807e3ee0  call     0x18046c160  ; -> 0x46C160 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01807e3ee5  test     rax, rax
+0x01807e3ee8  je       0x1807e4176
+0x01807e3eee  xor      r8d, r8d
+0x01807e3ef1  mov      rcx, rax
+0x01807e3ef4  lea      edx, [r8 + 0xa]
+0x01807e3ef8  call     0x180c2cbb0  ; -> GameDataController$$Save (0xC2CBB0)
+0x01807e3efd  jmp      0x1807e3f4a  ; -> 0x7E3F4A (inside GameController$$Update)
+0x01807e3eff  mov      rcx, qword ptr [rip + 0x15d1fd2]  ; [0x1DB5ED8 .data] f32=-1.08619e-19
+0x01807e3f06  xor      edx, edx
+0x01807e3f08  call     0x180d9fe40  ; -> UnityEngine.Resources$$Load (0xD9FE40)
+0x01807e3f0d  mov      rcx, qword ptr [rip + 0x15a9e74]  ; [0x1D8DD88 .data] f32=1.08779e-19
+0x01807e3f14  mov      rdi, rax
+0x01807e3f17  test     byte ptr [rcx + 0x133], 4
+0x01807e3f1e  je       0x1807e3f2e
+0x01807e3f20  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e3f27  jne      0x1807e3f2e
+0x01807e3f29  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3f2e  xor      ecx, ecx
+0x01807e3f30  test     rdi, rdi
+0x01807e3f33  je       0x1807e3f43
+0x01807e3f35  mov      rax, qword ptr [rip + 0x15cd484]  ; [0x1DB13C0 .data] f32=1.08644e-19
+0x01807e3f3c  cmp      qword ptr [rdi], rax
+0x01807e3f3f  cmove    rcx, rdi
+0x01807e3f43  xor      edx, edx
+0x01807e3f45  call     0x180b8e450  ; -> NGUITools$$PlaySound (0xB8E450)
+0x01807e3f4a  xor      r8d, r8d
+0x01807e3f4d  mov      dl, 1
+0x01807e3f4f  mov      rcx, rbx
+0x01807e3f52  call     0x1807bfb40  ; -> GameController$$HaveSpeUI (0x7BFB40)
+0x01807e3f57  test     al, al
+0x01807e3f59  jne      0x1807e40ba
+0x01807e3f5f  cmp      byte ptr [rip + 0x16b8e7b], al  ; [0x1E9CDE0 .data] f32=1.4639e-39
+0x01807e3f65  jne      0x1807e3f7a
+0x01807e3f67  lea      rcx, [rip + 0x15c681a]  ; [0x1DAA788 .data] f32=1.08851e-19
+0x01807e3f6e  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e3f73  mov      byte ptr [rip + 0x16b8e66], 1  ; [0x1E9CDE0 .data] f32=1.4639e-39
+0x01807e3f7a  mov      rax, qword ptr [rip + 0x15c6807]  ; [0x1DAA788 .data] f32=1.08851e-19
+0x01807e3f81  mov      rcx, qword ptr [rax + 0xb8]
+0x01807e3f88  mov      rax, qword ptr [rcx]
+0x01807e3f8b  test     rax, rax
+0x01807e3f8e  je       0x1807e4176
+0x01807e3f94  mov      rcx, qword ptr [rax + 0x18]
+0x01807e3f98  test     rcx, rcx
+0x01807e3f9b  je       0x1807e4176
+0x01807e3fa1  xor      edx, edx
+0x01807e3fa3  call     0x1810dcc60  ; -> UnityEngine.GameObject$$get_activeSelf (0x10DCC60)
+0x01807e3fa8  test     al, al
+0x01807e3faa  jne      0x1807e40ba
+0x01807e3fb0  mov      rax, qword ptr [rip + 0x1591da9]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3fb7  test     byte ptr [rax + 0x133], 4
+0x01807e3fbe  je       0x1807e3fd8
+0x01807e3fc0  cmp      dword ptr [rax + 0xe0], 0
+0x01807e3fc7  jne      0x1807e3fd8
+0x01807e3fc9  mov      rcx, rax
+0x01807e3fcc  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e3fd1  mov      rax, qword ptr [rip + 0x1591d88]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e3fd8  mov      rax, qword ptr [rax + 0xb8]
+0x01807e3fdf  mov      ecx, dword ptr [rax + 8]
+0x01807e3fe2  cmp      ecx, 1
+0x01807e3fe5  jne      0x1807e4015
+0x01807e3fe7  mov      rax, qword ptr [rbx + 0x20]
+0x01807e3feb  test     rax, rax
+0x01807e3fee  je       0x1807e4176
+0x01807e3ff4  mov      rax, qword ptr [rax + 0xa8]
+0x01807e3ffb  test     rax, rax
+0x01807e3ffe  je       0x1807e4176
+0x01807e4004  cmp      dword ptr [rax + 0x10], ecx
+0x01807e4007  jne      0x1807e4041
+0x01807e4009  cmp      dword ptr [rax + 0x14], 4
+0x01807e400d  jl       0x1807e40ba
+0x01807e4013  jmp      0x1807e4041  ; -> 0x7E4041 (inside GameController$$Update)
+0x01807e4015  cmp      ecx, 3
+0x01807e4018  jne      0x1807e40ba
+0x01807e401e  mov      rax, qword ptr [rbx + 0x20]
+0x01807e4022  test     rax, rax
+0x01807e4025  je       0x1807e4176
+0x01807e402b  mov      rcx, qword ptr [rax + 0xa8]
+0x01807e4032  test     rcx, rcx
+0x01807e4035  je       0x1807e4176
+0x01807e403b  cmp      dword ptr [rcx + 0x10], 1
+0x01807e403f  je       0x1807e40ba
+0x01807e4041  xor      ecx, ecx
+0x01807e4043  call     0x180778b40  ; -> 0x778B40 (inside rail.RAIL_API_PINVOKE$$new_VoiceDataCapturedEvent__SWIG_1)
+0x01807e4048  xor      edx, edx
+0x01807e404a  mov      rcx, rbx
+0x01807e404d  mov      rdi, rax
+0x01807e4050  call     0x1810d83c0  ; -> UnityEngine.Component$$get_gameObject (0x10D83C0)
+0x01807e4055  test     rax, rax
+0x01807e4058  je       0x1807e4176
+0x01807e405e  xor      edx, edx
+0x01807e4060  mov      rcx, rax
+0x01807e4063  call     0x1810dcce0  ; -> UnityEngine.GameObject$$get_tag (0x10DCCE0)
+0x01807e4068  test     rdi, rdi
+0x01807e406b  je       0x1807e4176
+0x01807e4071  mov      r8, qword ptr [rip + 0x15de1a8]  ; [0x1DC2220 .data] f32=-1.08487e-19
+0x01807e4078  xor      r9d, r9d
+0x01807e407b  mov      rdx, qword ptr [rip + 0x15c8e7e]  ; [0x1DACF00 .data] f32=-1.08894e-19
+0x01807e4082  mov      rcx, rdi
+0x01807e4085  mov      qword ptr [rsp + 0x30], 0
+0x01807e408e  mov      byte ptr [rsp + 0x28], 0
+0x01807e4093  mov      qword ptr [rsp + 0x20], rax
+0x01807e4098  call     0x180a95e30  ; -> SureMenu$$CallSureMenu (0xA95E30)
+0x01807e409d  xor      ecx, ecx
+0x01807e409f  call     0x180778b40  ; -> 0x778B40 (inside rail.RAIL_API_PINVOKE$$new_VoiceDataCapturedEvent__SWIG_1)
+0x01807e40a4  test     rax, rax
+0x01807e40a7  je       0x1807e4176
+0x01807e40ad  xor      r8d, r8d
+0x01807e40b0  mov      dl, 1
+0x01807e40b2  mov      rcx, rax
+0x01807e40b5  call     0x180a967a0  ; -> SureMenu$$SetExtraButton (0xA967A0)
+0x01807e40ba  cmp      byte ptr [rip + 0x16b8c91], 0  ; [0x1E9CD52 .data] f64=1.27449e-57
+0x01807e40c1  jne      0x1807e40ee
+0x01807e40c3  lea      rcx, [rip + 0x1590ca6]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e40ca  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e40cf  lea      rcx, [rip + 0x1591c8a]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e40d6  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e40db  lea      rcx, [rip + 0x15e3ec6]  ; [0x1DC7FA8 .data] f32=-1.08633e-19
+0x01807e40e2  call     0x1800d64a0  ; -> 0xD64A0
+0x01807e40e7  mov      byte ptr [rip + 0x16b8c64], 1  ; [0x1E9CD52 .data] f64=1.27449e-57
+0x01807e40ee  mov      rax, qword ptr [rip + 0x1590c7b]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e40f5  test     byte ptr [rax + 0x133], 4
+0x01807e40fc  je       0x1807e4116
+0x01807e40fe  cmp      dword ptr [rax + 0xe0], 0
+0x01807e4105  jne      0x1807e4116
+0x01807e4107  mov      rcx, rax
+0x01807e410a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e410f  mov      rax, qword ptr [rip + 0x1590c5a]  ; [0x1D74D70 .data] f32=1.08722e-19
+0x01807e4116  mov      rax, qword ptr [rax + 0xb8]
+0x01807e411d  mov      rcx, qword ptr [rax + 8]
+0x01807e4121  test     rcx, rcx
+0x01807e4124  je       0x1807e4176
+0x01807e4126  mov      rcx, qword ptr [rcx + 0x10]
+0x01807e412a  test     rcx, rcx
+0x01807e412d  je       0x1807e4176
+0x01807e412f  mov      rdx, qword ptr [rip + 0x15e3e72]  ; [0x1DC7FA8 .data] f32=-1.08633e-19
+0x01807e4136  xor      r8d, r8d
+0x01807e4139  call     0x18046d980  ; -> PlayerPrefDictionary$$GetInt (0x46D980)
+0x01807e413e  cmp      eax, 1
+0x01807e4141  jne      0x1807e416b
+0x01807e4143  mov      rcx, qword ptr [rip + 0x1591c16]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01807e414a  test     byte ptr [rcx + 0x133], 4
+0x01807e4151  je       0x1807e4161
+0x01807e4153  cmp      dword ptr [rcx + 0xe0], 0
+0x01807e415a  jne      0x1807e4161
+0x01807e415c  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807e4161  xor      edx, edx
+0x01807e4163  lea      ecx, [rdx + 0x70]
+0x01807e4166  call     0x180a83ba0  ; -> GlobalData$$GetKeyDown (0xA83BA0)
+0x01807e416b  mov      rdi, qword ptr [rsp + 0x50]
+0x01807e4170  add      rsp, 0x40
+0x01807e4174  pop      rbx
+0x01807e4175  ret      
+0x01807e4176  call     0x1800d6610  ; -> 0xD6610
+0x01807e417b  int3     
+0x01807e417c  int3     
+0x01807e417d  int3     
+0x01807e417e  int3     
+0x01807e417f  int3     

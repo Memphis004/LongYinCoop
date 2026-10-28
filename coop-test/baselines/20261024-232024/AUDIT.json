@@ -1,0 +1,23 @@
+{
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
+  "ts": "2026-10-24T23:20:24",
+  "reason": "SP0/SP7 gate (มติผู้ใช้ 2026-10-24, ทาง ก-A): baseline เดิม 4226730f66ff ล้าสมัยจากการเซฟของผู้ใช้เอง (SaveSlot8 เวลา 02:15:47) และ pref drift จาก session เปิดเกม 22:08 ของวันเดียวกัน — สร้าง baseline รอบ sp0sp7-20261024-225939 จากสถานะปัจจุบัน; ห้ามลบ/เขียนทับ baseline เดิม; volatile_only=false เพราะมี drift ระดับ SaveSlot8 ที่ผู้ใช้สั่งรักษาไว้",
+  "files": 57,
+  "digest": "7332fc93eb98e4751b698ede19e6d2324d6cc57ab93a962c4d041a6e45d424c7",
+  "changed": [
+    "PlayerprefData.dat",
+    "SaveSlot8/Hero",
+    "SaveSlot8/Info",
+    "SaveSlot8/Save",
+    "SaveSlot8/TempHero"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": false,
+  "against": "coop-test/baselines/20261022-075422/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "c0f7c9217a4da6793649b887c846d13283f9ae63346d009b0412e306d9cab3fb",
+  "generated_by": "tools/coop-audit.py"
+}

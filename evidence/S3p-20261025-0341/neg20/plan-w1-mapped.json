@@ -1,0 +1,101 @@
+{
+  "label": "NEG20-f2ad30cd-20261025-202331",
+  "window": "w1-waitplayerinput",
+  "pref": true,
+  "settle_ms": 500,
+  "cases": [
+    {
+      "n": 1,
+      "group": "DISARMED",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 1,
+        "col": 0
+      },
+      "arm": 0,
+      "expect": "DISARMED"
+    },
+    {
+      "n": 2,
+      "group": "DISARMED",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 1,
+      "arm_wait_ms": 2200,
+      "expect": "DISARMED"
+    },
+    {
+      "n": 3,
+      "group": "NOT_ACTIVE",
+      "cmd": "move",
+      "args": {
+        "id": "0:51",
+        "row": 4,
+        "col": 0
+      },
+      "arm": 120,
+      "expect": "is not the active unit"
+    },
+    {
+      "n": 4,
+      "group": "NOT_ACTIVE",
+      "cmd": "move",
+      "args": {
+        "id": "0:86",
+        "row": 11,
+        "col": 0
+      },
+      "arm": 120,
+      "expect": "is not the active unit"
+    },
+    {
+      "n": 17,
+      "group": "STATE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "NOT_ATTACK_MODE"
+    },
+    {
+      "n": 18,
+      "group": "STATE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "expect": "NOT_ATTACK_MODE"
+    },
+    {
+      "n": 20,
+      "group": "GRID",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 99,
+        "col": 99
+      },
+      "arm": 120,
+      "expect": "no grid cell at (99,99)"
+    }
+  ],
+  "id_mapping": {
+    "target": {
+      "1:10066": "1:10034",
+      "1:10067": "1:10034"
+    },
+    "id": {
+      "0:9": "0:51"
+    },
+    "mapped_from": "evidence/S3prereq-20261025-0248/plan-w1.json",
+    "rule": "case/group/expect unchanged - ids only (มติผู้ใช้ NEG20) ยืนยันจาก status สด 2026-10-25 21:46:55"
+  }
+}

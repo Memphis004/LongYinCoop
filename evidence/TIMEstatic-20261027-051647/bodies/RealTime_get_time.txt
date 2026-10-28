@@ -1,0 +1,12 @@
+; RealTime_get_time  rva=0xCFD4B0 va=0x180CFD4B0 end(before)=0xCFD4C0 insns=11
+0x0180cfd4b0  xor      ecx, ecx
+0x0180cfd4b2  jmp      0x180daa000  ; -> UnityEngine.Time$$get_unscaledTime (0xDAA000)
+0x0180cfd4b7  int3     
+0x0180cfd4b8  int3     
+0x0180cfd4b9  int3     
+0x0180cfd4ba  int3     
+0x0180cfd4bb  int3     
+0x0180cfd4bc  int3     
+0x0180cfd4bd  int3     
+0x0180cfd4be  int3     
+0x0180cfd4bf  int3     

@@ -1,0 +1,22 @@
+=== CLEANUP2 20261025-062819 ===
+--- spike disarm
+{
+  "ok": true,
+  "cmd": "spike",
+  "result": {
+    "armed": false,
+    "remainingMs": 0
+  },
+  "note": null
+}
+--- set_pref allowRemoteInput=false
+{
+  "ok": true,
+  "cmd": "set_pref",
+  "result": {
+    "key": "allowRemoteInput",
+    "value": false,
+    "armed": false
+  },
+  "note": null
+}

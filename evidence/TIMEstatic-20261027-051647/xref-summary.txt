@@ -1,0 +1,209 @@
+xref summary (E8/E9 direct scan, GAME-ONLY targets; generic-shared NOISE excluded)
+total raw hits: 2740
+
+== StudySkillController$$.ctor @ 0x3A1810 == total=30 (E8=6 E9=24)
+   1x  PigeonCoopToolkit.Effects.Trails.SmokePlume$$.ctor   sites=0x98C1BA
+   1x  PigeonCoopToolkit.Effects.Trails.SmokeTrail$$.ctor   sites=0x98C642
+   1x  PigeonCoopToolkit.Effects.Trails.SmoothTrail$$.ctor   sites=0x98DE42
+   1x  TMPro.TextContainer$$.ctor   sites=0xDBA3A6
+   1x  MultipleObjectsMake$$.ctor   sites=0xDF5F89
+   1x  Spine.Unity.Examples.SkeletonUtilityEyeConstraint$$.ctor   sites=0xE586D0
+   1x  Spine.Unity.Examples.SkeletonUtilityGroundConstraint$$.ctor   sites=0xE59021
+   1x  UnityEngine.UI.AspectRatioFitter$$.ctor   sites=0xFB8EF9
+   1x  UnityEngine.EventSystems.BaseInputModule$$.ctor   sites=0xFB9DC1
+   1x  UnityEngine.EventSystems.BaseRaycaster$$.ctor   sites=0xFBA0E2
+   1x  UnityEngine.UI.CanvasScaler$$.ctor   sites=0xFBB588
+   1x  UnityEngine.EventSystems.EventSystem$$.ctor   sites=0xFC87D0
+   1x  UnityEngine.UI.GraphicRaycaster$$.ctor   sites=0xFCC8F2
+   1x  UnityEngine.UI.Graphic$$.ctor   sites=0xFD08D0
+   1x  UIPopupList$$.ctor   sites=0x11A6DF0
+   1x  UIGrid$$.ctor   sites=0x12C5070
+   1x  UnityEngine.UI.Mask$$.ctor   sites=0x13B0BA6
+   1x  UnityEngine.UI.RectMask2D$$.ctor   sites=0x13B8BFA
+   1x  UnityEngine.UI.ScrollRect$$.ctor   sites=0x13BE811
+   1x  UnityEngine.UI.Selectable$$.ctor   sites=0x13C32AA
+   1x  UIButtonColor$$.ctor   sites=0x1531949
+   1x  UIButtonKeys$$.ctor   sites=0x1531F1D
+   1x  UIButton$$.ctor   sites=0x153439F
+   1x  UIProgressBar$$.ctor   sites=0x16FD458
+   1x  UIScrollBar$$.ctor   sites=0x1702DBA
+   1x  UISlider$$.ctor   sites=0x1707FE6
+   1x  UITable$$.ctor   sites=0x170F649
+   1x  UnityEngine.UI.HorizontalOrVerticalLayoutGroup$$.ctor   sites=0x1742F2E
+   1x  UnityEngine.UI.LayoutElement$$.ctor   sites=0x17569A3
+   1x  UnityEngine.UI.LayoutGroup$$.ctor   sites=0x1757C37
+
+== GameController$$ChangeDayDirect @ 0x790CA0 == total=1 (E8=1 E9=0)
+   1x  Console$$Input   sites=0x9A79F1
+
+== GameController$$ChangeDay @ 0x790E30 == total=2 (E8=2 E9=0)
+   1x  GameController$$ChangeDay   sites=0x792608
+   1x  GameController$$ChangeHour   sites=0x792818
+
+== GameController$$ChangeHour @ 0x792620 == total=9 (E8=3 E9=6)
+   2x  BigMapController$$FixedUpdate   sites=0x8D9F66,8DA308
+   1x  PlotController$$HideInteractUIOneDay   sites=0x5382FA
+   1x  PlotController$$PlayerFinishPrison   sites=0x557B1D
+   1x  PlotController$$StartStudyFightWithGreatHeroFinalResult   sites=0x65DA3E
+   1x  PlotController$$StartStudyFightWithGreatHeroMultiResult   sites=0x65E7A6
+   1x  PlotController$$StartStudyFightWithGreatHeroSingleResult   sites=0x65F326
+   1x  ExploreController$$FinishExploreMap   sites=0x939FB2
+   1x  WorkingUIController$$Update   sites=0x9CBC30
+
+== GameController$$ChangeMonthDirect @ 0x793920 == total=1 (E8=1 E9=0)
+   1x  Console$$Input   sites=0x9A76A5
+
+== GameController$$ChangeMonth @ 0x793A20 == total=1 (E8=1 E9=0)
+   1x  GameController$$ChangeDay   sites=0x791055
+
+== GameController$$ChangeYearDirect @ 0x795180 == total=1 (E8=1 E9=0)
+   1x  Console$$Input   sites=0x9A794C
+
+== UnityEngine.Component$$GetComponent<StudySkillStarController> == NOISE (generic sharing: one code address for all T) hits=2554
+
+== WorkingUIController$$StartWorking @ 0x9CABF0 == total=42 (E8=42 E9=0)
+   4x  WorkingUIController$$StartWorking   sites=0x9CADDD,9CAE6E,9CAFD4,9CB067
+   1x  PlotController$$EnlightForNpcSpeStart   sites=0x4C232C
+   1x  PlotController$$ExploreAreaStart   sites=0x4C72A2
+   1x  PlotController$$ForceLeaderAskClean   sites=0x4F957F
+   1x  PlotController$$GuardRichStartWork   sites=0x524F34
+   1x  PlotController$$PatrolAreaStart   sites=0x556382
+   1x  PlotController$$SpeCureStart   sites=0x58C602
+   1x  PlotController$$SpeGetTalentPointStart   sites=0x58CC32
+   1x  PlotController$$SpeReduceBadFameStart   sites=0x59D5E2
+   1x  PlotController$$SpeRemoveSkillStart   sites=0x59DEC6
+   1x  PlotController$$SpeRemoveTagStart   sites=0x59EB1E
+   1x  PlotController$$SpeStartPartySure   sites=0x59ED63
+   1x  PlotController$$StartAskNearRandomEvent   sites=0x5A1BCD
+   1x  PlotController$$StartDigTreasureMap   sites=0x5A5674
+   1x  PlotController$$StartMeditationWork   sites=0x5ADD41
+   1x  PlotController$$StartPrepareParty   sites=0x5B1815
+   1x  PlotController$$StartWorking   sites=0x660590
+   1x  PlotController$$StealForceResourceStart   sites=0x662048
+   1x  PlotController$$StealForceSkillStart   sites=0x662938
+   1x  PlotController$$StudyLivingSkillStart   sites=0x66F064
+   1x  PlotController$$StudyMartialClubSkillSure   sites=0x671100
+   1x  PlotController$$StudyMaxFightSkillStart   sites=0x671627
+   1x  PlotController$$StudyMaxLivingSkillStart   sites=0x671B77
+   1x  PlotController$$StudyMaxStateStart   sites=0x67308A
+   1x  PlotController$$SureHomeRestRecover   sites=0x67A196
+   1x  PlotController$$SureHomeRest   sites=0x67A335
+   1x  PlotController$$SureHotelRestRecover   sites=0x67A896
+   1x  PlotController$$SureHotelRest   sites=0x67AA35
+   1x  PlotController$$SurePrepareBreakPrison   sites=0x67D976
+   1x  ForceSpeResearchUIController$$StartResearchButtonClicked   sites=0x782C4C
+   1x  GameController$$PlayerQuickTravel   sites=0x7D9AAB
+   1x  EnhanceUIController$$EnhanceButtonClicked   sites=0x930C51
+   1x  SpeEnhanceEquipController$$EnhanceButtonClicked   sites=0x98FB6E
+   1x  ManageTagController$$SureUnderstandTag   sites=0xA52482
+   1x  CraftPoisonUIController$$PoisonButtonClicked   sites=0xA5A860
+   1x  CraftUIController$$CraftButtonClicked   sites=0xA5CC7C
+   1x  BreakThroughController$$StartBreakThroughButtonClicked   sites=0xC95C52
+   1x  ReadBookController$$SureStartReadBook   sites=0xCF90BE
+   1x  StudySkillController$$SureStartStudySkill   sites=0xFE6535
+
+== WorkingUIController$$StartWorking @ 0x9CAD70 == total=3 (E8=3 E9=0)
+   1x  PlotController$$ForceTeachNPCContinue   sites=0x4FC345
+   1x  PlotController$$StartRecruitHero   sites=0x5B3A23
+   1x  PlotController$$SureHospitalCureInjury   sites=0x67A4F8
+
+== WorkingUIController$$StartWorking @ 0x9CAE00 == total=1 (E8=0 E9=1)
+   1x  PlotController$$RecoverBuildingResourceRate   sites=0x570531
+
+== WorkingUIController$$StartWorking @ 0x9CAE90 == total=1 (E8=0 E9=1)
+   1x  PlotController$$SureBuildingWork   sites=0x6758FB
+
+== WorkingUIController$$StartWorking @ 0x9CB000 == total=3 (E8=3 E9=0)
+   1x  PlotController$$PlayerContinuePrison   sites=0x5578DC
+   1x  PlotController$$SureSimpleWork   sites=0x67FA11
+   1x  WaitUIController$$SureButtonClicked   sites=0xC14E4E
+
+== WorkingUIController$$StartWorking @ 0x9CB090 == total=1 (E8=1 E9=0)
+   1x  PlotController$$TryThinkAboutMissingSkill   sites=0x68545C
+
+== WorkingUIController$$StopWorking @ 0x9CB220 == total=6 (E8=5 E9=1)
+   2x  PlotController$$HospitalCureInjury   sites=0x53A96D,53ABD8
+   1x  PlotController$$ForceTeachNPCOneDay   sites=0x4FC67E
+   1x  PlotController$$MiddleStopWork   sites=0x54EF55
+   1x  PlotController$$PlayerContinuePrisonOneDay   sites=0x557777
+   1x  PlotController$$RestInHotel   sites=0x57A05C
+
+== BuildingUIController$$BuildingStudySkillCostRate @ 0xB63470 == total=4 (E8=4 E9=0)
+   1x  BuildingUIController$$StudyLivingSkill   sites=0xB7BF34
+   1x  BuildingUIController$$StudyMaxFightSkill   sites=0xB7CAEA
+   1x  BuildingUIController$$StudyMaxLivingSkill   sites=0xB7D662
+   1x  BuildingUIController$$StudyMaxState   sites=0xB7E0E5
+
+== RealTime$$get_deltaTime @ 0xCFD4A0 == total=63 (E8=63 E9=0)
+   11x  BGMController$$Update   sites=0x7F5AD6,7F5B87,7F5D17,7F5EB1,7F5EDB,7F611D,7F62E0,7F6462,7F65F1,7F6777,7F67B8
+   4x  WeatherController$$Update   sites=0xC1A188,C1A246,C1A2E2,C1A70A
+   2x  PlotController$$Update   sites=0x685D3A,685D79
+   2x  BattleController$$Update   sites=0x82444F,824592
+   2x  BigMapController$$FixedUpdate   sites=0x8DA788,8DA898
+   2x  ExploreController$$Update   sites=0x9472D8,947415
+   2x  SkillExpShowPrefab$$Update   sites=0x985831,985847
+   2x  WorkingUIController$$Update   sites=0x9CBA56,9CBDC0
+   2x  AdjustPos$$Update   sites=0xA1EF2B,A1EFA9
+   2x  AreaController$$Update   sites=0xA39882,A399BF
+   2x  TimeScaleController$$Update   sites=0xAA728B,AA7302
+   1x  GameController$$LateUpdate   sites=0x7C2340
+   1x  AreaIconController$$Update   sites=0x7EC5A4
+   1x  BattleController$$RunBattle   sites=0x81B173
+   1x  SelfDestroy$$Update   sites=0x97BD23
+   1x  SimpleDetail$$Update   sites=0x98259B
+   1x  CloudController$$Update   sites=0x9A0779
+   1x  ActiveAnimation$$Update   sites=0xA1E418
+   1x  LagPosition$$Update   sites=0xA455B1
+   1x  LagRotation$$Update   sites=0xA45841
+   1x  GameStopQuitButtonController$$Update   sites=0xA7AE02
+   1x  Consolation.TestConsole$$Update   sites=0xAA05C1
+   1x  TypewriterEffect$$Update   sites=0xAF09EF
+   1x  HeroLittleTalkUIController$$Update   sites=0xAF9ED8
+   1x  HudController$$Update   sites=0xB0B5CD
+   1x  PlotInteractController$$Update   sites=0xB0F2BD
+   1x  QuickDetail$$Update   sites=0xB22149
+   1x  PanWithMouse$$Update   sites=0xB97A0B
+   1x  UITooltip$$Update   sites=0xC0A8E8
+   1x  SpeShowController$$Update   sites=0xC6917D
+   1x  Spin$$Update   sites=0xC6CAE3
+   1x  SpringPanel$$AdvanceTowardsPosition   sites=0xC6CBD1
+   1x  SpringPosition$$Update   sites=0xC6D4A9
+   1x  SpriteAnimationController$$Update   sites=0xC6DABA
+   1x  SteamStatsAndAchievements$$Update   sites=0xC7D041
+   1x  MoveWithMouse$$Update   sites=0xDF5815
+   1x  NGUIPanWithMouse$$Update   sites=0xE00557
+   1x  UIDragObject$$LateUpdate   sites=0x12B6782
+   1x  UIDraggableCamera$$Update   sites=0x12B9BB5
+   1x  UIScrollView$$LateUpdate   sites=0x1703EAF
+   1x  UISpriteAnimation$$Update   sites=0x1708786
+
+== StudySkillController$$FinishStudySkill @ 0xFE4450 == total=4 (E8=4 E9=0)
+   1x  StudyDodgeSkillController.<FinishStudyDodgeSkill>d__40$$MoveNext   sites=0x8EC468
+   1x  StudyAttackSkillController.<FinishStudyFightSkill>d__28$$MoveNext   sites=0x8ECA8A
+   1x  StudyInternalSkillController.<FinishStudyInternalSkill>d__48$$MoveNext   sites=0x8ED608
+   1x  StudyUniqueSkillController.<FinishStudyUniqueSkill>d__34$$MoveNext   sites=0x8EDCF5
+
+== StudySkillController$$GetAutoPracticeCost @ 0xFE4AC0 == total=3 (E8=3 E9=0)
+   2x  StudySkillController$$AutoStudySkill   sites=0xFE4197,FE4266
+   1x  StudySkillController$$RealStartStudySkill   sites=0xFE5806
+
+== StudySkillController$$GetMaxSkillSelfStudyLv @ 0xFE4B70 == total=3 (E8=3 E9=0)
+   2x  StudySkillController$$StartStudySkill   sites=0xFE5C0F,FE5EBD
+   1x  StudySkillController$$GetPracticeExpRate   sites=0xFE4CD1
+
+== StudySkillController$$GetPracticeExpRate @ 0xFE4C20 == total=1 (E8=1 E9=0)
+   1x  PlotController$$GetStudyFightExp   sites=0x517CF8
+
+== StudySkillController$$GetRandomStarPrefab @ 0xFE4D20 == total=1 (E8=1 E9=0)
+   1x  StudyDodgeSkillController$$ManageAttackGenerate   sites=0xFDA489
+
+== StudySkillController$$PlayerStudySkill @ 0xFE4D70 == total=2 (E8=2 E9=0)
+   1x  StudySkillController$$RealStartStudySkill   sites=0xFE5914
+   1x  StudySkillController$$StartStudySkill   sites=0xFE61C0
+
+== StudySkillController$$RealStartStudySkill @ 0xFE5490 == total=1 (E8=0 E9=1)
+   1x  PlotController$$RealStartStudySkill   sites=0x5700B7
+
+== StudySkillController$$StartStudySkill @ 0xFE59D0 == total=2 (E8=2 E9=0)
+   1x  PlotController$$CoachWorkChoosen   sites=0x4AF002
+   1x  PlotController$$StudyFightSelfChoosen   sites=0x66CC1A

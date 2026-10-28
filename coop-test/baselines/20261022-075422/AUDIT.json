@@ -1,0 +1,19 @@
+{
+  "audit_version": 1,
+  "sanitized": true,
+  "source": "REBASELINE.json",
+  "ts": "2026-10-22T07:54:22",
+  "reason": "incident 2026-10-22 07:48 - user opened the game on the real save after restore (label S2cd) before this Explorer survey; only PlayerprefData.dat written; SaveSlot* untouched",
+  "files": 57,
+  "digest": "4226730f66ffdcf9adb110fd8e26e29ffa8ba40620ccc33b013ef11adfaa46d7",
+  "changed": [
+    "PlayerprefData.dat"
+  ],
+  "missing": [],
+  "added": [],
+  "volatile_only": true,
+  "against": "coop-test/baselines/20261022-064714/savehash.real.before.txt",
+  "against_scope": "repo-relative",
+  "source_sha256": "62a2a6fdec2186c8a43905bbe423d039c5047d5a64147f25f0a8bf1664c9b01d",
+  "generated_by": "tools/coop-audit.py"
+}

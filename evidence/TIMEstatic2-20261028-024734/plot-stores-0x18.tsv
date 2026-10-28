@@ -1,0 +1,4 @@
+# PlotController$$ byte-store [reg+0x18] (plotHappen=instance 0x18)
+# owner	site_rva	origin	base	src_kind	insn
+PlotController$$DisactiveInteractUI	0x4be572	this	rbx	imm	mov byte ptr [rbx + 0x18], 0
+PlotController$$ShowPlot	0x5893f4	this	r14	imm	mov byte ptr [r14 + 0x18], 1

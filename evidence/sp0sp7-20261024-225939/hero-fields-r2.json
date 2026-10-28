@@ -1,0 +1,269 @@
+{
+ "isSummon": false,
+ "summonID": 0,
+ "summonLv": 0,
+ "summonMoveRange": 0,
+ "summonControlable": false,
+ "summonSourceHero": "null",
+ "interestingStar": false,
+ "manageAiHour": -1,
+ "dailyAIManaged": false,
+ "heroAIData": "HeroAIData",
+ "heroAIDataArriveTargetRecord": "null",
+ "heroAISettingData": "HeroAISettingData",
+ "heroID": 0,
+ "speHero": false,
+ "tempPlotHero": false,
+ "recruitAble": false,
+ "loveAble": false,
+ "hide": false,
+ "dead": false,
+ "heroName": "สมศรี",
+ "heroFamilyName": "สม",
+ "heroNickName": "null",
+ "isFemale": false,
+ "belongForceID": 25,
+ "skillForceID": -1,
+ "outsideForce": false,
+ "replacedForce": false,
+ "forceJobType": -1,
+ "forceJobID": -1,
+ "forceJobCD": 0,
+ "branchLeaderAreaID": -1,
+ "thisMonthContribution": 0,
+ "lastMonthContribution": 0,
+ "thisYearContribution": 0,
+ "lastYearContribution": 0,
+ "lastFightContribution": 0,
+ "isLeader": false,
+ "heroForceLv": 0,
+ "heroStrengthLv": 0,
+ "atAreaID": 55,
+ "bigMapPos": "BigMapPos",
+ "inSafeArea": false,
+ "inPrison": false,
+ "age": 18,
+ "generation": 1,
+ "voicePitch": 1,
+ "faceData": "HeroFaceData",
+ "skinColorDark": 0,
+ "defaultSkinID": -5,
+ "skinID": -5,
+ "skinLv": 0,
+ "changeSkinCd": 0,
+ "playerSetSkin": false,
+ "setSkinID": 0,
+ "setSkinLv": 0,
+ "kungfuSkillFocus": {
+  "listSize": 0
+ },
+ "livingSkillFocus": {
+  "listSize": 0
+ },
+ "goodKungfuSkillName": {
+  "listSize": 0
+ },
+ "haveMeet": false,
+ "favor": -999999,
+ "baseAttri": {
+  "listSize": 6
+ },
+ "maxAttri": {
+  "listSize": 6
+ },
+ "totalAttri": {
+  "listSize": 6
+ },
+ "baseFightSkill": {
+  "listSize": 9
+ },
+ "maxFightSkill": {
+  "listSize": 9
+ },
+ "totalFightSkill": {
+  "listSize": 9
+ },
+ "baseLivingSkill": {
+  "listSize": 9
+ },
+ "maxLivingSkill": {
+  "listSize": 9
+ },
+ "totalLivingSkill": {
+  "listSize": 9
+ },
+ "expLivingSkill": {
+  "listSize": 9
+ },
+ "hp": 110.3899917602539,
+ "maxhp": 110.3899917602539,
+ "realMaxHp": 110.3899917602539,
+ "power": 112,
+ "maxPower": 112,
+ "realMaxPower": 112,
+ "mana": 191.52000427246094,
+ "maxMana": 191.52000427246094,
+ "realMaxMana": 191.52000427246094,
+ "armor": 0,
+ "externalInjury": 0,
+ "internalInjury": 0,
+ "poisonInjury": 0,
+ "isGovern": false,
+ "governLv": 0,
+ "governContribution": 0,
+ "isHornord": false,
+ "hornorLv": 0,
+ "forceContribution": 0,
+ "fame": 0,
+ "badFame": 0,
+ "loyal": 0,
+ "evil": 50,
+ "chaos": 50,
+ "nature": 0,
+ "talent": 0,
+ "hobby": {
+  "listSize": 0
+ },
+ "rest": false,
+ "cureType": -1,
+ "salary": 10,
+ "population": 1,
+ "nowEquipment": "HeroEquipmentData",
+ "horseSaveRecord": 0,
+ "horse": "null",
+ "horseArmorSaveRecord": 0,
+ "horseArmor": "null",
+ "itemListData": "ItemListData",
+ "selfStorage": "ItemListData",
+ "partPosture": "PartPostureData",
+ "selfCureTime": 0,
+ "restCureTotalRate": 0,
+ "medResist": 0,
+ "fightProtectTarget": false,
+ "fightForceEnter": false,
+ "fightSpeControl": false,
+ "battlePrepareSpellData": "null",
+ "skillMaxPracticeExpData": "null",
+ "skillCount": {
+  "listSize": 6
+ },
+ "kungfuSkills": {
+  "listSize": 1
+ },
+ "internalSkillSaveRecord": 0,
+ "internalSkill": "null",
+ "dodgeSkillSaveRecord": 0,
+ "dodgeSkill": "null",
+ "uniqueSkillSaveRecord": 0,
+ "uniqueSkill": "null",
+ "attackSkillSaveRecord": "null",
+ "attackSkills": {
+  "listSize": 8
+ },
+ "nowActiveSkill": 0,
+ "baseAddData": "HeroSpeAddData",
+ "totalAddData": "HeroSpeAddData",
+ "heroBuff": "HeroSpeAddData",
+ "heroBuffLevel": "System.Collections.Generic.Dictionary`2[System.Int32,System.Single]",
+ "autoSetting": {
+  "listSize": 6
+ },
+ "heroDetailDirty": false,
+ "heroBuffDirty": false,
+ "heroIconDirtyCount": 1,
+ "forceMission": "null",
+ "missions": {
+  "listSize": 0
+ },
+ "inTeam": false,
+ "teamLeader": -1,
+ "teamMates": {
+  "listSize": 0
+ },
+ "autoLeaveTeamDay": -1,
+ "autoLeaveTeamDestroy": false,
+ "bodyGuard": false,
+ "playerInteractionTimeData": "PlayerInteractionTimeData",
+ "plotNumCount": 0,
+ "missionNumCount": 0,
+ "playerBecomeTeacherTime": 0,
+ "Teacher": 1,
+ "Students": {
+  "listSize": 0
+ },
+ "Lover": -1,
+ "PreLovers": {
+  "listSize": 0
+ },
+ "Relatives": {
+  "listSize": 0
+ },
+ "Brothers": {
+  "listSize": 0
+ },
+ "Friends": {
+  "listSize": 0
+ },
+ "Haters": {
+  "listSize": 0
+ },
+ "recordLog": {
+  "listSize": 0
+ },
+ "selfHouseTotalAdd": 0,
+ "heroTagPoint": 2,
+ "heroTagData": {
+  "listSize": 6
+ },
+ "bookWriteWorking": false,
+ "wantRemove": false,
+ "equipLock": false,
+ "skillLock": false,
+ "studyNewSkillSetting": 0,
+ "settingName": "null",
+ "servantForceID": -1,
+ "recruitByPlayer": false,
+ "shownHpBarRoot": "HudPanel (UnityEngine.GameObject)",
+ "shownHp": 110.3899917602539,
+ "shownMaxHp": 110.3899917602539,
+ "shownRealMaxHp": 110.3899917602539,
+ "shownMpBarRoot": "HudPanel (UnityEngine.GameObject)",
+ "shownMana": 191.52000427246094,
+ "shownMaxMana": 191.52000427246094,
+ "shownRealMaxMana": 191.52000427246094,
+ "shownPowerBarRoot": "null",
+ "shownPower": null,
+ "shownMaxPower": null,
+ "shownRealMaxPower": null,
+ "isTempHero": false,
+ "isRandomEnemy": false,
+ "needRemove": false,
+ "inWater": false,
+ "inMountain": false,
+ "inHill": false,
+ "fightScore": 832.1419677734375,
+ "__extra": {
+  "bigMapPos": {
+   "x": -1056,
+   "y": -664
+  },
+  "worldTime": {
+   "year": 1,
+   "month": 1,
+   "day": 1
+  },
+  "itemListData": {
+   "heroID": 0,
+   "forceID": -1,
+   "money": 200,
+   "weight": 8,
+   "maxWeight": 185,
+   "allItem": {
+    "listSize": 1
+   },
+   "itemTypeList": {
+    "listSize": 7
+   }
+  }
+ }
+}

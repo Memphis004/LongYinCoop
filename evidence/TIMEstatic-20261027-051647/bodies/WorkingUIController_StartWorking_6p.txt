@@ -1,0 +1,99 @@
+; WorkingUIController_StartWorking_6p  rva=0x9CABF0 va=0x1809CABF0 end(before)=0x9CAD70 insns=98
+0x01809cabf0  mov      qword ptr [rsp + 8], rbx
+0x01809cabf5  mov      qword ptr [rsp + 0x10], rbp
+0x01809cabfa  mov      qword ptr [rsp + 0x18], rsi
+0x01809cabff  push     rdi
+0x01809cac00  sub      rsp, 0x20
+0x01809cac04  cmp      byte ptr [rip + 0x14d4c2f], 0
+0x01809cac0b  mov      rbp, r9
+0x01809cac0e  mov      esi, r8d
+0x01809cac11  mov      rdi, rdx
+0x01809cac14  mov      rbx, rcx
+0x01809cac17  jne      0x1809cac44
+0x01809cac19  lea      rcx, [rip + 0x13cccb8]  ; [0x1D978D8 .data] f32=-2.01632 f64=1.59153e-314
+0x01809cac20  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cac25  lea      rcx, [rip + 0x13ed234]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01809cac2c  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cac31  lea      rcx, [rip + 0x13bd548]  ; [0x1D88180 .data] f32=-1.08652e-19
+0x01809cac38  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cac3d  mov      byte ptr [rip + 0x14d4bf6], 1
+0x01809cac44  mov      rcx, qword ptr [rbx + 0x18]
+0x01809cac48  test     rcx, rcx
+0x01809cac4b  je       0x1809cad69
+0x01809cac51  xor      r8d, r8d
+0x01809cac54  mov      dl, 1
+0x01809cac56  call     0x1810dc960  ; -> UnityEngine.GameObject$$SetActive (0x10DC960)
+0x01809cac5b  lea      rcx, [rbx + 0x20]
+0x01809cac5f  mov      rdx, rdi
+0x01809cac62  mov      qword ptr [rcx], rdi
+0x01809cac65  mov      byte ptr [rbx + 0x48], 1
+0x01809cac69  call     0x1800d6020  ; -> 0xD6020
+0x01809cac6e  xor      edi, edi
+0x01809cac70  mov      dword ptr [rbx + 0x4c], esi
+0x01809cac73  mov      dword ptr [rbx + 0x50], edi
+0x01809cac76  mov      rax, qword ptr [rip + 0x13ed1e3]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01809cac7d  test     byte ptr [rax + 0x133], 4
+0x01809cac84  je       0x1809cac9d
+0x01809cac86  cmp      dword ptr [rax + 0xe0], edi
+0x01809cac8c  jne      0x1809cac9d
+0x01809cac8e  mov      rcx, rax
+0x01809cac91  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809cac96  mov      rax, qword ptr [rip + 0x13ed1c3]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01809cac9d  mov      rax, qword ptr [rax + 0xb8]
+0x01809caca4  mov      rdx, rbp
+0x01809caca7  mov      ecx, dword ptr [rax + 4]
+0x01809cacaa  mov      dword ptr [rbx + 0x58], ecx
+0x01809cacad  lea      rcx, [rbx + 0x28]
+0x01809cacb1  mov      qword ptr [rcx], rbp
+0x01809cacb4  mov      dword ptr [rbx + 0x54], edi
+0x01809cacb7  mov      dword ptr [rbx + 0x5c], edi
+0x01809cacba  call     0x1800d6020  ; -> 0xD6020
+0x01809cacbf  mov      rdx, qword ptr [rsp + 0x50]
+0x01809cacc4  lea      rcx, [rbx + 0x30]
+0x01809cacc8  mov      qword ptr [rcx], rdx
+0x01809caccb  call     0x1800d6020  ; -> 0xD6020
+0x01809cacd0  mov      rdx, qword ptr [rsp + 0x58]
+0x01809cacd5  lea      rcx, [rbx + 0x38]
+0x01809cacd9  mov      qword ptr [rcx], rdx
+0x01809cacdc  call     0x1800d6020  ; -> 0xD6020
+0x01809cace1  mov      rdx, qword ptr [rsp + 0x60]
+0x01809cace6  lea      rcx, [rbx + 0x40]
+0x01809cacea  mov      qword ptr [rcx], rdx
+0x01809caced  call     0x1800d6020  ; -> 0xD6020
+0x01809cacf2  mov      rcx, qword ptr [rbx + 0x18]
+0x01809cacf6  mov      byte ptr [rbx + 0x61], dil
+0x01809cacfa  test     rcx, rcx
+0x01809cacfd  je       0x1809cad69
+0x01809cacff  xor      edx, edx
+0x01809cad01  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01809cad06  test     rax, rax
+0x01809cad09  je       0x1809cad69
+0x01809cad0b  mov      rdx, qword ptr [rip + 0x13bd46e]  ; [0x1D88180 .data] f32=-1.08652e-19
+0x01809cad12  xor      r8d, r8d
+0x01809cad15  mov      rcx, rax
+0x01809cad18  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x01809cad1d  test     rax, rax
+0x01809cad20  je       0x1809cad69
+0x01809cad22  mov      rdx, qword ptr [rip + 0x13ccbaf]  ; [0x1D978D8 .data] f32=-2.01632 f64=1.59153e-314
+0x01809cad29  mov      rcx, rax
+0x01809cad2c  call     0x180967ef0  ; -> UnityEngine.Component$$GetComponent<ActionBarUnit> (0x967EF0)
+0x01809cad31  test     rax, rax
+0x01809cad34  je       0x1809cad69
+0x01809cad36  xor      edx, edx
+0x01809cad38  mov      rcx, rax
+0x01809cad3b  call     0x180f09b10  ; -> Spine.Unity.SkeletonGraphic$$get_AnimationState (0xF09B10)
+0x01809cad40  test     rax, rax
+0x01809cad43  je       0x1809cad69
+0x01809cad45  xor      r9d, r9d
+0x01809cad48  xorps    xmm2, xmm2
+0x01809cad4b  xor      edx, edx
+0x01809cad4d  mov      rcx, rax
+0x01809cad50  mov      rbx, qword ptr [rsp + 0x30]
+0x01809cad55  mov      rbp, qword ptr [rsp + 0x38]
+0x01809cad5a  mov      rsi, qword ptr [rsp + 0x40]
+0x01809cad5f  add      rsp, 0x20
+0x01809cad63  pop      rdi
+0x01809cad64  jmp      0x181773390  ; -> Spine.AnimationState$$SetEmptyAnimation (0x1773390)
+0x01809cad69  call     0x1800d6610  ; -> 0xD6610
+0x01809cad6e  int3     
+0x01809cad6f  int3     

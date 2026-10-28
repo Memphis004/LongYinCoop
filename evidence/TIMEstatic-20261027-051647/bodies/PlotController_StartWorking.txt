@@ -1,0 +1,142 @@
+; PlotController_StartWorking  rva=0x6603F0 va=0x1806603F0 end(before)=0x660620 insns=141
+0x01806603f0  mov      qword ptr [rsp + 0x10], rbx
+0x01806603f5  push     rdi
+0x01806603f6  sub      rsp, 0x40
+0x01806603fa  cmp      byte ptr [rip + 0x183158d], 0  ; [0x1E9198E .data] f32=8.25858e-21
+0x0180660401  mov      rdi, rdx
+0x0180660404  mov      rbx, rcx
+0x0180660407  jne      0x180660428
+0x0180660409  lea      rcx, [rip + 0x1742ca8]  ; [0x1DA30B8 .data] f32=1.08609e-19
+0x0180660410  call     0x1800d64a0  ; -> 0xD64A0
+0x0180660415  lea      rcx, [rip + 0x1757a44]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x018066041c  call     0x1800d64a0  ; -> 0xD64A0
+0x0180660421  mov      byte ptr [rip + 0x1831566], 1  ; [0x1E9198E .data] f32=8.25858e-21
+0x0180660428  cmp      byte ptr [rbx + 0x18], 0
+0x018066042c  je       0x180660441
+0x018066042e  cmp      byte ptr [rbx + 0x130], 0
+0x0180660435  jne      0x180660441
+0x0180660437  xor      edx, edx
+0x0180660439  mov      rcx, rbx
+0x018066043c  call     0x180537d90  ; -> PlotController$$HideInteractUIBase (0x537D90)
+0x0180660441  mov      rcx, qword ptr [rip + 0x1742c70]  ; [0x1DA30B8 .data] f32=1.08609e-19
+0x0180660448  mov      edx, 1
+0x018066044d  mov      qword ptr [rsp + 0x50], rsi
+0x0180660452  call     0x1800d60a0  ; -> 0xD60A0
+0x0180660457  test     rax, rax
+0x018066045a  je       0x1806605a5
+0x0180660460  cmp      dword ptr [rax + 0x18], 0
+0x0180660464  jbe      0x1806605ab
+0x018066046a  mov      ecx, 0x3b
+0x018066046f  mov      word ptr [rax + 0x20], cx
+0x0180660473  test     rdi, rdi
+0x0180660476  je       0x1806605a5
+0x018066047c  xor      r8d, r8d
+0x018066047f  mov      rdx, rax
+0x0180660482  mov      rcx, rdi
+0x0180660485  call     0x181724b10  ; -> System.String$$Split (0x1724B10)
+0x018066048a  mov      rbx, rax
+0x018066048d  mov      rax, qword ptr [rip + 0x17579cc]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x0180660494  test     byte ptr [rax + 0x133], 4
+0x018066049b  je       0x1806604b5
+0x018066049d  cmp      dword ptr [rax + 0xe0], 0
+0x01806604a4  jne      0x1806604b5
+0x01806604a6  mov      rcx, rax
+0x01806604a9  call     0x18005a6e0  ; -> 0x5A6E0
+0x01806604ae  mov      rax, qword ptr [rip + 0x17579ab]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01806604b5  cmp      byte ptr [rip + 0x183188d], 0  ; [0x1E91D49 .data] f64=3.79072e-270
+0x01806604bc  jne      0x1806604d8
+0x01806604be  lea      rcx, [rip + 0x175799b]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01806604c5  call     0x1800d64a0  ; -> 0xD64A0
+0x01806604ca  mov      rax, qword ptr [rip + 0x175798f]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01806604d1  mov      byte ptr [rip + 0x1831871], 1  ; [0x1E91D49 .data] f64=3.79072e-270
+0x01806604d8  test     byte ptr [rax + 0x133], 4
+0x01806604df  je       0x1806604f9
+0x01806604e1  cmp      dword ptr [rax + 0xe0], 0
+0x01806604e8  jne      0x1806604f9
+0x01806604ea  mov      rcx, rax
+0x01806604ed  call     0x18005a6e0  ; -> 0x5A6E0
+0x01806604f2  mov      rax, qword ptr [rip + 0x1757967]  ; [0x1DB7E60 .data] f32=1.0889e-19
+0x01806604f9  mov      rax, qword ptr [rax + 0xb8]
+0x0180660500  mov      rdi, qword ptr [rax + 8]
+0x0180660504  test     rbx, rbx
+0x0180660507  je       0x1806605a5
+0x018066050d  mov      eax, dword ptr [rbx + 0x18]
+0x0180660510  test     eax, eax
+0x0180660512  je       0x1806605bb
+0x0180660518  mov      rsi, qword ptr [rbx + 0x20]
+0x018066051c  cmp      eax, 1
+0x018066051f  jbe      0x1806605cb
+0x0180660525  mov      rcx, qword ptr [rbx + 0x28]
+0x0180660529  xor      edx, edx
+0x018066052b  call     0x180f92930  ; -> System.Int32$$Parse (0xF92930)
+0x0180660530  mov      ecx, dword ptr [rbx + 0x18]
+0x0180660533  mov      r10d, eax
+0x0180660536  cmp      ecx, 2
+0x0180660539  jbe      0x1806605db
+0x018066053f  cmp      ecx, 3
+0x0180660542  jbe      0x1806605eb
+0x0180660548  mov      rdx, qword ptr [rbx + 0x38]
+0x018066054c  cmp      ecx, 4
+0x018066054f  jbe      0x1806605fb
+0x0180660555  mov      r8, qword ptr [rbx + 0x40]
+0x0180660559  cmp      ecx, 5
+0x018066055c  jbe      0x18066060b
+0x0180660562  test     rdi, rdi
+0x0180660565  je       0x1806605a5
+0x0180660567  mov      rax, qword ptr [rbx + 0x48]
+0x018066056b  mov      rcx, rdi
+0x018066056e  mov      r9, qword ptr [rbx + 0x30]
+0x0180660572  mov      qword ptr [rsp + 0x38], 0
+0x018066057b  mov      qword ptr [rsp + 0x30], rax
+0x0180660580  mov      qword ptr [rsp + 0x28], r8
+0x0180660585  mov      r8d, r10d
+0x0180660588  mov      qword ptr [rsp + 0x20], rdx
+0x018066058d  mov      rdx, rsi
+0x0180660590  call     0x1809cabf0  ; -> WorkingUIController$$StartWorking (0x9CABF0)
+0x0180660595  mov      rsi, qword ptr [rsp + 0x50]
+0x018066059a  mov      rbx, qword ptr [rsp + 0x58]
+0x018066059f  add      rsp, 0x40
+0x01806605a3  pop      rdi
+0x01806605a4  ret      
+0x01806605a5  call     0x1800d6610  ; -> 0xD6610
+0x01806605aa  int3     
+0x01806605ab  call     0x1800d6240  ; -> 0xD6240
+0x01806605b0  mov      rcx, rax
+0x01806605b3  xor      edx, edx
+0x01806605b5  call     0x1800d65e0  ; -> 0xD65E0
+0x01806605ba  int3     
+0x01806605bb  call     0x1800d6240  ; -> 0xD6240
+0x01806605c0  mov      rcx, rax
+0x01806605c3  xor      edx, edx
+0x01806605c5  call     0x1800d65e0  ; -> 0xD65E0
+0x01806605ca  int3     
+0x01806605cb  call     0x1800d6240  ; -> 0xD6240
+0x01806605d0  mov      rcx, rax
+0x01806605d3  xor      edx, edx
+0x01806605d5  call     0x1800d65e0  ; -> 0xD65E0
+0x01806605da  int3     
+0x01806605db  call     0x1800d6240  ; -> 0xD6240
+0x01806605e0  mov      rcx, rax
+0x01806605e3  xor      edx, edx
+0x01806605e5  call     0x1800d65e0  ; -> 0xD65E0
+0x01806605ea  int3     
+0x01806605eb  call     0x1800d6240  ; -> 0xD6240
+0x01806605f0  mov      rcx, rax
+0x01806605f3  xor      edx, edx
+0x01806605f5  call     0x1800d65e0  ; -> 0xD65E0
+0x01806605fa  int3     
+0x01806605fb  call     0x1800d6240  ; -> 0xD6240
+0x0180660600  mov      rcx, rax
+0x0180660603  xor      edx, edx
+0x0180660605  call     0x1800d65e0  ; -> 0xD65E0
+0x018066060a  int3     
+0x018066060b  call     0x1800d6240  ; -> 0xD6240
+0x0180660610  mov      rcx, rax
+0x0180660613  xor      edx, edx
+0x0180660615  call     0x1800d65e0  ; -> 0xD65E0
+0x018066061a  int3     
+0x018066061b  int3     
+0x018066061c  int3     
+0x018066061d  int3     
+0x018066061e  int3     
+0x018066061f  int3     

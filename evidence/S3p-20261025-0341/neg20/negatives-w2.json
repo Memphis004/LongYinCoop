@@ -1,0 +1,629 @@
+{
+  "label": "NEG20-f2ad30cd-20261025-202331",
+  "window": "w2-waitattacking",
+  "pid": 37556,
+  "settle_ms": 500,
+  "base_hash": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+  "cases": [
+    {
+      "n": 5,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:51",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_after": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: unit 0:51 is not the active unit (0:0)",
+      "expect": "is not the active unit",
+      "code_ok": true,
+      "latency_ms": 5,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 22:03:26"
+    },
+    {
+      "n": 6,
+      "group": "NOT_ACTIVE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:86",
+        "target": "1:10034"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_after": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: unit 0:86 is not the active unit (0:0)",
+      "expect": "is not the active unit",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 22:03:27"
+    },
+    {
+      "n": 15,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 1,
+        "col": 0
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_after": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike move: nowActiveState=WaitAttacking (expected WaitPlayerInput)",
+      "expect": "expected WaitPlayerInput",
+      "code_ok": true,
+      "latency_ms": 6,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 22:03:28"
+    },
+    {
+      "n": 16,
+      "group": "STATE",
+      "cmd": "move",
+      "args": {
+        "id": "0:0",
+        "row": 0,
+        "col": 1
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_after": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike move: nowActiveState=WaitAttacking (expected WaitPlayerInput)",
+      "expect": "expected WaitPlayerInput",
+      "code_ok": true,
+      "latency_ms": 9,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 22:03:29"
+    },
+    {
+      "n": 19,
+      "group": "SELF",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "0:0"
+      },
+      "arm": 120,
+      "armed": true,
+      "pref": true,
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_after": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "hash_same": true,
+      "reply_ok": false,
+      "applied_flag": false,
+      "error": "spike attack: target 0:0 is the active unit",
+      "expect": "is the active unit",
+      "code_ok": true,
+      "latency_ms": 7,
+      "pass": true,
+      "result": "PASS",
+      "ts": "2026-10-25 22:03:30"
+    },
+    {
+      "n": 7,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "result": "NOT-RUN",
+      "pass": false,
+      "notrun_reason": "premise-unverifiable-range",
+      "prechecks": [
+        {
+          "check": "in-battle",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "check": "battle-fighting",
+          "ok": true,
+          "detail": "battleState=Fighting"
+        },
+        {
+          "check": "attacker-is-active",
+          "ok": true,
+          "detail": "active=0:0"
+        },
+        {
+          "check": "attacker-alive",
+          "ok": true,
+          "detail": "0:0"
+        },
+        {
+          "check": "target-exists",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "target-alive",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "range-membership-verifiable",
+          "ok": false,
+          "detail": "attackRangeGridUnits cells are not exposed by the spike status surface - the out-of-range premise cannot be confirmed from live state (needs a mod-surface change; separate approval)"
+        }
+      ],
+      "pre_state": {
+        "inBattle": true,
+        "battleStateName": "Fighting",
+        "nowActiveStateName": "WaitAttacking",
+        "active": "0:0",
+        "isPlayerTurn": false,
+        "unitCount": 5,
+        "turnIndex": 3,
+        "gridW": 20,
+        "gridH": 19,
+        "attackRangeCount": 87,
+        "damageRangeCount": 1,
+        "paused": false,
+        "stateHash": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+        "units": [
+          {
+            "id": "0:200",
+            "team": 0,
+            "row": 16,
+            "col": 0,
+            "hp": 263.872,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "0:86",
+            "team": 0,
+            "row": 11,
+            "col": 6,
+            "hp": 793.891,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:0",
+            "team": 0,
+            "row": 11,
+            "col": 13,
+            "hp": 1006.416,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:51",
+            "team": 0,
+            "row": 11,
+            "col": 7,
+            "hp": 538.434,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "1:10034",
+            "team": 1,
+            "row": 12,
+            "col": 19,
+            "hp": 494.4,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          }
+        ]
+      },
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "expect": "OUT_OF_RANGE",
+      "ts": "2026-10-25 22:03:30"
+    },
+    {
+      "n": 8,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "result": "NOT-RUN",
+      "pass": false,
+      "notrun_reason": "premise-unverifiable-range",
+      "prechecks": [
+        {
+          "check": "in-battle",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "check": "battle-fighting",
+          "ok": true,
+          "detail": "battleState=Fighting"
+        },
+        {
+          "check": "attacker-is-active",
+          "ok": true,
+          "detail": "active=0:0"
+        },
+        {
+          "check": "attacker-alive",
+          "ok": true,
+          "detail": "0:0"
+        },
+        {
+          "check": "target-exists",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "target-alive",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "range-membership-verifiable",
+          "ok": false,
+          "detail": "attackRangeGridUnits cells are not exposed by the spike status surface - the out-of-range premise cannot be confirmed from live state (needs a mod-surface change; separate approval)"
+        }
+      ],
+      "pre_state": {
+        "inBattle": true,
+        "battleStateName": "Fighting",
+        "nowActiveStateName": "WaitAttacking",
+        "active": "0:0",
+        "isPlayerTurn": false,
+        "unitCount": 5,
+        "turnIndex": 3,
+        "gridW": 20,
+        "gridH": 19,
+        "attackRangeCount": 87,
+        "damageRangeCount": 1,
+        "paused": false,
+        "stateHash": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+        "units": [
+          {
+            "id": "0:200",
+            "team": 0,
+            "row": 16,
+            "col": 0,
+            "hp": 263.872,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "0:86",
+            "team": 0,
+            "row": 11,
+            "col": 6,
+            "hp": 793.891,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:0",
+            "team": 0,
+            "row": 11,
+            "col": 13,
+            "hp": 1006.416,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:51",
+            "team": 0,
+            "row": 11,
+            "col": 7,
+            "hp": 538.434,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "1:10034",
+            "team": 1,
+            "row": 12,
+            "col": 19,
+            "hp": 494.4,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          }
+        ]
+      },
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "expect": "OUT_OF_RANGE",
+      "ts": "2026-10-25 22:03:31"
+    },
+    {
+      "n": 9,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "result": "NOT-RUN",
+      "pass": false,
+      "notrun_reason": "premise-unverifiable-range",
+      "prechecks": [
+        {
+          "check": "in-battle",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "check": "battle-fighting",
+          "ok": true,
+          "detail": "battleState=Fighting"
+        },
+        {
+          "check": "attacker-is-active",
+          "ok": true,
+          "detail": "active=0:0"
+        },
+        {
+          "check": "attacker-alive",
+          "ok": true,
+          "detail": "0:0"
+        },
+        {
+          "check": "target-exists",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "target-alive",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "range-membership-verifiable",
+          "ok": false,
+          "detail": "attackRangeGridUnits cells are not exposed by the spike status surface - the out-of-range premise cannot be confirmed from live state (needs a mod-surface change; separate approval)"
+        }
+      ],
+      "pre_state": {
+        "inBattle": true,
+        "battleStateName": "Fighting",
+        "nowActiveStateName": "WaitAttacking",
+        "active": "0:0",
+        "isPlayerTurn": false,
+        "unitCount": 5,
+        "turnIndex": 3,
+        "gridW": 20,
+        "gridH": 19,
+        "attackRangeCount": 87,
+        "damageRangeCount": 1,
+        "paused": false,
+        "stateHash": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+        "units": [
+          {
+            "id": "0:200",
+            "team": 0,
+            "row": 16,
+            "col": 0,
+            "hp": 263.872,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "0:86",
+            "team": 0,
+            "row": 11,
+            "col": 6,
+            "hp": 793.891,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:0",
+            "team": 0,
+            "row": 11,
+            "col": 13,
+            "hp": 1006.416,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:51",
+            "team": 0,
+            "row": 11,
+            "col": 7,
+            "hp": 538.434,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "1:10034",
+            "team": 1,
+            "row": 12,
+            "col": 19,
+            "hp": 494.4,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          }
+        ]
+      },
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "expect": "OUT_OF_RANGE",
+      "ts": "2026-10-25 22:03:31"
+    },
+    {
+      "n": 10,
+      "group": "OUT_OF_RANGE",
+      "cmd": "attack",
+      "args": {
+        "id": "0:0",
+        "target": "1:10034"
+      },
+      "result": "NOT-RUN",
+      "pass": false,
+      "notrun_reason": "premise-unverifiable-range",
+      "prechecks": [
+        {
+          "check": "in-battle",
+          "ok": true,
+          "detail": ""
+        },
+        {
+          "check": "battle-fighting",
+          "ok": true,
+          "detail": "battleState=Fighting"
+        },
+        {
+          "check": "attacker-is-active",
+          "ok": true,
+          "detail": "active=0:0"
+        },
+        {
+          "check": "attacker-alive",
+          "ok": true,
+          "detail": "0:0"
+        },
+        {
+          "check": "target-exists",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "target-alive",
+          "ok": true,
+          "detail": "1:10034"
+        },
+        {
+          "check": "range-membership-verifiable",
+          "ok": false,
+          "detail": "attackRangeGridUnits cells are not exposed by the spike status surface - the out-of-range premise cannot be confirmed from live state (needs a mod-surface change; separate approval)"
+        }
+      ],
+      "pre_state": {
+        "inBattle": true,
+        "battleStateName": "Fighting",
+        "nowActiveStateName": "WaitAttacking",
+        "active": "0:0",
+        "isPlayerTurn": false,
+        "unitCount": 5,
+        "turnIndex": 3,
+        "gridW": 20,
+        "gridH": 19,
+        "attackRangeCount": 87,
+        "damageRangeCount": 1,
+        "paused": false,
+        "stateHash": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+        "units": [
+          {
+            "id": "0:200",
+            "team": 0,
+            "row": 16,
+            "col": 0,
+            "hp": 263.872,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          },
+          {
+            "id": "0:86",
+            "team": 0,
+            "row": 11,
+            "col": 6,
+            "hp": 793.891,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:0",
+            "team": 0,
+            "row": 11,
+            "col": 13,
+            "hp": 1006.416,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "0:51",
+            "team": 0,
+            "row": 11,
+            "col": 7,
+            "hp": 538.434,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": true
+          },
+          {
+            "id": "1:10034",
+            "team": 1,
+            "row": 12,
+            "col": 19,
+            "hp": 494.4,
+            "alive": true,
+            "unitAlive": true,
+            "playerControl": false
+          }
+        ]
+      },
+      "hash_before": "168963240f3466a797b63a7ef00a4a29aef25085b2684f371a025c1706b73c41",
+      "expect": "OUT_OF_RANGE",
+      "ts": "2026-10-25 22:03:32"
+    }
+  ],
+  "pass": 5,
+  "fail": 0,
+  "notrun": 4,
+  "unknown": 0,
+  "aborted": null,
+  "cleanup_ok": true,
+  "cases_planned": 9,
+  "records_written": 9,
+  "event_records": 14,
+  "terminal_cases": 5,
+  "case_status": {
+    "5": "PASS",
+    "6": "PASS",
+    "15": "PASS",
+    "16": "PASS",
+    "19": "PASS",
+    "7": "NOT-RUN",
+    "8": "NOT-RUN",
+    "9": "NOT-RUN",
+    "10": "NOT-RUN"
+  },
+  "incomplete_case_ids": []
+}

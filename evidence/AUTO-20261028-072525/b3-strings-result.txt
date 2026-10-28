@@ -1,0 +1,8 @@
+#Strings heap: offset=0x121a4 size=45764 (file src/LongYinCoop/bin/Release/LongYinCoop.dll)
+  S2GuestDecoder: FOUND
+  S2OverlayClient: FOUND
+  S2OverlayRenderModel: FOUND
+  S2OverlayService: FOUND
+  S2SetPrefGate: FOUND
+  S2WriteGuardHook: FOUND
+RESULT: ALL 6 TYPES FOUND

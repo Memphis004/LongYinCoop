@@ -1,0 +1,77 @@
+; WorkingUIController_StopWorking  rva=0x9CB220 va=0x1809CB220 end(before)=0x9CB330 insns=76
+0x01809cb220  mov      qword ptr [rsp + 8], rbx
+0x01809cb225  push     rdi
+0x01809cb226  sub      rsp, 0x20
+0x01809cb22a  cmp      byte ptr [rip + 0x14d460a], 0  ; [0x1E9F83B .data] f32=-0.437714 f64=1.91646e-224
+0x01809cb231  movzx    edi, dl
+0x01809cb234  mov      rbx, rcx
+0x01809cb237  jne      0x1809cb258
+0x01809cb239  lea      rcx, [rip + 0x13c89c0]  ; [0x1D93C00 .data] f32=1.08793e-19
+0x01809cb240  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb245  lea      rcx, [rip + 0x13fb89c]  ; [0x1DC6AE8 .data] f32=-1.0842e-19
+0x01809cb24c  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb251  mov      byte ptr [rip + 0x14d45e3], 1  ; [0x1E9F83B .data] f32=-0.437714 f64=1.91646e-224
+0x01809cb258  mov      rcx, qword ptr [rbx + 0x38]
+0x01809cb25c  xor      r8d, r8d
+0x01809cb25f  mov      byte ptr [rbx + 0x60], dil
+0x01809cb263  mov      rdx, qword ptr [rip + 0x13fb87e]  ; [0x1DC6AE8 .data] f32=-1.0842e-19
+0x01809cb26a  call     0x181726c10  ; -> System.String$$op_Inequality (0x1726C10)
+0x01809cb26f  test     al, al
+0x01809cb271  je       0x1809cb2ff
+0x01809cb277  mov      rdx, qword ptr [rip + 0x13fb86a]  ; [0x1DC6AE8 .data] f32=-1.0842e-19
+0x01809cb27e  xor      r8d, r8d
+0x01809cb281  mov      rcx, qword ptr [rbx + 0x40]
+0x01809cb285  call     0x181726c10  ; -> System.String$$op_Inequality (0x1726C10)
+0x01809cb28a  mov      rcx, qword ptr [rip + 0x13c896f]  ; [0x1D93C00 .data] f32=1.08793e-19
+0x01809cb291  test     al, al
+0x01809cb293  jne      0x1809cb2c9
+0x01809cb295  test     byte ptr [rcx + 0x133], 4
+0x01809cb29c  je       0x1809cb2ac
+0x01809cb29e  cmp      dword ptr [rcx + 0xe0], 0
+0x01809cb2a5  jne      0x1809cb2ac
+0x01809cb2a7  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809cb2ac  xor      ecx, ecx
+0x01809cb2ae  call     0x18046c460  ; -> 0x46C460 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809cb2b3  test     rax, rax
+0x01809cb2b6  je       0x1809cb320
+0x01809cb2b8  mov      rdx, qword ptr [rbx + 0x38]
+0x01809cb2bc  xor      r8d, r8d
+0x01809cb2bf  mov      rcx, rax
+0x01809cb2c2  call     0x1810d8310  ; -> UnityEngine.Component$$SendMessage (0x10D8310)
+0x01809cb2c7  jmp      0x1809cb2ff  ; -> 0x9CB2FF (inside WorkingUIController$$StopWorking)
+0x01809cb2c9  test     byte ptr [rcx + 0x133], 4
+0x01809cb2d0  je       0x1809cb2e0
+0x01809cb2d2  cmp      dword ptr [rcx + 0xe0], 0
+0x01809cb2d9  jne      0x1809cb2e0
+0x01809cb2db  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809cb2e0  xor      ecx, ecx
+0x01809cb2e2  call     0x18046c460  ; -> 0x46C460 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809cb2e7  test     rax, rax
+0x01809cb2ea  je       0x1809cb320
+0x01809cb2ec  mov      r8, qword ptr [rbx + 0x40]
+0x01809cb2f0  xor      r9d, r9d
+0x01809cb2f3  mov      rdx, qword ptr [rbx + 0x38]
+0x01809cb2f7  mov      rcx, rax
+0x01809cb2fa  call     0x1810d8360  ; -> UnityEngine.Component$$SendMessage (0x10D8360)
+0x01809cb2ff  mov      rcx, qword ptr [rbx + 0x18]
+0x01809cb303  mov      byte ptr [rbx + 0x48], 0
+0x01809cb307  test     rcx, rcx
+0x01809cb30a  je       0x1809cb320
+0x01809cb30c  xor      r8d, r8d
+0x01809cb30f  xor      edx, edx
+0x01809cb311  mov      rbx, qword ptr [rsp + 0x30]
+0x01809cb316  add      rsp, 0x20
+0x01809cb31a  pop      rdi
+0x01809cb31b  jmp      0x1810dc960  ; -> UnityEngine.GameObject$$SetActive (0x10DC960)
+0x01809cb320  call     0x1800d6610  ; -> 0xD6610
+0x01809cb325  int3     
+0x01809cb326  int3     
+0x01809cb327  int3     
+0x01809cb328  int3     
+0x01809cb329  int3     
+0x01809cb32a  int3     
+0x01809cb32b  int3     
+0x01809cb32c  int3     
+0x01809cb32d  int3     
+0x01809cb32e  int3     
+0x01809cb32f  int3     
