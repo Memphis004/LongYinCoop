@@ -84,7 +84,7 @@
 | ยืนยันด้วยการวัด | split ของ `NEG20-f2ad30cd-20261025-202331` EXACT (0/0/0) + restore หลังจบ NEG20: `Save` 57 ไฟล์ **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
 | ผลบังคับ | เป็น expected baseline ของ `split` ถัดไป · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** (rebaseline เพิ่มต้องอนุมัติแยก) |
 
-## Mod build ที่ deploy ล่าสุด (2026-10-25 ค่ำ · build `1b4c17aa…` — rangecells patch · ก่อนหน้า: `f2ad30cd…`)
+## Mod build ที่ deploy ล่าสุด (2026-10-25 ค่ำ · build `1b4c17aa…` — rangecells patch · ก่อนหน้า: `f2ad30cd…`) — **superseded 2026-10-29 โดย build `6a94abb5…` (หัวข้อถัดไป)**
 
 | รายการ | ค่า |
 |---|---|
@@ -122,6 +122,21 @@
 | **เคยบันทึกเป็น** (2026-10-24, ยุค S2a-3/งาน A — ล้าสมัย) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` · 454 B |
 | คำอธิบายหลักฐาน | ค่าที่วัดจริง `12541f34…` **ตรงกับบันทึก AGENTS.md หัวข้อ 2026-10-24** (net.cfg คืนสถานะอนุมัติหลังปิด stage S2a-3) · ขนาดที่รายงานเก่า (444 vs 454 B) ขัดกันเองในรายงานยุคนั้น — ค่าวัดจริงล่าสุด = 444 B · เนื้อหาไฟล์ไม่เปลี่ยน semantic (enabled=false, heartbeatMs=1000) ⇒ เป็นการแก้**บันทึก**เท่านั้น ไม่ใช่ไฟล์ |
 | ข้อจำกัด | ห้ามคัดลอกค่า `secret` ลงเอกสารใด (ไม่ได้ log ใน record นี้) · ไฟล์ `UserData\LongYinCoop\net.cfg` ไม่ถูกแตะใน session นี้ (hash ก่อน/หลัง = `12541f34…` เท่ากัน) |
+
+## Mod build ที่ deploy ล่าสุด (2026-10-29 · build `6a94abb5…` — S2a-4 GO-3: overlay + set_pref gate · ก่อนหน้า: `1b4c17aa…`)
+
+> deploy 2026-10-28 07:40:28 ใน GO-3 (วลี `เริ่ม GO-3 session` = สิทธิ์ [N1]) · วัดจริงครบเกณฑ์ GO-3 → **คงไว้ใน Mods\ ตามมติ [G-3] ทาง (ก) (ผู้ใช้ 2026-10-29 — ห้าม rollback, `.prev` คงไว้)** · รายงาน `evidence/S2a4-GO3-20261028-074003/s2a4-report.md` (8 PASS · 1 PASS-with-limitation · 0 FAIL)
+
+| รายการ | ค่า |
+|---|---|
+| `Mods\LongYinCoop.dll` (ปัจจุบัน) | **`6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334`** (359,936 B · deploy 2026-10-28 07:40:28 · hash หลัง deploy ตรง artifact provenance READY @ mod repo `1359217`) |
+| `Mods\LongYinCoop.pdb` (ปัจจุบัน) | **`856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035`** (97,128 B) |
+| **เคยบันทึกเป็น** (build ก่อน — rollback point) | DLL `1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177` (316,416 B) · PDB `dcd78ebd5241f25196c1c71296ab05dae3d14a034959f9d0d934155e1d4c1e17` (83,180 B) — สำรองไว้ **`Mods\LongYinCoop.dll.prev-1b4c17aa`** + **`Mods\LongYinCoop.pdb.prev-dcd78ebd`** (hash ตรง ยืนยัน 2026-10-29 01:14) |
+| source ที่ตรงกับ build ใหม่ | `636c209ecd61a572f25d40179b99de370e9892fb` (using fix — บล็อคเดียวที่ต่างจาก provenance build) · docs `1359217` · ยังไม่ tag `stage-S2a-4` (รอมติผู้ใช้) |
+| `UserData\MelonPreferences.cfg` | **`66fb92d51e5d9d24ca2578740b561a3bc6fb4876ebfeddce944535e9a02e74cf`** · **เคยบันทึกเป็น `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1`** — divergence record: ML เขียนไฟล์ตอนปิดเกม (01:06:22, "Preferences Saved!") หลัง pref dirty จาก E6 set_pref roundtrip (true→false คืนทันที) · **ค่า `AllowRemoteInput = false` ถูกต้อง** (บรรทัด 9 — ตรวจแล้ว 2026-10-29 01:14) · agent ไม่ได้แก้ไฟล์นี้ |
+| `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`, `heartbeatMs=1000` — คืน EXACT หลัง GO-3 ตาม RUNBOOK ขั้น 8 · ระหว่าง session ใช้ `5ce166da…` = enabled=true+overlay=true) |
+| baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` (คงเดิม — หลัง GO-3 restore EXACT + `leftovers: none`) |
+| ผล GO-3 สรุป | G0/E1/E2/E3/E4/E6/E7/E8 = PASS · E5 = PASS-with-limitation (M5-3: E5(a) NOT-RUN — ไม่มี hook) · E4 Δmean +0.244 ms ≤ 1.0 · ตรวจหลัง deploy ไม่มีบรรทัด SP5/Sp5T0 ใน ML log · `commandsAccepted=0` ตลอด |
 
 ## กฎ
 
