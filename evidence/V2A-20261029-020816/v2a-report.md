@@ -5,7 +5,10 @@
 
 ## 1) สรุปผูกมัด
 
-- **8 runs** (6 ใช้งานจริง + A2-r2 + A3-r3 รวมในชุด valid) บนสำเนาเซฟทั้งหมด · restore EXACT ทุกรัน ·
+- **9 runs** (นับจาก label dir จริง 9 dir: `evidence/V2A-a1r1…a3r3` — ไม่รวม `V2A-20261029-020816` ซึ่งเป็น
+  dir ของ artifact/รายงาน) = **5 valid** (A3-r1, A3-r3, A2-r2, A1-r2, A1-r3) + **2 CONTAMINATED** (A3-r2,
+  A2-r3 — กฎ gap > 2 s) + **1 INVALID** (A2-r1 — โครง work_start ×4) + **1 pilot** (A1-r1) ·
+  บนสำเนาเซฟทั้งหมด · restore EXACT ทุกรัน ·
   เซฟจริงไม่ถูกแตะ (digest `df8e5a11beed…` คงเดิมทุกรอบ) · 0 crash · 0 soft-lock
 - **ผล fit (5 จุด non-pilot non-contaminated):** slope **1.2675 s/วัน** (ผ่าน 1.25±0.1) · intercept **0.8056 s** ·
   CI_t (df=3, t=3.182) **[0.7665, 0.8446]** — ไม่คาบเกี่ยว window ฟอร์มใด ⇒ ป้าย **UNRESOLVED_OFFSET**
