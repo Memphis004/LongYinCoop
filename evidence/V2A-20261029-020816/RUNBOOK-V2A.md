@@ -28,15 +28,19 @@
 
 1. แก้ `UserData\MelonPreferences.cfg` เฉพาะบรรทัด pref: เพิ่ม/ตั้ง `TimeV2a = true` ใน section `[LongYinCoop]`
    (ค่าอื่นทุกตัวคงเดิม — โดยเฉพาะ `AllowRemoteInput = false` · จด sha256 ก่อน/หลัง แต่**ตรวจปลาย session ด้วยค่า key**)
-2. สร้าง pointer file `UserData\LongYinCoop\time-v2a.out` บรรทัดเดียว (path ของ NDJSON ใน evidence ของ label นี้
-   ผ่าน junction):
+2. สร้าง pointer file `UserData\LongYinCoop\time-v2a.out` บรรทัดเดียว (path ของ NDJSON **ของ run นั้น** ใน evidence
+   ของ label นี้ ผ่าน junction) — **ชื่อไฟล์แยกต่อเคส×รอบ** (มติ 2026-10-29 รอบเริ่ม session: `<เคส>-r<รอบ>.ndjson`
+   เช่น `a1-r1.ndjson` — แทนชื่อตายตัว `time-v2a.ndjson` ที่เคยระบุไว้ก่อนหน้า):
 
    ```
-   C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\<LABEL>\time-v2a.ndjson
+   C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\<LABEL>\<เคส>-r<รอบ>.ndjson
    ```
 
    และ `mkdir` โฟลเดอร์ `LongYinCoop\evidence\<LABEL>\` ให้พร้อม (sampler เปิดแบบ append — ไฟล์ว่างเริ่มต้นได้)
-   · **สลับ label ต่อเคส = แก้บรรทัดเดียวใน pointer file ระหว่างเกมปิด** (fail-closed: ไม่มีไฟล์/ว่าง = ไม่เขียน)
+   · **touch ไฟล์ปลายทางให้มีอยู่จริง (ว่าง) ก่อน preflight ของ run นั้นทุกครั้ง** (บทเรียน RUNBOOK-G3 — กันไฟล์
+     evidence ไม่มีจริงตอนเปิดเกม)
+   · **สลับ pointer ต่อ run = แก้บรรทัดเดียวให้ชี้ไฟล์ของ run ใหม่ระหว่างเกมปิด + touch ไฟล์ใหม่** ก่อน split/preflight
+     (fail-closed: ไม่มีไฟล์/ว่าง = ไม่เขียน) · pointer ต้องชี้ถูกไฟล์ก่อนผู้ใช้เปิดเกม**ทุกรอบ**
 
 ## ขั้น 3 — split + preflight (ต่อเคสทุกครั้ง — กฎ 2 ของ time-plan §D.0)
 
@@ -53,7 +57,8 @@ python tools\save-split.py preflight   # ต้อง READY ก่อนเป�
 
 ## ขั้น 4 — ผู้ใช้เปิดเกมเอง + ตารางเคส (ชุด A — Gate 5a; ไม่รวมชุด B/C)
 
-ML log ต้องมีบรรทัด `[TimeV2a] writer open -> …<LABEL>\time-v2a.ndjson` หลังงานเริ่มครั้งแรก
+ML log ต้องมีบรรทัด `[TimeV2a] writer open -> …<LABEL>\<เคส>-r<รอบ>.ndjson` หลังงานเริ่มครั้งแรก (ไฟล์ของ run
+นั้น — pointer ต้องชี้ถูกไฟล์ก่อนเปิดเกมทุกรอบ ตามขั้น 2)
 · **ต้องไม่มี**บรรทัด Harmony/patch/install ใด (มี = หยุด) · และต้องไม่มี SP5/Sp5T0 install/patch (ถ้ามี = หยุด)
 
 | เคส | รอบ | สิ่งที่ผู้ใช้ทำ (ต่อรอบ — สำเนาใหม่ทุกรอบ) | คาดหวังเชิงโครง |
@@ -74,8 +79,8 @@ ML log ต้องมีบรรทัด `[TimeV2a] writer open -> …<LABEL>
 
 ## ขั้น 5 — เก็บข้อมูล
 
-- NDJSON ต่อเคส = `LongYinCoop\evidence\<LABEL>\time-v2a.ndjson` (ต่อ label) — ตรวจว่าไฟล์โตและมี
-  `work_end`/`work_abort` ปิด session ครบทุกงานที่ทำ
+- NDJSON แยกต่อเคส×รอบ = `LongYinCoop\evidence\<LABEL>\<เคส>-r<รอบ>.ndjson` (ตามขั้น 2 — มติ 2026-10-29) — ตรวจว่า
+  ไฟล์โตและมี `work_end`/`work_abort` ปิด session ครบทุกงานที่ทำ
 - ML log คัดลอกบรรทัด `[TimeV2a]` ทั้งหมดไป evidence ของ session
 
 ## ขั้น 6 — restore + verify (ปิดเคสก่อนเคสถัดไป — กฎ 2)
@@ -90,7 +95,7 @@ python tools\save-split.py status   # ต้อง EXACT ตามมติ [V2A
 ## ขั้น 7 — วิเคราะห์ (offline, หลังปิดเกม)
 
 ```
-python tools\time_v2a_analyze.py evidence\<LABEL>\time-v2a.ndjson --tolerance <T>
+python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjson --tolerance <T>
 ```
 
 - **`--tolerance` ต้องประกาศก่อนวัด** — เสนอ **0.1 s** (การวัดระดับเฟรม; ดีฟอลต์ 0.5 ทำให้ N=10 ปกติ = INDISTINGUISHABLE
