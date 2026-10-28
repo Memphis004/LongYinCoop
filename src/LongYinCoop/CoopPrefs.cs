@@ -26,6 +26,9 @@ namespace LongYinCoop
         // SP5-T0: probe log-only บัญชี NPC (H1–H5) — default false = ไม่ติด hook เลย;
         // one-shot ต่อ 1 เกม session (แผน evidence/SP5t0plan-20261027/sp5-t0-plan.md rev 13 §2.5)
         public static MelonPreferences_Entry<bool> Sp5T0;
+        // V2-A (มติ V2A-4, 2026-10-29 — errata N1): sampler อ่านอย่างเดียวของ activity pump —
+        // false = ไม่อ่าน/ไม่เขียนอะไรเลย (ไม่มี Harmony/ไม่มี hook)
+        public static MelonPreferences_Entry<bool> TimeV2a;
         public static MelonPreferences_Entry<bool> Capture;
         public static MelonPreferences_Entry<int> WorldHz;
         public static MelonPreferences_Entry<int> WorldStreamHz;
@@ -54,6 +57,8 @@ namespace LongYinCoop
             JitProbeW7 = Category.CreateEntry("JitProbeW7", false);
             // SP5-T0: probe บัญชี NPC log-only (H1–H5) — false = ไม่ติด hook เลย
             Sp5T0 = Category.CreateEntry("Sp5T0", false);
+            // V2-A: sampler อ่านอย่างเดียวของ activity pump (TimeV2aSampler) — false = no-op สมบูรณ์
+            TimeV2a = Category.CreateEntry("TimeV2a", false);
             // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
             Capture = Category.CreateEntry("Capture", true);
             // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling

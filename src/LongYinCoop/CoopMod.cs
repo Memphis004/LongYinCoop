@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using LongYinCoop.S2;
+using LongYinCoop.TimeV2a;
 using MelonLoader;
 
 [assembly: MelonInfo(typeof(LongYinCoop.CoopMod), "LongYinCoop", "0.5.0", "Westernholudur")]
@@ -95,6 +96,8 @@ namespace LongYinCoop
             }
             if (_ipc != null) _ipc.Stop();
             CaptureWriter.Stop();
+            // V2-A: ปิด NDJSON writer ของ sampler (pref ปิด / unload)
+            TimeV2aSampler.Stop();
             BattleLogHook.Uninstall();
             JitProbe.Uninstall();
             JitProbeW2.Uninstall();
@@ -119,6 +122,8 @@ namespace LongYinCoop
                 Sp5T0Probe.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
+                // V2-A: pref หลักปิด = ปิด sampler ด้วย (writer ถูก dispose ทันที)
+                TimeV2aSampler.Stop();
                 return;
             }
 
@@ -131,6 +136,17 @@ namespace LongYinCoop
             if (_s2 != null) _s2.Tick();
             // S2a-4: overlay service (เปิด/ปิด client ตาม net.cfg + สถานะ listener — main thread)
             if (_overlay != null) _overlay.Tick();
+
+            // V2-A: sampler อ่านอย่างเดียวของ activity pump (มติ V2A-4 — pref default false = ไม่ทำอะไร;
+            // ไม่มี Harmony/hook, เขียนเฉพาะ NDJSON ตาม pointer file)
+            if (CoopPrefs.TimeV2a.Value)
+            {
+                TimeV2aSampler.Tick();
+            }
+            else if (TimeV2aSampler.WriterOpen)
+            {
+                TimeV2aSampler.Stop();
+            }
 
             // probe เปิด/ปิดได้ด้วย pref ระหว่างรัน
             if (CoopPrefs.Probe.Value != HarmonyProbe.Installed)
