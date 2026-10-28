@@ -192,5 +192,45 @@ class TestV2AFit(unittest.TestCase):
         self.assertIn("SLOPE MISMATCH", r.stdout)
 
 
+    def test_ci_t_df1_wider_than_196(self):
+        # 3 จุด → df=1 → tcrit 12.706 · รายงาน CI แบบ t (valid) คู่กับ 1.96 (ติดป้ายไม่ valid สำหรับ df ต่ำ)
+        # · intercept 0.8175 (นอกทั้งคู่) + residual ±15–26 ms ⇒ CI_t คาบเกี่ยวเฉพาะ window ของ FORM2
+        files = [dump(self.tmp, f"t1-n{n}.ndjson",
+                      [session(n, 1250 * n + 800 + d)[0]])
+                 for n, d in ((1, 0), (5, 30), (10, -20))]
+        code, out = self.run_main(files)
+        self.assertEqual(code, 0)
+        self.assertIn('"df": 1', out)
+        self.assertIn('"tcrit_95": 12.706', out)
+        row = json.loads([l for l in out.splitlines() if '"tcrit_95"' in l][0])
+        self.assertGreater(row["intercept_ci_half_t"], row["intercept_ci_half_196"])
+        self.assertIn("1.96 invalid for low df", row["ci196_note"])
+        self.assertEqual(row["overlaps_t"]["FORM1"], False)
+        self.assertEqual(row["overlaps_t"]["FORM2"], True)
+        self.assertEqual(row["form"], "UNRESOLVED_OFFSET")
+
+    def test_ci_t_df2(self):
+        # 4 จุด → df=2 → tcrit 4.303 · intercept ~0.5026 ใน window ของ FORM2 (จุดตัดสินก่อน CI)
+        files = [dump(self.tmp, f"t2-n{n}.ndjson",
+                      [session(n, 1250 * n + 500 + d)[0]])
+                 for n, d in ((1, 0), (2, 20), (3, -15), (5, 10))]
+        code, out = self.run_main(files)
+        self.assertEqual(code, 0)
+        self.assertIn('"df": 2', out)
+        self.assertIn('"tcrit_95": 4.303', out)
+        self.assertIn('"form": "FORM2"', out)
+
+    def test_ci_df0_two_points_no_ci(self):
+        # 2 จุด → df=0 → ไม่รายงาน CI (null ทั้งคู่) แต่ fit ยังออก slope/intercept/ป้ายจากจุด
+        files = [dump(self.tmp, "d0-n1.ndjson", [session(1, 1250 + 500)[0]]),
+                 dump(self.tmp, "d0-n5.ndjson", [session(5, 1250 * 5 + 500)[0]])]
+        code, out = self.run_main(files)
+        self.assertEqual(code, 0)
+        self.assertIn('"df": 0', out)
+        self.assertIn('"intercept_ci_t": null', out)
+        self.assertIn('"intercept_ci_196": null', out)
+        self.assertIn('"form": "FORM2"', out)
+
+
 if __name__ == "__main__":
     unittest.main()

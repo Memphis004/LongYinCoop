@@ -29,6 +29,10 @@ SLOPE_TARGET = 1.25
 SLOPE_TOL = 0.1
 I1, I2, ITOL = 0.0, 0.5, 0.1
 
+# t-critical สองด้านที่ 95% ตามองศาอิสระของ fit (n_points − 2) — ดีฟอลต์ >10 จุด = 1.96
+T_CRIT_95 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571,
+             6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228}
+
 
 def load_events(path):
     events = []
@@ -104,7 +108,8 @@ def segments_of(s):
 
 
 def fit(points):
-    """least squares ผ่าน (n, measured) — คืน (slope, intercept, se_intercept หรือ None)"""
+    """least squares ผ่าน (n, measured) — คืน (slope, intercept, se_intercept หรือ None, df)
+    df = จุด − 2 (องศาอิสระของ residual) · se = sqrt(MSE×(1/n + mean_n²/Sxx)) เมื่อ MSE > 0"""
     ns = [p[0] for p in points]
     ys = [p[1] for p in points]
     mean_n = sum(ns) / len(ns)
@@ -113,14 +118,25 @@ def fit(points):
     cov = sum((n - mean_n) * (y - mean_y) for n, y in points)
     slope = cov / sxx
     intercept = mean_y - slope * mean_n
+    df = len(points) - 2
     se = None
     if len(points) >= 3 and sxx > 0:
         resid = [y - (slope * n + intercept) for n, y in points]
         ssr = sum(r * r for r in resid)
-        mse = ssr / (len(points) - 2)
+        mse = ssr / df
         if mse > 0:
             se = math.sqrt(mse * (1.0 / len(points) + mean_n * mean_n / sxx))
-    return round(slope, 6), round(intercept, 6), (None if se is None else round(1.96 * se, 6))
+    return round(slope, 6), round(intercept, 6), (None if se is None else round(se, 6)), df
+
+
+def overlaps(intercept, ci_half, target, itol):
+    """ช่วง [intercept±ci_half] คาบเกี่ยว window [target±itol] หรือไม่ (จุดอยู่ใน window = คาบเกี่ยว)"""
+    if target - itol <= intercept <= target + itol:
+        return True
+    if ci_half is None:
+        return False
+    lo, hi = intercept - ci_half, intercept + ci_half
+    return lo <= target + itol and hi >= target - itol
 
 
 def form_verdict(intercept, ci_half):
@@ -188,16 +204,46 @@ def main(argv=None):
               f"excluded={sum(1 for r in rows if r['status'] != 'OK')}")
         return 1
 
-    slope, intercept, ci_half = fit(points)
+    slope, intercept, se, df = fit(points)
     slope_ok = abs(slope - SLOPE_TARGET) <= SLOPE_TOL
-    fv, ci_range = form_verdict(intercept, ci_half)
+    # CI สองวิธีรายงานคู่ขนาน (มติ 2026-10-29 รอบ A3-r2 เตรียม): แบบ t ตาม df จริง (valid) และแบบ 1.96
+    # (ไม่ valid สำหรับ df ต่ำ — เก็บไว้เทียบกับรายงานรอบก่อน) · df=0 (2 จุด) = ไม่รายงาน CI
+    if se is not None:
+        tcrit = T_CRIT_95.get(df, 1.96)
+        ci_half_t = round(tcrit * se, 6)
+        ci_half_196 = round(1.96 * se, 6)
+        fv_t, range_t = form_verdict(intercept, ci_half_t)
+        fv_196, range_196 = form_verdict(intercept, ci_half_196)
+        ov_t = {"FORM1": overlaps(intercept, ci_half_t, I1, ITOL),
+                "FORM2": overlaps(intercept, ci_half_t, I2, ITOL)}
+        ov_196 = {"FORM1": overlaps(intercept, ci_half_196, I1, ITOL),
+                  "FORM2": overlaps(intercept, ci_half_196, I2, ITOL)}
+        ci_block = {
+            "df": df, "tcrit_95": tcrit,
+            "intercept_ci_half_t": ci_half_t, "intercept_ci_t": range_t,
+            "overlaps_t": ov_t, "form": fv_t, "form_ci": "t (valid ตาม df)",
+            "intercept_ci_half_196": ci_half_196, "intercept_ci_196": range_196,
+            "overlaps_196": ov_196, "form_under_ci196": fv_196,
+            "ci196_note": "1.96 invalid for low df — kept for comparison with earlier report",
+        }
+    else:
+        fv_t, range_t = form_verdict(intercept, None)
+        ci_block = {
+            "df": df, "tcrit_95": None,
+            "intercept_ci_half_t": None, "intercept_ci_t": None,
+            "overlaps_t": None, "form": fv_t, "form_ci": "no CI (residual 0 หรือจุดไม่พอ)",
+            "intercept_ci_half_196": None, "intercept_ci_196": None,
+            "overlaps_196": None, "form_under_ci196": fv_t,
+            "ci196_note": "no CI — residual 0 หรือจุดไม่พอ (df=0 สำหรับ 2 จุด = ไม่รายงาน CI)",
+        }
+    fv, ci_range = fv_t, range_t
     print(json.dumps({
         "points": len(points), "slope": slope, "intercept": intercept,
-        "intercept_ci_half_ms": ci_half, "intercept_ci": ci_range,
         "slope_ok": slope_ok, "form": fv,
         "criteria": "slope in 1.25±0.1; point in [-0.1,+0.1]=FORM1, [+0.4,+0.6]=FORM2; "
                     "outside both + CI overlaps both windows = INDISTINGUISHABLE; "
                     "outside both otherwise = UNRESOLVED_OFFSET (acceptable, no refit)",
+        **ci_block,
     }, ensure_ascii=False))
     for r in rows:
         if r["status"] == "OK":
