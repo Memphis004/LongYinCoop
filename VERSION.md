@@ -72,7 +72,7 @@
 | ยืนยันด้วยการวัด | restore ของ `AB-oldbuild-20261025-054139` (A/B test 2026-10-25): `Save` 57 ไฟล์ `b7f67154cff6` **EXACT** (changed=0 missing=0 added=0) · `leftovers: none` · `evidence/S3p-20261025-0341/ab/ab-report.md` |
 | ผลบังคับ (ประวัติ) | เป็น expected baseline **เฉพาะรอบ A/B** · **superseded — ตั้งแต่รอบ NEG20 ใช้ `20261025-201545` (หัวข้อถัดไป)** · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** |
 
-## Baseline ที่อนุมัติสำหรับรอบ NEG20 และ split ถัดไป (มติผู้ใช้ 2026-10-25 ค่ำ · rebaseline volatile-only)
+## Baseline ที่อนุมัติสำหรับรอบ NEG20 และ split ถัดไป (มติผู้ใช้ 2026-10-25 ค่ำ · rebaseline volatile-only) — **superseded 2026-10-28 โดย `20261028-071340` (หัวข้อถัดไป)**
 
 | รายการ | ค่า |
 |---|---|
@@ -94,13 +94,34 @@
 | build ก่อนหน้า (ประวัติ) | `f2ad30cd2090a63879a74605c32efc999163b9d1873da6a68bd875e872f112a8` (314,880 B · source `59276a4` — S3 prerequisite patch · ใช้ A/B สองรอบ + NEG20 ครบ 20 เคส · สำรองที่ `.prev-f2ad30cd` และ `.s3prereq-f2ad30cd`) · `5d7b7cc5520ae784c5efc198dda8c1c3ba33ff3c55eb7aaa955ede5f63735953` (ยุค S2a-3 · source `ffc2c88` · A/B รอบแรก · สำรองที่ `.prev-5d7b7cc5`) |
 | source ที่ตรงกับ build ใหม่ | HEAD `8fe33ce` **+ patch ยังไม่ commit** (rangecells: `TurnGate.cs` + `S3/RangeCells.cs` + runner/tests — diff ตรวจแล้วใน Phase 2 · deterministic rebuild = `1b4c17aa…` ตรงทุก byte) |
 | `UserData\MelonPreferences.cfg` | `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1` (ไม่เปลี่ยน) |
-| `UserData\LongYinCoop\net.cfg` (A0/พัก) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` (454 B · `enabled=false` · `heartbeatMs=1000`) |
+| `UserData\LongYinCoop\net.cfg` (A0/พัก) | **`12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8`** (444 B · `enabled=false` · `heartbeatMs=1000` — วัดจริง 2026-10-28, มติ [DEV-2] · **เคยบันทึกเป็น** `dc8e9098…61b61` 454 B — ค่านั้นล้าสมัย ดู divergence record หัวข้อ "Divergence record — net.cfg (DEV-2)" ท้ายไฟล์) |
 | baseline ที่ใช้กับ build นี้ | `coop-test/baselines/20261025-201545/savehash.real.before.txt` · digest `588839490e5b418ae6e20172ea7af21916c9afa3a935c99525984fc9e16a0485` — split ทั้งสอง label บังคับ `--expected-baseline` และ restore แล้ว EXACT ทั้งคู่ |
 | สถานะ 2026-10-26 | **rangecells patch (attackRangeCells — read-only instrumentation) deploy แล้ว และผ่าน Phase 3 retest ครบ 20/20** · **Gate 2 = PASS (มติผู้ใช้ 2026-10-26)** · **ต้นเหตุ crash เดิม (Gate-2 incident 04:14) ยัง UNKNOWN — แยกจากผล Gate 2 ชัดเจน** · rollback พร้อม (`.prev-f2ad30cd`) · patch rangecells **ยังไม่ commit** (source ณ HEAD `8fe33ce` + patch) |
 | label ที่ใช้ล่าสุด | `NEG20R-case7-20261025-234850` (เคส 7 retest · restore EXACT · `leftovers: none`) · ก่อนหน้า: `NEG20R-1b4c17aa-20261025-230950` (w1/w2/w3 · restore EXACT · `leftovers: none`) · `NEG20-f2ad30cd-20261025-202331` + `AB-newbuild`/`AB-oldbuild` (restore EXACT ทั้งหมด) · ประวัติยุค S2a-3: `S2a3r-20261024-0115`, `S2a3x6-20261024-0120` |
 | ผล Gate 2 closure retest (NEG20R · 2026-10-25/26 · build `1b4c17aa`) | negative 20 เคส same-binary: **PASS 20 · NOT-RUN 0 · FAIL 0 · UNKNOWN 0** · เคส 7–10 พิสูจน์ด้วย `attackRangeCells` สด (ยิงจริง 4 เคสผ่าน 4 เงื่อนไข + กันยิงเมื่อเป้าในระยะ 1 เคส) · เคส 11–14 ศพจริง (`unitAlive=false`, hp=0, (-1,-1)) + ศัตรูมีชีวิตเหลือ · restore EXACT ทั้งสอง split · รายงาน `evidence/S3p-20261025-0341/neg20r/neg20r-report.md` |
 | ผล runtime รอบแรก (NEG20 · 2026-10-25 · build `f2ad30cd` — ประวัติ) | negative 20 เคส: **PASS 12 · NOT-RUN 8 (7–10 range-unverifiable + 11–14 structural) · FAIL 0 · UNKNOWN 0** · ทุกเคสที่ยิง stateHash ก่อน/หลังเหมือนเดิม · จบศึกปกติ (`state=Loot`) · restore EXACT · **NOT-RUN ทั้ง 8 ปิดครบด้วย NEG20R (หัวข้อข้างบน)** · รายงาน `evidence/S3p-20261025-0341/neg20/neg20-report.md` |
 | หลักฐาน | `evidence/S3p-20261025-0341/{gate2-deploy.md,gate2-release-build.txt}` (provenance ยุคก่อน) · `ab/ab-report.md` · `neg20/neg20-report.md` · **`neg20r/neg20r-report.md` (Gate 2 closure)** · Phase 1–2 audit (diff + deterministic rebuild + tests 466+53) อยู่ในบันทึก session นี้ |
+
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-28 [G-2] · rebaseline volatile-only · session `AUTO-20261028-070417`)
+
+| รายการ | ค่า |
+|---|---|
+| digest ที่อนุมัติ | **`df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920`** (57 ไฟล์ = SaveSlot* 55 + `PlayerprefData.dat` + `steam_autocloud.vdf`) |
+| ไฟล์ baseline | `coop-test/baselines/20261028-071340/savehash.real.before.txt` |
+| **คำสั่งบังคับ** | `python tools\save-split.py split --label <label> --expected-baseline coop-test\baselines\20261028-071340\savehash.real.before.txt` — **ทุก `split` ตั้งแต่ 2026-10-28 ต้องระบุ flag นี้ตรง ๆ ทุกครั้ง ห้ามพึ่ง default ของ tool** |
+| เหตุผล | ปิด DEVIATION-1 ของ session `AUTO-20261028-023904`: drift = `PlayerprefData.dat` ไฟล์เดียว (hash `50e1612b…` → `efd4ac5b…`) จากการเปิดเกมของผู้ใช้ 2026-10-27 ×3 (ML logs 00:47/02:16/02:26) · **`SaveSlot*` ทั้ง 55 ไฟล์ EXACT baseline `20261025-201545`** · rehash อิสระ ADDED=0 MISSING=0 · `REBASELINE.json` = `volatile_only: true` |
+| สายโซ่ baseline | `4226730f66ff` (S2a-3) → `7332fc93eb98` → `b7f67154cff6` (ยุค A/B) → `58883949…` (`20261025-201545` — NEG20) → **`df8e5a11beed…` (`20261028-071340` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
+| ยืนยันด้วยการวัด | rebaseline ด้วย tool (`save-split.py rebaseline --against 20261025-201545`) exit 0 · Save 57 ไฟล์ EXACT baseline ใหม่ (rehash อิสระ diffs: NONE) · ไฟล์เซฟไม่ถูกแตะ (digest ก่อน/หลัง = `df8e5a11beed` เท่ากัน) · หลักฐาน `evidence/AUTO-20261028-070417/c2-independent-rehash.md`, `c3-c4-rebaseline-record.md` |
+| ผลบังคับ | เป็น expected baseline ของ `split` ถัดไป (รวม GO-3 ขั้น 4 ของ RUNBOOK-G3) · ถ้า digest ไม่ตรง **หยุดและรายงาน ห้าม rebaseline กลบ** (rebaseline เพิ่มต้องอนุมัติแยก) |
+
+## Divergence record — `net.cfg` (มติ [DEV-2] ผู้ใช้ 2026-10-28 · แก้บันทึก ไม่แตะไฟล์)
+
+| รายการ | ค่า |
+|---|---|
+| ค่าที่วัดจริง (2026-10-28, session `AUTO-20261028-070417`) | sha256 **`12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8`** · ขนาด **444 B** · เนื้อหา semantic = `enabled=false`, `heartbeatMs=1000` (สถานะ "พัก" ตามอนุมัติ) |
+| **เคยบันทึกเป็น** (2026-10-24, ยุค S2a-3/งาน A — ล้าสมัย) | `dc8e9098490d74c2dfbd6c8a1dffecfbd6befbfeccb2d235dbd0756f4d861b61` · 454 B |
+| คำอธิบายหลักฐาน | ค่าที่วัดจริง `12541f34…` **ตรงกับบันทึก AGENTS.md หัวข้อ 2026-10-24** (net.cfg คืนสถานะอนุมัติหลังปิด stage S2a-3) · ขนาดที่รายงานเก่า (444 vs 454 B) ขัดกันเองในรายงานยุคนั้น — ค่าวัดจริงล่าสุด = 444 B · เนื้อหาไฟล์ไม่เปลี่ยน semantic (enabled=false, heartbeatMs=1000) ⇒ เป็นการแก้**บันทึก**เท่านั้น ไม่ใช่ไฟล์ |
+| ข้อจำกัด | ห้ามคัดลอกค่า `secret` ลงเอกสารใด (ไม่ได้ log ใน record นี้) · ไฟล์ `UserData\LongYinCoop\net.cfg` ไม่ถูกแตะใน session นี้ (hash ก่อน/หลัง = `12541f34…` เท่ากัน) |
 
 ## กฎ
 
