@@ -132,11 +132,31 @@
 | `Mods\LongYinCoop.dll` (ปัจจุบัน) | **`6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334`** (359,936 B · deploy 2026-10-28 07:40:28 · hash หลัง deploy ตรง artifact provenance READY @ mod repo `1359217`) |
 | `Mods\LongYinCoop.pdb` (ปัจจุบัน) | **`856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035`** (97,128 B) |
 | **เคยบันทึกเป็น** (build ก่อน — rollback point) | DLL `1b4c17aa6a934b25c884f62dbab59a795a8bbadf60fd2fc869ee0927fb3f0177` (316,416 B) · PDB `dcd78ebd5241f25196c1c71296ab05dae3d14a034959f9d0d934155e1d4c1e17` (83,180 B) — สำรองไว้ **`Mods\LongYinCoop.dll.prev-1b4c17aa`** + **`Mods\LongYinCoop.pdb.prev-dcd78ebd`** (hash ตรง ยืนยัน 2026-10-29 01:14) |
-| source ที่ตรงกับ build ใหม่ | `636c209ecd61a572f25d40179b99de370e9892fb` (using fix — บล็อคเดียวที่ต่างจาก provenance build) · docs `1359217` · ยังไม่ tag `stage-S2a-4` (รอมติผู้ใช้) |
+| source ที่ตรงกับ build ใหม่ | `636c209ecd61a572f25d40179b99de370e9892fb` (using fix — บล็อคเดียวที่ต่างจาก provenance build) · docs `1359217` · tag `stage-S2a-4` @ `3ac0761` (2026-10-29 01:27) · เคยบันทึกเป็น "ยังไม่ tag (รอมติผู้ใช้)" |
 | `UserData\MelonPreferences.cfg` | **`66fb92d51e5d9d24ca2578740b561a3bc6fb4876ebfeddce944535e9a02e74cf`** · **เคยบันทึกเป็น `269b571c1b1572b7b525cda3e8a27e09b732b8eb31bdfe290269c8ed62a098d1`** — divergence record: ML เขียนไฟล์ตอนปิดเกม (01:06:22, "Preferences Saved!") หลัง pref dirty จาก E6 set_pref roundtrip (true→false คืนทันที) · **ค่า `AllowRemoteInput = false` ถูกต้อง** (บรรทัด 9 — ตรวจแล้ว 2026-10-29 01:14) · agent ไม่ได้แก้ไฟล์นี้ |
 | `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`, `heartbeatMs=1000` — คืน EXACT หลัง GO-3 ตาม RUNBOOK ขั้น 8 · ระหว่าง session ใช้ `5ce166da…` = enabled=true+overlay=true) |
 | baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` (คงเดิม — หลัง GO-3 restore EXACT + `leftovers: none`) |
 | ผล GO-3 สรุป | G0/E1/E2/E3/E4/E6/E7/E8 = PASS · E5 = PASS-with-limitation (M5-3: E5(a) NOT-RUN — ไม่มี hook) · E4 Δmean +0.244 ms ≤ 1.0 · ตรวจหลัง deploy ไม่มีบรรทัด SP5/Sp5T0 ใน ML log · `commandsAccepted=0` ตลอด |
+
+## V2-A session (2026-10-29 · PROVISIONAL — ไม่ปิด stage ไม่ tag · รายงาน `evidence/V2A-20261029-020816/v2a-report.md` @ `44b255b`)
+
+| รายการ | ค่า |
+|---|---|
+| `Mods\LongYinCoop.dll` (ปัจจุบัน) | `6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334` (359,936 B) — **rollback กลับตามมติผู้ใช้ 2026-10-29 (ทาง ข)** หลังปิด session V2-A · verify hash ก่อน/หลัง copy ตรง · build V2-A `983b238432a466535e6f3bfad1408f4ee0a657f910f2169af84f0d2f9d16893b` (366,080 B) เก็บที่ `evidence/V2A-20261029-020816/` · `.prev` ทั้งหมดคงอยู่ไม่ลบ |
+| `Mods\LongYinCoop.pdb` (ปัจจุบัน) | `856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035` (97,128 B) — rollback พร้อมกัน · build V2-A `951de8fc1385a285cb1a02174639e92b1a6a3719bf6028e2adcfdbe52afee7d6` เก็บใน evidence เดียวกัน |
+| runs ของ V2-A — นับจาก label dir จริง = **9** | ไม่รวม `V2A-20261029-020816` (dir ของ artifact/รายงาน) และ `AUTO-20261029-013511` (dir ของ session) |
+| runs — **5 valid** (เข้า fit) | A3-r1 · A3-r3 (N=10 ×2) · A2-r2 (N=5) · A1-r2 · A1-r3 (N=1 ×2) — measured 13.500 / 13.464 / 7.136 / 2.082 / 2.068 s |
+| runs — **2 เข้าข่ายกฎ gap** (CONTAMINATED · auto-exclude) | A3-r2 (16,118 ms · popup กลางงานหลัง day_tick วันที่ 6) · A2-r3 (9,043 ms · popup "ได้ไม้" หลัง day_tick วันที่ 1) |
+| runs — **1 INVALID** (โครง) | A2-r1 (work_start ×4 · day_ticks 13≠5 · gap 43,428–77,289 ms จบด้วย work_start ใหม่ — เข้าข่ายกฎ gap ด้วย) |
+| runs — **1 pilot** (ไม่เข้า fit) | A1-r1 (2.088 s) |
+| ผล fit 5 จุด | slope **1.2675 s/วัน** (ผ่าน 1.25±0.1) · intercept **0.8056 s** · residual +20/−16/−7/+9/−5 ms |
+| ป้ายตามเกณฑ์ | **UNRESOLVED_OFFSET** · CI_t (df=3, t=3.182) [0.7665, 0.8446] — ไม่คาบเกี่ยวทั้ง FORM1 [−0.1,+0.1] และ FORM2 [+0.4,+0.6] · CI 1.96 (ไม่ valid df ต่ำ — เทียบรอบก่อน) [0.7815, 0.8296] |
+| deviation §E.1 | ≥3 รอบ/ค่า → ≥2 valid/ค่า (ทาง B ลดรูป มติ 2026-10-29) — **N=5 ไม่ครบเกณฑ์ ≥2 valid (มี 1 รัน: A2-r2)** · N=10/N=1 ครบ 2 รัน · PROVISIONAL จนมีรอบซ้ำเพิ่ม |
+| `UserData\MelonPreferences.cfg` | ปัจจุบัน `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` · **เคยบันทึกเป็น** `66fb92d51e5d9d24ca2578740b561a3bc6fb4876ebfeddce944535e9a02e74cf` (ก่อน session) → `dd33ef531c2adae2fcd75d0cb2d4833c554705bc36e774c19de6a35619d2436e` (agent ตั้ง `TimeV2a=true` ก่อนวัด) → `b07cab85241bb0700a2d7e3ebc868b18aaf309be837bd3f6f56582adb82404ee` (ML exit-save ตอนปิดเกม) → `976ccfb9…` (agent คืน `TimeV2a=false` ตอนปิด session) — **ค่า key semantic ตรงตลอด** (ตรวจด้วยค่า key ไม่ใช่ hash — บทเรียน RUNBOOK-G3 บรรทัด 120: `evidence/S2a4-GO3-20261028-030025/RUNBOOK-G3.md` + commit `3ac0761`) |
+| `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`) — **ไม่ถูกแตะตลอด session** |
+| pointer file `time-v2a.out` | ลบแล้วตอนปิด session (fail-closed — ไม่มีผลเมื่อ `TimeV2a=false`) |
+| baseline เซฟ | `df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920` @ `20261028-071340` คงเดิม — restore EXACT ทุก run |
+| tag ที่เกี่ยว | `stage-S2a-4` → `3ac0761` (2026-10-29 01:27) คงเดิม · ไม่มี tag ใหม่ · ไม่ push |
 
 ## กฎ
 
