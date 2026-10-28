@@ -1,14 +1,14 @@
 # RUNBOOK-G3 — ลำดับ session เมื่อผู้ใช้พิมพ์ "เริ่ม GO-3 session" (S2a-4)
 
-> **ฉบับ:** 2026-10-28 (session `AUTO-20261028-023904`, B5 · อัปเดตสถานะ 2026-10-28 โดย session `AUTO-20261028-070417`) · **แผนอ้างอิง:** `S2a-4-plan.md` rev4 — §3 (เกต GO-3),
+> **ฉบับ:** 2026-10-28 (session `AUTO-20261028-023904`, B5 · อัปเดต 2026-10-28 โดย `AUTO-20261028-070417` และ `AUTO-20261028-072525`) · **แผนอ้างอิง:** `S2a-4-plan.md` rev4 — §3 (เกต GO-3),
 > §9 (provenance), §11 (เกณฑ์ E1–E8 ตรงตัว **ไม่แก้เกณฑ์**), §15 (rollback) · **มติที่ใช้:** M3 (overlay = flat key
 > net.cfg, default off, ไม่มี hotkey) · M4 (guest slot เดียว) · **M5 = M5-3 ไม่ hook เลย** ⇒ W4(a) = NOT-RUN,
 > E5(a) = NOT-RUN ทั้ง 4 กลุ่ม, E5 สูงสุด = PASS-with-limitation, **ห้ามติดตั้ง hook ใด ๆ**
-> **เงื่อนไขเบื้องต้น (สถานะล่าสุด 2026-10-28 07:1x):**
-> 1. **Release artifact — ยัง BLOCKED** — build ณ HEAD `91c276b` ล้ม (`Sp5T0Probe.cs` ขาด using — ดู `provenance.md`) ·
->    session `AUTO-20261028-070417` พบว่า**เงื่อนไขก่อนแก้ของมติ [G-1] ติด**: `CoopMod.cs:53` เรียก `Sp5T0Probe.Apply`
->    จาก `OnInitializeMelon` (load path) ⇒ การแก้ using **ยังไม่ถูกทำ** รอมติผู้ใช้รอบใหม่ (หลักฐาน `evidence/AUTO-20261028-070417/a1-a2-reachability.md`) ·
->    ยังต้องมีมติแก้ + build ผ่าน 0W/0E + artifact ในโฟลเดอร์นี้ครบ ก่อนเริ่ม
+> **เงื่อนไขเบื้องต้น (สถานะล่าสุด 2026-10-28 07:3x — ปิดครบทั้ง 2 ข้อ):**
+> 1. **Release artifact — ปิดแล้ว (2026-10-28, session `AUTO-20261028-072525`)** — มติ [G-1] รอบใหม่ = ทาง (ก) พร้อมเงื่อนไข
+>    C1–C4 ผ่านครบ ⇒ แก้ using 1 บรรทัด (commit `636c209…`) · build ผ่าน **0W/0E (exit 0)** ณ HEAD `636c209…` ·
+>    artifact DLL+PDB ในโฟลเดอร์นี้ครบ (sha256 ใน `provenance.md` — สถานะ **READY**) · ตรวจ 6 ชนิดใน #Strings heap = FOUND ครบ ·
+>    DLL มีโค้ด SP5 แต่ `Sp5T0=false` default ⇒ `Apply(false)` = no-op ไม่ติด hook (ตรวจซ้ำตอนรันจริงที่ขั้น 6)
 > 2. **baseline เซฟ — ปิดแล้ว (2026-10-28, มติ [G-2])** — rebaseline volatile-only แล้ว: baseline ปัจจุบัน
 >    **`df8e5a11beed…` @ `coop-test/baselines/20261028-071340/savehash.real.before.txt`** (57 ไฟล์ · ต่างจาก `58883949…` เฉพาะ `PlayerprefData.dat`) ·
 >    หลักฐาน `evidence/AUTO-20261028-070417/c3-c4-rebaseline-record.md` · ขั้นที่ 4 ข้างล่างใช้ baseline นี้แล้ว
@@ -67,6 +67,10 @@
 
 1. ตรวจ ML log ใหม่: mod โหลด, DLL ที่โหลด = artifact (ตรวจเวอร์ชัน/log เปิด IPC + overlay), ERROR/Exception
    เริ่มต้น
+   **เพิ่มเติม (สืบเนื่องมติ [G-1] รอบใหม่ — DLL มีโค้ด SP5 compiled แต่ต้องไม่ติด hook):** ML log ต้อง**ไม่มี**
+   บรรทัด SP5/Sp5T0 install/patch ใด (เช่น `Sp5T0 installed`, `Sp5T0:` patch count/session) — **ถ้ามี = หยุดรายงาน**
+   (สถานะที่ถูกต้องคือเงียบ เพราะ `Sp5T0=false` default ⇒ `Apply(false)` = no-op; `CloseSession("uninstall-not-installed")`
+   ที่ guard return ก่อน ไม่ emit อะไร)
 2. **G0 = ตรวจว่า `MelonEvents.OnGUI` ยิงจริง** (overlay render ขึ้นจอ/counter เดิน) — **ไม่ยิง = หยุดรายงาน
    ทันที ไม่เดาทางแก้ ไม่ปรับโค้ดก่อนอนุมัติ** (แผน §3/§11)
 
@@ -81,7 +85,7 @@
 | **E2** overlay ตรงจริง | เทียบ grid/unit/hp บน overlay กับ `spike status` ณ key เดียวกัน ≥ 20 คู่ | เข้าศึก ปล่อยค้างที่ `WaitPlayerInput` | **≥ 20/20** |
 | **E3** input isolation | เฝ้า `commandsAccepted` + audit | **เล่น 1 เทิร์นเต็มระหว่าง overlay เปิด** | คลิกเกมปกติ · `commandsAccepted=0` · audit เปลี่ยนเฉพาะจาก action ผู้ใช้ |
 | **E4** ต้นทุนเฟรม | A/B overlay ON vs OFF ด้วย `S2FrameMeter`/`s2.metrics` — ศึกนิ่ง `WaitPlayerInput`, protocol v2 (wall-clock + sha256 net.cfg ทุกสลับ) — M5-3 = ต้นทุน overlay ล้วน | คงศึกค้างนิ่งช่วงวัด (ห้ามคลิก action) | \|Δmean\| ≤ 1.0 ms (band ±0.5 = INCONCLUSIVE — รายงานตามจริง) |
-| **E5** guest อ่านอย่างเดียว | (b) รัน `s2_static_check.py` = 0 call sites · (c) รวบ IPC audit ทั้ง session | — | **M5-3 ⇒ (a) = NOT-RUN ทั้ง 4 กลุ่ม, สูงสุด PASS-with-limitation; ห้ามเขียนว่า "hook ผ่าน"** |
+| **E5** guest อ่านอย่างเดียว | (b) รัน `s2_static_check.py` = 0 call sites · (c) รวบ IPC audit ทั้ง session · (d) แนบหลักฐานขั้น 6: ML log **ไม่มี** บรรทัด SP5/Sp5T0 install/patch ใด (ประกอบ M5-3) | — | **M5-3 ⇒ (a) = NOT-RUN ทั้ง 4 กลุ่ม, สูงสุด PASS-with-limitation; ห้ามเขียนว่า "hook ผ่าน"** |
 | **E7** เซฟปลอดภัย | ตรวจ `SaveSlot*` + digest สำเนาตลอด session | — | `SaveSlot*` เปลี่ยน 0 · digest ตรง baseline (ยกเว้น volatile) · `leftovers: none` |
 | **E8** สเกล | บันทึก unit count จริงทุกหน้าต่างวัด | — | บันทึกตามจริง (ไม่มี fixture 60 = ข้อจำกัดของ S2a-4) |
 

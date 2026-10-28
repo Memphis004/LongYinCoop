@@ -1,32 +1,34 @@
-# provenance — S2a-4 GO-3 artifact (สถานะ: **BLOCKED — build ยังไม่ได้ · G-1 รอมติผู้ใช้**)
+# provenance — S2a-4 GO-3 artifact (สถานะ: **READY — build ผ่าน 0W/0E · artifact ครบ · 6 ชนิดครบ**)
 
-> อัปเดตสถานะ 2026-10-28 โดย session `AUTO-20261028-070417` (B5 ฉบับปรับตามผล — build ไม่ได้รันเพราะเงื่อนไข [G-1] ติด) · **ไม่มี DLL/PDB artifact ใดในโฟลเดอร์นี้** (ห้ามเขียนทับ/เติมทีหลังโดยไม่ผ่านขั้นตอนนี้ซ้ำทั้งหมด)
+> อัปเดต 2026-10-28 07:3x โดย session `AUTO-20261028-072525` (หลังมติ [G-1] รอบใหม่ของผู้ใช้) · ประวัติ BLOCKED ด้านล่างคงไว้ตามจริง
 
-- **เหตุที่ยัง BLOCKED (อัปเดต 2026-10-28):** มติ [G-1] ทาง (ก) แก้ using 1 บรรทัด มี**เงื่อนไขก่อนแก้** = ตรวจ reachability ของ `Sp5T0Probe` — ผลตรวจ (อ่านอย่างเดียว): **เงื่อนไขติด** — `CoopMod.cs:53` เรียก `Sp5T0Probe.Apply(...)` จาก `OnInitializeMelon()` (load path) ตามตัวอักษรของเงื่อนไข *"ถ้า probe ถูกเรียก…จากเส้นทางที่รันตอนโหลด = หยุด"* ⇒ **การแก้ using ไม่ถูกทำ, build ไม่ถูกรันซ้ำ, ห้ามเปลี่ยนไปทาง (ข) เอง** — รอมติผู้ใช้ · ข้อเท็จจริงประกอบมติ (RUNTIME-พฤติกรรมจากซอร์ส): ณ pref default `Sp5T0=false`, `Apply(false)` → `Uninstall()` → `CloseSession` (return ทันที) = **ไม่สร้าง Harmony ไม่ติด patch ไม่เขียนไฟล์** · หลักฐานเต็ม `evidence/AUTO-20261028-070417/a1-a2-reachability.md`
-- **สถานะ src/ ณ session `AUTO-20261028-070417`:** HEAD `ec78a8b` · `git diff --stat 91c276b ec78a8b -- src/` = **ว่าง** (ยืนยันแล้ว) ⇒ ผล build ล้มของ `91c276b` ยังคงอธิบายทรีปัจจุบันได้ (CS0246 ตัวเดิม deterministic) — จึงไม่รัน build ซ้ำโดยรู้ผลล่วงหน้า
-- **(ปิดแล้ว แยกสาย) baseline เซฟ:** มติ [G-2] 2026-10-28 — rebaseline volatile-only แล้ว ⇒ baseline ปัจจุบัน `df8e5a11beed…` @ `coop-test/baselines/20261028-071340` (ดู RUNBOOK ขั้น 4 · VERSION.md หัวข้อ "Baseline ที่อนุมัติปัจจุบัน")
-- **คำสั่งที่รันครั้งล่าสุด (ตาม [A5], session `AUTO-20261028-023904`):** `dotnet build src/LongYinCoop -c Release --no-incremental` ณ mod repo HEAD `91c276b9436fccdf498fc3b3eb08b62f10ec4406` (branch master, `src/ tools/ tests/` ไม่มี uncommitted) — **2026-10-28 02:5x**
-- **ผล:** **FAILED — 0 Warning(s) / 1 Error(s)**:
-  `src\LongYinCoop\SP5\Sp5T0Probe.cs(52,33): error CS0246: The type or namespace name 'Stopwatch' could not be found`
-- **สาเหตุที่วิเคราะห์ (อ่านอย่างเดียว) [OBSERVED]:**
-  - `SP5/Sp5T0Probe.cs` ใช้ `Stopwatch` (บรรทัด 52) แต่ using block ไม่มี `System.Diagnostics` · csproj หลัก `ImplicitUsings=disable`
-  - ไฟล์นี้ commit ครั้งแรกใน `7ff47ab` ("SP5: … log-only probe source (**ยังไม่ build/deploy**)") — **ถูก commit โดยยังไม่เคย compile** ⇒ แผนตรวจ 0W/0E ที่รายงานในยุค S2a-4 GO-1 (ก่อน `7ff47ab`) ยังจริงสำหรับทรียุคนั้น แต่**ทรีปัจจุบัน (HEAD `91c276b`) Release-build ไม่ผ่าน**
-  - เทสต์ C# 596/0 ยังผ่านเพราะ `tests/S2Protocol.Tests.csproj` include เฉพาะไฟล์ที่เลือกไว้ (S2/Protocol/**, S2/Transport/**, S2/Host subset ฯลฯ) **ไม่รวม SP5/**` — จึงไม่ได้ compile ไฟล์นี้ (แยกสองโลกกันชัดเจน)
-- **ทางแก้ที่พบ (เสนอ ไม่ตัดสิน — ทั้งสองทางต้องอนุมัติแยก เพราะเป็นการแก้ tracked source):**
-  - (ก) เพิ่ม `using System.Diagnostics;` ใน `SP5/Sp5T0Probe.cs` (1 บรรทัด — แก้ tracked source ของ SP5)
-  - (ข) exclude `SP5/**` ออกจาก `LongYinCoop.csproj` (แก้ csproj — กระทบ build ทุก config)
-  - ห้าม agent แก้เองในรอบนี้ (นอกขอบเขต [A1]–[A6] — คำสั่ง B3 กำหนด "ต้อง 0/0 ถ้าไม่ใช่หยุด")
-- **สิ่งที่ต้องทำซ้ำเมื่อได้รับอนุมัติแก้แล้ว (ตาม [A5] + S2a-4-plan §9):**
-  1. commit การแก้ (แยก commit, ระบุ path ไฟล์เดียว)
-  2. `dotnet build src/LongYinCoop -c Release --no-incremental` ต้อง **0 warning / 0 error**
-  3. บันทึก: full SHA ของ source commit · `dotnet --version` · คำสั่ง build เต็ม · sha256 + ขนาด (bytes) ของ `bin/Release/LongYinCoop.dll` และ `.pdb`
-  4. ตรวจเมทาดาทาดิบ (อ่านไบต์ #Strings heap ของ DLL — **ไม่โหลดแอสเซมบลีเข้ากระบวนการใด**) ยืนยันชนิดครบ 6 ชนิด: `S2GuestDecoder`, `S2OverlayClient`, `S2OverlayRenderModel`, `S2OverlayService`, `S2SetPrefGate`, `S2WriteGuardHook`
-  5. คัดลอก DLL+PDB มาไว้โฟลเดอร์นี้เป็น artifact (ไม่ commit — ห้ามคัดลอกเข้า `Mods\`)
-  6. อัปเดตไฟล์นี้ด้วยค่าจริง + เติมตาราง artifact ด้านล่าง
+## ผล build ที่ผ่านแล้ว (2026-10-28 07:3x)
 
-## ตาราง artifact (ยังว่าง — จะเติมเมื่อ build ผ่าน)
+- **มติ [G-1] รอบใหม่ (ผู้ใช้ 2026-10-28):** ทาง (ก) เพิ่ม `using System.Diagnostics;` 1 บรรทัดใน `SP5/Sp5T0Probe.cs` — เงื่อนไขก่อนแก้ C1–C4 ตรวจครบ **ผ่านทั้ง 4** (อ่านอย่างเดียว — `evidence/AUTO-20261028-072525/c1-c4-precondition-checks.md`) · commit การแก้ = `636c209ecd61a572f25d40179b99de370e9892fb` (path เดียว, diff +1 บรรทัด, ข้อความระบุ "build-fix only")
+- **คำสั่ง:** `dotnet build src/LongYinCoop -c Release --no-incremental` (จาก mod repo, ณ HEAD `636c209…` · `src/ tools/ tests/` ไม่มี uncommitted ก่อน build) · **ผล: Build succeeded — 0 Warning(s) / 0 Error(s), exit 0** (CS0246 ของ `91c276b` หมดไป)
+- **dotnet SDK:** 9.0.311
+- **เทสต์ก่อน build (exit code จริงทั้งหมด):** C# suite **596 PASS / 0 FAIL** (exit 0 — นับ `[PASS]` รายบรรทัด; กลุ่ม s2a3 179/0, s2a4 130/0) · python `test_negative_preconditions` **53 OK** (exit 0) · discover `test_*.py` **68 OK** (exit 0) · `s2_static_check.py` **CLEAN, 0 violations** (exit 0)
+
+## ตาราง artifact (คัดลอกแล้ววัดซ้ำตรงต้นทาง — ไฟล์อยู่ในโฟลเดอร์นี้, ไม่ commit, **ไม่อยู่ใน Mods\**)
 
 | ไฟล์ | sha256 | ขนาด (bytes) |
 |---|---|---|
-| `LongYinCoop.dll` | — ยังไม่มี (build ล้ม) — | — |
-| `LongYinCoop.pdb` | — ยังไม่มี (build ล้ม) — | — |
+| `LongYinCoop.dll` | `6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334` | 359,936 |
+| `LongYinCoop.pdb` | `856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035` | 97,128 |
+
+- ต้นทาง: `src/LongYinCoop/bin/Release/` — สำเนาในโฟลเดอร์นี้ sha256 ตรงต้นทางเป๊ะ (วัดซ้ำหลัง copy)
+- `.dll` ถูก .gitignore กัน (`evidence/**/*.dll` — บรรทัด 63) · `.pdb` untracked และ**ไม่ถูก add** ใน commit ใด
+
+## ตรวจ metadata ดิบ (B3 — อ่านไบต์ #Strings heap, **ไม่โหลดแอสเซมบลี**)
+
+สคริปต์ `evidence/AUTO-20261028-072525/b3_strings_heap_check.py` (parse PE → CLR dir → BSJB → #Strings, หา exact null-terminated entry) · ผล (`b3-strings-result.txt`, exit 0): **ครบ 6 ชนิด = FOUND ทั้งหมด** — `S2GuestDecoder` · `S2OverlayClient` · `S2OverlayRenderModel` · `S2OverlayService` · `S2SetPrefGate` · `S2WriteGuardHook`
+
+## ข้อความชัดเรื่อง SP5 ใน DLL (M5-3)
+
+**DLL นี้มีโค้ด `SP5/Sp5T0Probe.cs` compiled อยู่จริง** (csproj หลัก SDK-style compile ทุก .cs) — แต่ตามเงื่อนไขมติ [G-1] รอบใหม่ + หลักฐาน C1–C4: ณ default (`Sp5T0=false` — `CoopPrefs.cs:56`, ไม่มี key ใน `MelonPreferences.cfg`) การเรียก `Apply(false)` ที่โหลดเป็น **no-op ล้วน: ไม่สร้าง Harmony instance, ไม่ติด patch, ไม่เขียน/เปิดไฟล์, ไม่เปิดเธรด/timer** (`new HarmonyLib.Harmony` บรรทัด 201 / `.Patch` 203–230 / `OpenWriter` 197 อยู่เฉพาะกิ่ง `wanted==true`) ⇒ **ไม่ขัด M5-3** (ไม่มี hook ถูกติดตั้ง) · การตรวจซ้ำตอนรันจริง = ขั้น 6 ของ RUNBOOK (ML log ต้องไม่มีบรรทัด SP5/Sp5T0 install/patch ใด — ถ้ามี = หยุด)
+
+## ประวัติ (คงไว้ตามจริง)
+
+- **B3/B4 ของ session `AUTO-20261028-023904` = NOT-RUN (build ล้ม)** — `dotnet build -c Release --no-incremental` ณ HEAD `91c276b9436fccdf498fc3b3eb08b62f10ec4406` (2026-10-28 02:5x): `SP5/Sp5T0Probe.cs(52,33) error CS0246 'Stopwatch'` — ต้นเหตุ = commit `7ff47ab` ถูก commit โดยยังไม่เคย compile (test csproj ไม่ลิงก์ SP5/** จึงเทสต์ยังผ่าน)
+- **session `AUTO-20261028-070417`:** มติ [G-1] รอบแรก — เงื่อนไข tripwire ติด (probe ถูกเรียกจาก load path ตามตัวอักษร) ⇒ A3 หยุดรอมติ, build ไม่รัน · ผู้ใช้ตัดสินรอบใหม่ = ทาง (ก) พร้อมเงื่อนไข C1–C4 (ดูหัวข้อ build ที่ผ่านแล้ว)
+- baseline เซฟที่เกี่ยวข้องกับ GO-3: ปัจจุบัน = `df8e5a11beed…` @ `coop-test/baselines/20261028-071340` (มติ [G-2] — ดู VERSION.md หัวข้อ "Baseline ที่อนุมัติปัจจุบัน")
