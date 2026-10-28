@@ -13,8 +13,9 @@
 - **ผล fit (5 จุด non-pilot non-contaminated):** slope **1.2675 s/วัน** (ผ่าน 1.25±0.1) · intercept **0.8056 s** ·
   CI_t (df=3, t=3.182) **[0.7665, 0.8446]** — ไม่คาบเกี่ยว window ฟอร์มใด ⇒ ป้าย **UNRESOLVED_OFFSET**
   (ยอมรับได้ · PROVISIONAL) · residual รายรัน ≤ 20 ms
-- **2 runs CONTAMINATED** (กฎ gap > 2 s — A2-r1 77.3 s ก่อนเริ่มใหม่ · A3-r2 16.1 s popup กลางงาน) ·
-  1 run INVALID (A2-r1 โครง — day_ticks 13≠5) · 1 pilot (A1-r1) ไม่เข้า fit
+- **2 runs CONTAMINATED** (กฎ gap > 2 s — A3-r2 16,118 ms popup กลางงานหลัง day_tick วันที่ 6 · A2-r3 9,043 ms
+  popup "ได้ไม้" หลัง day_tick วันที่ 1) · 1 run INVALID (A2-r1 โครง — day_ticks 13≠5 · gap 43,428–77,289 ms
+  เข้าข่ายกฎ gap ด้วย — excluded ตามเดิม ผลไม่เปลี่ยน) · 1 pilot (A1-r1) ไม่เข้า fit
 - **deviation จากแผน §E.1:** ≥3 รอบ/ค่า → **≥2 valid/ค่า** (ทาง B ลดรูป มติ 2026-10-29) — เหตุผล: N=10 ซ้ำ
   ต่าง 36 ms · CI_t ห่าง window ฟอร์มชัด · popup กลางงานเสี่ยงซ้ำ — **ผลกระทบ: N=5 มี valid 1 รัน
   (ไม่มี pure error)** · รอบซ้ำเพิ่ม = งานอนาคต
@@ -121,6 +122,6 @@
 | pointer `time-v2a.out` | **ลบแล้ว** | ✓ |
 | net.cfg | `12541f34…` (444 B) — ไม่ถูกแตะตลอด session | ✓ |
 | เซฟ | EXACT 57/57 `df8e5a11beed…` + `leftovers: none` | ✓ |
-| DLL | `983b2384…` (366,080 B) + `.prev-6a94abb5` — **รอมติ rollback/คง build** | ✓ |
+| DLL | `983b2384…` (366,080 B) + `.prev-6a94abb5` — **มติหลังปิด session: rollback ทาง (ข) กลับ `6a94abb5…` ทำแล้ว** (verify hash ตรง 2026-10-29 · บันทึก VERSION.md หัวข้อ V2-A) | ✓ |
 | commits ของ session | `21e99a0`(A) `b0ca9f7`/`91bf85c`/`211ea21`(B) `bd7885e`(C) `397b569` `789f670` `3490cff` `2952e1c` `0c9202d` `516197d` `646f0f5` `1a5797b` `81580f0` `e90de47` — src/ ไม่เปลี่ยนจาก `bd7885e` | ✓ |
 | ไฟล์รายงาน/หลักฐาน | v2a-report.md (ไฟล์นี้) · interim-report-3run.md/-v2.md · README-a2r1/a2r3 · ผล analyze/fit ราย label — **บนดิสก์ ยังไม่ commit** (รอสั่ง) | — |
