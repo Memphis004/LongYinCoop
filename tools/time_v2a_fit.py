@@ -1,24 +1,28 @@
 #!/usr/bin/env python3
-"""time_v2a_fit.py — fit รวมของ V2 set-A ตามเกณฑ์ฉบับที่ 2 [CRITERIA] (RUNBOOK-V2A.md ภาคผนวก A)
+"""time_v2a_fit.py — fit รวมของ V2 set-A ตามเกณฑ์ฉบับที่ 2 [CRITERIA] (RUNBOOK-V2A.md ภาคผนวก A,
+ปรับตามมติ 2026-10-29 รอบ A: เพิ่ม UNRESOLVED_OFFSET + รายงาน observational รายช่วง + --exclude pilot)
 
-อ่าน NDJSON รายรัน (ไฟล์ละ session) → ตรวจโครงรายรัน → fit เชิงเส้นรวม `measured = slope×N + intercept`
-(least squares) → ตัดสินตามเกณฑ์ที่ล็อก:
+อ่าน NDJSON รายรัน → ตรวจโครงรายรัน → fit เชิงเส้นรวม `measured = slope×N + intercept` (least squares)
+→ ตัดสินตามเกณฑ์ที่ล็อก (ตัวเลขตัดสินฟอร์มคงเดิมทุกตัว):
   - ความชัน slope ต้องอยู่ใน 1.25 ± 0.1 s/วัน (ผิด = MISMATCH จริง — หยุดรายงาน)
-  - ฟอร์มจาก intercept: [−0.1, +0.1] = FORM1 · [+0.4, +0.6] = FORM2 · นอกนั้น/คาบเกี่ยว =
-    INDISTINGUISHABLE (ผลที่ยอมรับได้)
-  - residual รายรัน = measured − (slope×N + intercept) รายงานแยก ไม่ใช้ตัดสินฟอร์ม
+  - ฟอร์มจาก intercept: จุดอยู่ใน [−0.1, +0.1] = FORM1 · ใน [+0.4, +0.6] = FORM2 · จุดอยู่นอกทั้งคู่
+    **และไม่ใช่กรณีคาบเกี่ยว** = UNRESOLVED_OFFSET (รายงานค่า intercept + ช่วงความเชื่อมั่นถ้ามี) ·
+    INDISTINGUISHABLE สงวนไว้เฉพาะกรณีคาบเกี่ยว/ข้อมูลไม่พอแยก (ช่วงความเชื่อมั่นครอบ/ทับทั้งสอง window)
+    — ทั้ง UNRESOLVED_OFFSET และ INDISTINGUISHABLE เป็นผลที่ยอมรับได้ ไม่ใช่ความล้มเหลว · ห้าม refit
+  - residual + segment observational รายรัน (initial / day mean-min-max / final / tail) — ไม่ใช้ตัดสินฟอร์ม
 โครงที่ตรวจรายรัน: work_start → pause_end → [day_tick → pause_end]×N → work_end (abort = work_abort)
 โดย day_ticks ต้อง == N และ leftWorkingDay ไล่ลงถูกต้อง
 
 การใช้: ส่งเฉพาะไฟล์รอบ **normal** (A1/A2/A3) — รอบ skip (A4) รายงานแยก ห้ามเข้า fit (k ต่าง)
-pilot A1-r1 ไม่นับเป็นผลยืนยัน (มติ 2026-10-29) จึงไม่ส่งเข้า fit
+`--exclude <path>` = กันไฟล์ออกจาก fit (เช่น pilot A1-r1 ที่ไม่นับเป็นผลยืนยัน — มติ 2026-10-29)
 
-exit code: 0 = fit สำเร็จ (slope อยู่ในเกณฑ์ — ฟอร์มตัดสินแยก) · 3 = slope MISMATCH (หยุดรายงาน) ·
-1 = ไม่มี run ที่ใช้ได้ / จุดไม่พอ fit (ต้องมี ≥2 run ที่ N ต่างกัน) · 2 = args/ไฟล์ผิด
+exit code: 0 = fit สำเร็จ (slope อยู่ในเกณฑ์ — ฟอร์มตัดสินแยก รวม INDISTINGUISHABLE/UNRESOLVED_OFFSET) ·
+3 = slope MISMATCH (หยุดรายงาน) · 1 = ไม่มี run ที่ใช้ได้ / จุดไม่พอ fit · 2 = args/ไฟล์ผิด
 เครื่องมือนี้อ่านอย่างเดียว — ไม่แตะเกม/เซฟ/pref และห้ามใช้แทน time_v2a_analyze.py (ไม่แก้ไฟล์นั้น)
 """
 import argparse
 import json
+import math
 import sys
 
 SLOPE_TARGET = 1.25
@@ -77,35 +81,80 @@ def validate_structure(s):
     return True, "ok", day_ticks
 
 
+def segments_of(s):
+    """segment observational รายรัน (OBSERVED จากไฟล์ — ไม่มีการตีความ):
+    initial = work_start→pause_end#1 · day_i = pause_end#i→day_tick#i (แต่ละวัน) ·
+    final = day_tick สุดท้าย→pause_end สุดท้าย · tail = pause_end สุดท้าย→work_end"""
+    evs = s["events"]
+    pauses = [e for e in evs if e.get("ev") == "pause_end"]
+    days = [e for e in evs if e.get("ev") == "day_tick"]
+    t_ws = evs[0]["t"]
+    initial = (pauses[0]["t"] - t_ws) / 1000.0
+    day_list = [(days[i]["t"] - pauses[i]["t"]) / 1000.0 for i in range(len(days))]
+    final = (pauses[-1]["t"] - days[-1]["t"]) / 1000.0
+    tail = (s["t_end"] - pauses[-1]["t"]) / 1000.0
+    return {
+        "initial_ms": round(initial * 1000, 1),
+        "day_mean_ms": round(sum(day_list) / len(day_list) * 1000, 1),
+        "day_min_ms": round(min(day_list) * 1000, 1),
+        "day_max_ms": round(max(day_list) * 1000, 1),
+        "final_ms": round(final * 1000, 1),
+        "tail_ms": round(tail * 1000, 1),
+    }
+
+
 def fit(points):
-    """least squares ผ่าน (n, measured) — คืน (slope, intercept)"""
+    """least squares ผ่าน (n, measured) — คืน (slope, intercept, se_intercept หรือ None)"""
     ns = [p[0] for p in points]
     ys = [p[1] for p in points]
     mean_n = sum(ns) / len(ns)
     mean_y = sum(ys) / len(ys)
+    sxx = sum((n - mean_n) ** 2 for n in ns)
     cov = sum((n - mean_n) * (y - mean_y) for n, y in points)
-    var = sum((n - mean_n) ** 2 for n in ns)
-    slope = cov / var
+    slope = cov / sxx
     intercept = mean_y - slope * mean_n
-    # round 6 ตำแหน่งก่อนตัดสินขอบเขต — กัน float drift ที่เส้นแบ่ง 0.1/0.4/0.6 (ตามเกณฑ์ที่ล็อก)
-    return round(slope, 6), round(intercept, 6)
+    se = None
+    if len(points) >= 3 and sxx > 0:
+        resid = [y - (slope * n + intercept) for n, y in points]
+        ssr = sum(r * r for r in resid)
+        mse = ssr / (len(points) - 2)
+        if mse > 0:
+            se = math.sqrt(mse * (1.0 / len(points) + mean_n * mean_n / sxx))
+    return round(slope, 6), round(intercept, 6), (None if se is None else round(1.96 * se, 6))
 
 
-def form_verdict(intercept):
+def form_verdict(intercept, ci_half):
+    """ตัดสินฟอร์มตาม [CRITERIA]: จุดใน window = ฟอร์มนั้น · จุดนอกทั้งคู่:
+    ช่วงความเชื่อมั่นครอบ/ทับทั้งสอง window = INDISTINGUISHABLE (คาบเกี่ยว/ข้อมูลไม่พอแยก) ·
+    ไม่งั้น = UNRESOLVED_OFFSET — ทั้งสองป้ายหลังเป็นผลที่ยอมรับได้"""
     if I1 - ITOL <= intercept <= I1 + ITOL:
-        return "FORM1"
+        return "FORM1", None
     if I2 - ITOL <= intercept <= I2 + ITOL:
-        return "FORM2"
-    return "INDISTINGUISHABLE"
+        return "FORM2", None
+    if ci_half is not None:
+        lo, hi = intercept - ci_half, intercept + ci_half
+        f1_ov = lo <= I1 + ITOL and hi >= I1 - ITOL
+        f2_ov = lo <= I2 + ITOL and hi >= I2 - ITOL
+        if f1_ov and f2_ov:
+            return "INDISTINGUISHABLE", [round(lo, 4), round(hi, 4)]
+    return "UNRESOLVED_OFFSET", ([round(intercept - ci_half, 4), round(intercept + ci_half, 4)]
+                                 if ci_half is not None else None)
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("ndjson", nargs="+", help="NDJSON รายรัน (รอบ normal เท่านั้น — ดูภาคผนวก A)")
+    ap.add_argument("--exclude", action="append", default=[],
+                    help="ไฟล์ที่ต้องกันออกจาก fit (เช่น pilot A1-r1) — รายงานเป็น EXCLUDED_PILOT")
     args = ap.parse_args(argv)
 
+    exclude = set(args.exclude)
     rows, points = [], []
     for path in args.ndjson:
+        if path in exclude:
+            rows.append({"file": path, "status": "EXCLUDED_PILOT",
+                         "reason": "excluded from fit by --exclude (pilot — ไม่นับเป็นผลยืนยัน)"})
+            continue
         try:
             sessions = extract_sessions(load_events(path))
         except OSError as e:
@@ -122,8 +171,10 @@ def main(argv=None):
                 rows.append({"file": path, "n": s["n"], "measured_s": round(measured, 3),
                              "day_ticks": day_ticks, "status": "INVALID", "reason": reason})
                 continue
-            rows.append({"file": path, "n": s["n"], "measured_s": round(measured, 3),
-                         "day_ticks": day_ticks, "status": "OK"})
+            row = {"file": path, "n": s["n"], "measured_s": round(measured, 3),
+                   "day_ticks": day_ticks, "status": "OK"}
+            row["segments_observed"] = segments_of(s)
+            rows.append(row)
             points.append((s["n"], measured))
 
     for r in rows:
@@ -134,17 +185,19 @@ def main(argv=None):
         print(f"summary: valid_runs={len(valid)} points={len(points)} "
               f"fit=NOT_POSSIBLE (need >=2 runs with distinct N) "
               f"invalid={sum(1 for r in rows if r['status'] == 'INVALID')} "
-              f"excluded={sum(1 for r in rows if r['status'] == 'EXCLUDED')}")
+              f"excluded={sum(1 for r in rows if r['status'] != 'OK')}")
         return 1
 
-    slope, intercept = fit(points)
+    slope, intercept, ci_half = fit(points)
     slope_ok = abs(slope - SLOPE_TARGET) <= SLOPE_TOL
-    fv = form_verdict(intercept)
+    fv, ci_range = form_verdict(intercept, ci_half)
     print(json.dumps({
-        "points": len(points), "slope": round(slope, 4), "intercept": round(intercept, 4),
+        "points": len(points), "slope": slope, "intercept": intercept,
+        "intercept_ci_half_ms": ci_half, "intercept_ci": ci_range,
         "slope_ok": slope_ok, "form": fv,
-        "criteria": f"slope in {SLOPE_TARGET}±{SLOPE_TOL}; intercept [{I1 - ITOL},{I1 + ITOL}]=FORM1, "
-                    f"[{I2 - ITOL},{I2 + ITOL}]=FORM2, else INDISTINGUISHABLE",
+        "criteria": "slope in 1.25±0.1; point in [-0.1,+0.1]=FORM1, [+0.4,+0.6]=FORM2; "
+                    "outside both + CI overlaps both windows = INDISTINGUISHABLE; "
+                    "outside both otherwise = UNRESOLVED_OFFSET (acceptable, no refit)",
     }, ensure_ascii=False))
     for r in rows:
         if r["status"] == "OK":
@@ -158,7 +211,7 @@ def main(argv=None):
         return 3
     print(f"summary: slope OK ({slope:.4f} in {SLOPE_TARGET}±{SLOPE_TOL}) · form={fv} · "
           f"valid_runs={len(valid)} invalid={sum(1 for r in rows if r['status'] == 'INVALID')} "
-          f"excluded={sum(1 for r in rows if r['status'] == 'EXCLUDED')}")
+          f"excluded={sum(1 for r in rows if r['status'] != 'OK')}")
     return 0
 
 
