@@ -148,13 +148,23 @@ python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjso
 - **โครง:** ทุกรัน `day_ticks == N` **และ** ลำดับ event ตรงโครง = `work_start → pause_end → [day_tick →
   pause_end]×N → work_end` (ตาม static §2.4; abort = work_abort แทน work_end)
 - **ความชัน:** fit เชิงเส้น `measured = slope×N + intercept` จาก **N=1,5,10 ทุกรอบรวม** (least squares ราย run —
-  เฉพาะรอบ normal A1/A2/A3; **รอบ skip A4 รายงานแยก ไม่เข้า fit** เพราะ k ต่าง จะบิดเบือนความชัน) —
+  เฉพาะรอบ normal A1/A2/A3; **รอบ skip A4 รายงานแยก ไม่เข้า fit** เพราะ k ต่าง) —
   slope ต้องอยู่ใน **1.25 ± 0.1 s/วัน** ผิด = **MISMATCH จริง → หยุดรายงาน**
-- **ฟอร์ม:** ค่าตัดแกน (intercept) ที่ fit ได้ — ใน **[−0.1, +0.1]** = **FORM1** · ใน **[+0.4, +0.6]** = **FORM2** ·
-  นอกนั้น/คาบเกี่ยว (0.1–0.4 หรือเกิน 0.6/ต่ำกว่า −0.1) = **INDISTINGUISHABLE** (ผลที่ยอมรับได้ ไม่ใช่ความล้มเหลว) ·
+- **ฟอร์ม (ตัวเลขคงเดิมทุกตัว — มติรอบ A):** จุด intercept อยู่ใน **[−0.1, +0.1]** = **FORM1** · ใน
+  **[+0.4, +0.6]** = **FORM2** · จุด**นอกทั้งสอง window และไม่ใช่กรณีคาบเกี่ยว** = **UNRESOLVED_OFFSET**
+  (รายงานค่า intercept + ช่วงความเชื่อมั่นถ้ามี — เชิงประมาณ ±1.96×SE ของ intercept จาก residual ของ fit เดิม)
+  · **INDISTINGUISHABLE สงวนไว้เฉพาะกรณีคาบเกี่ยว/ข้อมูลไม่พอแยก** (ช่วงความเชื่อมั่นครอบ/ทับ**ทั้งสอง**
+  window) — ทั้ง UNRESOLVED_OFFSET และ INDISTINGUISHABLE เป็น**ผลที่ยอมรับได้ ไม่ใช่ความล้มเหลว** ·
   **ห้าม refit โมเดล ห้ามเพิ่มพารามิเตอร์แอนิเมชันเข้าสูตรเอง**
-- **ส่วนเกินที่อธิบายไม่ได้:** residual รายรัน = `measured − (slope×N + intercept)` รายงานเป็นค่าแยก (พร้อมช่วง
-  event ที่เกิด เมื่อวิเคราะห์ได้) — **ไม่ใช้ตัดสินฟอร์ม**
-- **เครื่องมือ:** `python tools\time_v2a_fit.py <ndjson ของรอบ normal ทุกไฟล์>` — ตรวจโครงรายรัน → fit รวม →
-  พิมพ์ slope/intercept/verdict/residual รายรัน · exit code: **0** = fit สำเร็จ · **3** = slope MISMATCH (หยุด
-  รายงาน) · **1** = ไม่มี run ที่ใช้ได้ · **2** = args/ไฟล์ผิด · ห้ามแก้ `time_v2a_analyze.py`
+- **ส่วนเกินที่อธิบายไม่ได้:** residual รายรัน = `measured − (slope×N + intercept)` รายงานเป็นค่าแยก — **ไม่ใช้
+  ตัดสินฟอร์ม**
+- **รายงาน observational รายช่วง (มติรอบ A ข้อ A2 — ไม่ใช้ตัดสินฟอร์ม):** ต่อรันและต่อ N รายงาน
+  initial (work_start→pause_end#1) · day ต่อวัน (mean/min/max) · final (day_tick สุดท้าย→pause_end สุดท้าย) ·
+  tail (→work_end) พร้อมบอกว่าแต่ละช่วงขึ้นกับ N หรือคงที่ — **OBSERVED เท่านั้น ห้ามใส่คำอธิบาย "แอนิเมชัน"
+  เว้นแต่มีหลักฐานในไฟล์**
+- **pilot:** A1-r1 (MISMATCH ตาม [TOL] เดิม — `pilot-a1r1-analysis.md`) **ไม่นับเป็นผลยืนยัน ⇒ กันออกจาก fit
+  ด้วย `--exclude <path>` เสมอ** (ข้อความมติ 2026-10-29 ข้อ 2)
+- **เครื่องมือ:** `python tools\time_v2a_fit.py <ndjson รอบ normal ทุกไฟล์> [--exclude <pilot>]` — ตรวจโครงรายรัน →
+  fit รวม → พิมพ์ slope/intercept/CI/verdict/residual/segments รายรัน · exit code: **0** = fit สำเร็จ (รวม
+  INDISTINGUISHABLE/UNRESOLVED_OFFSET — ยอมรับได้) · **3** = slope MISMATCH (หยุดรายงาน) · **1** = ไม่มี run
+  ใช้ได้/จุดไม่พอ fit · **2** = args/ไฟล์ผิด · ห้ามแก้ `time_v2a_analyze.py`
