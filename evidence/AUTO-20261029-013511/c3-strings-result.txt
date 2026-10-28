@@ -1,0 +1,14 @@
+#Strings heap: offset=0x12650 size=46484 (file src/LongYinCoop/bin/Release/LongYinCoop.dll)
+  TimeV2aObs: FOUND
+  TimeV2aEvent: FOUND
+  TimeV2aDetector: FOUND
+  TimeV2aGate: FOUND
+  TimeV2aNdjsonWriter: FOUND
+  TimeV2aSampler: FOUND
+  S2GuestDecoder: FOUND
+  S2OverlayClient: FOUND
+  S2OverlayRenderModel: FOUND
+  S2OverlayService: FOUND
+  S2SetPrefGate: FOUND
+  S2WriteGuardHook: FOUND
+RESULT: ALL 12 TYPES FOUND
