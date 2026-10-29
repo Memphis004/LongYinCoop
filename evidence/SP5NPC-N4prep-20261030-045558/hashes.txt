@@ -1,0 +1,2 @@
+ba1e1dd14e0cbeaede4bbd57af55477bf45639638a33ad40a2c927f99abeefa0 *LongYinCoop.dll
+a96a4a38e99c07f768a7d538a23018cc7164be9263b703f9f08390242b8ce132 *LongYinCoop.pdb

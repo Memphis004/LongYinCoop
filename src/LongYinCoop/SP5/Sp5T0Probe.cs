@@ -28,6 +28,11 @@ namespace LongYinCoop
     /// ขอบเขต log-only (บังคับ): ห้ามเขียน state เกม/args/__result, ห้าม skip original, ห้าม raw offset
     /// (identity อ่านจาก property Pointer ของ interop wrapper เท่านั้น), hook body ครอบ try/catch กลืนหมด
     ///
+    /// T2 census fields (N4-prep มติ 2026-10-30 ทาง (ข)) — worldcount เพิ่ม 4 field อ่านอย่างเดียว:
+    ///   zhangmen (ForceData.leader 30 สำนัก) · loveable (HeroData.loveAble + GDC.loveableSpeHeroList.Count)
+    ///   · teacher (HeroData.Teacher ของสมาชิกสำนัก เทียบ leader ของสำนักตัวเอง) · birth (SGC.BirthSetting)
+    ///   — ไม่เปลี่ยนตรรกะ/ตัวนับ/การจำแนกเดิมใด ๆ
+    ///
 /// สถานะที่ rev 13 กำหนดให้คง UNKNOWN:
 ///   - inventoryStability ภายใน window (audit ณ จุดตรวจ = point-in-time เท่านั้น) ⇒ #C.ok / E1 / E2 คง UNKNOWN
 ///   - invocation linkage ด้วย thread-local LIFO (iid) — กลไกผ่าน harness offline แล้ว (Sp5T0LinkageHarness
@@ -87,6 +92,12 @@ namespace LongYinCoop
         private static long _lastWid, _lastHidH, _lastHidT;
         private static int[][] _lastHeroNumArrays;
         private static int _lastSpeDb = -1;
+
+        // T2 census fields (N4-prep มติ 2026-10-30 ทาง (ข)) — snapshot ล่าสุดเข้า summary.json; อ่านอย่างเดียวเท่านั้น
+        private static int _lastZhangmen = -1, _lastZhangmenInSpe = -1;
+        private static int _lastLoveableHero = -1, _lastLoveableList = -1;
+        private static int _lastTeacherNonZero = -1, _lastTeacherEqLeader = -1;
+        private static int _lastBirthCount = -1;
 
         // fingerprint ของ patch.audit ล่าสุดต่อ overload — เทียบระหว่างจุดตรวจ (stable/changed, rev 12–13)
         private static readonly string[] _lastAuditFp = new string[3];
@@ -1013,6 +1024,30 @@ namespace LongYinCoop
                 _haveIdentity = true;
                 _lastWid = wid; _lastHidH = hidH; _lastHidT = hidT;
 
+                // ===== T2 census fields (N4-prep มติ 2026-10-30 ทาง (ข)) — อ่านอย่างเดียว ไม่แตะตรรกะเดิม =====
+                // 掌门: ForceData.leader (int field = heroID) อ่านตรง — ไม่เรียก GetLeader()
+                Il2CppSystem.Collections.Generic.List<ForceData> forces = wd.Forces;
+                int[] leaderIds = new int[ForceBins];
+                int zmCount = 0, zmInSpe = 0;
+                StringBuilder zmIds = new StringBuilder("[");
+                for (int fi = 0; fi < ForceBins; fi++)
+                {
+                    int lid = 0;
+                    if (forces != null && fi < forces.Count)
+                    {
+                        ForceData f = forces[fi];
+                        if (f != null) lid = f.leader;
+                    }
+                    leaderIds[fi] = lid;
+                    if (fi > 0) zmIds.Append(',');
+                    zmIds.Append(lid);
+                    if (lid != 0) { zmCount++; if (lid >= 1 && lid <= SpeIdMax) zmInSpe++; }
+                }
+                zmIds.Append(']');
+
+                int loveableCount = 0, teacherNonZero = 0, teacherEqLeader = 0;
+                HashSet<int> teacherVals = new HashSet<int>();
+
                 int[] hist = new int[8];   // 0 protag 1 spe 2 sect 3 wanderer 4 f-2 5 temp 6 tempPlot 7 other
                 int[] perForce = new int[ForceBins];
                 int speOutOfRange = 0;
@@ -1024,6 +1059,15 @@ namespace LongYinCoop
                     if (hd == null) { hist[7]++; continue; }
                     int cls = Classify(hd, perForce, ref speOutOfRange);
                     hist[cls]++;
+                    if (hd.loveAble) loveableCount++;                  // LoveableSpeHero (T2)
+                    if (cls == 2)                                       // สมาชิกสำนักเท่านั้น
+                    {
+                        int tch = hd.Teacher;                           // heroID ของอาจารย์ (JoinForce setTeacherToLeader)
+                        if (tch != 0) teacherNonZero++;
+                        if (hd.belongForceID >= 0 && hd.belongForceID < ForceBins &&
+                            leaderIds[hd.belongForceID] == tch) teacherEqLeader++;
+                        if (tch > 0 && teacherVals.Count < 64) teacherVals.Add(tch);
+                    }
                 }
 
                 int t = temps != null ? temps.Count : 0;
@@ -1059,6 +1103,53 @@ namespace LongYinCoop
                 sb.Append(']');
                 sb.Append(",\"tempMatch\":").Append(tempMatch);
                 sb.Append(",\"tempOther\":").Append(tempOther);
+
+                // loveableSpeHeroList (GameDataController) + BirthSetting (StartGameSettingController) — อ่านอย่างเดียว
+                int loveListCount = -1;
+                try
+                {
+                    GameDataController gdc2 = GameDataController.Instance;
+                    Il2CppSystem.Collections.Generic.List<string> lsl = gdc2 != null ? gdc2.loveableSpeHeroList : null;
+                    loveListCount = lsl != null ? lsl.Count : -1;
+                }
+                catch { Swallow(); Interlocked.Increment(ref _readfail); }
+                int birthCount = -1;
+                StringBuilder birthVals = null;
+                try
+                {
+                    StartGameSettingController sgc = StartGameSettingController.Instance;
+                    Il2CppSystem.Collections.Generic.List<int> bs = sgc != null ? sgc.BirthSetting : null;
+                    if (bs != null)
+                    {
+                        birthCount = bs.Count;
+                        birthVals = new StringBuilder("[");
+                        for (int i = 0; i < bs.Count; i++)
+                        {
+                            if (i > 0) birthVals.Append(',');
+                            birthVals.Append(bs[i]);
+                        }
+                        birthVals.Append(']');
+                    }
+                }
+                catch { Swallow(); Interlocked.Increment(ref _readfail); }
+
+                List<int> tvs = new List<int>(teacherVals);
+                tvs.Sort();
+                sb.Append(",\"zhangmen\":{\"count\":").Append(zmCount)
+                   .Append(",\"inSpe\":").Append(zmInSpe)
+                   .Append(",\"leaderIds\":").Append(zmIds).Append('}');
+                sb.Append(",\"loveable\":{\"heroCount\":").Append(loveableCount)
+                   .Append(",\"listCount\":").Append(loveListCount).Append('}');
+                sb.Append(",\"teacher\":{\"membersWithTeacher\":").Append(teacherNonZero)
+                   .Append(",\"eqLeader\":").Append(teacherEqLeader)
+                   .Append(",\"distinct\":[").Append(string.Join(",", tvs.ToArray())).Append("]}");
+                sb.Append(",\"birth\":{\"count\":").Append(birthCount).Append(",\"vals\":");
+                if (birthVals != null) sb.Append(birthVals); else sb.Append("null");
+                sb.Append('}');
+                _lastZhangmen = zmCount; _lastZhangmenInSpe = zmInSpe;
+                _lastLoveableHero = loveableCount; _lastLoveableList = loveListCount;
+                _lastTeacherNonZero = teacherNonZero; _lastTeacherEqLeader = teacherEqLeader;
+                _lastBirthCount = birthCount;
                 Commit(sb, true);
             }
             catch
@@ -1451,6 +1542,13 @@ namespace LongYinCoop
                 sb.Append(']');
             }
             sb.Append(",\n");
+            sb.Append("  \"censusLast\": {\"zhangmen\": ").Append(_lastZhangmen)
+               .Append(", \"zhangmenInSpe\": ").Append(_lastZhangmenInSpe)
+               .Append(", \"loveableHero\": ").Append(_lastLoveableHero)
+               .Append(", \"loveableList\": ").Append(_lastLoveableList)
+               .Append(", \"teacherNonZero\": ").Append(_lastTeacherNonZero)
+               .Append(", \"teacherEqLeader\": ").Append(_lastTeacherEqLeader)
+               .Append(", \"birthCount\": ").Append(_lastBirthCount).Append("},\n");
             sb.Append("  \"auditFingerprint\": {\"A\": ").Append(JsOr(_lastAuditFp[0])).Append(", \"B\": ")
                .Append(JsOr(_lastAuditFp[1])).Append(", \"C\": ").Append(JsOr(_lastAuditFp[2])).Append("},\n");
             sb.Append("  \"unknown\": {\n");
