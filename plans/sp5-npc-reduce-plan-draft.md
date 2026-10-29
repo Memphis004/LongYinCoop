@@ -7,6 +7,12 @@
   **N2 = เสร็จแล้ว** (hooks G1/G4/G5 + เทสต์ · artifact `2b59e46c…` ·
   `evidence/SP5NPC-N2-20261030-033852/provenance.md` — **ยังไม่ deploy ทั้งคู่** · พารามิเตอร์
   scale/rounding + มติระดับ/refill/key ที่ bracket ยังไม่ได้เลือก = คงรอ ดู decisions-pending §7.1) ·
+  **N3 = เสร็จแล้ว 2026-10-30** (append — ตัวเลข artifact N1/N2 ข้างบนคงตามจริง ยังไม่ deploy ถาวร;
+  N3 deploy artifact N2 `2b59e46c…` ชั่วคราวแล้ว rollback ครบ) — T1 ผ่านครบ ×3 รอบ (census
+  h=883 ตรง T0 ทุกประเภททุกรอบ · gate install สำเร็จ ×3 · ไม่มี patch นอกชุด · SaveSlot* ไม่ถูกเขียน) ·
+  rollback ครบ (DLL กลับ `6a94abb5`, cfg `976ccfb9` เป๊ะ, เซฟ EXACT 0/0/0, net.cfg ไม่แตะ) ·
+  tag `stage-N3` · หลักฐาน `evidence/SP5NPC-N3-20261030-035500/session-record.md` ·
+  ขั้นถัดไป = N4 (T2–T4, npcPolicy=light) — คำขอ `plans/sp5-npc-n4-approval-request.md` (ร่าง ยังไม่ดำเนินการ) ·
   ตัวเอกอ้างอิง: `evidence/SP5design-20261027/sp5-design-report.md` (design-only, §3–§8) + ผลรอบจริง
   `evidence/SP5T0-run-20261030-012502/round-report.md` (T0 ของ design §6.2 รันแล้ว)
 - **ห้ามเสนอ/ตัดสินเลือกระดับ L1/L2/L3 จนกว่าผู้ใช้สั่ง** (มติ 2026-10-30) — **มติถัดมา (2026-10-30):
@@ -118,7 +124,7 @@ raw offset · census PROTECTED ขาด/ผิดตัว · soft-lock/crash �
 |---|---|---|---|---|
 | N1 (offline) | งานย่อย §2 ครบ + predicate/parser + เทสต์ offline | ไม่ | ไม่ | ไม่ |
 | N2 (offline) | **เสร็จแล้ว 2026-10-30** — implement hooks G1/G4/G5 (+negative tests; **G2 ไม่ implement — ยังไม่อนุมัติ**) · artifact `2b59e46c…` · C# 693/0 · พารามิเตอร์/ข้อจำกัด = `evidence/SP5NPC-N2-20261030-033852/provenance.md` | ไม่ (ยังไม่ deploy) | ไม่ | ไม่ |
-| N3 (runtime) | T1 normal mode (gate off) | ใช่ (+สำรอง .prev) | ใช่ | ใช่ (ผู้ใช้เปิดเอง) |
+| N3 (runtime) | **เสร็จแล้ว 2026-10-30 (append)** — T1 normal mode (gate off) ผ่านครบ ×3 รอบ · ผลรายเกณฑ์+คืนสภาพครบ = `evidence/SP5NPC-N3-20261030-035500/session-record.md` · tag `stage-N3` | ใช่ (+สำรอง .prev) | ใช่ | ใช่ (ผู้ใช้เปิดเอง ×3) |
 | N4 (runtime) | T2–T4 ที่ระดับที่อนุมัติ | ใช่ | ใช่ | ใช่ |
 | N5 (runtime) | T5–T7 (ยาว — อาจแบ่งหลาย session) | ใช่ | ใช่ | ใช่ |
 | N6 (runtime) | T8 + T10 (T9 เมื่อมี guest/VPN) | ใช่ | ใช่ | ใช่ |
@@ -142,3 +148,20 @@ raw offset · census PROTECTED ขาด/ผิดตัว · soft-lock/crash �
 > ยังรอ · ข้อ 5 ยังรอ (T9 ไม่อยู่ใน N3)
 
 **หยุดหลังส่งแผน — ห้ามเขียนโค้ด implement/ห้าม deploy/ห้ามเปิดเกมจนกว่าอนุมัติแผนนี้ + วลีสั่งแยกต่อ stage**
+
+> **สถานะ stage N3 = ปิดแล้ว 2026-10-30 (append — ตามมติผู้ใช้รับรายงาน T1 ผ่านครบ ×3 รอบ):**
+> รันจริง label `SP5NPC-N3-20261030-035500` (วลี `เริ่ม N3 session พร้อม Sp5T0` — เปิด census เชิงตัวเลข
+> ตามตัวเลือกในคำขอ) · deploy artifact N2 `2b59e46c…`/`857cd1b8…` (สำรอง `.prev-6a94abb5-20261030-035500`)
+> · split `--expected-baseline 20261028-071340` ตรง 0/0/0 · เกมเปิด ×3 โดยผู้ใช้ (pid 30584/35688/43836)
+> · **T1 = PASS ทุกเกณฑ์ทุกรอบ:** gate install สำเร็จ ×3 (ไม่มี install ล้ม) · probe 7 patches +
+> `outside=0 unattributed=0 ownedLeft=0 errors=0` ×3 · census `h=883` ตรง baseline T0 **ทุกประเภท
+> ทุกรอบ** (protag 1 / spe 170 / sect 562 / wanderer 150 / f2 0) · heroNum Σ=88 ไม่ถูกย่อ · `h` นิ่ง
+> ตลอด (ไม่มีการลบหลังสร้าง) · TempHeros 81/79/84 เทียบ T0=87 = RNG worldgen · factory เฉพาะ overload
+> C (963/961/966 · A/B=0) · `SaveSlot*` ไม่ถูกเขียนเลย · hash เกม/Mods ตรงทุกจุดวัด · คืนสภาพครบ:
+> restore EXACT 0/0/0 (57 ไฟล์ `df8e5a11beed` + leftovers none) · DLL กลับ `6a94abb5`/`856d3bed` ·
+> `Sp5T0=false` (cfg กลับ `976ccfb9` เป๊ะ) · `net.cfg` ไม่ถูกแตะ (ไม่มี key `npcPolicy` = off ตลอด
+> stage ตามมติ) · **ฐานเทียบ N4 ที่ได้เพิ่ม:** Heros census = deterministic ตามโควตา (883 เท่ากัน 4 จุด
+> ข้อมูล T0+N3×3) · TempHeros = ตัวแปร RNG (79–87) ไม่ใช่ตัวชี้วัด gate · tag `stage-N3` (annotated,
+> mod repo) สร้างตาม convention `stage-<stage-id>` · ขั้นถัดไป = **N4 (T2–T4, npcPolicy=light)** —
+> คำขอ `plans/sp5-npc-n4-approval-request.md` (ร่างแล้ว **ยังไม่ดำเนินการ** รอวลีสั่งแยก) · N5–N6
+> ยังไม่อนุมัติ
