@@ -33,6 +33,15 @@ namespace LongYinCoop
     ///   · teacher (HeroData.Teacher ของสมาชิกสำนัก เทียบ leader ของสำนักตัวเอง) · birth (SGC.BirthSetting)
     ///   — ไม่เปลี่ยนตรรกะ/ตัวนับ/การจำแนกเดิมใด ๆ
     ///
+    /// T2 loveable ฉบับใหม่ + จุดอ่าน heroNum (N4-follow-up มติ 2026-10-30 อนุมัติตามร่าง
+    /// plans/sp5-npc-n4-followup-draft.md) — อ่านอย่างเดียวทั้งหมด:
+    ///   loveable เพิ่ม listPresent/listMissing (กติกา match ชื่อใน Sp5T0NameMatch — pure,
+    ///   รอบแรกที่ใช้บนเกม = การยืนยันกติกา) · heroCount คงเก็บเป็นข้อมูลอ้างอิงเท่านั้น
+    ///   (flag ≠ สมาชิก list — RUNTIME 744/883 และ 631/632) · heroNum.window = one-shot ณ
+    ///   GenDataC call แรก (ใน window ของ GenerateHero — คาด Σ=50) · worldcount ที่ sng.end
+    ///   เพิ่มบล็อก heroNum (post-restore — คาด Σ=88 · ห้ามใช้ genhero.end เพราะ postfix ของ
+    ///   probe รันก่อน finalizer ของ gate)
+    ///
 /// สถานะที่ rev 13 กำหนดให้คง UNKNOWN:
 ///   - inventoryStability ภายใน window (audit ณ จุดตรวจ = point-in-time เท่านั้น) ⇒ #C.ok / E1 / E2 คง UNKNOWN
 ///   - invocation linkage ด้วย thread-local LIFO (iid) — กลไกผ่าน harness offline แล้ว (Sp5T0LinkageHarness
@@ -98,6 +107,12 @@ namespace LongYinCoop
         private static int _lastLoveableHero = -1, _lastLoveableList = -1;
         private static int _lastTeacherNonZero = -1, _lastTeacherEqLeader = -1;
         private static int _lastBirthCount = -1;
+
+        // T2 loveable ฉบับใหม่ + heroNum read points (N4-follow-up มติ 2026-10-30 อนุมัติตามร่าง) — อ่านอย่างเดียว
+        private static int _lastLoveablePresent = -1, _lastLoveableMissing = -1;
+        private static bool _heroNumWindowEmitted;        // one-shot guard ของ heroNum.window ต่อ session
+        private static long _heroNumWindowSum = -1;       // Σ ตาราง heroNum ณ in-window (คาด 50)
+        private static long _heroNumPostRestoreSum = -1;  // Σ ตาราง heroNum ณ sng.end (คาด 88)
 
         // fingerprint ของ patch.audit ล่าสุดต่อ overload — เทียบระหว่างจุดตรวจ (stable/changed, rev 12–13)
         private static readonly string[] _lastAuditFp = new string[3];
@@ -651,6 +666,7 @@ namespace LongYinCoop
                 sb.Append(",\"argIsRandomEnemy\":").Append(isRandomEnemy ? "true" : "false");
                 sb.Append(",\"outSideForce\":").Append(outSideForce ? "true" : "false");
                 Commit(sb, false);
+                EmitHeroNumWindowOnce();   // N4-follow-up ร่าง 2 — one-shot ณ call แรก (ใน window ⇒ คาด Σ=50)
                 Interlocked.Increment(ref _ovCalls[2]);
             }
             catch { Swallow(); }
@@ -985,6 +1001,71 @@ namespace LongYinCoop
         }
 
         // =====================================================================
+        // heroNum.window — N4-follow-up ร่าง 2 (มติ 2026-10-30): one-shot ต่อ session ณ
+        // GenDataC call แรก — จุดอ่าน "ใน window" ของ GenerateHero (gate G1 ย่อที่ prefix
+        // ของ GenerateHero แล้ว และ finalizer ยังไม่คืน) ⇒ คาด Σ=50 · deterministic จาก
+        // nesting (method ลูกภายใน original เสมอ) · ReadHeroNum เดิม (pre-window) คงไว้ครบ
+        // =====================================================================
+
+        private static void EmitHeroNumWindowOnce()
+        {
+            if (_heroNumWindowEmitted) return;
+            _heroNumWindowEmitted = true;
+            try
+            {
+                StringBuilder sb = BeginEvent("heroNum.window", true);
+                GameDataController gdc = GameDataController.Instance;
+                if (gdc == null)
+                {
+                    sb.Append(",\"readfail\":\"GameDataController.Instance null\"");
+                    Commit(sb, true);
+                    Interlocked.Increment(ref _readfail);
+                    return;
+                }
+                Il2CppSystem.Collections.Generic.List<ForceLevelData> lvls = gdc.forceLevelData;
+                int n = lvls != null ? lvls.Count : 0;
+                long sum = 0;
+                int entries = 0;
+                sb.Append(",\"force\":[");
+                for (int i = 0; i < n; i++)
+                {
+                    if (i > 0) sb.Append(',');
+                    ForceLevelData e = lvls[i];
+                    if (e == null) { sb.Append("null"); continue; }
+                    Il2CppSystem.Collections.Generic.List<int> heroNum = e.heroNum;
+                    int m = heroNum != null ? heroNum.Count : 0;
+                    sb.Append('[');
+                    for (int j = 0; j < m; j++)
+                    {
+                        if (j > 0) sb.Append(',');
+                        int v = heroNum[j];
+                        sum += v;
+                        sb.Append(v);
+                    }
+                    sb.Append(']');
+                    entries += m;
+                }
+                sb.Append(']');
+                sb.Append(",\"forces\":").Append(n);
+                sb.Append(",\"entries\":").Append(entries);
+                sb.Append(",\"sum\":").Append(sum);
+                sb.Append(",\"note\":\"in-window ณ GenDataC call แรก (มติ N4-follow-up ร่าง 2) — คาด Σ=50\"");
+                AppendIdentity(sb);
+                Commit(sb, true);
+                _heroNumWindowSum = sum;
+            }
+            catch
+            {
+                // JSON ครึ่งบรรทัดห้ามปล่อยลงไฟล์ — เขียนบรรทัดใหม่แทน (readfail เป็น field ของ event เดิม)
+                Swallow();
+                Interlocked.Increment(ref _readfail);
+                StringBuilder rb = BeginEvent("heroNum.window", true);
+                rb.Append(",\"readfail\":\"exception\"");
+                Commit(rb, true);
+            }
+        }
+
+        // =====================================================================
         // worldcount — snapshot ที่ boundary (§2.2): นับ + histogram 8 คลาส + perForce + identity
         // =====================================================================
 
@@ -1059,7 +1140,10 @@ namespace LongYinCoop
                     if (hd == null) { hist[7]++; continue; }
                     int cls = Classify(hd, perForce, ref speOutOfRange);
                     hist[cls]++;
-                    if (hd.loveAble) loveableCount++;                  // LoveableSpeHero (T2)
+                    // N4-follow-up: heroCount = ข้อมูลอ้างอิงเท่านั้น — flag `loveAble` เป็น true แทบทุก hero
+                    // (RUNTIME 744/883 ในโน้ต area-notes.md:170 · 631/632 ใน N4 รอบ 1) ⇒ ไม่ใช่การเป็น
+                    // สมาชิก loveableSpeHeroList — T2 ตัดสินที่ listMatch ด้านล่าง ไม่ใช่ flag นี้
+                    if (hd.loveAble) loveableCount++;
                     if (cls == 2)                                       // สมาชิกสำนักเท่านั้น
                     {
                         int tch = hd.Teacher;                           // heroID ของอาจารย์ (JoinForce setTeacherToLeader)
@@ -1068,6 +1152,27 @@ namespace LongYinCoop
                             leaderIds[hd.belongForceID] == tch) teacherEqLeader++;
                         if (tch > 0 && teacherVals.Count < 64) teacherVals.Add(tch);
                     }
+                }
+
+                // N4-follow-up ร่าง 1 (มติ 2026-10-30): set ชื่อ hero สำหรับตรวจ loveableSpeHeroList —
+                // loop แยกต่างหาก (ไม่แตะ loop hist เดิม) · กติกา match อยู่ใน Sp5T0NameMatch (pure)
+                HashSet<string> loveGiven = new HashSet<string>(StringComparer.Ordinal);
+                HashSet<string> loveFull = new HashSet<string>(StringComparer.Ordinal);
+                for (int i = 0; i < h; i++)
+                {
+                    HeroData hd = heros[i];
+                    if (hd == null) continue;
+                    try
+                    {
+                        string gn = hd.heroName;
+                        if (!string.IsNullOrEmpty(gn))
+                        {
+                            loveGiven.Add(gn);
+                            string fn = hd.heroFamilyName;
+                            loveFull.Add((fn ?? "") + gn);
+                        }
+                    }
+                    catch { Swallow(); Interlocked.Increment(ref _readfail); }
                 }
 
                 int t = temps != null ? temps.Count : 0;
@@ -1106,11 +1211,17 @@ namespace LongYinCoop
 
                 // loveableSpeHeroList (GameDataController) + BirthSetting (StartGameSettingController) — อ่านอย่างเดียว
                 int loveListCount = -1;
+                List<string> loveNames = null;
                 try
                 {
                     GameDataController gdc2 = GameDataController.Instance;
                     Il2CppSystem.Collections.Generic.List<string> lsl = gdc2 != null ? gdc2.loveableSpeHeroList : null;
                     loveListCount = lsl != null ? lsl.Count : -1;
+                    if (lsl != null)
+                    {
+                        loveNames = new List<string>(lsl.Count);
+                        for (int i = 0; i < lsl.Count; i++) loveNames.Add(lsl[i]);
+                    }
                 }
                 catch { Swallow(); Interlocked.Increment(ref _readfail); }
                 int birthCount = -1;
@@ -1138,16 +1249,90 @@ namespace LongYinCoop
                 sb.Append(",\"zhangmen\":{\"count\":").Append(zmCount)
                    .Append(",\"inSpe\":").Append(zmInSpe)
                    .Append(",\"leaderIds\":").Append(zmIds).Append('}');
+                // N4-follow-up ร่าง 1: T2 loveable = listCount ครบ + ทุกชื่อใน list มี HeroData ใน Heros
+                // (มติ 2026-10-30 — ชื่อที่ match ไม่ได้ต้อง log ออกมา; -1 = อ่านไม่ได้ ตาม convention)
+                int lovePresent = -1, loveMissingCount = -1;
+                List<string> loveMissing = null;
+                bool loveMissingTrunc = false;
+                if (loveNames != null)
+                {
+                    Sp5T0NameMatch.MatchResult mr = Sp5T0NameMatch.Match(loveNames, loveGiven, loveFull);
+                    lovePresent = mr.Present;
+                    loveMissingCount = mr.Missing.Count;   // จำนวนที่ลง log — เกิน cap มี listMissingTruncated แยก
+                    loveMissing = mr.Missing;
+                    loveMissingTrunc = mr.MissingTruncated;
+                }
                 sb.Append(",\"loveable\":{\"heroCount\":").Append(loveableCount)
-                   .Append(",\"listCount\":").Append(loveListCount).Append('}');
+                   .Append(",\"listCount\":").Append(loveListCount)
+                   .Append(",\"listPresent\":").Append(lovePresent)
+                   .Append(",\"listMissing\":[");
+                if (loveMissing != null)
+                    for (int i = 0; i < loveMissing.Count; i++)
+                    {
+                        if (i > 0) sb.Append(',');
+                        sb.Append(loveMissing[i] == null ? "null" : "\"" + Escape(loveMissing[i]) + "\"");
+                    }
+                sb.Append("],\"listMissingTruncated\":").Append(loveMissingTrunc ? "true" : "false")
+                   .Append('}');
                 sb.Append(",\"teacher\":{\"membersWithTeacher\":").Append(teacherNonZero)
                    .Append(",\"eqLeader\":").Append(teacherEqLeader)
                    .Append(",\"distinct\":[").Append(string.Join(",", tvs.ToArray())).Append("]}");
                 sb.Append(",\"birth\":{\"count\":").Append(birthCount).Append(",\"vals\":");
                 if (birthVals != null) sb.Append(birthVals); else sb.Append("null");
                 sb.Append('}');
+
+                // N4-follow-up ร่าง 2: จุดอ่าน post-restore เฉพาะ sng.end (มติ 2026-10-30) — gate G1 ไม่
+                // patch StartNewGame ⇒ ณ จุดนี้ GenerateHero (รวม finalizer restore) คืนไปแล้วทั้งหมด
+                // ⇒ คาด Σ=88 · **ห้ามใช้ genhero.end เป็น post-restore** (postfix ของ probe รันก่อน
+                // finalizer ของ gate ตาม pipeline Harmony — จุดนั้นจะยังเห็น Σ=50)
+                if (at == "sng.end")
+                {
+                    int[][] postForce = null;
+                    long postSum = -1;
+                    string postFail = null;
+                    try
+                    {
+                        GameDataController gdc3 = GameDataController.Instance;
+                        Il2CppSystem.Collections.Generic.List<ForceLevelData> lv = gdc3 != null ? gdc3.forceLevelData : null;
+                        if (gdc3 == null) postFail = "GameDataController.Instance null";
+                        else if (lv == null) postFail = "forceLevelData null";
+                        else
+                        {
+                            postForce = new int[lv.Count][];
+                            postSum = 0;
+                            for (int i = 0; i < lv.Count; i++)
+                            {
+                                ForceLevelData e = lv[i];
+                                Il2CppSystem.Collections.Generic.List<int> hn = e != null ? e.heroNum : null;
+                                int m = hn != null ? hn.Count : 0;
+                                int[] copy = new int[m];   // copy อ่านอย่างเดียว (§1.3) — ไม่เขียนกลับ field
+                                for (int j = 0; j < m; j++) { copy[j] = hn[j]; postSum += copy[j]; }
+                                postForce[i] = copy;
+                            }
+                        }
+                    }
+                    catch { Swallow(); Interlocked.Increment(ref _readfail); postForce = null; postSum = -1; postFail = "exception"; }
+                    sb.Append(",\"heroNum\":{\"force\":");
+                    if (postForce == null) sb.Append("null");
+                    else
+                    {
+                        sb.Append('[');
+                        for (int i = 0; i < postForce.Length; i++)
+                        {
+                            if (i > 0) sb.Append(',');
+                            sb.Append('[').Append(string.Join(",", Array.ConvertAll(postForce[i], x => x.ToString()))).Append(']');
+                        }
+                        sb.Append(']');
+                    }
+                    sb.Append(",\"sum\":").Append(postSum);
+                    if (postFail != null) sb.Append(",\"readfail\":\"").Append(postFail).Append('"');
+                    sb.Append(",\"note\":\"post-restore ณ sng.end (มติ N4-follow-up ร่าง 2) — คาด Σ=88\"}");
+                    if (postSum >= 0) _heroNumPostRestoreSum = postSum;
+                }
+
                 _lastZhangmen = zmCount; _lastZhangmenInSpe = zmInSpe;
                 _lastLoveableHero = loveableCount; _lastLoveableList = loveListCount;
+                _lastLoveablePresent = lovePresent; _lastLoveableMissing = loveMissingCount;
                 _lastTeacherNonZero = teacherNonZero; _lastTeacherEqLeader = teacherEqLeader;
                 _lastBirthCount = birthCount;
                 Commit(sb, true);
@@ -1546,9 +1731,13 @@ namespace LongYinCoop
                .Append(", \"zhangmenInSpe\": ").Append(_lastZhangmenInSpe)
                .Append(", \"loveableHero\": ").Append(_lastLoveableHero)
                .Append(", \"loveableList\": ").Append(_lastLoveableList)
+               .Append(", \"listPresent\": ").Append(_lastLoveablePresent)
+               .Append(", \"listMissingCount\": ").Append(_lastLoveableMissing)
                .Append(", \"teacherNonZero\": ").Append(_lastTeacherNonZero)
                .Append(", \"teacherEqLeader\": ").Append(_lastTeacherEqLeader)
                .Append(", \"birthCount\": ").Append(_lastBirthCount).Append("},\n");
+            sb.Append("  \"heroNumWindowSum\": ").Append(_heroNumWindowSum).Append(",\n");
+            sb.Append("  \"heroNumPostRestoreSum\": ").Append(_heroNumPostRestoreSum).Append(",\n");
             sb.Append("  \"auditFingerprint\": {\"A\": ").Append(JsOr(_lastAuditFp[0])).Append(", \"B\": ")
                .Append(JsOr(_lastAuditFp[1])).Append(", \"C\": ").Append(JsOr(_lastAuditFp[2])).Append("},\n");
             sb.Append("  \"unknown\": {\n");
