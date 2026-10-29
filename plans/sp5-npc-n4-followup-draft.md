@@ -78,3 +78,18 @@ Release 0W/0E determinism ×2 · provenance ใหม่ · เทสต์ช�
    N4prep) หรือแยกก็ได้ตามสั่ง
 4. ทางปิด UNKNOWN "ใครเขียน flag true" (ถ้ายังต้องการ): disassembly ของ
    `SetHeroLoveAble`/`GenerateHeroData` = งาน RE อนุมัติแยก
+
+> **สถานะมติ 2026-10-30 (append — ข้อความเดิมคงไว้): อนุมัติทั้ง 2 ร่างตามร่าง และทำเสร็จแล้ว
+> (offline — ไม่ deploy).** มติผู้ใช้: ร่าง 1 = listCount=57 + ทุกชื่อใน list 57 ต้องมี HeroData
+> ใน Heros match ด้วย heroName (fallback family+given) · log ผล match รายชื่อ (ชื่อที่ match
+> ไม่ได้ต้อง log ออกมา) · กติกา match ยังไม่ RUNTIME-confirmed ⇒ **รอบแรกที่ใช้ = การยืนยัน
+> กติกา** · เลิกใช้ heroCount ตัดสิน (เก็บเป็นข้อมูลอ้างอิง) · ร่าง 2 = in-window Σ=50 ที่
+> GenDataC call แรก / post-restore Σ=88 ที่ sng.end · ห้ามใช้ genhero.end เป็น post-restore ·
+> งานโค้ด Sp5T0Probe.cs log-only ห้ามเปลี่ยนตรรกะ gate/hook อื่น ห้าม raw offset · แก้ comment
+> เก่าให้ตรงความจริง · build Release determinism ×2 + provenance ไม่ deploy · เทสต์ ≥ เดิม ·
+> sp5t0_audit.py ต้องยังอ่าน ndjson รูปเดิมได้ · commit แยก 2 อัน ไม่ push · disassembly หา
+> writer ของ loveAble = **ไม่อนุมัติ** (ไม่จำเป็นต่อ N4)
+> **ผลจริง:** artifact DLL `476f390e…` (377,344 B) / PDB `e8c44e4f…` (104,744 B) · C# 705/0 ·
+> python 53+110 · static CLEAN · audit tool รูปเดิม+รูปใหม่ PASS · provenance
+> `evidence/SP5NPC-N4prep2-20261030-062233/` · รายละเอียดการแก้โค้ดตรงตาม §"งานที่ทำ" ของ
+> provenance นั้น (ขอบเขตเดิมในเอกสารนี้คงไว้ทุก byte)

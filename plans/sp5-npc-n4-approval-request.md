@@ -131,3 +131,38 @@
 > หลักฐาน 2 จุด (744/883 โน้ต area-notes.md:170; 631/632 N4) — รายละเอียด
 > `evidence/SP5NPC-N4-20261030-052251/loveable-investigation.md` · **นิยาม T2 loveable ใหม่ + จุดอ่าน
 > heroNum ใหม่ = ร่างรออนุมัติ** `plans/sp5-npc-n4-followup-draft.md` (ยังไม่เขียนโค้ด)
+
+> **สถานะมติ 2026-10-30 (append ที่ 3 — ข้อความเดิมคงไว้ทุก byte): อนุมัติตามร่าง follow-up
+> ทั้ง 2 ร่าง — ทำโค้ด/provenance เสร็จแล้ว (ไม่ deploy) · พร้อมวลีสั่ง N4 รอบ 2–3.** มติผู้ใช้
+> (offline session ~06:00): (1) ร่าง 1 นิยาม T2 loveable ใหม่ = listCount=57 + ทุกชื่อใน list 57
+> ต้องมี HeroData ใน Heros match ด้วย heroName (fallback family+given) — log ผล match รายชื่อ
+> ชื่อที่ match ไม่ได้ต้อง log ออกมา · กติกา match ยังไม่ RUNTIME-confirmed ⇒ **รอบแรกที่ใช้ = การยืนยันกติกา**
+> · เลิกใช้ heroCount ตัดสิน (เก็บเป็นข้อมูลอ้างอิง) · (2) ร่าง 2 จุดอ่าน heroNum = in-window Σ=50
+> ที่ GenDataC call แรก / post-restore Σ=88 ที่ sng.end · ห้ามใช้ genhero.end เป็น post-restore ·
+> (3) งานโค้ด Sp5T0Probe.cs log-only ห้ามเปลี่ยนตรรกะ gate/hook อื่น · ห้าม raw offset ·
+> แก้ comment เก่าให้ตรงความจริง · (4) build Release determinism ×2 + provenance ไม่ deploy ·
+> เทสต์ ≥ เดิม · sp5t0_audit.py ต้องยังอ่านรูปเดิมได้ · (5) commit แยก 2 อัน ไม่ push ·
+> (6) disassembly หา writer ของ loveAble = ไม่อนุมัติ
+>
+> **ผลที่ทำแล้ว:** artifact ใหม่ DLL **`476f390e0993adcb4be797cf588e2b4eacb3c00ad6f044c7ffa323e8407ee868`**
+> (377,344 B) / PDB `e8c44e4ff790efda635b7ca7591de8f42be0a1cd8fff5bd8c62c804fea65da74` (104,744 B) —
+> provenance `evidence/SP5NPC-N4prep2-20261030-062233/` · C# **705 PASS/0 FAIL** (693+12) ·
+> python 53+110 OK · static CLEAN · audit tool อ่านได้ทั้ง ndjson รูปเดิม (PASS) และ synthetic
+> รูปใหม่ (PASS) · build 0W/0E determinism ×2 · **ไม่ deploy** (`Mods\` คง `6a94abb5…`)
+>
+> **ผลกระทบต่อคำขอ N4 (แทนบรรทัด "ผลกระทบ" ก่อนหน้าในทางปฏิบัติ — ตัวเลขเก่าคงไว้ข้างบนตามจริง):**
+> - ขั้น 2 (deploy) ของ N4 รอบ 2–3 ใช้ **artifact `476f390e…` แทน `ba1e1dd1…`** (ครอบนิยาม T2
+>   ใหม่ + จุดอ่าน heroNum ใหม่)
+> - **เกณฑ์ T2 ข้อ loveable ใหม่:** `listCount = 57` **และ** `listPresent = 57` (ทุกชื่อ match
+>   ได้) — ถ้า `listMissing` ไม่ว่าง = หยุดรายงานชื่อที่หายทั้งหมด (zero-tolerance เหมือนเดิม) ·
+>   `heroCount` (flag) = observational เท่านั้น ไม่ใช่เกณฑ์ · **รอบแรก = การยืนยันกติกา match**
+>   (ถ้า match ไม่ตรงเพราะรูปแบบชื่อ = หยุดรายงาน ห้ามปรับกติกาในเซสชันเอง)
+> - **BirthSetting เทียบข้ามรอบ:** ฐานรอบ 1 = `count=6, vals=[-1,0,0,0,0,0]` — รอบ 2–3 ค่าต้อง
+>   **ตรงฐานนี้** (โลกใหม่ที่ผู้ใช้สร้างด้วย setting เดิม); ต่าง = หยุดรายงาน
+> - **รอบ 2–3 ต้องรันครบ** (มติเดิม 3 รอบ — รอบ 1 เสร็จแล้ว หยุดที่ T2) · เกณฑ์ T3/T4 คงเดิม
+>   (band [280,350] · f2=0 · heroNum window Σ=50 / restore Σ=88 — รอบ 2 มีการวัดตรงใหม่ทั้งสองจุด)
+> - เงื่อนไขแวดล้อมคงเดิม: net.cfg ช่วงรัน = `enabled=true` + `npcPolicy=light` (มติเพิ่มเติม
+>   append ที่ 2), `Sp5T0=true`, คืนครบท้ายเซสชัน (เซฟ EXACT + DLL `6a94abb5…` + net.cfg
+>   `12541f34…` + Sp5T0=false)
+> - **baseline เซฟปัจจุบัน = `7e1e65e52659…` @ `20261030-060854`** (rebaseline volatile-only
+>   มติ 2026-10-30 — ดู VERSION.md หัวข้อ Baseline ปัจจุบัน) — split รอบ 2–3 ใช้ baseline นี้

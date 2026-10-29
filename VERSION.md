@@ -175,6 +175,17 @@
 | baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` — split label `SP5T0-20261030-012502` (Save vs baseline changed=0 missing=0 added=0) · จบรอบ restore + rollback DLL |
 | **สถานะหลังจบรอบ (2026-10-30 01:4x)** | **rollback แล้วตามวลีสั่ง:** `Mods\LongYinCoop.dll` = `6a94abb5…` + PDB `856d3bed…` (hash ตรง rollback point ยืนยัน 01:44) · `MelonPreferences.cfg` = `976ccfb9…` **EXACT byte-level ก่อน session** (`Sp5T0=false` — ML ที่เขียนตอนออกเกมเป็น cosmetic rewrite, ค่า key ทุกตัวเหมือนเดิม) · เซฟ restore EXACT + `leftovers: none` · `SaveSlot*` ไม่ถูกเขียนตลอดรอบ (โลกใหม่ไม่ได้เซฟลง slot) · รอบรันผลครบ: ติด 7 patch/ถอน ownedLeft=0 · events=3014 errors=0 · E4/E5/E6/E7 ปิด · E1/E2 คง UNKNOWN ตาม rev 13 · พบบั๊ก comparator string-format ของ probe (allMatch=false เป็น artifact — inventory เชิงความหมายตรงทุกจุด) · รายงาน `evidence/SP5T0-run-20261030-012502/round-report.md` |
 
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-30 N4-follow-up · rebaseline volatile-only — แทนหัวข้อ [G-2] ด้านบนเป็น anchor ปัจจุบัน)
+
+| รายการ | ค่า |
+|---|---|
+| เหตุการณ์ | ผู้ใช้เปิดเกมเอง 05:45:05–05:46:28 (ML log `26-10-30_5-45-5.log` — ไม่มีบรรทัด probe/gate/S2, [ERROR]=0) ระหว่างเซสชัน offline ⇒ snapshot ไม่ตรง ⇒ เซสชันโค้ด N4-follow-up หยุดตามเงื่อนไข แล้วมติผู้ใช้อนุมัติทาง (ก) rebaseline volatile-only (รูปแบบ [G-2]) · incident `evidence/AUTO-20261030-060328/incident-game-open-0545.md` |
+| ยืนยันก่อน rebaseline | เซฟรายไฟล์เทียบ `20261028-071340`: **56/57 EXACT · CHANGED = `Save/PlayerprefData.dat` ไฟล์เดียว** · missing=0 · extra=0 ⇒ `SaveSlot*` ทั้ง 55 ไม่ถูกเขียน (วัดซ้ำ 06:07 ครั้งที่ 2 ตรง) |
+| digest ที่อนุมัติ (anchor ใหม่) | **`7e1e65e52659e878650b206e43322692879aad9750d047091f34450e94830fa6`** (57 ไฟล์) @ `coop-test/baselines/20261030-060854/savehash.real.before.txt` · `REBASELINE.json` = `volatile_only: true, changed=[PlayerprefData.dat]` |
+| สายโซ่ baseline | `4226730f66ff` → `7332fc93eb98` → `b7f67154cff6` → `58883949…` (`20261025-201545`) → `df8e5a11beed…` (`20261028-071340`) → **`7e1e65e52659…` (`20261030-060854` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
+| `UserData\MelonPreferences.cfg` | `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` (หลังปิด N3) → **`733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c`** (ML เขียนตอนปิดเกม 05:46:28 "Preferences Saved!") — **ค่า key semantic ตรงตลอด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false` (อ่านเนื้อหาเทียบค่า; ไม่มีสำเนาไฟล์เก่าไว้ diff ทุก byte — ตามบทเรียน RUNBOOK-G3 ตรวจด้วยค่า key ไม่ใช่ hash) |
+| `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:03 + 06:07) |
+
 ## กฎ
 
 1. เทียบ SHA-256 ทั้งสองไฟล์ทุกครั้งที่เริ่ม session — **ไม่ตรง = หยุดและรายงาน** (เกมอัปเดต = anchor ใน notes ทั้งหมดเชื่อไม่ได้)
