@@ -1,9 +1,12 @@
 # SP5-NPC Reduce — แผน implement ร่าง (DRAFT — N1 อนุมัติและ**ทำเสร็จแล้ว** · N2–N6 ยังรออนุมัติ)
 
 - **label:** `SP5-NPC-plan-draft-20261030` · **สถานะ:** มติผู้ใช้ 2026-10-30 = GO ทาง (ก) ร่างแผน ·
-  **มติถัดมา (2026-10-30): อนุมัติเฉพาะ stage N1 (offline ล้วน) — N2–N6 ยังไม่อนุมัติ ห้ามเริ่ม
-  ห้ามเขียนโค้ดนอกขอบเขต N1** · **N1 = เสร็จแล้ว** (ผลจริง §2 ตารางคอลัมน์ "ผลจริง N1" ·
-  artifact `b6d24d34…` provenance `evidence/SP5T0-N1-20261030-025854/provenance.md` — **ยังไม่ deploy**) ·
+  **มติถัดมา: อนุมัติเฉพาะ stage N1 (offline ล้วน)** — **มติถัดมาอีก (2026-10-30): อนุมัติเฉพาะ
+  stage N2 (offline = hook ต่อ predicate + เทสต์) — N3–N6 ยังไม่อนุมัติ ห้าม deploy ห้ามเปิดเกม** ·
+  **N1 = เสร็จแล้ว** (artifact `b6d24d34…` · `evidence/SP5T0-N1-20261030-025854/`) ·
+  **N2 = เสร็จแล้ว** (hooks G1/G4/G5 + เทสต์ · artifact `2b59e46c…` ·
+  `evidence/SP5NPC-N2-20261030-033852/provenance.md` — **ยังไม่ deploy ทั้งคู่** · พารามิเตอร์
+  scale/rounding + มติระดับ/refill/key ที่ bracket ยังไม่ได้เลือก = คงรอ ดู decisions-pending §7.1) ·
   ตัวเอกอ้างอิง: `evidence/SP5design-20261027/sp5-design-report.md` (design-only, §3–§8) + ผลรอบจริง
   `evidence/SP5T0-run-20261030-012502/round-report.md` (T0 ของ design §6.2 รันแล้ว)
 - **ห้ามเสนอ/ตัดสินเลือกระดับ L1/L2/L3 จนกว่าผู้ใช้สั่ง** (มติ 2026-10-30)
@@ -110,7 +113,7 @@ raw offset · census PROTECTED ขาด/ผิดตัว · soft-lock/crash �
 | Stage | งาน | deploy | split | เปิดเกม |
 |---|---|---|---|---|
 | N1 (offline) | งานย่อย §2 ครบ + predicate/parser + เทสต์ offline | ไม่ | ไม่ | ไม่ |
-| N2 (offline) | implement hooks G1/G4/G5 (+G2 ถ้าอนุมัติ) + negative tests + build + provenance | ไม่ (artifact READY เท่านั้น) | ไม่ | ไม่ |
+| N2 (offline) | **เสร็จแล้ว 2026-10-30** — implement hooks G1/G4/G5 (+negative tests; **G2 ไม่ implement — ยังไม่อนุมัติ**) · artifact `2b59e46c…` · C# 693/0 · พารามิเตอร์/ข้อจำกัด = `evidence/SP5NPC-N2-20261030-033852/provenance.md` | ไม่ (ยังไม่ deploy) | ไม่ | ไม่ |
 | N3 (runtime) | T1 normal mode (gate off) | ใช่ (+สำรอง .prev) | ใช่ | ใช่ (ผู้ใช้เปิดเอง) |
 | N4 (runtime) | T2–T4 ที่ระดับที่อนุมัติ | ใช่ | ใช่ | ใช่ |
 | N5 (runtime) | T5–T7 (ยาว — อาจแบ่งหลาย session) | ใช่ | ใช่ | ใช่ |
