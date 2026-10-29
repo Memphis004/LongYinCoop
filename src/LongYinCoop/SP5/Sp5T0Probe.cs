@@ -28,10 +28,12 @@ namespace LongYinCoop
     /// ขอบเขต log-only (บังคับ): ห้ามเขียน state เกม/args/__result, ห้าม skip original, ห้าม raw offset
     /// (identity อ่านจาก property Pointer ของ interop wrapper เท่านั้น), hook body ครอบ try/catch กลืนหมด
     ///
-    /// สถานะที่ rev 13 กำหนดให้คง UNKNOWN และ build นี้ตั้งใจไม่มีกลไกพิสูจน์:
-    ///   - inventoryStability ภายใน window (audit ณ จุดตรวจ = point-in-time เท่านั้น) ⇒ #C.ok / E1 / E2 คง UNKNOWN
-    ///   - invocation linkage ด้วย thread-local LIFO (iid) — ผู้สมัครที่โมดควบคุมเองครบ แต่ยังไม่ผ่าน harness test
-    ///     (ห้ามอ้างว่า linkage พิสูจน์แล้วจนกว่าจะรัน harness ที่ได้รับอนุมัติตอน build)
+/// สถานะที่ rev 13 กำหนดให้คง UNKNOWN:
+///   - inventoryStability ภายใน window (audit ณ จุดตรวจ = point-in-time เท่านั้น) ⇒ #C.ok / E1 / E2 คง UNKNOWN
+///   - invocation linkage ด้วย thread-local LIFO (iid) — กลไกผ่าน harness offline แล้ว (Sp5T0LinkageHarness
+///     ใน tests/S2Protocol.Tests: pairing ซ้อน / exception-path / thread-isolation — รันบน artifact ที่ build,
+///     หลักฐานใน evidence ของ session เตรียม) · mismatch-branch ของ PopInv ครอบด้วย code audit (Unity-bound) ·
+///     runtime ordering บนเป้าเกมยังไม่เคยรัน ⇒ #C.ok / E1 / E2 ยังคง UNKNOWN ตาม rev 13 (inventoryStability)
     /// </summary>
     internal static class Sp5T0Probe
     {
@@ -91,8 +93,9 @@ namespace LongYinCoop
         private static bool _haveAuditFp;
 
         // ===== invocation linkage (iid) — thread-local LIFO ของโมด (ผู้สมัคร rev 8–9 ทางที่ 2) =====
-        // UNPROVEN: ต้องผ่าน harness test ตอน build ก่อนจึงถือเป็นข้อเท็จจริง; จนกว่านั้น accounting
-        // ที่พึ่ง linkage (#C.ok → E1/E2) คง UNKNOWN ตามแผน — ป้ายติดที่ event iid ทุกบรรทัด
+        // กลไกผ่าน harness offline แล้ว (Sp5T0LinkageHarness — tests/S2Protocol.Tests: nesting/exception-path/
+        // thread-isolation บน artifact ที่ build); mismatch-branch ของ PopInv ครอบด้วย code audit (Unity-bound);
+        // runtime ordering บนเป้าเกมยังไม่รัน — accounting ที่พึ่ง linkage (#C.ok → E1/E2) ยังคง UNKNOWN ตาม rev 13
         private sealed class InvRec
         {
             public long Iid;
@@ -788,7 +791,7 @@ namespace LongYinCoop
             sb.Append("},\"allMatch\":").Append(allMatch ? "true" : "false");
             sb.Append(",\"allStableBetweenCheckpoints\":").Append(allStable ? "true" : "false");
             sb.Append(",\"inventoryStabilityInWindow\":\"UNKNOWN (rev 13 — build นี้ไม่มีกลไกตรวจภายใน window)\"");
-            sb.Append(",\"linkage\":\"iid UNPROVEN (thread-local LIFO รอ harness test ตอน build)\"");
+            sb.Append(",\"linkage\":\"iid thread-local LIFO — mechanism harness-proven offline (Sp5T0LinkageHarness); runtime ordering ยังไม่รัน; #C.ok คง UNKNOWN ตาม rev 13\"");
             Commit(sb, true);
         }
 
@@ -1439,7 +1442,7 @@ namespace LongYinCoop
                .Append(JsOr(_lastAuditFp[1])).Append(", \"C\": ").Append(JsOr(_lastAuditFp[2])).Append("},\n");
             sb.Append("  \"unknown\": {\n");
             sb.Append("    \"inventoryStabilityInWindow\": \"UNKNOWN (rev 13 — ไม่มีกลไกตรวจภายใน window)\",\n");
-            sb.Append("    \"invocationLinkage\": \"UNPROVEN (thread-local LIFO iid — รอ harness test ตอน build)\",\n");
+            sb.Append("    \"invocationLinkage\": \"thread-local LIFO iid — mechanism harness-proven offline (Sp5T0LinkageHarness); runtime ordering ยังไม่รัน\",\n");
             sb.Append("    \"cOk_E1_E2\": \"UNKNOWN จนกว่าสองข้อบนจะมีหลักฐานจากกลไกที่ผ่านอนุมัติ\"\n");
             sb.Append("  }\n");
             sb.Append("}\n");
