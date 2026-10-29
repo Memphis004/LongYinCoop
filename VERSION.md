@@ -158,6 +158,23 @@
 | baseline เซฟ | `df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920` @ `20261028-071340` คงเดิม — restore EXACT ทุก run |
 | tag ที่เกี่ยว | `stage-S2a-4` → `3ac0761` (2026-10-29 01:27) คงเดิม · ไม่มี tag ใหม่ · ไม่ push |
 
+## Mod build ที่ deploy ล่าสุด (2026-10-30 · build `865b4a87…` — SP5-T0 probe log-only · ก่อนหน้า: `6a94abb5…`)
+
+> deploy 2026-10-30 01:2x ใน session `SP5T0-run-20261030-012502` (วลีผู้ใช้ "รัน SP5-T0" = มติ §4 ข้อ 2–8
+> แผน rev 13) · **กำหนดจากวลีสั่ง: จบรอบ rollback DLL กลับ `6a94abb5…`** · provenance READY
+> `evidence/SP5T0-prep-20261030-010247/` @ mod repo `ab9d07b` (a998509) · รอบรัน `evidence/SP5T0-run-20261030-012502/`
+
+| รายการ | ค่า |
+|---|---|
+| `Mods\LongYinCoop.dll` (ปัจจุบัน) | **`865b4a87b6ee4aa5b5ac2b20e63fb4537ab14c49210948875b93eed8a441a84a`** (366,592 B · deploy 2026-10-30 01:2x · hash หลัง deploy ตรง artifact provenance READY เป๊ะ) |
+| `Mods\LongYinCoop.pdb` (ปัจจุบัน) | **`60ad4546aa556ab2613525b2f193d9ed3b690e7163346541b72b14c958e51c0d`** (99,568 B บนดิสก์ — provenance.md เขียน 99,572 B: **sha256 ตรงตามตารางเป๊ะ**, ส่วนตัวเลขขนาดในเอกสารคลาด 4 B บันทึกตามจริง) |
+| **เคยบันทึกเป็น** (build ก่อน — rollback point) | DLL `6a94abb579e65d5e6b0af917dfed4ba6f5350ad76847190bd7263cda3077b334` (359,936 B) · PDB `856d3beda727218823170f861f532509c5458eb91e51c79f07c0452d3b196035` (97,128 B) — สำรองไว้ **`Mods\LongYinCoop.dll.prev-6a94abb5-20261030`** + **`Mods\LongYinCoop.pdb.prev-856d3bed-20261030`** (hash ตรง ยืนยัน 2026-10-30 01:2x) |
+| source ที่ตรงกับ build ใหม่ | `ab9d07b` (Sp5T0LinkageHarness + ป้าย linkage — ตรรกะ probe เดียวกับ `6a94abb5` @ `636c209` สายโซ่) · determinism ×2 ยืนยันใน provenance |
+| `UserData\MelonPreferences.cfg` | ก่อน `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` → หลังตั้ง **`5a9d4280f2dd8590e6f5498dd45a6562eb2bbbd43c634b41fccd5a2e6505a519`** (`Sp5T0 = true` บรรทัด 15 — agent แก้ 1 บรรทัดตามมติ ข้อ 2 "ตั้ง Sp5T0=true ก่อนเปิดเกม"; key อื่นทุกค่าเดิม) |
+| `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`) — **ไม่แตะ** (T0 ไม่ใช้) |
+| baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` — split label `SP5T0-20261030-012502` (Save vs baseline changed=0 missing=0 added=0) · จบรอบ restore + rollback DLL |
+| **สถานะหลังจบรอบ (2026-10-30 01:4x)** | **rollback แล้วตามวลีสั่ง:** `Mods\LongYinCoop.dll` = `6a94abb5…` + PDB `856d3bed…` (hash ตรง rollback point ยืนยัน 01:44) · `MelonPreferences.cfg` = `976ccfb9…` **EXACT byte-level ก่อน session** (`Sp5T0=false` — ML ที่เขียนตอนออกเกมเป็น cosmetic rewrite, ค่า key ทุกตัวเหมือนเดิม) · เซฟ restore EXACT + `leftovers: none` · `SaveSlot*` ไม่ถูกเขียนตลอดรอบ (โลกใหม่ไม่ได้เซฟลง slot) · รอบรันผลครบ: ติด 7 patch/ถอน ownedLeft=0 · events=3014 errors=0 · E4/E5/E6/E7 ปิด · E1/E2 คง UNKNOWN ตาม rev 13 · พบบั๊ก comparator string-format ของ probe (allMatch=false เป็น artifact — inventory เชิงความหมายตรงทุกจุด) · รายงาน `evidence/SP5T0-run-20261030-012502/round-report.md` |
+
 ## กฎ
 
 1. เทียบ SHA-256 ทั้งสองไฟล์ทุกครั้งที่เริ่ม session — **ไม่ตรง = หยุดและรายงาน** (เกมอัปเดต = anchor ใน notes ทั้งหมดเชื่อไม่ได้)
