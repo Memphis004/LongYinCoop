@@ -5,6 +5,7 @@ inventory ของ Harmony patch ที่มีอยู่, named-pipe IPC �
 
 > repo นี้อยู่นอกโฟลเดอร์เกม (`C:\Users\memph\LongYinCoop`) — build แล้ว copy DLL เข้า `Mods\`
 > ห้าม commit ไฟล์เกม (`.gitignore` กันไว้แล้ว)
+> สารบัญเอกสารทั้งหมด (แผน/โน้ต/สถานะแต่ละไฟล์): **`INDEX.md`** · แผนที่ใช้งานอยู่ `plans/` · แผนปิดแล้ว `plans/closed/` · โน้ตสำรวจ `notes/`
 
 ## โครงสร้าง
 
