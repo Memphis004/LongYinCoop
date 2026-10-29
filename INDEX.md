@@ -26,6 +26,7 @@
 | `S3-plan-draft-rev2.md` | ร่างแผน S3 rev2 — **เอกสารรีวิวเท่านั้น ยังไม่ขอเริ่ม** (Gate 2 = PASS แล้ว แต่ไม่ใช่การอนุมัติ S3) |
 | `sp5-npc-reduce-plan-draft.md` | แผน SP5-NPC (ลด NPC) — **N1–N3 อนุมัติ+ทำเสร็จแล้ว** (2026-10-30 · N3 ปิดตามมติ commit `3131df8`) · **N4–N6 ยังรออนุมัติ** · มติระดับ/refill คงรอใน `decisions-pending.md` §7.1 |
 | `sp5-npc-n4-approval-request.md` | คำขออนุมัติ stage N4 (T2–T4 ที่ Light ×0.5) — **ร่าง ยังไม่ได้รับอนุมัติ ยังไม่ดำเนินการ** |
+| `CLOCK-1-decision-draft.md` | ร่างมติปฏิทินกลาง server + ไม่มี pause (P1–P4, a/b/d/e = มติผู้ใช้ 2026-10-30 · ข้อ c อัตรา `secondsPerDay` รอ M1/M2) — สรุปมติใน decisions-pending §10 · implement รอหลัง Gate 5/6 |
 
 ## `plans/closed/` — แผนที่ปิดแล้ว / superseded / ประวัติ diff (อ่านอย่างเดียว)
 
