@@ -1,0 +1,41 @@
+...................................C:\Users\memph\LongYinCoop\tools\test_negative_preconditions.py:426: ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\memph\\AppData\\Local\\Temp\\tmpf_4l2rl7\\out-w-c.ndjson' mode='a' encoding='utf-8'>
+  code = nt.main()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.......................................................................
+----------------------------------------------------------------------
+Ran 106 tests in 0.274s
+
+OK
+# window=w-g label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+AUDIT-TRAIL WRITE FAILED: disk full - stopping, no further commands
+
+ABORTED  pass=0 fail=0 notrun=0 unknown=0 (planned=1 written=0) -> C:\Users\memph\AppData\Local\Temp\tmpwvnwyikd\out-w-g.json
+# window=w-h label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+AUDIT-TRAIL WRITE FAILED: disk full - stopping, no further commands
+
+ABORTED  pass=0 fail=0 notrun=0 unknown=0 (planned=1 written=0) -> C:\Users\memph\AppData\Local\Temp\tmpo51n5nt2\out-w-h.json
+ABORT: hash-unstable - nothing fired
+ABORT: cannot open NDJSON audit file (C:\Users\memph\AppData\Local\Temp\tmpi9y345vz\out.ndjson): [Errno 13] Permission denied: 'C:\\Users\\memph\\AppData\\Local\\Temp\\tmpi9y345vz\\out.ndjson' - no commands will be sent
+# window=w-b label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+AUDIT-TRAIL WRITE FAILED: disk full - stopping, no further commands
+1    DISARMED       move    UNKNOWN    DIFF     False  yes    DISARMED: run spike arm first (one command per arm)
+
+FAILED  pass=0 fail=0 notrun=0 unknown=1 (planned=1 written=1) -> C:\Users\memph\AppData\Local\Temp\tmp31h9017j\out-w-b.json
+# window=w-a label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+AUDIT-TRAIL WRITE FAILED: disk full - stopping, no further commands
+
+ABORTED  pass=0 fail=0 notrun=0 unknown=0 (planned=1 written=0) -> C:\Users\memph\AppData\Local\Temp\tmpd614nsek\out-w-a.json
+# window=w-e label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+
+ABORTED  pass=0 fail=0 notrun=0 unknown=0 (planned=1 written=0) -> C:\Users\memph\AppData\Local\Temp\tmpcteioi5d\out-w-e.json
+# window=w-d label=UT pid=4242 pref=True hash0=HHHHHHHHHHHHHHHH
+#    group          cmd     result     hash=    ok=    sent=  error/reason
+1    DISARMED       move    PASS       same     False  yes    DISARMED: run spike arm first (one command per arm)
+2    DISARMED       move    UNKNOWN    -        -      -      state-unreadable: FileNotFoundError: pipe
+
+ABORTED  pass=1 fail=0 notrun=0 unknown=1 (planned=2 written=2) -> C:\Users\memph\AppData\Local\Temp\tmpfgzt2eat\out-w-d.json

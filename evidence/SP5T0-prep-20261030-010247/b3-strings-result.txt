@@ -1,0 +1,15 @@
+#Strings heap: offset=0x12650 size=46484 (file evidence/SP5T0-prep-20261030-010247/LongYinCoop.dll)
+  Sp5T0Probe: FOUND
+  TimeV2aSampler: FOUND
+  TimeV2aDetector: FOUND
+  TimeV2aGate: FOUND
+  TimeV2aNdjsonWriter: FOUND
+  TimeV2aObs: FOUND
+  TimeV2aEvent: FOUND
+  S2GuestDecoder: FOUND
+  S2OverlayClient: FOUND
+  S2OverlayRenderModel: FOUND
+  S2OverlayService: FOUND
+  S2SetPrefGate: FOUND
+  S2WriteGuardHook: FOUND
+RESULT: ALL 6 TYPES FOUND

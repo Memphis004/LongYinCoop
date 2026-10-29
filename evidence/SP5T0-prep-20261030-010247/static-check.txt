@@ -1,0 +1,2 @@
+STATIC CHECK CLEAN (0 violations) root=C:\Users\memph\LongYinCoop
+TOTAL violations=0
