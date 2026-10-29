@@ -61,6 +61,10 @@ evidence/**/*.ndjson
 
 # binary drops inside evidence stay local
 evidence/**/*.dll
+# (ค) 2026-10-29 ตามมติผู้ใช้ — PDB ของ build และสำเนา pref binary ไม่เข้า git
+# (ถอนจาก index ด้วย git rm --cached แล้ว — ไฟล์บนดิสก์คงอยู่)
+evidence/**/*.pdb
+PlayerprefData.dat.*
 
 # SP5body: full-binary disasm of GameAssembly.dll (471MB, game-derived dump)
 # stays local per the never-commit rule for game assets; the extracted bodies
