@@ -95,3 +95,22 @@
 - **ต้องระบุในวลีสั่ง:** ยอมรับ band T4 [280, 350] หรือแก้ · ทางวัด T2 · จำนวนรอบ (default 3)
 
 **หยุดหลังส่งเอกสาร — ไม่ deploy ไม่ split ไม่เปิดเกม ไม่แก้โค้ด probe จนกว่าวลีสั่งแยก**
+
+> **สถานะมติ 2026-10-30 (append — ข้อความเดิมคงไว้): T2 = ทาง (ข) อนุมัติและทำเสร็จแล้ว (offline).**
+> มติผู้ใช้: "(ข) เพิ่ม census field ใน probe offline: 掌门 30, LoveableSpeHero 57, Teacher=1,
+> BirthSetting; probe ยังเป็น log-only ห้ามเปลี่ยนตรรกะอื่น · build+provenance ไม่ deploy ·
+> เทสต์ชุดเต็มต้องไม่น้อยกว่าเดิม" — **ปฏิบัติครบ:**
+> - โค้ด: `Sp5T0Probe.cs` ไฟล์เดียว — event `worldcount` เพิ่ม 4 field อ่านอย่างเดียว
+>   (`zhangmen` จาก `ForceData.leader` field ตรง · `loveable` จาก `HeroData.loveAble` +
+>   `GDC.loveableSpeHeroList.Count` · `teacher` จาก `HeroData.Teacher` ของสมาชิกสำนัก เทียบ leader
+>   ของสำนักตัวเอง · `birth` จาก `StartGameSettingController.Instance.BirthSetting`) + `censusLast`
+>   ใน summary.json — **ตรรกะ/ตัวนับ/การจำแนกเดิมไม่ถูกแตะ** (field ใหม่ append ท้าย JSON line) ·
+>   ยัง log-only ครบตามขอบเขตเดิม
+> - ผลวัด: build Release **0W/0E ×2 determinism** · artifact DLL **`ba1e1dd1…`** (373,760 B) / PDB
+>   **`a96a4a38…`** — **ไม่ deploy** (`Mods\` คง `6a94abb5…`) · C# **693 PASS/0 FAIL** (= เดิม) ·
+>   python **53 OK + 110 OK** (= เดิม) · static **CLEAN** · `sp5t0_audit.py` sanity-check บน ndjson
+>   รอบจริง N3 = PASS เหมือนเดิม
+> - provenance: `evidence/SP5NPC-N4prep-20261030-045558/provenance.md`
+> - **ผลกระทบต่อคำขอ N3 ด้านบน:** ขั้น 2 (deploy) ของ N4 เมื่อสั่งรัน จะใช้ **artifact ใหม่
+>   `ba1e1dd1…` แทน `2b59e46c…`** (ครอบ census field ของ T2 ครบ) · ทางเลือก (ก)/(ค) ของ T2 ด้านบน
+>   = ปิดแล้วด้วยมติ (ข) · band T4 [280, 350] + จำนวนรอบ **ยังรออนุมัติในวลีสั่ง N4**
