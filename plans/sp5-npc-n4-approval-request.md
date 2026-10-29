@@ -114,3 +114,20 @@
 > - **ผลกระทบต่อคำขอ N3 ด้านบน:** ขั้น 2 (deploy) ของ N4 เมื่อสั่งรัน จะใช้ **artifact ใหม่
 >   `ba1e1dd1…` แทน `2b59e46c…`** (ครอบ census field ของ T2 ครบ) · ทางเลือก (ก)/(ค) ของ T2 ด้านบน
 >   = ปิดแล้วด้วยมติ (ข) · band T4 [280, 350] + จำนวนรอบ **ยังรออนุมัติในวลีสั่ง N4**
+
+> **สถานะมติ 2026-10-30 (append ที่ 2 — ข้อความเดิมคงไว้ทุก byte): N4 รอบ 1 รันแล้ว หยุดที่ T2 —
+> รอบ 2–3 ไม่ได้รัน ยังไม่มี verdict รวม.** วลีสั่ง `เริ่ม N4 session` ครบทุกข้อ (band [280,350] ·
+> 3 รอบ · artifact `ba1e1dd1…` · npcPolicy=light) + มติเพิ่มในเซสชัน: net.cfg ช่วงรัน = `enabled=true`
+> + `npcPolicy=light` (เหตุผล: `Sp5NpcPolicy.Decide` + เทสต์ 80 ชุด lock opt-in สองชั้น — มติเดิม
+> พูดแค่ npcPolicy จะได้ Off ตลอด; side effect S2 loopback listener อนุมัติแล้ว) · **ผลรอบ 1** (label
+> `SP5NPC-N4-20261030-052251`): gate install สำเร็จ ไม่มี patch นอกชุด `[ERROR]`=0 · census h=632 =
+> protag 1 + spe 170 + **sect 311 (ใน band [280,350])** + wanderer 150 + f2 0 · zhangmen 30/30 ✅ ·
+> teacher 311/311 + distinct = ชุด leaderIds ✅ · birth count=6 vals `[-1,0,0,0,0,0]` (ไม่มีฐานเทียบ) ·
+> **loveable: listCount=57 ✅ แต่ heroCount=631 ≠ 57 ⇒ เงื่อนไขหยุดของผู้ใช้กระตุ้น** · T3 f2=0 ✅ ·
+> T4: band ผ่าน, h นิ่ง, factory C=719 (A/B=0), heroNum Σ=50 ใน window ไม่มีการวัดตรง (probe อ่าน
+> pre-window เท่านั้น) · `SaveSlot*` ไม่ถูกเขียน · คืนสภาพครบ (เซฟ `df8e5a11beed` EXACT · DLL
+> `6a94abb5…` · net.cfg `12541f34…` เป๊ะ · Sp5T0=false `976ccfb9…`) · **ไม่ปิด stage ไม่ tag ไม่ push**
+> · สืบเหตุ loveable เสร็จ (offline): การอ่านถูกต้อง — ข้อสมมติ "flag = สมาชิก list 57" ขัด RUNTIME
+> หลักฐาน 2 จุด (744/883 โน้ต area-notes.md:170; 631/632 N4) — รายละเอียด
+> `evidence/SP5NPC-N4-20261030-052251/loveable-investigation.md` · **นิยาม T2 loveable ใหม่ + จุดอ่าน
+> heroNum ใหม่ = ร่างรออนุมัติ** `plans/sp5-npc-n4-followup-draft.md` (ยังไม่เขียนโค้ด)

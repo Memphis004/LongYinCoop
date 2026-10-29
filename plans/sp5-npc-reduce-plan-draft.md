@@ -165,3 +165,14 @@ raw offset · census PROTECTED ขาด/ผิดตัว · soft-lock/crash �
 > mod repo) สร้างตาม convention `stage-<stage-id>` · ขั้นถัดไป = **N4 (T2–T4, npcPolicy=light)** —
 > คำขอ `plans/sp5-npc-n4-approval-request.md` (ร่างแล้ว **ยังไม่ดำเนินการ** รอวลีสั่งแยก) · N5–N6
 > ยังไม่อนุมัติ
+
+> **สถานะมติ 2026-10-30 (append — ข้อความเดิมคงไว้): N4 รอบ 1 = รันแล้ว หยุดที่ T2 (loveable
+> heroCount=631 ≠ 57 ตามเงื่อนไขผู้ใช้) — รอบ 2–3 ไม่ได้รัน, N4 ยังไม่มี verdict, N5–N6 ยังไม่อนุมัติ.**
+> ตัวเลขหลัก: census h=632 (protag 1 / spe 170 / **sect 311 ใน band [280,350]** / wanderer 150 / f2 0) ·
+> gate install สำเร็จ ไม่มี patch นอกชุด · zhangmen 30/30 + teacher 311/311 + listCount 57 ครบ ·
+> `SaveSlot*` ไม่ถูกเขียน · rollback ครบ (DLL `6a94abb5` / net.cfg `12541f34` / Sp5T0=false) ·
+> สืบเหตุแล้ว: flag `loveAble` ไม่ใช่การเป็นสมาชิก list 57 (หลักฐาน `evidence/SP5NPC-N4-20261030-052251/
+> loveable-investigation.md` — รวมโน้ต RUNTIME เดิม 744/883) · นิยาม T2 loveable ใหม่ + จุดอ่าน heroNum
+> (in-window Σ=50 / post-restore Σ=88) = **ร่างรออนุมัติ** `plans/sp5-npc-n4-followup-draft.md` —
+> ยังไม่เขียนโค้ด · หมายเหตุ: net.cfg ช่วงรันต้อง `enabled=true` + `npcPolicy=light` พร้อมกัน
+> (opt-in สองชั้น — Sp5NpcPolicy.Decide + เทสต์ 80 ชุด)
