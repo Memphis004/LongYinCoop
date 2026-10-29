@@ -53,13 +53,15 @@
 | `time-notes.md` | ระบบเวลาโลก (read-only survey) · 2026-10-27 |
 | `time-audit-notes.md` | Activity timing / global pause / ยกเลิกฝึก (audit รอบ 3) · 2026-10-27 |
 | `time-followup-notes.md` | Pause / ระยะเวลา interactive (สืบค้นรอบ 2) · 2026-10-27 |
+| `battle-notes.md` | Battle / ศึกต่อสู้ · 2026-10-27 |
+| `worldmap-notes.md` | BigMap / WorldMap แผนที่โลก· 2026-10-27 |
 
 ## แผนที่ path เก่า → ใหม่ (สำหรับอ้างอิงที่ค้างอยู่ในเอกสาร/คอมเมนต์)
 
 - `S2-plan.md` → `plans/S2-plan.md` · `sp5-t0-plan.md` → `plans/sp5-t0-plan.md` · `time-plan-draft.md` → `plans/time-plan-draft.md` · `S3-plan-draft-rev2.md` → `plans/S3-plan-draft-rev2.md`
 - แผนปิดทั้งหมด → `plans/closed/<ชื่อเดิม>` (S1.5-plan, S2a-2-plan, S2a-3-plan, S2a-4-plan, SP0-full-plan-draft, X5-*, X6-*, S3-plan-draft, STAGEPLAN.v2-draft, STAGEPLAN.v3-draft)
 - โน้ตทั้งหมด → `notes/<ชื่อเดิม>` (area-notes, explorer-notes, sp0-sp7-notes, sp5-prep-notes, time-notes, time-audit-notes, time-followup-notes)
-- `battle-notes.md`, `worldmap-notes.md`, `STAGEPLAN.md`, `STAGEPLAN-v3-addendum.md`, `VERSION.md`, `README.md` — **ไม่ย้าย**
+- `STAGEPLAN.md`, `STAGEPLAN-v3-addendum.md`, `VERSION.md`, `README.md` — **ไม่ย้าย**
 - ไฟล์ที่ไม่ใช่ .md และไม่ได้แตะ: `.probe.js`, `context.txt` · โฟลเดอร์ `src/ tests/ tools/ evidence/ coop-test/` คงเดิมทั้งหมด
 
 > คอมเมนต์ในโค้ดที่อ้างเช่น `S2-plan.md §13.2` หรือ `S1.5-plan §4` ยังอ่านเข้าใจได้ตรงกัน (อ้างเลข section ไม่ใช่ path) — แก้เฉพาะเมื่อแตะไฟล์นั้นอยู่แล้ว
