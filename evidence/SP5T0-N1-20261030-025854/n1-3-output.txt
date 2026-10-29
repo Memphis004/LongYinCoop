@@ -1,0 +1,38 @@
+runs ต่อเนื่องราย force: 31 (ก้อนสุดท้าย = force -1 n=150)
+sect forces ที่ fit แถว heroNum ใดๆ ภายใน [+0,+1] ต่อ band >=5/6: 2/30
+  force  -1: obs=[80, 13, 19, 15, 14, 9] best d=3 within=0/6
+  force   0: obs=[5, 4, 4, 3, 2, 0] best d=3 within=0/6
+  force   1: obs=[5, 5, 4, 3, 3, 0] best d=3 within=1/6
+  force   2: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force   3: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force   4: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force   5: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force   6: obs=[5, 4, 4, 3, 3, 0] best d=3 within=0/6
+  force   7: obs=[5, 5, 4, 4, 2, 0] best d=3 within=2/6
+  force   8: obs=[6, 5, 5, 4, 0, 0] best d=3 within=4/6
+  force   9: obs=[6, 5, 5, 4, 4, 0] best d=3 within=5/6
+  force  10: obs=[6, 5, 5, 4, 4, 0] best d=3 within=5/6
+  force  11: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force  12: obs=[5, 4, 4, 3, 3, 0] best d=3 within=0/6
+  force  13: obs=[5, 4, 4, 3, 3, 0] best d=3 within=0/6
+  force  14: obs=[5, 5, 4, 3, 3, 0] best d=3 within=1/6
+  force  15: obs=[5, 4, 4, 3, 3, 0] best d=3 within=0/6
+  force  16: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force  17: obs=[5, 4, 4, 2, 3, 0] best d=3 within=0/6
+  force  18: obs=[5, 5, 4, 4, 3, 0] best d=3 within=2/6
+  force  19: obs=[5, 5, 4, 4, 2, 0] best d=3 within=2/6
+  force  20: obs=[5, 4, 4, 3, 3, 1] best d=3 within=0/6
+  force  21: obs=[4, 4, 3, 3, 2, 0] best d=3 within=0/6
+  force  22: obs=[4, 4, 3, 3, 2, 0] best d=3 within=0/6
+  force  23: obs=[4, 4, 3, 3, 2, 0] best d=3 within=0/6
+  force  24: obs=[4, 4, 1, 1, 0, 0] best d=3 within=0/6
+  force  25: obs=[3, 2, 1, 2, 2, 0] best d=3 within=0/6
+  force  26: obs=[4, 4, 3, 3, 2, 0] best d=3 within=0/6
+  force  27: obs=[5, 4, 4, 3, 3, 1] best d=3 within=0/6
+  force  28: obs=[3, 4, 3, 3, 2, 0] best d=3 within=0/6
+  force  29: obs=[4, 4, 3, 3, 2, 0] best d=3 within=0/6
+รวม obs ต่อ band (30 forces): [143, 132, 111, 98, 76, 2] /30 = [4.77, 4.4, 3.7, 3.27, 2.53, 0.07]
+ค่าเฉลี่ย heroNum ต่อ band: [5.0, 4.5, 4.0, 3.5, 3.0, 2.0]
+
+sect total = 562 · A1 ครอบ 562/883 Heros = 63.6%
+Light 0.5 (สมมติ linear): Heros 883 -> ~602 = ลด ~281 ตัว ≈ 31.8%

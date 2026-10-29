@@ -1,9 +1,12 @@
-# SP5-NPC Reduce — แผน implement ร่าง (DRAFT — รออนุมัติแผนก่อนเขียนโค้ด)
+# SP5-NPC Reduce — แผน implement ร่าง (DRAFT — N1 อนุมัติและ**ทำเสร็จแล้ว** · N2–N6 ยังรออนุมัติ)
 
-- **label:** `SP5-NPC-plan-draft-20261030` · **สถานะ: DRAFT** — มติผู้ใช้ 2026-10-30 = GO ทาง (ก)
-  "ร่างแผน implement แบบ offline **ห้ามเขียนโค้ดจนกว่าอนุมัติแผน**" · ตัวเอกอ้างอิง:
-  `evidence/SP5design-20261027/sp5-design-report.md` (design-only, §3–§8) + ผลรอบจริง
+- **label:** `SP5-NPC-plan-draft-20261030` · **สถานะ:** มติผู้ใช้ 2026-10-30 = GO ทาง (ก) ร่างแผน ·
+  **มติถัดมา (2026-10-30): อนุมัติเฉพาะ stage N1 (offline ล้วน) — N2–N6 ยังไม่อนุมัติ ห้ามเริ่ม
+  ห้ามเขียนโค้ดนอกขอบเขต N1** · **N1 = เสร็จแล้ว** (ผลจริง §2 ตารางคอลัมน์ "ผลจริง N1" ·
+  artifact `b6d24d34…` provenance `evidence/SP5T0-N1-20261030-025854/provenance.md` — **ยังไม่ deploy**) ·
+  ตัวเอกอ้างอิง: `evidence/SP5design-20261027/sp5-design-report.md` (design-only, §3–§8) + ผลรอบจริง
   `evidence/SP5T0-run-20261030-012502/round-report.md` (T0 ของ design §6.2 รันแล้ว)
+- **ห้ามเสนอ/ตัดสินเลือกระดับ L1/L2/L3 จนกว่าผู้ใช้สั่ง** (มติ 2026-10-30)
 - **กติกาครอบ:** กติกา 1 (ทำตามแผนที่อนุมัติเท่านั้น) · กติกา 5 (สำเนาเซฟ) · กติกา 6 (main thread) ·
   กติกา 8 (typed interop — ห้าม raw offset ถ้าล้มให้หยุดรายงาน) · ห้ามแตะ Steam/anti-cheat/เซฟจริง
 
@@ -35,13 +38,16 @@
 
 ## §2 งานย่อย offline (ไม่ต้อง deploy/เปิดเกม/split — ทำได้ทันทีเมื่ออนุมัติแผนนี้)
 
-| # | งาน | ผลลัพธ์ | หมายเหตุ |
+| # | งาน | ผลลัพธ์ | ผลจริง N1 (2026-10-30 — `evidence/SP5T0-N1-20261030-025854/`) |
 |---|---|---|---|
-| N1-1 | **แก้บั๊ก comparator ใน `Sp5T0Probe.cs`** — normalize ตัวคั่น (`ns:Type::Method` ↔ `ns.Type.Method`) ก่อนเทียบ expected inventory | patch.audit allMatch รายงานถูกต้องในรอบถัดไป | แก้ + อัปเดตป้าย harness — **โค้ด probe แก้ได้เฉพาะหลังอนุมัติแผนนี้** (build ใหม่ deploy ตอน stage runtime เท่านั้น) |
-| N1-2 | **แก้ `tools/sp5t0_audit.py`** ให้อ่าน `perForce` เป็น list 30 ช่อง (ตาม schema จริง) | tool ใช้ได้โดยไม่ต้องพึ่ง analyze_round.py เฉพาะกิจ | รวม test ของ tool ด้วย |
-| N1-3 | **attribute ลูป #2/#3 จาก NDJSON รอบ T0** (offline — เรียงลำดับ call, heroForceLv, db, postBelongForceID เทียบ heroNum ที่อ่านได้) | ตอบว่า A1 ย่อ heroNum กระทบกี่ call จาก 712 generic — ประมาณขอบเขตการลดจริงของ A1 | ปิด design UNKNOWN ข้อ 2 บางส่วน; ถ้าตอบไม่ปิดจากข้อมูลเดิม = รายงาน + เสนอ hook เพิ่ม (อนุมัติแยก) |
-| N1-4 | **enumerate consumer อื่นของ `forceLevelData`** (static — dump.cs + xref) | รายการ consumer + ผลถ้า heroNum ถูกย่อ | ปิด design UNKNOWN ข้อ 1 เชิง static |
-| N1-5 | predicate `npcPolicy` + parser (สไตล์ `S2NetConfig` fail-closed) + truth-table tests | โค้ด pure + เทสต์ผ่าน | key `npcPolicy` ค่าที่ยอมรับ = จุดอนุมัติ §8 |
+| N1-1 | **แก้บั๊ก comparator ใน `Sp5T0Probe.cs`** — normalize ตัวคั่น (`ns:Type::Method` ↔ `ns.Type.Method`) ก่อนเทียบ expected inventory | patch.audit allMatch รายงานถูกต้องในรอบถัดไป | ✅ `NormalizePatchId` + เทียบ format-insensitive + harness +6 checks |
+| N1-2 | **แก้ `tools/sp5t0_audit.py`** ให้อ่าน `perForce` เป็น list 30 ช่อง (ตาม schema จริง) | tool ใช้ได้โดยไม่ต้องพึ่ง analyze_round.py เฉพาะกิจ | ✅ รองรับ list+dict · key ด้วย label `at` (worldcount เขียน t=0) · dH/dT observed · tests 6→10 OK · รัน log จริง: dH=883 dT=87 CLEAN |
+| N1-3 | **attribute ลูป #2/#3 จาก NDJSON รอบ T0** (offline — เรียงลำดับ call, heroForceLv, db, postBelongForceID เทียบ heroNum ที่อ่านได้) | ตอบว่า A1 ย่อ heroNum กระทบกี่ call จาก 712 generic — ประมาณขอบเขตการลดจริงของ A1 | ✅ **A1 ครอบ 562/883 (63.6%)** — quota รายสำนักราย band มาจากตาราง heroNum (25/30 fit [+0,+1]) · Light 0.5 คาดลด ~281 ≈ **31.8%** (ตรง ~32% ของ design — linear เป็นข้อสันนิษฐาน คง UNKNOWN จนวัดจริง) |
+| N1-4 | **enumerate consumer อื่นของ `forceLevelData`** (static — dump.cs + xref) | รายการ consumer + ผลถ้า heroNum ถูกย่อ | ✅ writer เดียว = LoadAllGameData/CSV · reader ยืนยัน = GenerateHero · unattributed candidates 3 จุด = UNKNOWN (ไม่บล็อก A1) |
+| N1-5 | predicate `npcPolicy` + parser (สไตล์ `S2NetConfig` fail-closed) + truth-table tests | โค้ด pure + เทสต์ผ่าน | ✅ `Sp5NpcPolicy` + key `npcPolicy` + tests (grid 80 ชุด + parser) — รวมใน build `b6d24d34…` |
+
+**เทสต์หลัง N1: C# 673 PASS / 0 FAIL (เดิม 650) · python 53 OK + discover 110 OK (เดิม 106) · static CLEAN ·
+build 0W/0E determinism ×2 · artifact DLL `b6d24d34…` / PDB `4632b607…` — ยังไม่ deploy**
 
 ## §3 กลไก implement (ยึด design §3/§5 — สรุปสิ่งที่จะเขียน)
 
