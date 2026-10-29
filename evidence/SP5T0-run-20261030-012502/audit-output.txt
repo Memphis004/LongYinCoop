@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\tools\sp5t0_audit.py", line 145, in <module>
+    sys.exit(main(sys.argv))
+             ^^^^^^^^^^^^^^
+  File "C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\tools\sp5t0_audit.py", line 141, in main
+    return print(verdict(audit(load(argv[1])))) or 0
+                         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\tools\sp5t0_audit.py", line 86, in audit
+    if sum(per_force.values()) != sect:
+           ^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'values'

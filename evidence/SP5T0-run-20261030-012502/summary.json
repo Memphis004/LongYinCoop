@@ -1,0 +1,25 @@
+{
+  "plan": "SP5-T0-plan-20261027 rev13",
+  "closeReason": "uninstall",
+  "startedAtMs": 1793298704312,
+  "durMs": 198702,
+  "events": 3014,
+  "errors": 0,
+  "ovCalls": {"A": 0, "B": 0, "C": 969},
+  "ovResultsNonNull": {"A": 0, "B": 0, "C": 969},
+  "ovFailures": {"A": 0, "B": 0, "C": 0},
+  "addtemps": 87,
+  "unattributed": 0,
+  "outside": 0,
+  "phaseStuck": 0,
+  "rebaseline": 0,
+  "readfail": 0,
+  "speDbTableSize": 170,
+  "heroNumLastRead": [[4,4,3,3,2,1],[5,4,4,3,3,2],[5,5,4,4,3,2],[6,5,5,4,4,3]],
+  "auditFingerprint": {"A": "pre=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataAPrefixpost=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataAPostfixfin=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataAFinalizertrans=0ilm=0", "B": "pre=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataBPrefixpost=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataBPostfixfin=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataBFinalizertrans=0ilm=0", "C": "pre=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataCPrefixpost=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataCPostfixfin=1|longyincoop.sp5t0.probe:Sp5T0Probe::GenDataCFinalizertrans=0ilm=0"},
+  "unknown": {
+    "inventoryStabilityInWindow": "UNKNOWN (rev 13 — ไม่มีกลไกตรวจภายใน window)",
+    "invocationLinkage": "thread-local LIFO iid — mechanism harness-proven offline (Sp5T0LinkageHarness); runtime ordering ยังไม่รัน",
+    "cOk_E1_E2": "UNKNOWN จนกว่าสองข้อบนจะมีหลักฐานจากกลไกที่ผ่านอนุมัติ"
+  }
+}
