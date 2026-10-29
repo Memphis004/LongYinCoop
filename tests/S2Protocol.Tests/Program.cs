@@ -79,6 +79,7 @@ namespace LongYinCoop.S2.Tests
             _fail += TimeV2aTests.Run();
             _fail += Sp5T0LinkageHarness.Run();
             _fail += Sp5NpcPolicyTests.Run();
+            _fail += Sp5NpcRulesTests.Run();
 
             Console.WriteLine();
             Console.WriteLine(_fail == 0 ? "RESULT PASS (all T0/T1 checks)" : $"RESULT FAIL ({_fail} checks failed)");

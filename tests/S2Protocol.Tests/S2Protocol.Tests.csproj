@@ -48,6 +48,8 @@
     <Compile Include="..\..\src\LongYinCoop\TimeV2a\TimeV2aRules.cs" LinkBase="TimeV2a" />
     <!-- SP5-NPC N1-5: predicate/policy pure (ไม่มี Unity) — Sp5NpcPolicy.cs -->
     <Compile Include="..\..\src\LongYinCoop\SP5\Sp5NpcPolicy.cs" LinkBase="SP5" />
+    <!-- SP5-NPC N2: กฎคำนวณ gate แบบ pure — Sp5NpcGate.cs ไม่ลิงก์ (Il2Cpp/Harmony — compile เฉพาะ mod csproj) -->
+    <Compile Include="..\..\src\LongYinCoop\SP5\Sp5NpcRules.cs" LinkBase="SP5" />
   </ItemGroup>
 
   <ItemGroup>

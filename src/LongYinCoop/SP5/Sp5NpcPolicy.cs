@@ -49,4 +49,21 @@ namespace LongYinCoop
             return ParseValue(policyValue);
         }
     }
+
+    /// <summary>snapshot ของ net.cfg ที่ gate อ่านต่อ invocation (pure — inject ได้ สไตล์ provider)</summary>
+    internal struct Sp5NpcSnapshot
+    {
+        public bool Enabled;
+        public string Role;
+        public bool FormatOk;
+        public string NpcPolicy;
+
+        public Sp5NpcSnapshot(bool enabled, string role, bool formatOk, string npcPolicy)
+        {
+            Enabled = enabled;
+            Role = role;
+            FormatOk = formatOk;
+            NpcPolicy = npcPolicy;
+        }
+    }
 }

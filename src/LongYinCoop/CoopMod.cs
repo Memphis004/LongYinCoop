@@ -52,6 +52,10 @@ namespace LongYinCoop
             JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
             // SP5-T0: probe บัญชี NPC log-only (default false = ไม่ติด hook; one-shot ต่อ session)
             Sp5T0Probe.Apply(CoopPrefs.Sp5T0.Value);
+            // SP5-NPC gate (stage N2): ติด fail-closed — ทุก hook ตัดสินจาก Sp5NpcPolicy.Decide
+            // ต่อ invocation (net.cfg npcPolicy; default off = เกมเดิม 100%) — deploy ได้เฉพาะหลัง
+            // มติอนุมัติ stage runtime ตามแผน SP5-NPC §7
+            Sp5NpcGate.Install();
             CompatInventory.Dump();
             BattleLogHook.Apply();
 
@@ -105,6 +109,7 @@ namespace LongYinCoop
             JitProbeW6.Uninstall();
             JitProbeW7.Uninstall();
             Sp5T0Probe.Uninstall();
+            Sp5NpcGate.Uninstall();
             HarmonyProbe.Uninstall();
         }
 
@@ -120,6 +125,7 @@ namespace LongYinCoop
                 JitProbeW6.Uninstall();
                 JitProbeW7.Uninstall();
                 Sp5T0Probe.Uninstall();
+                Sp5NpcGate.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
                 // V2-A: pref หลักปิด = ปิด sampler ด้วย (writer ถูก dispose ทันที)
