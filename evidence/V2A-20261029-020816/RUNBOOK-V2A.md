@@ -13,6 +13,8 @@
    (`python tools\save-split.py status`)
 4. `MelonPreferences.cfg` ตรวจ**ค่า key** ไม่ใช่ hash (บทเรียน GO-3): `Enabled = true` (โมด), `AllowRemoteInput = false`,
    ไม่มี key `TimeV2a` หรือมีแล้วเป็น false · `net.cfg` = `12541f34…` (444 B, `enabled=false` — ไม่แตะตลอด session)
+   — ตรวจด้วยเครื่องมือ (เพิ่ม 2026-10-29 ตามอนุมัติผู้ใช้ — commit `606f64f`): `python tools\pref_key_check.py`
+     **exit 0 = ผ่าน** (fail = หยุดรายงาน)
 5. ข้อใดไม่ตรง = **หยุดรายงาน** ไม่ลงมือ
 
 ## ขั้น 1 — สำรอง + deploy artifact
@@ -129,7 +131,8 @@ python tools\time_v2a_analyze.py evidence\<LABEL>\<เคส>-r<รอบ>.ndjso
 1. ปิดเกมแล้ว: restore ของ label สุดท้าย + `status` EXACT baseline + `leftovers: none`
 2. **คืน pref ด้วยการตรวจค่า key** (บทเรียน RUNBOOK-G3 — ML เขียน cfg ตอนออกเกม แฮชจึงเปลี่ยนได้เอง):
    `TimeV2a = false` · `AllowRemoteInput = false` · `Enabled = true` คงเดิม · จด sha256 ก่อน/หลังเป็น divergence record
-   (ไม่ใช้ hash เป็นเกณฑ์ผ่าน)
+   (ไม่ใช้ hash เป็นเกณฑ์ผ่าน) — ตรวจด้วย `python tools\pref_key_check.py` **exit 0 = ผ่าน** (เพิ่ม 2026-10-29
+   ตามอนุมัติผู้ใช้)
 3. **`net.cfg` ห้ามแตะตลอด session** — ตรวจท้าย = `12541f34…` (444 B)
 4. pointer file `time-v2a.out`: ลบหรือคงไว้ก็ได้ (fail-closed — ไม่มีผลเมื่อ `TimeV2a=false`) — แนะนำ**ลบ**
    เพื่อลดสิ่งแวดล้อมค้าง

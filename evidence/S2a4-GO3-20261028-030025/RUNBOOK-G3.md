@@ -24,6 +24,10 @@
 4. `git status` — `src/ tools/ tests/` สะอาด; HEAD บันทึกไว้เทียบตอนจบ
 5. hash `Mods\LongYinCoop.dll`/`.pdb` ตรง VERSION.md (`1b4c17aa…`/`dcd78ebd…`) — ไม่ตรง = **หยุด**
 6. ไม่มี ML log ใหม่ที่ไม่มีคำอธิบาย
+7. ตรวจ**ค่า key** ของ pref ด้วยเครื่องมือ (เพิ่ม 2026-10-29 ตามอนุมัติผู้ใช้ — commit `606f64f`):
+   `python tools\pref_key_check.py` — **exit 0 = ผ่าน** (default ตรวจ Enabled=true · AllowRemoteInput=false ·
+   Sp5T0=false · TimeV2a=false — key หายได้ = NOTE · fail = หยุดรายงาน) — ตรวจค่า key ไม่ใช่ hash
+   (บทเรียน L120 ด้านล่าง)
 
 ## ขั้น 1 — ตรวจ artifact + HEAD ยังตรง provenance
 
@@ -100,6 +104,8 @@
 3. ถามผู้ใช้: **rollback DLL กลับ `.prev-1b4c17aa` หรือคง build ใหม่ไว้** — **ห้ามตัดสินเอง** (ถ้า rollback = คืน
    DLL+PDB จาก `.prev-*` แล้ววัด hash ตรงค่าก่อน deploy)
 4. หยุด recorder/ตรวจ orphan process/ไม่มีไฟล์ค้าง
+5. ตรวจ**ค่า key** ปลาย session ด้วย `python tools\pref_key_check.py` — **exit 0 = ผ่าน** (เพิ่ม 2026-10-29
+   ตามอนุมัติผู้ใช้ — ML เขียน cfg ตอนออกเกม แฮชจึงเปลี่ยนได้เอง ใช้ค่า key ไม่ใช้ hash เป็นเกณฑ์)
 
 ## ขั้น 9 — รายงาน
 
