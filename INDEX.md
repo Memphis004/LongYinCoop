@@ -3,6 +3,7 @@
 > จัดโครงสร้างเมื่อ 2026-10-29 ตามคำขอผู้ใช้ — ย้ายด้วย `git mv` ทั้งหมด (เนื้อหาไฟล์ไม่ถูกแก้)
 > **ไม่มีไฟล์ใดถูกลบ** · `evidence/` และ `coop-test/` **ไม่ถูกย้ายเลย** (หลักฐาน/บาสไลน์ — ห้ามจัดระเบียบทับ)
 > ถ้าเอกสารอื่น (AGENTS.md, รายงานใน evidence/, คอมเมนต์ในโค้ด) อ้างชื่อไฟล์แบบ root เดิม ให้ใช้แผนที่ท้ายไฟล์นี้
+> อัปเดต 2026-10-30: ย้าย `sp5-t0-plan.md` + `sp5-npc-n3-approval-request.md` → `plans/closed/` (git mv, เนื้อหาไม่แก้) และเพิ่มแถวไฟล์ SP5-NPC ที่เกิดใหม่หลัง 2026-10-29
 
 ## ไฟล์ระดับ root (ไฟล์ที่ใช้งานจริง)
 
@@ -18,12 +19,13 @@
 
 ## `plans/` — แผนที่ยังใช้งาน / รอ gate ถัดไป
 
-| ไฟล์ | สถานะ ณ 2026-10-29 |
+| ไฟล์ | สถานะ ณ 2026-10-30 |
 |---|---|
 | `S2-plan.md` | แผนแม่ S2 — S2a-0…S2a-3 ปิดแล้ว (tags) · ใช้ §13 (rev2) แทน §1–§12 ตามมติรายข้อ §13.9 · Q3 ยังไม่ตัดสิน |
-| `sp5-t0-plan.md` | rev13 **อนุมัติ 2026-10-27** — probe อยู่ใน build แล้ว (`Sp5/Sp5T0Probe.cs`, pref `Sp5T0=false`) · session รัน T0 ยังไม่เกิด |
 | `time-plan-draft.md` | TIME-PLAN (V1/V2 + Gate 0–6) — **V2-A รันปิดแล้ว 2026-10-29** (`evidence/V2A-20261029-020816/v2a-report.md`) · phase ถัดไปรออนุมัติ gate ตาม §F |
 | `S3-plan-draft-rev2.md` | ร่างแผน S3 rev2 — **เอกสารรีวิวเท่านั้น ยังไม่ขอเริ่ม** (Gate 2 = PASS แล้ว แต่ไม่ใช่การอนุมัติ S3) |
+| `sp5-npc-reduce-plan-draft.md` | แผน SP5-NPC (ลด NPC) — **N1–N3 อนุมัติ+ทำเสร็จแล้ว** (2026-10-30 · N3 ปิดตามมติ commit `3131df8`) · **N4–N6 ยังรออนุมัติ** · มติระดับ/refill คงรอใน `decisions-pending.md` §7.1 |
+| `sp5-npc-n4-approval-request.md` | คำขออนุมัติ stage N4 (T2–T4 ที่ Light ×0.5) — **ร่าง ยังไม่ได้รับอนุมัติ ยังไม่ดำเนินการ** |
 
 ## `plans/closed/` — แผนที่ปิดแล้ว / superseded / ประวัติ diff (อ่านอย่างเดียว)
 
@@ -39,6 +41,8 @@
 | `S3-plan-draft.md` | ฉบับ 2026-10-25 — superseded โดย `plans/S3-plan-draft-rev2.md` (คงไว้ตามหัวไฟล์ rev2) |
 | `STAGEPLAN.v2-draft.md` | superseded โดย `STAGEPLAN.md` (v2 merged) — เดิมถูกระบุว่าห้ามใช้เป็นแหล่งความจริง |
 | `STAGEPLAN.v3-draft.md` | rev1 — SUPERSEDED โดย `STAGEPLAN-v3-addendum.md` (ป้ายในหัวไฟล์) |
+| `sp5-t0-plan.md` | rev 13 อนุมัติ + **รัน T0 จริง 2026-10-30** · `evidence/SP5T0-run-20261030-012502/round-report.md` (เงื่อนไขความถูกต้อง PASS · E4–E7 ปิด · E1/E2 UNKNOWN ตามโครง rev 13 · restore EXACT `df8e5a11beed` + rollback `6a94abb5` + cfg `976ccfb9` ครบ) · มติ GO ลด NPC ตัดสินแล้ว → `plans/sp5-npc-reduce-plan-draft.md` |
+| `sp5-npc-n3-approval-request.md` | stage N3 อนุมัติ+รัน+ปิดแล้ว 2026-10-30 — T1 ผ่าน 3/3 (census h=883 ตรง T0 ทุกประเภททุกรอบ, SaveSlot* ไม่ถูกเขียน) · `evidence/SP5NPC-N3-20261030-035500/` · commits `7396b94`→`bda5200`/`3131df8` (หัวไฟล์ยังเป็นถ้อยคำ "ร่าง" ก่อนอนุมัติ — เนื้อหาไม่แก้ตามธรรมเนียมการย้าย) |
 | `S2a-4-plan-rev3.diff`, `S2a-4-plan-rev4.diff`, `S2a4-*.diff` (6 ไฟล์) | ประวัติ diff ของแผน S2a-4 |
 | `STAGEPLAN.v2-to-v3.diff`, `STAGEPLAN-v3-addendum.diff`, `STAGEPLAN-v3-addendum-rev3.diff` | ประวัติ diff ของ STAGEPLAN v2→v3 / addendum rev1→rev2→rev3 (ถูกอ้างเป็น "ประวัติ" ในหัว addendum) |
 
@@ -58,8 +62,8 @@
 
 ## แผนที่ path เก่า → ใหม่ (สำหรับอ้างอิงที่ค้างอยู่ในเอกสาร/คอมเมนต์)
 
-- `S2-plan.md` → `plans/S2-plan.md` · `sp5-t0-plan.md` → `plans/sp5-t0-plan.md` · `time-plan-draft.md` → `plans/time-plan-draft.md` · `S3-plan-draft-rev2.md` → `plans/S3-plan-draft-rev2.md`
-- แผนปิดทั้งหมด → `plans/closed/<ชื่อเดิม>` (S1.5-plan, S2a-2-plan, S2a-3-plan, S2a-4-plan, SP0-full-plan-draft, X5-*, X6-*, S3-plan-draft, STAGEPLAN.v2-draft, STAGEPLAN.v3-draft)
+- `S2-plan.md` → `plans/S2-plan.md` · `sp5-t0-plan.md` → `plans/closed/sp5-t0-plan.md` (ปิดแล้ว 2026-10-30) · `time-plan-draft.md` → `plans/time-plan-draft.md` · `S3-plan-draft-rev2.md` → `plans/S3-plan-draft-rev2.md`
+- แผนปิดทั้งหมด → `plans/closed/<ชื่อเดิม>` (S1.5-plan, S2a-2-plan, S2a-3-plan, S2a-4-plan, SP0-full-plan-draft, X5-*, X6-*, S3-plan-draft, STAGEPLAN.v2-draft, STAGEPLAN.v3-draft, sp5-t0-plan, sp5-npc-n3-approval-request — สองไฟล์ท้ายย้าย 2026-10-30)
 - โน้ตทั้งหมด → `notes/<ชื่อเดิม>` (area-notes, explorer-notes, sp0-sp7-notes, sp5-prep-notes, time-notes, time-audit-notes, time-followup-notes)
 - `STAGEPLAN.md`, `STAGEPLAN-v3-addendum.md`, `VERSION.md`, `README.md` — **ไม่ย้าย**
 - ไฟล์ที่ไม่ใช่ .md และไม่ได้แตะ: `.probe.js`, `context.txt` · โฟลเดอร์ `src/ tests/ tools/ evidence/ coop-test/` คงเดิมทั้งหมด
