@@ -32,6 +32,11 @@ namespace LongYinCoop.S2
         /// <summary>แสดง overlay IMGUI ในโปรเซสเดียวกับ host (default false — M3: flat key ไม่ใช้ hotkey)</summary>
         public bool Overlay;
 
+        // ---- SP5-NPC (แผน plans/sp5-npc-reduce-plan-draft.md — N1-5) -------
+        /// <summary>ค่า raw ของ key `npcPolicy` (default "off") — แปลงเป็นระดับด้วย Sp5NpcPolicy
+        /// · ค่าไม่รู้จัก = Off และ**ไม่**ทำให้ไฟล์ parse ล้ม (fail-closed เฉพาะ gate ไม่ใช่ไฟล์)</summary>
+        public string NpcPolicy;
+
         public bool IsValid
         {
             get
@@ -133,6 +138,8 @@ namespace LongYinCoop.S2
         public const string KeyTransport = "transport";
         // S2a-4
         public const string KeyOverlay = "overlay";
+        // SP5-NPC (N1-5) — key name จาก design §5.2/§8.2 ข้อ 4 (ยืนยันสุดท้ายก่อน stage N2)
+        public const string KeyNpcPolicy = "npcpolicy";
 
         public const string DefaultBind = BindPolicy.DefaultBind;
         public const int DefaultPort = 47800;
@@ -284,6 +291,12 @@ namespace LongYinCoop.S2
                     // S2a-4 (M3): flat key ปิดเป็น default · รับ true/1/yes/on ตาม IsTrue
                     s.Overlay = IsTrue(value);
                 }
+                else if (key == KeyNpcPolicy)
+                {
+                    // SP5-NPC (N1-5): เก็บ raw — แปลงเป็นระดับที่ gate ด้วย Sp5NpcPolicy.ParseValue
+                    // (ค่าไม่รู้จัก = Off ตอน Decide; ไม่ตั้ง Error — ค่าแปลกไม่ทำไฟล์ parse พัง)
+                    s.NpcPolicy = value;
+                }
                 // key อื่น: ข้าม (เผื่ออนาคต ไม่ทำให้ไฟล์เสีย)
             }
 
@@ -343,6 +356,7 @@ namespace LongYinCoop.S2
                 SendHz = DefaultSendHz,
                 HeartbeatMs = DefaultHeartbeatMs,
                 Transport = DefaultTransport,
+                NpcPolicy = "off",
             };
         }
 

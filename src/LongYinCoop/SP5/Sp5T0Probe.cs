@@ -842,6 +842,18 @@ namespace LongYinCoop
             return fp.ToString();
         }
 
+        /// <summary>
+        /// normalize ตัวคั่นของ patch id ให้เทียบแบบ format-insensitive:
+        /// actual จาก CheckCategory เป็นรูป <c>owner:Type::Method</c> ขณะ expected literal
+        /// เป็นรูป <c>owner:Type.Method</c> — รอบ T0 20261030 เคยทำให้ allMatch=false
+        /// ทั้ง 4 จุดตรวจแม้ inventory ตรงเชิงความหมาย (บั๊ก N1-1 ของแผน SP5-NPC)
+        /// </summary>
+        internal static string NormalizePatchId(string s)
+        {
+            if (s == null) return null;
+            return s.Replace("::", ".").Replace(":", ".");
+        }
+
         private static void CheckCategory(StringBuilder fp, string key, StringBuilder inv,
                                           IEnumerable<Patch> patches, int expectedCount,
                                           string expectedMethod, List<string> reasons, ref bool match)
@@ -883,9 +895,10 @@ namespace LongYinCoop
             }
             if (expectedMethod != null)
             {
+                string expected = NormalizePatchId(HarmonyId + ":" + expectedMethod);
                 foreach (string it in items)
                 {
-                    if (it != HarmonyId + ":" + expectedMethod)
+                    if (NormalizePatchId(it) != expected)
                     {
                         reasons.Add(key + " ไม่ตรง expected: " + it + " (expected " + HarmonyId + ":" + expectedMethod + ")");
                         match = false;

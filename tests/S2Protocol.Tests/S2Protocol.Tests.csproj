@@ -46,6 +46,8 @@
     <Compile Include="..\..\src\LongYinCoop\S2\Guest\S2OverlayRenderModel.cs" LinkBase="Guest" />
     <!-- V2-A (มติ V2A-4): ตรรกะ pure ของ sampler อ่านอย่างเดียว — TimeV2aSampler.cs ไม่ถูกลิงก์ (อ้าง Il2Cpp/Unity) -->
     <Compile Include="..\..\src\LongYinCoop\TimeV2a\TimeV2aRules.cs" LinkBase="TimeV2a" />
+    <!-- SP5-NPC N1-5: predicate/policy pure (ไม่มี Unity) — Sp5NpcPolicy.cs -->
+    <Compile Include="..\..\src\LongYinCoop\SP5\Sp5NpcPolicy.cs" LinkBase="SP5" />
   </ItemGroup>
 
   <ItemGroup>

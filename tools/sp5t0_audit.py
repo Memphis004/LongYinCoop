@@ -47,6 +47,7 @@ def audit(events):
     c_ok = {"W2": 0, "W3": 0}
     add_ok = {"W3": 0}
     counts = {}
+    genenemy = {"before": None, "after": None}
 
     for ev in events:
         e, t = ev.get("ev"), ev.get("t", 0)
@@ -76,31 +77,47 @@ def audit(events):
             if b == "creation":
                 add_ok["W3"] += 1
         elif e == "worldcount":
-            b = bucket_at(t, sng)
-            h = ev.get("H", ev.get("heros", 0))
+            # schema จริงของ probe (รอบ T0 20261030): `h` ตัวพิมพ์เล็ก · perForce = list 30 ช่อง
+            # (session.begin โลกยัง null → ไม่มี hist/perForce) — รองรับ schema แผนเดิม (H/dict) ด้วย
+            # หมายเหตุ: ไม่คำนวณ bucket ของ worldcount — เหตุการณ์นี้เขียน t=0 จึงใช้ label `at` เท่านั้น
+            h = ev.get("h", ev.get("H", ev.get("heros", 0)))
             hist = ev.get("hist", {})
-            per_force = ev.get("perForce", {})
+            per_force = ev.get("perForce")
             if sum(hist.values()) != h:
-                findings["e7_failures"].append({**ev, "why": f"sum(hist)={sum(hist.values())} != H={h}"})
-            sect = hist.get("sect", 0)
-            if sum(per_force.values()) != sect:
-                findings["e7_failures"].append({**ev, "why": f"sum(perForce)={sum(per_force.values())} != hist[sect]={sect}"})
-            counts[f"{b}:{ev.get('at', t)}"] = (h, hist)
+                findings["e7_failures"].append({**ev, "why": f"sum(hist)={sum(hist.values())} != h={h}"})
+            if per_force is not None:
+                pf_sum = sum(per_force) if isinstance(per_force, list) else sum(per_force.values())
+                sect = hist.get("sect", 0)
+                if pf_sum != sect:
+                    findings["e7_failures"].append({**ev, "why": f"sum(perForce)={pf_sum} != hist[sect]={sect}"})
+            # key ด้วย label `at` ตรง ๆ — worldcount จริงของ probe เขียน t=0 (ไม่ใช่ timestamp)
+            # จึงห้ามคำนวณ bucket จาก t; snapshot ชื่อตาม boundary (genhero.begin/end ฯลฯ) อยู่แล้ว
+            counts[str(ev.get("at") or ("t%d" % t))] = (h, hist)
+        elif e == "genenemy.begin":
+            genenemy["before"] = ev.get("tempBefore")
+        elif e == "genenemy.end":
+            genenemy["after"] = ev.get("tempAfter")
 
-    # E1 skeleton: H(genhero.end) - H(genhero.begin) vs #C.ok(W2) + 1
+    # E1 skeleton: H(genhero.end) - H(genhero.begin) vs #C.ok(W2) + 1 (observational only)
     def h_at(label):
-        for k, (h, _hist) in counts.items():
-            if k.startswith("creation:") and label in k:
-                return h
+        if label in counts:
+            return counts[label][0]
         return None
+    hb, he = h_at("genhero.begin"), h_at("genhero.end")
+    d_h = (he - hb) if (hb is not None and he is not None) else None
     findings["eq1"] = {
         "c_ok_W2": c_ok["W2"],
+        "dH_observed": d_h,
         "expected_min": (c_ok["W2"] + 1) if c_ok["W2"] else None,
         "status": "UNKNOWN (rev 13: #C.ok needs inventoryStability + patch-audit + iid linkage — "
                   "numbers reported here are observational only)",
     }
+    d_t = None
+    if genenemy["before"] is not None and genenemy["after"] is not None:
+        d_t = genenemy["after"] - genenemy["before"]
     findings["eq2"] = {
         "c_ok_W3": c_ok["W3"], "addtemp_W3": add_ok["W3"],
+        "dT_observed": d_t,
         "status": "UNKNOWN (rev 13, same conditions as E1)",
     }
     return findings

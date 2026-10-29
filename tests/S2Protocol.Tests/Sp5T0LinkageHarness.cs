@@ -98,6 +98,26 @@ namespace LongYinCoop.S2.Tests
                   invRec != null && push != null && top != null && pop != null && stackF != null && seqF != null);
             if (invRec == null || push == null || top == null || pop == null || stackF == null || seqF == null) return;
 
+            // ---- A0: NormalizePatchId ของ comparator patch.audit (แก้บั๊ก N1-1 — allMatch=false
+            //      ทั้ง 4 จุดตรวจในรอบ T0 20261030 แม้ inventory ตรงเชิงความหมาย) ----
+            MethodInfo normFn = probe.GetMethod("NormalizePatchId",
+                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            Check("มี NormalizePatchId ใน artifact", normFn != null);
+            if (normFn != null)
+            {
+                Func<string, string> norm = s => (string)normFn.Invoke(null, new[] { s });
+                const string id = "longyincoop.sp5t0.probe";
+                // คู่ string จริงจากรอบ T0 20261030 — actual (owner:Type::Method) เทียบ expected literal (owner:Type.Method)
+                Check("normalize: actual รอบ T0 == expected literal (บั๊กเดิมปิด)",
+                      norm(id + ":Sp5T0Probe::GenDataAPrefix") == norm(id + ":Sp5T0Probe.GenDataAPrefix"));
+                Check("normalize: canonical รูปเดียว — :: และ : ทับเป็น .",
+                      norm("a:B::C") == "a.B.C" && norm("x::y:z") == "x.y.z");
+                Check("normalize: ไม่มีตัวคั่น = คงเดิม", norm("plain.Name") == "plain.Name");
+                Check("normalize: method ต่างกันยังต่างกัน (ไม่กลืน false-positive)",
+                      norm(id + ":Sp5T0Probe::GenDataAPrefix") != norm(id + ":Sp5T0Probe::GenDataBPrefix"));
+                Check("normalize: null ปลอดภัย (คืน null)", norm(null) == null);
+            }
+
             // ---- helpers: สร้าง record + อ่าน/เขียน field ผ่าน reflection (handler เรียกผ่านเมธอดเดียวกันนี้) ----
             Func<long, int, object> newRec = (iid, ov) =>
             {
