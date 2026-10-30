@@ -138,7 +138,7 @@
 | baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` (คงเดิม — หลัง GO-3 restore EXACT + `leftovers: none`) |
 | ผล GO-3 สรุป | G0/E1/E2/E3/E4/E6/E7/E8 = PASS · E5 = PASS-with-limitation (M5-3: E5(a) NOT-RUN — ไม่มี hook) · E4 Δmean +0.244 ms ≤ 1.0 · ตรวจหลัง deploy ไม่มีบรรทัด SP5/Sp5T0 ใน ML log · `commandsAccepted=0` ตลอด |
 
-## V2-A session (2026-10-29 · PROVISIONAL — ไม่ปิด stage ไม่ tag · รายงาน `evidence/V2A-20261029-020816/v2a-report.md` @ `ee993d1` — แก้ไขเพิ่มหลัง close: `44b255b` (8→9 runs ตามมติ) · `c07ae7c` (fix งานตรวจค้าง) · `ee993d1` (ผลสืบสวน UNKNOWN — log/โค้ด/disasm เท่านั้น))
+## V2-A session (2026-10-29 · PROVISIONAL — ไม่ปิด stage ไม่ tag · รายงาน `evidence/V2A-20261029-020816/v2a-report.md` @ `ee993d1` — แก้ไขเพิ่มหลัง close: `44b255b` (8→9 runs ตามมติ) · `c07ae7c` (fix งานตรวจค้าง) · `ee993d1` (ผลสืบสวน UNKNOWN — log/โค้ด/disasm เท่านั้น) · `9663a21` (สถานะปิดงาน §9 — มติ (ข) 2026-10-31))
 
 | รายการ | ค่า |
 |---|---|
@@ -157,6 +157,7 @@
 | pointer file `time-v2a.out` | ลบแล้วตอนปิด session (fail-closed — ไม่มีผลเมื่อ `TimeV2a=false`) |
 | baseline เซฟ | `df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920` @ `20261028-071340` คงเดิม — restore EXACT ทุก run |
 | tag ที่เกี่ยว | `stage-S2a-4` → `3ac0761` (2026-10-29 01:27) คงเดิม · ไม่มี tag ใหม่ · ไม่ push |
+| สถานะปิดงาน (docs-only · มติ (ข) 2026-10-31 · session `AUTO-20261031-031942`) | **รับ PROVISIONAL เป็นคำตอบของชุด A** — ป้ายผลคง **UNRESOLVED_OFFSET (PROVISIONAL)** ตาม [CRITERIA] · ข้อจำกัด: N=10 valid 2 รัน (A3-r1/A3-r3 ต่าง 36 ms) · N=5 valid 1 รัน (A2-r2) · N=1 valid 2 รัน (A1-r2/A1-r3 — A1-r1 pilot ไม่นับ) ⇒ ไม่ครบ ≥3 รอบ/ค่าตามแผน §E.1 เดิม · A4 (skip `>>`) ไม่ได้วัด เลื่อน · popup/ปั๊มค้าง = UNKNOWN 2/9 รัน (A3-r2 gap 16,118 ms หลัง day_tick วันที่ 6 · A2-r3 gap 9,043 ms "ได้ไม้" หลัง day_tick วันที่ 1 · USER TESTIMONY 2026-10-30 = "ไม่แน่ใจ" ทั้ง 3 ข้อ) · คำอธิบาย offset ยังเป็น hypothesis (freeze gate ~34–42 เฟรม — ยังไม่พิสูจน์ตรง) · รายละเอียด = `v2a-report.md` §9 (commit `9663a21`) · การปิดงานนี้ docs-only — ไม่เปิดเกม ไม่แตะเซฟ/pref/Mods\ · สิ่งที่ตรวจซ้ำณ ปิดงาน: DLL `6a94abb5…`/PDB `856d3bed…` ✓ · `TimeV2a=false` ✓ · `time-v2a.out` ไม่พบ (ลบแล้ว) ✓ · `.prev-6a94abb5`/`.prev-856d3bed` คงอยู่ ✓ |
 
 ## Mod build ที่ deploy ล่าสุด (2026-10-30 · build `865b4a87…` — SP5-T0 probe log-only · ก่อนหน้า: `6a94abb5…`)
 
