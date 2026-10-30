@@ -27,7 +27,7 @@
 | `sp5-npc-reduce-plan-draft.md` | แผน SP5-NPC (ลด NPC) — **N1–N4 อนุมัติ+ทำเสร็จ+ปิดแล้ว** (2026-10-30 · N4 วัดครบ 3 รอบ: sect 311 ×3, heroNum 50→88 วัดตรง, loveable listPresent 57 · tag `stage-N4` · evidence `SP5NPC-N4-20261030-052251` + `-063817`) · **N5 ร่างคำขอแล้ว ยังไม่ดำเนินการ · N6 และระดับ Mid/Strong ยังไม่อนุมัติ** · มติระดับ/refill คงรอใน `decisions-pending.md` §7.1 |
 | `sp5-npc-n4-approval-request.md` | คำขออนุมัติ stage N4 (T2–T4 ที่ Light ×0.5) — **อนุมัติ+รัน+ปิดแล้ว 2026-10-30** (append ที่ 1–4 ตามลำดับมติ · รอบ 1 หยุดที่นิยาม loveable เก่า → นิยามใหม่ผ่านร่าง follow-up · 3/3 รอบ PASS · tag `stage-N4`) |
 | `sp5-npc-n5-approval-request.md` | คำขออนุมัติ stage N5 (T5–T7 บนโลกที่ลด ที่ Light — เดิน ≥25 วัน ข้าม ChangeMonth ≥2 + plot/mission ≥20+≥20 + dict/ID ตรวจ) — **ร่าง ยังไม่ได้รับอนุมัติ ยังไม่ดำเนินการ** (ต้องระบุทางวัด T7 + นโยบายเซฟ slot บนสำเนาในวลีสั่ง) |
-| `CLOCK-1-decision-draft.md` | ร่างมติปฏิทินกลาง server + ไม่มี pause (P1–P4, a/b/d/e = มติผู้ใช้ 2026-10-30 · ข้อ c อัตรา `secondsPerDay` รอ M1/M2) — สรุปมติใน decisions-pending §10 · implement รอหลัง Gate 5/6 |
+| `CLOCK-1-decision-draft.md` | ร่างมติปฏิทินกลาง server + ไม่มี pause (P1–P4, a/b/d/e = มติผู้ใช้ 2026-10-30 · ข้อ c มีค่าตั้งต้น **120 วิ/วัน** — ล็อกสุดท้ายรอ M1/M2 · กฎ 25% = ข้อเสนอ ยังไม่ใช่มติ) — สรุปมติใน decisions-pending §10 · implement รอหลัง Gate 5/6 |
 
 ## `plans/closed/` — แผนที่ปิดแล้ว / superseded / ประวัติ diff (อ่านอย่างเดียว)
 
