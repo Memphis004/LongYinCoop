@@ -65,6 +65,8 @@ evidence/**/*.dll
 # (ถอนจาก index ด้วย git rm --cached แล้ว — ไฟล์บนดิสก์คงอยู่)
 evidence/**/*.pdb
 PlayerprefData.dat.*
+# (2026-10-31 ตามมติผู้ใช้ — เติม pattern คลุมชื่อไฟล์ที่ไม่มี suffix เช่น PlayerprefData.dat ตรง ๆ)
+**/PlayerprefData.dat*
 
 # SP5body: full-binary disasm of GameAssembly.dll (471MB, game-derived dump)
 # stays local per the never-commit rule for game assets; the extracted bodies
