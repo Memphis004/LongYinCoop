@@ -1,0 +1,130 @@
+; WorldData_OnDeserializedMethod  rva=0x9CF0A0 va=0x1809CF0A0 end(before)=0x9CF2A0 insns=129
+0x01809cf0a0  push     rbx
+0x01809cf0a2  push     rbp
+0x01809cf0a3  push     rdi
+0x01809cf0a4  sub      rsp, 0x20
+0x01809cf0a8  cmp      byte ptr [rip + 0x14d079e], 0  ; [0x1E9F84D .data] f32=8196.37 f64=5.90257e-39
+0x01809cf0af  mov      rbx, rcx
+0x01809cf0b2  jne      0x1809cf0f7
+0x01809cf0b4  lea      rcx, [rip + 0x13b8c5d]  ; [0x1D87D18 .data] f32=-2.0088 f64=1.59152e-314
+0x01809cf0bb  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cf0c0  lea      rcx, [rip + 0x13c2ac9]  ; [0x1D91B90 .data] f32=-2.00901 f64=1.59152e-314
+0x01809cf0c7  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cf0cc  lea      rcx, [rip + 0x13e002d]  ; [0x1DAF100 .data] f32=-2.01 f64=1.59152e-314
+0x01809cf0d3  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cf0d8  lea      rcx, [rip + 0x13c2b31]  ; [0x1D91C10 .data] f32=-2.00901 f64=1.59152e-314
+0x01809cf0df  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cf0e4  lea      rcx, [rip + 0x13e0095]  ; [0x1DAF180 .data] f32=-2.01 f64=1.59152e-314
+0x01809cf0eb  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cf0f0  mov      byte ptr [rip + 0x14d0756], 1  ; [0x1E9F84D .data] f32=8196.37 f64=5.90257e-39
+0x01809cf0f7  mov      rax, qword ptr [rbx + 0x78]
+0x01809cf0fb  xor      edi, edi
+0x01809cf0fd  mov      qword ptr [rsp + 0x40], rsi
+0x01809cf102  mov      ebp, edi
+0x01809cf104  mov      qword ptr [rsp + 0x48], r14
+0x01809cf109  mov      ecx, edi
+0x01809cf10b  mov      qword ptr [rsp + 0x50], r15
+0x01809cf110  test     rax, rax
+0x01809cf113  je       0x1809cf29a
+0x01809cf119  mov      r15d, 0x20
+0x01809cf11f  mov      rsi, rax
+0x01809cf122  mov      r14d, r15d
+0x01809cf125  cmp      ecx, dword ptr [rax + 0x18]
+0x01809cf128  jge      0x1809cf1b4
+0x01809cf12e  test     rsi, rsi
+0x01809cf131  je       0x1809cf29a
+0x01809cf137  cmp      ebp, dword ptr [rsi + 0x18]
+0x01809cf13a  jb       0x1809cf143
+0x01809cf13c  xor      ecx, ecx
+0x01809cf13e  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809cf143  mov      rax, qword ptr [rsi + 0x10]
+0x01809cf147  cmp      dword ptr [r14 + rax], edi
+0x01809cf14b  jl       0x1809cf197
+0x01809cf14d  mov      rcx, qword ptr [rbx + 0x78]
+0x01809cf151  mov      rsi, qword ptr [rbx + 0x80]
+0x01809cf158  test     rcx, rcx
+0x01809cf15b  je       0x1809cf29a
+0x01809cf161  mov      r8, qword ptr [rip + 0x13c2aa8]  ; [0x1D91C10 .data] f32=-2.00901 f64=1.59152e-314
+0x01809cf168  mov      edx, ebp
+0x01809cf16a  call     0x1800d6750  ; -> 0xD6750
+0x01809cf16f  xor      r8d, r8d
+0x01809cf172  mov      edx, eax
+0x01809cf174  mov      rcx, rbx
+0x01809cf177  call     0x1809cd9d0  ; -> WorldData$$GetEventSaveIDEvent (0x9CD9D0)
+0x01809cf17c  test     rsi, rsi
+0x01809cf17f  je       0x1809cf29a
+0x01809cf185  mov      r8, qword ptr [rip + 0x13b8b8c]  ; [0x1D87D18 .data] f32=-2.0088 f64=1.59152e-314
+0x01809cf18c  mov      rdx, rax
+0x01809cf18f  mov      rcx, rsi
+0x01809cf192  call     0x18181f800  ; -> System.Collections.Generic.List<List<List<int>>>$$Add (0x181F800)
+0x01809cf197  mov      rax, qword ptr [rbx + 0x78]
+0x01809cf19b  inc      ebp
+0x01809cf19d  add      r14, 4
+0x01809cf1a1  mov      ecx, ebp
+0x01809cf1a3  mov      rsi, rax
+0x01809cf1a6  test     rax, rax
+0x01809cf1a9  jne      0x1809cf125
+0x01809cf1af  jmp      0x1809cf29a  ; -> 0x9CF29A (inside WorldData$$OnDeserializedMethod)
+0x01809cf1b4  mov      rax, qword ptr [rbx + 0xf0]
+0x01809cf1bb  mov      ecx, edi
+0x01809cf1bd  test     rax, rax
+0x01809cf1c0  je       0x1809cf29a
+0x01809cf1c6  mov      rsi, rax
+0x01809cf1c9  nop      dword ptr [rax]
+0x01809cf1d0  cmp      ecx, dword ptr [rax + 0x18]
+0x01809cf1d3  jge      0x1809cf283
+0x01809cf1d9  test     rsi, rsi
+0x01809cf1dc  je       0x1809cf29a
+0x01809cf1e2  cmp      edi, dword ptr [rsi + 0x18]
+0x01809cf1e5  jb       0x1809cf1ee
+0x01809cf1e7  xor      ecx, ecx
+0x01809cf1e9  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809cf1ee  mov      rax, qword ptr [rsi + 0x10]
+0x01809cf1f2  mov      rcx, qword ptr [r15 + rax]
+0x01809cf1f6  test     rcx, rcx
+0x01809cf1f9  je       0x1809cf29a
+0x01809cf1ff  cmp      dword ptr [rcx + 0x34], 0
+0x01809cf203  jl       0x1809cf267
+0x01809cf205  mov      rcx, qword ptr [rbx + 0xf0]
+0x01809cf20c  test     rcx, rcx
+0x01809cf20f  je       0x1809cf29a
+0x01809cf215  mov      r8, qword ptr [rip + 0x13dff64]  ; [0x1DAF180 .data] f32=-2.01 f64=1.59152e-314
+0x01809cf21c  mov      edx, edi
+0x01809cf21e  call     0x180002f80  ; -> 0x2F80
+0x01809cf223  mov      rcx, qword ptr [rbx + 0xf0]
+0x01809cf22a  mov      rsi, rax
+0x01809cf22d  test     rcx, rcx
+0x01809cf230  je       0x1809cf29a
+0x01809cf232  mov      r8, qword ptr [rip + 0x13dff47]  ; [0x1DAF180 .data] f32=-2.01 f64=1.59152e-314
+0x01809cf239  mov      edx, edi
+0x01809cf23b  call     0x180002f80  ; -> 0x2F80
+0x01809cf240  test     rax, rax
+0x01809cf243  je       0x1809cf29a
+0x01809cf245  mov      edx, dword ptr [rax + 0x34]
+0x01809cf248  xor      r8d, r8d
+0x01809cf24b  mov      rcx, rbx
+0x01809cf24e  call     0x1809cd9d0  ; -> WorldData$$GetEventSaveIDEvent (0x9CD9D0)
+0x01809cf253  test     rsi, rsi
+0x01809cf256  je       0x1809cf29a
+0x01809cf258  lea      rcx, [rsi + 0x38]
+0x01809cf25c  mov      rdx, rax
+0x01809cf25f  mov      qword ptr [rcx], rax
+0x01809cf262  call     0x1800d6020  ; -> 0xD6020
+0x01809cf267  mov      rax, qword ptr [rbx + 0xf0]
+0x01809cf26e  inc      edi
+0x01809cf270  add      r15, 8
+0x01809cf274  mov      ecx, edi
+0x01809cf276  mov      rsi, rax
+0x01809cf279  test     rax, rax
+0x01809cf27c  je       0x1809cf29a
+0x01809cf27e  jmp      0x1809cf1d0  ; -> 0x9CF1D0 (inside WorldData$$OnDeserializedMethod)
+0x01809cf283  mov      r15, qword ptr [rsp + 0x50]
+0x01809cf288  mov      r14, qword ptr [rsp + 0x48]
+0x01809cf28d  mov      rsi, qword ptr [rsp + 0x40]
+0x01809cf292  add      rsp, 0x20
+0x01809cf296  pop      rdi
+0x01809cf297  pop      rbp
+0x01809cf298  pop      rbx
+0x01809cf299  ret      
+0x01809cf29a  call     0x1800d6610  ; -> 0xD6610
+0x01809cf29f  int3     
