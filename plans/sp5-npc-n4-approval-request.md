@@ -166,3 +166,9 @@
 >   `12541f34…` + Sp5T0=false)
 > - **baseline เซฟปัจจุบัน = `7e1e65e52659…` @ `20261030-060854`** (rebaseline volatile-only
 >   มติ 2026-10-30 — ดู VERSION.md หัวข้อ Baseline ปัจจุบัน) — split รอบ 2–3 ใช้ baseline นี้
+
+> **สถานะมติ 2026-10-30 (append ที่ 4 — ข้อความเดิมคงไว้): stage N4 ปิดแล้ว** — ผู้ใช้รับรายงาน
+> 3/3 รอบ PASS ตามเกณฑ์ (รอบ 1 หยุดที่นิยาม loveable เก่าซึ่งถูกแทนด้วยนิยามใหม่ที่อนุมัติตามร่าง
+> follow-up; รอบ 2–3 ผ่านทุกเกณฑ์รวมการวัดตรง heroNum Σ=50/Σ=88 และ listPresent=57) ·
+> tag `stage-N4` สร้างแล้ว (annotated, mod repo — local, ยังไม่ push) · คำขอ N5 ร่างแล้ว
+> `plans/sp5-npc-n5-approval-request.md` (ยังไม่ดำเนินการ · N6/Mid/Strong ยังไม่อนุมัติ)

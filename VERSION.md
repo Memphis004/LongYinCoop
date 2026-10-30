@@ -183,8 +183,8 @@
 | ยืนยันก่อน rebaseline | เซฟรายไฟล์เทียบ `20261028-071340`: **56/57 EXACT · CHANGED = `Save/PlayerprefData.dat` ไฟล์เดียว** · missing=0 · extra=0 ⇒ `SaveSlot*` ทั้ง 55 ไม่ถูกเขียน (วัดซ้ำ 06:07 ครั้งที่ 2 ตรง) |
 | digest ที่อนุมัติ (anchor ใหม่) | **`7e1e65e52659e878650b206e43322692879aad9750d047091f34450e94830fa6`** (57 ไฟล์) @ `coop-test/baselines/20261030-060854/savehash.real.before.txt` · `REBASELINE.json` = `volatile_only: true, changed=[PlayerprefData.dat]` |
 | สายโซ่ baseline | `4226730f66ff` → `7332fc93eb98` → `b7f67154cff6` → `58883949…` (`20261025-201545`) → `df8e5a11beed…` (`20261028-071340`) → **`7e1e65e52659…` (`20261030-060854` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
-| `UserData\MelonPreferences.cfg` | `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` (หลังปิด N3) → **`733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c`** (ML เขียนตอนปิดเกม 05:46:28 "Preferences Saved!") — **ค่า key semantic ตรงตลอด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false` (อ่านเนื้อหาเทียบค่า; ไม่มีสำเนาไฟล์เก่าไว้ diff ทุก byte — ตามบทเรียน RUNBOOK-G3 ตรวจด้วยค่า key ไม่ใช่ hash) |
-| `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:03 + 06:07) |
+| `UserData\MelonPreferences.cfg` | `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` (หลังปิด N3) → `733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c` (ML เขียนตอนปิดเกม 05:46:28) → `5a9d4280f2dd8590e6f5498dd45a6562eb2bbbd43c634b41fccd5a2e6505a519` (agent ตั้ง `Sp5T0=true` ช่วงรัน N4 รอบ 2–3 · ML exit-save ×2 ที่ 06:42:56/06:46:31) → **`976ccfb9…` ปัจจุบัน** (agent คืน `Sp5T0=false` ปิดเซสชัน 06:47) — **ค่า key semantic ตรงตลอดทุกจุด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false` (ตรวจด้วยค่า key ไม่ใช่ hash — บทเรียน RUNBOOK-G3; **ML เขียน cfg ทุกครั้งที่ปิดเกม = cosmetic rewrite ตามปกติ คาดหวังได้**) |
+| `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:03 + 06:07 · หลังจบ N4 รอบ 2–3 ยืนยันซ้ำ 06:47 ตรงเป๊ะ) |
 
 ## กฎ
 

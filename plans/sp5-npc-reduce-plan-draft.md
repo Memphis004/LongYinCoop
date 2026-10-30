@@ -176,3 +176,20 @@ raw offset · census PROTECTED ขาด/ผิดตัว · soft-lock/crash �
 > (in-window Σ=50 / post-restore Σ=88) = **ร่างรออนุมัติ** `plans/sp5-npc-n4-followup-draft.md` —
 > ยังไม่เขียนโค้ด · หมายเหตุ: net.cfg ช่วงรันต้อง `enabled=true` + `npcPolicy=light` พร้อมกัน
 > (opt-in สองชั้น — Sp5NpcPolicy.Decide + เทสต์ 80 ชุด)
+
+> **สถานะมติ 2026-10-30 (append — ข้อความเดิมคงไว้): stage N4 = ปิดแล้ว ตามมติผู้ใช้ (รับรายงาน)
+> — tag `stage-N4` (annotated, mod repo) สร้างที่ commit ปิดของเซสชันนี้ · N5 ร่างคำขอแล้ว
+> ยังไม่ดำเนินการ · N6 และระดับ Mid/Strong ยังไม่อนุมัติ.**
+> **ผล N4 รวม 3 รอบ** (รอบ 1 = `SP5NPC-N4-20261030-052251` artifact `ba1e1dd1…` · รอบ 2–3 =
+> `SP5NPC-N4-20261030-063817` artifact `476f390e…`): census h=632 = protag 1 + spe 170 +
+> **sect 311 ทั้ง 3 รอบ** (ใน band [280,350] · ฐาน gate-off 562 → −251 ≈ โมเดล quota 300–316) ·
+> perForce เท่ากันทุกสำนักทุกรอบ (deterministic) · **heroNum window Σ=50 / post-restore sng.end
+> Σ=88 — วัดตรงได้ครั้งแรกด้วย artifact ใหม่ ตรงทุกช่องทั้งสองรอบ** · **T2 loveable นิยามใหม่
+> PASS: listCount=57 + listPresent=57, missing=0 ทั้งสองรอบ** (กติกา match ชื่อ RUNTIME-confirmed ·
+> heroCount 631 = observational — flag ≠ list membership ตามสืบเหตุ) · zhangmen 30/30 · teacher
+> 311/311 · BirthSetting ตรงฐาน · T3 f2=0 · gate install สำเร็จทุกรอบ (outside=0 ownedLeft=0
+> [ERROR]=0) · `SaveSlot*` ไม่ถูกเขียน · คืนสภาพครบทุกเซสชัน (DLL `6a94abb5` · net.cfg `12541f34`
+> เป๊ะ · เซฟ EXACT baseline `20261030-060854` digest `7e1e65e52659…` — rebaseline volatile-only
+> มติ 2026-10-30 หลังผู้ใช้เปิดเกมเอง 05:45) · TempHeros RNG 79–89 · หลักฐาน
+> `evidence/SP5NPC-N4-20261030-052251/` + `evidence/SP5NPC-N4-20261030-063817/` ·
+> คำขอ N5 = `plans/sp5-npc-n5-approval-request.md` (ร่าง ยังไม่ดำเนินการ)
