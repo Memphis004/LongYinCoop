@@ -52,6 +52,10 @@ namespace LongYinCoop
             JitProbeW7.Apply(CoopPrefs.JitProbeW7.Value);
             // SP5-T0: probe บัญชี NPC log-only (default false = ไม่ติด hook; one-shot ต่อ session)
             Sp5T0Probe.Apply(CoopPrefs.Sp5T0.Value);
+            // V1 (มติ [Gate 3] 2026-10-31): probe log-only บน StopWorking/MiddleStopWork —
+            // default false = Apply(false) = Uninstall ของสิ่งที่ไม่มีอยู่ = no-op ล้วน
+            // (ไม่สร้าง Harmony/ไม่เปิดไฟล์/ไม่เปิดเธรด — มติ [Gate 3] ข้อ (ก))
+            TimeV1.TimeV1Probe.Apply(CoopPrefs.TimeV1a.Value);
             // SP5-NPC gate (stage N2): ติด fail-closed — ทุก hook ตัดสินจาก Sp5NpcPolicy.Decide
             // ต่อ invocation (net.cfg npcPolicy; default off = เกมเดิม 100%) — deploy ได้เฉพาะหลัง
             // มติอนุมัติ stage runtime ตามแผน SP5-NPC §7
@@ -109,6 +113,8 @@ namespace LongYinCoop
             JitProbeW6.Uninstall();
             JitProbeW7.Uninstall();
             Sp5T0Probe.Uninstall();
+            // V1: ถอน probe log-only (ตรวจ patch count กลับ 0 ภายในตัวเอง — มติ [Gate 3] ข้อ (ข))
+            TimeV1.TimeV1Probe.Uninstall();
             Sp5NpcGate.Uninstall();
             HarmonyProbe.Uninstall();
         }
@@ -125,6 +131,8 @@ namespace LongYinCoop
                 JitProbeW6.Uninstall();
                 JitProbeW7.Uninstall();
                 Sp5T0Probe.Uninstall();
+                // V1: pref หลักปิด = ถอน probe log-only ด้วย
+                TimeV1.TimeV1Probe.Uninstall();
                 Sp5NpcGate.Uninstall();
                 HarmonyProbe.Uninstall();
                 CaptureWriter.Stop();
@@ -184,6 +192,16 @@ namespace LongYinCoop
             if (Sp5T0Probe.Installed)
             {
                 Sp5T0Probe.Tick();
+            }
+
+            // V1: ติด/ถอดตาม pref + เช็ค cap (มติ [Gate 3] 2026-10-31 — default false = no-op)
+            if (CoopPrefs.TimeV1a.Value != TimeV1.TimeV1Probe.Installed)
+            {
+                TimeV1.TimeV1Probe.Apply(CoopPrefs.TimeV1a.Value);
+            }
+            if (TimeV1.TimeV1Probe.Installed)
+            {
+                TimeV1.TimeV1Probe.Tick();
             }
 
             // S1.5-c W1: ติด/ถอดเฉพาะ 2 method ตาม pref (default false)

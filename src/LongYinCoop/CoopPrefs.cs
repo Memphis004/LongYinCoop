@@ -29,6 +29,9 @@ namespace LongYinCoop
         // V2-A (มติ V2A-4, 2026-10-29 — errata N1): sampler อ่านอย่างเดียวของ activity pump —
         // false = ไม่อ่าน/ไม่เขียนอะไรเลย (ไม่มี Harmony/ไม่มี hook)
         public static MelonPreferences_Entry<bool> TimeV2a;
+        // V1 (มติ [Gate 3] 2026-10-31 — errata E9): probe log-only บน StopWorking/MiddleStopWork —
+        // false = ไม่ติด patch เลย (Apply(false) ณ โหลด = no-op); ชื่อตามแบบ TimeV2a/Sp5T0
+        public static MelonPreferences_Entry<bool> TimeV1a;
         public static MelonPreferences_Entry<bool> Capture;
         public static MelonPreferences_Entry<int> WorldHz;
         public static MelonPreferences_Entry<int> WorldStreamHz;
@@ -59,6 +62,8 @@ namespace LongYinCoop
             Sp5T0 = Category.CreateEntry("Sp5T0", false);
             // V2-A: sampler อ่านอย่างเดียวของ activity pump (TimeV2aSampler) — false = no-op สมบูรณ์
             TimeV2a = Category.CreateEntry("TimeV2a", false);
+            // V1: probe log-only (TimeV1Probe) — false = ไม่ติด Harmony/ไม่เปิดไฟล์ (มติ [Gate 3] ข้อ (ก))
+            TimeV1a = Category.CreateEntry("TimeV1a", false);
             // S1 kill switch: false = hook ยังติดแต่ไม่บันทึก event ใหม่ (เกมเดินต่อ)
             Capture = Category.CreateEntry("Capture", true);
             // world snapshot rate (10 Hz ตามแผน) — ใช้ทั้ง IPC และ sampling
