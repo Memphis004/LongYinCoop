@@ -56,6 +56,7 @@ class TestCheckFile(unittest.TestCase):
         "JitProbe = false\n"
         "Sp5T0 = false\n"
         "TimeV2a = false\n"
+        "TimeV1a = false\n"
         "\n"
         "[UnityExplorer]\n"
         "\"Log To Disk\" = true\n"
@@ -71,6 +72,7 @@ class TestCheckFile(unittest.TestCase):
         self.assertEqual(tags["AllowRemoteInput"], "OK")
         self.assertEqual(tags["Sp5T0"], "OK")
         self.assertEqual(tags["TimeV2a"], "OK")
+        self.assertEqual(tags["TimeV1a"], "OK")
 
     def test_mismatch_is_fail(self):
         path = write_cfg(self.BASE.replace("AllowRemoteInput = false", "AllowRemoteInput = true"))
@@ -92,6 +94,22 @@ class TestCheckFile(unittest.TestCase):
         results, status = pkc.check_file(path, pkc.DEFAULT_CHECKS)
         self.assertEqual(status, "PASS")
         self.assertTrue(any(r[0] == "NOTE" and r[2] == "TimeV2a" for r in results))
+
+    def test_optional_timev1a_absent_is_note_pass(self):
+        # V1 (มติ [Gate 3] 2026-10-31): key TimeV1a ยังไม่มีใน cfg จนกว่า build ใหม่จะรันครั้งแรก
+        path = write_cfg(self.BASE.replace("TimeV1a = false\n", ""))
+        self.addCleanup(os.remove, path)
+        results, status = pkc.check_file(path, pkc.DEFAULT_CHECKS)
+        self.assertEqual(status, "PASS")
+        self.assertTrue(any(r[0] == "NOTE" and r[2] == "TimeV1a" for r in results))
+
+    def test_optional_both_time_keys_absent_is_note_pass(self):
+        path = write_cfg(self.BASE.replace("TimeV2a = false\n", "").replace("TimeV1a = false\n", ""))
+        self.addCleanup(os.remove, path)
+        results, status = pkc.check_file(path, pkc.DEFAULT_CHECKS)
+        self.assertEqual(status, "PASS")
+        self.assertTrue(any(r[0] == "NOTE" and r[2] == "TimeV2a" for r in results))
+        self.assertTrue(any(r[0] == "NOTE" and r[2] == "TimeV1a" for r in results))
 
     def test_section_missing_is_fail(self):
         path = write_cfg("[Other]\nX = 1\n")

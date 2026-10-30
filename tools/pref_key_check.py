@@ -9,10 +9,10 @@
   exit 0 = ผ่านครบ · exit 1 = มีข้อไม่ผ่าน (mismatch / key หาย / section หาย) ·
   exit 2 = ไฟล์ไม่มี / อ่านไม่ได้ / บรรทัดใน section เป้าหมายแยกไม่ได้ (ไม่เดา)
 
-ค่าเริ่มต้น (ตรงกับ session-start/exit check ที่ใช้จริง ณ 2026-10-29):
+ค่าเริ่มต้น (ตรงกับ session-start/exit check ที่ใช้จริง ณ 2026-10-31):
   [LongYinCoop] Enabled = true · AllowRemoteInput = false · Sp5T0 = false ·
-  TimeV2a = false (key หายได้ = PASS-with-note ตาม RUNBOOK-V2A ขั้น 0.4 "ไม่มี key
-  TimeV2a หรือมีแล้วเป็น false")
+  TimeV2a = false · TimeV1a = false (key หายได้ = PASS-with-note ตาม RUNBOOK-V2A ขั้น 0.4
+  "ไม่มี key หรือมีแล้วเป็น false" — TimeV1a ยังไม่มีใน cfg จนกว่า build ใหม่จะรันครั้งแรก)
 
 เพิ่ม/ทับรายการตรวจด้วย --check "Section:Key=Expected" (ทำซ้ำได้) เช่นตอนเตรียม V2-A:
   --check "LongYinCoop:TimeV2a=true"
@@ -31,6 +31,8 @@ DEFAULT_CHECKS = [
     ("LongYinCoop", "AllowRemoteInput", "false", False),
     ("LongYinCoop", "Sp5T0", "false", False),
     ("LongYinCoop", "TimeV2a", "false", True),
+    # V1 (มติ [Gate 3] 2026-10-31): key ยังไม่มีใน cfg จนกว่า build ใหม่จะรันครั้งแรก — optional เหมือน TimeV2a
+    ("LongYinCoop", "TimeV1a", "false", True),
 ]
 
 SECTION_RE = re.compile(r"^\s*\[\s*([^\]]+?)\s*\]\s*$")
