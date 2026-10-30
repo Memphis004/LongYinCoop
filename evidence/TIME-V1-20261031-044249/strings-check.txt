@@ -1,0 +1,35 @@
+== metadata raw scan (no assembly load) — TIME-V1 artifact ==
+file: evidence/TIME-V1-20261031-044249/LongYinCoop.dll
+#Strings = ชื่อ type/method (ASCII) · #US = string literal (UTF-16LE) — ตามแบบรอบ GO-3
+-- new V1: type/method names (#Strings) --
+TimeV1Probe                  1 FOUND
+TimeV1Event                  1 FOUND
+TimeV1Gate                   1 FOUND
+TimeV1NdjsonWriter           1 FOUND
+StopWorkingPrefix            1 FOUND
+StopWorkingPostfix           1 FOUND
+StopWorkingFinalizer         1 FOUND
+MiddleStopWorkPrefix         1 FOUND
+MiddleStopWorkPostfix        1 FOUND
+MiddleStopWorkFinalizer      1 FOUND
+-- new V1: string literals (#US, UTF-16LE) --
+time-v1.out                    2 FOUND
+longyincoop.timev1.probe       2 FOUND
+TimeV1 installed (log-only)    1 FOUND
+[TimeV1] writer open ->        1 FOUND
+-- legacy types (#Strings) --
+Sp5T0Probe                   1 FOUND
+TimeV2aSampler               1 FOUND
+TimeV2aObs                   1 FOUND
+TimeV2aEvent                 1 FOUND
+TimeV2aNdjsonWriter          1 FOUND
+TimeV2aDetector              1 FOUND
+TimeV2aGate                  1 FOUND
+S2SetPrefGate                1 FOUND
+S2OverlayClient              2 FOUND
+S2WriteGuardHook             1 FOUND
+S2FrameMeter                 1 FOUND
+-- legacy literals (#US) --
+time-v2a.out                   2 FOUND
+longyincoop.sp5t0.probe        4 FOUND
+RESULT: ALL-FOUND
