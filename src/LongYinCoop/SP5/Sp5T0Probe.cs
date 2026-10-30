@@ -1427,7 +1427,7 @@ namespace LongYinCoop
                             t7sb.Append(t7.OwnPerForce[i]);
                         }
                     }
-                    t7sb.Append("]}");
+                    t7sb.Append("]}}");   // ปิด perForce + ownHeros + ตัว object t7 เอง (Commit ปิดวงเล็บนอกสุด — บั๊ก emission N5 session-1: ขาด } ตัวนี้ทำให้ worldcount parse ไม่ได้)
 
                     _lastT7DictH = t7.DictH; _lastT7DictT = t7.DictT; _lastT7Dup = t7.DupCount;
                     _lastT7LeaderNonZero = t7.LeaderNonZero; _lastT7LeaderExists = t7.LeaderExists;
