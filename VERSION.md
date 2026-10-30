@@ -175,7 +175,7 @@
 | baseline เซฟที่ใช้ | `coop-test/baselines/20261028-071340/savehash.real.before.txt` · digest `df8e5a11beed…` — split label `SP5T0-20261030-012502` (Save vs baseline changed=0 missing=0 added=0) · จบรอบ restore + rollback DLL |
 | **สถานะหลังจบรอบ (2026-10-30 01:4x)** | **rollback แล้วตามวลีสั่ง:** `Mods\LongYinCoop.dll` = `6a94abb5…` + PDB `856d3bed…` (hash ตรง rollback point ยืนยัน 01:44) · `MelonPreferences.cfg` = `976ccfb9…` **EXACT byte-level ก่อน session** (`Sp5T0=false` — ML ที่เขียนตอนออกเกมเป็น cosmetic rewrite, ค่า key ทุกตัวเหมือนเดิม) · เซฟ restore EXACT + `leftovers: none` · `SaveSlot*` ไม่ถูกเขียนตลอดรอบ (โลกใหม่ไม่ได้เซฟลง slot) · รอบรันผลครบ: ติด 7 patch/ถอน ownedLeft=0 · events=3014 errors=0 · E4/E5/E6/E7 ปิด · E1/E2 คง UNKNOWN ตาม rev 13 · พบบั๊ก comparator string-format ของ probe (allMatch=false เป็น artifact — inventory เชิงความหมายตรงทุกจุด) · รายงาน `evidence/SP5T0-run-20261030-012502/round-report.md` |
 
-## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-30 N4-follow-up · rebaseline volatile-only — แทนหัวข้อ [G-2] ด้านบนเป็น anchor ปัจจุบัน)
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-30 N4-follow-up · rebaseline volatile-only — แทนหัวข้อ [G-2] ด้านบนเป็น anchor ปัจจุบัน) — **superseded 2026-10-31 โดย `20261031-001811` (หัวข้อถัดไป)**
 
 | รายการ | ค่า |
 |---|---|
@@ -186,6 +186,17 @@
 | `UserData\MelonPreferences.cfg` | `976ccfb9a6e6ff5be9718229b25af3e4b2bd765edeae419bc6fa0cd0ba39d325` (หลังปิด N3) → `733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c` (ML เขียนตอนปิดเกม 05:46:28) → `5a9d4280f2dd8590e6f5498dd45a6562eb2bbbd43c634b41fccd5a2e6505a519` (agent ตั้ง `Sp5T0=true` ช่วงรัน N4 รอบ 2–3 · ML exit-save ×2 ที่ 06:42:56/06:46:31) → **`976ccfb9…` ปัจจุบัน** (agent คืน `Sp5T0=false` ปิดเซสชัน 06:47) — **ค่า key semantic ตรงตลอดทุกจุด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false` (ตรวจด้วยค่า key ไม่ใช่ hash — บทเรียน RUNBOOK-G3; **ML เขียน cfg ทุกครั้งที่ปิดเกม = cosmetic rewrite ตามปกติ คาดหวังได้**) |
 | `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:03 + 06:07 · หลังจบ N4 รอบ 2–3 ยืนยันซ้ำ 06:47 ตรงเป๊ะ) |
 | **drift รอบที่ 3 (ผู้ใช้เปิดเกม 06:54–06:58 — ML log `26-10-30_6-54-6.log`)** | เซฟ digest `7e1e65e52659…` → **`d3f7cb2fcae2…`** (ไฟล์เดียว = `PlayerprefData.dat`, SaveSlot* ครบ · วัด 07:12) · cfg `976ccfb9…` → **`733d9a0c…`** (ML exit-save — ค่า key ตรงตลอด) · **มติ 2026-10-30: ดำเนินงาน push (git-side) ต่อโดยไม่ rebaseline ตอนนี้ — สถานะนี้ = anchor เริ่มต้นเซสชันถัดไป** · **คำเตือน: เซสชัน runtime ถัดไปต้อง `rebaseline volatile-only --against 20261030-060854` ก่อน split** (มิฉะนั้น expected-baseline check จะ fail ที่ pref) · ปัจจุบัน push แล้วโดยเซสชันขนาน: origin/master = `08a5ceb` (สายโซ่ครบจน 08a5ceb) + tag `stage-N4` = `eb3db5b5…` (push โดยเซสชันนี้ 07:1x) |
+
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-31 · rebaseline volatile-only — แทนหัวข้อ 2026-10-30 ด้านบนเป็น anchor ปัจจุบัน)
+
+| รายการ | ค่า |
+|---|---|
+| เหตุการณ์ | rebaseline volatile-only ตามมติผู้ใช้ 2026-10-31 (offline session — evidence `evidence/AUTO-20261031-001917/`) — **ปิดคำเตือนของ drift รอบที่ 3** ในหัวข้อก่อน ("เซสชัน runtime ถัดไปต้อง `rebaseline volatile-only --against 20261030-060854` ก่อน split") · ไม่มี incident เกมเปิดใหม่ — เซฟคงสถานะเดิมจาก anchor `d3f7cb2fcae2…` ที่ `b814d61` บันทึกไว้ |
+| ยืนยันก่อน rebaseline | เซฟรายไฟล์เทียบ `20261030-060854` (read-only ผ่านฟังก์ชันของ `save-split.py` เอง): **56/57 EXACT · CHANGED = `Save/PlayerprefData.dat` ไฟล์เดียว** · missing=0 · added=0 · digest ปัจจุบัน `d3f7cb2fcae2…` ตรง anchor ที่ผู้ใช้ระบุในมติเป๊ะ |
+| digest ที่อนุมัติ (anchor ใหม่) | **`d3f7cb2fcae297f0e4b1cfb61630c4d19adb2e848dd6dd2c2ebf2346afe91b0f`** (57 ไฟล์) @ `coop-test/baselines/20261031-001811/savehash.real.before.txt` · `REBASELINE.json` = `volatile_only: true, changed=[PlayerprefData.dat], missing=[], added=[]` · ต่อเนื่องจาก split ทุกครั้งใช้ `--expected-baseline` ไฟล์นี้ตรง ๆ |
+| สายโซ่ baseline | `4226730f66ff` → `7332fc93eb98` → `b7f67154cff6` → `58883949…` (`20261025-201545`) → `df8e5a11beed…` (`20261028-071340`) → `7e1e65e52659…` (`20261030-060854`) → **`d3f7cb2fcae2…` (`20261031-001811` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
+| `UserData\MelonPreferences.cfg` | `733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c` (วัด 00:19 — คงจาก drift รอบที่ 3 · ML cosmetic rewrite ตามปกติ · **ค่า key semantic ตรงตลอด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false`) |
+| `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 00:19) |
 
 ## กฎ
 
