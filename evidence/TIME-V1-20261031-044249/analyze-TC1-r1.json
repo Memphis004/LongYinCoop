@@ -1,0 +1,151 @@
+{
+  "label": "TC1-r1-INCOMPLETE-probe-down",
+  "gap_ms": 2000,
+  "probe_files": [
+    {
+      "stop_calls": [],
+      "middlestopwork": 0,
+      "session_markers": {
+        "begin": 0,
+        "end": 0
+      },
+      "last_err_n": null,
+      "finalizers_with_ex": [],
+      "file": "evidence/TIME-V1-20261031-044249/TC1-r1.ndjson",
+      "events": 0,
+      "malformed": 0,
+      "r1": {
+        "cancel_via_plot_choice_observed": false,
+        "route_a_cancel_count": 0,
+        "route_b_cancel_count": 0,
+        "finish_true_count": 0,
+        "note": "route-a = ผ่าน middlestopwork (plot-choice); route-b = เรียกตรง (รวม per-day handler — ระบุ TC ด้วยบันทึกผู้ใช้เสมอ, errata E4/E10)"
+      },
+      "r2": {
+        "stop_calls_with_handler": [],
+        "note": "gate totalWorkingDay>0 ของ FinishWorkInProductionBuilding (§B.4) — analyzer รายงานค่า; dialog จริงบนจอ = บันทึกของผู้ใช้เท่านั้น (hypothesis §D.4)"
+      }
+    }
+  ],
+  "v2a_files": [
+    {
+      "sessions": [
+        {
+          "ordinal": 1,
+          "start_index": 0,
+          "start": {
+            "t": 1793400256437,
+            "leftWorkingDay": 2,
+            "noCancel": false
+          },
+          "events": [
+            {
+              "t": 1793400256698,
+              "frame": 14916,
+              "ev": "pause_end",
+              "leftWorkingDay": 2,
+              "totalWorkingDay": 0,
+              "nextDayTime": 0,
+              "leftPauseTime": -0.0069341487,
+              "workFinished": false,
+              "skipping": false,
+              "dayTime": 1,
+              "pauseTime": 0.25,
+              "hour": 5.078057
+            },
+            {
+              "t": 1793400257753,
+              "frame": 15001,
+              "ev": "day_tick",
+              "leftWorkingDay": 1,
+              "totalWorkingDay": 1,
+              "nextDayTime": 0,
+              "leftPauseTime": 0.25,
+              "workFinished": false,
+              "skipping": false,
+              "dayTime": 1,
+              "pauseTime": 0.25,
+              "hour": 5.0780563,
+              "skipK": 1
+            },
+            {
+              "t": 1793400258116,
+              "frame": 15005,
+              "ev": "pause_end",
+              "leftWorkingDay": 1,
+              "totalWorkingDay": 1,
+              "nextDayTime": 0,
+              "leftPauseTime": -0.10413359,
+              "workFinished": false,
+              "skipping": false,
+              "dayTime": 1,
+              "pauseTime": 0.25,
+              "hour": 5.0780563
+            },
+            {
+              "t": 1793400301179,
+              "frame": 17791,
+              "ev": "work_abort",
+              "leftWorkingDay": 1,
+              "totalWorkingDay": 1,
+              "nextDayTime": 0.69440776,
+              "leftPauseTime": -0.10413359,
+              "workFinished": false,
+              "skipping": false,
+              "dayTime": 1,
+              "pauseTime": 0.25,
+              "hour": 5.0780563
+            }
+          ],
+          "times": [
+            1793400256698,
+            1793400257753,
+            1793400258116,
+            1793400301179
+          ],
+          "max_gap_ms": 43063,
+          "end": {
+            "ev": "work_abort",
+            "t": 1793400301179,
+            "index": 4
+          },
+          "contaminated_candidate": true,
+          "latch_true_events": 0,
+          "latch_false_events": 3
+        }
+      ],
+      "open_without_close": 0,
+      "max_gap_ms": 0,
+      "gap_hits": [
+        {
+          "index": 0,
+          "max_gap_ms": 43063
+        }
+      ],
+      "file": "evidence/TIME-V1-20261031-044249/TC1-r1-v2a.ndjson",
+      "events": 5,
+      "malformed": 0
+    }
+  ],
+  "screen_values_echo": {
+    "tc": "TC-1",
+    "run": "r1",
+    "work_type": "อ่านหนังสือวิชา (阅读《沸血法》 — อ่านหนังสือ/ฝึก 2 วัน ผ่าน UI ปกติ)",
+    "money_before": 7119,
+    "money_after_cancel": 7119,
+    "money_note": "จากภาพผู้ใช้: เงิน 7119 ทั้งก่อนเริ่ม (ภาพ 1) และหลังยกเลิก (ภาพ 3) — ไม่เห็นความต่าง; ไม่มีภาพช่วงหลังเริ่มงาน จึงพิสูจน์ 'ถูกหักค้าง' ไม่ได้จากภาพเดียว (OBSERVED บางส่วน — เงินไม่ต่างระหว่างภาพต้น-ปลาย)",
+    "gold_fragment": 8622,
+    "resource_after_cancel": "เหมือนเริ่มต้น (+194 +314 -303 +165 +545 +295 ทั้งสามภาพ — TC-1 สายอ่านหนังสือไม่ผลิตทรัพยากร)",
+    "dialog_after_cancel": "dialog ยืนยันยกเลิกโผล่จริง: 'แน่ใจหรือว่าจะยกเลิกกาน จัญไคเชิงเอียด (沸血法)?' พร้อม 2 ตัวเลือก (ยุติกางคืน / ยาเดิด) + แถบล่าง จั้งไจ้เอียด/เริ่มเลาะ — ตรง plot-choice ของ TryCancelWorking (static ก่อน — บนจอยืนยันครั้งแรก)",
+    "calendar_days_passed": "ชั่วยาม 21 → 22 (1 ชั่วยาม) · วันที่เดือนไม่ข้าม — day_tick 1 ครั้ง (leftWorkingDay 2→1) ตรง TimeV2a",
+    "ui_anomaly": "ไม่พบ — หลังยกเลิกกลับแผนที่ปกติ (ภาพ 3) · ค้าง tooltip ทำแพทย์ ระดับ 5 ตาม hover ปกติ",
+    "popup_stuck": "ไม่มี (dialog ยืนยันเป็นขั้นตอนปกติของการยกเลิก ผู้ใช้กดเอง)",
+    "images": [
+      "image-a51c142dcdc9183705d3d38e5e498d99.png (เริ่มต้น)",
+      "image-fd773f75b054b78b3b041fc8dd75b2dd.png (ยกเลิก)",
+      "image-83914fb09300ccd086ff18a4883a63d0.png (หลังยกเลิก)"
+    ],
+    "recorded_by": "ผู้ใช้ (แบบฟอร์ม RUNBOOK ขั้น 4)",
+    "recorded_at": "2026-10-31 session เริ่ม V1"
+  }
+}

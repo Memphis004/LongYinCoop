@@ -188,7 +188,24 @@
 | `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:03 + 06:07 · หลังจบ N4 รอบ 2–3 ยืนยันซ้ำ 06:47 ตรงเป๊ะ) |
 | **drift รอบที่ 3 (ผู้ใช้เปิดเกม 06:54–06:58 — ML log `26-10-30_6-54-6.log`)** | เซฟ digest `7e1e65e52659…` → **`d3f7cb2fcae2…`** (ไฟล์เดียว = `PlayerprefData.dat`, SaveSlot* ครบ · วัด 07:12) · cfg `976ccfb9…` → **`733d9a0c…`** (ML exit-save — ค่า key ตรงตลอด) · **มติ 2026-10-30: ดำเนินงาน push (git-side) ต่อโดยไม่ rebaseline ตอนนี้ — สถานะนี้ = anchor เริ่มต้นเซสชันถัดไป** · **คำเตือน: เซสชัน runtime ถัดไปต้อง `rebaseline volatile-only --against 20261030-060854` ก่อน split** (มิฉะนั้น expected-baseline check จะ fail ที่ pref) · ปัจจุบัน push แล้วโดยเซสชันขนาน: origin/master = `08a5ceb` (สายโซ่ครบจน 08a5ceb) + tag `stage-N4` = `eb3db5b5…` (push โดยเซสชันนี้ 07:1x) |
 
-## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-31 · rebaseline volatile-only — แทนหัวข้อ 2026-10-30 ด้านบนเป็น anchor ปัจจุบัน)
+## Mod build ที่ deploy 2026-10-31 (build `ddbb7fe8…` — TimeV1 probe log-only · **ยกเลิกโดยผู้ใช้ + rollback แล้ว**)
+
+> deploy 2026-10-31 ~05:00:28 ใน session `เริ่ม V1 session` (RUNBOOK-V1 · `evidence/TIME-V1-20261031-044249/`) ·
+> **มติผู้ใช้ 2026-10-31: ยกเลิก V1 → rollback DLL ทันที** หลังรอบรันจบด้วย `INCOMPLETE-probe-down`
+> (TimeV1 ติด 2/6 patch ⇒ RUNBOOK §G.1) · รายงานปิดสาย `evidence/TIME-V1-20261031-044249/V1-close-report.md`
+
+| รายการ | ค่า |
+|---|---|
+| build ที่ deploy (ตอนนี้ถอนแล้ว) | DLL **`ddbb7fe87896f58fb56c86d4483ffdc60e069d4e0d728c5eafcbbf457f60d30a`** (390,144 B) · PDB **`1213b165f917ce775df9d604e697cf2540e6c943d438ca15234540d9cf936fdc`** (109,536 B) |
+| source ที่ตรงกับ build | mod repo `6e99c538e7a2178e9c99f8c2b5032bc137fc3ad4` (provenance READY · determinism ×2 · 0W/0E) |
+| rollback point ที่ใช้ | `.prev-6a94abb5-20261031-050028` (DLL) + `.prev-856d3bed-20261031-050028` (PDB) — **ทั้งคู่ยังอยู่ ไม่ถูกลบ** · หมายเหตุ: mtime ของ `.prev` = 02:55:29 ขัด suffix `050028` = anomaly คงไว้ (UNKNOWN) |
+| `UserData\MelonPreferences.cfg` | `TimeV1a` เพิ่มใน build นี้ (default false) · หลังปิดเซสชัน: `TimeV1a=false` · `TimeV2a=false` · `Sp5T0=false` · `AllowRemoteInput=false` (ตรวจด้วยค่า key ไม่ใช่ hash) |
+| `UserData\LongYinCoop\net.cfg` | `12541f34c63389ce3192a290b6802ff933fcce843f5eae17200a8e78187aecc8` (444 B · `enabled=false`) — **ไม่ถูกแตะตลอดรอบ** |
+| baseline เซฟที่ใช้ตอน split | `coop-test/baselines/20261031-001811/savehash.real.before.txt` · digest `d3f7cb2fcae2…` — split label `TIMEV1-TC1-r1` (preflight READY 11/11 · mounted-is-copy changed=0) · restore 05:50:47 EXACT `d3f7cb2f` 57 ไฟล์ `ok:true` |
+| ผลรอบ | **INCOMPLETE-probe-down** — `TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด` ซ้ำ **283 ครั้ง** (05:41:49→05:46:35) · `TC1-r1.ndjson` = 0 byte (0 events) ⇒ TC-1…TC-4 = NOT-RUN · `[ERROR]`=0 · `Exception`=0 · TimeV2a เก็บได้ 5 events (observational, gap 43,063 ms = contaminated) |
+| **สถานะหลังปิด (2026-10-31 06:1x–06:3x)** | **rollback แล้ว:** DLL = `6a94abb5…` (359,936 B) + PDB = `856d3bed…` (97,128 B) — hash วัดซ้ำตรง rollback point · build TimeV1 เก็บในโฟลเดอร์ evidence (mtime 04:43) · เกมไม่รัน · **ไม่มี tag** (ยกเลิก ไม่นับเป็น stage) · drift pref จากเกมเปิดบนเซฟจริง 06:02–06:07 ⇒ ปิดด้วย rebaseline volatile-only 06:38 (หัวข้อถัดไป) |
+
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-31 · rebaseline volatile-only — แทนหัวข้อ 2026-10-30 ด้านบนเป็น anchor ปัจจุบัน) — **superseded 2026-10-31 06:38 โดย `20261031-063808` (หัวข้อถัดไป)**
 
 | รายการ | ค่า |
 |---|---|
@@ -198,6 +215,17 @@
 | สายโซ่ baseline | `4226730f66ff` → `7332fc93eb98` → `b7f67154cff6` → `58883949…` (`20261025-201545`) → `df8e5a11beed…` (`20261028-071340`) → `7e1e65e52659…` (`20261030-060854`) → **`d3f7cb2fcae2…` (`20261031-001811` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
 | `UserData\MelonPreferences.cfg` | `733d9a0c8fd801cace2c5640421facb2852c646a011754a8660e30149884130c` (วัด 00:19 — คงจาก drift รอบที่ 3 · ML cosmetic rewrite ตามปกติ · **ค่า key semantic ตรงตลอด**: `Sp5T0 = false` · `TimeV2a = false` · `AllowRemoteInput = false`) |
 | `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` / `6a94abb5…` — ไม่ถูกแตะ (วัด 00:19) |
+
+## Baseline ที่อนุมัติปัจจุบัน (มติผู้ใช้ 2026-10-31 รอบ 2 · rebaseline volatile-only — **anchor ปัจจุบัน**)
+
+| รายการ | ค่า |
+|---|---|
+| เหตุการณ์ | หลังปิดสาย V1 — ผู้ใช้เปิดเกมบน**เซฟจริง** 06:02:12–~06:07 (ML log `26-10-31_6-2-12.log`) หลัง restore 05:50:47 ⇒ pref drift ⇒ มติผู้ใช้ 2026-10-31: rebaseline volatile-only (รูปแบบเดิม [G-2]/N4-follow-up) · หลักฐาน `evidence/TIME-V1-20261031-044249/V1-close-report.md` §1 |
+| ยืนยันก่อน rebaseline | เซฟรายไฟล์เทียบ `20261031-001811` (ด้วย `save-split.py rebaseline` + rehash อิสระของ session): **56/57 EXACT · CHANGED = `Save/PlayerprefData.dat` ไฟล์เดียว** · missing=0 · added=0 |
+| digest ที่อนุมัติ (anchor ใหม่) | **`7cd02401960495034fa5e2e284645a8d3f504e5d609214a5786ef64b59452a7d`** (57 ไฟล์) @ `coop-test/baselines/20261031-063808/savehash.real.before.txt` · `REBASELINE.json` = `volatile_only: true, changed=[PlayerprefData.dat], missing=[], added=[]` · split รอบถัดไปใช้ `--expected-baseline` ไฟล์นี้ตรง ๆ |
+| สายโซ่ baseline | `4226730f66ff` → `7332fc93eb98` → `b7f67154cff6` → `58883949…` (`20261025-201545`) → `df8e5a11beed…` (`20261028-071340`) → `7e1e65e52659…` (`20261030-060854`) → `d3f7cb2fcae2…` (`20261031-001811`) → **`7cd024019604…` (`20261031-063808` — ปัจจุบัน)** · ตัวเก่าคงไว้ไม่ลบ |
+| `UserData\MelonPreferences.cfg` | `TimeV1a=false` · `TimeV2a=false` · `Sp5T0=false` · `AllowRemoteInput=false` (ตรวจด้วยค่า key · ML cosmetic rewrite ทุกครั้งที่ปิดเกมเป็นปกติ) |
+| `net.cfg` / `Mods\LongYinCoop.dll` | `12541f34…` (444 B) / `6a94abb5…` — ไม่ถูกแตะ (วัด 06:38–06:4x) |
 
 ## กฎ
 

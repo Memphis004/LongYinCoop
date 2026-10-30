@@ -1,0 +1,851 @@
+[05:41:48.966] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:49.029] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:49.098] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:51.776] [LongYinCoop] [TimeV2a] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1-v2a.ndjson
+[05:41:51.777] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:51.824] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:51.902] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:52.783] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:52.806] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:52.864] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:53.783] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:53.802] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:53.877] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:54.783] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:54.804] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:54.887] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:55.783] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:55.808] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:55.865] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:56.783] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:56.803] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:56.864] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:57.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:57.807] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:57.880] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:58.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:58.811] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:58.883] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:41:59.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:41:59.807] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:41:59.887] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:00.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:00.816] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:00.884] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:01.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:01.811] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:01.877] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:02.791] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:02.821] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:02.881] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:03.791] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:03.820] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:03.894] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:04.793] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:04.828] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:04.897] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:05.797] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:05.834] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:05.907] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:06.797] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:06.824] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:06.887] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:07.797] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:07.826] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:07.918] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:08.801] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:08.841] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:08.904] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:09.838] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:09.864] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:09.936] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:10.850] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:10.889] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:10.955] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:11.857] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:11.899] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:11.963] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:12.866] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:12.905] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:12.981] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:13.867] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:13.899] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:13.982] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:14.870] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:14.912] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:14.992] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:15.880] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:15.938] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:16.017] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:16.880] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:16.910] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:17.001] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:17.884] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:17.913] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:18.038] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:18.887] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:18.915] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:19.011] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:19.887] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:19.914] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:20.025] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:21.141] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:21.170] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:21.245] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:22.144] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:22.177] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:22.245] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:23.144] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:23.169] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:23.238] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:24.161] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:24.196] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:24.265] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:25.163] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:25.209] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:25.293] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:26.188] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:26.247] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:26.323] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:27.192] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:27.220] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:27.344] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:28.208] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:28.242] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:28.371] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:29.222] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:29.330] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:29.424] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:30.230] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:30.297] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:30.392] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:31.230] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:31.261] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:31.368] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:32.234] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:32.274] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:32.379] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:33.240] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:33.268] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:33.368] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:34.240] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:34.268] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:34.354] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:35.250] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:35.282] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:35.415] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:36.254] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:36.283] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:36.400] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:37.254] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:37.284] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:37.385] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:38.254] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:38.287] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:38.365] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:39.257] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:39.293] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:39.409] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:40.263] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:40.299] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:40.397] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:41.268] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:41.292] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:41.369] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:42.267] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:42.297] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:42.396] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:43.268] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:43.311] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:43.400] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:44.268] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:44.305] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:44.404] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:45.267] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:45.296] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:45.375] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:46.268] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:46.300] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:46.396] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:47.278] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:47.306] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:47.417] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:48.283] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:48.330] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:48.420] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:49.289] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:49.327] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:49.432] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:50.293] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:50.340] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:50.424] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:51.313] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:51.363] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:51.454] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:52.317] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:52.362] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:52.469] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:53.317] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:53.356] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:53.454] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:54.329] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:54.382] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:54.488] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:55.336] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:55.365] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:55.473] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:56.337] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:56.372] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:56.472] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:57.338] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:57.396] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:57.532] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:58.346] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:58.383] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:58.524] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:42:59.346] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:42:59.391] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:42:59.507] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:00.350] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:00.379] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:00.517] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:01.350] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:01.380] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:01.488] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:02.350] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:02.392] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:02.489] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:03.352] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:03.382] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:03.480] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:04.357] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:04.394] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:04.504] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:05.357] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:05.395] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:05.504] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:06.367] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:06.403] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:06.510] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:07.370] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:07.406] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:07.506] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:08.377] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:08.431] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:08.552] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:09.384] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:09.426] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:09.536] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:10.393] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:10.430] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:10.532] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:11.398] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:11.434] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:11.548] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:12.398] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:12.438] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:12.547] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:13.398] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:13.432] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:13.542] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:14.400] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:14.445] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:14.552] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:15.408] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:15.454] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:15.588] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:16.412] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:16.453] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:16.560] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:17.433] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:17.486] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:17.604] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:18.433] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:18.485] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:18.593] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:19.432] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:19.481] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:19.594] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:20.461] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:20.512] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:20.635] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:21.462] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:21.504] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:21.616] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:22.468] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:22.536] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:22.687] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:23.467] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:23.520] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:23.668] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:24.474] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:24.514] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:24.660] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:25.474] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:25.523] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:25.672] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:26.474] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:26.514] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:26.707] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:27.487] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:27.533] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:27.715] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:28.487] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:28.528] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:28.694] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:29.497] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:29.545] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:29.686] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:30.505] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:30.553] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:30.698] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:31.508] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:31.549] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:31.700] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:32.508] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:32.551] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:32.684] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:33.509] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:33.552] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:33.697] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:34.509] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:34.553] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:34.684] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:35.515] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:35.561] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:35.691] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:36.515] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:36.560] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:36.693] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:37.515] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:37.577] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:37.755] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:38.542] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:38.599] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:38.765] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:39.542] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:39.593] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:39.780] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:40.545] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:40.636] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:40.803] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:41.545] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:41.603] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:41.763] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:42.550] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:42.599] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:42.749] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:43.572] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:43.623] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:43.772] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:44.577] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:44.623] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:44.781] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:45.577] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:45.622] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:45.785] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:46.577] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:46.626] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:46.782] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:47.577] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:47.640] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:47.805] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:48.584] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:48.641] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:48.801] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:49.584] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:49.635] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:49.782] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:50.584] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:50.640] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:50.794] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:51.584] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:51.640] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:51.795] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:52.589] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:52.645] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:52.796] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:53.599] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:53.651] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:53.805] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:54.602] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:54.670] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:54.821] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:55.605] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:55.662] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:55.834] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:56.607] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:56.688] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:56.844] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:57.631] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:57.695] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:57.860] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:58.643] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:58.720] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:58.884] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:43:59.646] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:43:59.712] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:43:59.884] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:00.648] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:00.721] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:00.937] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:01.657] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:01.725] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:01.920] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:02.679] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:02.744] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:02.960] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:03.680] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:03.741] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:03.933] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:04.705] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:04.769] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:04.979] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:05.729] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:05.788] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:06.004] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:06.729] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:06.802] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:07.009] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:07.729] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:07.794] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:08.005] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:08.737] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:08.796] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:09.013] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:09.743] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:09.818] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:10.028] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:10.743] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:10.804] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:11.012] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:11.744] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:11.813] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:12.035] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:12.749] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:12.816] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:13.000] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:13.757] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:13.828] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:14.023] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:14.771] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:14.843] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:15.036] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:15.775] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:15.840] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:16.031] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:16.777] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:16.845] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:17.062] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:17.781] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:17.847] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:18.034] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:18.781] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:18.855] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:19.049] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:19.785] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:19.863] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:20.084] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:20.784] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:20.863] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:21.084] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:21.791] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:21.873] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:22.105] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:22.792] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:22.895] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:23.145] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:23.798] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:23.883] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:24.137] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:24.799] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:24.888] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:25.171] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:25.801] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:25.950] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:26.748] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:26.825] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:27.161] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:28.180] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:28.263] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:28.506] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:29.083] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:29.266] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:29.382] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:29.745] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:30.277] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:30.414] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:30.817] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:31.280] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:31.378] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:31.669] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:32.281] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:32.386] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:32.678] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:33.284] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:33.373] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:33.644] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:34.284] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:34.372] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:34.655] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:35.284] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:35.389] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:35.675] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:36.285] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:36.428] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:36.799] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:37.310] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:37.402] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:37.662] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:38.313] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:38.411] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:38.698] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:39.318] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:39.401] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:39.721] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:40.322] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:40.651] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:41.220] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:41.324] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:41.429] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:41.722] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:42.325] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:42.419] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:42.796] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:43.325] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:43.421] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:43.797] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:44.332] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:44.427] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:44.741] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:45.332] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:45.420] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:45.696] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:46.333] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:46.423] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:46.715] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:47.338] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:47.427] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:47.720] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:48.338] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:48.431] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:48.699] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:49.338] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:49.424] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:49.697] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:50.338] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:50.430] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:50.699] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:51.345] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:51.425] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:51.678] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:52.353] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:52.448] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:52.711] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:53.359] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:53.450] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:53.704] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:54.362] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:54.457] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:54.712] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:55.365] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:55.461] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:55.715] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:56.376] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:56.481] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:56.738] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:57.380] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:57.472] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:57.726] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:58.383] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:58.479] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:58.758] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:44:59.398] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:44:59.542] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:44:59.803] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:00.403] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:00.520] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:00.808] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:01.426] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:01.538] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:01.813] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:02.433] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:02.578] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:02.849] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:03.435] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:03.538] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:03.851] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:04.436] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:04.540] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:04.826] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:05.441] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:05.543] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:05.834] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:06.441] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:06.549] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:06.857] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:07.443] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:07.556] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:07.859] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:08.448] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:08.549] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:08.842] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:09.448] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:09.548] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:09.883] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:10.449] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:10.558] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:10.862] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:11.455] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:11.553] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:11.868] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:12.456] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:12.563] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:12.871] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:13.462] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:13.559] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:13.876] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:14.461] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:14.566] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:14.880] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:15.462] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:15.574] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:15.930] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:16.462] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:16.592] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:16.920] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:17.466] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:17.578] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:17.902] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:18.471] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:18.589] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:18.950] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:19.475] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:19.584] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:19.903] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:20.476] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:20.591] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:20.913] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:21.478] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:21.614] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:21.952] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:22.479] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:22.606] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:22.928] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:23.483] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:23.602] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:23.961] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:24.495] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:24.622] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:24.959] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:25.496] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:25.619] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:25.994] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:26.496] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:26.620] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:26.985] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:27.496] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:27.620] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:27.990] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:28.496] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:28.626] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:28.985] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:29.496] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:29.636] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:29.978] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:30.505] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:30.635] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:30.977] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:31.509] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:31.629] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:31.974] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:32.521] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:32.645] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:33.022] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:33.523] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:33.649] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:33.998] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:34.527] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:34.654] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:35.020] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:35.534] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:35.659] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:36.022] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:36.537] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:36.664] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:37.034] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:37.537] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:37.658] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:38.039] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:38.537] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:38.659] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:39.034] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:39.539] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:39.664] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:40.065] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:40.544] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:40.674] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:41.088] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:41.544] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:41.674] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:42.108] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:42.544] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:42.667] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:43.064] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:43.551] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:43.682] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:44.072] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:44.557] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:44.688] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:45.088] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:45.559] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:45.686] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:46.073] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:46.560] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:46.697] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:47.113] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:47.573] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:47.701] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:48.122] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:48.573] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:48.718] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:49.110] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:49.581] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:49.726] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:50.195] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:50.593] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:50.729] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:51.190] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:51.597] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:51.738] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:52.163] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:52.599] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:52.741] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:53.167] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:53.606] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:53.751] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:54.199] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:54.606] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:54.746] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:55.250] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:55.621] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:55.761] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:56.232] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:56.634] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:56.790] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:57.238] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:57.673] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:57.826] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:58.287] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:58.684] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:58.832] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:45:59.301] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:45:59.704] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:45:59.897] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:00.411] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:00.706] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:00.914] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:01.423] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:01.707] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:01.901] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:02.463] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:02.712] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:02.918] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:03.494] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:03.720] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:03.923] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:04.431] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:04.723] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:04.886] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:05.352] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:05.723] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:05.893] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:06.349] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:06.723] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:06.880] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:07.386] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:07.727] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:07.889] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:08.355] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:08.731] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:08.892] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:09.353] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:09.739] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:09.901] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:10.361] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:10.758] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:10.916] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:11.372] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:11.766] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:11.923] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:12.407] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:12.773] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:12.929] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:13.428] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:13.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:13.929] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:14.407] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:14.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:14.930] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:15.405] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:15.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:15.935] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:16.443] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:16.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:16.928] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:17.438] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:17.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:17.935] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:18.407] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:18.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:18.931] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:19.405] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:19.778] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:19.935] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:20.443] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:20.786] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:20.946] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:21.420] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:21.799] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:21.956] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:22.432] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:22.823] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:22.990] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:23.484] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:23.826] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:23.987] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:24.477] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:24.835] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:25.005] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:25.496] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:25.836] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:26.009] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:26.526] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:26.841] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:27.020] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:27.604] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:27.864] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:28.043] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:28.539] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:29.040] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:29.208] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:29.728] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:30.040] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:30.211] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:30.713] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:31.041] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:31.204] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:31.727] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:32.041] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:32.207] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:32.728] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:33.041] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:33.207] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:33.737] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:34.041] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:34.208] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:34.737] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:35.044] [LongYinCoop] [TimeV1] writer open -> C:\Program Files (x86)\Steam\steamapps\common\LongYinLiZhiZhuan\LongYinCoop\evidence\TIME-V1-20261031-044249\TC1-r1.ndjson
+[05:46:35.214] [LongYinCoop] TimeV1: patch count หลังติด = 2 (คาด 6) — ถอนทั้งชุด
+[05:46:35.731] [LongYinCoop] [TimeV1] writer closed lines=0
+[05:46:35.787] [LongYinCoop] [TimeV2a] writer closed lines=5

@@ -1,0 +1,12 @@
+  OK   game-not-running: not running
+  OK   leftovers-unexpected: none
+  OK   leftovers-state: 1 expected aside: Save.real-TIMEV1-TC1-r1
+  OK   no-hidden-sentinel: none
+  OK   label: TIMEV1-TC1-r1
+  OK   manifest: MANIFEST.json label=TIMEV1-TC1-r1
+  OK   aside-matches-manifest: ['Save.real-TIMEV1-TC1-r1'] vs manifest 'Save.real-TIMEV1-TC1-r1'
+  OK   copy-baseline-file: savehash.copy.before.txt
+  OK   real-save-mounted: no
+  OK   mounted-is-copy: files=57 vs copy baseline changed=0 missing=0 added=0
+  OK   real-aside-untouched: Save.real-TIMEV1-TC1-r1 files=57 digest=d3f7cb2fcae2
+PREFLIGHT-LAUNCH READY - you may launch the game
