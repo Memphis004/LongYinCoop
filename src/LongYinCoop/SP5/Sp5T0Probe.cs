@@ -42,6 +42,13 @@ namespace LongYinCoop
     ///   เพิ่มบล็อก heroNum (post-restore — คาด Σ=88 · ห้ามใช้ genhero.end เพราะ postfix ของ
     ///   probe รันก่อน finalizer ของ gate)
     ///
+/// T7 census fields (stage N5 — มติผู้ใช้ 2026-10-30 ทาง (ข) "เพิ่ม census field ใน probe" ตามร่าง
+/// plans/sp5-npc-n5-approval-request.md §T7) — worldcount เพิ่มบล็อก `t7` อ่านอย่างเดียว:
+///   dictH/dictT (WorldData.HerosDict/TempHerosDict Count) · heroID dedup ใน Heros (loop แยก)
+///   · leader-exists ต่อสำนัก (ส่งต่อ leaderIds จากบล็อก T2 ไม่อ่านซ้ำ) · ownHeros ต่อสำนัก
+///   (ForceData.ownHeros คัดลอก — เทียบ dangling) — ตรรกะคำนวณอยู่ใน Sp5T0T7Census (pure,
+///   เทสต์ offline ได้) · ไม่เปลี่ยนตรรกะ/ตัวนับ/การจำแนกเดิมใด ๆ
+///
 /// สถานะที่ rev 13 กำหนดให้คง UNKNOWN:
 ///   - inventoryStability ภายใน window (audit ณ จุดตรวจ = point-in-time เท่านั้น) ⇒ #C.ok / E1 / E2 คง UNKNOWN
 ///   - invocation linkage ด้วย thread-local LIFO (iid) — กลไกผ่าน harness offline แล้ว (Sp5T0LinkageHarness
@@ -107,6 +114,13 @@ namespace LongYinCoop
         private static int _lastLoveableHero = -1, _lastLoveableList = -1;
         private static int _lastTeacherNonZero = -1, _lastTeacherEqLeader = -1;
         private static int _lastBirthCount = -1;
+
+        // T7 census fields (stage N5 มติ 2026-10-30 ทาง (ข)) — snapshot ล่าสุดเข้า summary.json;
+        // อ่านอย่างเดียวเท่านั้น · ตัวเลขของ snapshot ที่อ่านล้มจะคงค่าล่าสุดที่สำเร็จ (บรรทัด worldcount
+        // ของ snapshot นั้นติด readfail marker แยกอยู่แล้ว)
+        private static int _lastT7DictH = -1, _lastT7DictT = -1, _lastT7Dup = -1;
+        private static int _lastT7LeaderNonZero = -1, _lastT7LeaderExists = -1, _lastT7LeaderMissing = -1;
+        private static int _lastT7OwnTotal = -1, _lastT7OwnDangling = -1;
 
         // T2 loveable ฉบับใหม่ + heroNum read points (N4-follow-up มติ 2026-10-30 อนุมัติตามร่าง) — อ่านอย่างเดียว
         private static int _lastLoveablePresent = -1, _lastLoveableMissing = -1;
@@ -1330,6 +1344,105 @@ namespace LongYinCoop
                     if (postSum >= 0) _heroNumPostRestoreSum = postSum;
                 }
 
+                // ===== T7 census (stage N5 มติ 2026-10-30 ทาง (ข)) — อ่านอย่างเดียว ไม่แตะตรรกะเดิม =====
+                // ตรรกะคำนวณอยู่ใน Sp5T0T7Census (pure — เทสต์ offline) · JSON ประกอบใน t7sb ก่อนแล้วค่อย
+                // แนบ เพื่อไม่ให้ exception กลางทางทิ้ง JSON ครึ่งบรรทัดลงไฟล์
+                StringBuilder t7sb = new StringBuilder(256);
+                try
+                {
+                    int dictH = -1, dictT = -1;
+                    try
+                    {
+                        Il2CppSystem.Collections.Generic.Dictionary<int, HeroData> hd2 = wd.HerosDict;
+                        dictH = hd2 != null ? hd2.Count : -1;
+                    }
+                    catch { Swallow(); Interlocked.Increment(ref _readfail); }
+                    try
+                    {
+                        Il2CppSystem.Collections.Generic.Dictionary<int, HeroData> td2 = wd.TempHerosDict;
+                        dictT = td2 != null ? td2.Count : -1;
+                    }
+                    catch { Swallow(); Interlocked.Increment(ref _readfail); }
+
+                    // heroID ทุกตัวใน Heros — loop แยกต่างหาก (ไม่แตะ loop hist/loop ชื่อเดิม)
+                    List<int> heroIdList = new List<int>(h);
+                    for (int i = 0; i < h; i++)
+                    {
+                        HeroData hd = heros[i];
+                        if (hd == null) continue;
+                        try { heroIdList.Add(hd.heroID); }
+                        catch { Swallow(); Interlocked.Increment(ref _readfail); }
+                    }
+
+                    // ownHeros ต่อสำนัก — คัดลอกอ่านอย่างเดียว (§1.3 ไม่เขียนกลับ field)
+                    int[][] ownRaw = new int[ForceBins][];
+                    for (int fi = 0; fi < ForceBins; fi++)
+                    {
+                        ownRaw[fi] = null;
+                        if (forces == null || fi >= forces.Count) continue;
+                        ForceData f = forces[fi];
+                        if (f == null) continue;
+                        try
+                        {
+                            Il2CppSystem.Collections.Generic.List<int> oh = f.ownHeros;
+                            if (oh == null) continue;
+                            int m = oh.Count;
+                            int[] copy = new int[m];
+                            for (int j = 0; j < m; j++) copy[j] = oh[j];
+                            ownRaw[fi] = copy;
+                        }
+                        catch { Swallow(); Interlocked.Increment(ref _readfail); ownRaw[fi] = null; }
+                    }
+
+                    Sp5T0T7Census.Result t7 = Sp5T0T7Census.Compute(dictH, dictT, heroIdList.ToArray(), leaderIds, ownRaw);
+
+                    t7sb.Append("{\"dictH\":").Append(t7.DictH)
+                       .Append(",\"dictT\":").Append(t7.DictT);
+                    t7sb.Append(",\"ids\":{\"readable\":").Append(t7.IdsReadable)
+                       .Append(",\"distinct\":").Append(t7.IdsDistinct)
+                       .Append(",\"dup\":").Append(t7.DupCount)
+                       .Append(",\"dupIds\":[");
+                    AppendIntList(t7sb, t7.DupIds);
+                    t7sb.Append("],\"dupTruncated\":").Append(t7.DupTruncated ? "true" : "false").Append('}');
+                    t7sb.Append(",\"leader\":{\"nonZero\":").Append(t7.LeaderNonZero)
+                       .Append(",\"exists\":").Append(t7.LeaderExists)
+                       .Append(",\"missingCount\":").Append(t7.LeaderMissing)
+                       .Append(",\"forcesRead\":").Append(t7.LeaderForcesRead)
+                       .Append(",\"missing\":[");
+                    AppendIntList(t7sb, t7.LeaderMissingIds);
+                    t7sb.Append("],\"missingTruncated\":").Append(t7.LeaderMissingTruncated ? "true" : "false").Append('}');
+                    t7sb.Append(",\"ownHeros\":{\"forcesRead\":").Append(t7.OwnForcesRead)
+                       .Append(",\"total\":").Append(t7.OwnTotal)
+                       .Append(",\"dangling\":").Append(t7.OwnDangling)
+                       .Append(",\"danglingIds\":[");
+                    AppendIntList(t7sb, t7.OwnDanglingIds);
+                    t7sb.Append("],\"danglingTruncated\":").Append(t7.OwnDanglingTruncated ? "true" : "false")
+                       .Append(",\"perForce\":[");
+                    if (t7.OwnPerForce == null) t7sb.Append("null");
+                    else
+                    {
+                        for (int i = 0; i < t7.OwnPerForce.Length; i++)
+                        {
+                            if (i > 0) t7sb.Append(',');
+                            t7sb.Append(t7.OwnPerForce[i]);
+                        }
+                    }
+                    t7sb.Append("]}");
+
+                    _lastT7DictH = t7.DictH; _lastT7DictT = t7.DictT; _lastT7Dup = t7.DupCount;
+                    _lastT7LeaderNonZero = t7.LeaderNonZero; _lastT7LeaderExists = t7.LeaderExists;
+                    _lastT7LeaderMissing = t7.LeaderMissing;
+                    _lastT7OwnTotal = t7.OwnTotal; _lastT7OwnDangling = t7.OwnDangling;
+                }
+                catch
+                {
+                    Swallow();
+                    Interlocked.Increment(ref _readfail);
+                    t7sb.Clear();
+                    t7sb.Append("{\"readfail\":\"exception\"}");
+                }
+                sb.Append(",\"t7\":").Append(t7sb);
+
                 _lastZhangmen = zmCount; _lastZhangmenInSpe = zmInSpe;
                 _lastLoveableHero = loveableCount; _lastLoveableList = loveListCount;
                 _lastLoveablePresent = lovePresent; _lastLoveableMissing = loveMissingCount;
@@ -1736,6 +1849,14 @@ namespace LongYinCoop
                .Append(", \"teacherNonZero\": ").Append(_lastTeacherNonZero)
                .Append(", \"teacherEqLeader\": ").Append(_lastTeacherEqLeader)
                .Append(", \"birthCount\": ").Append(_lastBirthCount).Append("},\n");
+            sb.Append("  \"t7Last\": {\"dictH\": ").Append(_lastT7DictH)
+               .Append(", \"dictT\": ").Append(_lastT7DictT)
+               .Append(", \"dup\": ").Append(_lastT7Dup)
+               .Append(", \"leaderNonZero\": ").Append(_lastT7LeaderNonZero)
+               .Append(", \"leaderExists\": ").Append(_lastT7LeaderExists)
+               .Append(", \"leaderMissing\": ").Append(_lastT7LeaderMissing)
+               .Append(", \"ownTotal\": ").Append(_lastT7OwnTotal)
+               .Append(", \"ownDangling\": ").Append(_lastT7OwnDangling).Append("},\n");
             sb.Append("  \"heroNumWindowSum\": ").Append(_heroNumWindowSum).Append(",\n");
             sb.Append("  \"heroNumPostRestoreSum\": ").Append(_heroNumPostRestoreSum).Append(",\n");
             sb.Append("  \"auditFingerprint\": {\"A\": ").Append(JsOr(_lastAuditFp[0])).Append(", \"B\": ")
@@ -1747,6 +1868,16 @@ namespace LongYinCoop
             sb.Append("  }\n");
             sb.Append("}\n");
             File.WriteAllText(Path.Combine(_dir, "summary.json"), sb.ToString(), new UTF8Encoding(false));
+        }
+
+        private static void AppendIntList(StringBuilder sb, List<int> xs)
+        {
+            if (xs == null) return;
+            for (int i = 0; i < xs.Count; i++)
+            {
+                if (i > 0) sb.Append(',');
+                sb.Append(xs[i]);
+            }
         }
 
         private static string JsOr(string s)

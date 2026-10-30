@@ -52,6 +52,8 @@
     <Compile Include="..\..\src\LongYinCoop\SP5\Sp5NpcRules.cs" LinkBase="SP5" />
     <!-- SP5-NPC N4-follow-up (มติ 2026-10-30): กติกา match ชื่อ loveable (pure) — Sp5T0Probe.cs ไม่ลิงก์ (Il2Cpp/Harmony) -->
     <Compile Include="..\..\src\LongYinCoop\SP5\Sp5T0NameMatch.cs" LinkBase="SP5" />
+    <!-- SP5-NPC N5 (มติ 2026-10-30 ทาง (ข)): T7 census pure — Sp5T0Probe.cs ยังไม่ลิงก์ (Il2Cpp/Harmony) -->
+    <Compile Include="..\..\src\LongYinCoop\SP5\Sp5T0T7Census.cs" LinkBase="SP5" />
   </ItemGroup>
 
   <ItemGroup>
