@@ -97,3 +97,31 @@
 - **ต้องแนบมติที่จำเป็นครบก่อนเริ่ม — ไม่ครบ = agent ปฏิเสธและแสดงรายการที่ขาด**
 
 **หยุดหลังส่งเอกสาร — ไม่ deploy ไม่ split ไม่เปิดเกม ไม่แก้โค้ดจนกว่าวลีสั่งแยก**
+
+---
+
+## append 2026-10-30 23:5x — มติ T7 = ทาง (ข) ดำเนินการแล้ว (offline เท่านั้น — ยังไม่ deploy ยังไม่รัน)
+
+- **มติผู้ใช้ 2026-10-30:** ทางวัด T7 = **(ข) เพิ่ม census field ใน probe** — log-only อ่านอย่างเดียว
+  ห้ามเปลี่ยนตรรกะ gate/hook อื่น ห้าม raw offset · build Release determinism ×2 + provenance
+  **ไม่ deploy** · เทสต์ไม่น้อยกว่าเดิม (C# 705 · python 53+110 · static CLEAN) · **ยังไม่ rebaseline
+  ยังไม่เริ่ม N5 runtime**
+- **สิ่งที่ทำ (session `SP5NPC-N5T7prep-20261030-234847` — รายละเอียดเต็มใน provenance ของ session):**
+  - ไฟล์ใหม่ `src/LongYinCoop/SP5/Sp5T0T7Census.cs` — pure ล้วน (ไม่แตะ Il2Cpp/Unity) เทสต์ offline ได้
+  - `Sp5T0Probe.cs` — worldcount เพิ่มบล็อก `t7` อ่านอย่างเดียว: `dictH`/`dictT`
+    (`WorldData.HerosDict`/`TempHerosDict` Count) · heroID dedup ใน Heros (loop แยก) ·
+    leader-exists ต่อสำนัก (ส่งต่อ `leaderIds` จากบล็อก T2 — ไม่อ่านซ้ำ) · ownHeros ต่อสำนัก
+    (dangling + perForce) + `summary.json` เพิ่ม `t7Last` — อ่าน typed ผ่าน interop property
+    ทั้งหมด (DUMP: WorldData.HerosDict 0x268 / TempHerosDict 0x278 / ForceData.ownHeros 0x70 —
+    offset ใช้สำรวจเท่านั้น) · **ไม่แตะ hook/gate/ตัวนับ/การจำแนกเดิมใด ๆ**
+  - เทสต์ใหม่ `Sp5T0T7CensusTests.cs` (24 เคส)
+- **ผลวัด:** C# suite **729 PASS / 0 FAIL** (≥705 — +24) · python **53 OK + discover 110 OK** (= เดิม)
+  · preflight-launch 14/14 · static **CLEAN** · build Release ×2 (--no-incremental) = **identical**,
+  0W/0E ทั้งสองรอบ — DLL `c58434b130b405bf81d7f63590fc36a30ab489b45a0a00a2f96d37399fe9df31` /
+  PDB `7d7f291ebf474f8edfd7ffeb169046a2892a4c06e7a0231aff8a5e0a4c3ea046`
+- **artifact ค้าง (ไม่ deploy):** `bin/Release/` + สำเนาใน evidence ของ session —
+  **`Mods\LongYinCoop.dll` ยังเป็น `6a94abb5…` ไม่ถูกแตะ** · เมื่อถึงวลีสั่ง N5 ขั้น 3 (deploy
+  artifact) ให้ใช้ artifact ใหม่นี้**แทน** `476f390e…` (ระบุในวลีสั่ง — ข้อความเดิมของขั้น 3 คงไว้
+  ตามหลัก append-only)
+- **คงค้างตามเดิม:** วลีสั่ง N5 ยังต้องระบุ โลกเซฟ slot บนสำเนาได้หรือไม่ + แบ่งกี่เซสชันเกม +
+  band/เกณฑ์เพิ่มเติม (ถ้าแก้) · คำขอนี้ยังเป็น "รอวลีสั่ง" — ทาง (ก)/(ค) ไม่ใช้แล้วตามมติ
