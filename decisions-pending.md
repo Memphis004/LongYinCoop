@@ -151,6 +151,27 @@
 > USER TESTIMONY จริงครั้งแรก: "ไม่แน่ใจ ทั้ง 3 ข้อ"** — บันทึก testimony ครั้งที่ 13 · freeze gate
 > ยังสรุปไม่ได้จากคำตอบนี้ (คงทางสืบ runtime อนุมัติแยก)
 
+> **ผลมติ 2026-10-31 (รอบ 7 — session offline · ส่วน A: secret + push):** **mod push สำเร็จ** —
+> แต่ว่า**สถานะก่อนรอบนี้ไม่ตรงกับที่รายงานรอบ 6 ไว้**: รายงานรอบ 6 เขียนว่า `d81c86d`
+> "ยังไม่เคยถูก push" + "34 commits ค้าง push" แต่ **A1 วัดจริง: `d81c86d` อยู่บน `origin/master`
+> แล้ว** (`git branch -r --contains d81c86d` = origin/master · `merge-base --is-ancestor` exit 0 ·
+> `origin/master = 409ac9b` = HEAD · `rev-list --left-right --count origin/master...HEAD` = `0 0` ·
+> reflog origin/master 5 รายการบนสุด = `update by push` ไล่ถึง `409ac9b` = commit ปิดรอบ 6) ⇒
+> **การ push รอบ 6 เกิดขึ้นจริงหลังรายงาน** (ผู้สั่ง/ผู้ทำ = UNKNOWN ไม่มีบันทึกใน AGENTS.md) ·
+> **ผลต่อ secret: ถือว่า burned — ไม่ rewrite history ไม่ force ตามมติ `[FORCE-PUSH] = ไม่อนุมัติ`** ·
+> **การ redact:** `evidence/S2a4-GO3-20261028-074003/net.cfg.during-GO3` (เพิ่มโดย `d81c86d`)
+> ค่า secret → `<redacted>` commit `805902a` (467 B → 413 B, 1 บรรทัด) · สำเนาต้นฉบับเก็บ
+> `coop-test/quarantine-secrets/SECRET-20261031-121438/` (untracked) sha256
+> `5ce166da…` ตรงกันก่อน/หลังย้าย · **push `409ac9b..b70cfd7` FF 3 commits** (`1165966` tools,
+> `805902a` redact, `b70cfd7` incident note + INDEX) — fetch ตรวจ origin/master ไม่ขยับระหว่าง
+> ตรวจกับ push (`409ac9b6d9…` ทั้งสองครั้ง) · range ไม่มี binary/DLL/PDB/dump.cs/เซฟ ·
+> `tools/scan_secrets.py --range` = 0 findings · ไม่ force · **origin/master หลัง push = `b70cfd7`
+> = HEAD (0/0)** · ยืนยัน blob บน origin = `secret = <redacted>` ·
+> **ข้อกำหนดต่อไป: ห้ามใช้ค่า secret เดิมซ้ำ — สุ่มใหม่ทุกครั้งก่อนเปิดเครือข่าย/ก่อน S3**
+> (incident note `evidence/SECRET-20261031-121438/incident-note.md` · เครื่องมือ
+> `tools/scan_secrets.py` + 27 tests) · **game repo = ไม่ push** ตาม `[PUSH-GAME-REPO] = ไม่อนุมัติ`
+> · commit บันทึกนี้ (`decisions-pending.md`) = **local ไม่ push** ตามคำสั่ง
+
 ## 5) ของค้างที่พบใหม่รอบนี้ (จาก session ก่อน — ยังไม่มีมติ agent ไม่แตะ)
 
 | รายการ | สถานะ | ทางเลือก · ข้อเสนอ |
