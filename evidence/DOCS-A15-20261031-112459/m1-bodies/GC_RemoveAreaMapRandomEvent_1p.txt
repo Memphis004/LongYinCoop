@@ -1,0 +1,9 @@
+; GC_RemoveAreaMapRandomEvent_1p  rva=0x7DCCC0 va=0x1807DCCC0 end(before)=0x7DCCD0 insns=8
+0x01807dccc0  xor      r9d, r9d
+0x01807dccc3  xor      r8d, r8d
+0x01807dccc6  jmp      0x1807dccd0  ; -> GameController$$RemoveAreaMapRandomEvent (0x7DCCD0)
+0x01807dcccb  int3     
+0x01807dcccc  int3     
+0x01807dcccd  int3     
+0x01807dccce  int3     
+0x01807dcccf  int3     

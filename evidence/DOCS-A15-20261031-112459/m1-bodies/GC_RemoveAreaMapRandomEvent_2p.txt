@@ -1,0 +1,71 @@
+; GC_RemoveAreaMapRandomEvent_2p  rva=0x7DCCD0 va=0x1807DCCD0 end(before)=0x7DCDF0 insns=70
+0x01807dccd0  mov      qword ptr [rsp + 8], rbx
+0x01807dccd5  mov      qword ptr [rsp + 0x10], rsi
+0x01807dccda  push     rdi
+0x01807dccdb  sub      rsp, 0x20
+0x01807dccdf  cmp      byte ptr [rip + 0x16c008f], 0
+0x01807dcce6  movzx    esi, r8b
+0x01807dccea  mov      rbx, rdx
+0x01807dcced  mov      rdi, rcx
+0x01807dccf0  jne      0x1807dcd11
+0x01807dccf2  lea      rcx, [rip + 0x15d1ad7]
+0x01807dccf9  call     0x1800d64a0  ; -> 0xD64A0
+0x01807dccfe  lea      rcx, [rip + 0x15ab193]
+0x01807dcd05  call     0x1800d64a0  ; -> 0xD64A0
+0x01807dcd0a  mov      byte ptr [rip + 0x16c0064], 1
+0x01807dcd11  test     rbx, rbx
+0x01807dcd14  je       0x1807dcde3
+0x01807dcd1a  mov      byte ptr [rbx + 0x61], 1
+0x01807dcd1e  mov      rax, qword ptr [rip + 0x15d1aab]
+0x01807dcd25  test     byte ptr [rax + 0x133], 4
+0x01807dcd2c  je       0x1807dcd46
+0x01807dcd2e  cmp      dword ptr [rax + 0xe0], 0
+0x01807dcd35  jne      0x1807dcd46
+0x01807dcd37  mov      rcx, rax
+0x01807dcd3a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807dcd3f  mov      rax, qword ptr [rip + 0x15d1a8a]
+0x01807dcd46  cmp      byte ptr [rip + 0x16b500c], 0
+0x01807dcd4d  jne      0x1807dcd69
+0x01807dcd4f  lea      rcx, [rip + 0x15d1a7a]
+0x01807dcd56  call     0x1800d64a0  ; -> 0xD64A0
+0x01807dcd5b  mov      rax, qword ptr [rip + 0x15d1a6e]
+0x01807dcd62  mov      byte ptr [rip + 0x16b4ff0], 1
+0x01807dcd69  test     byte ptr [rax + 0x133], 4
+0x01807dcd70  je       0x1807dcd8a
+0x01807dcd72  cmp      dword ptr [rax + 0xe0], 0
+0x01807dcd79  jne      0x1807dcd8a
+0x01807dcd7b  mov      rcx, rax
+0x01807dcd7e  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807dcd83  mov      rax, qword ptr [rip + 0x15d1a46]
+0x01807dcd8a  mov      rax, qword ptr [rax + 0xb8]
+0x01807dcd91  mov      rcx, qword ptr [rax + 0x38]
+0x01807dcd95  test     rcx, rcx
+0x01807dcd98  je       0x1807dcde3
+0x01807dcd9a  mov      byte ptr [rcx + 0xe1], 1
+0x01807dcda1  mov      rax, qword ptr [rdi + 0x20]
+0x01807dcda5  test     rax, rax
+0x01807dcda8  je       0x1807dcde3
+0x01807dcdaa  mov      rcx, qword ptr [rax + 0x68]
+0x01807dcdae  test     rcx, rcx
+0x01807dcdb1  je       0x1807dcde3
+0x01807dcdb3  mov      r8, qword ptr [rip + 0x15ab0de]
+0x01807dcdba  mov      rdx, rbx
+0x01807dcdbd  call     0x1817f0560  ; -> System.Collections.Generic.List<AnimatorClipInfo>$$Remove (0x17F0560)
+0x01807dcdc2  xor      r9d, r9d
+0x01807dcdc5  movzx    r8d, sil
+0x01807dcdc9  mov      rdx, rbx
+0x01807dcdcc  mov      rcx, rdi
+0x01807dcdcf  mov      rbx, qword ptr [rsp + 0x30]
+0x01807dcdd4  mov      rsi, qword ptr [rsp + 0x38]
+0x01807dcdd9  add      rsp, 0x20
+0x01807dcddd  pop      rdi
+0x01807dcdde  jmp      0x1807ddb00  ; -> GameController$$RemoveWorldEvent (0x7DDB00)
+0x01807dcde3  call     0x1800d6610  ; -> 0xD6610
+0x01807dcde8  int3     
+0x01807dcde9  int3     
+0x01807dcdea  int3     
+0x01807dcdeb  int3     
+0x01807dcdec  int3     
+0x01807dcded  int3     
+0x01807dcdee  int3     
+0x01807dcdef  int3     

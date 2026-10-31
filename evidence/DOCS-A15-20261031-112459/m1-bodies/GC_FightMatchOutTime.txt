@@ -1,0 +1,93 @@
+; GC_FightMatchOutTime  rva=0x7A06E0 va=0x1807A06E0 end(before)=0x7A0860 insns=92
+0x01807a06e0  mov      qword ptr [rsp + 0x10], rbp
+0x01807a06e5  mov      qword ptr [rsp + 0x18], rsi
+0x01807a06ea  mov      qword ptr [rsp + 0x20], rdi
+0x01807a06ef  push     r14
+0x01807a06f1  sub      rsp, 0x50
+0x01807a06f5  cmp      byte ptr [rip + 0x16fc67d], 0
+0x01807a06fc  mov      rdi, rdx
+0x01807a06ff  mov      rbp, rcx
+0x01807a0702  jne      0x1807a0723
+0x01807a0704  lea      rcx, [rip + 0x15f1505]
+0x01807a070b  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a0710  lea      rcx, [rip + 0x15f34e9]
+0x01807a0717  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a071c  mov      byte ptr [rip + 0x16fc656], 1
+0x01807a0723  mov      rax, qword ptr [rip + 0x15f34d6]
+0x01807a072a  test     byte ptr [rax + 0x133], 4
+0x01807a0731  je       0x1807a074b
+0x01807a0733  cmp      dword ptr [rax + 0xe0], 0
+0x01807a073a  jne      0x1807a074b
+0x01807a073c  mov      rcx, rax
+0x01807a073f  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807a0744  mov      rax, qword ptr [rip + 0x15f34b5]
+0x01807a074b  cmp      byte ptr [rip + 0x16f1600], 0
+0x01807a0752  jne      0x1807a076e
+0x01807a0754  lea      rcx, [rip + 0x15f34a5]
+0x01807a075b  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a0760  mov      rax, qword ptr [rip + 0x15f3499]
+0x01807a0767  mov      byte ptr [rip + 0x16f15e4], 1
+0x01807a076e  test     byte ptr [rax + 0x133], 4
+0x01807a0775  je       0x1807a078f
+0x01807a0777  cmp      dword ptr [rax + 0xe0], 0
+0x01807a077e  jne      0x1807a078f
+0x01807a0780  mov      rcx, rax
+0x01807a0783  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807a0788  mov      rax, qword ptr [rip + 0x15f3471]
+0x01807a078f  mov      rax, qword ptr [rax + 0xb8]
+0x01807a0796  mov      rsi, qword ptr [rbp + 0x20]
+0x01807a079a  mov      qword ptr [rsp + 0x60], rbx
+0x01807a079f  mov      r14, qword ptr [rax + 0x18]
+0x01807a07a3  test     rdi, rdi
+0x01807a07a6  je       0x1807a0853
+0x01807a07ac  mov      rbx, qword ptr [rdi + 0x40]
+0x01807a07b0  test     rbx, rbx
+0x01807a07b3  je       0x1807a0853
+0x01807a07b9  cmp      dword ptr [rbx + 0x18], 0
+0x01807a07bd  ja       0x1807a07c6
+0x01807a07bf  xor      ecx, ecx
+0x01807a07c1  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01807a07c6  test     rsi, rsi
+0x01807a07c9  je       0x1807a0853
+0x01807a07cf  mov      rax, qword ptr [rbx + 0x10]
+0x01807a07d3  xor      r8d, r8d
+0x01807a07d6  mov      rcx, rsi
+0x01807a07d9  mov      edx, dword ptr [rax + 0x20]
+0x01807a07dc  call     0x1809cd4f0  ; -> WorldData$$GetArea (0x9CD4F0)
+0x01807a07e1  movss    xmm3, dword ptr [rdi + 0x6c]
+0x01807a07e6  test     r14, r14
+0x01807a07e9  je       0x1807a0853
+0x01807a07eb  mulss    xmm3, dword ptr [rip + 0x1120b09]
+0x01807a07f3  xor      ebx, ebx
+0x01807a07f5  mov      qword ptr [rsp + 0x40], rbx
+0x01807a07fa  mov      rdx, rax
+0x01807a07fd  mov      dword ptr [rsp + 0x38], 2
+0x01807a0805  xorps    xmm0, xmm0
+0x01807a0808  movss    dword ptr [rsp + 0x30], xmm0
+0x01807a080e  mov      rcx, r14
+0x01807a0811  mov      byte ptr [rsp + 0x28], bl
+0x01807a0815  lea      r8d, [rbx + 0x20]
+0x01807a0819  mov      byte ptr [rsp + 0x20], bl
+0x01807a081d  call     0x1805059b0  ; -> PlotController$$GetAroundAreaHero (0x5059B0)
+0x01807a0822  xor      r9d, r9d
+0x01807a0825  mov      qword ptr [rsp + 0x20], rbx
+0x01807a082a  mov      r8, rax
+0x01807a082d  mov      rdx, rdi
+0x01807a0830  mov      rcx, rbp
+0x01807a0833  call     0x18078e2d0  ; -> GameController$$AutoManageFightMatch (0x78E2D0)
+0x01807a0838  mov      rbx, qword ptr [rsp + 0x60]
+0x01807a083d  mov      rbp, qword ptr [rsp + 0x68]
+0x01807a0842  mov      rsi, qword ptr [rsp + 0x70]
+0x01807a0847  mov      rdi, qword ptr [rsp + 0x78]
+0x01807a084c  add      rsp, 0x50
+0x01807a0850  pop      r14
+0x01807a0852  ret      
+0x01807a0853  call     0x1800d6610  ; -> 0xD6610
+0x01807a0858  int3     
+0x01807a0859  int3     
+0x01807a085a  int3     
+0x01807a085b  int3     
+0x01807a085c  int3     
+0x01807a085d  int3     
+0x01807a085e  int3     
+0x01807a085f  int3     

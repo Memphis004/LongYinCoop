@@ -1,0 +1,51 @@
+; GC_ForceAttackPlayerAreaTimeOut  rva=0x7A1350 va=0x1807A1350 end(before)=0x7A1400 insns=50
+0x01807a1350  mov      qword ptr [rsp + 0x18], rbx
+0x01807a1355  push     rdi
+0x01807a1356  sub      rsp, 0x20
+0x01807a135a  cmp      byte ptr [rip + 0x16fba16], 0
+0x01807a1361  mov      rbx, rdx
+0x01807a1364  mov      rdi, rcx
+0x01807a1367  jne      0x1807a137c
+0x01807a1369  lea      rcx, [rip + 0x15f08a0]
+0x01807a1370  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a1375  mov      byte ptr [rip + 0x16fb9fb], 1
+0x01807a137c  mov      qword ptr [rsp + 0x30], rbp
+0x01807a1381  mov      qword ptr [rsp + 0x38], rsi
+0x01807a1386  test     rbx, rbx
+0x01807a1389  je       0x1807a13f8
+0x01807a138b  mov      rcx, qword ptr [rdi + 0x20]
+0x01807a138f  test     rcx, rcx
+0x01807a1392  je       0x1807a13f8
+0x01807a1394  mov      edx, dword ptr [rbx + 0x74]
+0x01807a1397  xor      r8d, r8d
+0x01807a139a  call     0x1809cdd00  ; -> WorldData$$GetForce (0x9CDD00)
+0x01807a139f  mov      rbx, qword ptr [rbx + 0x40]
+0x01807a13a3  mov      rbp, rax
+0x01807a13a6  mov      rsi, qword ptr [rdi + 0x20]
+0x01807a13aa  test     rbx, rbx
+0x01807a13ad  je       0x1807a13f8
+0x01807a13af  cmp      dword ptr [rbx + 0x18], 0
+0x01807a13b3  ja       0x1807a13bc
+0x01807a13b5  xor      ecx, ecx
+0x01807a13b7  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01807a13bc  mov      rdx, qword ptr [rbx + 0x10]
+0x01807a13c0  test     rsi, rsi
+0x01807a13c3  je       0x1807a13f8
+0x01807a13c5  mov      edx, dword ptr [rdx + 0x20]
+0x01807a13c8  xor      r8d, r8d
+0x01807a13cb  mov      rcx, rsi
+0x01807a13ce  call     0x1809cd4f0  ; -> WorldData$$GetArea (0x9CD4F0)
+0x01807a13d3  xor      r9d, r9d
+0x01807a13d6  mov      r8, rax
+0x01807a13d9  mov      rdx, rbp
+0x01807a13dc  mov      rcx, rdi
+0x01807a13df  mov      rsi, qword ptr [rsp + 0x38]
+0x01807a13e4  mov      rbp, qword ptr [rsp + 0x30]
+0x01807a13e9  mov      rbx, qword ptr [rsp + 0x40]
+0x01807a13ee  add      rsp, 0x20
+0x01807a13f2  pop      rdi
+0x01807a13f3  jmp      0x18078efd0  ; -> GameController$$AutoManageForceAttackArea (0x78EFD0)
+0x01807a13f8  call     0x1800d6610  ; -> 0xD6610
+0x01807a13fd  int3     
+0x01807a13fe  int3     
+0x01807a13ff  int3     

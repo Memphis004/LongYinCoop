@@ -1,0 +1,128 @@
+; WE_CreateWorldEvent_b  rva=0x9D1EF0 va=0x1809D1EF0 end(before)=0x9D2100 insns=127
+0x01809d1ef0  mov      qword ptr [rsp + 8], rbx
+0x01809d1ef5  mov      qword ptr [rsp + 0x10], rbp
+0x01809d1efa  mov      qword ptr [rsp + 0x18], rsi
+0x01809d1eff  push     rdi
+0x01809d1f00  sub      rsp, 0x20
+0x01809d1f04  cmp      byte ptr [rip + 0x14cd966], 0
+0x01809d1f0b  mov      edi, r9d
+0x01809d1f0e  mov      rsi, r8
+0x01809d1f11  mov      rbx, rdx
+0x01809d1f14  mov      rbp, rcx
+0x01809d1f17  jne      0x1809d1f38
+0x01809d1f19  lea      rcx, [rip + 0x13f4940]
+0x01809d1f20  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d1f25  lea      rcx, [rip + 0x13a2dbc]
+0x01809d1f2c  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d1f31  mov      byte ptr [rip + 0x14cd939], 1
+0x01809d1f38  test     rbx, rbx
+0x01809d1f3b  je       0x1809d20e1
+0x01809d1f41  xor      edx, edx
+0x01809d1f43  mov      rcx, rbx
+0x01809d1f46  call     0x180934ef0  ; -> EventData$$Clone (0x934EF0)
+0x01809d1f4b  mov      r8, qword ptr [rip + 0x13f490e]
+0x01809d1f52  test     rax, rax
+0x01809d1f55  je       0x1809d20e1
+0x01809d1f5b  mov      rcx, qword ptr [rax]
+0x01809d1f5e  movzx    edx, byte ptr [r8 + 0x12c]
+0x01809d1f66  cmp      byte ptr [rcx + 0x12c], dl
+0x01809d1f6c  jb       0x1809d20e7
+0x01809d1f72  mov      rcx, qword ptr [rcx + 0xc8]
+0x01809d1f79  cmp      qword ptr [rcx + rdx*8 - 8], r8
+0x01809d1f7e  jne      0x1809d20e7
+0x01809d1f84  movss    xmm0, dword ptr [rsp + 0x50]
+0x01809d1f8a  mov      rbx, rax
+0x01809d1f8d  movss    dword ptr [rax + 0x6c], xmm0
+0x01809d1f92  mov      dword ptr [rax + 0x68], edi
+0x01809d1f95  mov      eax, dword ptr [rsp + 0x58]
+0x01809d1f99  mov      dword ptr [rbx + 0x74], eax
+0x01809d1f9c  cmp      byte ptr [rsp + 0x60], 0
+0x01809d1fa1  mov      rax, qword ptr [rip + 0x13a2d40]
+0x01809d1fa8  jne      0x1809d2039
+0x01809d1fae  test     byte ptr [rax + 0x133], 4
+0x01809d1fb5  je       0x1809d1fcf
+0x01809d1fb7  cmp      dword ptr [rax + 0xe0], 0
+0x01809d1fbe  jne      0x1809d1fcf
+0x01809d1fc0  mov      rcx, rax
+0x01809d1fc3  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d1fc8  mov      rax, qword ptr [rip + 0x13a2d19]
+0x01809d1fcf  cmp      byte ptr [rip + 0x14bfd76], 0
+0x01809d1fd6  jne      0x1809d1ff2
+0x01809d1fd8  lea      rcx, [rip + 0x13a2d09]
+0x01809d1fdf  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d1fe4  mov      rax, qword ptr [rip + 0x13a2cfd]
+0x01809d1feb  mov      byte ptr [rip + 0x14bfd5a], 1
+0x01809d1ff2  test     byte ptr [rax + 0x133], 4
+0x01809d1ff9  je       0x1809d2013
+0x01809d1ffb  cmp      dword ptr [rax + 0xe0], 0
+0x01809d2002  jne      0x1809d2013
+0x01809d2004  mov      rcx, rax
+0x01809d2007  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d200c  mov      rax, qword ptr [rip + 0x13a2cd5]
+0x01809d2013  mov      rax, qword ptr [rax + 0xb8]
+0x01809d201a  mov      rcx, qword ptr [rax]
+0x01809d201d  test     rcx, rcx
+0x01809d2020  je       0x1809d20e1
+0x01809d2026  xor      r9d, r9d
+0x01809d2029  mov      r8, rsi
+0x01809d202c  mov      rdx, rbx
+0x01809d202f  call     0x18079f5e0  ; -> GameController$$CreateAreaMapRandomEvent (0x79F5E0)
+0x01809d2034  jmp      0x1809d20bb  ; -> 0x9D20BB (inside WorldEventController$$CreateWorldEvent)
+0x01809d2039  test     byte ptr [rax + 0x133], 4
+0x01809d2040  je       0x1809d205a
+0x01809d2042  cmp      dword ptr [rax + 0xe0], 0
+0x01809d2049  jne      0x1809d205a
+0x01809d204b  mov      rcx, rax
+0x01809d204e  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2053  mov      rax, qword ptr [rip + 0x13a2c8e]
+0x01809d205a  cmp      byte ptr [rip + 0x14bfceb], 0
+0x01809d2061  jne      0x1809d207d
+0x01809d2063  lea      rcx, [rip + 0x13a2c7e]
+0x01809d206a  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d206f  mov      rax, qword ptr [rip + 0x13a2c72]
+0x01809d2076  mov      byte ptr [rip + 0x14bfccf], 1
+0x01809d207d  test     byte ptr [rax + 0x133], 4
+0x01809d2084  je       0x1809d209e
+0x01809d2086  cmp      dword ptr [rax + 0xe0], 0
+0x01809d208d  jne      0x1809d209e
+0x01809d208f  mov      rcx, rax
+0x01809d2092  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2097  mov      rax, qword ptr [rip + 0x13a2c4a]
+0x01809d209e  mov      rax, qword ptr [rax + 0xb8]
+0x01809d20a5  mov      rcx, qword ptr [rax]
+0x01809d20a8  test     rcx, rcx
+0x01809d20ab  je       0x1809d20e1
+0x01809d20ad  xor      r9d, r9d
+0x01809d20b0  mov      r8, rsi
+0x01809d20b3  mov      rdx, rbx
+0x01809d20b6  call     0x18079fde0  ; -> GameController$$CreateBigMapRandomEvent (0x79FDE0)
+0x01809d20bb  xor      r8d, r8d
+0x01809d20be  mov      rdx, rbx
+0x01809d20c1  mov      rcx, rbp
+0x01809d20c4  call     0x1809d1210  ; -> WorldEventController$$AddNewWorldEvent (0x9D1210)
+0x01809d20c9  mov      rbp, qword ptr [rsp + 0x38]
+0x01809d20ce  mov      rax, rbx
+0x01809d20d1  mov      rbx, qword ptr [rsp + 0x30]
+0x01809d20d6  mov      rsi, qword ptr [rsp + 0x40]
+0x01809d20db  add      rsp, 0x20
+0x01809d20df  pop      rdi
+0x01809d20e0  ret      
+0x01809d20e1  call     0x1800d6610  ; -> 0xD6610
+0x01809d20e6  int3     
+0x01809d20e7  mov      rdx, r8
+0x01809d20ea  mov      rcx, rax
+0x01809d20ed  call     0x1800d6060  ; -> 0xD6060
+0x01809d20f2  int3     
+0x01809d20f3  int3     
+0x01809d20f4  int3     
+0x01809d20f5  int3     
+0x01809d20f6  int3     
+0x01809d20f7  int3     
+0x01809d20f8  int3     
+0x01809d20f9  int3     
+0x01809d20fa  int3     
+0x01809d20fb  int3     
+0x01809d20fc  int3     
+0x01809d20fd  int3     
+0x01809d20fe  int3     
+0x01809d20ff  int3     

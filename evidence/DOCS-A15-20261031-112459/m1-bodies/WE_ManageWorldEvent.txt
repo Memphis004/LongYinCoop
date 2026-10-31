@@ -1,0 +1,323 @@
+; WE_ManageWorldEvent  rva=0x9D27B0 va=0x1809D27B0 end(before)=0x9D2D20 insns=322
+0x01809d27b0  mov      qword ptr [rsp + 0x10], rbx
+0x01809d27b5  mov      qword ptr [rsp + 0x18], rbp
+0x01809d27ba  push     rdi
+0x01809d27bb  sub      rsp, 0x30
+0x01809d27bf  cmp      byte ptr [rip + 0x14cd0a6], 0
+0x01809d27c6  mov      rdi, rcx
+0x01809d27c9  jne      0x1809d283e
+0x01809d27cb  lea      rcx, [rip + 0x13a2516]
+0x01809d27d2  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d27d7  lea      rcx, [rip + 0x13a3582]
+0x01809d27de  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d27e3  lea      rcx, [rip + 0x13bec26]
+0x01809d27ea  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d27ef  lea      rcx, [rip + 0x13bea9a]
+0x01809d27f6  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d27fb  lea      rcx, [rip + 0x13dc2fe]
+0x01809d2802  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d2807  lea      rcx, [rip + 0x13bf382]
+0x01809d280e  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d2813  lea      rcx, [rip + 0x13dc366]
+0x01809d281a  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d281f  lea      rcx, [rip + 0x13bf3ea]
+0x01809d2826  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d282b  lea      rcx, [rip + 0x13c3516]
+0x01809d2832  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d2837  mov      byte ptr [rip + 0x14cd02e], 1
+0x01809d283e  mov      rcx, qword ptr [rip + 0x13c3503]
+0x01809d2845  mov      qword ptr [rsp + 0x40], rsi
+0x01809d284a  movaps   xmmword ptr [rsp + 0x20], xmm6
+0x01809d284f  call     0x1800d65d0  ; -> 0xD65D0
+0x01809d2854  mov      rdx, qword ptr [rip + 0x13bea35]
+0x01809d285b  mov      rcx, rax
+0x01809d285e  mov      rbp, rax
+0x01809d2861  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01809d2866  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d286a  xor      edx, edx
+0x01809d286c  xor      ebx, ebx
+0x01809d286e  test     rcx, rcx
+0x01809d2871  je       0x1809d2d16
+0x01809d2877  cmp      edx, dword ptr [rcx + 0x18]
+0x01809d287a  jge      0x1809d2ab6
+0x01809d2880  mov      rcx, qword ptr [rip + 0x13a2461]
+0x01809d2887  test     byte ptr [rcx + 0x133], 4
+0x01809d288e  je       0x1809d289e
+0x01809d2890  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2897  jne      0x1809d289e
+0x01809d2899  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d289e  xor      ecx, ecx
+0x01809d28a0  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d28a5  test     rax, rax
+0x01809d28a8  je       0x1809d2d16
+0x01809d28ae  mov      rax, qword ptr [rax + 0x20]
+0x01809d28b2  test     rax, rax
+0x01809d28b5  je       0x1809d2d16
+0x01809d28bb  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d28bf  mov      rsi, qword ptr [rax + 0xa8]
+0x01809d28c6  test     rcx, rcx
+0x01809d28c9  je       0x1809d2d16
+0x01809d28cf  mov      r8, qword ptr [rip + 0x13dc2aa]
+0x01809d28d6  mov      edx, ebx
+0x01809d28d8  call     0x180002f80  ; -> 0x2F80
+0x01809d28dd  test     rax, rax
+0x01809d28e0  je       0x1809d2d16
+0x01809d28e6  test     rsi, rsi
+0x01809d28e9  je       0x1809d2d16
+0x01809d28ef  mov      rdx, qword ptr [rax + 0x20]
+0x01809d28f3  xor      r8d, r8d
+0x01809d28f6  mov      rcx, rsi
+0x01809d28f9  call     0x180aa6f80  ; -> TimeData$$DeltaDay (0xAA6F80)
+0x01809d28fe  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2902  mov      esi, eax
+0x01809d2904  test     rcx, rcx
+0x01809d2907  je       0x1809d2d16
+0x01809d290d  mov      r8, qword ptr [rip + 0x13dc26c]
+0x01809d2914  mov      edx, ebx
+0x01809d2916  call     0x180002f80  ; -> 0x2F80
+0x01809d291b  test     rax, rax
+0x01809d291e  je       0x1809d2d16
+0x01809d2924  cmp      dword ptr [rax + 0x30], 0
+0x01809d2928  jne      0x1809d29b6
+0x01809d292e  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2932  test     rcx, rcx
+0x01809d2935  je       0x1809d2d16
+0x01809d293b  mov      r8, qword ptr [rip + 0x13dc23e]
+0x01809d2942  mov      edx, ebx
+0x01809d2944  call     0x180002f80  ; -> 0x2F80
+0x01809d2949  test     rax, rax
+0x01809d294c  je       0x1809d2d16
+0x01809d2952  cmp      dword ptr [rax + 0x38], 0
+0x01809d2956  jne      0x1809d29b6
+0x01809d2958  test     esi, esi
+0x01809d295a  js       0x1809d29b6
+0x01809d295c  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2960  test     rcx, rcx
+0x01809d2963  je       0x1809d2d16
+0x01809d2969  mov      r8, qword ptr [rip + 0x13dc210]
+0x01809d2970  mov      edx, ebx
+0x01809d2972  call     0x180002f80  ; -> 0x2F80
+0x01809d2977  mov      rcx, rax
+0x01809d297a  test     rax, rax
+0x01809d297d  je       0x1809d2d16
+0x01809d2983  mov      eax, esi
+0x01809d2985  cdq      
+0x01809d2986  idiv     dword ptr [rcx + 0x34]
+0x01809d2989  test     edx, edx
+0x01809d298b  jne      0x1809d29b6
+0x01809d298d  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2991  test     rcx, rcx
+0x01809d2994  je       0x1809d2d16
+0x01809d299a  mov      r8, qword ptr [rip + 0x13dc1df]
+0x01809d29a1  mov      edx, ebx
+0x01809d29a3  call     0x180002f80  ; -> 0x2F80
+0x01809d29a8  xor      r8d, r8d
+0x01809d29ab  mov      rdx, rax
+0x01809d29ae  mov      rcx, rdi
+0x01809d29b1  call     0x1809d17d0  ; -> WorldEventController$$CreateWorldEvent (0x9D17D0)
+0x01809d29b6  mov      rcx, qword ptr [rip + 0x13a232b]
+0x01809d29bd  test     byte ptr [rcx + 0x133], 4
+0x01809d29c4  je       0x1809d29d4
+0x01809d29c6  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d29cd  jne      0x1809d29d4
+0x01809d29cf  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d29d4  xor      ecx, ecx
+0x01809d29d6  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d29db  test     rax, rax
+0x01809d29de  je       0x1809d2d16
+0x01809d29e4  mov      rax, qword ptr [rax + 0x20]
+0x01809d29e8  test     rax, rax
+0x01809d29eb  je       0x1809d2d16
+0x01809d29f1  mov      rax, qword ptr [rax + 0xa8]
+0x01809d29f8  test     rax, rax
+0x01809d29fb  je       0x1809d2d16
+0x01809d2a01  cmp      dword ptr [rax + 0x10], 1
+0x01809d2a05  jg       0x1809d2a58
+0x01809d2a07  mov      rcx, qword ptr [rip + 0x13a22da]
+0x01809d2a0e  test     byte ptr [rcx + 0x133], 4
+0x01809d2a15  je       0x1809d2a25
+0x01809d2a17  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2a1e  jne      0x1809d2a25
+0x01809d2a20  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2a25  xor      ecx, ecx
+0x01809d2a27  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d2a2c  test     rax, rax
+0x01809d2a2f  je       0x1809d2d16
+0x01809d2a35  mov      rax, qword ptr [rax + 0x20]
+0x01809d2a39  test     rax, rax
+0x01809d2a3c  je       0x1809d2d16
+0x01809d2a42  mov      rax, qword ptr [rax + 0xa8]
+0x01809d2a49  test     rax, rax
+0x01809d2a4c  je       0x1809d2d16
+0x01809d2a52  cmp      dword ptr [rax + 0x14], 3
+0x01809d2a56  jle      0x1809d2aa0
+0x01809d2a58  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2a5c  test     rcx, rcx
+0x01809d2a5f  je       0x1809d2d16
+0x01809d2a65  mov      r8, qword ptr [rip + 0x13dc114]
+0x01809d2a6c  mov      edx, ebx
+0x01809d2a6e  call     0x180002f80  ; -> 0x2F80
+0x01809d2a73  test     rax, rax
+0x01809d2a76  je       0x1809d2d16
+0x01809d2a7c  cmp      dword ptr [rax + 0x30], 1
+0x01809d2a80  jne      0x1809d2aa0
+0x01809d2a82  test     esi, esi
+0x01809d2a84  js       0x1809d2aa0
+0x01809d2a86  test     rbp, rbp
+0x01809d2a89  je       0x1809d2d16
+0x01809d2a8f  mov      r8, qword ptr [rip + 0x13be97a]
+0x01809d2a96  mov      edx, ebx
+0x01809d2a98  mov      rcx, rbp
+0x01809d2a9b  call     0x18182b810  ; -> System.Collections.Generic.List<AISettingType>$$Add (0x182B810)
+0x01809d2aa0  mov      rcx, qword ptr [rdi + 0x18]
+0x01809d2aa4  inc      ebx
+0x01809d2aa6  mov      edx, ebx
+0x01809d2aa8  test     rcx, rcx
+0x01809d2aab  je       0x1809d2d16
+0x01809d2ab1  jmp      0x1809d2877  ; -> 0x9D2877 (inside WorldEventController$$ManageWorldEvent)
+0x01809d2ab6  test     rbp, rbp
+0x01809d2ab9  je       0x1809d2d16
+0x01809d2abf  cmp      dword ptr [rbp + 0x18], 0
+0x01809d2ac3  jle      0x1809d2c8a
+0x01809d2ac9  mov      rcx, qword ptr [rip + 0x13a3290]
+0x01809d2ad0  test     byte ptr [rcx + 0x133], 4
+0x01809d2ad7  je       0x1809d2ae7
+0x01809d2ad9  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2ae0  jne      0x1809d2ae7
+0x01809d2ae2  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2ae7  xor      edx, edx
+0x01809d2ae9  xor      ecx, ecx
+0x01809d2aeb  call     0x180a871a0  ; -> GlobalData$$RandomRangeDouble (0xA871A0)
+0x01809d2af0  mov      rcx, qword ptr [rip + 0x13a21f1]
+0x01809d2af7  movaps   xmm6, xmm0
+0x01809d2afa  test     byte ptr [rcx + 0x133], 4
+0x01809d2b01  je       0x1809d2b11
+0x01809d2b03  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2b0a  jne      0x1809d2b11
+0x01809d2b0c  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2b11  xor      ecx, ecx
+0x01809d2b13  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d2b18  test     rax, rax
+0x01809d2b1b  je       0x1809d2d16
+0x01809d2b21  mov      rcx, qword ptr [rax + 0x20]
+0x01809d2b25  test     rcx, rcx
+0x01809d2b28  je       0x1809d2d16
+0x01809d2b2e  mov      esi, dword ptr [rcx + 0x70]
+0x01809d2b31  xor      ecx, ecx
+0x01809d2b33  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d2b38  test     rax, rax
+0x01809d2b3b  je       0x1809d2d16
+0x01809d2b41  mov      rax, qword ptr [rax + 0x20]
+0x01809d2b45  test     rax, rax
+0x01809d2b48  je       0x1809d2d16
+0x01809d2b4e  mov      rcx, qword ptr [rax + 0xa8]
+0x01809d2b55  test     rcx, rcx
+0x01809d2b58  je       0x1809d2d16
+0x01809d2b5e  mov      ebx, dword ptr [rcx + 0x10]
+0x01809d2b61  xor      ecx, ecx
+0x01809d2b63  call     0x1807b92f0  ; -> GameController$$GetGameMaxDifficulty (0x7B92F0)
+0x01809d2b68  xorps    xmm3, xmm3
+0x01809d2b6b  movaps   xmm2, xmm0
+0x01809d2b6e  cvtsi2ss xmm3, ebx
+0x01809d2b72  xor      r9d, r9d
+0x01809d2b75  xorps    xmm1, xmm1
+0x01809d2b78  subss    xmm3, dword ptr [rip + 0xeee5c8]
+0x01809d2b80  mulss    xmm3, dword ptr [rip + 0xeee774]
+0x01809d2b88  movaps   xmm0, xmm3
+0x01809d2b8b  call     0x1810e4de0  ; -> UnityEngine.Mathf$$Clamp (0x10E4DE0)
+0x01809d2b90  mulss    xmm0, dword ptr [rip + 0xf69608]
+0x01809d2b98  xorps    xmm1, xmm1
+0x01809d2b9b  cvtsi2ss xmm1, esi
+0x01809d2b9f  addss    xmm0, dword ptr [rip + 0xf6960d]
+0x01809d2ba7  mulss    xmm0, xmm1
+0x01809d2bab  cvtss2sd xmm0, xmm0
+0x01809d2baf  comisd   xmm0, xmm6
+0x01809d2bb3  jb       0x1809d2c8a
+0x01809d2bb9  mov      rcx, qword ptr [rip + 0x13a2128]
+0x01809d2bc0  test     byte ptr [rcx + 0x133], 4
+0x01809d2bc7  je       0x1809d2bd7
+0x01809d2bc9  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2bd0  jne      0x1809d2bd7
+0x01809d2bd2  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2bd7  xor      ecx, ecx
+0x01809d2bd9  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d2bde  test     rax, rax
+0x01809d2be1  je       0x1809d2d16
+0x01809d2be7  mov      rcx, qword ptr [rax + 0x20]
+0x01809d2beb  test     rcx, rcx
+0x01809d2bee  je       0x1809d2d16
+0x01809d2bf4  mov      dword ptr [rcx + 0x70], 0
+0x01809d2bfb  mov      rcx, qword ptr [rip + 0x13a315e]
+0x01809d2c02  mov      rbx, qword ptr [rdi + 0x18]
+0x01809d2c06  mov      esi, dword ptr [rbp + 0x18]
+0x01809d2c09  test     byte ptr [rcx + 0x133], 4
+0x01809d2c10  je       0x1809d2c20
+0x01809d2c12  cmp      dword ptr [rcx + 0xe0], 0
+0x01809d2c19  jne      0x1809d2c20
+0x01809d2c1b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2c20  xor      r9d, r9d
+0x01809d2c23  xor      r8d, r8d
+0x01809d2c26  mov      edx, esi
+0x01809d2c28  xor      ecx, ecx
+0x01809d2c2a  call     0x180a87220  ; -> GlobalData$$RandomRange (0xA87220)
+0x01809d2c2f  movsxd   rsi, eax
+0x01809d2c32  cmp      esi, dword ptr [rbp + 0x18]
+0x01809d2c35  jb       0x1809d2c3e
+0x01809d2c37  xor      ecx, ecx
+0x01809d2c39  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809d2c3e  test     rbx, rbx
+0x01809d2c41  je       0x1809d2d16
+0x01809d2c47  mov      rax, qword ptr [rbp + 0x10]
+0x01809d2c4b  movsxd   rsi, dword ptr [rax + rsi*4 + 0x20]
+0x01809d2c50  cmp      esi, dword ptr [rbx + 0x18]
+0x01809d2c53  jb       0x1809d2c5c
+0x01809d2c55  xor      ecx, ecx
+0x01809d2c57  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809d2c5c  mov      rdx, qword ptr [rbx + 0x10]
+0x01809d2c60  xor      r8d, r8d
+0x01809d2c63  mov      rcx, rdi
+0x01809d2c66  mov      rdx, qword ptr [rdx + rsi*8 + 0x20]
+0x01809d2c6b  call     0x1809d17d0  ; -> WorldEventController$$CreateWorldEvent (0x9D17D0)
+0x01809d2c70  movaps   xmm6, xmmword ptr [rsp + 0x20]
+0x01809d2c75  mov      rsi, qword ptr [rsp + 0x40]
+0x01809d2c7a  mov      rbx, qword ptr [rsp + 0x48]
+0x01809d2c7f  mov      rbp, qword ptr [rsp + 0x50]
+0x01809d2c84  add      rsp, 0x30
+0x01809d2c88  pop      rdi
+0x01809d2c89  ret      
+0x01809d2c8a  mov      rax, qword ptr [rip + 0x13a2057]
+0x01809d2c91  test     byte ptr [rax + 0x133], 4
+0x01809d2c98  je       0x1809d2cb2
+0x01809d2c9a  cmp      dword ptr [rax + 0xe0], 0
+0x01809d2ca1  jne      0x1809d2cb2
+0x01809d2ca3  mov      rcx, rax
+0x01809d2ca6  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2cab  mov      rax, qword ptr [rip + 0x13a2036]
+0x01809d2cb2  cmp      byte ptr [rip + 0x14bf093], 0
+0x01809d2cb9  jne      0x1809d2cd5
+0x01809d2cbb  lea      rcx, [rip + 0x13a2026]
+0x01809d2cc2  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d2cc7  mov      rax, qword ptr [rip + 0x13a201a]
+0x01809d2cce  mov      byte ptr [rip + 0x14bf077], 1
+0x01809d2cd5  test     byte ptr [rax + 0x133], 4
+0x01809d2cdc  je       0x1809d2cf6
+0x01809d2cde  cmp      dword ptr [rax + 0xe0], 0
+0x01809d2ce5  jne      0x1809d2cf6
+0x01809d2ce7  mov      rcx, rax
+0x01809d2cea  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d2cef  mov      rax, qword ptr [rip + 0x13a1ff2]
+0x01809d2cf6  mov      rax, qword ptr [rax + 0xb8]
+0x01809d2cfd  mov      rax, qword ptr [rax]
+0x01809d2d00  test     rax, rax
+0x01809d2d03  je       0x1809d2d16
+0x01809d2d05  mov      rax, qword ptr [rax + 0x20]
+0x01809d2d09  test     rax, rax
+0x01809d2d0c  je       0x1809d2d16
+0x01809d2d0e  inc      dword ptr [rax + 0x70]
+0x01809d2d11  jmp      0x1809d2c70  ; -> 0x9D2C70 (inside WorldEventController$$ManageWorldEvent)
+0x01809d2d16  call     0x1800d6610  ; -> 0xD6610
+0x01809d2d1b  int3     
+0x01809d2d1c  int3     
+0x01809d2d1d  int3     
+0x01809d2d1e  int3     
+0x01809d2d1f  int3     

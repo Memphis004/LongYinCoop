@@ -1,0 +1,42 @@
+; GC_RemoveBigMapRandomEvent_1p  rva=0x7DCE80 va=0x1807DCE80 end(before)=0x7DCF00 insns=41
+0x01807dce80  mov      qword ptr [rsp + 8], rbx
+0x01807dce85  push     rdi
+0x01807dce86  sub      rsp, 0x20
+0x01807dce8a  cmp      byte ptr [rip + 0x16bfee3], 0
+0x01807dce91  mov      rbx, rdx
+0x01807dce94  mov      rdi, rcx
+0x01807dce97  jne      0x1807dceac
+0x01807dce99  lea      rcx, [rip + 0x15aaff8]
+0x01807dcea0  call     0x1800d64a0  ; -> 0xD64A0
+0x01807dcea5  mov      byte ptr [rip + 0x16bfec8], 1
+0x01807dceac  test     rbx, rbx
+0x01807dceaf  je       0x1807dcef1
+0x01807dceb1  mov      byte ptr [rbx + 0x61], 1
+0x01807dceb5  mov      rax, qword ptr [rdi + 0x20]
+0x01807dceb9  test     rax, rax
+0x01807dcebc  je       0x1807dcef1
+0x01807dcebe  mov      rcx, qword ptr [rax + 0x60]
+0x01807dcec2  test     rcx, rcx
+0x01807dcec5  je       0x1807dcef1
+0x01807dcec7  mov      r8, qword ptr [rip + 0x15aafca]
+0x01807dcece  mov      rdx, rbx
+0x01807dced1  call     0x1817f0560  ; -> System.Collections.Generic.List<AnimatorClipInfo>$$Remove (0x17F0560)
+0x01807dced6  xor      r9d, r9d
+0x01807dced9  xor      r8d, r8d
+0x01807dcedc  mov      rdx, rbx
+0x01807dcedf  mov      rcx, rdi
+0x01807dcee2  mov      rbx, qword ptr [rsp + 0x30]
+0x01807dcee7  add      rsp, 0x20
+0x01807dceeb  pop      rdi
+0x01807dceec  jmp      0x1807ddb00  ; -> GameController$$RemoveWorldEvent (0x7DDB00)
+0x01807dcef1  call     0x1800d6610  ; -> 0xD6610
+0x01807dcef6  int3     
+0x01807dcef7  int3     
+0x01807dcef8  int3     
+0x01807dcef9  int3     
+0x01807dcefa  int3     
+0x01807dcefb  int3     
+0x01807dcefc  int3     
+0x01807dcefd  int3     
+0x01807dcefe  int3     
+0x01807dceff  int3     

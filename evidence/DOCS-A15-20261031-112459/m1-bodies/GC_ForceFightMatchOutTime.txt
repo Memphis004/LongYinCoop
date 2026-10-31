@@ -1,0 +1,106 @@
+; GC_ForceFightMatchOutTime  rva=0x7A1470 va=0x1807A1470 end(before)=0x7A1600 insns=105
+0x01807a1470  push     rbp
+0x01807a1472  push     r12
+0x01807a1474  push     r15
+0x01807a1476  sub      rsp, 0x30
+0x01807a147a  cmp      byte ptr [rip + 0x16fb8f7], 0
+0x01807a1481  mov      r12, rdx
+0x01807a1484  mov      r15, rcx
+0x01807a1487  jne      0x1807a14d8
+0x01807a1489  lea      rcx, [rip + 0x15ec280]
+0x01807a1490  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a1495  lea      rcx, [rip + 0x15ec174]
+0x01807a149c  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a14a1  lea      rcx, [rip + 0x15f06e8]
+0x01807a14a8  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a14ad  lea      rcx, [rip + 0x15ec85c]
+0x01807a14b4  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a14b9  lea      rcx, [rip + 0x15f0750]
+0x01807a14c0  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a14c5  lea      rcx, [rip + 0x15f3efc]
+0x01807a14cc  call     0x1800d64a0  ; -> 0xD64A0
+0x01807a14d1  mov      byte ptr [rip + 0x16fb8a0], 1
+0x01807a14d8  mov      rcx, qword ptr [rip + 0x15f3ee9]
+0x01807a14df  mov      qword ptr [rsp + 0x50], rbx
+0x01807a14e4  mov      qword ptr [rsp + 0x58], rsi
+0x01807a14e9  mov      qword ptr [rsp + 0x60], rdi
+0x01807a14ee  mov      qword ptr [rsp + 0x68], r14
+0x01807a14f3  call     0x1800d65d0  ; -> 0xD65D0
+0x01807a14f8  mov      rdx, qword ptr [rip + 0x15ec111]
+0x01807a14ff  mov      rcx, rax
+0x01807a1502  mov      rbp, rax
+0x01807a1505  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01807a150a  mov      rcx, qword ptr [r15 + 0x20]
+0x01807a150e  test     rcx, rcx
+0x01807a1511  je       0x1807a15f4
+0x01807a1517  xor      r8d, r8d
+0x01807a151a  xor      edx, edx
+0x01807a151c  call     0x1809cdfa0  ; -> WorldData$$GetHeroForce (0x9CDFA0)
+0x01807a1521  xor      ecx, ecx
+0x01807a1523  xor      ebx, ebx
+0x01807a1525  mov      r14, rax
+0x01807a1528  test     rax, rax
+0x01807a152b  je       0x1807a15f4
+0x01807a1531  lea      esi, [rbx + 0x20]
+0x01807a1534  nop      dword ptr [rax]
+0x01807a1538  nop      dword ptr [rax + rax]
+0x01807a1540  mov      rdi, qword ptr [r14 + 0x70]
+0x01807a1544  test     rdi, rdi
+0x01807a1547  je       0x1807a15f4
+0x01807a154d  mov      eax, dword ptr [rdi + 0x18]
+0x01807a1550  cmp      ecx, eax
+0x01807a1552  jge      0x1807a15bc
+0x01807a1554  test     rbp, rbp
+0x01807a1557  je       0x1807a15f4
+0x01807a155d  cmp      dword ptr [rbp + 0x18], 0x20
+0x01807a1561  jg       0x1807a15bc
+0x01807a1563  cmp      ebx, eax
+0x01807a1565  jb       0x1807a156e
+0x01807a1567  xor      ecx, ecx
+0x01807a1569  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01807a156e  mov      rax, qword ptr [rdi + 0x10]
+0x01807a1572  cmp      dword ptr [rsi + rax], 0
+0x01807a1576  je       0x1807a15b2
+0x01807a1578  xor      r8d, r8d
+0x01807a157b  mov      edx, ebx
+0x01807a157d  mov      rcx, r14
+0x01807a1580  call     0x180b37230  ; -> ForceData$$GetOwnHero (0xB37230)
+0x01807a1585  test     rax, rax
+0x01807a1588  je       0x1807a15f4
+0x01807a158a  cmp      dword ptr [rax + 0xb8], 5
+0x01807a1591  jge      0x1807a15b2
+0x01807a1593  xor      r8d, r8d
+0x01807a1596  mov      edx, ebx
+0x01807a1598  mov      rcx, r14
+0x01807a159b  call     0x180b37230  ; -> ForceData$$GetOwnHero (0xB37230)
+0x01807a15a0  mov      r8, qword ptr [rip + 0x15ec169]
+0x01807a15a7  mov      rdx, rax
+0x01807a15aa  mov      rcx, rbp
+0x01807a15ad  call     0x18181f800  ; -> System.Collections.Generic.List<List<List<int>>>$$Add (0x181F800)
+0x01807a15b2  inc      ebx
+0x01807a15b4  add      rsi, 4
+0x01807a15b8  mov      ecx, ebx
+0x01807a15ba  jmp      0x1807a1540  ; -> 0x7A1540 (inside GameController$$ForceFightMatchOutTime)
+0x01807a15bc  mov      r9b, 1
+0x01807a15bf  mov      qword ptr [rsp + 0x20], 0
+0x01807a15c8  mov      r8, rbp
+0x01807a15cb  mov      rdx, r12
+0x01807a15ce  mov      rcx, r15
+0x01807a15d1  call     0x18078e2d0  ; -> GameController$$AutoManageFightMatch (0x78E2D0)
+0x01807a15d6  mov      r14, qword ptr [rsp + 0x68]
+0x01807a15db  mov      rdi, qword ptr [rsp + 0x60]
+0x01807a15e0  mov      rsi, qword ptr [rsp + 0x58]
+0x01807a15e5  mov      rbx, qword ptr [rsp + 0x50]
+0x01807a15ea  add      rsp, 0x30
+0x01807a15ee  pop      r15
+0x01807a15f0  pop      r12
+0x01807a15f2  pop      rbp
+0x01807a15f3  ret      
+0x01807a15f4  call     0x1800d6610  ; -> 0xD6610
+0x01807a15f9  int3     
+0x01807a15fa  int3     
+0x01807a15fb  int3     
+0x01807a15fc  int3     
+0x01807a15fd  int3     
+0x01807a15fe  int3     
+0x01807a15ff  int3     

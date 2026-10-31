@@ -1,0 +1,827 @@
+; GC_ManageWorldEventOutTime  rva=0x7D4E90 va=0x1807D4E90 end(before)=0x7D5D00 insns=826
+0x01807d4e90  push     rbp
+0x01807d4e92  push     r15
+0x01807d4e94  sub      rsp, 0xb8
+0x01807d4e9b  cmp      byte ptr [rip + 0x16c7edb], 0
+0x01807d4ea2  mov      rbp, rdx
+0x01807d4ea5  mov      r15, rcx
+0x01807d4ea8  jne      0x1807d5089
+0x01807d4eae  lea      rcx, [rip + 0x15ece8b]
+0x01807d4eb5  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4eba  lea      rcx, [rip + 0x159feaf]
+0x01807d4ec1  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ec6  lea      rcx, [rip + 0x15a0e93]
+0x01807d4ecd  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ed2  lea      rcx, [rip + 0x15ad5b7]
+0x01807d4ed9  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ede  lea      rcx, [rip + 0x15af3ab]
+0x01807d4ee5  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4eea  lea      rcx, [rip + 0x15b189f]
+0x01807d4ef1  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ef6  lea      rcx, [rip + 0x15bc513]
+0x01807d4efd  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f02  lea      rcx, [rip + 0x15bc387]
+0x01807d4f09  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f0e  lea      rcx, [rip + 0x15d15bb]
+0x01807d4f15  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f1a  lea      rcx, [rip + 0x15bcc6f]
+0x01807d4f21  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f26  lea      rcx, [rip + 0x15bf7db]
+0x01807d4f2d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f32  lea      rcx, [rip + 0x15d1617]
+0x01807d4f39  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f3e  lea      rcx, [rip + 0x15bf843]
+0x01807d4f45  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f4a  lea      rcx, [rip + 0x15c0df7]
+0x01807d4f51  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f56  lea      rcx, [rip + 0x15beda3]
+0x01807d4f5d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f62  lea      rcx, [rip + 0x15e17c7]
+0x01807d4f69  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f6e  lea      rcx, [rip + 0x15c60fb]
+0x01807d4f75  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f7a  lea      rcx, [rip + 0x15e18bf]
+0x01807d4f81  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f86  lea      rcx, [rip + 0x15c1263]
+0x01807d4f8d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f92  lea      rcx, [rip + 0x15b2eef]
+0x01807d4f99  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4f9e  lea      rcx, [rip + 0x15f50cb]
+0x01807d4fa5  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4faa  lea      rcx, [rip + 0x15e1807]
+0x01807d4fb1  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4fb6  lea      rcx, [rip + 0x15e6a2b]
+0x01807d4fbd  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4fc2  lea      rcx, [rip + 0x15d2c37]
+0x01807d4fc9  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4fce  lea      rcx, [rip + 0x15e474b]
+0x01807d4fd5  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4fda  lea      rcx, [rip + 0x15a7177]
+0x01807d4fe1  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4fe6  lea      rcx, [rip + 0x15e18db]
+0x01807d4fed  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ff2  lea      rcx, [rip + 0x15e6967]
+0x01807d4ff9  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d4ffe  lea      rcx, [rip + 0x15b67cb]
+0x01807d5005  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d500a  lea      rcx, [rip + 0x15f4ca7]
+0x01807d5011  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5016  lea      rcx, [rip + 0x15d29b3]
+0x01807d501d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5022  lea      rcx, [rip + 0x15e1927]
+0x01807d5029  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d502e  lea      rcx, [rip + 0x15a8df3]
+0x01807d5035  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d503a  lea      rcx, [rip + 0x15e1667]
+0x01807d5041  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5046  lea      rcx, [rip + 0x15e6a23]
+0x01807d504d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5052  lea      rcx, [rip + 0x15f1a8f]
+0x01807d5059  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d505e  lea      rcx, [rip + 0x15aa4e3]
+0x01807d5065  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d506a  lea      rcx, [rip + 0x15d28df]
+0x01807d5071  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5076  lea      rcx, [rip + 0x15c6273]
+0x01807d507d  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d5082  mov      byte ptr [rip + 0x16c7cf4], 1
+0x01807d5089  mov      qword ptr [rsp + 0xd0], rbx
+0x01807d5091  mov      qword ptr [rsp + 0xb0], rsi
+0x01807d5099  mov      qword ptr [rsp + 0xa8], rdi
+0x01807d50a1  mov      qword ptr [rsp + 0xa0], r12
+0x01807d50a9  mov      qword ptr [rsp + 0x98], r13
+0x01807d50b1  mov      qword ptr [rsp + 0x90], r14
+0x01807d50b9  movaps   xmmword ptr [rsp + 0x80], xmm6
+0x01807d50c1  movaps   xmmword ptr [rsp + 0x70], xmm7
+0x01807d50c6  test     rbp, rbp
+0x01807d50c9  je       0x1807d5ce6
+0x01807d50cf  mov      rdi, qword ptr [rbp + 0x40]
+0x01807d50d3  test     rdi, rdi
+0x01807d50d6  je       0x1807d5ce6
+0x01807d50dc  cmp      dword ptr [rdi + 0x18], 0
+0x01807d50e0  jne      0x1807d511b
+0x01807d50e2  mov      rcx, qword ptr [rip + 0x15c0c5f]
+0x01807d50e9  call     0x1800d65d0  ; -> 0xD65D0
+0x01807d50ee  mov      rdx, qword ptr [rip + 0x15bc19b]
+0x01807d50f5  mov      rcx, rax
+0x01807d50f8  mov      rdi, rax
+0x01807d50fb  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01807d5100  test     rdi, rdi
+0x01807d5103  je       0x1807d5ce6
+0x01807d5109  mov      r8, qword ptr [rip + 0x15bc300]
+0x01807d5110  mov      rcx, rdi
+0x01807d5113  mov      edx, dword ptr [rbp + 0x58]
+0x01807d5116  call     0x18182b810  ; -> System.Collections.Generic.List<AISettingType>$$Add (0x182B810)
+0x01807d511b  mov      rcx, qword ptr [rip + 0x15bebde]
+0x01807d5122  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d5127  call     0x1800d65d0  ; -> 0xD65D0
+0x01807d512c  movss    xmm7, dword ptr [rip + 0x10ec1c8]
+0x01807d5134  xor      r13d, r13d
+0x01807d5137  mov      qword ptr [rsp + 0x58], r13
+0x01807d513c  mov      r9, rdi
+0x01807d513f  mov      dword ptr [rsp + 0x50], r13d
+0x01807d5144  xor      edx, edx
+0x01807d5146  mulss    xmm6, xmm7
+0x01807d514a  mov      rcx, rax
+0x01807d514d  lea      r8d, [r13 + 3]
+0x01807d5151  mov      rbx, rax
+0x01807d5154  movss    dword ptr [rsp + 0x48], xmm6
+0x01807d515a  mov      dword ptr [rsp + 0x40], 3
+0x01807d5162  mov      qword ptr [rsp + 0x38], r13
+0x01807d5167  mov      dword ptr [rsp + 0x30], r13d
+0x01807d516c  mov      dword ptr [rsp + 0x28], r13d
+0x01807d5171  mov      qword ptr [rsp + 0x20], r13
+0x01807d5176  call     0x180b0fb10  ; -> PlotRandomHeroData$$.ctor (0xB0FB10)
+0x01807d517b  xor      r9d, r9d
+0x01807d517e  xor      r8d, r8d
+0x01807d5181  mov      rdx, rbx
+0x01807d5184  mov      rcx, r15
+0x01807d5187  call     0x1807bdbe0  ; -> GameController$$GetRandomHero (0x7BDBE0)
+0x01807d518c  mov      rbx, qword ptr [rbp + 0x18]
+0x01807d5190  mov      rsi, rax
+0x01807d5193  mov      rdi, qword ptr [rip + 0x15f194e]
+0x01807d519a  test     rbx, rbx
+0x01807d519d  je       0x1807d5424
+0x01807d51a3  xor      edx, edx
+0x01807d51a5  mov      rcx, rbx
+0x01807d51a8  call     0x1803ffa50  ; -> <PrivateImplementationDetails>$$ComputeStringHash (0x3FFA50)
+0x01807d51ad  cmp      eax, 0x8b815224
+0x01807d51b2  jbe      0x1807d5896
+0x01807d51b8  cmp      eax, 0xb3a2d30f
+0x01807d51bd  jbe      0x1807d5518
+0x01807d51c3  cmp      eax, 0xcd3f1a4c
+0x01807d51c8  jne      0x1807d534c
+0x01807d51ce  mov      rdx, qword ptr [rip + 0x15c101b]
+0x01807d51d5  xor      r8d, r8d
+0x01807d51d8  mov      rcx, rbx
+0x01807d51db  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d51e0  test     al, al
+0x01807d51e2  je       0x1807d5424
+0x01807d51e8  mov      rcx, qword ptr [rip + 0x15a0b71]
+0x01807d51ef  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d51f4  test     byte ptr [rcx + 0x133], 4
+0x01807d51fb  je       0x1807d520b
+0x01807d51fd  cmp      dword ptr [rcx + 0xe0], r13d
+0x01807d5204  jne      0x1807d520b
+0x01807d5206  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d520b  movaps   xmm1, xmm6
+0x01807d520e  xor      r9d, r9d
+0x01807d5211  mulss    xmm6, dword ptr [rip + 0x1166faf]
+0x01807d5219  xor      r8d, r8d
+0x01807d521c  mulss    xmm1, dword ptr [rip + 0x1166fb0]
+0x01807d5224  addss    xmm6, dword ptr [rip + 0x10ec108]
+0x01807d522c  addss    xmm1, dword ptr [rip + 0x10ec108]
+0x01807d5234  movaps   xmm0, xmm6
+0x01807d5237  call     0x180a872c0  ; -> GlobalData$$RandomRange (0xA872C0)
+0x01807d523c  xor      edx, edx
+0x01807d523e  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01807d5243  mov      rcx, qword ptr [rip + 0x15af046]
+0x01807d524a  mov      r12d, eax
+0x01807d524d  call     0x1800d65d0  ; -> 0xD65D0
+0x01807d5252  xor      edx, edx
+0x01807d5254  mov      rcx, rax
+0x01807d5257  mov      r14, rax
+0x01807d525a  call     0x180d18340  ; -> ItemListData$$.ctor (0xD18340)
+0x01807d525f  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d5264  mov      edi, r13d
+0x01807d5267  mov      ebx, 0xffffffff
+0x01807d526c  test     r12d, r12d
+0x01807d526f  jle      0x1807d52e9
+0x01807d5271  addss    xmm6, dword ptr [rip + 0x10ebecf]
+0x01807d5279  movss    xmm7, dword ptr [rip + 0x10ec0af]
+0x01807d5281  nop      dword ptr [rax]
+0x01807d5285  nop      word ptr [rax + rax]
+0x01807d5290  xor      r9d, r9d
+0x01807d5293  xor      r8d, r8d
+0x01807d5296  xor      edx, edx
+0x01807d5298  mov      rcx, r15
+0x01807d529b  call     0x1807b9c90  ; -> GameController$$GetHeroRandomGetItemType (0x7B9C90)
+0x01807d52a0  mov      qword ptr [rsp + 0x40], r13
+0x01807d52a5  movaps   xmm3, xmm7
+0x01807d52a8  mov      qword ptr [rsp + 0x38], r13
+0x01807d52ad  movaps   xmm2, xmm6
+0x01807d52b0  mov      qword ptr [rsp + 0x30], r13
+0x01807d52b5  mov      edx, eax
+0x01807d52b7  mov      dword ptr [rsp + 0x28], ebx
+0x01807d52bb  mov      rcx, r15
+0x01807d52be  mov      byte ptr [rsp + 0x20], 1
+0x01807d52c3  call     0x1807b3a10  ; -> GameController$$GenerateRandomItem (0x7B3A10)
+0x01807d52c8  test     r14, r14
+0x01807d52cb  je       0x1807d5ce6
+0x01807d52d1  xor      r9d, r9d
+0x01807d52d4  xor      r8d, r8d
+0x01807d52d7  mov      rdx, rax
+0x01807d52da  mov      rcx, r14
+0x01807d52dd  call     0x180d17790  ; -> ItemListData$$GetItem (0xD17790)
+0x01807d52e2  inc      edi
+0x01807d52e4  cmp      edi, r12d
+0x01807d52e7  jl       0x1807d5290
+0x01807d52e9  test     rsi, rsi
+0x01807d52ec  je       0x1807d5ce6
+0x01807d52f2  mov      qword ptr [rsp + 0x28], r13
+0x01807d52f7  xor      r9d, r9d
+0x01807d52fa  xor      r8d, r8d
+0x01807d52fd  mov      dword ptr [rsp + 0x20], ebx
+0x01807d5301  mov      rdx, r14
+0x01807d5304  mov      rcx, rsi
+0x01807d5307  call     0x18088eb20  ; -> HeroData$$GetItem (0x88EB20)
+0x01807d530c  xor      r8d, r8d
+0x01807d530f  mov      dl, 1
+0x01807d5311  mov      rcx, rsi
+0x01807d5314  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5319  mov      rbx, rax
+0x01807d531c  test     r14, r14
+0x01807d531f  je       0x1807d5ce6
+0x01807d5325  xor      edx, edx
+0x01807d5327  mov      rcx, r14
+0x01807d532a  call     0x180d174c0  ; -> ItemListData$$GetItemName (0xD174C0)
+0x01807d532f  mov      rcx, qword ptr [rip + 0x15e13fa]
+0x01807d5336  xor      r9d, r9d
+0x01807d5339  mov      r8, rax
+0x01807d533c  mov      rdx, rbx
+0x01807d533f  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5344  mov      rdi, rax
+0x01807d5347  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d534c  cmp      eax, 0xdde5a3ab
+0x01807d5351  jne      0x1807d5403
+0x01807d5357  mov      rdx, qword ptr [rip + 0x15d25f2]
+0x01807d535e  xor      r8d, r8d
+0x01807d5361  mov      rcx, rbx
+0x01807d5364  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5369  test     al, al
+0x01807d536b  je       0x1807d5424
+0x01807d5371  movss    xmm3, dword ptr [rip + 0x10ebdcf]
+0x01807d5379  mov      ebx, 0xffffffff
+0x01807d537e  movss    xmm2, dword ptr [rbp + 0x6c]
+0x01807d5383  mov      rcx, r15
+0x01807d5386  mov      qword ptr [rsp + 0x40], r13
+0x01807d538b  mov      qword ptr [rsp + 0x38], r13
+0x01807d5390  mov      qword ptr [rsp + 0x30], r13
+0x01807d5395  lea      edx, [rbx + 4]
+0x01807d5398  mov      dword ptr [rsp + 0x28], ebx
+0x01807d539c  mov      byte ptr [rsp + 0x20], 1
+0x01807d53a1  call     0x1807b3a10  ; -> GameController$$GenerateRandomItem (0x7B3A10)
+0x01807d53a6  mov      rbx, rax
+0x01807d53a9  test     rsi, rsi
+0x01807d53ac  je       0x1807d5ce6
+0x01807d53b2  xor      r9d, r9d
+0x01807d53b5  xor      r8d, r8d
+0x01807d53b8  mov      rdx, rax
+0x01807d53bb  mov      rcx, rsi
+0x01807d53be  call     0x18088eae0  ; -> HeroData$$GetItem (0x88EAE0)
+0x01807d53c3  xor      r8d, r8d
+0x01807d53c6  mov      dl, 1
+0x01807d53c8  mov      rcx, rsi
+0x01807d53cb  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d53d0  mov      rdi, rax
+0x01807d53d3  test     rbx, rbx
+0x01807d53d6  je       0x1807d5ce6
+0x01807d53dc  xor      r8d, r8d
+0x01807d53df  mov      dl, 1
+0x01807d53e1  mov      rcx, rbx
+0x01807d53e4  call     0x180d0d140  ; -> ItemData$$Name (0xD0D140)
+0x01807d53e9  mov      rcx, qword ptr [rip + 0x15e6680]
+0x01807d53f0  xor      r9d, r9d
+0x01807d53f3  mov      r8, rax
+0x01807d53f6  mov      rdx, rdi
+0x01807d53f9  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d53fe  mov      rdi, rax
+0x01807d5401  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5403  cmp      eax, 0xdf1a2ba9
+0x01807d5408  jne      0x1807d5424
+0x01807d540a  mov      rdx, qword ptr [rip + 0x15b2a77]
+0x01807d5411  xor      r8d, r8d
+0x01807d5414  mov      rcx, rbx
+0x01807d5417  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d541c  test     al, al
+0x01807d541e  jne      0x1807d562b
+0x01807d5424  mov      rdx, qword ptr [rbp + 0x18]
+0x01807d5428  xor      r8d, r8d
+0x01807d542b  mov      rcx, qword ptr [rip + 0x15aa116]
+0x01807d5432  call     0x18171d350  ; -> System.String$$Concat (0x171D350)
+0x01807d5437  mov      rcx, qword ptr [rip + 0x15ec902]
+0x01807d543e  mov      rbx, rax
+0x01807d5441  test     byte ptr [rcx + 0x133], 4
+0x01807d5448  je       0x1807d5458
+0x01807d544a  cmp      dword ptr [rcx + 0xe0], r13d
+0x01807d5451  jne      0x1807d5458
+0x01807d5453  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d5458  xor      edx, edx
+0x01807d545a  mov      rcx, rbx
+0x01807d545d  call     0x1810db4e0  ; -> UnityEngine.Debug$$Log (0x10DB4E0)
+0x01807d5462  test     rsi, rsi
+0x01807d5465  je       0x1807d5ce6
+0x01807d546b  xor      r8d, r8d
+0x01807d546e  mov      rdx, rdi
+0x01807d5471  mov      rcx, rsi
+0x01807d5474  call     0x180879d30  ; -> HeroData$$AddLog (0x879D30)
+0x01807d5479  cmp      byte ptr [rip + 0x16bc8d8], 0
+0x01807d5480  jne      0x1807d5495
+0x01807d5482  lea      rcx, [rip + 0x15ac297]
+0x01807d5489  call     0x1800d64a0  ; -> 0xD64A0
+0x01807d548e  mov      byte ptr [rip + 0x16bc8c3], 1
+0x01807d5495  mov      rax, qword ptr [rip + 0x15ac284]
+0x01807d549c  xor      r8d, r8d
+0x01807d549f  mov      rdx, rdi
+0x01807d54a2  mov      rcx, qword ptr [rax + 0xb8]
+0x01807d54a9  mov      rbx, qword ptr [rcx]
+0x01807d54ac  mov      rcx, qword ptr [rip + 0x15a8975]
+0x01807d54b3  call     0x18171d350  ; -> System.String$$Concat (0x171D350)
+0x01807d54b8  test     rbx, rbx
+0x01807d54bb  je       0x1807d5ce6
+0x01807d54c1  xor      r9d, r9d
+0x01807d54c4  mov      r8, rax
+0x01807d54c7  xor      edx, edx
+0x01807d54c9  mov      rcx, rbx
+0x01807d54cc  movaps   xmm7, xmmword ptr [rsp + 0x70]
+0x01807d54d1  movaps   xmm6, xmmword ptr [rsp + 0x80]
+0x01807d54d9  mov      r14, qword ptr [rsp + 0x90]
+0x01807d54e1  mov      r13, qword ptr [rsp + 0x98]
+0x01807d54e9  mov      r12, qword ptr [rsp + 0xa0]
+0x01807d54f1  mov      rdi, qword ptr [rsp + 0xa8]
+0x01807d54f9  mov      rsi, qword ptr [rsp + 0xb0]
+0x01807d5501  mov      rbx, qword ptr [rsp + 0xd0]
+0x01807d5509  add      rsp, 0xb8
+0x01807d5510  pop      r15
+0x01807d5512  pop      rbp
+0x01807d5513  jmp      0x180d046f0  ; -> InfoController$$AddInfo (0xD046F0)
+0x01807d5518  cmp      eax, 0x97b4708b
+0x01807d551d  jne      0x1807d5606
+0x01807d5523  mov      rdx, qword ptr [rip + 0x15c5dc6]
+0x01807d552a  xor      r8d, r8d
+0x01807d552d  mov      rcx, rbx
+0x01807d5530  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5535  test     al, al
+0x01807d5537  je       0x1807d5424
+0x01807d553d  mov      rax, qword ptr [rip + 0x15a081c]
+0x01807d5544  test     byte ptr [rax + 0x133], 4
+0x01807d554b  je       0x1807d5565
+0x01807d554d  cmp      dword ptr [rax + 0xe0], r13d
+0x01807d5554  jne      0x1807d5565
+0x01807d5556  mov      rcx, rax
+0x01807d5559  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d555e  mov      rax, qword ptr [rip + 0x15a07fb]
+0x01807d5565  mov      rax, qword ptr [rax + 0xb8]
+0x01807d556c  mov      rcx, qword ptr [rax + 0x4a0]
+0x01807d5573  test     rcx, rcx
+0x01807d5576  je       0x1807d5ce6
+0x01807d557c  mov      edx, dword ptr [rcx + 0x18]
+0x01807d557f  xor      r9d, r9d
+0x01807d5582  xor      ecx, ecx
+0x01807d5584  xor      r8d, r8d
+0x01807d5587  call     0x180a87220  ; -> GlobalData$$RandomRange (0xA87220)
+0x01807d558c  mov      ebx, eax
+0x01807d558e  test     rsi, rsi
+0x01807d5591  je       0x1807d5ce6
+0x01807d5597  xor      r9d, r9d
+0x01807d559a  mov      qword ptr [rsp + 0x20], r13
+0x01807d559f  mov      edx, eax
+0x01807d55a1  mov      rcx, rsi
+0x01807d55a4  lea      r8d, [r9 + 2]
+0x01807d55a8  call     0x180882b50  ; -> HeroData$$ChangeMaxFightSkill (0x882B50)
+0x01807d55ad  xor      r8d, r8d
+0x01807d55b0  mov      dl, 1
+0x01807d55b2  mov      rcx, rsi
+0x01807d55b5  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d55ba  mov      rcx, qword ptr [rip + 0x15a079f]
+0x01807d55c1  mov      rdi, rax
+0x01807d55c4  mov      rdx, qword ptr [rcx + 0xb8]
+0x01807d55cb  mov      rcx, qword ptr [rdx + 0x4a0]
+0x01807d55d2  test     rcx, rcx
+0x01807d55d5  je       0x1807d5ce6
+0x01807d55db  mov      r8, qword ptr [rip + 0x15d0f6e]
+0x01807d55e2  mov      edx, ebx
+0x01807d55e4  call     0x180002f80  ; -> 0x2F80
+0x01807d55e9  mov      rcx, qword ptr [rip + 0x15e11c8]
+0x01807d55f0  xor      r9d, r9d
+0x01807d55f3  mov      r8, rax
+0x01807d55f6  mov      rdx, rdi
+0x01807d55f9  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d55fe  mov      rdi, rax
+0x01807d5601  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5606  cmp      eax, 0xb3a2d30f
+0x01807d560b  jne      0x1807d5424
+0x01807d5611  mov      rdx, qword ptr [rip + 0x15f4a58]
+0x01807d5618  xor      r8d, r8d
+0x01807d561b  mov      rcx, rbx
+0x01807d561e  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5623  test     al, al
+0x01807d5625  je       0x1807d5424
+0x01807d562b  mov      rcx, qword ptr [rip + 0x15a072e]
+0x01807d5632  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d5637  test     byte ptr [rcx + 0x133], 4
+0x01807d563e  je       0x1807d564e
+0x01807d5640  cmp      dword ptr [rcx + 0xe0], r13d
+0x01807d5647  jne      0x1807d564e
+0x01807d5649  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d564e  movss    xmm0, dword ptr [rip + 0x10ebb06]
+0x01807d5656  xor      r9d, r9d
+0x01807d5659  xor      r8d, r8d
+0x01807d565c  xorps    xmm1, xmm1
+0x01807d565f  call     0x180a872c0  ; -> GlobalData$$RandomRange (0xA872C0)
+0x01807d5664  xor      r9d, r9d
+0x01807d5667  mulss    xmm6, xmm7
+0x01807d566b  xor      edx, edx
+0x01807d566d  addss    xmm6, xmm0
+0x01807d5671  lea      r8d, [r9 + 5]
+0x01807d5675  cvttss2si ecx, xmm6
+0x01807d5679  call     0x1810e4dc0  ; -> UnityEngine.Mathf$$Clamp (0x10E4DC0)
+0x01807d567e  mov      rcx, qword ptr [rip + 0x15c06c3]
+0x01807d5685  mov      r13d, eax
+0x01807d5688  call     0x1800d65d0  ; -> 0xD65D0
+0x01807d568d  mov      rdx, qword ptr [rip + 0x15bbbfc]
+0x01807d5694  mov      rcx, rax
+0x01807d5697  mov      r12, rax
+0x01807d569a  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01807d569f  xor      ecx, ecx
+0x01807d56a1  xor      edi, edi
+0x01807d56a3  test     rsi, rsi
+0x01807d56a6  je       0x1807d5ce6
+0x01807d56ac  lea      r14d, [rdi + 0x20]
+0x01807d56b0  mov      rbx, qword ptr [rsi + 0x260]
+0x01807d56b7  test     rbx, rbx
+0x01807d56ba  je       0x1807d5ce6
+0x01807d56c0  mov      eax, dword ptr [rbx + 0x18]
+0x01807d56c3  cmp      ecx, eax
+0x01807d56c5  jge      0x1807d5708
+0x01807d56c7  cmp      edi, eax
+0x01807d56c9  jb       0x1807d56d2
+0x01807d56cb  xor      ecx, ecx
+0x01807d56cd  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01807d56d2  mov      rax, qword ptr [rbx + 0x10]
+0x01807d56d6  mov      rcx, qword ptr [r14 + rax]
+0x01807d56da  test     rcx, rcx
+0x01807d56dd  je       0x1807d5ce6
+0x01807d56e3  test     r12, r12
+0x01807d56e6  je       0x1807d5ce6
+0x01807d56ec  mov      edx, dword ptr [rcx + 0x10]
+0x01807d56ef  mov      rcx, r12
+0x01807d56f2  mov      r8, qword ptr [rip + 0x15bbd17]
+0x01807d56f9  call     0x18182b810  ; -> System.Collections.Generic.List<AISettingType>$$Add (0x182B810)
+0x01807d56fe  inc      edi
+0x01807d5700  add      r14, 8
+0x01807d5704  mov      ecx, edi
+0x01807d5706  jmp      0x1807d56b0  ; -> 0x7D56B0 (inside GameController$$ManageWorldEventOutTime)
+0x01807d5708  mov      rax, qword ptr [rip + 0x15a0651]
+0x01807d570f  test     byte ptr [rax + 0x133], 4
+0x01807d5716  je       0x1807d5730
+0x01807d5718  cmp      dword ptr [rax + 0xe0], 0
+0x01807d571f  jne      0x1807d5730
+0x01807d5721  mov      rcx, rax
+0x01807d5724  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d5729  mov      rax, qword ptr [rip + 0x15a0630]
+0x01807d5730  mov      rax, qword ptr [rax + 0xb8]
+0x01807d5737  mov      rcx, qword ptr [rax + 0x4a0]
+0x01807d573e  test     rcx, rcx
+0x01807d5741  je       0x1807d5ce6
+0x01807d5747  mov      edx, dword ptr [rcx + 0x18]
+0x01807d574a  xor      r9d, r9d
+0x01807d574d  xor      ecx, ecx
+0x01807d574f  xor      r8d, r8d
+0x01807d5752  call     0x180a87220  ; -> GlobalData$$RandomRange (0xA87220)
+0x01807d5757  movss    xmm0, dword ptr [rsi + 0xbc]
+0x01807d575f  mov      edi, eax
+0x01807d5761  movd     xmm1, r13d
+0x01807d5766  cvtdq2ps xmm1, xmm1
+0x01807d5769  comiss   xmm0, xmm1
+0x01807d576c  jbe      0x1807d57c6
+0x01807d576e  xor      ecx, ecx
+0x01807d5770  call     0x180d97240  ; -> UnityEngine.Random$$get_value (0xD97240)
+0x01807d5775  movss    xmm1, dword ptr [rip + 0x1166a67]
+0x01807d577d  comiss   xmm1, xmm0
+0x01807d5780  jbe      0x1807d57c6
+0x01807d5782  mov      rcx, qword ptr [rip + 0x159f5e7]
+0x01807d5789  test     byte ptr [rcx + 0x133], 4
+0x01807d5790  je       0x1807d57a0
+0x01807d5792  cmp      dword ptr [rcx + 0xe0], 0
+0x01807d5799  jne      0x1807d57a0
+0x01807d579b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d57a0  xor      ecx, ecx
+0x01807d57a2  call     0x18046c160  ; -> 0x46C160 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01807d57a7  test     rax, rax
+0x01807d57aa  je       0x1807d5ce6
+0x01807d57b0  xor      r9d, r9d
+0x01807d57b3  xorps    xmm1, xmm1
+0x01807d57b6  mov      rcx, rax
+0x01807d57b9  lea      r8d, [r9 - 1]
+0x01807d57bd  call     0x180c1e930  ; -> GameDataController$$GetRandomBigForceID (0xC1E930)
+0x01807d57c2  mov      ebx, eax
+0x01807d57c4  jmp      0x1807d57cb  ; -> 0x7D57CB (inside GameController$$ManageWorldEventOutTime)
+0x01807d57c6  mov      ebx, 0xffffffff
+0x01807d57cb  test     r15, r15
+0x01807d57ce  je       0x1807d5ce6
+0x01807d57d4  xor      r14d, r14d
+0x01807d57d7  mov      r9d, ebx
+0x01807d57da  mov      qword ptr [rsp + 0x28], r14
+0x01807d57df  mov      r8d, r13d
+0x01807d57e2  mov      edx, edi
+0x01807d57e4  mov      qword ptr [rsp + 0x20], r12
+0x01807d57e9  mov      rcx, r15
+0x01807d57ec  call     0x1807be8c0  ; -> GameController$$GetRandomSkillID (0x7BE8C0)
+0x01807d57f1  mov      rcx, qword ptr [rip + 0x15b0f98]
+0x01807d57f8  mov      ebx, eax
+0x01807d57fa  call     0x1800d65d0  ; -> 0xD65D0
+0x01807d57ff  xor      r8d, r8d
+0x01807d5802  mov      edx, ebx
+0x01807d5804  mov      rcx, rax
+0x01807d5807  mov      rdi, rax
+0x01807d580a  call     0x180a41820  ; -> KungfuSkillLvData$$.ctor (0xA41820)
+0x01807d580f  xor      r9d, r9d
+0x01807d5812  mov      qword ptr [rsp + 0x20], r14
+0x01807d5817  xor      r8d, r8d
+0x01807d581a  mov      rdx, rdi
+0x01807d581d  mov      rcx, rsi
+0x01807d5820  call     0x180894310  ; -> HeroData$$GetSkill (0x894310)
+0x01807d5825  xor      r8d, r8d
+0x01807d5828  mov      dl, 1
+0x01807d582a  mov      rcx, rsi
+0x01807d582d  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5832  mov      r14, rax
+0x01807d5835  test     rdi, rdi
+0x01807d5838  je       0x1807d5ce6
+0x01807d583e  xor      r8d, r8d
+0x01807d5841  mov      dl, 1
+0x01807d5843  mov      rcx, rdi
+0x01807d5846  call     0x180a40be0  ; -> KungfuSkillLvData$$Name (0xA40BE0)
+0x01807d584b  mov      rdx, qword ptr [rip + 0x15b2636]
+0x01807d5852  xor      r8d, r8d
+0x01807d5855  mov      rcx, qword ptr [rbp + 0x18]
+0x01807d5859  mov      rbx, rax
+0x01807d585c  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5861  mov      rcx, qword ptr [rip + 0x15e0e40]
+0x01807d5868  mov      r9, qword ptr [rip + 0x15f4449]
+0x01807d586f  test     al, al
+0x01807d5871  jne      0x1807d587a
+0x01807d5873  mov      r9, qword ptr [rip + 0x15d2386]
+0x01807d587a  mov      r8, rbx
+0x01807d587d  mov      qword ptr [rsp + 0x20], 0
+0x01807d5886  mov      rdx, r14
+0x01807d5889  call     0x181720b90  ; -> System.String$$Format (0x1720B90)
+0x01807d588e  mov      rdi, rax
+0x01807d5891  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5896  cmp      eax, 0x235af07f
+0x01807d589b  jbe      0x1807d5b19
+0x01807d58a1  cmp      eax, 0x2bbdd59d
+0x01807d58a6  jne      0x1807d599c
+0x01807d58ac  mov      rdx, qword ptr [rip + 0x15a68a5]
+0x01807d58b3  xor      r8d, r8d
+0x01807d58b6  mov      rcx, rbx
+0x01807d58b9  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d58be  test     al, al
+0x01807d58c0  je       0x1807d5424
+0x01807d58c6  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d58cb  test     rsi, rsi
+0x01807d58ce  je       0x1807d5cec
+0x01807d58d4  xor      edx, edx
+0x01807d58d6  mov      rcx, rsi
+0x01807d58d9  call     0x18088aaa0  ; -> HeroData$$GetExtraMaxMana (0x88AAA0)
+0x01807d58de  movss    xmm1, dword ptr [rbp + 0x6c]
+0x01807d58e3  xor      r8d, r8d
+0x01807d58e6  mulss    xmm1, dword ptr [rip + 0x11669a6]
+0x01807d58ee  subss    xmm0, xmm1
+0x01807d58f2  movaps   xmm1, xmm0
+0x01807d58f5  xorps    xmm0, xmm0
+0x01807d58f8  call     0x1810e5370  ; -> UnityEngine.Mathf$$Max (0x10E5370)
+0x01807d58fd  mulss    xmm0, dword ptr [rip + 0x11668a7]
+0x01807d5905  xor      edx, edx
+0x01807d5907  movss    xmm1, dword ptr [rip + 0x10eb839]
+0x01807d590f  addss    xmm6, dword ptr [rip + 0x10eba19]
+0x01807d5917  subss    xmm1, xmm0
+0x01807d591b  mulss    xmm6, dword ptr [rip + 0x10eb815]
+0x01807d5923  mulss    xmm1, xmm6
+0x01807d5927  movaps   xmm0, xmm1
+0x01807d592a  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01807d592f  xor      r8d, r8d
+0x01807d5932  mov      edx, eax
+0x01807d5934  lea      ecx, [r8 + 1]
+0x01807d5938  call     0x1810e5380  ; -> UnityEngine.Mathf$$Max (0x10E5380)
+0x01807d593d  xor      r9d, r9d
+0x01807d5940  xor      r8d, r8d
+0x01807d5943  mov      rcx, rsi
+0x01807d5946  mov      edi, eax
+0x01807d5948  movd     xmm1, eax
+0x01807d594c  cvtdq2ps xmm1, xmm1
+0x01807d594f  call     0x180883290  ; -> HeroData$$ChangeMaxMana (0x883290)
+0x01807d5954  xor      r8d, r8d
+0x01807d5957  mov      dl, 1
+0x01807d5959  mov      rcx, rsi
+0x01807d595c  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5961  mov      rcx, qword ptr [rip + 0x15acb28]
+0x01807d5968  lea      rdx, [rsp + 0xd8]
+0x01807d5970  mov      rbx, rax
+0x01807d5973  mov      dword ptr [rsp + 0xd8], edi
+0x01807d597a  call     0x18005ae60  ; -> 0x5AE60
+0x01807d597f  mov      rcx, qword ptr [rip + 0x15e0f42]
+0x01807d5986  xor      r9d, r9d
+0x01807d5989  mov      r8, rax
+0x01807d598c  mov      rdx, rbx
+0x01807d598f  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5994  mov      rdi, rax
+0x01807d5997  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d599c  cmp      eax, 0x48a55816
+0x01807d59a1  jne      0x1807d5a5d
+0x01807d59a7  mov      rdx, qword ptr [rip + 0x15c56c2]
+0x01807d59ae  xor      r8d, r8d
+0x01807d59b1  mov      rcx, rbx
+0x01807d59b4  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d59b9  test     al, al
+0x01807d59bb  je       0x1807d5424
+0x01807d59c1  movss    xmm2, dword ptr [rbp + 0x6c]
+0x01807d59c6  mov      ebx, 0xffffffff
+0x01807d59cb  addss    xmm2, dword ptr [rip + 0x10eb775]
+0x01807d59d3  movss    xmm3, dword ptr [rip + 0x10eb955]
+0x01807d59db  xor      edx, edx
+0x01807d59dd  mov      qword ptr [rsp + 0x40], r13
+0x01807d59e2  mov      rcx, r15
+0x01807d59e5  mov      qword ptr [rsp + 0x38], r13
+0x01807d59ea  mov      qword ptr [rsp + 0x30], r13
+0x01807d59ef  mov      dword ptr [rsp + 0x28], ebx
+0x01807d59f3  mov      byte ptr [rsp + 0x20], 1
+0x01807d59f8  call     0x1807b3a10  ; -> GameController$$GenerateRandomItem (0x7B3A10)
+0x01807d59fd  mov      rbx, rax
+0x01807d5a00  test     rsi, rsi
+0x01807d5a03  je       0x1807d5ce6
+0x01807d5a09  xor      r9d, r9d
+0x01807d5a0c  xor      r8d, r8d
+0x01807d5a0f  mov      rdx, rax
+0x01807d5a12  mov      rcx, rsi
+0x01807d5a15  call     0x18088eae0  ; -> HeroData$$GetItem (0x88EAE0)
+0x01807d5a1a  xor      r8d, r8d
+0x01807d5a1d  mov      dl, 1
+0x01807d5a1f  mov      rcx, rsi
+0x01807d5a22  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5a27  mov      rdi, rax
+0x01807d5a2a  test     rbx, rbx
+0x01807d5a2d  je       0x1807d5ce6
+0x01807d5a33  xor      r8d, r8d
+0x01807d5a36  mov      dl, 1
+0x01807d5a38  mov      rcx, rbx
+0x01807d5a3b  call     0x180d0d140  ; -> ItemData$$Name (0xD0D140)
+0x01807d5a40  mov      rcx, qword ptr [rip + 0x15e5f19]
+0x01807d5a47  xor      r9d, r9d
+0x01807d5a4a  mov      r8, rax
+0x01807d5a4d  mov      rdx, rdi
+0x01807d5a50  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5a55  mov      rdi, rax
+0x01807d5a58  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5a5d  cmp      eax, 0x8b815224
+0x01807d5a62  jne      0x1807d5424
+0x01807d5a68  mov      rdx, qword ptr [rip + 0x15b5d61]
+0x01807d5a6f  xor      r8d, r8d
+0x01807d5a72  mov      rcx, rbx
+0x01807d5a75  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5a7a  test     al, al
+0x01807d5a7c  je       0x1807d5424
+0x01807d5a82  movss    xmm2, dword ptr [rbp + 0x6c]
+0x01807d5a87  mov      edx, 6
+0x01807d5a8c  movss    xmm3, dword ptr [rip + 0x10eb6b8]
+0x01807d5a94  addss    xmm2, xmm7
+0x01807d5a98  mov      qword ptr [rsp + 0x40], r13
+0x01807d5a9d  mov      rcx, r15
+0x01807d5aa0  mov      qword ptr [rsp + 0x38], r13
+0x01807d5aa5  mov      qword ptr [rsp + 0x30], r13
+0x01807d5aaa  mov      dword ptr [rsp + 0x28], r13d
+0x01807d5aaf  mov      byte ptr [rsp + 0x20], 1
+0x01807d5ab4  call     0x1807b3a10  ; -> GameController$$GenerateRandomItem (0x7B3A10)
+0x01807d5ab9  mov      rbx, rax
+0x01807d5abc  test     rsi, rsi
+0x01807d5abf  je       0x1807d5ce6
+0x01807d5ac5  xor      r9d, r9d
+0x01807d5ac8  xor      r8d, r8d
+0x01807d5acb  mov      rdx, rax
+0x01807d5ace  mov      rcx, rsi
+0x01807d5ad1  call     0x18088eae0  ; -> HeroData$$GetItem (0x88EAE0)
+0x01807d5ad6  xor      r8d, r8d
+0x01807d5ad9  mov      dl, 1
+0x01807d5adb  mov      rcx, rsi
+0x01807d5ade  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5ae3  mov      rdi, rax
+0x01807d5ae6  test     rbx, rbx
+0x01807d5ae9  je       0x1807d5ce6
+0x01807d5aef  xor      r8d, r8d
+0x01807d5af2  mov      dl, 1
+0x01807d5af4  mov      rcx, rbx
+0x01807d5af7  call     0x180d0d140  ; -> ItemData$$Name (0xD0D140)
+0x01807d5afc  mov      rcx, qword ptr [rip + 0x15e5ee5]
+0x01807d5b03  xor      r9d, r9d
+0x01807d5b06  mov      r8, rax
+0x01807d5b09  mov      rdx, rdi
+0x01807d5b0c  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5b11  mov      rdi, rax
+0x01807d5b14  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5b19  cmp      eax, 0x614fbf8
+0x01807d5b1e  jne      0x1807d5c14
+0x01807d5b24  mov      rdx, qword ptr [rip + 0x15e3bf5]
+0x01807d5b2b  xor      r8d, r8d
+0x01807d5b2e  mov      rcx, rbx
+0x01807d5b31  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5b36  test     al, al
+0x01807d5b38  je       0x1807d5424
+0x01807d5b3e  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d5b43  test     rsi, rsi
+0x01807d5b46  je       0x1807d5cf2
+0x01807d5b4c  xor      edx, edx
+0x01807d5b4e  mov      rcx, rsi
+0x01807d5b51  call     0x18088aa70  ; -> HeroData$$GetExtraMaxHp (0x88AA70)
+0x01807d5b56  movss    xmm1, dword ptr [rbp + 0x6c]
+0x01807d5b5b  xor      r8d, r8d
+0x01807d5b5e  mulss    xmm1, dword ptr [rip + 0x116670e]
+0x01807d5b66  subss    xmm0, xmm1
+0x01807d5b6a  movaps   xmm1, xmm0
+0x01807d5b6d  xorps    xmm0, xmm0
+0x01807d5b70  call     0x1810e5370  ; -> UnityEngine.Mathf$$Max (0x10E5370)
+0x01807d5b75  mulss    xmm0, dword ptr [rip + 0x1166637]
+0x01807d5b7d  xor      edx, edx
+0x01807d5b7f  movss    xmm1, dword ptr [rip + 0x10eb5c1]
+0x01807d5b87  addss    xmm6, dword ptr [rip + 0x10eb7a1]
+0x01807d5b8f  subss    xmm1, xmm0
+0x01807d5b93  mulss    xmm6, dword ptr [rip + 0x116669d]
+0x01807d5b9b  mulss    xmm1, xmm6
+0x01807d5b9f  movaps   xmm0, xmm1
+0x01807d5ba2  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01807d5ba7  xor      r8d, r8d
+0x01807d5baa  mov      edx, eax
+0x01807d5bac  lea      ecx, [r8 + 1]
+0x01807d5bb0  call     0x1810e5380  ; -> UnityEngine.Mathf$$Max (0x10E5380)
+0x01807d5bb5  xor      r9d, r9d
+0x01807d5bb8  xor      r8d, r8d
+0x01807d5bbb  mov      rcx, rsi
+0x01807d5bbe  mov      edi, eax
+0x01807d5bc0  movd     xmm1, eax
+0x01807d5bc4  cvtdq2ps xmm1, xmm1
+0x01807d5bc7  call     0x180882de0  ; -> HeroData$$ChangeMaxHp (0x882DE0)
+0x01807d5bcc  xor      r8d, r8d
+0x01807d5bcf  mov      dl, 1
+0x01807d5bd1  mov      rcx, rsi
+0x01807d5bd4  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5bd9  mov      rcx, qword ptr [rip + 0x15ac8b0]
+0x01807d5be0  lea      rdx, [rsp + 0xe8]
+0x01807d5be8  mov      rbx, rax
+0x01807d5beb  mov      dword ptr [rsp + 0xe8], edi
+0x01807d5bf2  call     0x18005ae60  ; -> 0x5AE60
+0x01807d5bf7  mov      rcx, qword ptr [rip + 0x15e0d52]
+0x01807d5bfe  xor      r9d, r9d
+0x01807d5c01  mov      r8, rax
+0x01807d5c04  mov      rdx, rbx
+0x01807d5c07  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5c0c  mov      rdi, rax
+0x01807d5c0f  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5c14  cmp      eax, 0x235af07f
+0x01807d5c19  jne      0x1807d5424
+0x01807d5c1f  mov      rdx, qword ptr [rip + 0x15d1daa]
+0x01807d5c26  xor      r8d, r8d
+0x01807d5c29  mov      rcx, rbx
+0x01807d5c2c  call     0x18171fca0  ; -> System.String$$Equals (0x171FCA0)
+0x01807d5c31  test     al, al
+0x01807d5c33  je       0x1807d5424
+0x01807d5c39  mov      rcx, qword ptr [rip + 0x15a0120]
+0x01807d5c40  movss    xmm6, dword ptr [rbp + 0x6c]
+0x01807d5c45  test     byte ptr [rcx + 0x133], 4
+0x01807d5c4c  je       0x1807d5c5c
+0x01807d5c4e  cmp      dword ptr [rcx + 0xe0], r13d
+0x01807d5c55  jne      0x1807d5c5c
+0x01807d5c57  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807d5c5c  movss    xmm1, dword ptr [rip + 0x116667c]
+0x01807d5c64  xor      r9d, r9d
+0x01807d5c67  movss    xmm0, dword ptr [rip + 0x1166669]
+0x01807d5c6f  xor      r8d, r8d
+0x01807d5c72  call     0x180a872c0  ; -> GlobalData$$RandomRange (0xA872C0)
+0x01807d5c77  addss    xmm6, dword ptr [rip + 0x10eb6b1]
+0x01807d5c7f  xor      edx, edx
+0x01807d5c81  mulss    xmm6, xmm0
+0x01807d5c85  movaps   xmm0, xmm6
+0x01807d5c88  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01807d5c8d  mov      edi, eax
+0x01807d5c8f  test     rsi, rsi
+0x01807d5c92  je       0x1807d5cf8
+0x01807d5c94  xor      r9d, r9d
+0x01807d5c97  xor      r8d, r8d
+0x01807d5c9a  mov      edx, eax
+0x01807d5c9c  mov      rcx, rsi
+0x01807d5c9f  call     0x180883640  ; -> HeroData$$ChangeMoney (0x883640)
+0x01807d5ca4  xor      r8d, r8d
+0x01807d5ca7  mov      dl, 1
+0x01807d5ca9  mov      rcx, rsi
+0x01807d5cac  call     0x18089cc60  ; -> HeroData$$Name (0x89CC60)
+0x01807d5cb1  mov      rcx, qword ptr [rip + 0x15ac7d8]
+0x01807d5cb8  lea      rdx, [rsp + 0x60]
+0x01807d5cbd  mov      rbx, rax
+0x01807d5cc0  mov      dword ptr [rsp + 0x60], edi
+0x01807d5cc4  call     0x18005ae60  ; -> 0x5AE60
+0x01807d5cc9  mov      rcx, qword ptr [rip + 0x15e0b70]
+0x01807d5cd0  xor      r9d, r9d
+0x01807d5cd3  mov      r8, rax
+0x01807d5cd6  mov      rdx, rbx
+0x01807d5cd9  call     0x181720950  ; -> System.String$$Format (0x1720950)
+0x01807d5cde  mov      rdi, rax
+0x01807d5ce1  jmp      0x1807d546b  ; -> 0x7D546B (inside GameController$$ManageWorldEventOutTime)
+0x01807d5ce6  call     0x1800d6610  ; -> 0xD6610
+0x01807d5ceb  int3     
+0x01807d5cec  call     0x1800d6610  ; -> 0xD6610
+0x01807d5cf1  int3     
+0x01807d5cf2  call     0x1800d6610  ; -> 0xD6610
+0x01807d5cf7  int3     
+0x01807d5cf8  call     0x1800d6610  ; -> 0xD6610
+0x01807d5cfd  int3     
+0x01807d5cfe  int3     
+0x01807d5cff  int3     

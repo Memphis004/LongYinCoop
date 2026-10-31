@@ -1,0 +1,155 @@
+; WE_CreateRandomWorldEvent  rva=0x9D1550 va=0x1809D1550 end(before)=0x9D17D0 insns=154
+0x01809d1550  mov      qword ptr [rsp + 0x18], rbp
+0x01809d1555  mov      qword ptr [rsp + 0x20], rsi
+0x01809d155a  push     rdi
+0x01809d155b  push     r12
+0x01809d155d  push     r15
+0x01809d155f  sub      rsp, 0x20
+0x01809d1563  cmp      byte ptr [rip + 0x14ce303], 0
+0x01809d156a  movzx    r15d, dl
+0x01809d156e  mov      rbp, rcx
+0x01809d1571  jne      0x1809d15e6
+0x01809d1573  lea      rcx, [rip + 0x13a376e]
+0x01809d157a  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d157f  lea      rcx, [rip + 0x13a47da]
+0x01809d1586  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d158b  lea      rcx, [rip + 0x13bfe7e]
+0x01809d1592  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d1597  lea      rcx, [rip + 0x13bfcf2]
+0x01809d159e  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15a3  lea      rcx, [rip + 0x13dd556]
+0x01809d15aa  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15af  lea      rcx, [rip + 0x13c05da]
+0x01809d15b6  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15bb  lea      rcx, [rip + 0x13dd5be]
+0x01809d15c2  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15c7  lea      rcx, [rip + 0x13c0642]
+0x01809d15ce  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15d3  lea      rcx, [rip + 0x13c476e]
+0x01809d15da  call     0x1800d64a0  ; -> 0xD64A0
+0x01809d15df  mov      byte ptr [rip + 0x14ce287], 1
+0x01809d15e6  mov      rcx, qword ptr [rip + 0x13c475b]
+0x01809d15ed  xor      r12d, r12d
+0x01809d15f0  mov      qword ptr [rsp + 0x40], rbx
+0x01809d15f5  mov      qword ptr [rsp + 0x48], r14
+0x01809d15fa  call     0x1800d65d0  ; -> 0xD65D0
+0x01809d15ff  mov      rdx, qword ptr [rip + 0x13bfc8a]
+0x01809d1606  mov      rcx, rax
+0x01809d1609  mov      rsi, rax
+0x01809d160c  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01809d1611  mov      rax, qword ptr [rbp + 0x18]
+0x01809d1615  mov      edi, r12d
+0x01809d1618  mov      ecx, r12d
+0x01809d161b  test     rax, rax
+0x01809d161e  je       0x1809d17c9
+0x01809d1624  mov      rbx, rax
+0x01809d1627  lea      r14d, [r12 + 0x20]
+0x01809d162c  nop      dword ptr [rax]
+0x01809d1630  cmp      ecx, dword ptr [rax + 0x18]
+0x01809d1633  jge      0x1809d172b
+0x01809d1639  test     rbx, rbx
+0x01809d163c  je       0x1809d17c9
+0x01809d1642  cmp      edi, dword ptr [rbx + 0x18]
+0x01809d1645  jb       0x1809d164e
+0x01809d1647  xor      ecx, ecx
+0x01809d1649  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809d164e  mov      rax, qword ptr [rbx + 0x10]
+0x01809d1652  mov      rcx, qword ptr [r14 + rax]
+0x01809d1656  test     rcx, rcx
+0x01809d1659  je       0x1809d17c9
+0x01809d165f  cmp      dword ptr [rcx + 0x30], 1
+0x01809d1663  jne      0x1809d170e
+0x01809d1669  test     r15b, r15b
+0x01809d166c  je       0x1809d16f4
+0x01809d1672  mov      rcx, qword ptr [rip + 0x13a366f]
+0x01809d1679  test     byte ptr [rcx + 0x133], 4
+0x01809d1680  je       0x1809d1690
+0x01809d1682  cmp      dword ptr [rcx + 0xe0], r12d
+0x01809d1689  jne      0x1809d1690
+0x01809d168b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d1690  xor      ecx, ecx
+0x01809d1692  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809d1697  test     rax, rax
+0x01809d169a  je       0x1809d17c9
+0x01809d16a0  mov      rax, qword ptr [rax + 0x20]
+0x01809d16a4  test     rax, rax
+0x01809d16a7  je       0x1809d17c9
+0x01809d16ad  mov      rcx, qword ptr [rbp + 0x18]
+0x01809d16b1  mov      rbx, qword ptr [rax + 0xa8]
+0x01809d16b8  test     rcx, rcx
+0x01809d16bb  je       0x1809d17c9
+0x01809d16c1  mov      r8, qword ptr [rip + 0x13dd4b8]
+0x01809d16c8  mov      edx, edi
+0x01809d16ca  call     0x180002f80  ; -> 0x2F80
+0x01809d16cf  test     rax, rax
+0x01809d16d2  je       0x1809d17c9
+0x01809d16d8  test     rbx, rbx
+0x01809d16db  je       0x1809d17c9
+0x01809d16e1  mov      rdx, qword ptr [rax + 0x20]
+0x01809d16e5  xor      r8d, r8d
+0x01809d16e8  mov      rcx, rbx
+0x01809d16eb  call     0x180aa6f80  ; -> TimeData$$DeltaDay (0xAA6F80)
+0x01809d16f0  test     eax, eax
+0x01809d16f2  js       0x1809d170e
+0x01809d16f4  test     rsi, rsi
+0x01809d16f7  je       0x1809d17c9
+0x01809d16fd  mov      r8, qword ptr [rip + 0x13bfd0c]
+0x01809d1704  mov      edx, edi
+0x01809d1706  mov      rcx, rsi
+0x01809d1709  call     0x18182b810  ; -> System.Collections.Generic.List<AISettingType>$$Add (0x182B810)
+0x01809d170e  mov      rax, qword ptr [rbp + 0x18]
+0x01809d1712  inc      edi
+0x01809d1714  add      r14, 8
+0x01809d1718  mov      ecx, edi
+0x01809d171a  mov      rbx, rax
+0x01809d171d  test     rax, rax
+0x01809d1720  je       0x1809d17c9
+0x01809d1726  jmp      0x1809d1630  ; -> 0x9D1630 (inside WorldEventController$$CreateRandomWorldEvent)
+0x01809d172b  test     rsi, rsi
+0x01809d172e  je       0x1809d17c9
+0x01809d1734  mov      edi, dword ptr [rsi + 0x18]
+0x01809d1737  test     edi, edi
+0x01809d1739  jle      0x1809d17a8
+0x01809d173b  mov      rcx, qword ptr [rip + 0x13a461e]
+0x01809d1742  test     byte ptr [rcx + 0x133], 4
+0x01809d1749  je       0x1809d1759
+0x01809d174b  cmp      dword ptr [rcx + 0xe0], r12d
+0x01809d1752  jne      0x1809d1759
+0x01809d1754  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809d1759  xor      r9d, r9d
+0x01809d175c  xor      r8d, r8d
+0x01809d175f  mov      edx, edi
+0x01809d1761  xor      ecx, ecx
+0x01809d1763  call     0x180a87220  ; -> GlobalData$$RandomRange (0xA87220)
+0x01809d1768  movsxd   rdi, eax
+0x01809d176b  cmp      edi, dword ptr [rsi + 0x18]
+0x01809d176e  jb       0x1809d1777
+0x01809d1770  xor      ecx, ecx
+0x01809d1772  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809d1777  test     rbx, rbx
+0x01809d177a  je       0x1809d17c9
+0x01809d177c  mov      rax, qword ptr [rsi + 0x10]
+0x01809d1780  movsxd   rdi, dword ptr [rax + rdi*4 + 0x20]
+0x01809d1785  cmp      edi, dword ptr [rbx + 0x18]
+0x01809d1788  jb       0x1809d1791
+0x01809d178a  xor      ecx, ecx
+0x01809d178c  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01809d1791  mov      rax, qword ptr [rbx + 0x10]
+0x01809d1795  xor      r8d, r8d
+0x01809d1798  mov      rcx, rbp
+0x01809d179b  mov      rdx, qword ptr [rax + rdi*8 + 0x20]
+0x01809d17a0  call     0x1809d17d0  ; -> WorldEventController$$CreateWorldEvent (0x9D17D0)
+0x01809d17a5  mov      r12, rax
+0x01809d17a8  mov      r14, qword ptr [rsp + 0x48]
+0x01809d17ad  mov      rax, r12
+0x01809d17b0  mov      rbx, qword ptr [rsp + 0x40]
+0x01809d17b5  mov      rbp, qword ptr [rsp + 0x50]
+0x01809d17ba  mov      rsi, qword ptr [rsp + 0x58]
+0x01809d17bf  add      rsp, 0x20
+0x01809d17c3  pop      r15
+0x01809d17c5  pop      r12
+0x01809d17c7  pop      rdi
+0x01809d17c8  ret      
+0x01809d17c9  call     0x1800d6610  ; -> 0xD6610
+0x01809d17ce  int3     
+0x01809d17cf  int3     
