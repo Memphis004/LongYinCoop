@@ -1,0 +1,340 @@
+; PartyController_EndParty_MoveNext  rva=0x8EA5A0 va=0x1808EA5A0 end(before)=0x8EAB90 insns=339
+0x01808ea5a0  mov      qword ptr [rsp + 0x20], rbx
+0x01808ea5a5  push     rbp
+0x01808ea5a6  sub      rsp, 0x70
+0x01808ea5aa  cmp      byte ptr [rip + 0x15b4ce5], 0
+0x01808ea5b1  mov      rbp, rcx
+0x01808ea5b4  jne      0x1808ea605
+0x01808ea5b6  lea      rcx, [rip + 0x148a72b]
+0x01808ea5bd  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5c2  lea      rcx, [rip + 0x14bbf07]
+0x01808ea5c9  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5ce  lea      rcx, [rip + 0x14a75bb]
+0x01808ea5d5  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5da  lea      rcx, [rip + 0x14a762f]
+0x01808ea5e1  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5e6  lea      rcx, [rip + 0x14a7d1b]
+0x01808ea5ed  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5f2  lea      rcx, [rip + 0x14cc447]
+0x01808ea5f9  call     0x1800d64a0  ; -> 0xD64A0
+0x01808ea5fe  mov      byte ptr [rip + 0x15b4c91], 1
+0x01808ea605  mov      eax, dword ptr [rbp + 0x10]
+0x01808ea608  mov      rbx, qword ptr [rbp + 0x20]
+0x01808ea60c  mov      qword ptr [rsp + 0x80], rsi
+0x01808ea614  mov      qword ptr [rsp + 0x88], rdi
+0x01808ea61c  mov      qword ptr [rsp + 0x90], r14
+0x01808ea624  movaps   xmmword ptr [rsp + 0x60], xmm6
+0x01808ea629  movaps   xmmword ptr [rsp + 0x50], xmm7
+0x01808ea62e  movaps   xmmword ptr [rsp + 0x40], xmm8
+0x01808ea634  test     eax, eax
+0x01808ea636  jne      0x1808eab31
+0x01808ea63c  mov      dword ptr [rbp + 0x10], 0xffffffff
+0x01808ea643  test     rbx, rbx
+0x01808ea646  je       0x1808eab84
+0x01808ea64c  mov      rdx, qword ptr [rbx + 0x48]
+0x01808ea650  xor      r14d, r14d
+0x01808ea653  test     rdx, rdx
+0x01808ea656  je       0x1808ea6b8
+0x01808ea658  mov      rcx, qword ptr [rbx + 0xa8]
+0x01808ea65f  test     rcx, rcx
+0x01808ea662  je       0x1808eab84
+0x01808ea668  movss    xmm0, dword ptr [rbx + 0xc8]
+0x01808ea670  mov      r9, rcx
+0x01808ea673  mov      qword ptr [rsp + 0x28], r14
+0x01808ea678  mov      r8b, 1
+0x01808ea67b  movss    dword ptr [rsp + 0x20], xmm0
+0x01808ea681  call     0x180885a00  ; -> HeroData$$CosumeMedFood (0x885A00)
+0x01808ea686  mov      rcx, qword ptr [rbx + 0xb0]
+0x01808ea68d  test     rcx, rcx
+0x01808ea690  je       0x1808ea6b8
+0x01808ea692  movss    xmm0, dword ptr [rbx + 0xc8]
+0x01808ea69a  mov      r8b, 1
+0x01808ea69d  mov      r9, qword ptr [rbx + 0xa8]
+0x01808ea6a4  mov      rdx, qword ptr [rbx + 0x48]
+0x01808ea6a8  mov      qword ptr [rsp + 0x28], r14
+0x01808ea6ad  movss    dword ptr [rsp + 0x20], xmm0
+0x01808ea6b3  call     0x180885a00  ; -> HeroData$$CosumeMedFood (0x885A00)
+0x01808ea6b8  mov      rdx, qword ptr [rbx + 0x68]
+0x01808ea6bc  test     rdx, rdx
+0x01808ea6bf  je       0x1808ea721
+0x01808ea6c1  mov      rcx, qword ptr [rbx + 0xa8]
+0x01808ea6c8  test     rcx, rcx
+0x01808ea6cb  je       0x1808eab84
+0x01808ea6d1  movss    xmm0, dword ptr [rbx + 0xc8]
+0x01808ea6d9  mov      r9, rcx
+0x01808ea6dc  mov      qword ptr [rsp + 0x28], r14
+0x01808ea6e1  mov      r8b, 1
+0x01808ea6e4  movss    dword ptr [rsp + 0x20], xmm0
+0x01808ea6ea  call     0x180885a00  ; -> HeroData$$CosumeMedFood (0x885A00)
+0x01808ea6ef  mov      rcx, qword ptr [rbx + 0xb0]
+0x01808ea6f6  test     rcx, rcx
+0x01808ea6f9  je       0x1808ea721
+0x01808ea6fb  movss    xmm0, dword ptr [rbx + 0xc8]
+0x01808ea703  mov      r8b, 1
+0x01808ea706  mov      r9, qword ptr [rbx + 0xa8]
+0x01808ea70d  mov      rdx, qword ptr [rbx + 0x68]
+0x01808ea711  mov      qword ptr [rsp + 0x28], r14
+0x01808ea716  movss    dword ptr [rsp + 0x20], xmm0
+0x01808ea71c  call     0x180885a00  ; -> HeroData$$CosumeMedFood (0x885A00)
+0x01808ea721  movss    xmm7, dword ptr [rip + 0xfd6c37]
+0x01808ea729  xor      r8d, r8d
+0x01808ea72c  movss    xmm1, dword ptr [rip + 0xfd6bc8]
+0x01808ea734  movaps   xmm0, xmm7
+0x01808ea737  mov      rdi, qword ptr [rbx + 0xa8]
+0x01808ea73e  call     0x180d97130  ; -> UnityEngine.Random$$Range (0xD97130)
+0x01808ea743  xor      edx, edx
+0x01808ea745  mov      rcx, rbx
+0x01808ea748  movaps   xmm6, xmm0
+0x01808ea74b  call     0x180b9a280  ; -> PartyController$$GetMaxHeroLv (0xB9A280)
+0x01808ea750  mov      rax, qword ptr [rbx + 0xa8]
+0x01808ea757  movaps   xmm1, xmm0
+0x01808ea75a  test     rax, rax
+0x01808ea75d  je       0x1808eab84
+0x01808ea763  movd     xmm0, dword ptr [rax + 0xb8]
+0x01808ea76b  addss    xmm1, xmm6
+0x01808ea76f  cvtdq2ps xmm0, xmm0
+0x01808ea772  xor      edx, edx
+0x01808ea774  subss    xmm1, xmm0
+0x01808ea778  movaps   xmm0, xmm1
+0x01808ea77b  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01808ea780  mov      rcx, qword ptr [rip + 0x14a7b81]
+0x01808ea787  mov      esi, eax
+0x01808ea789  test     byte ptr [rcx + 0x133], 4
+0x01808ea790  je       0x1808ea7a7
+0x01808ea792  cmp      dword ptr [rcx + 0xe0], r14d
+0x01808ea799  jne      0x1808ea7a7
+0x01808ea79b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808ea7a0  mov      rcx, qword ptr [rip + 0x14a7b61]
+0x01808ea7a7  mov      rcx, qword ptr [rcx + 0xb8]
+0x01808ea7ae  mov      rax, qword ptr [rcx + 0x18]
+0x01808ea7b2  test     rax, rax
+0x01808ea7b5  je       0x1808eab84
+0x01808ea7bb  mov      r8d, dword ptr [rax + 0x18]
+0x01808ea7bf  xor      r9d, r9d
+0x01808ea7c2  dec      r8d
+0x01808ea7c5  xor      edx, edx
+0x01808ea7c7  mov      ecx, esi
+0x01808ea7c9  call     0x1810e4dc0  ; -> UnityEngine.Mathf$$Clamp (0x10E4DC0)
+0x01808ea7ce  test     rdi, rdi
+0x01808ea7d1  je       0x1808eab84
+0x01808ea7d7  movss    xmm6, dword ptr [rip + 0xfd6b69]
+0x01808ea7df  lea      edx, [rax + 0x14e]
+0x01808ea7e5  mov      qword ptr [rsp + 0x30], r14
+0x01808ea7ea  movaps   xmm2, xmm6
+0x01808ea7ed  mov      byte ptr [rsp + 0x28], 1
+0x01808ea7f2  xor      r9d, r9d
+0x01808ea7f5  mov      rcx, rdi
+0x01808ea7f8  mov      byte ptr [rsp + 0x20], 1
+0x01808ea7fd  call     0x18087b310  ; -> HeroData$$AddTag (0x87B310)
+0x01808ea802  mov      rdi, qword ptr [rbx + 0xb0]
+0x01808ea809  test     rdi, rdi
+0x01808ea80c  je       0x1808ea8cd
+0x01808ea812  movss    xmm1, dword ptr [rip + 0xfd6ae2]
+0x01808ea81a  xor      r8d, r8d
+0x01808ea81d  movaps   xmm0, xmm7
+0x01808ea820  call     0x180d97130  ; -> UnityEngine.Random$$Range (0xD97130)
+0x01808ea825  xor      edx, edx
+0x01808ea827  mov      rcx, rbx
+0x01808ea82a  movaps   xmm7, xmm0
+0x01808ea82d  call     0x180b9a280  ; -> PartyController$$GetMaxHeroLv (0xB9A280)
+0x01808ea832  mov      rax, qword ptr [rbx + 0xb0]
+0x01808ea839  test     rax, rax
+0x01808ea83c  je       0x1808eab84
+0x01808ea842  movd     xmm1, dword ptr [rax + 0xb8]
+0x01808ea84a  addss    xmm0, xmm7
+0x01808ea84e  cvtdq2ps xmm1, xmm1
+0x01808ea851  xor      edx, edx
+0x01808ea853  subss    xmm0, xmm1
+0x01808ea857  call     0x1810e56b0  ; -> UnityEngine.Mathf$$RoundToInt (0x10E56B0)
+0x01808ea85c  mov      rcx, qword ptr [rip + 0x14a7aa5]
+0x01808ea863  mov      esi, eax
+0x01808ea865  test     byte ptr [rcx + 0x133], 4
+0x01808ea86c  je       0x1808ea883
+0x01808ea86e  cmp      dword ptr [rcx + 0xe0], r14d
+0x01808ea875  jne      0x1808ea883
+0x01808ea877  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808ea87c  mov      rcx, qword ptr [rip + 0x14a7a85]
+0x01808ea883  mov      rcx, qword ptr [rcx + 0xb8]
+0x01808ea88a  mov      rax, qword ptr [rcx + 0x18]
+0x01808ea88e  test     rax, rax
+0x01808ea891  je       0x1808eab84
+0x01808ea897  mov      r8d, dword ptr [rax + 0x18]
+0x01808ea89b  xor      r9d, r9d
+0x01808ea89e  dec      r8d
+0x01808ea8a1  xor      edx, edx
+0x01808ea8a3  mov      ecx, esi
+0x01808ea8a5  call     0x1810e4dc0  ; -> UnityEngine.Mathf$$Clamp (0x10E4DC0)
+0x01808ea8aa  mov      qword ptr [rsp + 0x30], r14
+0x01808ea8af  xor      r9d, r9d
+0x01808ea8b2  mov      byte ptr [rsp + 0x28], 1
+0x01808ea8b7  movaps   xmm2, xmm6
+0x01808ea8ba  mov      rcx, rdi
+0x01808ea8bd  mov      byte ptr [rsp + 0x20], 1
+0x01808ea8c2  lea      edx, [rax + 0x14e]
+0x01808ea8c8  call     0x18087b310  ; -> HeroData$$AddTag (0x87B310)
+0x01808ea8cd  cmp      dword ptr [rbx + 0x18], 1
+0x01808ea8d1  mov      rdi, qword ptr [rbx + 0xa8]
+0x01808ea8d8  je       0x1808ea904
+0x01808ea8da  xor      edx, edx
+0x01808ea8dc  mov      rcx, rbx
+0x01808ea8df  call     0x180b9a280  ; -> PartyController$$GetMaxHeroLv (0xB9A280)
+0x01808ea8e4  test     rdi, rdi
+0x01808ea8e7  je       0x1808eab84
+0x01808ea8ed  mulss    xmm0, xmm6
+0x01808ea8f1  xor      r9d, r9d
+0x01808ea8f4  mov      r8b, 1
+0x01808ea8f7  mov      rcx, rdi
+0x01808ea8fa  movaps   xmm1, xmm0
+0x01808ea8fd  call     0x18087ea70  ; -> HeroData$$ChangeFame (0x87EA70)
+0x01808ea902  jmp      0x1808ea955  ; -> 0x8EA955 (inside PartyController.<EndParty>d__59$$MoveNext)
+0x01808ea904  test     rdi, rdi
+0x01808ea907  je       0x1808eab84
+0x01808ea90d  xor      r8d, r8d
+0x01808ea910  xor      edx, edx
+0x01808ea912  mov      rcx, rdi
+0x01808ea915  call     0x18088c0b0  ; -> HeroData$$GetForce (0x88C0B0)
+0x01808ea91a  xor      edx, edx
+0x01808ea91c  mov      rcx, rbx
+0x01808ea91f  mov      rdi, rax
+0x01808ea922  call     0x180b9a280  ; -> PartyController$$GetMaxHeroLv (0xB9A280)
+0x01808ea927  test     rdi, rdi
+0x01808ea92a  je       0x1808eab84
+0x01808ea930  mulss    xmm0, dword ptr [rip + 0x1051964]
+0x01808ea938  mov      r9b, 1
+0x01808ea93b  mov      qword ptr [rsp + 0x28], r14
+0x01808ea940  mov      edx, 5
+0x01808ea945  mov      rcx, rdi
+0x01808ea948  mov      byte ptr [rsp + 0x20], 1
+0x01808ea94d  movaps   xmm2, xmm0
+0x01808ea950  call     0x180b34430  ; -> ForceData$$ChangeResource (0xB34430)
+0x01808ea955  cmp      dword ptr [rbx + 0x18], 2
+0x01808ea959  jne      0x1808eaaf5
+0x01808ea95f  mov      rax, qword ptr [rbx + 0xb0]
+0x01808ea966  test     rax, rax
+0x01808ea969  je       0x1808eab84
+0x01808ea96f  mov      rcx, qword ptr [rbx + 0xa8]
+0x01808ea976  test     rcx, rcx
+0x01808ea979  je       0x1808eab84
+0x01808ea97f  mov      edx, dword ptr [rax + 0x58]
+0x01808ea982  xor      r9d, r9d
+0x01808ea985  mov      r8b, 1
+0x01808ea988  call     0x1808a45d0  ; -> HeroData$$SetLover (0x8A45D0)
+0x01808ea98d  mov      rax, qword ptr [rbx + 0xa8]
+0x01808ea994  test     rax, rax
+0x01808ea997  je       0x1808eab84
+0x01808ea99d  cmp      dword ptr [rax + 0x58], r14d
+0x01808ea9a1  jne      0x1808eaaf5
+0x01808ea9a7  mov      rcx, qword ptr [rax + 0x330]
+0x01808ea9ae  test     rcx, rcx
+0x01808ea9b1  je       0x1808eab84
+0x01808ea9b7  mov      edi, dword ptr [rcx + 0x18]
+0x01808ea9ba  sub      edi, 1
+0x01808ea9bd  js       0x1808eaaf5
+0x01808ea9c3  movss    xmm7, dword ptr [rip + 0x10518ed]
+0x01808ea9cb  xorps    xmm6, xmm6
+0x01808ea9ce  movss    xmm8, dword ptr [rip + 0x1051979]
+0x01808ea9d7  nop      word ptr [rax + rax]
+0x01808ea9e0  mov      rcx, qword ptr [rip + 0x148a301]
+0x01808ea9e7  test     byte ptr [rcx + 0x133], 4
+0x01808ea9ee  je       0x1808ea9fe
+0x01808ea9f0  cmp      dword ptr [rcx + 0xe0], r14d
+0x01808ea9f7  jne      0x1808ea9fe
+0x01808ea9f9  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808ea9fe  xor      ecx, ecx
+0x01808eaa00  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01808eaa05  test     rax, rax
+0x01808eaa08  je       0x1808eab84
+0x01808eaa0e  mov      rsi, qword ptr [rax + 0x20]
+0x01808eaa12  mov      rax, qword ptr [rbx + 0xa8]
+0x01808eaa19  test     rax, rax
+0x01808eaa1c  je       0x1808eab84
+0x01808eaa22  mov      rcx, qword ptr [rax + 0x330]
+0x01808eaa29  test     rcx, rcx
+0x01808eaa2c  je       0x1808eab84
+0x01808eaa32  mov      r8, qword ptr [rip + 0x14a71d7]
+0x01808eaa39  mov      edx, edi
+0x01808eaa3b  call     0x1800d6750  ; -> 0xD6750
+0x01808eaa40  test     rsi, rsi
+0x01808eaa43  je       0x1808eab84
+0x01808eaa49  xor      r8d, r8d
+0x01808eaa4c  mov      edx, eax
+0x01808eaa4e  mov      rcx, rsi
+0x01808eaa51  call     0x1809ce010  ; -> WorldData$$GetHero (0x9CE010)
+0x01808eaa56  test     rax, rax
+0x01808eaa59  je       0x1808eab84
+0x01808eaa5f  mov      qword ptr [rsp + 0x30], r14
+0x01808eaa64  movaps   xmm3, xmm7
+0x01808eaa67  mov      byte ptr [rsp + 0x28], r14b
+0x01808eaa6c  mov      r8b, 1
+0x01808eaa6f  movaps   xmm1, xmm8
+0x01808eaa73  movss    dword ptr [rsp + 0x20], xmm6
+0x01808eaa79  mov      rcx, rax
+0x01808eaa7c  call     0x18087ee30  ; -> HeroData$$ChangeFavor (0x87EE30)
+0x01808eaa81  xor      ecx, ecx
+0x01808eaa83  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01808eaa88  test     rax, rax
+0x01808eaa8b  je       0x1808eab84
+0x01808eaa91  mov      rsi, qword ptr [rax + 0x20]
+0x01808eaa95  mov      rax, qword ptr [rbx + 0xa8]
+0x01808eaa9c  test     rax, rax
+0x01808eaa9f  je       0x1808eab84
+0x01808eaaa5  mov      rcx, qword ptr [rax + 0x330]
+0x01808eaaac  test     rcx, rcx
+0x01808eaaaf  je       0x1808eab84
+0x01808eaab5  mov      r8, qword ptr [rip + 0x14a7154]
+0x01808eaabc  mov      edx, edi
+0x01808eaabe  call     0x1800d6750  ; -> 0xD6750
+0x01808eaac3  test     rsi, rsi
+0x01808eaac6  je       0x1808eab84
+0x01808eaacc  xor      r8d, r8d
+0x01808eaacf  mov      edx, eax
+0x01808eaad1  mov      rcx, rsi
+0x01808eaad4  call     0x1809ce010  ; -> WorldData$$GetHero (0x9CE010)
+0x01808eaad9  test     rax, rax
+0x01808eaadc  je       0x1808eab84
+0x01808eaae2  xor      edx, edx
+0x01808eaae4  mov      rcx, rax
+0x01808eaae7  call     0x180884f60  ; -> HeroData$$CheckPlayerMakeLoverUnhappy (0x884F60)
+0x01808eaaec  sub      edi, 1
+0x01808eaaef  jns      0x1808ea9e0
+0x01808eaaf5  mov      rcx, qword ptr [rip + 0x14cbf44]
+0x01808eaafc  call     0x1800d65d0  ; -> 0xD65D0
+0x01808eab01  movss    xmm1, dword ptr [rip + 0xfd67f3]
+0x01808eab09  xor      r8d, r8d
+0x01808eab0c  mov      rcx, rax
+0x01808eab0f  mov      rbx, rax
+0x01808eab12  call     0x181867ea0  ; -> UnityEngine.WaitForSeconds$$.ctor (0x1867EA0)
+0x01808eab17  lea      rcx, [rbp + 0x18]
+0x01808eab1b  mov      rdx, rbx
+0x01808eab1e  mov      qword ptr [rcx], rbx
+0x01808eab21  call     0x1800d6020  ; -> 0xD6020
+0x01808eab26  mov      al, 1
+0x01808eab28  mov      dword ptr [rbp + 0x10], 1
+0x01808eab2f  jmp      0x1808eab4e  ; -> 0x8EAB4E (inside PartyController.<EndParty>d__59$$MoveNext)
+0x01808eab31  cmp      eax, 1
+0x01808eab34  jne      0x1808eab4c
+0x01808eab36  mov      dword ptr [rbp + 0x10], 0xffffffff
+0x01808eab3d  test     rbx, rbx
+0x01808eab40  je       0x1808eab84
+0x01808eab42  xor      edx, edx
+0x01808eab44  mov      rcx, rbx
+0x01808eab47  call     0x180b9a3f0  ; -> PartyController$$PartyEnd (0xB9A3F0)
+0x01808eab4c  xor      al, al
+0x01808eab4e  movaps   xmm8, xmmword ptr [rsp + 0x40]
+0x01808eab54  movaps   xmm7, xmmword ptr [rsp + 0x50]
+0x01808eab59  movaps   xmm6, xmmword ptr [rsp + 0x60]
+0x01808eab5e  mov      r14, qword ptr [rsp + 0x90]
+0x01808eab66  mov      rdi, qword ptr [rsp + 0x88]
+0x01808eab6e  mov      rsi, qword ptr [rsp + 0x80]
+0x01808eab76  mov      rbx, qword ptr [rsp + 0x98]
+0x01808eab7e  add      rsp, 0x70
+0x01808eab82  pop      rbp
+0x01808eab83  ret      
+0x01808eab84  call     0x1800d6610  ; -> 0xD6610
+0x01808eab89  int3     
+0x01808eab8a  int3     
+0x01808eab8b  int3     
+0x01808eab8c  int3     
+0x01808eab8d  int3     
+0x01808eab8e  int3     
+0x01808eab8f  int3     

@@ -1,0 +1,80 @@
+; PlotController_FinishHelpPatrol  rva=0x4E5A90 va=0x1804E5A90 end(before)=0x4E5BD0 insns=79
+0x01804e5a90  mov      qword ptr [rsp + 0x10], rbx
+0x01804e5a95  push     rsi
+0x01804e5a96  sub      rsp, 0x30
+0x01804e5a9a  cmp      byte ptr [rip + 0x19abf0f], 0
+0x01804e5aa1  mov      rsi, rdx
+0x01804e5aa4  mov      rbx, rcx
+0x01804e5aa7  jne      0x1804e5abc
+0x01804e5aa9  lea      rcx, [rip + 0x188f238]
+0x01804e5ab0  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5ab5  mov      byte ptr [rip + 0x19abef4], 1
+0x01804e5abc  mov      rax, qword ptr [rip + 0x188f225]
+0x01804e5ac3  test     byte ptr [rax + 0x133], 4
+0x01804e5aca  je       0x1804e5ae4
+0x01804e5acc  cmp      dword ptr [rax + 0xe0], 0
+0x01804e5ad3  jne      0x1804e5ae4
+0x01804e5ad5  mov      rcx, rax
+0x01804e5ad8  call     0x18005a6e0  ; -> 0x5A6E0
+0x01804e5add  mov      rax, qword ptr [rip + 0x188f204]
+0x01804e5ae4  cmp      byte ptr [rip + 0x19ac261], 0
+0x01804e5aeb  jne      0x1804e5b07
+0x01804e5aed  lea      rcx, [rip + 0x188f1f4]
+0x01804e5af4  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5af9  mov      rax, qword ptr [rip + 0x188f1e8]
+0x01804e5b00  mov      byte ptr [rip + 0x19ac245], 1
+0x01804e5b07  test     byte ptr [rax + 0x133], 4
+0x01804e5b0e  je       0x1804e5b28
+0x01804e5b10  cmp      dword ptr [rax + 0xe0], 0
+0x01804e5b17  jne      0x1804e5b28
+0x01804e5b19  mov      rcx, rax
+0x01804e5b1c  call     0x18005a6e0  ; -> 0x5A6E0
+0x01804e5b21  mov      rax, qword ptr [rip + 0x188f1c0]
+0x01804e5b28  mov      rax, qword ptr [rax + 0xb8]
+0x01804e5b2f  mov      qword ptr [rsp + 0x40], rdi
+0x01804e5b34  movaps   xmmword ptr [rsp + 0x20], xmm6
+0x01804e5b39  mov      rcx, qword ptr [rax]
+0x01804e5b3c  test     rcx, rcx
+0x01804e5b3f  je       0x1804e5bc6
+0x01804e5b45  mov      rcx, qword ptr [rcx + 0x20]
+0x01804e5b49  test     rcx, rcx
+0x01804e5b4c  je       0x1804e5bc6
+0x01804e5b4e  xor      edx, edx
+0x01804e5b50  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01804e5b55  test     rax, rax
+0x01804e5b58  je       0x1804e5bc6
+0x01804e5b5a  xor      edx, edx
+0x01804e5b5c  mov      rcx, rax
+0x01804e5b5f  call     0x180888880  ; -> HeroData$$GetArea (0x888880)
+0x01804e5b64  xor      edx, edx
+0x01804e5b66  mov      rcx, rsi
+0x01804e5b69  mov      rdi, rax
+0x01804e5b6c  call     0x18144e0f0  ; -> System.Single$$Parse (0x144E0F0)
+0x01804e5b71  xor      edx, edx
+0x01804e5b73  mov      rcx, rbx
+0x01804e5b76  movaps   xmm6, xmm0
+0x01804e5b79  call     0x18050a160  ; -> PlotController$$GetNowEventDifficulty (0x50A160)
+0x01804e5b7e  test     rdi, rdi
+0x01804e5b81  je       0x1804e5bc6
+0x01804e5b83  mulss    xmm0, dword ptr [rip + 0x13db771]
+0x01804e5b8b  xor      r9d, r9d
+0x01804e5b8e  mov      r8b, 1
+0x01804e5b91  mov      rcx, rdi
+0x01804e5b94  addss    xmm0, dword ptr [rip + 0x13db5ac]
+0x01804e5b9c  mulss    xmm0, xmm6
+0x01804e5ba0  movaps   xmm1, xmm0
+0x01804e5ba3  call     0x1807e7690  ; -> AreaData$$ChangeSafe (0x7E7690)
+0x01804e5ba8  xor      edx, edx
+0x01804e5baa  mov      rcx, rbx
+0x01804e5bad  movaps   xmm6, xmmword ptr [rsp + 0x20]
+0x01804e5bb2  mov      rdi, qword ptr [rsp + 0x40]
+0x01804e5bb7  mov      rbx, qword ptr [rsp + 0x48]
+0x01804e5bbc  add      rsp, 0x30
+0x01804e5bc0  pop      rsi
+0x01804e5bc1  jmp      0x1804dd730  ; -> PlotController$$FinishEventMission (0x4DD730)
+0x01804e5bc6  call     0x1800d6610  ; -> 0xD6610
+0x01804e5bcb  int3     
+0x01804e5bcc  int3     
+0x01804e5bcd  int3     
+0x01804e5bce  int3     
+0x01804e5bcf  int3     

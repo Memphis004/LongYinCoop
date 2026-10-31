@@ -1,0 +1,33 @@
+; PartyController_PartyContinue_wrapper  rva=0xB9A380 va=0x180B9A380 end(before)=0xB9A3F0 insns=32
+0x0180b9a380  mov      qword ptr [rsp + 8], rbx
+0x0180b9a385  push     rdi
+0x0180b9a386  sub      rsp, 0x20
+0x0180b9a38a  cmp      byte ptr [rip + 0x1305d1e], 0
+0x0180b9a391  mov      rdi, rcx
+0x0180b9a394  jne      0x180b9a3a9
+0x0180b9a396  lea      rcx, [rip + 0x11e901b]
+0x0180b9a39d  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b9a3a2  mov      byte ptr [rip + 0x1305d06], 1
+0x0180b9a3a9  mov      rcx, qword ptr [rip + 0x11e9008]
+0x0180b9a3b0  call     0x1800d65d0  ; -> 0xD65D0
+0x0180b9a3b5  xor      r8d, r8d
+0x0180b9a3b8  xor      edx, edx
+0x0180b9a3ba  mov      rcx, rax
+0x0180b9a3bd  mov      rbx, rax
+0x0180b9a3c0  call     0x180219070  ; -> System.PointerSpec$$.ctor (0x219070)
+0x0180b9a3c5  test     rbx, rbx
+0x0180b9a3c8  je       0x180b9a3e7
+0x0180b9a3ca  lea      rcx, [rbx + 0x20]
+0x0180b9a3ce  mov      rdx, rdi
+0x0180b9a3d1  mov      qword ptr [rcx], rdi
+0x0180b9a3d4  call     0x1800d6020  ; -> 0xD6020
+0x0180b9a3d9  mov      rax, rbx
+0x0180b9a3dc  mov      rbx, qword ptr [rsp + 0x30]
+0x0180b9a3e1  add      rsp, 0x20
+0x0180b9a3e5  pop      rdi
+0x0180b9a3e6  ret      
+0x0180b9a3e7  call     0x1800d6610  ; -> 0xD6610
+0x0180b9a3ec  int3     
+0x0180b9a3ed  int3     
+0x0180b9a3ee  int3     
+0x0180b9a3ef  int3     

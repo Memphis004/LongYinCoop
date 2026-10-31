@@ -1,0 +1,194 @@
+; StudySkillController_SureStartStudySkill  rva=0xFE6280 va=0x180FE6280 end(before)=0xFE65E0 insns=193
+0x0180fe6280  push     rbx
+0x0180fe6282  sub      rsp, 0x40
+0x0180fe6286  cmp      byte ptr [rip + 0xebc662], 0
+0x0180fe628d  mov      rbx, rcx
+0x0180fe6290  jne      0x180fe62f9
+0x0180fe6292  lea      rcx, [rip + 0xdcb127]
+0x0180fe6299  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe629e  lea      rcx, [rip + 0xd8ea43]
+0x0180fe62a5  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62aa  lea      rcx, [rip + 0xda7ad7]
+0x0180fe62b1  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62b6  lea      rcx, [rip + 0xdd1ba3]
+0x0180fe62bd  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62c2  lea      rcx, [rip + 0xdb9b27]
+0x0180fe62c9  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62ce  lea      rcx, [rip + 0xdbd4cb]
+0x0180fe62d5  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62da  lea      rcx, [rip + 0xdcfbf7]
+0x0180fe62e1  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62e6  lea      rcx, [rip + 0xddaf53]
+0x0180fe62ed  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe62f2  mov      byte ptr [rip + 0xebc5f6], 1
+0x0180fe62f9  cmp      byte ptr [rbx + 0x48], 0
+0x0180fe62fd  mov      qword ptr [rsp + 0x50], rsi
+0x0180fe6302  mov      qword ptr [rsp + 0x58], rdi
+0x0180fe6307  je       0x180fe644c
+0x0180fe630d  mov      rax, qword ptr [rip + 0xd8e9d4]
+0x0180fe6314  test     byte ptr [rax + 0x133], 4
+0x0180fe631b  je       0x180fe6335
+0x0180fe631d  cmp      dword ptr [rax + 0xe0], 0
+0x0180fe6324  jne      0x180fe6335
+0x0180fe6326  mov      rcx, rax
+0x0180fe6329  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe632e  mov      rax, qword ptr [rip + 0xd8e9b3]
+0x0180fe6335  cmp      byte ptr [rip + 0xeaba10], 0
+0x0180fe633c  jne      0x180fe6358
+0x0180fe633e  lea      rcx, [rip + 0xd8e9a3]
+0x0180fe6345  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe634a  mov      rax, qword ptr [rip + 0xd8e997]
+0x0180fe6351  mov      byte ptr [rip + 0xeab9f4], 1
+0x0180fe6358  test     byte ptr [rax + 0x133], 4
+0x0180fe635f  je       0x180fe6379
+0x0180fe6361  cmp      dword ptr [rax + 0xe0], 0
+0x0180fe6368  jne      0x180fe6379
+0x0180fe636a  mov      rcx, rax
+0x0180fe636d  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe6372  mov      rax, qword ptr [rip + 0xd8e96f]
+0x0180fe6379  mov      rax, qword ptr [rax + 0xb8]
+0x0180fe6380  mov      rcx, qword ptr [rax]
+0x0180fe6383  test     rcx, rcx
+0x0180fe6386  je       0x180fe65d9
+0x0180fe638c  mov      rcx, qword ptr [rcx + 0x20]
+0x0180fe6390  test     rcx, rcx
+0x0180fe6393  je       0x180fe65d9
+0x0180fe6399  xor      edx, edx
+0x0180fe639b  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x0180fe63a0  test     rax, rax
+0x0180fe63a3  je       0x180fe65d9
+0x0180fe63a9  mov      rax, qword ptr [rax + 0x220]
+0x0180fe63b0  test     rax, rax
+0x0180fe63b3  je       0x180fe65d9
+0x0180fe63b9  mov      rcx, qword ptr [rbx + 0x20]
+0x0180fe63bd  mov      edi, dword ptr [rax + 0x18]
+0x0180fe63c0  test     rcx, rcx
+0x0180fe63c3  je       0x180fe65d9
+0x0180fe63c9  xor      edx, edx
+0x0180fe63cb  call     0x180a416f0  ; -> KungfuSkillLvData$$StudyMoneyCost (0xA416F0)
+0x0180fe63d0  mov      rcx, qword ptr [rip + 0xd8e911]
+0x0180fe63d7  cmp      edi, eax
+0x0180fe63d9  jl       0x180fe654a
+0x0180fe63df  test     byte ptr [rcx + 0x133], 4
+0x0180fe63e6  je       0x180fe63f6
+0x0180fe63e8  cmp      dword ptr [rcx + 0xe0], 0
+0x0180fe63ef  jne      0x180fe63f6
+0x0180fe63f1  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe63f6  xor      ecx, ecx
+0x0180fe63f8  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x0180fe63fd  test     rax, rax
+0x0180fe6400  je       0x180fe65d9
+0x0180fe6406  mov      rcx, qword ptr [rax + 0x20]
+0x0180fe640a  test     rcx, rcx
+0x0180fe640d  je       0x180fe65d9
+0x0180fe6413  xor      edx, edx
+0x0180fe6415  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x0180fe641a  mov      rcx, qword ptr [rbx + 0x20]
+0x0180fe641e  mov      rdi, rax
+0x0180fe6421  test     rcx, rcx
+0x0180fe6424  je       0x180fe65d9
+0x0180fe642a  xor      edx, edx
+0x0180fe642c  call     0x180a416f0  ; -> KungfuSkillLvData$$StudyMoneyCost (0xA416F0)
+0x0180fe6431  test     rdi, rdi
+0x0180fe6434  je       0x180fe65d9
+0x0180fe643a  neg      eax
+0x0180fe643c  xor      r9d, r9d
+0x0180fe643f  mov      edx, eax
+0x0180fe6441  mov      r8b, 1
+0x0180fe6444  mov      rcx, rdi
+0x0180fe6447  call     0x180883640  ; -> HeroData$$ChangeMoney (0x883640)
+0x0180fe644c  mov      rax, qword ptr [rip + 0xdd1a0d]
+0x0180fe6453  test     byte ptr [rax + 0x133], 4
+0x0180fe645a  je       0x180fe6474
+0x0180fe645c  cmp      dword ptr [rax + 0xe0], 0
+0x0180fe6463  jne      0x180fe6474
+0x0180fe6465  mov      rcx, rax
+0x0180fe6468  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe646d  mov      rax, qword ptr [rip + 0xdd19ec]
+0x0180fe6474  cmp      byte ptr [rip + 0xeab8ce], 0
+0x0180fe647b  jne      0x180fe6497
+0x0180fe647d  lea      rcx, [rip + 0xdd19dc]
+0x0180fe6484  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe6489  mov      rax, qword ptr [rip + 0xdd19d0]
+0x0180fe6490  mov      byte ptr [rip + 0xeab8b2], 1
+0x0180fe6497  test     byte ptr [rax + 0x133], 4
+0x0180fe649e  je       0x180fe64b8
+0x0180fe64a0  cmp      dword ptr [rax + 0xe0], 0
+0x0180fe64a7  jne      0x180fe64b8
+0x0180fe64a9  mov      rcx, rax
+0x0180fe64ac  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe64b1  mov      rax, qword ptr [rip + 0xdd19a8]
+0x0180fe64b8  mov      rax, qword ptr [rax + 0xb8]
+0x0180fe64bf  mov      rcx, qword ptr [rbx + 0x20]
+0x0180fe64c3  mov      rdi, qword ptr [rax + 8]
+0x0180fe64c7  test     rcx, rcx
+0x0180fe64ca  je       0x180fe65d9
+0x0180fe64d0  xor      r8d, r8d
+0x0180fe64d3  mov      dl, 1
+0x0180fe64d5  call     0x180a40be0  ; -> KungfuSkillLvData$$Name (0xA40BE0)
+0x0180fe64da  mov      rcx, qword ptr [rip + 0xdb990f]
+0x0180fe64e1  xor      r8d, r8d
+0x0180fe64e4  mov      rdx, rax
+0x0180fe64e7  call     0x181720720  ; -> System.String$$Format (0x1720720)
+0x0180fe64ec  mov      rcx, qword ptr [rbx + 0x20]
+0x0180fe64f0  mov      rsi, rax
+0x0180fe64f3  test     rcx, rcx
+0x0180fe64f6  je       0x180fe65d9
+0x0180fe64fc  xor      edx, edx
+0x0180fe64fe  call     0x180a41610  ; -> KungfuSkillLvData$$StudyDayCost (0xA41610)
+0x0180fe6503  test     rdi, rdi
+0x0180fe6506  je       0x180fe65d9
+0x0180fe650c  mov      rdx, qword ptr [rip + 0xdbd28d]
+0x0180fe6513  xor      ecx, ecx
+0x0180fe6515  mov      qword ptr [rsp + 0x38], rcx
+0x0180fe651a  xor      r9d, r9d
+0x0180fe651d  mov      qword ptr [rsp + 0x30], rcx
+0x0180fe6522  mov      r8d, eax
+0x0180fe6525  mov      qword ptr [rsp + 0x28], rdx
+0x0180fe652a  mov      rdx, rsi
+0x0180fe652d  mov      qword ptr [rsp + 0x20], rcx
+0x0180fe6532  mov      rcx, rdi
+0x0180fe6535  call     0x1809cabf0  ; -> WorkingUIController$$StartWorking (0x9CABF0)
+0x0180fe653a  mov      rdi, qword ptr [rsp + 0x58]
+0x0180fe653f  mov      rsi, qword ptr [rsp + 0x50]
+0x0180fe6544  add      rsp, 0x40
+0x0180fe6548  pop      rbx
+0x0180fe6549  ret      
+0x0180fe654a  test     byte ptr [rcx + 0x133], 4
+0x0180fe6551  je       0x180fe6561
+0x0180fe6553  cmp      dword ptr [rcx + 0xe0], 0
+0x0180fe655a  jne      0x180fe6561
+0x0180fe655c  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe6561  xor      ecx, ecx
+0x0180fe6563  call     0x18046c100  ; -> 0x46C100 (inside UnityEngine.ImageConversion$$LoadImage)
+0x0180fe6568  test     rax, rax
+0x0180fe656b  je       0x180fe65d9
+0x0180fe656d  mov      rdx, qword ptr [rip + 0xddaccc]
+0x0180fe6574  xor      r8d, r8d
+0x0180fe6577  mov      rcx, rax
+0x0180fe657a  call     0x1807df530  ; -> GameController$$ShowTextOnMouse (0x7DF530)
+0x0180fe657f  mov      rcx, qword ptr [rip + 0xdcf952]
+0x0180fe6586  xor      edx, edx
+0x0180fe6588  call     0x180d9fe40  ; -> UnityEngine.Resources$$Load (0xD9FE40)
+0x0180fe658d  mov      rcx, qword ptr [rip + 0xda77f4]
+0x0180fe6594  mov      rbx, rax
+0x0180fe6597  test     byte ptr [rcx + 0x133], 4
+0x0180fe659e  je       0x180fe65ae
+0x0180fe65a0  cmp      dword ptr [rcx + 0xe0], 0
+0x0180fe65a7  jne      0x180fe65ae
+0x0180fe65a9  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180fe65ae  xor      ecx, ecx
+0x0180fe65b0  test     rbx, rbx
+0x0180fe65b3  je       0x180fe65c3
+0x0180fe65b5  mov      rax, qword ptr [rip + 0xdcae04]
+0x0180fe65bc  cmp      qword ptr [rbx], rax
+0x0180fe65bf  cmove    rcx, rbx
+0x0180fe65c3  xor      edx, edx
+0x0180fe65c5  mov      rdi, qword ptr [rsp + 0x58]
+0x0180fe65ca  mov      rsi, qword ptr [rsp + 0x50]
+0x0180fe65cf  add      rsp, 0x40
+0x0180fe65d3  pop      rbx
+0x0180fe65d4  jmp      0x180b8e450  ; -> NGUITools$$PlaySound (0xB8E450)
+0x0180fe65d9  call     0x1800d6610  ; -> 0xD6610
+0x0180fe65de  int3     
+0x0180fe65df  int3     

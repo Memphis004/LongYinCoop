@@ -1,0 +1,111 @@
+; PlotController_FinishHelpWork  rva=0x4E5FA0 va=0x1804E5FA0 end(before)=0x4E6190 insns=110
+0x01804e5fa0  push     rsi
+0x01804e5fa2  sub      rsp, 0x50
+0x01804e5fa6  cmp      byte ptr [rip + 0x19ab9e2], 0
+0x01804e5fad  mov      rsi, rcx
+0x01804e5fb0  jne      0x1804e6025
+0x01804e5fb2  lea      rcx, [rip + 0x18bff97]
+0x01804e5fb9  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5fbe  lea      rcx, [rip + 0x18bfe0b]
+0x01804e5fc5  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5fca  lea      rcx, [rip + 0x18b37f7]
+0x01804e5fd1  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5fd6  lea      rcx, [rip + 0x18be573]
+0x01804e5fdd  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5fe2  lea      rcx, [rip + 0x18d1e77]
+0x01804e5fe9  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5fee  lea      rcx, [rip + 0x1890c9b]
+0x01804e5ff5  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e5ffa  lea      rcx, [rip + 0x18ced57]
+0x01804e6001  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e6006  lea      rcx, [rip + 0x188f49b]
+0x01804e600d  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e6012  lea      rcx, [rip + 0x18b75c7]
+0x01804e6019  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e601e  mov      byte ptr [rip + 0x19ab96a], 1
+0x01804e6025  mov      rax, qword ptr [rip + 0x18d1e34]
+0x01804e602c  test     byte ptr [rax + 0x133], 4
+0x01804e6033  je       0x1804e604d
+0x01804e6035  cmp      dword ptr [rax + 0xe0], 0
+0x01804e603c  jne      0x1804e604d
+0x01804e603e  mov      rcx, rax
+0x01804e6041  call     0x18005a6e0  ; -> 0x5A6E0
+0x01804e6046  mov      rax, qword ptr [rip + 0x18d1e13]
+0x01804e604d  cmp      byte ptr [rip + 0x19abcf5], 0
+0x01804e6054  jne      0x1804e6070
+0x01804e6056  lea      rcx, [rip + 0x18d1e03]
+0x01804e605d  call     0x1800d64a0  ; -> 0xD64A0
+0x01804e6062  mov      rax, qword ptr [rip + 0x18d1df7]
+0x01804e6069  mov      byte ptr [rip + 0x19abcd9], 1
+0x01804e6070  test     byte ptr [rax + 0x133], 4
+0x01804e6077  je       0x1804e6091
+0x01804e6079  cmp      dword ptr [rax + 0xe0], 0
+0x01804e6080  jne      0x1804e6091
+0x01804e6082  mov      rcx, rax
+0x01804e6085  call     0x18005a6e0  ; -> 0x5A6E0
+0x01804e608a  mov      rax, qword ptr [rip + 0x18d1dcf]
+0x01804e6091  mov      rax, qword ptr [rax + 0xb8]
+0x01804e6098  mov      qword ptr [rsp + 0x68], rdi
+0x01804e609d  mov      rcx, qword ptr [rax + 8]
+0x01804e60a1  test     rcx, rcx
+0x01804e60a4  je       0x1804e617f
+0x01804e60aa  cmp      byte ptr [rcx + 0x60], 0
+0x01804e60ae  je       0x1804e616b
+0x01804e60b4  mov      rcx, qword ptr [rip + 0x18b370d]
+0x01804e60bb  call     0x1800d65d0  ; -> 0xD65D0
+0x01804e60c0  mov      rdx, qword ptr [rip + 0x18bfd09]
+0x01804e60c7  mov      rcx, rax
+0x01804e60ca  mov      rdi, rax
+0x01804e60cd  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01804e60d2  test     rdi, rdi
+0x01804e60d5  je       0x1804e617f
+0x01804e60db  mov      r8, qword ptr [rip + 0x18bfe6e]
+0x01804e60e2  mov      rcx, rdi
+0x01804e60e5  mov      rdx, qword ptr [rip + 0x1890ba4]
+0x01804e60ec  mov      qword ptr [rsp + 0x60], rbx
+0x01804e60f1  call     0x18181f800  ; -> System.Collections.Generic.List<List<List<int>>>$$Add (0x181F800)
+0x01804e60f6  mov      rcx, qword ptr [rip + 0x18be453]
+0x01804e60fd  call     0x1800d65d0  ; -> 0xD65D0
+0x01804e6102  mov      rcx, qword ptr [rip + 0x18b74d7]
+0x01804e6109  mov      rbx, rax
+0x01804e610c  mov      rdx, qword ptr [rip + 0x18cec45]
+0x01804e6113  xor      eax, eax
+0x01804e6115  mov      qword ptr [rsp + 0x48], rax
+0x01804e611a  mov      r8, rdi
+0x01804e611d  mov      qword ptr [rsp + 0x40], rax
+0x01804e6122  mov      dword ptr [rsp + 0x38], eax
+0x01804e6126  mov      qword ptr [rsp + 0x30], rcx
+0x01804e612b  lea      r9d, [rax + 5]
+0x01804e612f  mov      rcx, qword ptr [rip + 0x188f372]
+0x01804e6136  mov      dword ptr [rsp + 0x28], 3
+0x01804e613e  mov      qword ptr [rsp + 0x20], rcx
+0x01804e6143  mov      rcx, rbx
+0x01804e6146  call     0x180983e60  ; -> SinglePlotData$$.ctor (0x983E60)
+0x01804e614b  xor      r9d, r9d
+0x01804e614e  xor      r8d, r8d
+0x01804e6151  mov      rdx, rbx
+0x01804e6154  mov      rcx, rsi
+0x01804e6157  mov      rbx, qword ptr [rsp + 0x60]
+0x01804e615c  mov      rdi, qword ptr [rsp + 0x68]
+0x01804e6161  add      rsp, 0x50
+0x01804e6165  pop      rsi
+0x01804e6166  jmp      0x180498740  ; -> PlotController$$ChangePlot (0x498740)
+0x01804e616b  xor      edx, edx
+0x01804e616d  mov      rcx, rsi
+0x01804e6170  mov      rdi, qword ptr [rsp + 0x68]
+0x01804e6175  add      rsp, 0x50
+0x01804e6179  pop      rsi
+0x01804e617a  jmp      0x180521560  ; -> PlotController$$GiveUpEventMission (0x521560)
+0x01804e617f  call     0x1800d6610  ; -> 0xD6610
+0x01804e6184  int3     
+0x01804e6185  int3     
+0x01804e6186  int3     
+0x01804e6187  int3     
+0x01804e6188  int3     
+0x01804e6189  int3     
+0x01804e618a  int3     
+0x01804e618b  int3     
+0x01804e618c  int3     
+0x01804e618d  int3     
+0x01804e618e  int3     
+0x01804e618f  int3     

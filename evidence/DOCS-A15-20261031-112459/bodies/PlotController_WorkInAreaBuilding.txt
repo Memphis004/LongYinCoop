@@ -1,0 +1,362 @@
+; PlotController_WorkInAreaBuilding  rva=0x68A720 va=0x18068A720 end(before)=0x68ADA0 insns=361
+0x018068a720  mov      qword ptr [rsp + 0x20], rbx
+0x018068a725  push     rdi
+0x018068a726  sub      rsp, 0x60
+0x018068a72a  cmp      byte ptr [rip + 0x18071f6], 0
+0x018068a731  mov      rbx, rdx
+0x018068a734  mov      rdi, rcx
+0x018068a737  jne      0x18068a77c
+0x018068a739  lea      rcx, [rip + 0x1724090]
+0x018068a740  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a745  lea      rcx, [rip + 0x16ea59c]
+0x018068a74c  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a751  lea      rcx, [rip + 0x172d708]
+0x018068a758  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a75d  lea      rcx, [rip + 0x170d97c]
+0x018068a764  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a769  lea      rcx, [rip + 0x17250f8]
+0x018068a770  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a775  mov      byte ptr [rip + 0x18071ab], 1
+0x018068a77c  mov      rax, qword ptr [rip + 0x16ea565]
+0x018068a783  test     byte ptr [rax + 0x133], 4
+0x018068a78a  je       0x18068a7a4
+0x018068a78c  cmp      dword ptr [rax + 0xe0], 0
+0x018068a793  jne      0x18068a7a4
+0x018068a795  mov      rcx, rax
+0x018068a798  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a79d  mov      rax, qword ptr [rip + 0x16ea544]
+0x018068a7a4  cmp      byte ptr [rip + 0x18075a1], 0
+0x018068a7ab  jne      0x18068a7c7
+0x018068a7ad  lea      rcx, [rip + 0x16ea534]
+0x018068a7b4  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a7b9  mov      rax, qword ptr [rip + 0x16ea528]
+0x018068a7c0  mov      byte ptr [rip + 0x1807585], 1
+0x018068a7c7  test     byte ptr [rax + 0x133], 4
+0x018068a7ce  je       0x18068a7e8
+0x018068a7d0  cmp      dword ptr [rax + 0xe0], 0
+0x018068a7d7  jne      0x18068a7e8
+0x018068a7d9  mov      rcx, rax
+0x018068a7dc  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a7e1  mov      rax, qword ptr [rip + 0x16ea500]
+0x018068a7e8  mov      rax, qword ptr [rax + 0xb8]
+0x018068a7ef  mov      qword ptr [rsp + 0x70], rbp
+0x018068a7f4  mov      qword ptr [rsp + 0x78], rsi
+0x018068a7f9  mov      qword ptr [rsp + 0x80], r14
+0x018068a801  mov      rcx, qword ptr [rax]
+0x018068a804  movaps   xmmword ptr [rsp + 0x50], xmm6
+0x018068a809  movaps   xmmword ptr [rsp + 0x40], xmm7
+0x018068a80e  movaps   xmmword ptr [rsp + 0x30], xmm8
+0x018068a814  test     rcx, rcx
+0x018068a817  je       0x18068ad95
+0x018068a81d  mov      rcx, qword ptr [rcx + 0x20]
+0x018068a821  test     rcx, rcx
+0x018068a824  je       0x18068ad95
+0x018068a82a  xor      edx, edx
+0x018068a82c  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x018068a831  mov      rsi, rax
+0x018068a834  test     rbx, rbx
+0x018068a837  je       0x18068ad95
+0x018068a83d  mov      r8, qword ptr [rip + 0x170d89c]
+0x018068a844  xor      r9d, r9d
+0x018068a847  mov      rdx, qword ptr [rip + 0x172501a]
+0x018068a84e  mov      rcx, rbx
+0x018068a851  call     0x1817245f0  ; -> System.String$$Replace (0x17245F0)
+0x018068a856  xor      edx, edx
+0x018068a858  mov      rcx, rax
+0x018068a85b  call     0x180f92930  ; -> System.Int32$$Parse (0xF92930)
+0x018068a860  movss    xmm6, dword ptr [rip + 0x12368e0]
+0x018068a868  xor      r14d, r14d
+0x018068a86b  xor      ecx, ecx
+0x018068a86d  mov      ebp, r14d
+0x018068a870  mov      ebx, eax
+0x018068a872  call     0x180d97240  ; -> UnityEngine.Random$$get_value (0xD97240)
+0x018068a877  movss    xmm1, dword ptr [rip + 0x12b1949]
+0x018068a87f  comiss   xmm1, xmm0
+0x018068a882  jae      0x18068a89b
+0x018068a884  comiss   xmm0, dword ptr [rip + 0x12b197d]
+0x018068a88b  jb       0x18068a8a8
+0x018068a88d  movss    xmm6, dword ptr [rip + 0x1236a9b]
+0x018068a895  lea      ebp, [r14 + 1]
+0x018068a899  jmp      0x18068a8a8  ; -> 0x68A8A8 (inside PlotController$$WorkInAreaBuilding)
+0x018068a89b  movss    xmm6, dword ptr [rip + 0x1236a59]
+0x018068a8a3  mov      ebp, 2
+0x018068a8a8  xor      r8d, r8d
+0x018068a8ab  mov      edx, ebx
+0x018068a8ad  mov      rcx, rdi
+0x018068a8b0  call     0x180519d20  ; -> PlotController$$GetWorkInAreaBuildingNum (0x519D20)
+0x018068a8b5  movaps   xmm8, xmm0
+0x018068a8b9  mulss    xmm8, xmm6
+0x018068a8be  mov      rax, qword ptr [rip + 0x1723f0b]
+0x018068a8c5  test     ebx, ebx
+0x018068a8c7  jg       0x18068a96f
+0x018068a8cd  test     byte ptr [rax + 0x133], 4
+0x018068a8d4  je       0x18068a8ee
+0x018068a8d6  cmp      dword ptr [rax + 0xe0], r14d
+0x018068a8dd  jne      0x18068a8ee
+0x018068a8df  mov      rcx, rax
+0x018068a8e2  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a8e7  mov      rax, qword ptr [rip + 0x1723ee2]
+0x018068a8ee  cmp      byte ptr [rip + 0x1807464], r14b
+0x018068a8f5  jne      0x18068a911
+0x018068a8f7  lea      rcx, [rip + 0x1723ed2]
+0x018068a8fe  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a903  mov      rax, qword ptr [rip + 0x1723ec6]
+0x018068a90a  mov      byte ptr [rip + 0x1807448], 1
+0x018068a911  test     byte ptr [rax + 0x133], 4
+0x018068a918  je       0x18068a932
+0x018068a91a  cmp      dword ptr [rax + 0xe0], r14d
+0x018068a921  jne      0x18068a932
+0x018068a923  mov      rcx, rax
+0x018068a926  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a92b  mov      rax, qword ptr [rip + 0x1723e9e]
+0x018068a932  mov      rax, qword ptr [rax + 0xb8]
+0x018068a939  mov      rcx, qword ptr [rax + 0x38]
+0x018068a93d  test     rcx, rcx
+0x018068a940  je       0x18068ad95
+0x018068a946  mov      rdi, qword ptr [rcx + 0x58]
+0x018068a94a  xor      edx, edx
+0x018068a94c  mov      ecx, ebx
+0x018068a94e  call     0x1810e4a60  ; -> UnityEngine.Mathf$$Abs (0x10E4A60)
+0x018068a953  test     rdi, rdi
+0x018068a956  je       0x18068ad95
+0x018068a95c  lea      edx, [rax - 1]
+0x018068a95f  xor      r8d, r8d
+0x018068a962  mov      rcx, rdi
+0x018068a965  call     0x1807e83a0  ; -> AreaData$$GetAreaState (0x7E83A0)
+0x018068a96a  jmp      0x18068aa92  ; -> 0x68AA92 (inside PlotController$$WorkInAreaBuilding)
+0x018068a96f  test     byte ptr [rax + 0x133], 4
+0x018068a976  je       0x18068a990
+0x018068a978  cmp      dword ptr [rax + 0xe0], r14d
+0x018068a97f  jne      0x18068a990
+0x018068a981  mov      rcx, rax
+0x018068a984  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a989  mov      rax, qword ptr [rip + 0x1723e40]
+0x018068a990  cmp      byte ptr [rip + 0x18073c2], r14b
+0x018068a997  jne      0x18068a9b3
+0x018068a999  lea      rcx, [rip + 0x1723e30]
+0x018068a9a0  call     0x1800d64a0  ; -> 0xD64A0
+0x018068a9a5  mov      rax, qword ptr [rip + 0x1723e24]
+0x018068a9ac  mov      byte ptr [rip + 0x18073a6], 1
+0x018068a9b3  test     byte ptr [rax + 0x133], 4
+0x018068a9ba  je       0x18068a9d4
+0x018068a9bc  cmp      dword ptr [rax + 0xe0], r14d
+0x018068a9c3  jne      0x18068a9d4
+0x018068a9c5  mov      rcx, rax
+0x018068a9c8  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068a9cd  mov      rax, qword ptr [rip + 0x1723dfc]
+0x018068a9d4  mov      rax, qword ptr [rax + 0xb8]
+0x018068a9db  mov      rcx, qword ptr [rax + 0x38]
+0x018068a9df  test     rcx, rcx
+0x018068a9e2  je       0x18068ad95
+0x018068a9e8  mov      rdi, qword ptr [rcx + 0x58]
+0x018068a9ec  xor      edx, edx
+0x018068a9ee  mov      ecx, ebx
+0x018068a9f0  call     0x1810e4a60  ; -> UnityEngine.Mathf$$Abs (0x10E4A60)
+0x018068a9f5  test     rdi, rdi
+0x018068a9f8  je       0x18068ad95
+0x018068a9fe  lea      edx, [rax - 1]
+0x018068aa01  xor      r8d, r8d
+0x018068aa04  mov      rcx, rdi
+0x018068aa07  call     0x1807e9190  ; -> AreaData$$GetMaxAreaState (0x7E9190)
+0x018068aa0c  cmp      byte ptr [rip + 0x1807346], r14b
+0x018068aa13  movaps   xmm7, xmm0
+0x018068aa16  jne      0x18068aa2b
+0x018068aa18  lea      rcx, [rip + 0x1723db1]
+0x018068aa1f  call     0x1800d64a0  ; -> 0xD64A0
+0x018068aa24  mov      byte ptr [rip + 0x180732e], 1
+0x018068aa2b  mov      rax, qword ptr [rip + 0x1723d9e]
+0x018068aa32  test     byte ptr [rax + 0x133], 4
+0x018068aa39  je       0x18068aa53
+0x018068aa3b  cmp      dword ptr [rax + 0xe0], r14d
+0x018068aa42  jne      0x18068aa53
+0x018068aa44  mov      rcx, rax
+0x018068aa47  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068aa4c  mov      rax, qword ptr [rip + 0x1723d7d]
+0x018068aa53  mov      rax, qword ptr [rax + 0xb8]
+0x018068aa5a  mov      rcx, qword ptr [rax + 0x38]
+0x018068aa5e  test     rcx, rcx
+0x018068aa61  je       0x18068ad95
+0x018068aa67  mov      rdi, qword ptr [rcx + 0x58]
+0x018068aa6b  xor      edx, edx
+0x018068aa6d  mov      ecx, ebx
+0x018068aa6f  call     0x1810e4a60  ; -> UnityEngine.Mathf$$Abs (0x10E4A60)
+0x018068aa74  test     rdi, rdi
+0x018068aa77  je       0x18068ad95
+0x018068aa7d  lea      edx, [rax - 1]
+0x018068aa80  xor      r8d, r8d
+0x018068aa83  mov      rcx, rdi
+0x018068aa86  call     0x1807e83a0  ; -> AreaData$$GetAreaState (0x7E83A0)
+0x018068aa8b  subss    xmm7, xmm0
+0x018068aa8f  movaps   xmm0, xmm7
+0x018068aa92  movaps   xmm6, xmm8
+0x018068aa96  xor      r8d, r8d
+0x018068aa99  andps    xmm6, xmmword ptr [rip + 0x12366d0]
+0x018068aaa0  movaps   xmm1, xmm6
+0x018068aaa3  call     0x1810e53a0  ; -> UnityEngine.Mathf$$Min (0x10E53A0)
+0x018068aaa8  movaps   xmm7, xmm0
+0x018068aaab  mov      rax, qword ptr [rip + 0x172d3ae]
+0x018068aab2  test     byte ptr [rax + 0x133], 4
+0x018068aab9  je       0x18068aad3
+0x018068aabb  cmp      dword ptr [rax + 0xe0], r14d
+0x018068aac2  jne      0x18068aad3
+0x018068aac4  mov      rcx, rax
+0x018068aac7  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068aacc  mov      rax, qword ptr [rip + 0x172d38d]
+0x018068aad3  cmp      byte ptr [rip + 0x180726f], r14b
+0x018068aada  jne      0x18068aaf6
+0x018068aadc  lea      rcx, [rip + 0x172d37d]
+0x018068aae3  call     0x1800d64a0  ; -> 0xD64A0
+0x018068aae8  mov      rax, qword ptr [rip + 0x172d371]
+0x018068aaef  mov      byte ptr [rip + 0x1807253], 1
+0x018068aaf6  test     byte ptr [rax + 0x133], 4
+0x018068aafd  je       0x18068ab17
+0x018068aaff  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ab06  jne      0x18068ab17
+0x018068ab08  mov      rcx, rax
+0x018068ab0b  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ab10  mov      rax, qword ptr [rip + 0x172d349]
+0x018068ab17  mov      rax, qword ptr [rax + 0xb8]
+0x018068ab1e  mov      rcx, qword ptr [rax + 8]
+0x018068ab22  test     rcx, rcx
+0x018068ab25  je       0x18068ad95
+0x018068ab2b  mov      qword ptr [rsp + 0x28], r14
+0x018068ab30  movaps   xmm3, xmm7
+0x018068ab33  movaps   xmm2, xmm7
+0x018068ab36  mov      dword ptr [rsp + 0x20], ebp
+0x018068ab3a  xor      edx, edx
+0x018068ab3c  call     0x1809ca580  ; -> WorkingUIController$$AddResourceNum (0x9CA580)
+0x018068ab41  mov      rax, qword ptr [rip + 0x1723c88]
+0x018068ab48  test     byte ptr [rax + 0x133], 4
+0x018068ab4f  je       0x18068ab69
+0x018068ab51  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ab58  jne      0x18068ab69
+0x018068ab5a  mov      rcx, rax
+0x018068ab5d  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ab62  mov      rax, qword ptr [rip + 0x1723c67]
+0x018068ab69  cmp      byte ptr [rip + 0x18071e9], r14b
+0x018068ab70  jne      0x18068ab8c
+0x018068ab72  lea      rcx, [rip + 0x1723c57]
+0x018068ab79  call     0x1800d64a0  ; -> 0xD64A0
+0x018068ab7e  mov      rax, qword ptr [rip + 0x1723c4b]
+0x018068ab85  mov      byte ptr [rip + 0x18071cd], 1
+0x018068ab8c  test     byte ptr [rax + 0x133], 4
+0x018068ab93  je       0x18068abad
+0x018068ab95  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ab9c  jne      0x18068abad
+0x018068ab9e  mov      rcx, rax
+0x018068aba1  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068aba6  mov      rax, qword ptr [rip + 0x1723c23]
+0x018068abad  mov      rax, qword ptr [rax + 0xb8]
+0x018068abb4  mov      rcx, qword ptr [rax + 0x38]
+0x018068abb8  test     rcx, rcx
+0x018068abbb  je       0x18068ad95
+0x018068abc1  mov      rdi, qword ptr [rcx + 0x58]
+0x018068abc5  xor      edx, edx
+0x018068abc7  mov      ecx, ebx
+0x018068abc9  call     0x1810e4a60  ; -> UnityEngine.Mathf$$Abs (0x10E4A60)
+0x018068abce  test     rdi, rdi
+0x018068abd1  je       0x18068ad95
+0x018068abd7  lea      edx, [rax - 1]
+0x018068abda  mov      qword ptr [rsp + 0x20], r14
+0x018068abdf  mov      r9b, 1
+0x018068abe2  movaps   xmm2, xmm8
+0x018068abe6  mov      rcx, rdi
+0x018068abe9  call     0x1807e71e0  ; -> AreaData$$ChangeAreaState (0x7E71E0)
+0x018068abee  mov      rax, qword ptr [rip + 0x1723bdb]
+0x018068abf5  test     ebx, ebx
+0x018068abf7  jg       0x18068aceb
+0x018068abfd  test     byte ptr [rax + 0x133], 4
+0x018068ac04  je       0x18068ac1e
+0x018068ac06  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ac0d  jne      0x18068ac1e
+0x018068ac0f  mov      rcx, rax
+0x018068ac12  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ac17  mov      rax, qword ptr [rip + 0x1723bb2]
+0x018068ac1e  cmp      byte ptr [rip + 0x1807134], r14b
+0x018068ac25  jne      0x18068ac41
+0x018068ac27  lea      rcx, [rip + 0x1723ba2]
+0x018068ac2e  call     0x1800d64a0  ; -> 0xD64A0
+0x018068ac33  mov      rax, qword ptr [rip + 0x1723b96]
+0x018068ac3a  mov      byte ptr [rip + 0x1807118], 1
+0x018068ac41  test     byte ptr [rax + 0x133], 4
+0x018068ac48  je       0x18068ac62
+0x018068ac4a  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ac51  jne      0x18068ac62
+0x018068ac53  mov      rcx, rax
+0x018068ac56  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ac5b  mov      rax, qword ptr [rip + 0x1723b6e]
+0x018068ac62  mov      rax, qword ptr [rax + 0xb8]
+0x018068ac69  mov      rcx, qword ptr [rax + 0x38]
+0x018068ac6d  test     rcx, rcx
+0x018068ac70  je       0x18068ad95
+0x018068ac76  mov      rcx, qword ptr [rcx + 0x58]
+0x018068ac7a  test     rcx, rcx
+0x018068ac7d  je       0x18068ad95
+0x018068ac83  add      rcx, 0x10
+0x018068ac87  xor      edx, edx
+0x018068ac89  call     0x180f93000  ; -> System.Int32$$ToString (0xF93000)
+0x018068ac8e  test     rsi, rsi
+0x018068ac91  je       0x18068ad95
+0x018068ac97  mov      r9d, 0xffffffff
+0x018068ac9d  mov      qword ptr [rsp + 0x28], r14
+0x018068aca2  sub      r9d, ebx
+0x018068aca5  movss    dword ptr [rsp + 0x20], xmm6
+0x018068acab  mov      r8, rax
+0x018068acae  mov      edx, 0x11
+0x018068acb3  mov      rcx, rsi
+0x018068acb6  call     0x1808808a0  ; -> HeroData$$ChangeHeroMissionResult (0x8808A0)
+0x018068acbb  movaps   xmm8, xmmword ptr [rsp + 0x30]
+0x018068acc1  movaps   xmm7, xmmword ptr [rsp + 0x40]
+0x018068acc6  movaps   xmm6, xmmword ptr [rsp + 0x50]
+0x018068accb  mov      r14, qword ptr [rsp + 0x80]
+0x018068acd3  mov      rsi, qword ptr [rsp + 0x78]
+0x018068acd8  mov      rbp, qword ptr [rsp + 0x70]
+0x018068acdd  mov      rbx, qword ptr [rsp + 0x88]
+0x018068ace5  add      rsp, 0x60
+0x018068ace9  pop      rdi
+0x018068acea  ret      
+0x018068aceb  test     byte ptr [rax + 0x133], 4
+0x018068acf2  je       0x18068ad0c
+0x018068acf4  cmp      dword ptr [rax + 0xe0], r14d
+0x018068acfb  jne      0x18068ad0c
+0x018068acfd  mov      rcx, rax
+0x018068ad00  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ad05  mov      rax, qword ptr [rip + 0x1723ac4]
+0x018068ad0c  cmp      byte ptr [rip + 0x1807046], r14b
+0x018068ad13  jne      0x18068ad2f
+0x018068ad15  lea      rcx, [rip + 0x1723ab4]
+0x018068ad1c  call     0x1800d64a0  ; -> 0xD64A0
+0x018068ad21  mov      rax, qword ptr [rip + 0x1723aa8]
+0x018068ad28  mov      byte ptr [rip + 0x180702a], 1
+0x018068ad2f  test     byte ptr [rax + 0x133], 4
+0x018068ad36  je       0x18068ad50
+0x018068ad38  cmp      dword ptr [rax + 0xe0], r14d
+0x018068ad3f  jne      0x18068ad50
+0x018068ad41  mov      rcx, rax
+0x018068ad44  call     0x18005a6e0  ; -> 0x5A6E0
+0x018068ad49  mov      rax, qword ptr [rip + 0x1723a80]
+0x018068ad50  mov      rax, qword ptr [rax + 0xb8]
+0x018068ad57  mov      rcx, qword ptr [rax + 0x38]
+0x018068ad5b  test     rcx, rcx
+0x018068ad5e  je       0x18068ad95
+0x018068ad60  mov      rcx, qword ptr [rcx + 0x58]
+0x018068ad64  test     rcx, rcx
+0x018068ad67  je       0x18068ad95
+0x018068ad69  add      rcx, 0x10
+0x018068ad6d  xor      edx, edx
+0x018068ad6f  call     0x180f93000  ; -> System.Int32$$ToString (0xF93000)
+0x018068ad74  test     rsi, rsi
+0x018068ad77  je       0x18068ad95
+0x018068ad79  mov      qword ptr [rsp + 0x28], r14
+0x018068ad7e  lea      r9d, [rbx - 1]
+0x018068ad82  movss    dword ptr [rsp + 0x20], xmm6
+0x018068ad88  mov      r8, rax
+0x018068ad8b  mov      edx, 4
+0x018068ad90  jmp      0x18068acb3  ; -> 0x68ACB3 (inside PlotController$$WorkInAreaBuilding)
+0x018068ad95  call     0x1800d6610  ; -> 0xD6610
+0x018068ad9a  int3     
+0x018068ad9b  int3     
+0x018068ad9c  int3     
+0x018068ad9d  int3     
+0x018068ad9e  int3     
+0x018068ad9f  int3     

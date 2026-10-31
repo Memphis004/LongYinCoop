@@ -1,0 +1,80 @@
+; AreaController_RefreshAreaBuildingChoiceInfo  rva=0xA37D60 va=0x180A37D60 end(before)=0xA37E80 insns=79
+0x0180a37d60  mov      qword ptr [rsp + 8], rbx
+0x0180a37d65  mov      qword ptr [rsp + 0x10], rsi
+0x0180a37d6a  push     rdi
+0x0180a37d6b  sub      rsp, 0x20
+0x0180a37d6f  cmp      byte ptr [rip + 0x1467c6f], 0
+0x0180a37d76  mov      rdi, rcx
+0x0180a37d79  jne      0x180a37d9a
+0x0180a37d7b  lea      rcx, [rip + 0x135db56]
+0x0180a37d82  call     0x1800d64a0  ; -> 0xD64A0
+0x0180a37d87  lea      rcx, [rip + 0x138f4fa]
+0x0180a37d8e  call     0x1800d64a0  ; -> 0xD64A0
+0x0180a37d93  mov      byte ptr [rip + 0x1467c4b], 1
+0x0180a37d9a  mov      rax, qword ptr [rdi + 0x80]
+0x0180a37da1  xor      ebx, ebx
+0x0180a37da3  mov      byte ptr [rdi + 0xe0], 0
+0x0180a37daa  mov      esi, ebx
+0x0180a37dac  test     rax, rax
+0x0180a37daf  je       0x180a37e75
+0x0180a37db5  xor      edx, edx
+0x0180a37db7  mov      rcx, rax
+0x0180a37dba  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x0180a37dbf  test     rax, rax
+0x0180a37dc2  je       0x180a37e75
+0x0180a37dc8  mov      rdx, qword ptr [rip + 0x138f4b9]
+0x0180a37dcf  xor      r8d, r8d
+0x0180a37dd2  mov      rcx, rax
+0x0180a37dd5  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x0180a37dda  test     rax, rax
+0x0180a37ddd  je       0x180a37e75
+0x0180a37de3  xor      edx, edx
+0x0180a37de5  mov      rcx, rax
+0x0180a37de8  call     0x180dac760  ; -> UnityEngine.Transform$$get_childCount (0xDAC760)
+0x0180a37ded  cmp      esi, eax
+0x0180a37def  jge      0x180a37e65
+0x0180a37df1  mov      rcx, qword ptr [rdi + 0x80]
+0x0180a37df8  test     rcx, rcx
+0x0180a37dfb  je       0x180a37e75
+0x0180a37dfd  xor      edx, edx
+0x0180a37dff  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x0180a37e04  test     rax, rax
+0x0180a37e07  je       0x180a37e75
+0x0180a37e09  mov      rdx, qword ptr [rip + 0x138f478]
+0x0180a37e10  xor      r8d, r8d
+0x0180a37e13  mov      rcx, rax
+0x0180a37e16  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x0180a37e1b  test     rax, rax
+0x0180a37e1e  je       0x180a37e75
+0x0180a37e20  xor      r8d, r8d
+0x0180a37e23  mov      edx, ebx
+0x0180a37e25  mov      rcx, rax
+0x0180a37e28  call     0x180dab040  ; -> UnityEngine.Transform$$GetChild (0xDAB040)
+0x0180a37e2d  test     rax, rax
+0x0180a37e30  je       0x180a37e75
+0x0180a37e32  mov      rdx, qword ptr [rip + 0x135da9f]
+0x0180a37e39  mov      rcx, rax
+0x0180a37e3c  call     0x180967ef0  ; -> UnityEngine.Component$$GetComponent<ActionBarUnit> (0x967EF0)
+0x0180a37e41  test     rax, rax
+0x0180a37e44  je       0x180a37e75
+0x0180a37e46  xor      edx, edx
+0x0180a37e48  mov      rcx, rax
+0x0180a37e4b  call     0x180b61180  ; -> BuildQuickButtonController$$RefreshBuildingChoiceInfo (0xB61180)
+0x0180a37e50  mov      rax, qword ptr [rdi + 0x80]
+0x0180a37e57  inc      ebx
+0x0180a37e59  mov      esi, ebx
+0x0180a37e5b  test     rax, rax
+0x0180a37e5e  je       0x180a37e75
+0x0180a37e60  jmp      0x180a37db5  ; -> 0xA37DB5 (inside AreaController$$RefreshAreaBuildingChoiceInfo)
+0x0180a37e65  mov      rbx, qword ptr [rsp + 0x30]
+0x0180a37e6a  mov      rsi, qword ptr [rsp + 0x38]
+0x0180a37e6f  add      rsp, 0x20
+0x0180a37e73  pop      rdi
+0x0180a37e74  ret      
+0x0180a37e75  call     0x1800d6610  ; -> 0xD6610
+0x0180a37e7a  int3     
+0x0180a37e7b  int3     
+0x0180a37e7c  int3     
+0x0180a37e7d  int3     
+0x0180a37e7e  int3     
+0x0180a37e7f  int3     

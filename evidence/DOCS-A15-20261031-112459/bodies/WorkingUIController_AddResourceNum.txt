@@ -1,0 +1,161 @@
+; WorkingUIController_AddResourceNum  rva=0x9CA580 va=0x1809CA580 end(before)=0x9CA870 insns=160
+0x01809ca580  mov      qword ptr [rsp + 8], rbx
+0x01809ca585  mov      qword ptr [rsp + 0x10], rbp
+0x01809ca58a  movss    dword ptr [rsp + 0x18], xmm2
+0x01809ca590  push     rdi
+0x01809ca591  sub      rsp, 0x70
+0x01809ca595  cmp      byte ptr [rip + 0x14d52a0], 0
+0x01809ca59c  mov      rdi, rcx
+0x01809ca59f  jne      0x1809ca611
+0x01809ca5a1  lea      rcx, [rip + 0x13aa740]
+0x01809ca5a8  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5ad  lea      rcx, [rip + 0x13f8d6c]
+0x01809ca5b4  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5b9  lea      rcx, [rip + 0x13f9110]
+0x01809ca5c0  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5c5  lea      rcx, [rip + 0x13ccd14]
+0x01809ca5cc  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5d1  lea      rcx, [rip + 0x13dcbf8]
+0x01809ca5d8  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5dd  lea      rcx, [rip + 0x13fecdc]
+0x01809ca5e4  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5e9  lea      rcx, [rip + 0x13fc4f8]
+0x01809ca5f0  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca5f5  lea      rcx, [rip + 0x13fedd4]
+0x01809ca5fc  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca601  movss    xmm2, dword ptr [rsp + 0x90]
+0x01809ca60a  mov      byte ptr [rip + 0x14d522b], 1
+0x01809ca611  cmp      dword ptr [rsp + 0xa0], 1
+0x01809ca619  addss    xmm2, dword ptr [rdi + 0x5c]
+0x01809ca61e  movss    dword ptr [rdi + 0x5c], xmm2
+0x01809ca623  mov      rbx, qword ptr [rip + 0x13fc4be]
+0x01809ca62a  jne      0x1809ca635
+0x01809ca62c  mov      rbx, qword ptr [rip + 0x13fec8d]
+0x01809ca633  jmp      0x1809ca645  ; -> 0x9CA645 (inside WorkingUIController$$AddResourceNum)
+0x01809ca635  cmp      dword ptr [rsp + 0xa0], 2
+0x01809ca63d  cmove    rbx, qword ptr [rip + 0x13fed8b]
+0x01809ca645  mov      rax, qword ptr [rip + 0x13aa69c]
+0x01809ca64c  test     byte ptr [rax + 0x133], 4
+0x01809ca653  je       0x1809ca66d
+0x01809ca655  cmp      dword ptr [rax + 0xe0], 0
+0x01809ca65c  jne      0x1809ca66d
+0x01809ca65e  mov      rcx, rax
+0x01809ca661  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809ca666  mov      rax, qword ptr [rip + 0x13aa67b]
+0x01809ca66d  cmp      byte ptr [rip + 0x14c76d8], 0
+0x01809ca674  jne      0x1809ca690
+0x01809ca676  lea      rcx, [rip + 0x13aa66b]
+0x01809ca67d  call     0x1800d64a0  ; -> 0xD64A0
+0x01809ca682  mov      rax, qword ptr [rip + 0x13aa65f]
+0x01809ca689  mov      byte ptr [rip + 0x14c76bc], 1
+0x01809ca690  test     byte ptr [rax + 0x133], 4
+0x01809ca697  je       0x1809ca6b1
+0x01809ca699  cmp      dword ptr [rax + 0xe0], 0
+0x01809ca6a0  jne      0x1809ca6b1
+0x01809ca6a2  mov      rcx, rax
+0x01809ca6a5  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809ca6aa  mov      rax, qword ptr [rip + 0x13aa637]
+0x01809ca6b1  mov      rax, qword ptr [rax + 0xb8]
+0x01809ca6b8  lea      rcx, [rsp + 0x90]
+0x01809ca6c0  mov      rdx, qword ptr [rip + 0x13ccc19]
+0x01809ca6c7  xor      r8d, r8d
+0x01809ca6ca  mov      rbp, qword ptr [rax]
+0x01809ca6cd  call     0x18144e800  ; -> System.Single$$ToString (0x144E800)
+0x01809ca6d2  xor      r8d, r8d
+0x01809ca6d5  mov      rdx, rbx
+0x01809ca6d8  mov      rcx, rax
+0x01809ca6db  call     0x18171d350  ; -> System.String$$Concat (0x171D350)
+0x01809ca6e0  mov      rcx, qword ptr [rdi + 0x18]
+0x01809ca6e4  mov      rbx, rax
+0x01809ca6e7  test     rcx, rcx
+0x01809ca6ea  je       0x1809ca867
+0x01809ca6f0  xor      edx, edx
+0x01809ca6f2  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01809ca6f7  test     rax, rax
+0x01809ca6fa  je       0x1809ca867
+0x01809ca700  mov      rdx, qword ptr [rip + 0x13dcac9]
+0x01809ca707  xor      r8d, r8d
+0x01809ca70a  mov      rcx, rax
+0x01809ca70d  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x01809ca712  test     rax, rax
+0x01809ca715  je       0x1809ca867
+0x01809ca71b  xor      r8d, r8d
+0x01809ca71e  lea      rcx, [rsp + 0x60]
+0x01809ca723  mov      rdx, rax
+0x01809ca726  call     0x180dace70  ; -> UnityEngine.Transform$$get_position (0xDACE70)
+0x01809ca72b  movsd    xmm1, qword ptr [rax]
+0x01809ca72f  mov      ecx, dword ptr [rax + 8]
+0x01809ca732  movaps   xmm2, xmm1
+0x01809ca735  movsd    qword ptr [rsp + 0x30], xmm1
+0x01809ca73b  movaps   xmm0, xmm2
+0x01809ca73e  addss    xmm1, dword ptr [rip + 0xf71a7e]
+0x01809ca746  shufps   xmm0, xmm0, 0x55
+0x01809ca74a  mov      dword ptr [rsp + 0x48], ecx
+0x01809ca74e  mov      dword ptr [rsp + 0x38], ecx
+0x01809ca752  movsd    qword ptr [rsp + 0x40], xmm2
+0x01809ca758  movss    dword ptr [rsp + 0x30], xmm1
+0x01809ca75e  xorps    xmm1, xmm1
+0x01809ca761  addss    xmm0, xmm1
+0x01809ca765  movss    dword ptr [rsp + 0x34], xmm0
+0x01809ca76b  movss    xmm0, dword ptr [rsp + 0x48]
+0x01809ca771  addss    xmm0, xmm1
+0x01809ca775  movss    dword ptr [rsp + 0x38], xmm0
+0x01809ca77b  xor      edx, edx
+0x01809ca77d  lea      rcx, [rsp + 0x60]
+0x01809ca782  cmp      dword ptr [rsp + 0xa0], 2
+0x01809ca78a  jne      0x1809ca793
+0x01809ca78c  call     0x1810d4c30  ; -> UnityEngine.Color$$get_magenta (0x10D4C30)
+0x01809ca791  jmp      0x1809ca798  ; -> 0x9CA798 (inside WorkingUIController$$AddResourceNum)
+0x01809ca793  call     0x1810d4b30  ; -> UnityEngine.Color$$get_green (0x10D4B30)
+0x01809ca798  movups   xmm0, xmmword ptr [rax]
+0x01809ca79b  test     rbp, rbp
+0x01809ca79e  je       0x1809ca867
+0x01809ca7a4  mov      eax, dword ptr [rsp + 0x38]
+0x01809ca7a8  lea      r8, [rsp + 0x40]
+0x01809ca7ad  mov      dword ptr [rsp + 0x48], eax
+0x01809ca7b1  mov      r9d, 0x1e
+0x01809ca7b7  movdqa   xmmword ptr [rsp + 0x60], xmm0
+0x01809ca7bd  lea      rax, [rsp + 0x60]
+0x01809ca7c2  movsd    xmm0, qword ptr [rsp + 0x30]
+0x01809ca7c8  mov      rdx, rbx
+0x01809ca7cb  mov      qword ptr [rsp + 0x28], 0
+0x01809ca7d4  mov      rcx, rbp
+0x01809ca7d7  mov      qword ptr [rsp + 0x20], rax
+0x01809ca7dc  movsd    qword ptr [rsp + 0x40], xmm0
+0x01809ca7e2  call     0x1807deca0  ; -> GameController$$ShowTextAtPos (0x7DECA0)
+0x01809ca7e7  mov      rcx, qword ptr [rdi + 0x18]
+0x01809ca7eb  test     rcx, rcx
+0x01809ca7ee  je       0x1809ca867
+0x01809ca7f0  xor      edx, edx
+0x01809ca7f2  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01809ca7f7  test     rax, rax
+0x01809ca7fa  je       0x1809ca867
+0x01809ca7fc  mov      rdx, qword ptr [rip + 0x13dc9cd]
+0x01809ca803  xor      r8d, r8d
+0x01809ca806  mov      rcx, rax
+0x01809ca809  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x01809ca80e  movss    xmm2, dword ptr [rip + 0xf719ca]
+0x01809ca816  xor      r9d, r9d
+0x01809ca819  movss    xmm1, dword ptr [rip + 0xef692b]
+0x01809ca821  mov      rcx, rax
+0x01809ca824  call     0x180336b00  ; -> DG.Tweening.ShortcutExtensions$$DOScale (0x336B00)
+0x01809ca829  mov      r8, qword ptr [rip + 0x13f8af0]
+0x01809ca830  mov      edx, 9
+0x01809ca835  mov      rcx, rax
+0x01809ca838  call     0x180f2e060  ; -> DG.Tweening.TweenSettingsExtensions$$SetEase<TweenerCore<Color, Color, ColorOptions>> (0xF2E060)
+0x01809ca83d  mov      r9, qword ptr [rip + 0x13f8e8c]
+0x01809ca844  mov      edx, 2
+0x01809ca849  mov      rcx, rax
+0x01809ca84c  lea      r8d, [rdx - 1]
+0x01809ca850  call     0x180f2e610  ; -> DG.Tweening.TweenSettingsExtensions$$SetLoops<TweenerCore<Color, Color, ColorOptions>> (0xF2E610)
+0x01809ca855  lea      r11, [rsp + 0x70]
+0x01809ca85a  mov      rbx, qword ptr [r11 + 0x10]
+0x01809ca85e  mov      rbp, qword ptr [r11 + 0x18]
+0x01809ca862  mov      rsp, r11
+0x01809ca865  pop      rdi
+0x01809ca866  ret      
+0x01809ca867  call     0x1800d6610  ; -> 0xD6610
+0x01809ca86c  int3     
+0x01809ca86d  int3     
+0x01809ca86e  int3     
+0x01809ca86f  int3     

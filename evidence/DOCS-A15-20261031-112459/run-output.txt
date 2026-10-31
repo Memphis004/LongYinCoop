@@ -1,0 +1,132 @@
+PlotController_WorkInProductionBuilding: 0x68ADA0..0x68BD50 (868 insns, 59 resolved calls)
+PlotController_FinishWorkInProductionBuilding: 0x4F2920..0x4F3530 (671 insns, 30 resolved calls)
+PlotController_WorkInAreaBuilding: 0x68A720..0x68ADA0 (361 insns, 18 resolved calls)
+PlotController_FinishWorkInAreaBuilding: 0x4F1690..0x4F2920 (1054 insns, 47 resolved calls)
+PlotController_FinishHelpWork: 0x4E5FA0..0x4E6190 (110 insns, 5 resolved calls)
+PlotController_HelpPatrol: 0x5305B0..0x530800 (131 insns, 8 resolved calls)
+PlotController_FinishHelpPatrol: 0x4E5A90..0x4E5BD0 (79 insns, 6 resolved calls)
+StudySkillController_SureStartStudySkill: 0xFE6280..0xFE65E0 (193 insns, 12 resolved calls)
+BuildingButtonController_OnClick: 0xB61A30..0xB61C60 (133 insns, 5 resolved calls)
+PlotController_StartWorking_string: 0x6603F0..0x660620 (141 insns, 4 resolved calls)
+PartyController_HeroEnteringParty_MoveNext: 0x8EDD70..0x8EF5E0 (1327 insns, 110 resolved calls)
+PartyController_PartyContinue_MoveNext: 0x8F0D50..0x8F17F0 (575 insns, 52 resolved calls)
+PartyController_FinishParty_MoveNext: 0x8EABD0..0x8EBA90 (812 insns, 71 resolved calls)
+PartyController_EndParty_MoveNext: 0x8EA5A0..0x8EAB90 (339 insns, 26 resolved calls)
+PartyController_PartyContinue_wrapper: 0xB9A380..0xB9A3F0 (32 insns, 1 resolved calls)
+BuildingUIController_CreateBuildingButton: 0xB65340..0xB656E0 (220 insns, 15 resolved calls)
+AreaController_RefreshAreaBuildingChoiceInfo: 0xA37D60..0xA37E80 (79 insns, 8 resolved calls)
+BuildingUIController_GenerateBuildingButton: 0xB66450..0xB66640 (126 insns, 10 resolved calls)
+AreaController_FreshAreaBuildingButton: 0xA2DF50..0xA2ED80 (807 insns, 88 resolved calls)
+PartyController_PartyStart: 0xB9A810..0xB9AE90 (370 insns, 29 resolved calls)
+PartyController_PartyEnd: 0xB9A3F0..0xB9A810 (246 insns, 28 resolved calls)
+WorkingUIController_AddResourceNum: 0x9CA580..0x9CA870 (160 insns, 13 resolved calls)
+GameController_GetConditionDescribe: 0x7B84B0..0x7B87B0 (179 insns, 11 resolved calls)
+
+==== สนใจ: resolved calls ที่ตรง INTEREST (ต่อ body) ====
+
+[PlotController_WorkInProductionBuilding]
+  x1: GameController$$GenerateMaterial
+  x1: GameController$$GenerateTreasure
+  x2: System.String$$Format
+  x2: WorkingUIController$$AddResourceNum
+  x1: WorldData$$Player
+
+[PlotController_FinishWorkInProductionBuilding]
+  x1: GameController$$GetRandomHero
+  x1: System.String$$Concat
+  x2: System.String$$Format
+  x1: WorldData$$Player
+
+[PlotController_WorkInAreaBuilding]
+  x1: System.String$$Replace
+  x1: WorkingUIController$$AddResourceNum
+  x1: WorldData$$Player
+
+[PlotController_FinishWorkInAreaBuilding]
+  x1: GameController$$GetRandomHero
+  x2: System.String$$Concat
+  x3: System.String$$Format
+  x1: System.String$$Replace
+  x2: WorldData$$Player
+
+[PlotController_FinishHelpWork]
+  (none)
+
+[PlotController_HelpPatrol]
+  x1: WorldData$$Player
+
+[PlotController_FinishHelpPatrol]
+  x1: WorldData$$Player
+
+[StudySkillController_SureStartStudySkill]
+  x1: GameController$$ShowTextOnMouse
+  x1: System.String$$Format
+  x1: WorkingUIController$$StartWorking
+  x2: WorldData$$Player
+
+[BuildingButtonController_OnClick]
+  x1: GameController$$ShowTextOnMouse
+  x2: UnityEngine.Component$$SendMessage
+
+[PlotController_StartWorking_string]
+  x1: WorkingUIController$$StartWorking
+
+[PartyController_HeroEnteringParty_MoveNext]
+  x1: GameController$$GenerateRandomItem
+  x1: GameController$$GetHeroName
+  x1: GameController$$ShowTextAtPos
+  x1: System.String$$Concat
+  x1: System.String$$Format
+  x3: UnityEngine.WaitForSeconds$$.ctor
+
+[PartyController_PartyContinue_MoveNext]
+  x1: GameController$$ShowTextAtPos
+  x1: System.String$$Concat
+  x1: System.String$$Replace
+  x2: UnityEngine.WaitForSeconds$$.ctor
+
+[PartyController_FinishParty_MoveNext]
+  x1: System.String$$Concat
+  x6: System.String$$Format
+  x1: UnityEngine.WaitForSeconds$$.ctor
+
+[PartyController_EndParty_MoveNext]
+  x1: PartyController$$PartyEnd
+  x1: UnityEngine.WaitForSeconds$$.ctor
+  x2: WorldData$$GetHero
+
+[PartyController_PartyContinue_wrapper]
+  (none)
+
+[BuildingUIController_CreateBuildingButton]
+  x1: GameController$$GetConditionDescribe
+  x2: GameController$$MeetCondition
+  x1: LTLocalization$$SetText
+
+[AreaController_RefreshAreaBuildingChoiceInfo]
+  (none)
+
+[BuildingUIController_GenerateBuildingButton]
+  x1: BuildingUIController$$CreateBuildingButton
+
+[AreaController_FreshAreaBuildingButton]
+  x3: LTLocalization$$SetText
+  x2: System.String$$Concat
+  x1: System.String$$Format
+
+[PartyController_PartyStart]
+  x3: GameController$$GenerateRandomItem
+
+[PartyController_PartyEnd]
+  (none)
+
+[WorkingUIController_AddResourceNum]
+  x1: GameController$$ShowTextAtPos
+  x1: System.String$$Concat
+
+[GameController_GetConditionDescribe]
+  x4: System.String$$Concat
+
+==== A1.5-2: ScriptString ที่มีลักษณะ callFucParam (';'-delimited มี callFuc ท้าย) ====
+  0x1DAE2C8: '完成巡查;FinishHelpPatrol;'
+  total: 1

@@ -1,0 +1,127 @@
+; BuildingUIController_GenerateBuildingButton  rva=0xB66450 va=0x180B66450 end(before)=0xB66640 insns=126
+0x0180b66450  mov      qword ptr [rsp + 0x10], rbx
+0x0180b66455  mov      qword ptr [rsp + 0x18], rsi
+0x0180b6645a  push     rdi
+0x0180b6645b  sub      rsp, 0x20
+0x0180b6645f  cmp      byte ptr [rip + 0x1339b13], 0
+0x0180b66466  mov      rsi, rcx
+0x0180b66469  jne      0x180b664ba
+0x0180b6646b  lea      rcx, [rip + 0x1230fe6]
+0x0180b66472  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b66477  lea      rcx, [rip + 0x1217c6a]
+0x0180b6647e  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b66483  lea      rcx, [rip + 0x1217cde]
+0x0180b6648a  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b6648f  lea      rcx, [rip + 0x1260f8a]
+0x0180b66496  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b6649b  lea      rcx, [rip + 0x12462a6]
+0x0180b664a2  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b664a7  lea      rcx, [rip + 0x126110a]
+0x0180b664ae  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b664b3  mov      byte ptr [rip + 0x1339abf], 1
+0x0180b664ba  mov      rax, qword ptr [rsi + 0x18]
+0x0180b664be  xor      edi, edi
+0x0180b664c0  mov      qword ptr [rsp + 0x30], rbp
+0x0180b664c5  mov      ebx, edi
+0x0180b664c7  test     rax, rax
+0x0180b664ca  je       0x180b6662e
+0x0180b664d0  lea      ebp, [rdi + 0x20]
+0x0180b664d3  xor      edx, edx
+0x0180b664d5  mov      rcx, rax
+0x0180b664d8  call     0x180a29110  ; -> AreaBuildingData$$DataBase (0xA29110)
+0x0180b664dd  test     rax, rax
+0x0180b664e0  je       0x180b6662e
+0x0180b664e6  mov      rax, qword ptr [rax + 0x40]
+0x0180b664ea  test     rax, rax
+0x0180b664ed  je       0x180b6662e
+0x0180b664f3  cmp      ebx, dword ptr [rax + 0x18]
+0x0180b664f6  jge      0x180b6655b
+0x0180b664f8  mov      rcx, qword ptr [rsi + 0x18]
+0x0180b664fc  test     rcx, rcx
+0x0180b664ff  je       0x180b6662e
+0x0180b66505  xor      edx, edx
+0x0180b66507  call     0x180a29110  ; -> AreaBuildingData$$DataBase (0xA29110)
+0x0180b6650c  test     rax, rax
+0x0180b6650f  je       0x180b6662e
+0x0180b66515  mov      rbx, qword ptr [rax + 0x40]
+0x0180b66519  test     rbx, rbx
+0x0180b6651c  je       0x180b6662e
+0x0180b66522  cmp      edi, dword ptr [rbx + 0x18]
+0x0180b66525  jb       0x180b6652e
+0x0180b66527  xor      ecx, ecx
+0x0180b66529  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180b6652e  mov      rdx, qword ptr [rbx + 0x10]
+0x0180b66532  xor      r8d, r8d
+0x0180b66535  mov      rcx, rsi
+0x0180b66538  mov      rdx, qword ptr [rdx + rbp]
+0x0180b6653c  call     0x180b65340  ; -> BuildingUIController$$CreateBuildingButton (0xB65340)
+0x0180b66541  mov      rax, qword ptr [rsi + 0x18]
+0x0180b66545  inc      edi
+0x0180b66547  add      rbp, 8
+0x0180b6654b  mov      ebx, edi
+0x0180b6654d  test     rax, rax
+0x0180b66550  je       0x180b6662e
+0x0180b66556  jmp      0x180b664d3  ; -> 0xB664D3 (inside BuildingUIController$$GenerateBuildingButton)
+0x0180b6655b  cmp      byte ptr [rip + 0x132b7e9], 0
+0x0180b66562  jne      0x180b66577
+0x0180b66564  lea      rcx, [rip + 0x120e99d]
+0x0180b6656b  call     0x1800d64a0  ; -> 0xD64A0
+0x0180b66570  mov      byte ptr [rip + 0x132b7d4], 1
+0x0180b66577  mov      rax, qword ptr [rip + 0x120e98a]
+0x0180b6657e  mov      rcx, qword ptr [rax + 0xb8]
+0x0180b66585  mov      rax, qword ptr [rcx]
+0x0180b66588  test     rax, rax
+0x0180b6658b  je       0x180b6662e
+0x0180b66591  mov      rcx, qword ptr [rax + 0x48]
+0x0180b66595  test     rcx, rcx
+0x0180b66598  je       0x180b6662e
+0x0180b6659e  xor      edx, edx
+0x0180b665a0  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x0180b665a5  test     rax, rax
+0x0180b665a8  je       0x180b6662e
+0x0180b665ae  mov      rdx, qword ptr [rip + 0x1261003]
+0x0180b665b5  xor      r8d, r8d
+0x0180b665b8  mov      rcx, rax
+0x0180b665bb  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x0180b665c0  test     rax, rax
+0x0180b665c3  je       0x180b6662e
+0x0180b665c5  mov      rdx, qword ptr [rip + 0x1260e54]
+0x0180b665cc  xor      r8d, r8d
+0x0180b665cf  mov      rcx, rax
+0x0180b665d2  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x0180b665d7  test     rax, rax
+0x0180b665da  je       0x180b6662e
+0x0180b665dc  mov      rdx, qword ptr [rip + 0x1246165]
+0x0180b665e3  xor      r8d, r8d
+0x0180b665e6  mov      rcx, rax
+0x0180b665e9  call     0x180daafa0  ; -> UnityEngine.Transform$$Find (0xDAAFA0)
+0x0180b665ee  test     rax, rax
+0x0180b665f1  je       0x180b6662e
+0x0180b665f3  mov      rdx, qword ptr [rip + 0x1230e5e]
+0x0180b665fa  mov      rcx, rax
+0x0180b665fd  call     0x180967ef0  ; -> UnityEngine.Component$$GetComponent<ActionBarUnit> (0x967EF0)
+0x0180b66602  test     rax, rax
+0x0180b66605  je       0x180b6662e
+0x0180b66607  movss    xmm1, dword ptr [rip + 0xd5ab39]
+0x0180b6660f  xor      r8d, r8d
+0x0180b66612  mov      rcx, rax
+0x0180b66615  mov      rbp, qword ptr [rsp + 0x30]
+0x0180b6661a  mov      rbx, qword ptr [rsp + 0x38]
+0x0180b6661f  mov      rsi, qword ptr [rsp + 0x40]
+0x0180b66624  add      rsp, 0x20
+0x0180b66628  pop      rdi
+0x0180b66629  jmp      0x1813c0d80  ; -> UnityEngine.UI.Scrollbar$$set_value (0x13C0D80)
+0x0180b6662e  call     0x1800d6610  ; -> 0xD6610
+0x0180b66633  int3     
+0x0180b66634  int3     
+0x0180b66635  int3     
+0x0180b66636  int3     
+0x0180b66637  int3     
+0x0180b66638  int3     
+0x0180b66639  int3     
+0x0180b6663a  int3     
+0x0180b6663b  int3     
+0x0180b6663c  int3     
+0x0180b6663d  int3     
+0x0180b6663e  int3     
+0x0180b6663f  int3     
