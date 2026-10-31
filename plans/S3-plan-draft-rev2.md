@@ -138,3 +138,4 @@ Audit log ทุกคำสั่ง (pattern `s2.metrics`) · stateHash v2 ก
    ต้องเป็นตัวที่อนุมัติล่าสุด ณ วันรัน
 6. **exit criteria ของ W6** (authority 20 / 50 คำสั่ง ≥45 / timeout 20/20 / 10 นาที 0 soft-lock) — ยืนยันว่า
    คงเดิมก่อนเริ่ม W6 (ห้ามปรับทีหลัง)
+7. **secret:** ต้องสุ่ม secret ใหม่ตาม `plans/PUSH-AND-SECRETS-RUNBOOK.md` ก่อน S3 (ก่อนเปิด `net.cfg`/เครือข่ายทุกครั้ง)
