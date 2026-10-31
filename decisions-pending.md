@@ -172,6 +172,20 @@
 > `tools/scan_secrets.py` + 27 tests) · **game repo = ไม่ push** ตาม `[PUSH-GAME-REPO] = ไม่อนุมัติ`
 > · commit บันทึกนี้ (`decisions-pending.md`) = **local ไม่ push** ตามคำสั่ง
 
+> **ผลมติ 2026-10-31 (รอบ 8 — session `HYGIENE-20261031-122528` · repo hygiene + push):** **mod push
+> สำเร็จ** — fetch ก่อน: `origin/master = b70cfd7` (ไม่ขยับจากรอบ 7) · `merge-base --is-ancestor` exit 0 ·
+> `rev-list --left-right --count` = `0 5` ⇒ **push `b70cfd7..0d7a9b4` fast-forward 5 commits** (`41e0d8f`
+> บันทึก §4 รอบ 7, `75ca39f` scanner v2, `6bc5db2` pre-push hook, `fe60fe2` runbook, `0d7a9b4` evidence) ·
+> **ผ่าน pre-push hook จริง** — output: `pre-push: refs/heads/master clean` + `pre-push: secret scan passed`
+> (ไม่มี `--no-verify`, ไม่ force) · ตรวจก่อน push: 13 ไฟล์ ไม่มี `*.dll`/`*.pdb`/`dump.cs`/`Il2CppAssemblies`/
+> `GlobalMetadata`/ไฟล์เซฟ/`net.cfg` · `scan_secrets --range origin/master..HEAD --patterns v2` = **0 findings** ·
+> **origin/master หลัง push = `0d7a9b4` = HEAD (0/0)** · `ls-remote` ตรง · **game repo = ไม่ push**
+> ตาม `[PUSH-GAME-REPO] = ไม่อนุมัติ` · commit บันทึกนี้ = **local ไม่ push**
+> · **เครื่องมือใหม่ที่ขึ้น origin แล้ว:** `tools/githooks/pre-push` (track, exec bit, LF) + `tools/test_pre_push_hook.py`
+> (14 tests) + `.gitattributes` + `plans/PUSH-AND-SECRETS-RUNBOOK.md` — **hook ยังต้องติดตั้งเองทุก clone**
+> (`git config --local core.hooksPath tools/githooks`; clone นี้ตั้งแล้ว) · หลักฐาน:
+> `evidence/HYGIENE-20261031-122528/` (history-scan-report / push-provenance / plan-rev2-review)
+
 ## 5) ของค้างที่พบใหม่รอบนี้ (จาก session ก่อน — ยังไม่มีมติ agent ไม่แตะ)
 
 | รายการ | สถานะ | ทางเลือก · ข้อเสนอ |
