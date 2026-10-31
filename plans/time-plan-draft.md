@@ -246,15 +246,15 @@ StartWorking: [initial pause = p]   (ตั้งที่ 0x9CACAA — จุ�
 |---|---|---|
 | D1 | cancellation ทดสอบ/ใช้งานผ่าน**ปุ่ม UI เท่านั้น** หรืออนุญาต invoke `MiddleStopWork` ด้วย — ถ้าเฉพาะ UI จะไม่ครอบเคส forced-cancel (ต้องบันทึกข้อจำกัด) | Gate 2/3 |
 | D2 | ยอมรับเป็นหลักการว่า **ผลรายวันที่ให้ไปแล้วอาจย้อนคืนไม่ได้** (per-day credit ถาวรทันทีที่ยิง — B.4) | Gate 2 |
-| D3 | รูปแบบ activity serialization/ownership สำหรับ multiplayer — Option A = **candidate เท่านั้น** (§A.3); ทางเลือก B/C ยังเปิด; รวมถึงความหมาย (1)/(2)/(3) ของ "กิจกรรม N วันใช้เวลา X วินาที" (T5 §6.1) | Gate 5/6 |
-| D4 | policy เมื่อมีคำขอเริ่มงานใหม่ขณะมีงานเดิม (เข้าคิว / ปฏิเสธ / ยอมให้ทับแบบเกม — ทับแล้วงานเดิมสูญเงียบ ตาม B.1) | Gate 5/6 |
-| D5 | policy ต่อ `noCancel` (งานที่ห้ามยกเลิกทาง UI), forced cancellation (`MiddleStopWork`) และผลของ finish handlers แต่ละตระกูล (gate/no-gate/totalWorkingDay — B.4) | Gate 5/6 |
-| D6 | policy สำหรับค่า N นอกชุดที่ทดสอบ {1,5,10,15} (linear fallback / default rate / ปฏิเสธ) — ยังไม่กำหนดแทนผู้ใช้ | Gate 5/6 |
-| D7 | วิธีจัดการ `workFinished`/`skipping` ที่ค้างข้ามงาน — mod ต้องใช้ `working==1` (E1) และอาจต้องเคลียร์/หลีกธงค้างเองถ้าจะใช้ skip ใน MP (T5 §11.11) | Gate 5/6 |
-| D8 | ข้อเท็จจริง E6 (QuickTravel + กิจกรรมอื่นใช้ปั๊มเดียวกัน) มีผลต่อ MP อย่างไร — travel ของผู้เล่นหลายคนผ่านคิวเดียวหรือไม่ | Gate 5/6 |
+| D3 | รูปแบบ activity serialization/ownership สำหรับ multiplayer — Option A = **candidate เท่านั้น** (§A.3); ทางเลือก B/C ยังเปิด; รวมถึงความหมาย (1)/(2)/(3) ของ "กิจกรรม N วันใช้เวลา X วินาที" (T5 §6.1) — **มติ 2026-10-31: เลือก Option B (activity manager ต่อผู้เล่น) — decisions-pending §13** | Gate 5/6 |
+| D4 | policy เมื่อมีคำขอเริ่มงานใหม่ขณะมีงานเดิม (เข้าคิว / ปฏิเสธ / ยอมให้ทับแบบเกม — ทับแล้วงานเดิมสูญเงียบ ตาม B.1) — **มติ 2026-10-31: ทับแบบเกม — decisions-pending §13** | Gate 5/6 |
+| D5 | policy ต่อ `noCancel` (งานที่ห้ามยกเลิกทาง UI), forced cancellation (`MiddleStopWork`) และผลของ finish handlers แต่ละตระกูล (gate/no-gate/totalWorkingDay — B.4) — **มติ 2026-10-31: คงพฤติกรรมเกมเดิม — decisions-pending §13** | Gate 5/6 |
+| D6 | policy สำหรับค่า N นอกชุดที่ทดสอบ {1,5,10,15} (linear fallback / default rate / ปฏิเสธ) — ยังไม่กำหนดแทนผู้ใช้ — **มติ 2026-10-31: ล็อกสูตร (ฉ) `max(30, 12×N)` วิ ทุก N ในขอบเขต ACT-1; นอกขอบเขต (งานเลี้ยง) คงปั๊ม native — decisions-pending §13** | Gate 5/6 |
+| D7 | วิธีจัดการ `workFinished`/`skipping` ที่ค้างข้ามงาน — mod ต้องใช้ `working==1` (E1) และอาจต้องเคลียร์/หลีกธงค้างเองถ้าจะใช้ skip ใน MP (T5 §11.11) — **มติ 2026-10-31: อนุญาต skip + mod เคลียร์/หลีกธงเอง — decisions-pending §13** | Gate 5/6 |
+| D8 | ข้อเท็จจริง E6 (QuickTravel + กิจกรรมอื่นใช้ปั๊มเดียวกัน) มีผลต่อ MP อย่างไร — travel ของผู้เล่นหลายคนผ่านคิวเดียวหรือไม่ — **มติ 2026-10-31: แยกคิวต่อผู้เล่น — decisions-pending §13** | Gate 5/6 |
 | D9 | สถานะ baseline/fixture เซฟก่อน V1 — ตอนนี้ `Save` diverge จาก baseline ที่อนุมัติขณะนั้น `4226730f66ff` 5 ไฟล์ (SaveSlot8 จากการเซฟของผู้ใช้เอง 2026-10-24 02:15 + `PlayerprefData.dat`) — **มติ D9 แล้ว 2026-10-28 ทาง (ก) rebaseline volatile-only: baseline ที่อนุมัติปัจจุบัน = `df8e5a11beed6e62cc18d40da9ae0f2d0d5fbfdc56640b4196ece95df1ed4920` @ `coop-test/baselines/20261028-071340` (มติ [G-2] + V2A-2 — ดู VERSION.md หัวข้อ "Baseline ที่อนุมัติปัจจุบัน")** — ต้องเลือก **(ก) rebaseline**: บันทึก manifest/digest ใหม่แล้วใช้ manifest นั้นเป็นเกณฑ์ preflight/rollback ทั้งหมด หรือ **(ข) คง baseline เดิม + บันทึก divergence**: แยก "original approved baseline" (`4226730f66ff`) ออกจาก "approved test fixture ปัจจุบัน" ระบุรายการ divergence ที่อนุมัติ และใช้เกณฑ์ตรวจคืน fixture ให้ตรงกับ **snapshot ก่อนทดสอบ** (§D.1/§G.2) · **ห้ามอ้างว่า fixture ที่ diverge ตรง baseline เดิมแบบ EXACT** · การบันทึก/ใช้ manifest ทั้งสองทางต้องเป็นไป
 ตามนิยาม "ห้ามแตะเซฟจริง" (§D.0) · ถ้ายังไม่มีมติ D9 ⇒ Gate 1 ไม่ผ่าน ห้ามเปิดเกม (มติ D9 แล้ว 2026-10-28 ทาง (ก) — ดู VERSION.md) | Gate 1 |
-| D10 | ทดสอบขอบ slider Wait หรือไม่ — **อนุญาตเฉพาะหลังยืนยันค่า `TestMode` แล้ว** (§E.3) | Gate 5c |
+| D10 | ทดสอบขอบ slider Wait หรือไม่ — **อนุญาตเฉพาะหลังยืนยันค่า `TestMode` แล้ว** (§E.3) — **มติ 2026-10-31: ทำ (เงื่อนไข TestMode คงเดิม) — decisions-pending §13** | Gate 5c |
 
 ### C.4 สิ่งที่อาจต้องกลับไปตรวจ static เพิ่ม (ทำได้ต่อ อ่านอย่างเดียว — ไม่บังคับก่อน V1/V2)
 
