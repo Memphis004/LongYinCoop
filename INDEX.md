@@ -74,6 +74,7 @@
 | `TIME-V1-20261031-044249/` | สาย V1 ปิด (CLOSED-CANCELLED — V1-close-report + rollback-user-cancel) · TC1-r1 = INCOMPLETE-probe-down |
 | `SP5body-TempHerosDict-20261031-034658/` | asm bodies ระบบเวลา (29 ไฟล์) + toolchain (`time_static_common.py`/`disasm_time_bodies.py` — read-only) + analysis-report + floats-observed.tsv — toolchain ที่ A1/A1.5 อ้างอิง |
 | `AUTO-20261030-071500/` · `AUTO-20261031-035916/` · `AUTO-20261031-GITAUDIT/` | HANDOFF ของ session ก่อน + time-plan-v1-errata + git audit snapshot |
+| `SECRET-20261031-121438/` | incident note: ค่า secret จริงใน `evidence/S2a4-GO3-20261028-074003/net.cfg.during-GO3` (เพิ่มโดย `d81c86d`) → redact `<redacted>` commit `805902a` · d81c86d อยู่บน origin แล้ว = burned ไม่ rewrite ไม่ force · เครื่องมือ `tools/scan_secrets.py` (รอบ 7) |
 
 ## แผนที่ path เก่า → ใหม่ (สำหรับอ้างอิงที่ค้างอยู่ในเอกสาร/คอมเมนต์)
 
