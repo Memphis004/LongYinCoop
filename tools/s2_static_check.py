@@ -39,7 +39,7 @@ HARMONY_PATTERNS = [
     (r"\[\s*Harmony", "[Harmony..."),
 ]
 
-PURE_LOGIC_TOKEN = "S2WriteGuardHook"
+PURE_LOGIC_MARKER = "S2WriteGuardHook"
 PURE_LOGIC_DEFINITION_FILE = "S2WriteGuardHook.cs"
 
 
@@ -102,10 +102,10 @@ def check_file(path: Path, root: Path, violations: list) -> None:
                 })
 
         # กติกา 3: pure logic ห้ามถูกอ้างนอกไฟล์นิยาม (สแกนทั้ง src/** — ผู้เรียกกรองเอง)
-        if not is_definition and PURE_LOGIC_TOKEN in line:
+        if not is_definition and PURE_LOGIC_MARKER in line:
             violations.append({
                 "rule": "pure-logic-reference", "file": rel, "line": lineno,
-                "detail": PURE_LOGIC_TOKEN, "text": stripped[:120],
+                "detail": PURE_LOGIC_MARKER, "text": stripped[:120],
             })
 
     # กติกา 2: Harmony references — สแกนเฉพาะโค้ดจริง (ตัด comment แล้ว)
@@ -148,10 +148,10 @@ def scan(root: Path) -> list:
         if path.name == PURE_LOGIC_DEFINITION_FILE:
             continue
         for lineno, line in enumerate(text.splitlines(), 1):
-            if PURE_LOGIC_TOKEN in line:
+            if PURE_LOGIC_MARKER in line:
                 violations.append({
                     "rule": "pure-logic-reference", "file": rel, "line": lineno,
-                    "detail": PURE_LOGIC_TOKEN, "text": line.strip()[:120],
+                    "detail": PURE_LOGIC_MARKER, "text": line.strip()[:120],
                 })
 
     return violations

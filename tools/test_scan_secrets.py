@@ -23,7 +23,7 @@ _spec.loader.exec_module(ss)
 
 # Fixture secrets are synthetic (not the burned value from evidence/).
 FAKE_HEX = "0123456789abcdef0123456789abcdef"
-FAKE_TOKEN = "AbCdEf0123456789xyzXYZ+/="
+FAKE_MIXED = "AbCdEf0123456789xyzXYZ+/="
 
 
 class ClassifyTests(unittest.TestCase):
@@ -46,7 +46,7 @@ class ClassifyTests(unittest.TestCase):
         self.assertEqual(ss.classify_line("SECRET = %s" % FAKE_HEX.upper()), "hex")
 
     def test_non_hex_long_token_is_real(self):
-        self.assertEqual(ss.classify_line("secret = %s" % FAKE_TOKEN), "token")
+        self.assertEqual(ss.classify_line("secret = %s" % FAKE_MIXED), "token")
 
     def test_placeholder_angle_hex_is_clean(self):
         self.assertIsNone(ss.classify_line("coop.secret = <hex>"))
@@ -79,7 +79,7 @@ class ScanTextTests(unittest.TestCase):
         self.assertEqual(ss.scan_text(text), [(2, "hex")])
 
     def test_multiple_hits(self):
-        text = "secret = %s\nsecret = %s\n" % (FAKE_HEX, FAKE_TOKEN)
+        text = "secret = %s\nsecret = %s\n" % (FAKE_HEX, FAKE_MIXED)
         self.assertEqual(ss.scan_text(text), [(1, "hex"), (2, "token")])
 
     def test_clean_text(self):
@@ -213,10 +213,193 @@ class RangeScanTests(unittest.TestCase):
                 return b"ccc333\n"
             if args[:1] == ("diff-tree",):
                 return b"dump.cs\n"
-            return b"secret = " + FAKE_HEX.encode() + b"\x00\x01binary"
+            # key is split so this scanner does not flag its own test source
+            return b"sec" + b"ret = " + FAKE_HEX.encode() + b"\x00\x01binary"
 
         with mock.patch.object(ss, "_git", side_effect=fake_git):
             self.assertEqual(ss.scan_range("origin/master..HEAD"), [])
+
+
+class ClassifyV2Tests(unittest.TestCase):
+    """v2 pattern set: new detections and their false-positive guards."""
+
+    # ---- detections ------------------------------------------------------
+    def test_quoted_short_secret_is_real(self):
+        self.assertEqual(ss.classify_line_v2('secret = "s3cr3t-pw"'), "quoted")
+
+    def test_quoted_api_key_is_real(self):
+        self.assertEqual(ss.classify_line_v2('  "api_key": "abcd1234wxyz"'), "quoted")
+
+    def test_base64_token_is_real(self):
+        value = "QWxhZGRpbjpvcGVuIHNlc2FtZQ"  # 26 chars, base64 alphabet
+        self.assertEqual(ss.classify_line_v2("token = %s" % value), "base64")
+
+    def test_hex_secret_still_labelled_hex(self):
+        self.assertEqual(ss.classify_line_v2("secret = %s" % FAKE_HEX), "hex")
+
+    def test_generic_token_key_is_real(self):
+        self.assertEqual(ss.classify_line_v2("token = AbCd-1234_efgh-99"), "token")
+
+    def test_private_key_header_is_real(self):
+        pem = "-----BEGIN " + "RSA PRIVATE KEY-----"
+        self.assertEqual(ss.classify_line_v2(pem), "private-key")
+
+    def test_openssh_private_key_header_is_real(self):
+        pem = "-----BEGIN " + "OPENSSH PRIVATE KEY-----"
+        self.assertEqual(ss.classify_line_v2(pem), "private-key")
+
+    def test_github_pat_classic_is_real(self):
+        fake = "gh" + "p_" + "A1b2C3d4E5f6G7h8I9j0K1l2M3n4O5p6Q7r8"
+        self.assertEqual(ss.classify_line_v2("token: %s" % fake), "github-token")
+
+    def test_github_pat_fine_grained_is_real(self):
+        fake = "github_" + "pat_" + "11ABCDEFG0123456789_abcdef"
+        self.assertEqual(ss.classify_line_v2("use %s now" % fake), "github-token")
+
+    def test_aws_access_key_id_is_real(self):
+        fake = "AK" + "IA" + "IOSFODNN7EXAMPLE"
+        self.assertEqual(ss.classify_line_v2("aws_access_key_id = %s" % fake), "aws-key-id")
+
+    def test_slack_token_is_real(self):
+        fake = "xo" + "xb-" + "1234567890-abcdefghijkl"
+        self.assertEqual(ss.classify_line_v2(fake), "slack-token")
+
+    def test_v2_scantext_reports_lines(self):
+        text = 'token = "abcdefgh1234"\nnote = hi\nkey: %s\n' % FAKE_HEX
+        self.assertEqual(ss.scan_text_with(text, "v2"), [(1, "quoted"), (3, "hex")])
+
+    def test_v2_default_scanner_is_v1(self):
+        # behaviour of the legacy entry point must not change
+        self.assertEqual(ss.scan_text_with('secret = "s3cr3t-pw"', "v1"), [])
+
+    # ---- false positives that must stay clean ----------------------------
+    def test_placeholder_angle_bracket_clean(self):
+        for ph in ("<hex>", "<redacted>", "<secret>", "<token>", "<key>"):
+            self.assertIsNone(ss.classify_line_v2("token = %s" % ph))
+
+    def test_repeated_x_placeholder_clean(self):
+        self.assertIsNone(ss.classify_line_v2("secret = xxxxxxxxxxxxxxxxxxxxxxxx"))
+
+    def test_bare_redacted_clean(self):
+        self.assertIsNone(ss.classify_line_v2('secret = "REDACTED"'))
+
+    def test_env_var_reference_clean(self):
+        self.assertIsNone(ss.classify_line_v2("secret = ${COOP_SECRET}"))
+        self.assertIsNone(ss.classify_line_v2("token = $GITHUB_TOKEN"))
+
+    def test_keys_plural_is_benign(self):
+        self.assertIsNone(ss.classify_line_v2('keys = "abcdefgh1234"'))
+
+    def test_keyboard_keyword_benign(self):
+        self.assertIsNone(ss.classify_line_v2('keyboard = "abcdefgh1234"'))
+        self.assertIsNone(ss.classify_line_v2('keyword = "abcdefgh1234"'))
+        self.assertIsNone(ss.classify_line_v2('monkey = "abcdefgh1234"'))
+
+    def test_short_quoted_value_clean(self):
+        self.assertIsNone(ss.classify_line_v2('secret = "short"'))
+
+    def test_prose_without_assignment_clean(self):
+        self.assertIsNone(ss.classify_line_v2("the token is read from net.cfg at startup"))
+        self.assertIsNone(ss.classify_line_v2("note: the token is expired"))
+
+    def test_ordinary_numbers_and_flags_clean(self):
+        self.assertIsNone(ss.classify_line_v2("heartbeatMs = 1000"))
+        self.assertIsNone(ss.classify_line_v2("enabled = false"))
+        self.assertIsNone(ss.classify_line_v2("secretEnabled = true"))
+
+    def test_sha_hex_not_a_key(self):
+        self.assertIsNone(ss.classify_line_v2("sha256 = %s" % FAKE_HEX))
+
+    def test_provider_prefixes_in_prose_clean(self):
+        self.assertIsNone(ss.classify_line_v2("rotate any ghp_ / AKIA / xoxb- tokens"))
+        self.assertIsNone(ss.classify_line_v2("never commit an AKIA.... key id"))
+
+    def test_masked_preview_with_ellipsis_clean(self):
+        self.assertIsNone(ss.classify_line_v2('coop.secret = "abc123...x9y8"'))
+        self.assertIsNone(ss.classify_line_v2("token = abcd\u2026wxyz"))
+
+    def test_snake_case_identifier_with_pat_prefix_clean(self):
+        self.assertIsNone(ss.classify_line_v2("def test_github_pat_fine_grained_is_real(self):"))
+        self.assertIsNone(ss.classify_line_v2("github_pat_placeholder_documentation"))
+
+    def test_scanner_sources_are_self_clean(self):
+        # the scanner and its tests must not trip their own v2 patterns
+        for name in ("scan_secrets.py", "test_scan_secrets.py"):
+            path = os.path.join(HERE, name)
+            with open(path, encoding="utf-8") as fh:
+                found = ss.scan_text_with(fh.read(), "v2")
+            self.assertEqual(found, [], "%s has %d finding(s)" % (name, len(found)))
+
+
+class AllHistoryTests(unittest.TestCase):
+    @staticmethod
+    def _raw(blob_sha: str, path: str, status: str = "A") -> bytes:
+        return (":000000 100644 0000000 %s %s\x00%s\x00" % (blob_sha, status, path)).encode()
+
+    def test_scan_all_history_uses_rev_list_all(self):
+        calls = []
+        secret_text = ("secret = %s\n" % FAKE_HEX).encode()
+
+        def fake_git(*args):
+            calls.append(args)
+            if args == ("rev-list", "--all"):
+                return b"root1\nhead2\n"
+            if args[:1] == ("diff-tree",) and args[-1] == "root1":
+                return self._raw("1111111", "a/net.cfg")
+            if args[:1] == ("diff-tree",) and args[-1] == "head2":
+                return self._raw("2222222", "b/gone.cfg", status="D")
+            raise RuntimeError("unexpected: %s" % (args,))
+
+        with mock.patch.object(ss, "_git", side_effect=fake_git), mock.patch.object(
+            ss, "_read_blobs", side_effect=lambda shas: {"1111111": secret_text}
+        ):
+            findings = ss.scan_all_history("v1")
+
+        self.assertIn(("rev-list", "--all"), calls)
+        self.assertEqual(len(findings), 1)
+        self.assertEqual(findings[0]["commit"], "root1")
+        self.assertEqual(findings[0]["path"], "a/net.cfg")
+        self.assertNotIn(FAKE_HEX, repr(findings))
+
+    def test_scan_all_history_is_clean_when_only_placeholders(self):
+        def fake_git(*args):
+            if args == ("rev-list", "--all"):
+                return b"root1\n"
+            return self._raw("3333333", "docs/net.cfg")
+
+        with mock.patch.object(ss, "_git", side_effect=fake_git), mock.patch.object(
+            ss, "_read_blobs", side_effect=lambda shas: {"3333333": b"secret = <redacted>\n"}
+        ):
+            self.assertEqual(ss.scan_all_history("v2"), [])
+
+    def test_changed_blobs_parses_raw_z_output(self):
+        raw = (
+            b":000000 100644 0000000 aaa111 A\x00a/net.cfg\x00"
+            b":100644 100644 aaa111 bbb222 M\x00b/two.cfg\x00"
+            b":100644 100644 bbb222 0000000 D\x00c/deleted.cfg\x00"
+        )
+        with mock.patch.object(ss, "_git", return_value=raw):
+            got = ss._changed_blobs("deadbeef")
+        self.assertEqual(got, [("a/net.cfg", "aaa111"), ("b/two.cfg", "bbb222")])
+
+    def test_main_all_history_flag(self):
+        def fake_git(*args):
+            if args == ("rev-list", "--all"):
+                return b"root1\n"
+            return self._raw("4444444", "x/net.cfg")
+
+        out = io.StringIO()
+        with mock.patch.object(ss, "_git", side_effect=fake_git), mock.patch.object(
+            ss, "_read_blobs", side_effect=lambda shas: {"4444444": ("token = %s\n" % FAKE_HEX).encode()}
+        ), redirect_stdout(out):
+            code = ss.main(["--all-history", "--patterns", "v2"])
+        self.assertEqual(code, 1)
+        self.assertIn("x/net.cfg:1", out.getvalue())
+        self.assertNotIn(FAKE_HEX, out.getvalue())
+
+    def test_main_patterns_choice_rejects_unknown(self):
+        with self.assertRaises(SystemExit), redirect_stderr(io.StringIO()):
+            ss.main(["--patterns", "v3"])
 
 
 if __name__ == "__main__":
