@@ -1,0 +1,111 @@
+#!/bin/sh
+# pre-push hook: block pushes that would add real secret values.
+#
+# Tracked in the repo (tools/githooks/) but NOT active until a clone runs:
+#     git config --local core.hooksPath tools/githooks
+# That config is per-clone and is not versioned; see
+# plans/PUSH-AND-SECRETS-RUNBOOK.md.
+#
+# stdin format (one ref per line, git's documented pre-push protocol):
+#     <local ref> <local sha> <remote ref> <remote sha>
+#
+# Rules (fail-closed: anything unexpected blocks the push):
+#   * remote sha all-zeros -> new ref  -> scan "<local sha> --not --remotes"
+#   * local  sha all-zeros -> delete   -> nothing to scan, skip
+#   * otherwise            -> scan "<remote sha>..<local sha>"
+# Only commit:path:line is printed; the scanner never prints values.
+
+set -u
+
+zero_sha="0000000000000000000000000000000000000000"
+status=0
+PY_BIN=""
+PY_ARGS=""
+
+# --- locate python ---------------------------------------------------------
+# PYTHON_CMD may be pre-set by the test harness (e.g. "python" or "py -3").
+if [ -n "${PYTHON_CMD:-}" ]; then
+    set -- $PYTHON_CMD
+    PY_BIN="$1"
+    shift
+    PY_ARGS="$*"
+elif command -v python >/dev/null 2>&1; then
+    PY_BIN="python"
+elif command -v python3 >/dev/null 2>&1; then
+    PY_BIN="python3"
+elif py -3 -c "import sys" >/dev/null 2>&1; then
+    PY_BIN="py"
+    PY_ARGS="-3"
+fi
+
+if [ -z "$PY_BIN" ]; then
+    echo "pre-push: BLOCKED - no python interpreter found (tried python, python3, py -3)." >&2
+    echo "pre-push: the secret gate is fail-closed; install Python 3 or push with a scanner." >&2
+    exit 1
+fi
+
+REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" || {
+    echo "pre-push: BLOCKED - not inside a git work tree." >&2
+    exit 1
+}
+SCANNER="$REPO_ROOT/tools/scan_secrets.py"
+if [ ! -f "$SCANNER" ]; then
+    echo "pre-push: BLOCKED - scanner missing at tools/scan_secrets.py." >&2
+    exit 1
+fi
+
+# --- scanner must actually run (a broken scanner must not let a push through)
+# shellcheck disable=SC2086
+$PY_BIN $PY_ARGS "$SCANNER" --tree --rev HEAD --patterns v2 >/dev/null 2>&1
+smoke_rc=$?
+if [ "$smoke_rc" -eq 2 ] || [ "$smoke_rc" -eq 127 ]; then
+    echo "pre-push: BLOCKED - scanner error (exit $smoke_rc); cannot verify the push." >&2
+    exit 1
+fi
+
+scan_range() {
+    # $1 = rev-list expression (may contain spaces)
+    # shellcheck disable=SC2086
+    $PY_BIN $PY_ARGS "$SCANNER" --range "$1" --patterns v2 2>&1
+}
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+    [ -z "${local_ref:-}" ] && continue
+
+    if [ "$local_sha" = "$zero_sha" ]; then
+        echo "pre-push: $remote_ref deleted - nothing to scan"
+        continue
+    fi
+
+    if [ "$remote_sha" = "$zero_sha" ]; then
+        echo "pre-push: $remote_ref new ref -> scanning '$local_sha --not --remotes'"
+        out="$(scan_range "$local_sha --not --remotes")"
+        rc=$?
+    else
+        echo "pre-push: $remote_ref -> scanning '$remote_sha..$local_sha'"
+        out="$(scan_range "$remote_sha..$local_sha")"
+        rc=$?
+    fi
+
+    if [ "$rc" -eq 2 ]; then
+        echo "pre-push: BLOCKED - scanner failed for $remote_ref:" >&2
+        echo "$out" >&2
+        status=1
+        continue
+    fi
+    if [ "$rc" -ne 0 ]; then
+        echo "pre-push: BLOCKED - possible secret in $remote_ref:" >&2
+        echo "$out" >&2
+        status=1
+        continue
+    fi
+    echo "pre-push: $remote_ref clean"
+done
+
+if [ "$status" -ne 0 ]; then
+    echo "pre-push: push BLOCKED by the secret scan. Do not use --no-verify." >&2
+    exit 1
+fi
+
+echo "pre-push: secret scan passed"
+exit 0
