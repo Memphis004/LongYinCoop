@@ -125,18 +125,25 @@ namespace LongYinCoop.TimeV1
                     postfix: new HarmonyMethod(M(self, "MiddleStopWorkPostfix")),
                     finalizer: new HarmonyMethod(M(self, "MiddleStopWorkFinalizer")));
 
+                // gate หลังติด = เทียบ "ชุด method เป้าหมาย + จำนวน patch-entries ต่อ method"
+                // (patchcount-audit.md — CountOwnedPatches นิยาม method-count จับ partial-install ไม่ได้
+                //  = สาเหตุ false-fail "2 (คาด 6)" ของ TC1-r1)
                 int ownedAfter = CompatInventory.CountOwnedPatches(HarmonyId);
-                if (ownedAfter != ExpectedPatchCount)
+                int entriesAfter = CompatInventory.CountOwnedPatchEntries(HarmonyId);
+                string patchMismatch;
+                if (!CompatInventory.OwnedPatchTargetsMatch(HarmonyId,
+                        new MethodBase[] { stop, msw }, new int[] { 3, 3 }, out patchMismatch))
                 {
-                    CoopLog.Warn("TimeV1: patch count หลังติด = " + ownedAfter + " (คาด "
-                                 + ExpectedPatchCount + ") — ถอนทั้งชุด");
+                    CoopLog.Warn("TimeV1: patch set หลังติดไม่ตรง (คาด " + ExpectedPatchCount
+                                 + " patch-methods บน 2 เป้า) — ถอนทั้งชุด" + Environment.NewLine + patchMismatch);
                     Uninstall();
                     return false;
                 }
 
                 Installed = true;
                 EmitSession("session.begin");
-                CoopLog.Msg("TimeV1 installed (log-only): patches=" + ownedAfter
+                CoopLog.Msg("TimeV1 installed (log-only): patchMethods=" + ownedAfter
+                            + " patchEntries=" + entriesAfter
                             + " out=" + (OutputPath ?? "null"));
                 return true;
             }

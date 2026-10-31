@@ -95,7 +95,6 @@ namespace LongYinCoop
                 }
                 _tGenerateHero = h1; _tGetRecommend = h4a; _tGetMax = h4b; _tWorldAdd = h5;
 
-                int ownedBefore = CompatInventory.CountOwnedPatches(HarmonyId);
                 _harmony = new HarmonyLib.Harmony(HarmonyId);
                 Type self = typeof(Sp5NpcGate);
                 _harmony.Patch(_tGenerateHero,
@@ -108,15 +107,24 @@ namespace LongYinCoop
                 _harmony.Patch(_tWorldAdd,
                     prefix: new HarmonyMethod(M(self, "WorldAddPrefix")));
 
+                // gate หลังติด = เทียบ "ชุดเป้า 4 + patch-entries ต่อเป้า (GenerateHero 2, ที่เหลือ 1 = 5 รวม)"
+                // (patchcount-audit.md — delta method-count เดิมจับ partial-install ไม่ได้; เป้าหลงเหลือจาก
+                //  รอบก่อนจะโดนนับเป็น "เกิน" แล้ว fail-closed เหมือนกัน)
                 int ownedAfter = CompatInventory.CountOwnedPatches(HarmonyId);
-                if (ownedAfter != ownedBefore + 4)
+                int entriesAfter = CompatInventory.CountOwnedPatchEntries(HarmonyId);
+                string patchMismatch;
+                if (!CompatInventory.OwnedPatchTargetsMatch(HarmonyId,
+                        new MethodBase[] { _tGenerateHero, _tGetRecommend, _tGetMax, _tWorldAdd },
+                        new int[] { 2, 1, 1, 1 }, out patchMismatch))
                 {
-                    CoopLog.Warn("Sp5Npc: patch count หลังติด = " + (ownedAfter - ownedBefore) + " (คาด 4) — ถอนทั้งชุด");
+                    CoopLog.Warn("Sp5Npc: patch set หลังติดไม่ตรง (คาด 5 patch-methods บน 4 เป้า) — ถอนทั้งชุด"
+                                 + Environment.NewLine + patchMismatch);
                     Uninstall();
                     return false;
                 }
                 _installed = true;
-                CoopLog.Msg("Sp5Npc gate installed (fail-closed; ย่อ/คลำ/deny ตาม net.cfg npcPolicy)");
+                CoopLog.Msg("Sp5Npc gate installed (fail-closed; ย่อ/คลำ/deny ตาม net.cfg npcPolicy)"
+                            + " patchMethods=" + ownedAfter + " patchEntries=" + entriesAfter);
                 return true;
             }
             catch (Exception e)

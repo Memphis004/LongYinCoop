@@ -21,7 +21,8 @@ namespace LongYinCoop.S2.Tests
     ///     (writer ยังไม่เปิด — fail-closed)
     ///
     /// สิ่งที่ harness นี้พิสูจน์ "ไม่ได้" (ประกาศตามขอบเขต): พฤติกรรมจริงบนเกม (ต้อง runtime —
-    /// RUNBOOK-V1 ขั้น 4: ML log "TimeV1 installed (log-only): patches=6" + ไม่มี Harmony ใดนอกจากนี้)
+    /// RUNBOOK-V1 ขั้น 4: ML log "TimeV1 installed (log-only): patchMethods=2 patchEntries=6" + ไม่มี
+    /// Harmony ใดนอกจากนี้ — รูปแบบ log แก้ตาม patch-count gate fix รอบ 6 งาน 2)
     /// · การอ่านค่าจริงของ interop getter · ลำดับ prefix/postfix บนเป้าเกม
     /// </summary>
     internal static class TimeV1PurityHarness

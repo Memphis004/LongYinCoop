@@ -273,10 +273,18 @@ namespace LongYinCoop
                     postfix: new HarmonyMethod(M(self, "GenDataCPostfix")),
                     finalizer: new HarmonyMethod(M(self, "GenDataCFinalizer")));
 
+                // gate หลังติด = เทียบ "ชุดเป้า 7 + patch-entries ต่อเป้า (×3 = 21)"
+                // (patchcount-audit.md — ค่าคาดเดิม 7 = method-count ผ่านโดยบังเอิญนิยาม จับ partial-install ไม่ได้)
                 int ownedAfter = CompatInventory.CountOwnedPatches(HarmonyId);
-                if (ownedAfter != 7)
+                int entriesAfter = CompatInventory.CountOwnedPatchEntries(HarmonyId);
+                string patchMismatch;
+                if (!CompatInventory.OwnedPatchTargetsMatch(HarmonyId,
+                        new MethodBase[] { _tStartNewGame, _tGenerateHero, _tGenRandomEnemy, _tAddTempHero,
+                                           _tGenDataA, _tGenDataB, _tGenDataC },
+                        new int[] { 3, 3, 3, 3, 3, 3, 3 }, out patchMismatch))
                 {
-                    CoopLog.Warn("Sp5T0: patch count หลังติด = " + ownedAfter + " (คาด 7) — ถอนทั้งชุด (§2.5)");
+                    CoopLog.Warn("Sp5T0: patch set หลังติดไม่ตรง (คาด 21 patch-methods บน 7 เป้า) — ถอนทั้งชุด (§2.5)"
+                                 + Environment.NewLine + patchMismatch);
                     Uninstall();
                     return false;
                 }
@@ -290,7 +298,8 @@ namespace LongYinCoop
                 Flush();
 
                 CoopLog.Msg("Sp5T0 installed (log-only): " + _dir +
-                            " | patches=" + ownedAfter + " (before=" + ownedBefore + ")");
+                            " | patchMethods=" + ownedAfter + " patchEntries=" + entriesAfter +
+                            " (before=" + ownedBefore + ")");
                 return true;
             }
             catch (Exception e)
