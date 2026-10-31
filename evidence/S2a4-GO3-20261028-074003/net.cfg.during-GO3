@@ -2,7 +2,7 @@
 # enabled=false by default; flip to true only for a measurement session
 enabled          = true
 role             = host
-secret           = 2721695f8fab75dc8d356c69e4f9195ee74332add9f1de317ee48b735bb2f4c2
+secret           = <redacted>
 allowNonLoopback = false
 transport        = tcp
 bind             = 127.0.0.1
