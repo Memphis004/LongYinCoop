@@ -1,0 +1,122 @@
+; GameController_ChangeHour  rva=0x792620 va=0x180792620 end(before)=0x792830 insns=121
+0x0180792620  push     rbx
+0x0180792622  sub      rsp, 0x30
+0x0180792626  cmp      byte ptr [rip + 0x170a734], 0  ; [0x1E9CD61 .data] f32=1.65517e-24
+0x018079262d  mov      rbx, rcx
+0x0180792630  movaps   xmmword ptr [rsp + 0x20], xmm6
+0x0180792635  movaps   xmm6, xmm1
+0x0180792638  jne      0x180792659
+0x018079263a  lea      rcx, [rip + 0x16205ff]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x0180792641  call     0x1800d64a0  ; -> 0xD64A0
+0x0180792646  lea      rcx, [rip + 0x1624943]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x018079264d  call     0x1800d64a0  ; -> 0xD64A0
+0x0180792652  mov      byte ptr [rip + 0x170a708], 1  ; [0x1E9CD61 .data] f32=1.65517e-24
+0x0180792659  mov      rax, qword ptr [rbx + 0x20]
+0x018079265d  mov      qword ptr [rsp + 0x40], rsi
+0x0180792662  mov      qword ptr [rsp + 0x48], rdi
+0x0180792667  test     rax, rax
+0x018079266a  je       0x18079281f
+0x0180792670  movss    xmm2, dword ptr [rax + 0xb4]
+0x0180792678  movaps   xmm3, xmm2
+0x018079267b  mulss    xmm2, dword ptr [rip + 0x112ecc5]  ; [0x18C1348 .rdata] f32=10 f64=7.27847e+11
+0x0180792683  addss    xmm3, xmm6
+0x0180792687  cvttss2si esi, xmm2
+0x018079268b  movss    dword ptr [rax + 0xb4], xmm3
+0x0180792693  movaps   xmm0, xmm3
+0x0180792696  mov      rax, qword ptr [rip + 0x16205a3]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x018079269d  mulss    xmm0, dword ptr [rip + 0x112eca3]  ; [0x18C1348 .rdata] f32=10 f64=7.27847e+11
+0x01807926a5  test     byte ptr [rax + 0x133], 4
+0x01807926ac  cvttss2si edi, xmm0
+0x01807926b0  je       0x1807926ca
+0x01807926b2  cmp      dword ptr [rax + 0xe0], 0
+0x01807926b9  jne      0x1807926ca
+0x01807926bb  mov      rcx, rax
+0x01807926be  call     0x18005a6e0  ; -> 0x5A6E0
+0x01807926c3  mov      rax, qword ptr [rip + 0x1620576]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01807926ca  cmp      byte ptr [rip + 0x16ff68f], 0  ; [0x1E91D60 .data] f32=7.06973e-38
+0x01807926d1  jne      0x1807926ed
+0x01807926d3  lea      rcx, [rip + 0x1620566]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01807926da  call     0x1800d64a0  ; -> 0xD64A0
+0x01807926df  mov      rax, qword ptr [rip + 0x162055a]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01807926e6  mov      byte ptr [rip + 0x16ff673], 1  ; [0x1E91D60 .data] f32=7.06973e-38
+0x01807926ed  test     byte ptr [rax + 0x133], 4
+0x01807926f4  je       0x18079270e
+0x01807926f6  cmp      dword ptr [rax + 0xe0], 0
+0x01807926fd  jne      0x18079270e
+0x01807926ff  mov      rcx, rax
+0x0180792702  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180792707  mov      rax, qword ptr [rip + 0x1620532]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x018079270e  mov      rax, qword ptr [rax + 0xb8]
+0x0180792715  mov      rcx, qword ptr [rax + 0x10]
+0x0180792719  test     rcx, rcx
+0x018079271c  je       0x18079281f
+0x0180792722  xor      r8d, r8d
+0x0180792725  movaps   xmm1, xmm6
+0x0180792728  call     0x1808ddd60  ; -> BigMapController$$ManageAllHeroMove (0x8DDD60)
+0x018079272d  mov      rax, qword ptr [rip + 0x162485c]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180792734  test     byte ptr [rax + 0x133], 4
+0x018079273b  je       0x180792755
+0x018079273d  cmp      dword ptr [rax + 0xe0], 0
+0x0180792744  jne      0x180792755
+0x0180792746  mov      rcx, rax
+0x0180792749  call     0x18005a6e0  ; -> 0x5A6E0
+0x018079274e  mov      rax, qword ptr [rip + 0x162483b]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180792755  cmp      byte ptr [rip + 0x16ff620], 0  ; [0x1E91D7C .data] f32=4.95566e-40
+0x018079275c  jne      0x180792778
+0x018079275e  lea      rcx, [rip + 0x162482b]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180792765  call     0x1800d64a0  ; -> 0xD64A0
+0x018079276a  mov      rax, qword ptr [rip + 0x162481f]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180792771  mov      byte ptr [rip + 0x16ff604], 1  ; [0x1E91D7C .data] f32=4.95566e-40
+0x0180792778  test     byte ptr [rax + 0x133], 4
+0x018079277f  je       0x180792799
+0x0180792781  cmp      dword ptr [rax + 0xe0], 0
+0x0180792788  jne      0x180792799
+0x018079278a  mov      rcx, rax
+0x018079278d  call     0x18005a6e0  ; -> 0x5A6E0
+0x0180792792  mov      rax, qword ptr [rip + 0x16247f7]  ; [0x1DB6F90 .data] f32=1.08888e-19
+0x0180792799  mov      rax, qword ptr [rax + 0xb8]
+0x01807927a0  mov      rcx, qword ptr [rax + 8]
+0x01807927a4  test     rcx, rcx
+0x01807927a7  je       0x18079281f
+0x01807927a9  xorps    xmm6, xmmword ptr [rip + 0x112e9d0]  ; [0x18C1180 .rdata] f32=-0
+0x01807927b0  xor      r8d, r8d
+0x01807927b3  divss    xmm6, dword ptr [rip + 0x11a9ad1]  ; [0x193C28C .rdata] f32=24 f64=8.05306e+08
+0x01807927bb  movaps   xmm1, xmm6
+0x01807927be  call     0x180c18a90  ; -> WeatherController$$ChangeWeatherLastTime (0xC18A90)
+0x01807927c3  mov      rax, qword ptr [rbx + 0x20]
+0x01807927c7  test     rax, rax
+0x01807927ca  je       0x18079281f
+0x01807927cc  movss    xmm0, dword ptr [rax + 0xb4]
+0x01807927d4  comiss   xmm0, dword ptr [rip + 0x11a9ab1]  ; [0x193C28C .rdata] f32=24 f64=8.05306e+08
+0x01807927db  jae      0x180792803
+0x01807927dd  cmp      esi, edi
+0x01807927df  je       0x1807927ee
+0x01807927e1  xor      r8d, r8d
+0x01807927e4  mov      dl, 1
+0x01807927e6  mov      rcx, rbx
+0x01807927e9  call     0x1807c5a50  ; -> GameController$$ManageAllAI (0x7C5A50)
+0x01807927ee  mov      rdi, qword ptr [rsp + 0x48]
+0x01807927f3  mov      rsi, qword ptr [rsp + 0x40]
+0x01807927f8  movaps   xmm6, xmmword ptr [rsp + 0x20]
+0x01807927fd  add      rsp, 0x30
+0x0180792801  pop      rbx
+0x0180792802  ret      
+0x0180792803  subss    xmm0, dword ptr [rip + 0x11a9a81]  ; [0x193C28C .rdata] f32=24 f64=8.05306e+08
+0x018079280b  movss    dword ptr [rax + 0xb4], xmm0
+0x0180792813  xor      edx, edx
+0x0180792815  mov      rcx, rbx
+0x0180792818  call     0x180790e30  ; -> GameController$$ChangeDay (0x790E30)
+0x018079281d  jmp      0x1807927ee  ; -> 0x7927EE (inside GameController$$ChangeHour)
+0x018079281f  call     0x1800d6610  ; -> 0xD6610
+0x0180792824  int3     
+0x0180792825  int3     
+0x0180792826  int3     
+0x0180792827  int3     
+0x0180792828  int3     
+0x0180792829  int3     
+0x018079282a  int3     
+0x018079282b  int3     
+0x018079282c  int3     
+0x018079282d  int3     
+0x018079282e  int3     
+0x018079282f  int3     

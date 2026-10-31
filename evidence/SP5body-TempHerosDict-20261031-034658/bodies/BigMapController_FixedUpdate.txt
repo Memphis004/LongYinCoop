@@ -1,0 +1,1272 @@
+; BigMapController_FixedUpdate  rva=0x8D9640 va=0x1808D9640 end(before)=0x8DAC40 insns=1271
+0x01808d9640  mov      rax, rsp
+0x01808d9643  mov      qword ptr [rax + 8], rcx
+0x01808d9647  push     rbx
+0x01808d9648  push     rsi
+0x01808d9649  push     rdi
+0x01808d964a  push     r12
+0x01808d964c  push     r13
+0x01808d964e  push     r14
+0x01808d9650  push     r15
+0x01808d9652  sub      rsp, 0xc0
+0x01808d9659  movaps   xmmword ptr [rax - 0x48], xmm6
+0x01808d965d  movaps   xmmword ptr [rax - 0x58], xmm7
+0x01808d9661  movaps   xmmword ptr [rax - 0x68], xmm8
+0x01808d9666  mov      rbx, rcx
+0x01808d9669  mov      qword ptr [rsp + 0x110], rcx
+0x01808d9671  cmp      byte ptr [rip + 0x15c5bf7], 0  ; [0x1E9F26F .data] f32=1.55948e-28
+0x01808d9678  jne      0x1808d9781
+0x01808d967e  lea      rcx, [rip + 0x14d95bb]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01808d9685  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d968a  lea      rcx, [rip + 0x14e604f]  ; [0x1DBF6E0 .data] f32=-2.00244 f64=1.5915e-314
+0x01808d9691  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9696  lea      rcx, [rip + 0x14e60cb]  ; [0x1DBF768 .data] f32=-2.00244 f64=1.5915e-314
+0x01808d969d  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96a2  lea      rcx, [rip + 0x14c34a7]  ; [0x1D9CB50 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d96a9  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96ae  lea      rcx, [rip + 0x14c351b]  ; [0x1D9CBD0 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d96b5  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96ba  lea      rcx, [rip + 0x14c358f]  ; [0x1D9CC50 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d96c1  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96c6  lea      rcx, [rip + 0x149b61b]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d96cd  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96d2  lea      rcx, [rip + 0x14efc97]  ; [0x1DC9370 .data] f32=-2.0166 f64=1.59153e-314
+0x01808d96d9  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96de  lea      rcx, [rip + 0x149b9cb]  ; [0x1D750B0 .data] f32=-2.01664 f64=1.59153e-314
+0x01808d96e5  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96ea  lea      rcx, [rip + 0x149c5f7]  ; [0x1D75CE8 .data] f32=-2.01666 f64=1.59153e-314
+0x01808d96f1  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d96f6  lea      rcx, [rip + 0x149c673]  ; [0x1D75D70 .data] f32=-2.01666 f64=1.59153e-314
+0x01808d96fd  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9702  lea      rcx, [rip + 0x149d07f]  ; [0x1D76788 .data] f32=-2.01667 f64=1.59153e-314
+0x01808d9709  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d970e  lea      rcx, [rip + 0x149c64b]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01808d9715  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d971a  lea      rcx, [rip + 0x14b40ef]  ; [0x1D8D810 .data] f32=-2.00891 f64=1.59152e-314
+0x01808d9721  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9726  lea      rcx, [rip + 0x14b8463]  ; [0x1D91B90 .data] f32=-2.00901 f64=1.59152e-314
+0x01808d972d  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9732  lea      rcx, [rip + 0x14b45d7]  ; [0x1D8DD10 .data] f32=-2.00891 f64=1.59152e-314
+0x01808d9739  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d973e  lea      rcx, [rip + 0x14b464b]  ; [0x1D8DD90 .data] f32=-2.00891 f64=1.59152e-314
+0x01808d9745  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d974a  lea      rcx, [rip + 0x14b84bf]  ; [0x1D91C10 .data] f32=-2.00901 f64=1.59152e-314
+0x01808d9751  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9756  lea      rcx, [rip + 0x14b40ab]  ; [0x1D8D808 .data] f32=1.08778e-19
+0x01808d975d  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9762  lea      rcx, [rip + 0x14b6b1f]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808d9769  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d976e  lea      rcx, [rip + 0x14a80db]  ; [0x1D81850 .data] f32=-2.01429 f64=1.59153e-314
+0x01808d9775  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d977a  mov      byte ptr [rip + 0x15c5aee], 1  ; [0x1E9F26F .data] f32=1.55948e-28
+0x01808d9781  xorps    xmm0, xmm0
+0x01808d9784  xor      eax, eax
+0x01808d9786  movups   xmmword ptr [rsp + 0x70], xmm0
+0x01808d978b  mov      qword ptr [rsp + 0x80], rax
+0x01808d9793  xor      edi, edi
+0x01808d9795  mov      qword ptr [rsp + 0x118], rdi
+0x01808d979d  mov      rcx, qword ptr [rbx + 0x40]
+0x01808d97a1  test     rcx, rcx
+0x01808d97a4  je       0x1808dac23
+0x01808d97aa  xor      edx, edx
+0x01808d97ac  call     0x1810dcc20  ; -> UnityEngine.GameObject$$get_activeInHierarchy (0x10DCC20)
+0x01808d97b1  test     al, al
+0x01808d97b3  je       0x1808dabfd
+0x01808d97b9  mov      r14d, edi
+0x01808d97bc  mov      ecx, edi
+0x01808d97be  mov      rax, qword ptr [rbx + 0x98]
+0x01808d97c5  test     rax, rax
+0x01808d97c8  je       0x1808dac23
+0x01808d97ce  mov      rsi, rax
+0x01808d97d1  mov      r15d, 0x20
+0x01808d97d7  mov      r12d, r15d
+0x01808d97da  nop      word ptr [rax + rax]
+0x01808d97e0  cmp      ecx, dword ptr [rax + 0x18]
+0x01808d97e3  jge      0x1808d982d
+0x01808d97e5  test     rsi, rsi
+0x01808d97e8  je       0x1808dac23
+0x01808d97ee  cmp      r14d, dword ptr [rsi + 0x18]
+0x01808d97f2  jb       0x1808d97fb
+0x01808d97f4  xor      ecx, ecx
+0x01808d97f6  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01808d97fb  mov      rdx, qword ptr [rsi + 0x10]
+0x01808d97ff  xor      r8d, r8d
+0x01808d9802  mov      rdx, qword ptr [rdx + r12]
+0x01808d9806  mov      rcx, rbx
+0x01808d9809  call     0x1808e28d0  ; -> BigMapController$$RemoveBigMapNpc (0x8E28D0)
+0x01808d980e  inc      r14d
+0x01808d9811  add      r12, 8
+0x01808d9815  mov      ecx, r14d
+0x01808d9818  mov      rax, qword ptr [rbx + 0x98]
+0x01808d981f  mov      rsi, rax
+0x01808d9822  test     rax, rax
+0x01808d9825  je       0x1808dac23
+0x01808d982b  jmp      0x1808d97e0  ; -> 0x8D97E0 (inside BigMapController$$FixedUpdate)
+0x01808d982d  mov      rdx, qword ptr [rip + 0x14b3fdc]  ; [0x1D8D810 .data] f32=-2.00891 f64=1.59152e-314
+0x01808d9834  mov      rcx, rsi
+0x01808d9837  call     0x1812fb130  ; -> System.Collections.ArrayList$$Clear (0x12FB130)
+0x01808d983c  mov      rax, qword ptr [rip + 0x149b4a5]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9843  test     byte ptr [rax + 0x133], 4
+0x01808d984a  je       0x1808d9863
+0x01808d984c  cmp      dword ptr [rax + 0xe0], edi
+0x01808d9852  jne      0x1808d9863
+0x01808d9854  mov      rcx, rax
+0x01808d9857  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d985c  mov      rax, qword ptr [rip + 0x149b485]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9863  cmp      byte ptr [rip + 0x15b84e2], dil  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d986a  jne      0x1808d9886
+0x01808d986c  lea      rcx, [rip + 0x149b475]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9873  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9878  mov      byte ptr [rip + 0x15b84cd], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d987f  mov      rax, qword ptr [rip + 0x149b462]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9886  test     byte ptr [rax + 0x133], 4
+0x01808d988d  je       0x1808d98a6
+0x01808d988f  cmp      dword ptr [rax + 0xe0], edi
+0x01808d9895  jne      0x1808d98a6
+0x01808d9897  mov      rcx, rax
+0x01808d989a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d989f  mov      rax, qword ptr [rip + 0x149b442]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d98a6  mov      rax, qword ptr [rax + 0xb8]
+0x01808d98ad  mov      rcx, qword ptr [rax]
+0x01808d98b0  test     rcx, rcx
+0x01808d98b3  je       0x1808dac23
+0x01808d98b9  mov      rcx, qword ptr [rcx + 0x20]
+0x01808d98bd  test     rcx, rcx
+0x01808d98c0  je       0x1808dac23
+0x01808d98c6  xor      edx, edx
+0x01808d98c8  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01808d98cd  test     rax, rax
+0x01808d98d0  je       0x1808dac23
+0x01808d98d6  xor      edx, edx
+0x01808d98d8  mov      rcx, rax
+0x01808d98db  call     0x1808973f0  ; -> HeroData$$HaveForce (0x8973F0)
+0x01808d98e0  mov      rcx, qword ptr [rbx + 0xb0]
+0x01808d98e7  test     al, al
+0x01808d98e9  jne      0x1808d9913
+0x01808d98eb  test     rcx, rcx
+0x01808d98ee  je       0x1808dac23
+0x01808d98f4  xor      edx, edx
+0x01808d98f6  call     0x1810dcc60  ; -> UnityEngine.GameObject$$get_activeSelf (0x10DCC60)
+0x01808d98fb  test     al, al
+0x01808d98fd  je       0x1808d9941
+0x01808d98ff  mov      rcx, qword ptr [rbx + 0xb0]
+0x01808d9906  test     rcx, rcx
+0x01808d9909  je       0x1808dac23
+0x01808d990f  xor      edx, edx
+0x01808d9911  jmp      0x1808d9939  ; -> 0x8D9939 (inside BigMapController$$FixedUpdate)
+0x01808d9913  test     rcx, rcx
+0x01808d9916  je       0x1808dac23
+0x01808d991c  xor      edx, edx
+0x01808d991e  call     0x1810dcc60  ; -> UnityEngine.GameObject$$get_activeSelf (0x10DCC60)
+0x01808d9923  test     al, al
+0x01808d9925  jne      0x1808d9941
+0x01808d9927  mov      rcx, qword ptr [rbx + 0xb0]
+0x01808d992e  test     rcx, rcx
+0x01808d9931  je       0x1808dac23
+0x01808d9937  mov      dl, 1
+0x01808d9939  xor      r8d, r8d
+0x01808d993c  call     0x1810dc960  ; -> UnityEngine.GameObject$$SetActive (0x10DC960)
+0x01808d9941  mov      rcx, qword ptr [rbx + 0x70]
+0x01808d9945  test     rcx, rcx
+0x01808d9948  je       0x1808dac23
+0x01808d994e  mov      rdx, qword ptr [rip + 0x14e5e13]  ; [0x1DBF768 .data] f32=-2.00244 f64=1.5915e-314
+0x01808d9955  call     0x1808ae8c0  ; -> System.Collections.Generic.Dictionary<KeyValuePair<object, object>, object>$$get_Values (0x8AE8C0)
+0x01808d995a  test     rax, rax
+0x01808d995d  je       0x1808dac23
+0x01808d9963  mov      r8, qword ptr [rip + 0x14a7ee6]  ; [0x1D81850 .data] f32=-2.01429 f64=1.59153e-314
+0x01808d996a  mov      rdx, rax
+0x01808d996d  lea      rcx, [rsp + 0x50]
+0x01808d9972  call     0x180ecd6d0  ; -> System.Collections.Generic.Dictionary.KeyCollection<long, object>$$GetEnumerator (0xECD6D0)
+0x01808d9977  movups   xmm0, xmmword ptr [rsp + 0x50]
+0x01808d997c  movups   xmmword ptr [rsp + 0x70], xmm0
+0x01808d9981  movsd    xmm1, qword ptr [rsp + 0x60]
+0x01808d9987  movsd    qword ptr [rsp + 0x80], xmm1
+0x01808d9990  mov      rdx, qword ptr [rip + 0x14c3239]  ; [0x1D9CBD0 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d9997  lea      rcx, [rsp + 0x70]
+0x01808d999c  call     0x1811c56a0  ; -> System.Collections.Generic.Dictionary.ValueCollection.Enumerator<int, AreaBuildingDataBase>$$MoveNext (0x11C56A0)
+0x01808d99a1  test     al, al
+0x01808d99a3  je       0x1808d99bc
+0x01808d99a5  mov      rax, qword ptr [rsp + 0x80]
+0x01808d99ad  test     rax, rax
+0x01808d99b0  je       0x1808dac29
+0x01808d99b6  mov      byte ptr [rax + 0x38], 0
+0x01808d99ba  jmp      0x1808d9990  ; -> 0x8D9990 (inside BigMapController$$FixedUpdate)
+0x01808d99bc  mov      rdx, qword ptr [rip + 0x14c318d]  ; [0x1D9CB50 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d99c3  lea      rcx, [rsp + 0x70]
+0x01808d99c8  call     0x180245810  ; -> Mono.Xml.SecurityParser$$OnStartParsing (0x245810)
+0x01808d99cd  jmp      0x1808d99fc  ; -> 0x8D99FC (inside BigMapController$$FixedUpdate)
+0x01808d99cf  mov      rdx, qword ptr [rip + 0x14c317a]  ; [0x1D9CB50 .data] f32=-2.00513 f64=1.59151e-314
+0x01808d99d6  lea      rcx, [rsp + 0x70]
+0x01808d99db  call     0x180245810  ; -> Mono.Xml.SecurityParser$$OnStartParsing (0x245810)
+0x01808d99e0  mov      rcx, qword ptr [rsp + 0x30]
+0x01808d99e5  test     rcx, rcx
+0x01808d99e8  jne      0x1808dac2f
+0x01808d99ee  xor      edi, edi
+0x01808d99f0  lea      r15d, [rdi + 0x20]
+0x01808d99f4  mov      rbx, qword ptr [rsp + 0x100]
+0x01808d99fc  mov      rcx, qword ptr [rip + 0x14b3e05]  ; [0x1D8D808 .data] f32=1.08778e-19
+0x01808d9a03  test     byte ptr [rcx + 0x133], 4
+0x01808d9a0a  je       0x1808d9a1a
+0x01808d9a0c  cmp      dword ptr [rcx + 0xe0], 0
+0x01808d9a13  jne      0x1808d9a1a
+0x01808d9a15  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9a1a  xor      ecx, ecx
+0x01808d9a1c  call     0x180df4bf0  ; -> MouseController$$get_hoveredObject (0xDF4BF0)
+0x01808d9a21  mov      rsi, rax
+0x01808d9a24  mov      rcx, qword ptr [rip + 0x14b685d]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808d9a2b  test     byte ptr [rcx + 0x133], 4
+0x01808d9a32  je       0x1808d9a42
+0x01808d9a34  cmp      dword ptr [rcx + 0xe0], 0
+0x01808d9a3b  jne      0x1808d9a42
+0x01808d9a3d  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9a42  xor      r8d, r8d
+0x01808d9a45  xor      edx, edx
+0x01808d9a47  mov      rcx, rsi
+0x01808d9a4a  call     0x180d8fa80  ; -> UnityEngine.Object$$op_Inequality (0xD8FA80)
+0x01808d9a4f  test     al, al
+0x01808d9a51  je       0x1808d9b8c
+0x01808d9a57  test     rsi, rsi
+0x01808d9a5a  je       0x1808dac23
+0x01808d9a60  mov      rdx, qword ptr [rip + 0x149b649]  ; [0x1D750B0 .data] f32=-2.01664 f64=1.59153e-314
+0x01808d9a67  mov      rcx, rsi
+0x01808d9a6a  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808d9a6f  mov      r14, rax
+0x01808d9a72  mov      rcx, qword ptr [rip + 0x14b680f]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808d9a79  test     byte ptr [rcx + 0x133], 4
+0x01808d9a80  je       0x1808d9a90
+0x01808d9a82  cmp      dword ptr [rcx + 0xe0], 0
+0x01808d9a89  jne      0x1808d9a90
+0x01808d9a8b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9a90  xor      r8d, r8d
+0x01808d9a93  xor      edx, edx
+0x01808d9a95  mov      rcx, r14
+0x01808d9a98  call     0x180d8fa80  ; -> UnityEngine.Object$$op_Inequality (0xD8FA80)
+0x01808d9a9d  test     al, al
+0x01808d9a9f  jne      0x1808d9b7e
+0x01808d9aa5  mov      rdx, qword ptr [rip + 0x14ef8c4]  ; [0x1DC9370 .data] f32=-2.0166 f64=1.59153e-314
+0x01808d9aac  mov      rcx, rsi
+0x01808d9aaf  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808d9ab4  mov      r13, rax
+0x01808d9ab7  mov      rcx, qword ptr [rip + 0x14b67ca]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808d9abe  test     byte ptr [rcx + 0x133], 4
+0x01808d9ac5  je       0x1808d9ad5
+0x01808d9ac7  cmp      dword ptr [rcx + 0xe0], 0
+0x01808d9ace  jne      0x1808d9ad5
+0x01808d9ad0  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9ad5  xor      r8d, r8d
+0x01808d9ad8  xor      edx, edx
+0x01808d9ada  mov      rcx, r13
+0x01808d9add  call     0x180d8fa80  ; -> UnityEngine.Object$$op_Inequality (0xD8FA80)
+0x01808d9ae2  test     al, al
+0x01808d9ae4  je       0x1808d9b8c
+0x01808d9aea  mov      ecx, edi
+0x01808d9aec  test     r13, r13
+0x01808d9aef  je       0x1808dac23
+0x01808d9af5  nop      word ptr [rax + rax]
+0x01808d9b00  mov      rsi, qword ptr [r13 + 0x18]
+0x01808d9b04  test     rsi, rsi
+0x01808d9b07  je       0x1808dac23
+0x01808d9b0d  mov      rsi, qword ptr [rsi + 0xa8]
+0x01808d9b14  test     rsi, rsi
+0x01808d9b17  je       0x1808dac23
+0x01808d9b1d  mov      eax, dword ptr [rsi + 0x18]
+0x01808d9b20  cmp      ecx, eax
+0x01808d9b22  jge      0x1808d9b8c
+0x01808d9b24  mov      r14, qword ptr [rbx + 0x70]
+0x01808d9b28  cmp      edi, eax
+0x01808d9b2a  jb       0x1808d9b33
+0x01808d9b2c  xor      ecx, ecx
+0x01808d9b2e  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x01808d9b33  mov      rax, qword ptr [rsi + 0x10]
+0x01808d9b37  test     r14, r14
+0x01808d9b3a  je       0x1808dac23
+0x01808d9b40  mov      r9, qword ptr [rip + 0x14e5b99]  ; [0x1DBF6E0 .data] f32=-2.00244 f64=1.5915e-314
+0x01808d9b47  lea      r8, [rsp + 0x118]
+0x01808d9b4f  mov      edx, dword ptr [r15 + rax]
+0x01808d9b53  mov      rcx, r14
+0x01808d9b56  call     0x1808b07d0  ; -> System.Collections.Generic.Dictionary<Action, LinkedListNode<Action>>$$TryGetValue (0x8B07D0)
+0x01808d9b5b  test     al, al
+0x01808d9b5d  je       0x1808d9b74
+0x01808d9b5f  mov      rax, qword ptr [rsp + 0x118]
+0x01808d9b67  test     rax, rax
+0x01808d9b6a  je       0x1808dac23
+0x01808d9b70  mov      byte ptr [rax + 0x38], 1
+0x01808d9b74  inc      edi
+0x01808d9b76  add      r15, 4
+0x01808d9b7a  mov      ecx, edi
+0x01808d9b7c  jmp      0x1808d9b00  ; -> 0x8D9B00 (inside BigMapController$$FixedUpdate)
+0x01808d9b7e  test     r14, r14
+0x01808d9b81  je       0x1808dac23
+0x01808d9b87  mov      byte ptr [r14 + 0x38], 1
+0x01808d9b8c  mov      rdi, qword ptr [rbx + 0xa0]
+0x01808d9b93  mov      rcx, qword ptr [rip + 0x14b66ee]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808d9b9a  test     byte ptr [rcx + 0x133], 4
+0x01808d9ba1  je       0x1808d9bb1
+0x01808d9ba3  cmp      dword ptr [rcx + 0xe0], 0
+0x01808d9baa  jne      0x1808d9bb1
+0x01808d9bac  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9bb1  xor      r8d, r8d
+0x01808d9bb4  xor      edx, edx
+0x01808d9bb6  mov      rcx, rdi
+0x01808d9bb9  call     0x180d8fa80  ; -> UnityEngine.Object$$op_Inequality (0xD8FA80)
+0x01808d9bbe  test     al, al
+0x01808d9bc0  je       0x1808d9ccd
+0x01808d9bc6  mov      rax, qword ptr [rip + 0x149b11b]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9bcd  test     byte ptr [rax + 0x133], 4
+0x01808d9bd4  je       0x1808d9bee
+0x01808d9bd6  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9bdd  jne      0x1808d9bee
+0x01808d9bdf  mov      rcx, rax
+0x01808d9be2  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9be7  mov      rax, qword ptr [rip + 0x149b0fa]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9bee  cmp      byte ptr [rip + 0x15b8157], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9bf5  jne      0x1808d9c11
+0x01808d9bf7  lea      rcx, [rip + 0x149b0ea]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9bfe  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9c03  mov      byte ptr [rip + 0x15b8142], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9c0a  mov      rax, qword ptr [rip + 0x149b0d7]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9c11  test     byte ptr [rax + 0x133], 4
+0x01808d9c18  je       0x1808d9c32
+0x01808d9c1a  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9c21  jne      0x1808d9c32
+0x01808d9c23  mov      rcx, rax
+0x01808d9c26  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9c2b  mov      rax, qword ptr [rip + 0x149b0b6]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9c32  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9c39  mov      rcx, qword ptr [rax]
+0x01808d9c3c  test     rcx, rcx
+0x01808d9c3f  je       0x1808dac23
+0x01808d9c45  mov      rcx, qword ptr [rcx + 0x20]
+0x01808d9c49  test     rcx, rcx
+0x01808d9c4c  je       0x1808dac23
+0x01808d9c52  xor      edx, edx
+0x01808d9c54  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01808d9c59  test     rax, rax
+0x01808d9c5c  je       0x1808dac23
+0x01808d9c62  mov      rax, qword ptr [rax + 0x40]
+0x01808d9c66  test     rax, rax
+0x01808d9c69  je       0x1808dac23
+0x01808d9c6f  mov      rdi, qword ptr [rax + 0x38]
+0x01808d9c73  mov      rcx, qword ptr [rbx + 0xa0]
+0x01808d9c7a  test     rcx, rcx
+0x01808d9c7d  je       0x1808dac23
+0x01808d9c83  xor      edx, edx
+0x01808d9c85  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808d9c8a  test     rax, rax
+0x01808d9c8d  je       0x1808dac23
+0x01808d9c93  xor      r8d, r8d
+0x01808d9c96  mov      rdx, rax
+0x01808d9c99  lea      rcx, [rsp + 0x40]
+0x01808d9c9e  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808d9ca3  test     rdi, rdi
+0x01808d9ca6  je       0x1808dac23
+0x01808d9cac  movsd    xmm0, qword ptr [rax]
+0x01808d9cb0  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808d9cb6  mov      eax, dword ptr [rax + 8]
+0x01808d9cb9  mov      dword ptr [rsp + 0x28], eax
+0x01808d9cbd  xor      r8d, r8d
+0x01808d9cc0  lea      rdx, [rsp + 0x20]
+0x01808d9cc5  mov      rcx, rdi
+0x01808d9cc8  call     0x180c7d6f0  ; -> BigMapPos$$SetByVector3 (0xC7D6F0)
+0x01808d9ccd  mov      rax, qword ptr [rip + 0x149b014]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9cd4  test     byte ptr [rax + 0x133], 4
+0x01808d9cdb  je       0x1808d9cf5
+0x01808d9cdd  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9ce4  jne      0x1808d9cf5
+0x01808d9ce6  mov      rcx, rax
+0x01808d9ce9  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9cee  mov      rax, qword ptr [rip + 0x149aff3]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9cf5  cmp      byte ptr [rip + 0x15b8050], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9cfc  jne      0x1808d9d18
+0x01808d9cfe  lea      rcx, [rip + 0x149afe3]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9d05  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9d0a  mov      byte ptr [rip + 0x15b803b], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9d11  mov      rax, qword ptr [rip + 0x149afd0]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9d18  test     byte ptr [rax + 0x133], 4
+0x01808d9d1f  je       0x1808d9d39
+0x01808d9d21  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9d28  jne      0x1808d9d39
+0x01808d9d2a  mov      rcx, rax
+0x01808d9d2d  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9d32  mov      rax, qword ptr [rip + 0x149afaf]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9d39  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9d40  mov      rcx, qword ptr [rax]
+0x01808d9d43  test     rcx, rcx
+0x01808d9d46  je       0x1808dac23
+0x01808d9d4c  xor      r8d, r8d
+0x01808d9d4f  mov      dl, 1
+0x01808d9d51  call     0x1807bfb40  ; -> GameController$$HaveSpeUI (0x7BFB40)
+0x01808d9d56  test     al, al
+0x01808d9d58  jne      0x1808da319
+0x01808d9d5e  movss    xmm6, dword ptr [rbx + 0xa8]
+0x01808d9d66  movss    xmm7, dword ptr [rbx + 0xac]
+0x01808d9d6e  xor      ecx, ecx
+0x01808d9d70  call     0x1818648b0  ; -> UnityEngine.Vector2$$get_zero (0x18648B0)
+0x01808d9d75  mov      qword ptr [rsp + 0x100], rax
+0x01808d9d7d  subss    xmm6, dword ptr [rsp + 0x100]
+0x01808d9d86  subss    xmm7, dword ptr [rsp + 0x104]
+0x01808d9d8f  mulss    xmm7, xmm7
+0x01808d9d93  mulss    xmm6, xmm6
+0x01808d9d97  addss    xmm7, xmm6
+0x01808d9d9b  movss    xmm0, dword ptr [rip + 0x1159d3d]  ; [0x1A33AE0 .rdata] f32=1e-10
+0x01808d9da3  comiss   xmm0, xmm7
+0x01808d9da6  jbe      0x1808da30f
+0x01808d9dac  mov      rax, qword ptr [rip + 0x149af35]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9db3  test     byte ptr [rax + 0x133], 4
+0x01808d9dba  je       0x1808d9dd4
+0x01808d9dbc  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9dc3  jne      0x1808d9dd4
+0x01808d9dc5  mov      rcx, rax
+0x01808d9dc8  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9dcd  mov      rax, qword ptr [rip + 0x149af14]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9dd4  cmp      byte ptr [rip + 0x15b7f71], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9ddb  jne      0x1808d9df7
+0x01808d9ddd  lea      rcx, [rip + 0x149af04]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9de4  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9de9  mov      byte ptr [rip + 0x15b7f5c], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9df0  mov      rax, qword ptr [rip + 0x149aef1]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9df7  test     byte ptr [rax + 0x133], 4
+0x01808d9dfe  je       0x1808d9e18
+0x01808d9e00  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9e07  jne      0x1808d9e18
+0x01808d9e09  mov      rcx, rax
+0x01808d9e0c  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9e11  mov      rax, qword ptr [rip + 0x149aed0]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9e18  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9e1f  mov      rcx, qword ptr [rax]
+0x01808d9e22  test     rcx, rcx
+0x01808d9e25  je       0x1808dac23
+0x01808d9e2b  mov      rcx, qword ptr [rcx + 0x20]
+0x01808d9e2f  test     rcx, rcx
+0x01808d9e32  je       0x1808dac23
+0x01808d9e38  xor      edx, edx
+0x01808d9e3a  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01808d9e3f  test     rax, rax
+0x01808d9e42  je       0x1808dac23
+0x01808d9e48  mov      rax, qword ptr [rax + 0x40]
+0x01808d9e4c  test     rax, rax
+0x01808d9e4f  je       0x1808dac23
+0x01808d9e55  mov      rcx, qword ptr [rax + 0x38]
+0x01808d9e59  test     rcx, rcx
+0x01808d9e5c  je       0x1808dac23
+0x01808d9e62  xor      edx, edx
+0x01808d9e64  call     0x180c7d610  ; -> BigMapPos$$IsZero (0xC7D610)
+0x01808d9e69  test     al, al
+0x01808d9e6b  je       0x1808d9f70
+0x01808d9e71  cmp      byte ptr [rbx + 0xe8], 0
+0x01808d9e78  je       0x1808da319
+0x01808d9e7e  mov      rax, qword ptr [rip + 0x149ae63]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9e85  test     byte ptr [rax + 0x133], 4
+0x01808d9e8c  je       0x1808d9ea6
+0x01808d9e8e  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9e95  jne      0x1808d9ea6
+0x01808d9e97  mov      rcx, rax
+0x01808d9e9a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9e9f  mov      rax, qword ptr [rip + 0x149ae42]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9ea6  cmp      byte ptr [rip + 0x15b7e9f], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9ead  jne      0x1808d9ec9
+0x01808d9eaf  lea      rcx, [rip + 0x149ae32]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9eb6  call     0x1800d64a0  ; -> 0xD64A0
+0x01808d9ebb  mov      byte ptr [rip + 0x15b7e8a], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808d9ec2  mov      rax, qword ptr [rip + 0x149ae1f]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9ec9  test     byte ptr [rax + 0x133], 4
+0x01808d9ed0  je       0x1808d9eea
+0x01808d9ed2  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9ed9  jne      0x1808d9eea
+0x01808d9edb  mov      rcx, rax
+0x01808d9ede  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9ee3  mov      rax, qword ptr [rip + 0x149adfe]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808d9eea  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9ef1  mov      rdi, qword ptr [rax]
+0x01808d9ef4  xor      ecx, ecx
+0x01808d9ef6  call     0x180da9e80  ; -> UnityEngine.Time$$get_fixedDeltaTime (0xDA9E80)
+0x01808d9efb  movaps   xmm6, xmm0
+0x01808d9efe  mov      rax, qword ptr [rip + 0x149be5b]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01808d9f05  test     byte ptr [rax + 0x133], 4
+0x01808d9f0c  je       0x1808d9f26
+0x01808d9f0e  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9f15  jne      0x1808d9f26
+0x01808d9f17  mov      rcx, rax
+0x01808d9f1a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9f1f  mov      rax, qword ptr [rip + 0x149be3a]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01808d9f26  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9f2d  mulss    xmm6, dword ptr [rax + 0x124]
+0x01808d9f35  cmp      byte ptr [rbx + 0xe9], 0
+0x01808d9f3c  je       0x1808d9f48
+0x01808d9f3e  movss    xmm0, dword ptr [rip + 0xfe73ea]  ; [0x18C1330 .rdata] f32=2 f64=32
+0x01808d9f46  jmp      0x1808d9f50  ; -> 0x8D9F50 (inside BigMapController$$FixedUpdate)
+0x01808d9f48  movss    xmm0, dword ptr [rip + 0xfe71f8]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x01808d9f50  test     rdi, rdi
+0x01808d9f53  je       0x1808dac23
+0x01808d9f59  mulss    xmm6, xmm0
+0x01808d9f5d  xor      r8d, r8d
+0x01808d9f60  movaps   xmm1, xmm6
+0x01808d9f63  mov      rcx, rdi
+0x01808d9f66  call     0x180792620  ; -> GameController$$ChangeHour (0x792620)
+0x01808d9f6b  jmp      0x1808da319  ; -> 0x8DA319 (inside BigMapController$$FixedUpdate)
+0x01808d9f70  movss    xmm6, dword ptr [rbx + 0x20]
+0x01808d9f75  mov      rax, qword ptr [rip + 0x14d8cc4]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01808d9f7c  test     byte ptr [rax + 0x133], 4
+0x01808d9f83  je       0x1808d9f9d
+0x01808d9f85  cmp      dword ptr [rax + 0xe0], 0
+0x01808d9f8c  jne      0x1808d9f9d
+0x01808d9f8e  mov      rcx, rax
+0x01808d9f91  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808d9f96  mov      rax, qword ptr [rip + 0x14d8ca3]  ; [0x1DB2C40 .data] f32=1.08649e-19
+0x01808d9f9d  mov      rax, qword ptr [rax + 0xb8]
+0x01808d9fa4  xor      r9d, r9d
+0x01808d9fa7  movss    xmm2, dword ptr [rbx + 0x18]
+0x01808d9fac  movss    xmm1, dword ptr [rax]
+0x01808d9fb0  movaps   xmm0, xmm6
+0x01808d9fb3  call     0x1810e4de0  ; -> UnityEngine.Mathf$$Clamp (0x10E4DE0)
+0x01808d9fb8  movss    dword ptr [rbx + 0x20], xmm0
+0x01808d9fbd  mov      rcx, qword ptr [rbx + 0x58]
+0x01808d9fc1  test     rcx, rcx
+0x01808d9fc4  je       0x1808dac23
+0x01808d9fca  xor      edx, edx
+0x01808d9fcc  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808d9fd1  test     rax, rax
+0x01808d9fd4  je       0x1808dac23
+0x01808d9fda  xor      r8d, r8d
+0x01808d9fdd  mov      rdx, rax
+0x01808d9fe0  lea      rcx, [rsp + 0x40]
+0x01808d9fe5  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808d9fea  movss    xmm7, dword ptr [rax]
+0x01808d9fee  mov      rcx, qword ptr [rbx + 0x58]
+0x01808d9ff2  test     rcx, rcx
+0x01808d9ff5  je       0x1808dac23
+0x01808d9ffb  xor      edx, edx
+0x01808d9ffd  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da002  test     rax, rax
+0x01808da005  je       0x1808dac23
+0x01808da00b  xor      r8d, r8d
+0x01808da00e  mov      rdx, rax
+0x01808da011  lea      rcx, [rsp + 0x40]
+0x01808da016  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808da01b  movsd    xmm1, qword ptr [rax]
+0x01808da01f  mov      eax, dword ptr [rax + 8]
+0x01808da022  mov      dword ptr [rsp + 0x28], eax
+0x01808da026  xorps    xmm7, xmmword ptr [rip + 0xfe7153]  ; [0x18C1180 .rdata] f32=-0
+0x01808da02d  movaps   xmm6, xmm1
+0x01808da030  shufps   xmm6, xmm6, 0x55
+0x01808da034  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da03a  xorps    xmm6, xmmword ptr [rip + 0xfe713f]  ; [0x18C1180 .rdata] f32=-0
+0x01808da041  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da045  test     rcx, rcx
+0x01808da048  je       0x1808dac23
+0x01808da04e  xor      edx, edx
+0x01808da050  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da055  test     rax, rax
+0x01808da058  je       0x1808dac23
+0x01808da05e  xor      r8d, r8d
+0x01808da061  mov      rdx, rax
+0x01808da064  lea      rcx, [rsp + 0x40]
+0x01808da069  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da06e  movss    xmm4, dword ptr [rax]
+0x01808da072  xorps    xmm0, xmm0
+0x01808da075  movss    dword ptr [rsp + 0x38], xmm0
+0x01808da07b  movss    xmm3, dword ptr [rbx + 0x30]
+0x01808da080  movss    xmm8, dword ptr [rip + 0xfe7273]  ; [0x18C12FC .rdata] f32=0.5 f64=5.27122e-05
+0x01808da089  mulss    xmm3, xmm8
+0x01808da08e  mulss    xmm3, xmm4
+0x01808da092  movss    xmm0, dword ptr [rbx + 0x28]
+0x01808da097  mulss    xmm0, xmm8
+0x01808da09c  movaps   xmm2, xmm3
+0x01808da09f  subss    xmm2, xmm0
+0x01808da0a3  divss    xmm2, xmm4
+0x01808da0a7  movss    dword ptr [rsp + 0x30], xmm7
+0x01808da0ad  movaps   xmm1, xmm6
+0x01808da0b0  movss    dword ptr [rsp + 0x34], xmm6
+0x01808da0b6  comiss   xmm7, xmm2
+0x01808da0b9  jbe      0x1808da0ca
+0x01808da0bb  movaps   xmm7, xmm2
+0x01808da0be  movss    dword ptr [rsp + 0x30], xmm2
+0x01808da0c4  movss    dword ptr [rsp + 0x34], xmm6
+0x01808da0ca  subss    xmm0, xmm3
+0x01808da0ce  divss    xmm0, xmm4
+0x01808da0d2  comiss   xmm0, xmm7
+0x01808da0d5  jbe      0x1808da0e6
+0x01808da0d7  movss    dword ptr [rsp + 0x30], xmm0
+0x01808da0dd  movaps   xmm1, xmm6
+0x01808da0e0  movss    dword ptr [rsp + 0x34], xmm6
+0x01808da0e6  movss    xmm3, dword ptr [rbx + 0x34]
+0x01808da0eb  mulss    xmm3, xmm8
+0x01808da0f0  mulss    xmm3, xmm4
+0x01808da0f4  movss    xmm0, dword ptr [rbx + 0x2c]
+0x01808da0f9  mulss    xmm0, xmm8
+0x01808da0fe  movaps   xmm2, xmm3
+0x01808da101  subss    xmm2, xmm0
+0x01808da105  divss    xmm2, xmm4
+0x01808da109  comiss   xmm6, xmm2
+0x01808da10c  jbe      0x1808da117
+0x01808da10e  movaps   xmm1, xmm2
+0x01808da111  movss    dword ptr [rsp + 0x34], xmm2
+0x01808da117  subss    xmm0, xmm3
+0x01808da11b  divss    xmm0, xmm4
+0x01808da11f  comiss   xmm0, xmm1
+0x01808da122  jbe      0x1808da12a
+0x01808da124  movss    dword ptr [rsp + 0x34], xmm0
+0x01808da12a  mov      rcx, qword ptr [rbx + 0x40]
+0x01808da12e  test     rcx, rcx
+0x01808da131  je       0x1808dac23
+0x01808da137  xor      edx, edx
+0x01808da139  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da13e  test     rax, rax
+0x01808da141  je       0x1808dac23
+0x01808da147  movsd    xmm6, qword ptr [rsp + 0x30]
+0x01808da14d  movsd    qword ptr [rsp + 0x20], xmm6
+0x01808da153  mov      edi, dword ptr [rsp + 0x38]
+0x01808da157  mov      dword ptr [rsp + 0x28], edi
+0x01808da15b  xor      r8d, r8d
+0x01808da15e  mov      rdx, rax
+0x01808da161  lea      rcx, [rsp + 0x40]
+0x01808da166  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808da16b  movsd    xmm0, qword ptr [rax]
+0x01808da16f  movsd    qword ptr [rsp + 0x30], xmm0
+0x01808da175  mov      eax, dword ptr [rax + 8]
+0x01808da178  mov      dword ptr [rsp + 0x38], eax
+0x01808da17c  xor      r8d, r8d
+0x01808da17f  lea      rdx, [rsp + 0x20]
+0x01808da184  lea      rcx, [rsp + 0x30]
+0x01808da189  call     0x181865310  ; -> UnityEngine.Vector3$$Distance (0x1865310)
+0x01808da18e  mov      rsi, qword ptr [rsp + 0x110]
+0x01808da196  mov      rcx, qword ptr [rsi + 0x40]
+0x01808da19a  movss    xmm7, dword ptr [rip + 0xfe6fa6]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x01808da1a2  comiss   xmm0, xmm7
+0x01808da1a5  ja       0x1808da20b
+0x01808da1a7  test     rcx, rcx
+0x01808da1aa  je       0x1808dac23
+0x01808da1b0  xor      edx, edx
+0x01808da1b2  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da1b7  test     rax, rax
+0x01808da1ba  je       0x1808dac23
+0x01808da1c0  movsd    qword ptr [rsp + 0x20], xmm6
+0x01808da1c6  mov      dword ptr [rsp + 0x28], edi
+0x01808da1ca  xor      r8d, r8d
+0x01808da1cd  lea      rdx, [rsp + 0x20]
+0x01808da1d2  mov      rcx, rax
+0x01808da1d5  call     0x180dad490  ; -> UnityEngine.Transform$$set_localPosition (0xDAD490)
+0x01808da1da  mov      rcx, qword ptr [rbx + 0x40]
+0x01808da1de  test     rcx, rcx
+0x01808da1e1  je       0x1808dac23
+0x01808da1e7  mov      rdx, qword ptr [rip + 0x149bafa]  ; [0x1D75CE8 .data] f32=-2.01666 f64=1.59153e-314
+0x01808da1ee  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808da1f3  test     rax, rax
+0x01808da1f6  je       0x1808dac23
+0x01808da1fc  xor      r8d, r8d
+0x01808da1ff  xor      edx, edx
+0x01808da201  mov      rcx, rax
+0x01808da204  call     0x1810d03d0  ; -> UnityEngine.Behaviour$$set_enabled (0x10D03D0)
+0x01808da209  jmp      0x1808da22a  ; -> 0x8DA22A (inside BigMapController$$FixedUpdate)
+0x01808da20b  movsd    qword ptr [rsp + 0x20], xmm6
+0x01808da211  mov      dword ptr [rsp + 0x28], edi
+0x01808da215  xor      r9d, r9d
+0x01808da218  movss    xmm2, dword ptr [rip + 0x1062054]  ; [0x193C274 .rdata] f32=15 f64=3.35544e+07
+0x01808da220  lea      rdx, [rsp + 0x20]
+0x01808da225  call     0x180c6d1a0  ; -> SpringPosition$$Begin (0xC6D1A0)
+0x01808da22a  mov      rax, qword ptr [rip + 0x149aab7]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da231  test     byte ptr [rax + 0x133], 4
+0x01808da238  je       0x1808da252
+0x01808da23a  cmp      dword ptr [rax + 0xe0], 0
+0x01808da241  jne      0x1808da252
+0x01808da243  mov      rcx, rax
+0x01808da246  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da24b  mov      rax, qword ptr [rip + 0x149aa96]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da252  cmp      byte ptr [rip + 0x15b7af3], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da259  jne      0x1808da275
+0x01808da25b  lea      rcx, [rip + 0x149aa86]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da262  call     0x1800d64a0  ; -> 0xD64A0
+0x01808da267  mov      byte ptr [rip + 0x15b7ade], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da26e  mov      rax, qword ptr [rip + 0x149aa73]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da275  test     byte ptr [rax + 0x133], 4
+0x01808da27c  je       0x1808da296
+0x01808da27e  cmp      dword ptr [rax + 0xe0], 0
+0x01808da285  jne      0x1808da296
+0x01808da287  mov      rcx, rax
+0x01808da28a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da28f  mov      rax, qword ptr [rip + 0x149aa52]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da296  mov      rax, qword ptr [rax + 0xb8]
+0x01808da29d  mov      rdi, qword ptr [rax]
+0x01808da2a0  xor      ecx, ecx
+0x01808da2a2  call     0x180da9e80  ; -> UnityEngine.Time$$get_fixedDeltaTime (0xDA9E80)
+0x01808da2a7  movaps   xmm6, xmm0
+0x01808da2aa  mov      rax, qword ptr [rip + 0x149baaf]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01808da2b1  test     byte ptr [rax + 0x133], 4
+0x01808da2b8  je       0x1808da2d2
+0x01808da2ba  cmp      dword ptr [rax + 0xe0], 0
+0x01808da2c1  jne      0x1808da2d2
+0x01808da2c3  mov      rcx, rax
+0x01808da2c6  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da2cb  mov      rax, qword ptr [rip + 0x149ba8e]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x01808da2d2  mov      rax, qword ptr [rax + 0xb8]
+0x01808da2d9  mulss    xmm6, dword ptr [rax + 0x124]
+0x01808da2e1  cmp      byte ptr [rbx + 0xe9], 0
+0x01808da2e8  je       0x1808da2f2
+0x01808da2ea  movss    xmm7, dword ptr [rip + 0xfe703e]  ; [0x18C1330 .rdata] f32=2 f64=32
+0x01808da2f2  test     rdi, rdi
+0x01808da2f5  je       0x1808dac23
+0x01808da2fb  mulss    xmm6, xmm7
+0x01808da2ff  xor      r8d, r8d
+0x01808da302  movaps   xmm1, xmm6
+0x01808da305  mov      rcx, rdi
+0x01808da308  call     0x180792620  ; -> GameController$$ChangeHour (0x792620)
+0x01808da30d  jmp      0x1808da32a  ; -> 0x8DA32A (inside BigMapController$$FixedUpdate)
+0x01808da30f  xor      edx, edx
+0x01808da311  mov      rcx, rbx
+0x01808da314  call     0x1808e3430  ; -> BigMapController$$TweenFocusTarget (0x8E3430)
+0x01808da319  movss    xmm8, dword ptr [rip + 0xfe6fda]  ; [0x18C12FC .rdata] f32=0.5 f64=5.27122e-05
+0x01808da322  mov      rsi, qword ptr [rsp + 0x110]
+0x01808da32a  mov      rax, qword ptr [rip + 0x149a9b7]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da331  test     byte ptr [rax + 0x133], 4
+0x01808da338  je       0x1808da352
+0x01808da33a  cmp      dword ptr [rax + 0xe0], 0
+0x01808da341  jne      0x1808da352
+0x01808da343  mov      rcx, rax
+0x01808da346  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da34b  mov      rax, qword ptr [rip + 0x149a996]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da352  cmp      byte ptr [rip + 0x15b79f3], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da359  jne      0x1808da375
+0x01808da35b  lea      rcx, [rip + 0x149a986]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da362  call     0x1800d64a0  ; -> 0xD64A0
+0x01808da367  mov      byte ptr [rip + 0x15b79de], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da36e  mov      rax, qword ptr [rip + 0x149a973]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da375  test     byte ptr [rax + 0x133], 4
+0x01808da37c  je       0x1808da396
+0x01808da37e  cmp      dword ptr [rax + 0xe0], 0
+0x01808da385  jne      0x1808da396
+0x01808da387  mov      rcx, rax
+0x01808da38a  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da38f  mov      rax, qword ptr [rip + 0x149a952]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da396  mov      rax, qword ptr [rax + 0xb8]
+0x01808da39d  mov      rcx, qword ptr [rax]
+0x01808da3a0  test     rcx, rcx
+0x01808da3a3  je       0x1808dac23
+0x01808da3a9  mov      rcx, qword ptr [rcx + 0x20]
+0x01808da3ad  test     rcx, rcx
+0x01808da3b0  je       0x1808dac23
+0x01808da3b6  xor      edx, edx
+0x01808da3b8  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01808da3bd  test     rax, rax
+0x01808da3c0  je       0x1808dac23
+0x01808da3c6  mov      rax, qword ptr [rax + 0x40]
+0x01808da3ca  test     rax, rax
+0x01808da3cd  je       0x1808dac23
+0x01808da3d3  mov      rcx, qword ptr [rax + 0x38]
+0x01808da3d7  test     rcx, rcx
+0x01808da3da  je       0x1808dac23
+0x01808da3e0  xor      edx, edx
+0x01808da3e2  call     0x180c7d610  ; -> BigMapPos$$IsZero (0xC7D610)
+0x01808da3e7  mov      rcx, qword ptr [rsi + 0x50]
+0x01808da3eb  test     al, al
+0x01808da3ed  je       0x1808da439
+0x01808da3ef  test     rcx, rcx
+0x01808da3f2  je       0x1808dac23
+0x01808da3f8  mov      rdx, qword ptr [rip + 0x149b971]  ; [0x1D75D70 .data] f32=-2.01666 f64=1.59153e-314
+0x01808da3ff  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808da404  mov      rdi, rax
+0x01808da407  xor      edx, edx
+0x01808da409  lea      rcx, [rsp + 0x50]
+0x01808da40e  call     0x180d9a6a0  ; -> UnityEngine.Rect$$get_zero (0xD9A6A0)
+0x01808da413  test     rdi, rdi
+0x01808da416  je       0x1808dac23
+0x01808da41c  movups   xmm0, xmmword ptr [rax]
+0x01808da41f  movaps   xmmword ptr [rsp + 0x50], xmm0
+0x01808da424  xor      r8d, r8d
+0x01808da427  lea      rdx, [rsp + 0x50]
+0x01808da42c  mov      rcx, rdi
+0x01808da42f  call     0x180da2b50  ; -> UnityEngine.SpriteRenderer$$set_color (0xDA2B50)
+0x01808da434  jmp      0x1808da656  ; -> 0x8DA656 (inside BigMapController$$FixedUpdate)
+0x01808da439  test     rcx, rcx
+0x01808da43c  je       0x1808dac23
+0x01808da442  mov      rdx, qword ptr [rip + 0x149b927]  ; [0x1D75D70 .data] f32=-2.01666 f64=1.59153e-314
+0x01808da449  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808da44e  mov      rdi, rax
+0x01808da451  xor      edx, edx
+0x01808da453  lea      rcx, [rsp + 0x50]
+0x01808da458  call     0x1810d4c90  ; -> UnityEngine.Color$$get_white (0x10D4C90)
+0x01808da45d  test     rdi, rdi
+0x01808da460  je       0x1808dac23
+0x01808da466  movups   xmm0, xmmword ptr [rax]
+0x01808da469  movaps   xmmword ptr [rsp + 0x50], xmm0
+0x01808da46e  xor      r8d, r8d
+0x01808da471  lea      rdx, [rsp + 0x50]
+0x01808da476  mov      rcx, rdi
+0x01808da479  call     0x180da2b50  ; -> UnityEngine.SpriteRenderer$$set_color (0xDA2B50)
+0x01808da47e  mov      rcx, qword ptr [rbx + 0x50]
+0x01808da482  test     rcx, rcx
+0x01808da485  je       0x1808dac23
+0x01808da48b  xor      edx, edx
+0x01808da48d  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da492  mov      rdi, rax
+0x01808da495  mov      rax, qword ptr [rip + 0x149a84c]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da49c  test     byte ptr [rax + 0x133], 4
+0x01808da4a3  je       0x1808da4bd
+0x01808da4a5  cmp      dword ptr [rax + 0xe0], 0
+0x01808da4ac  jne      0x1808da4bd
+0x01808da4ae  mov      rcx, rax
+0x01808da4b1  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da4b6  mov      rax, qword ptr [rip + 0x149a82b]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da4bd  cmp      byte ptr [rip + 0x15b7888], 0  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da4c4  jne      0x1808da4e0
+0x01808da4c6  lea      rcx, [rip + 0x149a81b]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da4cd  call     0x1800d64a0  ; -> 0xD64A0
+0x01808da4d2  mov      byte ptr [rip + 0x15b7873], 1  ; [0x1E91D4C .data] f32=4.92533e-40
+0x01808da4d9  mov      rax, qword ptr [rip + 0x149a808]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da4e0  test     byte ptr [rax + 0x133], 4
+0x01808da4e7  je       0x1808da501
+0x01808da4e9  cmp      dword ptr [rax + 0xe0], 0
+0x01808da4f0  jne      0x1808da501
+0x01808da4f2  mov      rcx, rax
+0x01808da4f5  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da4fa  mov      rax, qword ptr [rip + 0x149a7e7]  ; [0x1D74CE8 .data] f32=1.08722e-19
+0x01808da501  mov      rax, qword ptr [rax + 0xb8]
+0x01808da508  mov      rcx, qword ptr [rax]
+0x01808da50b  test     rcx, rcx
+0x01808da50e  je       0x1808dac23
+0x01808da514  mov      rcx, qword ptr [rcx + 0x20]
+0x01808da518  test     rcx, rcx
+0x01808da51b  je       0x1808dac23
+0x01808da521  xor      edx, edx
+0x01808da523  call     0x1809cf5a0  ; -> WorldData$$Player (0x9CF5A0)
+0x01808da528  test     rax, rax
+0x01808da52b  je       0x1808dac23
+0x01808da531  mov      rax, qword ptr [rax + 0x40]
+0x01808da535  test     rax, rax
+0x01808da538  je       0x1808dac23
+0x01808da53e  mov      rdx, qword ptr [rax + 0x38]
+0x01808da542  test     rdx, rdx
+0x01808da545  je       0x1808dac23
+0x01808da54b  xor      r8d, r8d
+0x01808da54e  lea      rcx, [rsp + 0x40]
+0x01808da553  call     0x180c7d7b0  ; -> BigMapPos$$ToVector3 (0xC7D7B0)
+0x01808da558  test     rdi, rdi
+0x01808da55b  je       0x1808dac23
+0x01808da561  movsd    xmm0, qword ptr [rax]
+0x01808da565  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808da56b  mov      eax, dword ptr [rax + 8]
+0x01808da56e  mov      dword ptr [rsp + 0x28], eax
+0x01808da572  xor      r8d, r8d
+0x01808da575  lea      rdx, [rsp + 0x20]
+0x01808da57a  mov      rcx, rdi
+0x01808da57d  call     0x180dad490  ; -> UnityEngine.Transform$$set_localPosition (0xDAD490)
+0x01808da582  mov      rcx, qword ptr [rbx + 0x50]
+0x01808da586  test     rcx, rcx
+0x01808da589  je       0x1808dac23
+0x01808da58f  xor      edx, edx
+0x01808da591  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da596  mov      rdi, rax
+0x01808da599  mov      rcx, qword ptr [rbx + 0x50]
+0x01808da59d  test     rcx, rcx
+0x01808da5a0  je       0x1808dac23
+0x01808da5a6  xor      edx, edx
+0x01808da5a8  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da5ad  test     rax, rax
+0x01808da5b0  je       0x1808dac23
+0x01808da5b6  xor      r8d, r8d
+0x01808da5b9  mov      rdx, rax
+0x01808da5bc  lea      rcx, [rsp + 0x40]
+0x01808da5c1  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808da5c6  movss    xmm6, dword ptr [rax]
+0x01808da5ca  mov      rcx, qword ptr [rbx + 0x50]
+0x01808da5ce  test     rcx, rcx
+0x01808da5d1  je       0x1808dac23
+0x01808da5d7  xor      edx, edx
+0x01808da5d9  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da5de  test     rax, rax
+0x01808da5e1  je       0x1808dac23
+0x01808da5e7  xor      r8d, r8d
+0x01808da5ea  mov      rdx, rax
+0x01808da5ed  lea      rcx, [rsp + 0x40]
+0x01808da5f2  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808da5f7  movsd    xmm1, qword ptr [rax]
+0x01808da5fb  mov      eax, dword ptr [rax + 8]
+0x01808da5fe  mov      dword ptr [rsp + 0x28], eax
+0x01808da602  movss    dword ptr [rsp + 0x30], xmm6
+0x01808da608  movaps   xmm0, xmm1
+0x01808da60b  shufps   xmm0, xmm0, 0x55
+0x01808da60f  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da615  movss    dword ptr [rsp + 0x34], xmm0
+0x01808da61b  movss    xmm0, dword ptr [rip + 0x1061bc1]  ; [0x193C1E4 .rdata] f32=0.2 f64=7.43866e-07
+0x01808da623  movss    dword ptr [rsp + 0x38], xmm0
+0x01808da629  test     rdi, rdi
+0x01808da62c  je       0x1808dac23
+0x01808da632  movsd    xmm0, qword ptr [rsp + 0x30]
+0x01808da638  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808da63e  mov      eax, dword ptr [rsp + 0x38]
+0x01808da642  mov      dword ptr [rsp + 0x28], eax
+0x01808da646  xor      r8d, r8d
+0x01808da649  lea      rdx, [rsp + 0x20]
+0x01808da64e  mov      rcx, rdi
+0x01808da651  call     0x180dad490  ; -> UnityEngine.Transform$$set_localPosition (0xDAD490)
+0x01808da656  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da65a  test     rcx, rcx
+0x01808da65d  je       0x1808dac23
+0x01808da663  mov      rdx, qword ptr [rip + 0x149c11e]  ; [0x1D76788 .data] f32=-2.01667 f64=1.59153e-314
+0x01808da66a  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808da66f  mov      rdi, rax
+0x01808da672  mov      rcx, qword ptr [rip + 0x14b5c0f]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808da679  test     byte ptr [rcx + 0x133], 4
+0x01808da680  je       0x1808da690
+0x01808da682  cmp      dword ptr [rcx + 0xe0], 0
+0x01808da689  jne      0x1808da690
+0x01808da68b  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808da690  xor      r8d, r8d
+0x01808da693  xor      edx, edx
+0x01808da695  mov      rcx, rdi
+0x01808da698  call     0x180d8f840  ; -> UnityEngine.Object$$op_Equality (0xD8F840)
+0x01808da69d  test     al, al
+0x01808da69f  jne      0x1808da6d5
+0x01808da6a1  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da6a5  test     rcx, rcx
+0x01808da6a8  je       0x1808dac23
+0x01808da6ae  mov      rdx, qword ptr [rip + 0x149c0d3]  ; [0x1D76788 .data] f32=-2.01667 f64=1.59153e-314
+0x01808da6b5  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808da6ba  test     rax, rax
+0x01808da6bd  je       0x1808dac23
+0x01808da6c3  xor      edx, edx
+0x01808da6c5  mov      rcx, rax
+0x01808da6c8  call     0x1810d0350  ; -> UnityEngine.Behaviour$$get_enabled (0x10D0350)
+0x01808da6cd  test     al, al
+0x01808da6cf  jne      0x1808da9f9
+0x01808da6d5  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da6d9  test     rcx, rcx
+0x01808da6dc  je       0x1808dac23
+0x01808da6e2  xor      edx, edx
+0x01808da6e4  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da6e9  test     rax, rax
+0x01808da6ec  je       0x1808dac23
+0x01808da6f2  xor      r8d, r8d
+0x01808da6f5  mov      rdx, rax
+0x01808da6f8  lea      rcx, [rsp + 0x40]
+0x01808da6fd  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da702  mov      rcx, qword ptr [rsi + 0x38]
+0x01808da706  movss    xmm0, dword ptr [rbx + 0x20]
+0x01808da70b  comiss   xmm0, dword ptr [rax]
+0x01808da70e  ja       0x1808da85f
+0x01808da714  test     rcx, rcx
+0x01808da717  je       0x1808dac23
+0x01808da71d  xor      edx, edx
+0x01808da71f  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da724  test     rax, rax
+0x01808da727  je       0x1808dac23
+0x01808da72d  xor      r8d, r8d
+0x01808da730  mov      rdx, rax
+0x01808da733  lea      rcx, [rsp + 0x40]
+0x01808da738  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da73d  movss    xmm0, dword ptr [rax]
+0x01808da741  comiss   xmm0, dword ptr [rbx + 0x20]
+0x01808da745  jbe      0x1808da9f9
+0x01808da74b  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da74f  test     rcx, rcx
+0x01808da752  je       0x1808dac23
+0x01808da758  xor      edx, edx
+0x01808da75a  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da75f  mov      rdi, rax
+0x01808da762  test     rax, rax
+0x01808da765  je       0x1808dac23
+0x01808da76b  xor      r8d, r8d
+0x01808da76e  mov      rdx, rax
+0x01808da771  lea      rcx, [rsp + 0x40]
+0x01808da776  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da77b  movsd    xmm7, qword ptr [rax]
+0x01808da77f  mov      ecx, dword ptr [rax + 8]
+0x01808da782  mov      dword ptr [rsp + 0x38], ecx
+0x01808da786  xor      ecx, ecx
+0x01808da788  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x01808da78d  movaps   xmm6, xmm0
+0x01808da790  xor      edx, edx
+0x01808da792  lea      rcx, [rsp + 0x50]
+0x01808da797  call     0x181866a10  ; -> UnityEngine.Vector3$$get_one (0x1866A10)
+0x01808da79c  movsd    xmm2, qword ptr [rax]
+0x01808da7a0  mov      ecx, dword ptr [rax + 8]
+0x01808da7a3  mov      dword ptr [rsp + 0x48], ecx
+0x01808da7a7  mulss    xmm6, dword ptr [rip + 0xfe6b81]  ; [0x18C1330 .rdata] f32=2 f64=32
+0x01808da7af  movaps   xmm1, xmm2
+0x01808da7b2  mov      dword ptr [rsp + 0x48], ecx
+0x01808da7b6  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da7bc  mov      dword ptr [rsp + 0x28], ecx
+0x01808da7c0  mulss    xmm2, xmm6
+0x01808da7c4  movaps   xmm3, xmm7
+0x01808da7c7  subss    xmm3, xmm2
+0x01808da7cb  movaps   xmm0, xmm1
+0x01808da7ce  shufps   xmm0, xmm0, 0x55
+0x01808da7d2  mulss    xmm0, xmm6
+0x01808da7d6  movaps   xmm2, xmm7
+0x01808da7d9  shufps   xmm2, xmm2, 0x55
+0x01808da7dd  movsd    qword ptr [rsp + 0x30], xmm7
+0x01808da7e3  subss    xmm2, xmm0
+0x01808da7e7  movss    xmm1, dword ptr [rsp + 0x28]
+0x01808da7ed  mulss    xmm1, xmm6
+0x01808da7f1  movss    xmm0, dword ptr [rsp + 0x38]
+0x01808da7f7  subss    xmm0, xmm1
+0x01808da7fb  movss    dword ptr [rsp + 0x48], xmm0
+0x01808da801  movaps   xmm1, xmm3
+0x01808da804  unpcklps xmm1, xmm2
+0x01808da807  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da80d  mov      eax, dword ptr [rsp + 0x48]
+0x01808da811  mov      dword ptr [rsp + 0x28], eax
+0x01808da815  xor      r8d, r8d
+0x01808da818  lea      rdx, [rsp + 0x20]
+0x01808da81d  mov      rcx, rdi
+0x01808da820  call     0x180dad5d0  ; -> UnityEngine.Transform$$set_localScale (0xDAD5D0)
+0x01808da825  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da829  test     rcx, rcx
+0x01808da82c  je       0x1808dac23
+0x01808da832  xor      edx, edx
+0x01808da834  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da839  test     rax, rax
+0x01808da83c  je       0x1808dac23
+0x01808da842  xor      r8d, r8d
+0x01808da845  mov      rdx, rax
+0x01808da848  lea      rcx, [rsp + 0x50]
+0x01808da84d  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da852  movss    xmm0, dword ptr [rbx + 0x20]
+0x01808da857  comiss   xmm0, dword ptr [rax]
+0x01808da85a  jmp      0x1808da963  ; -> 0x8DA963 (inside BigMapController$$FixedUpdate)
+0x01808da85f  test     rcx, rcx
+0x01808da862  je       0x1808dac23
+0x01808da868  xor      edx, edx
+0x01808da86a  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da86f  mov      rdi, rax
+0x01808da872  test     rax, rax
+0x01808da875  je       0x1808dac23
+0x01808da87b  xor      r8d, r8d
+0x01808da87e  mov      rdx, rax
+0x01808da881  lea      rcx, [rsp + 0x50]
+0x01808da886  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da88b  movsd    xmm7, qword ptr [rax]
+0x01808da88f  mov      ecx, dword ptr [rax + 8]
+0x01808da892  mov      dword ptr [rsp + 0x38], ecx
+0x01808da896  xor      ecx, ecx
+0x01808da898  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x01808da89d  movaps   xmm6, xmm0
+0x01808da8a0  xor      edx, edx
+0x01808da8a2  lea      rcx, [rsp + 0x50]
+0x01808da8a7  call     0x181866a10  ; -> UnityEngine.Vector3$$get_one (0x1866A10)
+0x01808da8ac  movsd    xmm3, qword ptr [rax]
+0x01808da8b0  mov      ecx, dword ptr [rax + 8]
+0x01808da8b3  mov      dword ptr [rsp + 0x48], ecx
+0x01808da8b7  mulss    xmm6, dword ptr [rip + 0xfe6a71]  ; [0x18C1330 .rdata] f32=2 f64=32
+0x01808da8bf  movaps   xmm1, xmm3
+0x01808da8c2  mov      dword ptr [rsp + 0x48], ecx
+0x01808da8c6  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da8cc  mov      dword ptr [rsp + 0x28], ecx
+0x01808da8d0  mulss    xmm3, xmm6
+0x01808da8d4  addss    xmm3, xmm7
+0x01808da8d8  movaps   xmm2, xmm1
+0x01808da8db  shufps   xmm2, xmm2, 0x55
+0x01808da8df  mulss    xmm2, xmm6
+0x01808da8e3  movaps   xmm0, xmm7
+0x01808da8e6  shufps   xmm0, xmm0, 0x55
+0x01808da8ea  movsd    qword ptr [rsp + 0x30], xmm7
+0x01808da8f0  addss    xmm2, xmm0
+0x01808da8f4  movss    xmm1, dword ptr [rsp + 0x28]
+0x01808da8fa  mulss    xmm1, xmm6
+0x01808da8fe  addss    xmm1, dword ptr [rsp + 0x38]
+0x01808da904  movss    dword ptr [rsp + 0x48], xmm1
+0x01808da90a  movaps   xmm0, xmm3
+0x01808da90d  unpcklps xmm0, xmm2
+0x01808da910  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808da916  mov      eax, dword ptr [rsp + 0x48]
+0x01808da91a  mov      dword ptr [rsp + 0x28], eax
+0x01808da91e  xor      r8d, r8d
+0x01808da921  lea      rdx, [rsp + 0x20]
+0x01808da926  mov      rcx, rdi
+0x01808da929  call     0x180dad5d0  ; -> UnityEngine.Transform$$set_localScale (0xDAD5D0)
+0x01808da92e  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da932  test     rcx, rcx
+0x01808da935  je       0x1808dac23
+0x01808da93b  xor      edx, edx
+0x01808da93d  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da942  test     rax, rax
+0x01808da945  je       0x1808dac23
+0x01808da94b  xor      r8d, r8d
+0x01808da94e  mov      rdx, rax
+0x01808da951  lea      rcx, [rsp + 0x50]
+0x01808da956  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808da95b  movss    xmm0, dword ptr [rax]
+0x01808da95f  comiss   xmm0, dword ptr [rbx + 0x20]
+0x01808da963  jb       0x1808da9f9
+0x01808da969  mov      rcx, qword ptr [rbx + 0x38]
+0x01808da96d  test     rcx, rcx
+0x01808da970  je       0x1808dac23
+0x01808da976  xor      edx, edx
+0x01808da978  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808da97d  movss    xmm6, dword ptr [rbx + 0x20]
+0x01808da982  mov      rdi, rax
+0x01808da985  xor      edx, edx
+0x01808da987  lea      rcx, [rsp + 0x50]
+0x01808da98c  call     0x181866a10  ; -> UnityEngine.Vector3$$get_one (0x1866A10)
+0x01808da991  movsd    xmm1, qword ptr [rax]
+0x01808da995  movaps   xmm0, xmm6
+0x01808da998  mov      ecx, dword ptr [rax + 8]
+0x01808da99b  movsd    qword ptr [rsp + 0x20], xmm1
+0x01808da9a1  mulss    xmm0, xmm1
+0x01808da9a5  movaps   xmm2, xmm6
+0x01808da9a8  mov      dword ptr [rsp + 0x28], ecx
+0x01808da9ac  shufps   xmm1, xmm1, 0x55
+0x01808da9b0  mulss    xmm6, dword ptr [rsp + 0x28]
+0x01808da9b6  mulss    xmm2, xmm1
+0x01808da9ba  test     rdi, rdi
+0x01808da9bd  movss    dword ptr [rsp + 0x38], xmm6
+0x01808da9c3  movss    dword ptr [rsp + 0x34], xmm2
+0x01808da9c9  movss    dword ptr [rsp + 0x30], xmm0
+0x01808da9cf  je       0x1808dac23
+0x01808da9d5  movsd    xmm0, qword ptr [rsp + 0x30]
+0x01808da9db  mov      eax, dword ptr [rsp + 0x38]
+0x01808da9df  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808da9e5  mov      dword ptr [rsp + 0x28], eax
+0x01808da9e9  xor      r8d, r8d
+0x01808da9ec  lea      rdx, [rsp + 0x20]
+0x01808da9f1  mov      rcx, rdi
+0x01808da9f4  call     0x180dad5d0  ; -> UnityEngine.Transform$$set_localScale (0xDAD5D0)
+0x01808da9f9  mov      rcx, qword ptr [rbx + 0x40]
+0x01808da9fd  test     rcx, rcx
+0x01808daa00  je       0x1808dac23
+0x01808daa06  mov      rdx, qword ptr [rip + 0x149b2db]  ; [0x1D75CE8 .data] f32=-2.01666 f64=1.59153e-314
+0x01808daa0d  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808daa12  mov      rdi, rax
+0x01808daa15  mov      rcx, qword ptr [rip + 0x14b586c]  ; [0x1D90288 .data] f32=1.08785e-19
+0x01808daa1c  test     byte ptr [rcx + 0x133], 4
+0x01808daa23  je       0x1808daa33
+0x01808daa25  cmp      dword ptr [rcx + 0xe0], 0
+0x01808daa2c  jne      0x1808daa33
+0x01808daa2e  call     0x18005a6e0  ; -> 0x5A6E0
+0x01808daa33  xor      r8d, r8d
+0x01808daa36  xor      edx, edx
+0x01808daa38  mov      rcx, rdi
+0x01808daa3b  call     0x180d8f840  ; -> UnityEngine.Object$$op_Equality (0xD8F840)
+0x01808daa40  test     al, al
+0x01808daa42  jne      0x1808daa78
+0x01808daa44  mov      rcx, qword ptr [rbx + 0x40]
+0x01808daa48  test     rcx, rcx
+0x01808daa4b  je       0x1808dac23
+0x01808daa51  mov      rdx, qword ptr [rip + 0x149b290]  ; [0x1D75CE8 .data] f32=-2.01666 f64=1.59153e-314
+0x01808daa58  call     0x180976b00  ; -> UnityEngine.GameObject$$GetComponent<AISettingTabController> (0x976B00)
+0x01808daa5d  test     rax, rax
+0x01808daa60  je       0x1808dac23
+0x01808daa66  xor      edx, edx
+0x01808daa68  mov      rcx, rax
+0x01808daa6b  call     0x1810d0390  ; -> UnityEngine.Behaviour$$get_isActiveAndEnabled (0x10D0390)
+0x01808daa70  test     al, al
+0x01808daa72  jne      0x1808dabfd
+0x01808daa78  mov      rcx, qword ptr [rbx + 0x40]
+0x01808daa7c  test     rcx, rcx
+0x01808daa7f  je       0x1808dac23
+0x01808daa85  xor      edx, edx
+0x01808daa87  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808daa8c  mov      rdi, rax
+0x01808daa8f  mov      rcx, qword ptr [rbx + 0x40]
+0x01808daa93  test     rcx, rcx
+0x01808daa96  je       0x1808dac23
+0x01808daa9c  xor      edx, edx
+0x01808daa9e  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808daaa3  test     rax, rax
+0x01808daaa6  je       0x1808dac23
+0x01808daaac  xor      r8d, r8d
+0x01808daaaf  mov      rdx, rax
+0x01808daab2  lea      rcx, [rsp + 0x50]
+0x01808daab7  call     0x180dacb40  ; -> UnityEngine.Transform$$get_localPosition (0xDACB40)
+0x01808daabc  movsd    xmm0, qword ptr [rax]
+0x01808daac0  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808daac6  mov      eax, dword ptr [rax + 8]
+0x01808daac9  mov      dword ptr [rsp + 0x28], eax
+0x01808daacd  mov      rcx, qword ptr [rbx + 0x38]
+0x01808daad1  test     rcx, rcx
+0x01808daad4  je       0x1808dac23
+0x01808daada  xor      edx, edx
+0x01808daadc  call     0x1810dcd20  ; -> UnityEngine.GameObject$$get_transform (0x10DCD20)
+0x01808daae1  test     rax, rax
+0x01808daae4  je       0x1808dac23
+0x01808daaea  xor      r8d, r8d
+0x01808daaed  mov      rdx, rax
+0x01808daaf0  lea      rcx, [rsp + 0x50]
+0x01808daaf5  call     0x180dacc80  ; -> UnityEngine.Transform$$get_localScale (0xDACC80)
+0x01808daafa  movss    xmm4, dword ptr [rax]
+0x01808daafe  movss    xmm6, dword ptr [rsp + 0x20]
+0x01808dab04  movss    dword ptr [rsp + 0x30], xmm6
+0x01808dab0a  movss    xmm7, dword ptr [rsp + 0x24]
+0x01808dab10  movaps   xmm1, xmm7
+0x01808dab13  movss    dword ptr [rsp + 0x34], xmm7
+0x01808dab19  movss    xmm5, dword ptr [rsp + 0x28]
+0x01808dab1f  movss    dword ptr [rsp + 0x38], xmm5
+0x01808dab25  movss    xmm3, dword ptr [rbx + 0x30]
+0x01808dab2a  mulss    xmm3, xmm8
+0x01808dab2f  mulss    xmm3, xmm4
+0x01808dab33  movss    xmm0, dword ptr [rbx + 0x28]
+0x01808dab38  mulss    xmm0, xmm8
+0x01808dab3d  movaps   xmm2, xmm3
+0x01808dab40  subss    xmm2, xmm0
+0x01808dab44  divss    xmm2, xmm4
+0x01808dab48  comiss   xmm6, xmm2
+0x01808dab4b  jbe      0x1808dab62
+0x01808dab4d  movaps   xmm6, xmm2
+0x01808dab50  movss    dword ptr [rsp + 0x30], xmm2
+0x01808dab56  movss    dword ptr [rsp + 0x34], xmm7
+0x01808dab5c  movss    dword ptr [rsp + 0x38], xmm5
+0x01808dab62  subss    xmm0, xmm3
+0x01808dab66  divss    xmm0, xmm4
+0x01808dab6a  comiss   xmm0, xmm6
+0x01808dab6d  jbe      0x1808dab84
+0x01808dab6f  movss    dword ptr [rsp + 0x30], xmm0
+0x01808dab75  movaps   xmm1, xmm7
+0x01808dab78  movss    dword ptr [rsp + 0x34], xmm7
+0x01808dab7e  movss    dword ptr [rsp + 0x38], xmm5
+0x01808dab84  movss    xmm3, dword ptr [rbx + 0x34]
+0x01808dab89  mulss    xmm3, xmm8
+0x01808dab8e  mulss    xmm3, xmm4
+0x01808dab92  movss    xmm0, dword ptr [rbx + 0x2c]
+0x01808dab97  mulss    xmm0, xmm8
+0x01808dab9c  movaps   xmm2, xmm3
+0x01808dab9f  subss    xmm2, xmm0
+0x01808daba3  divss    xmm2, xmm4
+0x01808daba7  comiss   xmm7, xmm2
+0x01808dabaa  jbe      0x1808dabbb
+0x01808dabac  movaps   xmm1, xmm2
+0x01808dabaf  movss    dword ptr [rsp + 0x34], xmm2
+0x01808dabb5  movss    dword ptr [rsp + 0x38], xmm5
+0x01808dabbb  subss    xmm0, xmm3
+0x01808dabbf  divss    xmm0, xmm4
+0x01808dabc3  comiss   xmm0, xmm1
+0x01808dabc6  jbe      0x1808dabd4
+0x01808dabc8  movss    dword ptr [rsp + 0x34], xmm0
+0x01808dabce  movss    dword ptr [rsp + 0x38], xmm5
+0x01808dabd4  test     rdi, rdi
+0x01808dabd7  je       0x1808dac23
+0x01808dabd9  movsd    xmm0, qword ptr [rsp + 0x30]
+0x01808dabdf  movsd    qword ptr [rsp + 0x20], xmm0
+0x01808dabe5  mov      eax, dword ptr [rsp + 0x38]
+0x01808dabe9  mov      dword ptr [rsp + 0x28], eax
+0x01808dabed  xor      r8d, r8d
+0x01808dabf0  lea      rdx, [rsp + 0x20]
+0x01808dabf5  mov      rcx, rdi
+0x01808dabf8  call     0x180dad490  ; -> UnityEngine.Transform$$set_localPosition (0xDAD490)
+0x01808dabfd  lea      r11, [rsp + 0xc0]
+0x01808dac05  movaps   xmm6, xmmword ptr [r11 - 0x10]
+0x01808dac0a  movaps   xmm7, xmmword ptr [r11 - 0x20]
+0x01808dac0f  movaps   xmm8, xmmword ptr [r11 - 0x30]
+0x01808dac14  mov      rsp, r11
+0x01808dac17  pop      r15
+0x01808dac19  pop      r14
+0x01808dac1b  pop      r13
+0x01808dac1d  pop      r12
+0x01808dac1f  pop      rdi
+0x01808dac20  pop      rsi
+0x01808dac21  pop      rbx
+0x01808dac22  ret      
+0x01808dac23  call     0x1800d6610  ; -> 0xD6610
+0x01808dac28  nop      
+0x01808dac29  call     0x1800d6610  ; -> 0xD6610
+0x01808dac2e  nop      
+0x01808dac2f  xor      edx, edx
+0x01808dac31  call     0x1800d65e0  ; -> 0xD65E0
+0x01808dac36  int3     
+0x01808dac37  int3     
+0x01808dac38  int3     
+0x01808dac39  int3     
+0x01808dac3a  int3     
+0x01808dac3b  int3     
+0x01808dac3c  int3     
+0x01808dac3d  int3     
+0x01808dac3e  int3     
+0x01808dac3f  int3     

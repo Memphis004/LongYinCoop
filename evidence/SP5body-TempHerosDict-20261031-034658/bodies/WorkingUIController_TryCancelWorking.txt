@@ -1,0 +1,91 @@
+; WorkingUIController_TryCancelWorking  rva=0x9CB330 va=0x1809CB330 end(before)=0x9CB4B0 insns=90
+0x01809cb330  push     rbx
+0x01809cb332  sub      rsp, 0x20
+0x01809cb336  cmp      byte ptr [rip + 0x14d44f8], 0  ; [0x1E9F835 .data] f64=8.12087e-174
+0x01809cb33d  mov      rbx, rcx
+0x01809cb340  jne      0x1809cb3a9
+0x01809cb342  lea      rcx, [rip + 0x13dac07]  ; [0x1DA5F50 .data] f32=-2.00962 f64=1.59152e-314
+0x01809cb349  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb34e  lea      rcx, [rip + 0x13daa7b]  ; [0x1DA5DD0 .data] f32=-2.00961 f64=1.59152e-314
+0x01809cb355  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb35a  lea      rcx, [rip + 0x13ce467]  ; [0x1D997C8 .data] f32=1.0855e-19
+0x01809cb361  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb366  lea      rcx, [rip + 0x13c8893]  ; [0x1D93C00 .data] f32=1.08793e-19
+0x01809cb36d  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb372  lea      rcx, [rip + 0x13d91d7]  ; [0x1DA4550 .data] f32=1.08831e-19
+0x01809cb379  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb37e  lea      rcx, [rip + 0x13c28cb]  ; [0x1D8DC50 .data] f32=-1.08798e-19
+0x01809cb385  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb38a  lea      rcx, [rip + 0x13ce4df]  ; [0x1D99870 .data] f32=-1.08878e-19
+0x01809cb391  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb396  lea      rcx, [rip + 0x13a91a3]  ; [0x1D74540 .data] f32=-1.08777e-19
+0x01809cb39d  call     0x1800d64a0  ; -> 0xD64A0
+0x01809cb3a2  mov      byte ptr [rip + 0x14d448c], 1  ; [0x1E9F835 .data] f64=8.12087e-174
+0x01809cb3a9  cmp      dword ptr [rbx + 0x4c], 0
+0x01809cb3ad  jle      0x1809cb49b
+0x01809cb3b3  cmp      byte ptr [rbx + 0x61], 0
+0x01809cb3b7  jne      0x1809cb49b
+0x01809cb3bd  mov      rcx, qword ptr [rip + 0x13c883c]  ; [0x1D93C00 .data] f32=1.08793e-19
+0x01809cb3c4  mov      qword ptr [rsp + 0x30], rbp
+0x01809cb3c9  mov      qword ptr [rsp + 0x40], rdi
+0x01809cb3ce  test     byte ptr [rcx + 0x133], 4
+0x01809cb3d5  je       0x1809cb3e5
+0x01809cb3d7  cmp      dword ptr [rcx + 0xe0], 0
+0x01809cb3de  jne      0x1809cb3e5
+0x01809cb3e0  call     0x18005a6e0  ; -> 0x5A6E0
+0x01809cb3e5  xor      ecx, ecx
+0x01809cb3e7  mov      qword ptr [rsp + 0x38], rsi
+0x01809cb3ec  call     0x18046c460  ; -> 0x46C460 (inside UnityEngine.ImageConversion$$LoadImage)
+0x01809cb3f1  mov      rdx, qword ptr [rbx + 0x20]
+0x01809cb3f5  xor      r8d, r8d
+0x01809cb3f8  mov      rcx, qword ptr [rip + 0x13ce471]  ; [0x1D99870 .data] f32=-1.08878e-19
+0x01809cb3ff  mov      rdi, rax
+0x01809cb402  call     0x181720720  ; -> System.String$$Format (0x1720720)
+0x01809cb407  mov      rcx, qword ptr [rip + 0x13ce3ba]  ; [0x1D997C8 .data] f32=1.0855e-19
+0x01809cb40e  mov      rbp, rax
+0x01809cb411  call     0x1800d65d0  ; -> 0xD65D0
+0x01809cb416  mov      rdx, qword ptr [rip + 0x13da9b3]  ; [0x1DA5DD0 .data] f32=-2.00961 f64=1.59152e-314
+0x01809cb41d  mov      rcx, rax
+0x01809cb420  mov      rbx, rax
+0x01809cb423  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x01809cb428  test     rbx, rbx
+0x01809cb42b  je       0x1809cb4a1
+0x01809cb42d  mov      r8, qword ptr [rip + 0x13dab1c]  ; [0x1DA5F50 .data] f32=-2.00962 f64=1.59152e-314
+0x01809cb434  mov      rcx, rbx
+0x01809cb437  mov      rdx, qword ptr [rip + 0x13a9102]  ; [0x1D74540 .data] f32=-1.08777e-19
+0x01809cb43e  call     0x18181f800  ; -> System.Collections.Generic.List<List<List<int>>>$$Add (0x181F800)
+0x01809cb443  mov      r8, qword ptr [rip + 0x13dab06]  ; [0x1DA5F50 .data] f32=-2.00962 f64=1.59152e-314
+0x01809cb44a  mov      rcx, rbx
+0x01809cb44d  mov      rdx, qword ptr [rip + 0x13c27fc]  ; [0x1D8DC50 .data] f32=-1.08798e-19
+0x01809cb454  call     0x18181f800  ; -> System.Collections.Generic.List<List<List<int>>>$$Add (0x181F800)
+0x01809cb459  mov      rcx, qword ptr [rip + 0x13d90f0]  ; [0x1DA4550 .data] f32=1.08831e-19
+0x01809cb460  call     0x1800d65d0  ; -> 0xD65D0
+0x01809cb465  xor      r9d, r9d
+0x01809cb468  mov      r8, rbx
+0x01809cb46b  mov      rdx, rbp
+0x01809cb46e  mov      rcx, rax
+0x01809cb471  mov      rsi, rax
+0x01809cb474  call     0x180983f70  ; -> SinglePlotData$$.ctor (0x983F70)
+0x01809cb479  test     rdi, rdi
+0x01809cb47c  je       0x1809cb4a1
+0x01809cb47e  xor      r8d, r8d
+0x01809cb481  mov      rdx, rsi
+0x01809cb484  mov      rcx, rdi
+0x01809cb487  call     0x180498870  ; -> PlotController$$ChangePlot (0x498870)
+0x01809cb48c  mov      rsi, qword ptr [rsp + 0x38]
+0x01809cb491  mov      rbp, qword ptr [rsp + 0x30]
+0x01809cb496  mov      rdi, qword ptr [rsp + 0x40]
+0x01809cb49b  add      rsp, 0x20
+0x01809cb49f  pop      rbx
+0x01809cb4a0  ret      
+0x01809cb4a1  call     0x1800d6610  ; -> 0xD6610
+0x01809cb4a6  int3     
+0x01809cb4a7  int3     
+0x01809cb4a8  int3     
+0x01809cb4a9  int3     
+0x01809cb4aa  int3     
+0x01809cb4ab  int3     
+0x01809cb4ac  int3     
+0x01809cb4ad  int3     
+0x01809cb4ae  int3     
+0x01809cb4af  int3     

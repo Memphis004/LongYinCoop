@@ -1,0 +1,134 @@
+; TimeScaleController_Update  rva=0xAA71D0 va=0x180AA71D0 end(before)=0xAA73D0 insns=133
+0x0180aa71d0  push     rdi
+0x0180aa71d2  sub      rsp, 0x40
+0x0180aa71d6  cmp      byte ptr [rip + 0x13f8a64], 0  ; [0x1E9FC41 .data] f32=-1.50544e-36
+0x0180aa71dd  mov      rdi, rcx
+0x0180aa71e0  jne      0x180aa720d
+0x0180aa71e2  lea      rcx, [rip + 0x12fe4e7]  ; [0x1DA56D0 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa71e9  call     0x1800d64a0  ; -> 0xD64A0
+0x0180aa71ee  lea      rcx, [rip + 0x12fe55b]  ; [0x1DA5750 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa71f5  call     0x1800d64a0  ; -> 0xD64A0
+0x0180aa71fa  lea      rcx, [rip + 0x12fe5cf]  ; [0x1DA57D0 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa7201  call     0x1800d64a0  ; -> 0xD64A0
+0x0180aa7206  mov      byte ptr [rip + 0x13f8a34], 1  ; [0x1E9FC41 .data] f32=-1.50544e-36
+0x0180aa720d  cmp      byte ptr [rdi + 0x18], 0
+0x0180aa7211  jne      0x180aa73b5
+0x0180aa7217  mov      qword ptr [rsp + 0x50], rbx
+0x0180aa721c  mov      qword ptr [rsp + 0x58], rsi
+0x0180aa7221  mov      qword ptr [rsp + 0x60], r14
+0x0180aa7226  movaps   xmmword ptr [rsp + 0x30], xmm6
+0x0180aa722b  movaps   xmmword ptr [rsp + 0x20], xmm7
+0x0180aa7230  mov      rax, qword ptr [rdi + 0x20]
+0x0180aa7234  test     rax, rax
+0x0180aa7237  je       0x180aa73c4
+0x0180aa723d  cmp      dword ptr [rax + 0x18], 0
+0x0180aa7241  jg       0x180aa72ac
+0x0180aa7243  xor      ecx, ecx
+0x0180aa7245  call     0x180da9f70  ; -> UnityEngine.Time$$get_timeScale (0xDA9F70)
+0x0180aa724a  movss    xmm7, dword ptr [rip + 0xe19ef6]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x0180aa7252  comiss   xmm7, xmm0
+0x0180aa7255  ja       0x180aa727f
+0x0180aa7257  movaps   xmm0, xmm7
+0x0180aa725a  xor      edx, edx
+0x0180aa725c  movaps   xmm6, xmmword ptr [rsp + 0x30]
+0x0180aa7261  mov      r14, qword ptr [rsp + 0x60]
+0x0180aa7266  mov      rsi, qword ptr [rsp + 0x58]
+0x0180aa726b  mov      rbx, qword ptr [rsp + 0x50]
+0x0180aa7270  movaps   xmm7, xmmword ptr [rsp + 0x20]
+0x0180aa7275  add      rsp, 0x40
+0x0180aa7279  pop      rdi
+0x0180aa727a  jmp      0x180daa030  ; -> UnityEngine.Time$$set_timeScale (0xDAA030)
+0x0180aa727f  xor      ecx, ecx
+0x0180aa7281  call     0x180da9f70  ; -> UnityEngine.Time$$get_timeScale (0xDA9F70)
+0x0180aa7286  xor      ecx, ecx
+0x0180aa7288  movaps   xmm6, xmm0
+0x0180aa728b  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180aa7290  mulss    xmm0, dword ptr [rip + 0xe1a0a4]  ; [0x18C133C .rdata] f32=4 f64=12831.7
+0x0180aa7298  xor      r8d, r8d
+0x0180aa729b  addss    xmm0, xmm6
+0x0180aa729f  movaps   xmm1, xmm0
+0x0180aa72a2  movaps   xmm0, xmm7
+0x0180aa72a5  call     0x1810e53a0  ; -> UnityEngine.Mathf$$Min (0x10E53A0)
+0x0180aa72aa  jmp      0x180aa725a  ; -> 0xAA725A (inside TimeScaleController$$Update)
+0x0180aa72ac  movss    xmm0, dword ptr [rip + 0xe19e94]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x0180aa72b4  mov      dword ptr [rdi + 0x1c], 0x3f800000
+0x0180aa72bb  mov      ebx, dword ptr [rax + 0x18]
+0x0180aa72be  sub      ebx, 1
+0x0180aa72c1  js       0x180aa725a
+0x0180aa72c3  movsxd   rax, ebx
+0x0180aa72c6  xorps    xmm7, xmm7
+0x0180aa72c9  lea      r14, [rax*8 + 0x20]
+0x0180aa72d1  mov      rsi, qword ptr [rdi + 0x20]
+0x0180aa72d5  test     rsi, rsi
+0x0180aa72d8  je       0x180aa73c4
+0x0180aa72de  cmp      ebx, dword ptr [rsi + 0x18]
+0x0180aa72e1  jb       0x180aa72ea
+0x0180aa72e3  xor      ecx, ecx
+0x0180aa72e5  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180aa72ea  mov      rax, qword ptr [rsi + 0x10]
+0x0180aa72ee  mov      rsi, qword ptr [r14 + rax]
+0x0180aa72f2  test     rsi, rsi
+0x0180aa72f5  je       0x180aa73c4
+0x0180aa72fb  movss    xmm6, dword ptr [rsi + 0x10]
+0x0180aa7300  xor      ecx, ecx
+0x0180aa7302  call     0x180cfd4a0  ; -> RealTime$$get_deltaTime (0xCFD4A0)
+0x0180aa7307  subss    xmm6, xmm0
+0x0180aa730b  movss    dword ptr [rsi + 0x10], xmm6
+0x0180aa7310  mov      rsi, qword ptr [rdi + 0x20]
+0x0180aa7314  test     rsi, rsi
+0x0180aa7317  je       0x180aa73c4
+0x0180aa731d  cmp      ebx, dword ptr [rsi + 0x18]
+0x0180aa7320  jb       0x180aa7329
+0x0180aa7322  xor      ecx, ecx
+0x0180aa7324  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x0180aa7329  mov      rax, qword ptr [rsi + 0x10]
+0x0180aa732d  mov      rdx, qword ptr [r14 + rax]
+0x0180aa7331  test     rdx, rdx
+0x0180aa7334  je       0x180aa73c4
+0x0180aa733a  comiss   xmm7, dword ptr [rdx + 0x10]
+0x0180aa733e  mov      rcx, qword ptr [rdi + 0x20]
+0x0180aa7342  jae      0x180aa738b
+0x0180aa7344  test     rcx, rcx
+0x0180aa7347  je       0x180aa73c4
+0x0180aa7349  mov      r8, qword ptr [rip + 0x12fe480]  ; [0x1DA57D0 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa7350  mov      edx, ebx
+0x0180aa7352  call     0x180002f80  ; -> 0x2F80
+0x0180aa7357  test     rax, rax
+0x0180aa735a  je       0x180aa73c4
+0x0180aa735c  movss    xmm0, dword ptr [rdi + 0x1c]
+0x0180aa7361  comiss   xmm0, dword ptr [rax + 0x14]
+0x0180aa7365  jbe      0x180aa739e
+0x0180aa7367  mov      rcx, qword ptr [rdi + 0x20]
+0x0180aa736b  test     rcx, rcx
+0x0180aa736e  je       0x180aa73c4
+0x0180aa7370  mov      r8, qword ptr [rip + 0x12fe459]  ; [0x1DA57D0 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa7377  mov      edx, ebx
+0x0180aa7379  call     0x180002f80  ; -> 0x2F80
+0x0180aa737e  test     rax, rax
+0x0180aa7381  je       0x180aa73c4
+0x0180aa7383  mov      eax, dword ptr [rax + 0x14]
+0x0180aa7386  mov      dword ptr [rdi + 0x1c], eax
+0x0180aa7389  jmp      0x180aa739e  ; -> 0xAA739E (inside TimeScaleController$$Update)
+0x0180aa738b  test     rcx, rcx
+0x0180aa738e  je       0x180aa73c4
+0x0180aa7390  mov      r8, qword ptr [rip + 0x12fe339]  ; [0x1DA56D0 .data] f32=-2.00961 f64=1.59152e-314
+0x0180aa7397  mov      edx, ebx
+0x0180aa7399  call     0x181824cf0  ; -> System.Collections.Generic.List<int[]>$$RemoveAt (0x1824CF0)
+0x0180aa739e  sub      r14, 8
+0x0180aa73a2  sub      ebx, 1
+0x0180aa73a5  jns      0x180aa72d1
+0x0180aa73ab  movss    xmm0, dword ptr [rdi + 0x1c]
+0x0180aa73b0  jmp      0x180aa725a  ; -> 0xAA725A (inside TimeScaleController$$Update)
+0x0180aa73b5  xor      edx, edx
+0x0180aa73b7  xorps    xmm0, xmm0
+0x0180aa73ba  add      rsp, 0x40
+0x0180aa73be  pop      rdi
+0x0180aa73bf  jmp      0x180daa030  ; -> UnityEngine.Time$$set_timeScale (0xDAA030)
+0x0180aa73c4  call     0x1800d6610  ; -> 0xD6610
+0x0180aa73c9  int3     
+0x0180aa73ca  int3     
+0x0180aa73cb  int3     
+0x0180aa73cc  int3     
+0x0180aa73cd  int3     
+0x0180aa73ce  int3     
+0x0180aa73cf  int3     

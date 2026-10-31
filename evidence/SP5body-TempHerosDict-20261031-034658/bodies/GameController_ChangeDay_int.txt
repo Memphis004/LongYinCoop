@@ -1,0 +1,20 @@
+; GameController_ChangeDay_int  rva=0x7925F0 va=0x1807925F0 end(before)=0x792620 insns=19
+0x01807925f0  test     edx, edx
+0x01807925f2  jle      0x18079261d
+0x01807925f4  mov      qword ptr [rsp + 8], rbx
+0x01807925f9  push     rdi
+0x01807925fa  sub      rsp, 0x20
+0x01807925fe  mov      ebx, edx
+0x0180792600  mov      rdi, rcx
+0x0180792603  xor      edx, edx
+0x0180792605  mov      rcx, rdi
+0x0180792608  call     0x180790e30  ; -> GameController$$ChangeDay (0x790E30)
+0x018079260d  dec      ebx
+0x018079260f  test     ebx, ebx
+0x0180792611  jg       0x180792603
+0x0180792613  mov      rbx, qword ptr [rsp + 0x30]
+0x0180792618  add      rsp, 0x20
+0x018079261c  pop      rdi
+0x018079261d  ret      
+0x018079261e  int3     
+0x018079261f  int3     

@@ -1,0 +1,12 @@
+; RealTime_get_deltaTime  rva=0xCFD4A0 va=0x180CFD4A0 end(before)=0xCFD4B0 insns=11
+0x0180cfd4a0  xor      ecx, ecx
+0x0180cfd4a2  jmp      0x180da9fd0  ; -> UnityEngine.Time$$get_unscaledDeltaTime (0xDA9FD0)
+0x0180cfd4a7  int3     
+0x0180cfd4a8  int3     
+0x0180cfd4a9  int3     
+0x0180cfd4aa  int3     
+0x0180cfd4ab  int3     
+0x0180cfd4ac  int3     
+0x0180cfd4ad  int3     
+0x0180cfd4ae  int3     
+0x0180cfd4af  int3     

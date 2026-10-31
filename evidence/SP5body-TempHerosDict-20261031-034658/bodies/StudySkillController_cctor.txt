@@ -1,0 +1,57 @@
+; StudySkillController_cctor  rva=0xFE65E0 va=0x180FE65E0 end(before)=0xFE6700 insns=56
+0x0180fe65e0  push     rbx
+0x0180fe65e2  sub      rsp, 0x20
+0x0180fe65e6  cmp      byte ptr [rip + 0xebc307], 0  ; [0x1EA28F4 .data] f32=1.7973e-39
+0x0180fe65ed  jne      0x180fe6626
+0x0180fe65ef  lea      rcx, [rip + 0xdbc9fa]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe65f6  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe65fb  lea      rcx, [rip + 0xdbc8ee]  ; [0x1DA2EF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe6602  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe6607  lea      rcx, [rip + 0xdb293a]  ; [0x1D98F48 .data] f32=1.08548e-19
+0x0180fe660e  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe6613  lea      rcx, [rip + 0xdc3bee]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x0180fe661a  call     0x1800d64a0  ; -> 0xD64A0
+0x0180fe661f  mov      byte ptr [rip + 0xebc2ce], 1  ; [0x1EA28F4 .data] f32=1.7973e-39
+0x0180fe6626  mov      rcx, qword ptr [rip + 0xdb291b]  ; [0x1D98F48 .data] f32=1.08548e-19
+0x0180fe662d  call     0x1800d65d0  ; -> 0xD65D0
+0x0180fe6632  mov      rdx, qword ptr [rip + 0xdbc8b7]  ; [0x1DA2EF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe6639  mov      rcx, rax
+0x0180fe663c  mov      rbx, rax
+0x0180fe663f  call     0x181331210  ; -> System.Collections.Generic.List<KeyValuePair<DateTime, object>>$$.ctor (0x1331210)
+0x0180fe6644  test     rbx, rbx
+0x0180fe6647  je       0x180fe66f9
+0x0180fe664d  mov      r8, qword ptr [rip + 0xdbc99c]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe6654  mov      rcx, rbx
+0x0180fe6657  movss    xmm1, dword ptr [rip + 0x955b69]  ; [0x193C1C8 .rdata] f32=0.05 f64=1.23691e-12
+0x0180fe665f  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe6664  mov      r8, qword ptr [rip + 0xdbc985]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe666b  mov      rcx, rbx
+0x0180fe666e  movss    xmm1, dword ptr [rip + 0x955b5e]  ; [0x193C1D4 .rdata] f32=0.1 f64=3.1665e-10
+0x0180fe6676  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe667b  mov      r8, qword ptr [rip + 0xdbc96e]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe6682  mov      rcx, rbx
+0x0180fe6685  movss    xmm1, dword ptr [rip + 0x955b57]  ; [0x193C1E4 .rdata] f32=0.2 f64=7.43866e-07
+0x0180fe668d  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe6692  mov      r8, qword ptr [rip + 0xdbc957]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe6699  mov      rcx, rbx
+0x0180fe669c  movss    xmm1, dword ptr [rip + 0x8dac4c]  ; [0x18C12F0 .rdata] f32=0.3 f64=1.56056e-06
+0x0180fe66a4  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe66a9  mov      r8, qword ptr [rip + 0xdbc940]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe66b0  mov      rcx, rbx
+0x0180fe66b3  movss    xmm1, dword ptr [rip + 0x955b35]  ; [0x193C1F0 .rdata] f32=0.4 f64=9.76563e-05
+0x0180fe66bb  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe66c0  mov      r8, qword ptr [rip + 0xdbc929]  ; [0x1DA2FF0 .data] f32=-2.00955 f64=1.59152e-314
+0x0180fe66c7  mov      rcx, rbx
+0x0180fe66ca  movss    xmm1, dword ptr [rip + 0x8dac2a]  ; [0x18C12FC .rdata] f32=0.5 f64=5.27122e-05
+0x0180fe66d2  call     0x18181f570  ; -> System.Collections.Generic.List<float>$$Add (0x181F570)
+0x0180fe66d7  mov      rax, qword ptr [rip + 0xdc3b2a]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x0180fe66de  mov      rdx, rbx
+0x0180fe66e1  mov      rcx, qword ptr [rax + 0xb8]
+0x0180fe66e8  add      rcx, 8
+0x0180fe66ec  mov      qword ptr [rcx], rbx
+0x0180fe66ef  add      rsp, 0x20
+0x0180fe66f3  pop      rbx
+0x0180fe66f4  jmp      0x1800d6020  ; -> 0xD6020
+0x0180fe66f9  call     0x1800d6610  ; -> 0xD6610
+0x0180fe66fe  int3     
+0x0180fe66ff  int3     

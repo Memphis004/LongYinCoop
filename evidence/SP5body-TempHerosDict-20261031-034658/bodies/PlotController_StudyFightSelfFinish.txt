@@ -1,0 +1,251 @@
+; PlotController_StudyFightSelfFinish  rva=0x66CC40 va=0x18066CC40 end(before)=0x66D0B0 insns=250
+0x018066cc40  push     rbx
+0x018066cc42  push     rbp
+0x018066cc43  push     r14
+0x018066cc45  sub      rsp, 0xa0
+0x018066cc4c  cmp      byte ptr [rip + 0x1824c8a], 0
+0x018066cc53  mov      rbp, rdx
+0x018066cc56  mov      r14, rcx
+0x018066cc59  jne      0x18066ccea
+0x018066cc5f  lea      rcx, [rip + 0x17090fa]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x018066cc66  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cc6b  lea      rcx, [rip + 0x172109e]  ; [0x1D8DD10 .data] f32=-2.00891 f64=1.59152e-314
+0x018066cc72  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cc77  lea      rcx, [rip + 0x1721112]  ; [0x1D8DD90 .data] f32=-2.00891 f64=1.59152e-314
+0x018066cc7e  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cc83  lea      rcx, [rip + 0x17398c6]  ; [0x1DA6550 .data] f32=-2.00962 f64=1.59152e-314
+0x018066cc8a  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cc8f  lea      rcx, [rip + 0x17365da]  ; [0x1DA3270 .data] f32=-2.00957 f64=1.59152e-314
+0x018066cc96  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cc9b  lea      rcx, [rip + 0x17378ae]  ; [0x1DA4550 .data] f32=1.08831e-19
+0x018066cca2  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cca7  lea      rcx, [rip + 0x17376a2]  ; [0x1DA4350 .data] f32=1.0883e-19
+0x018066ccae  call     0x1800d64a0  ; -> 0xD64A0
+0x018066ccb3  lea      rcx, [rip + 0x173d54e]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x018066ccba  call     0x1800d64a0  ; -> 0xD64A0
+0x018066ccbf  lea      rcx, [rip + 0x171b6b2]  ; [0x1D88378 .data] f32=-1.0844e-19
+0x018066ccc6  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cccb  lea      rcx, [rip + 0x1748406]  ; [0x1DB50D8 .data] f32=-1.08548e-19
+0x018066ccd2  call     0x1800d64a0  ; -> 0xD64A0
+0x018066ccd7  lea      rcx, [rip + 0x1730902]  ; [0x1D9D5E0 .data] f32=-1.08458e-19
+0x018066ccde  call     0x1800d64a0  ; -> 0xD64A0
+0x018066cce3  mov      byte ptr [rip + 0x1824bf3], 1
+0x018066ccea  xor      edx, edx
+0x018066ccec  mov      rcx, r14
+0x018066ccef  call     0x180505600  ; -> PlotController$$GetAreaAvailableHelpHero (0x505600)
+0x018066ccf4  mov      rbx, rax
+0x018066ccf7  test     rax, rax
+0x018066ccfa  je       0x18066d09a
+0x018066cd00  cmp      dword ptr [rax + 0x18], 0
+0x018066cd04  movaps   xmmword ptr [rsp + 0x90], xmm6
+0x018066cd0c  jle      0x18066d08a
+0x018066cd12  xor      ecx, ecx
+0x018066cd14  call     0x180d97240  ; -> UnityEngine.Random$$get_value (0xD97240)
+0x018066cd19  movd     xmm1, dword ptr [rbx + 0x18]
+0x018066cd1e  movaps   xmm6, xmm0
+0x018066cd21  movss    xmm0, dword ptr [rip + 0x12545c3]  ; [0x18C12EC .rdata] f32=0.25 f64=3.8147e-07
+0x018066cd29  xor      r8d, r8d
+0x018066cd2c  cvtdq2ps xmm1, xmm1
+0x018066cd2f  mulss    xmm1, dword ptr [rip + 0x12cf485]  ; [0x193C1BC .rdata] f32=0.025 f64=4.83169e-15
+0x018066cd37  addss    xmm1, dword ptr [rip + 0x12cf489]  ; [0x193C1C8 .rdata] f32=0.05 f64=1.23691e-12
+0x018066cd3f  call     0x1810e53a0  ; -> UnityEngine.Mathf$$Min (0x10E53A0)
+0x018066cd44  comiss   xmm0, xmm6
+0x018066cd47  jb       0x18066d08a
+0x018066cd4d  mov      rcx, qword ptr [rip + 0x170900c]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x018066cd54  mov      qword ptr [rsp + 0xc8], rdi
+0x018066cd5c  mov      edi, dword ptr [rbx + 0x18]
+0x018066cd5f  test     byte ptr [rcx + 0x133], 4
+0x018066cd66  je       0x18066cd76
+0x018066cd68  cmp      dword ptr [rcx + 0xe0], 0
+0x018066cd6f  jne      0x18066cd76
+0x018066cd71  call     0x18005a6e0  ; -> 0x5A6E0
+0x018066cd76  xor      r9d, r9d
+0x018066cd79  xor      r8d, r8d
+0x018066cd7c  mov      edx, edi
+0x018066cd7e  xor      ecx, ecx
+0x018066cd80  call     0x180a87220  ; -> GlobalData$$RandomRange (0xA87220)
+0x018066cd85  movsxd   rdi, eax
+0x018066cd88  cmp      edi, dword ptr [rbx + 0x18]
+0x018066cd8b  jb       0x18066cd94
+0x018066cd8d  xor      ecx, ecx
+0x018066cd8f  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x018066cd94  mov      rax, qword ptr [rbx + 0x10]
+0x018066cd98  mov      qword ptr [rsp + 0xc0], rsi
+0x018066cda0  mov      rdi, qword ptr [rax + rdi*8 + 0x20]
+0x018066cda5  test     rdi, rdi
+0x018066cda8  je       0x18066d0a0
+0x018066cdae  mov      rcx, qword ptr [rip + 0x173d453]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x018066cdb5  mov      rbx, qword ptr [rdi + 0x150]
+0x018066cdbc  test     byte ptr [rcx + 0x133], 4
+0x018066cdc3  je       0x18066cdd3
+0x018066cdc5  cmp      dword ptr [rcx + 0xe0], 0
+0x018066cdcc  jne      0x18066cdd3
+0x018066cdce  call     0x18005a6e0  ; -> 0x5A6E0
+0x018066cdd3  xor      ecx, ecx
+0x018066cdd5  call     0x18046c680  ; -> 0x46C680 (inside UnityEngine.ImageConversion$$LoadImage)
+0x018066cdda  test     rax, rax
+0x018066cddd  je       0x18066d0a0
+0x018066cde3  mov      rcx, qword ptr [rax + 0x20]
+0x018066cde7  test     rcx, rcx
+0x018066cdea  je       0x18066d0a0
+0x018066cdf0  xor      edx, edx
+0x018066cdf2  call     0x180a3d610  ; -> KungfuSkillLvData$$DataBase (0xA3D610)
+0x018066cdf7  test     rax, rax
+0x018066cdfa  je       0x18066d0a0
+0x018066ce00  test     rbx, rbx
+0x018066ce03  je       0x18066d0a0
+0x018066ce09  movsxd   rsi, dword ptr [rax + 0x30]
+0x018066ce0d  cmp      esi, dword ptr [rbx + 0x18]
+0x018066ce10  jb       0x18066ce19
+0x018066ce12  xor      ecx, ecx
+0x018066ce14  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x018066ce19  mov      rax, qword ptr [rbx + 0x10]
+0x018066ce1d  xor      edx, edx
+0x018066ce1f  mov      rcx, rbp
+0x018066ce22  movss    xmm6, dword ptr [rax + rsi*4 + 0x20]
+0x018066ce28  mulss    xmm6, dword ptr [rip + 0x12cf384]  ; [0x193C1B4 .rdata] f32=0.01 f64=1.37668e-16
+0x018066ce30  call     0x18144e0f0  ; -> System.Single$$Parse (0x144E0F0)
+0x018066ce35  movaps   xmm1, xmm6
+0x018066ce38  xor      ecx, ecx
+0x018066ce3a  addss    xmm1, dword ptr [rip + 0x1254306]  ; [0x18C1148 .rdata] f32=1 f64=0.125
+0x018066ce42  mulss    xmm0, xmm1
+0x018066ce46  movss    dword ptr [rsp + 0x84], xmm0
+0x018066ce4f  mov      rbx, qword ptr [rdi + 0x150]
+0x018066ce56  call     0x18046c680  ; -> 0x46C680 (inside UnityEngine.ImageConversion$$LoadImage)
+0x018066ce5b  test     rax, rax
+0x018066ce5e  je       0x18066d0a0
+0x018066ce64  mov      rcx, qword ptr [rax + 0x20]
+0x018066ce68  test     rcx, rcx
+0x018066ce6b  je       0x18066d0a0
+0x018066ce71  xor      edx, edx
+0x018066ce73  call     0x180a3d610  ; -> KungfuSkillLvData$$DataBase (0xA3D610)
+0x018066ce78  test     rax, rax
+0x018066ce7b  je       0x18066d0a0
+0x018066ce81  test     rbx, rbx
+0x018066ce84  je       0x18066d0a0
+0x018066ce8a  movsxd   rsi, dword ptr [rax + 0x30]
+0x018066ce8e  cmp      esi, dword ptr [rbx + 0x18]
+0x018066ce91  jb       0x18066ce9a
+0x018066ce93  xor      ecx, ecx
+0x018066ce95  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x018066ce9a  mov      rax, qword ptr [rbx + 0x10]
+0x018066ce9e  lea      rdx, [rsp + 0xd8]
+0x018066cea6  mov      rcx, qword ptr [rip + 0x17374a3]  ; [0x1DA4350 .data] f32=1.0883e-19
+0x018066cead  movss    xmm0, dword ptr [rax + rsi*4 + 0x20]
+0x018066ceb3  movss    dword ptr [rsp + 0xd8], xmm0
+0x018066cebc  call     0x18005ae60  ; -> 0x5AE60
+0x018066cec1  cmp      byte ptr [rip + 0x1824e96], 0
+0x018066cec8  mov      rbp, rax
+0x018066cecb  mov      rdx, qword ptr [rip + 0x1708e8e]  ; [0x1D75D60 .data] f32=1.08724e-19
+0x018066ced2  mov      r8, qword ptr [rdx + 0xb8]
+0x018066ced9  mov      rbx, qword ptr [r8 + 0x4a0]
+0x018066cee0  jne      0x18066cef5
+0x018066cee2  lea      rcx, [rip + 0x173d31f]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x018066cee9  call     0x1800d64a0  ; -> 0xD64A0
+0x018066ceee  mov      byte ptr [rip + 0x1824e69], 1
+0x018066cef5  mov      rax, qword ptr [rip + 0x173d30c]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x018066cefc  test     byte ptr [rax + 0x133], 4
+0x018066cf03  je       0x18066cf1d
+0x018066cf05  cmp      dword ptr [rax + 0xe0], 0
+0x018066cf0c  jne      0x18066cf1d
+0x018066cf0e  mov      rcx, rax
+0x018066cf11  call     0x18005a6e0  ; -> 0x5A6E0
+0x018066cf16  mov      rax, qword ptr [rip + 0x173d2eb]  ; [0x1DAA208 .data] f32=1.0885e-19
+0x018066cf1d  mov      rax, qword ptr [rax + 0xb8]
+0x018066cf24  mov      rcx, qword ptr [rax]
+0x018066cf27  test     rcx, rcx
+0x018066cf2a  je       0x18066d0a0
+0x018066cf30  mov      rcx, qword ptr [rcx + 0x20]
+0x018066cf34  test     rcx, rcx
+0x018066cf37  je       0x18066d0a0
+0x018066cf3d  xor      edx, edx
+0x018066cf3f  call     0x180a3d610  ; -> KungfuSkillLvData$$DataBase (0xA3D610)
+0x018066cf44  test     rax, rax
+0x018066cf47  je       0x18066d0a0
+0x018066cf4d  test     rbx, rbx
+0x018066cf50  je       0x18066d0a0
+0x018066cf56  movsxd   rsi, dword ptr [rax + 0x30]
+0x018066cf5a  mov      qword ptr [rsp + 0xd0], r15
+0x018066cf62  cmp      esi, dword ptr [rbx + 0x18]
+0x018066cf65  jb       0x18066cf6e
+0x018066cf67  xor      ecx, ecx
+0x018066cf69  call     0x1811f0c70  ; -> System.ThrowHelper$$ThrowArgumentOutOfRangeException (0x11F0C70)
+0x018066cf6e  mov      rax, qword ptr [rbx + 0x10]
+0x018066cf72  lea      rdx, [rsp + 0x80]
+0x018066cf7a  mulss    xmm6, dword ptr [rip + 0x12cf336]  ; [0x193C2B8 .rdata] f32=100 f64=1.93514e+14
+0x018066cf82  mov      rcx, qword ptr [rip + 0x17373c7]  ; [0x1DA4350 .data] f32=1.0883e-19
+0x018066cf89  mov      rbx, qword ptr [rax + rsi*8 + 0x20]
+0x018066cf8e  movss    dword ptr [rsp + 0x80], xmm6
+0x018066cf97  call     0x18005ae60  ; -> 0x5AE60
+0x018066cf9c  mov      rcx, qword ptr [rip + 0x171b3d5]  ; [0x1D88378 .data] f32=-1.0844e-19
+0x018066cfa3  xor      r15d, r15d
+0x018066cfa6  mov      r9, rax
+0x018066cfa9  mov      qword ptr [rsp + 0x20], r15
+0x018066cfae  mov      r8, rbx
+0x018066cfb1  mov      rdx, rbp
+0x018066cfb4  call     0x181720b90  ; -> System.String$$Format (0x1720B90)
+0x018066cfb9  lea      rcx, [rdi + 0x58]
+0x018066cfbd  xor      edx, edx
+0x018066cfbf  mov      rbp, rax
+0x018066cfc2  call     0x180f93000  ; -> System.Int32$$ToString (0xF93000)
+0x018066cfc7  xor      edx, edx
+0x018066cfc9  lea      rcx, [rsp + 0x84]
+0x018066cfd1  mov      rsi, rax
+0x018066cfd4  call     0x18144e880  ; -> System.Single$$ToString (0x144E880)
+0x018066cfd9  mov      rcx, qword ptr [rip + 0x17480f8]  ; [0x1DB50D8 .data] f32=-1.08548e-19
+0x018066cfe0  xor      r8d, r8d
+0x018066cfe3  mov      rdx, rax
+0x018066cfe6  call     0x18171d350  ; -> System.String$$Concat (0x171D350)
+0x018066cfeb  mov      rcx, qword ptr [rip + 0x173755e]  ; [0x1DA4550 .data] f32=1.08831e-19
+0x018066cff2  mov      rbx, rax
+0x018066cff5  call     0x1800d65d0  ; -> 0xD65D0
+0x018066cffa  mov      rcx, qword ptr [rip + 0x17305df]  ; [0x1D9D5E0 .data] f32=-1.08458e-19
+0x018066d001  lea      r9d, [r15 + 3]
+0x018066d005  mov      qword ptr [rsp + 0x70], r15
+0x018066d00a  xor      r8d, r8d
+0x018066d00d  mov      byte ptr [rsp + 0x68], r15b
+0x018066d012  mov      rdx, rbp
+0x018066d015  mov      qword ptr [rsp + 0x60], r15
+0x018066d01a  mov      rdi, rax
+0x018066d01d  mov      qword ptr [rsp + 0x58], r15
+0x018066d022  mov      qword ptr [rsp + 0x50], r15
+0x018066d027  mov      byte ptr [rsp + 0x48], r15b
+0x018066d02c  mov      qword ptr [rsp + 0x40], rbx
+0x018066d031  mov      dword ptr [rsp + 0x38], r15d
+0x018066d036  mov      qword ptr [rsp + 0x30], rcx
+0x018066d03b  mov      rcx, rax
+0x018066d03e  mov      dword ptr [rsp + 0x28], 3
+0x018066d046  mov      qword ptr [rsp + 0x20], rsi
+0x018066d04b  call     0x180983c20  ; -> SinglePlotData$$.ctor (0x983C20)
+0x018066d050  xor      r8d, r8d
+0x018066d053  mov      rdx, rdi
+0x018066d056  mov      rcx, r14
+0x018066d059  call     0x180476130  ; -> PlotController$$AddPlot (0x476130)
+0x018066d05e  mov      r15, qword ptr [rsp + 0xd0]
+0x018066d066  mov      rsi, qword ptr [rsp + 0xc0]
+0x018066d06e  mov      rdi, qword ptr [rsp + 0xc8]
+0x018066d076  movaps   xmm6, xmmword ptr [rsp + 0x90]
+0x018066d07e  add      rsp, 0xa0
+0x018066d085  pop      r14
+0x018066d087  pop      rbp
+0x018066d088  pop      rbx
+0x018066d089  ret      
+0x018066d08a  xor      r8d, r8d
+0x018066d08d  mov      rdx, rbp
+0x018066d090  mov      rcx, r14
+0x018066d093  call     0x180517b70  ; -> PlotController$$GetStudyFightExp (0x517B70)
+0x018066d098  jmp      0x18066d076  ; -> 0x66D076 (inside PlotController$$StudyFightSelfFinish)
+0x018066d09a  call     0x1800d6610  ; -> 0xD6610
+0x018066d09f  int3     
+0x018066d0a0  call     0x1800d6610  ; -> 0xD6610
+0x018066d0a5  int3     
+0x018066d0a6  int3     
+0x018066d0a7  int3     
+0x018066d0a8  int3     
+0x018066d0a9  int3     
+0x018066d0aa  int3     
+0x018066d0ab  int3     
+0x018066d0ac  int3     
+0x018066d0ad  int3     
+0x018066d0ae  int3     
+0x018066d0af  int3     
