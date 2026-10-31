@@ -27,8 +27,9 @@
 | `sp5-npc-reduce-plan-draft.md` | แผน SP5-NPC (ลด NPC) — **N1–N4 อนุมัติ+ทำเสร็จ+ปิดแล้ว** (2026-10-30 · N4 วัดครบ 3 รอบ: sect 311 ×3, heroNum 50→88 วัดตรง, loveable listPresent 57 · tag `stage-N4` · evidence `SP5NPC-N4-20261030-052251` + `-063817`) · **N5 ร่างคำขอแล้ว ยังไม่ดำเนินการ · N6 และระดับ Mid/Strong ยังไม่อนุมัติ** · มติระดับ/refill คงรอใน `decisions-pending.md` §7.1 |
 | `sp5-npc-n4-approval-request.md` | คำขออนุมัติ stage N4 (T2–T4 ที่ Light ×0.5) — **อนุมัติ+รัน+ปิดแล้ว 2026-10-30** (append ที่ 1–4 ตามลำดับมติ · รอบ 1 หยุดที่นิยาม loveable เก่า → นิยามใหม่ผ่านร่าง follow-up · 3/3 รอบ PASS · tag `stage-N4`) |
 | `sp5-npc-n5-approval-request.md` | คำขออนุมัติ stage N5 (T5–T7 บนโลกที่ลด ที่ Light — เดิน ≥25 วัน ข้าม ChangeMonth ≥2 + plot/mission ≥20+≥20 + dict/ID ตรวจ) — **ร่าง ยังไม่ได้รับอนุมัติ ยังไม่ดำเนินการ** (ต้องระบุทางวัด T7 + นโยบายเซฟ slot บนสำเนาในวลีสั่ง) |
-| `CLOCK-1-decision-draft.md` | ร่างมติปฏิทินกลาง server + ไม่มี pause (P1–P4, a/b/d/e = มติผู้ใช้ 2026-10-30 · ข้อ c ค่าตั้งต้นล่าสุด **720 วิ/วัน** = 1 เดือน 6 ชม.จริง — แทน 120 · ล็อกสุดท้ายรอ M1/M2 · กฎ 25% = ข้อเสนอ ยังไม่ใช่มติ · งาน AFK = หน่วยชั่วยามตาม NPC-1-ACT-1 §4) — สรุปมติใน decisions-pending §10 · implement รอหลัง Gate 5/6 |
-| `NPC-1-ACT-1-decision-draft.md` | มติสหายร่วมตี้ NPC (N1–N7: ตัวจริงบน server + สำเนาต่อผู้เล่น เทมเพลต ณ สร้างโลก ตี้ ≤4 รวมผู้เล่น สำเนาตายไม่ได้) + ACT-1 งาน AFK หน่วยชั่วยาม (1 ชั่วยาม = 60 วิจริง · 1/5/15/20 วัน → 30/60/180/300 วิ · **10 วัน = ช่องว่างรอมติ (เสนอ 2 ชั่วยาม)** · รางวัลต่อชั่วยามยังเปิด) — สรุปใน decisions-pending §12 · implement รอหลัง Gate 5/6 |
+| `CLOCK-1-decision-draft.md` | ร่างมติปฏิทินกลาง server + ไม่มี pause (P1–P4, a/b/d/e = มติผู้ใช้ 2026-10-30 · ข้อ c ค่าตั้งต้นล่าสุด **720 วิ/วัน** = 1 เดือน 6 ชม.จริง — แทน 120 · ล็อกสุดท้ายรอ M1/M2 · กฎ 25% = ข้อเสนอ ยังไม่ใช่มติ) — **มติรอบ 5 (§10) + รอบ 6 (bullet ท้าย §10): (ค) = α ยืนยันกลับ (แทนสถานะ "ยังเปิด" โดยไม่ลบ) · double-driver = ทาง (ii) นาฬิกา host driver เดียว ไม่ใช้ทาง (i)** · M1 events (static) = อนุมัติแล้วเฉพาะส่วนอีเวนท์ (R6-7) — ผล `evidence/DOCS-A15-20261031-112459/m1-events-report.md` |
+| `NPC-1-ACT-1-decision-draft.md` | มติสหายร่วมตี้ NPC (N1–N7) + ACT-1 งาน AFK — **มติรอบ 5 ฉบับสั่งงาน = §12** ((ฉ) สูตร `max(30,12×N)` วิ ทุก N · (ช) = ช-A คง dayNum/รางวัลต่อวัน · (ซ) งานเลี้ยงนอกขอบเขต · (ฌ) ป้ายสองหน่วย · (ข) ปิด = เครดิตวันงานที่ครบ D2) · **มติรอบ 6 = §13 (R6-1..R6-8)** (double-driver ทาง (ii) · (ค)=α · ขอบเขต = ทุกกิจกรรมผ่านปั๊มกลางยกเว้นงานเลี้ยง (R6-5) · hook อนุมัติในหลักการ + เงื่อนไข patch-count fix (R6-4) · V2-A superseded (R6-8)) · ผล A1 = `evidence/DOCS-A1-20261031-065625/` · ผล A1.5 = `evidence/DOCS-A15-20261031-112459/a15-report.md` |
+| `ACT1-impl-stage-plan-draft.md` | แผน stage ACT-1 — **rev 2 (รอบ 6 · DRAFT รออนุมัติ ห้ามเริ่มโค้ด)** — ตรง §12 + ผล A1 + R6-1..R6-8 (diff rev 1→2 ในไฟล์ คงสมมติฐานเก่าในรูป "ถูกแทนด้วย") · ลำดับ: A1 (เสร็จ) → A1.5 (เสร็จ — disasm read-only) → A2 (pure+config+เทสต์ compile-only) → A3 (runtime — ผู้ใช้เปิดเกม) → A4 (guest overlay หลัง S3) |
 
 ## `plans/closed/` — แผนที่ปิดแล้ว / superseded / ประวัติ diff (อ่านอย่างเดียว)
 
@@ -62,6 +63,17 @@
 | `time-followup-notes.md` | Pause / ระยะเวลา interactive (สืบค้นรอบ 2) · 2026-10-27 |
 | `battle-notes.md` | Battle / ศึกต่อสู้ · 2026-10-27 |
 | `worldmap-notes.md` | BigMap / WorldMap แผนที่โลก· 2026-10-27 |
+
+## `evidence/` — โฟลเดอร์ที่เพิ่ม/ปิดล่าสุด (รอบ 6 · 2026-10-31 — **รายการใหม่เท่านั้น ไม่ใช่สารบัญเต็มของ evidence/**)
+
+| โฟลเดอร์ | เนื้อหา |
+|---|---|
+| `DOCS-A1-20261031-065625/` | ผล A1 static survey (a1-report.md — A1-1..A1-5) + patchcount-audit.md (วินิจฉัย CountOwnedPatches นับ method ไม่ใช่ patch-entries) |
+| `DOCS-A15-20261031-112459/` | A1.5 disasm 5 รายการ (a15-report.md + bodies/ 23 ไฟล์ + m1-bodies/ 17 ไฟล์ + runner scripts) + M1 events (m1-events-report.md Q1–Q5) — งาน 3/4 รอบ 6 |
+| `PATCHGATE-20261031-111337/` | patchfix-report.md — แก้ patch-count gate เป็น set+entries matcher (งาน 2 รอบ 6 · suite 808/0 · build 0W/0E) |
+| `TIME-V1-20261031-044249/` | สาย V1 ปิด (CLOSED-CANCELLED — V1-close-report + rollback-user-cancel) · TC1-r1 = INCOMPLETE-probe-down |
+| `SP5body-TempHerosDict-20261031-034658/` | asm bodies ระบบเวลา (29 ไฟล์) + toolchain (`time_static_common.py`/`disasm_time_bodies.py` — read-only) + analysis-report + floats-observed.tsv — toolchain ที่ A1/A1.5 อ้างอิง |
+| `AUTO-20261030-071500/` · `AUTO-20261031-035916/` · `AUTO-20261031-GITAUDIT/` | HANDOFF ของ session ก่อน + time-plan-v1-errata + git audit snapshot |
 
 ## แผนที่ path เก่า → ใหม่ (สำหรับอ้างอิงที่ค้างอยู่ในเอกสาร/คอมเมนต์)
 
