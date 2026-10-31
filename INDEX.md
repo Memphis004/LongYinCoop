@@ -23,6 +23,7 @@
 |---|---|
 | `S2-plan.md` | แผนแม่ S2 — S2a-0…S2a-3 ปิดแล้ว (tags) · ใช้ §13 (rev2) แทน §1–§12 ตามมติรายข้อ §13.9 · Q3 ยังไม่ตัดสิน |
 | `time-plan-draft.md` | TIME-PLAN (V1/V2 + Gate 0–6) — **V2-A รันปิดแล้ว 2026-10-29** (`evidence/V2A-20261029-020816/v2a-report.md`) · phase ถัดไปรออนุมัติ gate ตาม §F |
+| `GATE56-OptionB-stage-plan-draft.md` | แผน stage Gate 5/6 ตามมติ D3 = Option B — **ร่าง rev 1 (รอรีวิว — ห้ามเริ่มโค้ด)** · ขั้น G1–G4 · 5 ประเด็นรอมติก่อน G1 (§5.1) |
 | `S3-plan-draft-rev2.md` | ร่างแผน S3 rev2 — **เอกสารรีวิวเท่านั้น ยังไม่ขอเริ่ม** (Gate 2 = PASS แล้ว แต่ไม่ใช่การอนุมัติ S3) |
 | `sp5-npc-reduce-plan-draft.md` | แผน SP5-NPC (ลด NPC) — **N1–N4 อนุมัติ+ทำเสร็จ+ปิดแล้ว** (2026-10-30 · N4 วัดครบ 3 รอบ: sect 311 ×3, heroNum 50→88 วัดตรง, loveable listPresent 57 · tag `stage-N4` · evidence `SP5NPC-N4-20261030-052251` + `-063817`) · **N5 ร่างคำขอแล้ว ยังไม่ดำเนินการ · N6 และระดับ Mid/Strong ยังไม่อนุมัติ** · มติระดับ/refill คงรอใน `decisions-pending.md` §7.1 |
 | `sp5-npc-n4-approval-request.md` | คำขออนุมัติ stage N4 (T2–T4 ที่ Light ×0.5) — **อนุมัติ+รัน+ปิดแล้ว 2026-10-30** (append ที่ 1–4 ตามลำดับมติ · รอบ 1 หยุดที่นิยาม loveable เก่า → นิยามใหม่ผ่านร่าง follow-up · 3/3 รอบ PASS · tag `stage-N4`) |
